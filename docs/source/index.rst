@@ -1,8 +1,13 @@
 Documentatation for OpenRouteService
 =============================================================
 
-Another simple header
-^^^^^^^^^^^^^^^^^^^^^
+This is the documentation for the APIs of the OpenRouteService.
+
+
+
+
+This header is a bit smaller
+----------------------------
 
 Here is some text explaining some very complicated stuff . ::
 
@@ -14,8 +19,8 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-
-
+   example
+   
 Indices and tables
 ==================
 
@@ -23,3 +28,5 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
+Contact
+=======
