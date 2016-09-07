@@ -15,15 +15,34 @@ Here is some text explaining some very complicated stuff . ::
     print 'hello'
     >> hello
 
+This site is structured into following sections:
+
+* :ref:`doc-docs`
+* :ref:`help-docs`
+* :ref:`index-docs`
+
+
 Contents:
 
+.. _doc-docs:
+
 .. toctree::
+   :caption: Documentation
    :maxdepth: 2
 
    api
    tools
-   contact
    
+.. _help-docs:
+
+.. toctree::
+   :caption: Help Section
+   :maxdepth: 2
+
+   faq
+   contact
+
+.. _index-docs:
 
 Indices and tables
 ==================
@@ -31,6 +50,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
-Contact
-=======
