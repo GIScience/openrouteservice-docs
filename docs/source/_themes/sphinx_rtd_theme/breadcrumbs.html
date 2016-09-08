@@ -16,10 +16,14 @@
 {% set display_github = True %}
 {% endif %}
 
+
 {% if check_meta and 'bitbucket_url' in meta %}
 {% set display_bitbucket = True %}
 {% endif %}
 
+{% if check_meta and 'gitlab_url' in meta %}
+{% set display_gitlab = True %}
+{% endif %}
 <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     {% block breadcrumbs %}
@@ -46,6 +50,13 @@
             {% else %}
               <a href="https://bitbucket.org/{{ bitbucket_user }}/{{ bitbucket_repo }}/src/{{ bitbucket_version}}{{ conf_py_path }}{{ pagename }}{{ suffix }}" class="fa fa-bitbucket"> Edit on Bitbucket</a>
             {% endif %}
+          {% elif display_gitlab %}
+            {% if check_meta and 'gitlab_url' in meta %}
+              <!-- User defined GitLab URL -->
+              <a href="{{ meta['gitlab_url'] }}" class="fa fa-gitlab"> Show on GitLab</a>
+            {% else %}
+              <a href="https://{{ gitlab_host|default("gitlab.com") }}/{{ gitlab_user }}/{{ gitlab_repo }}/{{ gitlab_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}" class="fa fa-gitlab"> Show on Gitlab</a>
+            {% endif %}
           {% elif show_source and source_url_prefix %}
             <a href="{{ source_url_prefix }}{{ pagename }}{{ suffix }}">View page source</a>
           {% elif show_source and has_source and sourcename %}
@@ -57,3 +68,5 @@
   </ul>
   <hr/>
 </div>
+https://github.com/pyapi-gitlab/pyapi-gitlab/blob/develop/docs/index.rst
+https://gitlab.com/giscience/ORS_api_documentation/tree/master
