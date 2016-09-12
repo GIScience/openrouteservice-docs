@@ -25,3 +25,10 @@ Inline Markup
 Words can have *emphasis in italics* or be **bold** and you can define
 code samples with back quotes, like when you talk about a command: ``sudo`` 
 gives you super user powers!
+
+
+Here is some text explaining some very complicated stuff . ::
+
+    print 'hello'
+    >> hello
+

@@ -6,21 +6,12 @@ In this Textblock we have a quick introduction to the OpenRouteService
 as well as an overview of the different topics (?)
 
 
-
-This header is a bit smaller
-----------------------------
-
-Here is some text explaining some very complicated stuff . ::
-
-    print 'hello'
-    >> hello
-
 This site is structured into following sections:
 
 * :ref:`doc-docs`
 * :ref:`help-docs`
+* :ref:`tos-docs`
 * :ref:`index-docs`
-
 
 Contents:
 
@@ -42,6 +33,14 @@ Contents:
    faq
    contact
 
+.. _tos-docs:
+
+.. toctree::
+   :caption: Terms of Service & Disclaimer
+   :maxdepth: 1
+   
+   tos
+   
 .. _index-docs:
 
 Indices and tables
