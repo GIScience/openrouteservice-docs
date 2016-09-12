@@ -4,6 +4,16 @@ Application Programming Interface
 End point:
 In this Section we will let the user know what the API is for.
 
+Usage
+------
+
+Before you can use the APIs of the OpenRouteService you need to request an API-Key.
+
+APIKeys
+````````
+description for API keys
+
+
 ------------
 
 Parameters
@@ -12,7 +22,7 @@ Parameters
 +-----------------+--------------------------------+
 |Query Parameters |Description                     |
 +=================+================================+
-| parameter1      |this is for parameting          |
+| parameter 1     | this is for parameting         |
 +-----------------+--------------------------------+
 | parameter 2     | etcetera                       |
 +-----------------+--------------------------------+

@@ -23,7 +23,7 @@ Contents:
 
    api
    tools
-   
+
 .. _help-docs:
 
 .. toctree::
@@ -37,7 +37,7 @@ Contents:
 
 .. toctree::
    :caption: Terms of Service & Disclaimer
-   :maxdepth: 1
+   :maxdepth: 2
    
    tos
    
