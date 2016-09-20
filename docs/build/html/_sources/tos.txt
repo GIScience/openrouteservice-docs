@@ -43,13 +43,11 @@ same
 
 thing
 
-as 
-----
+as
 
 above
 
 i
---
 
 need
 

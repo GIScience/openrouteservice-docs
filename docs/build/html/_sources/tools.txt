@@ -19,7 +19,7 @@ here we will explain things about Geocoding
 
 
 
-Accessability Analysis
+Accessibility Analysis
 ----------------------
 
 guess what?

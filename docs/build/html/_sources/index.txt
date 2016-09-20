@@ -21,8 +21,16 @@ Contents:
    :caption: Documentation
    :maxdepth: 2
 
-   api
    tools
+   api
+
+.. _tos-docs:
+
+.. toctree::
+   :caption: Terms of Service & Disclaimer 
+   :maxdepth: 2
+   
+   tos
 
 .. _help-docs:
 
@@ -31,16 +39,9 @@ Contents:
    :maxdepth: 2
 
    faq
+   glossary
    contact
 
-.. _tos-docs:
-
-.. toctree::
-   :caption: Terms of Service & Disclaimer
-   :maxdepth: 2
-   
-   tos
-   
 .. _index-docs:
 
 Indices and tables
