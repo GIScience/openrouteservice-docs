@@ -21,7 +21,7 @@ Contents:
    :caption: Documentation
    :maxdepth: 2
 
-   tools
+   overview
    api
 
 .. _tos-docs:
