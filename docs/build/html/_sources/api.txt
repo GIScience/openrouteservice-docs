@@ -2,7 +2,7 @@ Application Programming Interfaces
 ==================================
 
 End point:
-In this Section we will let the user know what the API is for.
+In this Section we will let the user know what the :term:`API` is for.
 Instead of using the ORS website you can also request the Data in the form of an .gml file.
 Therefore you have to directly contact the respective API of the tool you would like to use.
 
@@ -10,9 +10,8 @@ Therefore you have to directly contact the respective API of the tool you would 
 API Keys
 --------
 
-Before you can use the APIs of the OpenRouteService you need an `API-Key`_ .
+Before you can use the APIs of the OpenRouteService you need an :term:`API-Key` .
 
-__ API_Key_
 
 ------------
 

@@ -4,16 +4,15 @@ Glossary
 This is tho glossary where you can look up words or abbreviations you don't understand.
 
 
+.. glossary::
+
+  TCM
+  Traffic Control Manager
+    The TMC is the TMC
 
 
-.. _TCM:
+  API
+    The API is bla
 
-	TCM
-
-
-.. _API:
-
-API
-
-.. _API_Key:
-API-Key
+  API-Key
+    The API-Key is the Key to the API
