@@ -7,15 +7,12 @@ Instead of using the ORS website you can also request the Data in the form of an
 Therefore you have to directly contact the respective API of the tool you would like to use.
 
 
-Usage
-------
-
-Before you can use the APIs of the OpenRouteService you need an API-Key.
-
 API Keys
-++++++++
-description for API keys
+--------
 
+Before you can use the APIs of the OpenRouteService you need an `API-Key`_ .
+
+__ API_Key_
 
 ------------
 
@@ -25,12 +22,6 @@ Routing API
 To do a direkt routing request via GET you need to open up your URL with
 `http://openls.geog.uni-heidelberg.de/route?` .
 Except for the first parameter, every parameter has to be added with a **&**. The pattern for Parameter Usage is "*parameter*=*value*"
-
-
-hallo  hallo 
-hhs  wat  is  
-is happening  ud
-
 
 
 Required Parameters

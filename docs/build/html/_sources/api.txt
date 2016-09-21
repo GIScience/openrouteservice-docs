@@ -7,15 +7,12 @@ Instead of using the ORS website you can also request the Data in the form of an
 Therefore you have to directly contact the respective API of the tool you would like to use.
 
 
-Usage
-------
-
-Before you can use the APIs of the OpenRouteService you need an API-Key.
-
 API Keys
-++++++++
-description for API keys
+--------
 
+Before you can use the APIs of the OpenRouteService you need an `API-Key`_ .
+
+__ API_Key_
 
 ------------
 
@@ -27,21 +24,15 @@ To do a direkt routing request via GET you need to open up your URL with
 Except for the first parameter, every parameter has to be added with a **&**. The pattern for Parameter Usage is "*parameter*=*value*"
 
 
-hallo  hallo 
-hhs  wat  is  
-is happening  ud
-
-
-
 Required Parameters
 ++++++++++++++++++++
 
 
 .. note:: The parameters as well as values are case sensitive. The input order doesn't matter though.
 
-+-----------------+-------------------------------------+--------------------------+
++-----------------+--------------------------------+--------------------------+
 | Query Parameters| Description                    | Values                   |
-+=================+=====================================+==========================+
++=================+================================+==========================+
 | start           | Set the starting Point of      | *latitude*, *longitude*  |
 |                 | your route in lat,lon form     |                          |
 |                 |                                |                          |
@@ -53,11 +44,7 @@ Required Parameters
 +-----------------+--------------------------------+--------------------------+
 | instructions    |                                | True/False               |
 +-----------------+--------------------------------+--------------------------+
-| lang            | Set the language for the       | de,en,list of all        |
-|                 | instructions                   + supported languages is   |
-|                 |                                | somewhere else right now |
-|                 |                                +                          |
-|                 |                                |                          |
+| lang            | Set the language for the       | de,en                    |
 +-----------------+--------------------------------+--------------------------+
 | distunit        | Set the unit in which you want | KM                       |
 |                 | to view the distances          +--------------------------+

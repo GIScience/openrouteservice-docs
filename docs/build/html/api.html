@@ -32,7 +32,7 @@
   
     <link rel="top" title="OpenRouteService API Documentation 0.0.1 documentation" href="index.html"/>
         <link rel="next" title="Disclaimer" href="tos.html"/>
-        <link rel="prev" title="Tools" href="tools.html"/> 
+        <link rel="prev" title="Tools" href="overview.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -84,23 +84,20 @@
             
                 <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Tools</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Application Programming Interfaces</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#api-keys">API Keys</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#api-keys">API Keys</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#routing-api">Routing API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#required-parameters">Required Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional Parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#geocoding-api">Geocoding API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Required Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Required Parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#accessibility-analysis-api">Accessibility Analysis API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Required Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Required Parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#response-type">Response Type</a></li>
@@ -181,13 +178,9 @@
 In this Section we will let the user know what the API is for.
 Instead of using the ORS website you can also request the Data in the form of an .gml file.
 Therefore you have to directly contact the respective API of the tool you would like to use.</p>
-<div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<p>Before you can use the APIs of the OpenRouteService you need an API-Key.</p>
 <div class="section" id="api-keys">
-<h3>API Keys<a class="headerlink" href="#api-keys" title="Permalink to this headline">¶</a></h3>
-<p>description for API keys</p>
-</div>
+<h2>API Keys<a class="headerlink" href="#api-keys" title="Permalink to this headline">¶</a></h2>
+<p>Before you can use the APIs of the OpenRouteService you need an <a href="#id6"><span class="problematic" id="id7">`API-Key`_</span></a> .</p>
 </div>
 <hr class="docutils" />
 <div class="section" id="routing-api">
@@ -195,15 +188,102 @@ Therefore you have to directly contact the respective API of the tool you would 
 <p>To do a direkt routing request via GET you need to open up your URL with
 <cite>http://openls.geog.uni-heidelberg.de/route?</cite> .
 Except for the first parameter, every parameter has to be added with a <strong>&amp;</strong>. The pattern for Parameter Usage is &#8220;<em>parameter*=*value</em>&#8220;</p>
-<p>hallo  hallo
-hhs  wat  is
-is happening  ud</p>
 <div class="section" id="required-parameters">
 <h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The parameters as well as values are case sensitive. The input order doesn&#8217;t matter though.</p>
 </div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="43%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Query Parameters</th>
+<th class="head">Description</th>
+<th class="head">Values</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>start</td>
+<td>Set the starting Point of
+your route in lat,lon form</td>
+<td><em>latitude</em>, <em>longitude</em></td>
+</tr>
+<tr class="row-odd"><td>end</td>
+<td>Set the end Point of your route
+in lat,lon form</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>via</td>
+<td>Set a stopover Point</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>instructions</td>
+<td>&nbsp;</td>
+<td>True/False</td>
+</tr>
+<tr class="row-even"><td>lang</td>
+<td>Set the language for the</td>
+<td>de,en</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">distunit</td>
+<td rowspan="3">Set the unit in which you want
+to view the distances</td>
+<td>KM</td>
+</tr>
+<tr class="row-even"><td>M</td>
+</tr>
+<tr class="row-odd"><td>MI</td>
+</tr>
+<tr class="row-even"><td rowspan="5">routepref</td>
+<td rowspan="5">Set the way you are taveling</td>
+<td>Car</td>
+</tr>
+<tr class="row-odd"><td>Pedestrian</td>
+</tr>
+<tr class="row-even"><td>Bicycle</td>
+</tr>
+<tr class="row-odd"><td>Wheelchair</td>
+</tr>
+<tr class="row-even"><td>HeavyVehicle</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">weighting</td>
+<td rowspan="3">Set the route type</td>
+<td>Fastest</td>
+</tr>
+<tr class="row-even"><td>Shortest</td>
+</tr>
+<tr class="row-odd"><td>Recommended</td>
+</tr>
+<tr class="row-even"><td>noMotorways</td>
+<td>&nbsp;</td>
+<td>True/False</td>
+</tr>
+<tr class="row-odd"><td>noTollways</td>
+<td>&nbsp;</td>
+<td>True/False</td>
+</tr>
+<tr class="row-even"><td>noUnpavedroads</td>
+<td>&nbsp;</td>
+<td>True/False</td>
+</tr>
+<tr class="row-odd"><td>noSteps</td>
+<td>&nbsp;</td>
+<td>True/False</td>
+</tr>
+<tr class="row-even"><td>noFerries</td>
+<td>&nbsp;</td>
+<td>True/False</td>
+</tr>
+<tr class="row-odd"><td>api_key</td>
+<td>Input your API-Key here</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="optional-parameters">
 <h3>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this headline">¶</a></h3>
@@ -214,8 +294,8 @@ is happening  ud</p>
 <div class="section" id="geocoding-api">
 <h2>Geocoding API<a class="headerlink" href="#geocoding-api" title="Permalink to this headline">¶</a></h2>
 <p>here comes the geocoding api</p>
-<div class="section" id="id1">
-<h3>Required Parameters<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Required Parameters<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Here will be the required Parameters</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -242,8 +322,8 @@ is happening  ud</p>
 <div class="section" id="accessibility-analysis-api">
 <h2>Accessibility Analysis API<a class="headerlink" href="#accessibility-analysis-api" title="Permalink to this headline">¶</a></h2>
 <p>aaaaand the aa api</p>
-<div class="section" id="id2">
-<h3>Required Parameters<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Required Parameters<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="36%" />
@@ -282,7 +362,7 @@ is happening  ud</p>
         <a href="tos.html" class="btn btn-neutral float-right" title="Disclaimer" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="tools.html" class="btn btn-neutral" title="Tools" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="overview.html" class="btn btn-neutral" title="Tools" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
