@@ -186,8 +186,8 @@ Therefore you have to directly contact the respective API of the tool you would 
 <div class="section" id="routing-api">
 <h2>Routing API<a class="headerlink" href="#routing-api" title="Permalink to this headline">¶</a></h2>
 <p>To do a direkt routing request via GET you need to open up your URL with
-<cite>http://openls.geog.uni-heidelberg.de/route?</cite> .
-Except for the first parameter, every parameter has to be added with a <strong>&amp;</strong>. The pattern for Parameter Usage is &#8220;<em>parameter*=*value</em>&#8220;</p>
+<cite>http://openls.geog.uni-heidelberg.de/route?</cite> .</p>
+<p>Except for the first parameter, every parameter has to be added with a <strong>&amp;</strong>. The pattern for Parameter Usage is &#8220;<em>parameter*=*value</em>&#8220;</p>
 <div class="section" id="required-parameters">
 <h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
@@ -210,7 +210,7 @@ Except for the first parameter, every parameter has to be added with a <strong>&
 <tr class="row-even"><td>start</td>
 <td>Set the starting Point of
 your route in lat,lon form</td>
-<td><em>latitude</em>, <em>longitude</em></td>
+<td><em>latitude</em> , <em>longitude</em></td>
 </tr>
 <tr class="row-odd"><td>end</td>
 <td>Set the end Point of your route
@@ -222,7 +222,8 @@ in lat,lon form</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td>instructions</td>
-<td>&nbsp;</td>
+<td>Set True if you want step by
+step by step instructions</td>
 <td>True/False</td>
 </tr>
 <tr class="row-even"><td>lang</td>
@@ -230,13 +231,15 @@ in lat,lon form</td>
 <td>de,en</td>
 </tr>
 <tr class="row-odd"><td rowspan="3">distunit</td>
-<td rowspan="3">Set the unit in which you want
-to view the distances</td>
-<td>KM</td>
+<td rowspan="3"><p class="first">Set the unit in which you want
+to view the distances blablabl</p>
+<blockquote class="last">
+<div>sdfjl flsldfks dflksdf</div></blockquote>
+</td>
+<td rowspan="2">M   <code class="docutils literal"><span class="pre">distunit=M</span></code></td>
 </tr>
-<tr class="row-even"><td>M</td>
-</tr>
-<tr class="row-odd"><td>MI</td>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>MI  <code class="docutils literal"><span class="pre">distunit=MI</span></code></td>
 </tr>
 <tr class="row-even"><td rowspan="5">routepref</td>
 <td rowspan="5">Set the way you are taveling</td>

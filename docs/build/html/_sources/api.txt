@@ -20,6 +20,7 @@ Routing API
 
 To do a direkt routing request via GET you need to open up your URL with
 `http://openls.geog.uni-heidelberg.de/route?` .
+
 Except for the first parameter, every parameter has to be added with a **&**. The pattern for Parameter Usage is "*parameter*=*value*"
 
 
@@ -27,12 +28,13 @@ Required Parameters
 ++++++++++++++++++++
 
 
+
 .. note:: The parameters as well as values are case sensitive. The input order doesn't matter though.
 
 +-----------------+--------------------------------+--------------------------+
 | Query Parameters| Description                    | Values                   |
 +=================+================================+==========================+
-| start           | Set the starting Point of      | *latitude*, *longitude*  |
+| start           | Set the starting Point of      | *latitude* , *longitude* |
 |                 | your route in lat,lon form     |                          |
 |                 |                                |                          |
 +-----------------+--------------------------------+--------------------------+
@@ -41,15 +43,16 @@ Required Parameters
 +-----------------+--------------------------------+--------------------------+
 | via             | Set a stopover Point           |                          |
 +-----------------+--------------------------------+--------------------------+
-| instructions    |                                | True/False               |
+| instructions    | Set True if you want step by   | True/False               |
+|                 | step by step instructions      |                          |
 +-----------------+--------------------------------+--------------------------+
 | lang            | Set the language for the       | de,en                    |
 +-----------------+--------------------------------+--------------------------+
-| distunit        | Set the unit in which you want | KM                       |
-|                 | to view the distances          +--------------------------+
-|                 |                                | M                        |
+| distunit        | Set the unit in which you want | KM  ``distunit=KM``      |
+|                 | to view the distances blablabl + -------------------------+
+|                 |  sdfjl flsldfks dflksdf        | M   ``distunit=M``       |
 |                 |                                +--------------------------+
-|                 |                                | MI                       |
+|                 |                                | MI  ``distunit=MI``      |
 +-----------------+--------------------------------+--------------------------+
 | routepref       | Set the way you are taveling   | Car                      |
 |                 |                                +--------------------------+
