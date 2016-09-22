@@ -20,7 +20,7 @@ Routing API
 
 To do a direkt routing request via GET you need to open up your URL with
 `http://openls.geog.uni-heidelberg.de/route?` .
-
+After the **?** you have to add parameters. 
 Except for the first parameter, every parameter has to be added with a **&**. The pattern for Parameter Usage is "*parameter*=*value*"
 
 
@@ -32,13 +32,16 @@ Required Parameters
 .. note:: The parameters as well as values are case sensitive. The input order doesn't matter though.
 
 +-----------------+--------------------------------+--------------------------+
-| Query Parameters| Description                    | Values                   |
+| Parameters      | Description                    | Values                   |
 +=================+================================+==========================+
-| start           | Set the starting Point of      | *latitude* , *longitude* |
-|                 | your route in lat,lon form     |                          |
+| start           | Set the starting Point of      | *latitude*,\ *longitude* |
 |                 |                                |                          |
+|                 | your route in form of          |                          |
+|                 |                                |                          |
+|                 | geographic coordinates         |                          |
 +-----------------+--------------------------------+--------------------------+
-| end             | Set the end Point of your route|                          |
+| end             | Set the end Point of your route| *latitude*,\ *longitude* |
+|                 |                                |                          |
 |                 | in lat,lon form                |                          |
 +-----------------+--------------------------------+--------------------------+
 | via             | Set a stopover Point           |                          |
@@ -49,8 +52,8 @@ Required Parameters
 | lang            | Set the language for the       | de,en                    |
 +-----------------+--------------------------------+--------------------------+
 | distunit        | Set the unit in which you want | KM  ``distunit=KM``      |
-|                 | to view the distances blablabl + -------------------------+
-|                 |  sdfjl flsldfks dflksdf        | M   ``distunit=M``       |
+|                 |                                +--------------------------+
+|                 | to view the distances in       | M   ``distunit=M``       |
 |                 |                                +--------------------------+
 |                 |                                | MI  ``distunit=MI``      |
 +-----------------+--------------------------------+--------------------------+
@@ -64,24 +67,25 @@ Required Parameters
 |                 |                                +--------------------------+
 |                 |                                | HeavyVehicle             |
 +-----------------+--------------------------------+--------------------------+
+| api_key         | Input your API-Key here        | `your_api_key`           |
++-----------------+--------------------------------+--------------------------+
 | weighting       | Set the route type             | Fastest                  |
 |                 |                                +--------------------------+
 |                 |                                | Shortest                 |
 |                 |                                +--------------------------+
 |                 |                                | Recommended              |
 +-----------------+--------------------------------+--------------------------+
-| noMotorways     |                                | True/False               |
+| noMotorways     | Set True to avoid motorways    | True/False               |
 +-----------------+--------------------------------+--------------------------+
-| noTollways      |                                | True/False               |
+| noTollways      | Set True to avoid tollways     | True/False               |
 +-----------------+--------------------------------+--------------------------+
-| noUnpavedroads  |                                | True/False               |
+| noUnpavedroads  | Set True to avoid unpaved roads| True/False               |
 +-----------------+--------------------------------+--------------------------+
-| noSteps         |                                | True/False               |
+| noSteps         | Set True to avoid steps        | True/False               |
 +-----------------+--------------------------------+--------------------------+
-| noFerries       |                                | True/False               |
+| noFerries       | Set True to avoid ferries      | True/False               |
 +-----------------+--------------------------------+--------------------------+
-| api_key         | Input your API-Key here        |                          |
-+-----------------+--------------------------------+--------------------------+
+
 
 Optional Parameters
 +++++++++++++++++++

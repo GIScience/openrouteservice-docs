@@ -186,8 +186,9 @@ Therefore you have to directly contact the respective API of the tool you would 
 <div class="section" id="routing-api">
 <h2>Routing API<a class="headerlink" href="#routing-api" title="Permalink to this headline">¶</a></h2>
 <p>To do a direkt routing request via GET you need to open up your URL with
-<cite>http://openls.geog.uni-heidelberg.de/route?</cite> .</p>
-<p>Except for the first parameter, every parameter has to be added with a <strong>&amp;</strong>. The pattern for Parameter Usage is &#8220;<em>parameter*=*value</em>&#8220;</p>
+<cite>http://openls.geog.uni-heidelberg.de/route?</cite> .
+After the <strong>?</strong> you have to add parameters.
+Except for the first parameter, every parameter has to be added with a <strong>&amp;</strong>. The pattern for Parameter Usage is &#8220;<em>parameter*=*value</em>&#8220;</p>
 <div class="section" id="required-parameters">
 <h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
@@ -201,21 +202,24 @@ Therefore you have to directly contact the respective API of the tool you would 
 <col width="35%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Query Parameters</th>
+<tr class="row-odd"><th class="head">Parameters</th>
 <th class="head">Description</th>
 <th class="head">Values</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>start</td>
-<td>Set the starting Point of
-your route in lat,lon form</td>
-<td><em>latitude</em> , <em>longitude</em></td>
+<td><p class="first">Set the starting Point of</p>
+<p>your route in form of</p>
+<p class="last">geographic coordinates</p>
+</td>
+<td><em>latitude</em>,<em>longitude</em></td>
 </tr>
 <tr class="row-odd"><td>end</td>
-<td>Set the end Point of your route
-in lat,lon form</td>
-<td>&nbsp;</td>
+<td><p class="first">Set the end Point of your route</p>
+<p class="last">in lat,lon form</p>
+</td>
+<td><em>latitude</em>,<em>longitude</em></td>
 </tr>
 <tr class="row-even"><td>via</td>
 <td>Set a stopover Point</td>
@@ -231,14 +235,13 @@ step by step instructions</td>
 <td>de,en</td>
 </tr>
 <tr class="row-odd"><td rowspan="3">distunit</td>
-<td rowspan="3"><p class="first">Set the unit in which you want
-to view the distances blablabl</p>
-<blockquote class="last">
-<div>sdfjl flsldfks dflksdf</div></blockquote>
+<td rowspan="3"><p class="first">Set the unit in which you want</p>
+<p class="last">to view the distances in</p>
 </td>
-<td rowspan="2">M   <code class="docutils literal"><span class="pre">distunit=M</span></code></td>
+<td>KM  <code class="docutils literal"><span class="pre">distunit=KM</span></code></td>
 </tr>
-<tr class="row-even"></tr>
+<tr class="row-even"><td>M   <code class="docutils literal"><span class="pre">distunit=M</span></code></td>
+</tr>
 <tr class="row-odd"><td>MI  <code class="docutils literal"><span class="pre">distunit=MI</span></code></td>
 </tr>
 <tr class="row-even"><td rowspan="5">routepref</td>
@@ -253,37 +256,37 @@ to view the distances blablabl</p>
 </tr>
 <tr class="row-even"><td>HeavyVehicle</td>
 </tr>
-<tr class="row-odd"><td rowspan="3">weighting</td>
+<tr class="row-odd"><td>api_key</td>
+<td>Input your API-Key here</td>
+<td><cite>your_api_key</cite></td>
+</tr>
+<tr class="row-even"><td rowspan="3">weighting</td>
 <td rowspan="3">Set the route type</td>
 <td>Fastest</td>
 </tr>
-<tr class="row-even"><td>Shortest</td>
+<tr class="row-odd"><td>Shortest</td>
 </tr>
-<tr class="row-odd"><td>Recommended</td>
+<tr class="row-even"><td>Recommended</td>
 </tr>
-<tr class="row-even"><td>noMotorways</td>
-<td>&nbsp;</td>
+<tr class="row-odd"><td>noMotorways</td>
+<td>Set True to avoid motorways</td>
 <td>True/False</td>
 </tr>
-<tr class="row-odd"><td>noTollways</td>
-<td>&nbsp;</td>
+<tr class="row-even"><td>noTollways</td>
+<td>Set True to avoid tollways</td>
 <td>True/False</td>
 </tr>
-<tr class="row-even"><td>noUnpavedroads</td>
-<td>&nbsp;</td>
+<tr class="row-odd"><td>noUnpavedroads</td>
+<td>Set True to avoid unpaved roads</td>
 <td>True/False</td>
 </tr>
-<tr class="row-odd"><td>noSteps</td>
-<td>&nbsp;</td>
+<tr class="row-even"><td>noSteps</td>
+<td>Set True to avoid steps</td>
 <td>True/False</td>
 </tr>
-<tr class="row-even"><td>noFerries</td>
-<td>&nbsp;</td>
+<tr class="row-odd"><td>noFerries</td>
+<td>Set True to avoid ferries</td>
 <td>True/False</td>
-</tr>
-<tr class="row-odd"><td>api_key</td>
-<td>Input your API-Key here</td>
-<td>&nbsp;</td>
 </tr>
 </tbody>
 </table>
