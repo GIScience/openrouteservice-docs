@@ -65,5 +65,5 @@ Privacy
 Licence
 =======
 
-Content is available under Creative Commons Attribution-ShareAlike 2.0 license.
+Content is available under `Creative Commons Attribution-ShareAlike 2.0 license <http://wiki.openstreetmap.org/wiki/OpenStreetMap_License>`__.
 Version last modified: 11.02.2016 

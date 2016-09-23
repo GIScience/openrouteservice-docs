@@ -88,8 +88,10 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Application Programming Interfaces</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#api-keys">API Keys</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#routing-api">Routing API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#must-have-parameters">Must Have Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#required-parameters">Required Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#geocoding-api">Geocoding API</a><ul>
@@ -180,31 +182,32 @@ Instead of using the ORS website you can also request the Data in the form of an
 Therefore you have to directly contact the respective API of the tool you would like to use.</p>
 <div class="section" id="api-keys">
 <h2>API Keys<a class="headerlink" href="#api-keys" title="Permalink to this headline">¶</a></h2>
-<p>Before you can use the APIs of the OpenRouteService you need an <a class="reference internal" href="glossary.html#term-api-key"><span class="xref std std-term">API-Key</span></a> .</p>
+<p>Before you can use the APIs of the OpenRouteService you need an <a class="reference internal" href="glossary.html#term-api-key"><span class="xref std std-term">API-Key</span></a>.</p>
 </div>
 <hr class="docutils" />
 <div class="section" id="routing-api">
 <h2>Routing API<a class="headerlink" href="#routing-api" title="Permalink to this headline">¶</a></h2>
-<p>To do a direkt routing request via GET you need to open up your URL with
-<cite>http://openls.geog.uni-heidelberg.de/route?</cite> .
-After the <strong>?</strong> you have to add parameters.
-Except for the first parameter, every parameter has to be added with a <strong>&amp;</strong>. The pattern for Parameter Usage is &#8220;<em>parameter*=*value</em>&#8220;</p>
-<div class="section" id="required-parameters">
-<h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this headline">¶</a></h3>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The parameters as well as values are case sensitive. The input order doesn&#8217;t matter though.</p>
+<p>To do a direkt routing request via GET you need to open up your URL with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/route?
+</pre></div>
 </div>
+<p>After the <strong>&#8221;?&#8221;</strong> you have to add parameters with <strong>&#8220;&amp;&#8221;</strong>. For the first parameter the <strong>&#8220;&amp;&#8221;</strong> can be omitted. The pattern for parameter usage is &#8220;<em>parameter*=*value</em>&#8221;.
+There are three types of parameters
+- <a class="reference internal" href="#must-have-parameters">Must Have Parameters</a> : They are required for the API to work and need a value inserted
+- <a href="#id3"><span class="problematic" id="id4">`Required Parameters`_</span></a> : They are required for the API to work but can be left empty.
+- <a class="reference internal" href="#optional-parameters">Optional Parameters</a> : These parameters are not necessary to get a functional request.</p>
+<div class="section" id="must-have-parameters">
+<h3>Must Have Parameters<a class="headerlink" href="#must-have-parameters" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="23%" />
-<col width="43%" />
-<col width="35%" />
+<col width="18%" />
+<col width="34%" />
+<col width="48%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameters</th>
 <th class="head">Description</th>
-<th class="head">Values</th>
+<th class="head">Values   <code class="docutils literal"><span class="pre">example</span></code></th>
 </tr>
 </thead>
 <tbody valign="top">
@@ -213,87 +216,155 @@ Except for the first parameter, every parameter has to be added with a <strong>&
 <p>your route in form of</p>
 <p class="last">geographic coordinates</p>
 </td>
-<td><em>latitude</em>,<em>longitude</em></td>
+<td><p class="first"><em>latitude</em>,<em>longitude</em></p>
+<p class="last"><code class="docutils literal"><span class="pre">9.3785,47.2250</span></code></p>
+</td>
 </tr>
 <tr class="row-odd"><td>end</td>
 <td><p class="first">Set the end Point of your route</p>
-<p class="last">in lat,lon form</p>
+<p class="last">form of geographic coordinates</p>
 </td>
-<td><em>latitude</em>,<em>longitude</em></td>
-</tr>
-<tr class="row-even"><td>via</td>
-<td>Set a stopover Point</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>instructions</td>
-<td>Set True if you want step by
-step by step instructions</td>
-<td>True/False</td>
+<td><p class="first"><em>latitude</em>,<em>longitude</em></p>
+<p class="last"><code class="docutils literal"><span class="pre">9.505250,47</span></code></p>
+</td>
 </tr>
 <tr class="row-even"><td>lang</td>
-<td>Set the language for the</td>
-<td>de,en</td>
+<td><p class="first">Set the language for the</p>
+<p class="last">instructions</p>
+</td>
+<td>de; en   <code class="docutils literal"><span class="pre">lang=en</span></code></td>
 </tr>
-<tr class="row-odd"><td rowspan="3">distunit</td>
-<td rowspan="3"><p class="first">Set the unit in which you want</p>
+<tr class="row-odd"><td>distunit</td>
+<td><p class="first">Set the unit in which you want</p>
 <p class="last">to view the distances in</p>
 </td>
-<td>KM  <code class="docutils literal"><span class="pre">distunit=KM</span></code></td>
+<td><p class="first">KM(kilometers); M(meters); MI(miles)</p>
+<p class="last"><code class="docutils literal"><span class="pre">distunit=M</span></code></p>
+</td>
 </tr>
-<tr class="row-even"><td>M   <code class="docutils literal"><span class="pre">distunit=M</span></code></td>
-</tr>
-<tr class="row-odd"><td>MI  <code class="docutils literal"><span class="pre">distunit=MI</span></code></td>
-</tr>
-<tr class="row-even"><td rowspan="5">routepref</td>
-<td rowspan="5">Set the way you are taveling</td>
-<td>Car</td>
-</tr>
-<tr class="row-odd"><td>Pedestrian</td>
-</tr>
-<tr class="row-even"><td>Bicycle</td>
-</tr>
-<tr class="row-odd"><td>Wheelchair</td>
-</tr>
-<tr class="row-even"><td>HeavyVehicle</td>
+<tr class="row-even"><td>routepref</td>
+<td>Set the way you are taveling</td>
+<td><p class="first">Car; Pedestrian; Bicycle;</p>
+<p>Wheelchair; HeavyVehicle</p>
+<p class="last"><code class="docutils literal"><span class="pre">routepref=Bicycle</span></code></p>
+</td>
 </tr>
 <tr class="row-odd"><td>api_key</td>
-<td>Input your API-Key here</td>
-<td><cite>your_api_key</cite></td>
+<td>Input your <a class="reference internal" href="glossary.html#term-api-key"><span class="xref std std-term">API-Key</span></a> here</td>
+<td><p class="first"><cite>your_api_key</cite></p>
+<p class="last"><code class="docutils literal"><span class="pre">api_key=eb85f2a6a61aafaebe7e2f2a89b102f5</span></code></p>
+</td>
 </tr>
-<tr class="row-even"><td rowspan="3">weighting</td>
-<td rowspan="3">Set the route type</td>
-<td>Fastest</td>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">languages</p>
+</div>
+</div>
+<div class="section" id="required-parameters">
+<h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this headline">¶</a></h3>
+<p>If</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="32%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameters</th>
+<th class="head">Description</th>
+<th class="head">Values (<strong>default</strong>)</th>
+<th class="head">Example</th>
 </tr>
-<tr class="row-odd"><td>Shortest</td>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>via</td>
+<td>Set a stopover Point</td>
+<td><em>latitude</em>,<em>longitude</em></td>
+<td><code class="docutils literal"><span class="pre">via</span></code> <code class="docutils literal"><span class="pre">via=9.43,47.1</span></code></td>
 </tr>
-<tr class="row-even"><td>Recommended</td>
+<tr class="row-odd"><td>instructions</td>
+<td><p class="first">Set True if you want step by</p>
+<p class="last">step by step instructions</p>
+</td>
+<td>True/<strong>False</strong></td>
+<td><p class="first"><code class="docutils literal"><span class="pre">instructions=True</span></code></p>
+<p class="last"><code class="docutils literal"><span class="pre">instructions</span></code></p>
+</td>
+</tr>
+<tr class="row-even"><td>weighting</td>
+<td>Set the route type</td>
+<td><p class="first"><strong>Fastest</strong>; Shortest ;</p>
+<p class="last">Recommended</p>
+</td>
+<td><code class="docutils literal"><span class="pre">wighting=Shortest</span></code></td>
 </tr>
 <tr class="row-odd"><td>noMotorways</td>
 <td>Set True to avoid motorways</td>
-<td>True/False</td>
+<td>True/<strong>False</strong></td>
+<td><code class="docutils literal"><span class="pre">noMotorways</span></code></td>
 </tr>
 <tr class="row-even"><td>noTollways</td>
 <td>Set True to avoid tollways</td>
-<td>True/False</td>
+<td>True/<strong>False</strong></td>
+<td><code class="docutils literal"><span class="pre">noTollways=True</span></code></td>
 </tr>
 <tr class="row-odd"><td>noUnpavedroads</td>
 <td>Set True to avoid unpaved roads</td>
-<td>True/False</td>
+<td>True/<strong>False</strong></td>
+<td><code class="docutils literal"><span class="pre">noUnpavedroads=False</span></code></td>
 </tr>
 <tr class="row-even"><td>noSteps</td>
 <td>Set True to avoid steps</td>
-<td>True/False</td>
+<td>True/<strong>False</strong></td>
+<td><code class="docutils literal"><span class="pre">noSteps</span></code></td>
 </tr>
 <tr class="row-odd"><td>noFerries</td>
 <td>Set True to avoid ferries</td>
-<td>True/False</td>
+<td>True/<strong>False</strong></td>
+<td><code class="docutils literal"><span class="pre">noFerries</span></code></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="optional-parameters">
 <h3>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="32%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameters</th>
+<th class="head">Description</th>
+<th class="head">Values (<strong>default</strong>)</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>useTMC</td>
+<td>Set a stopover Point</td>
+<td>True/<strong>False</strong></td>
+<td><code class="docutils literal"><span class="pre">useTMC=True</span></code></td>
+</tr>
+</tbody>
+</table>
 <p>here will be the optionals</p>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>The shortest version of a full functioning routing URL would look like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;via&amp;end=9.156506,49.230011&amp;lang=en&amp;distunit=KM&amp;routepref=Car&amp;weighting&amp;useTMC&amp;noMotorways&amp;noTollways&amp;noUnpavedroads&amp;noSteps&amp;noFerries&amp;instructions&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">Parameters as well as values are <cite>case sensitive</cite>. The input order doesn&#8217;t matter though.</p>
+</div>
 </div>
 </div>
 <hr class="docutils" />
