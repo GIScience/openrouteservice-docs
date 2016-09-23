@@ -21,8 +21,10 @@ Routing API
 To do a direkt routing request via GET you need to open up your URL with::
 
  http://openls.geog.uni-heidelberg.de/route?
-After the **"?"** you have to add parameters with **"&"**. For the first parameter the **"&"** can be omitted. The pattern for parameter usage is "*parameter*=*value*". 
+
+After the **"?"** you have to add parameters with **"&"**. For the first parameter the **"&"** can be omitted. The pattern for parameter usage is "*parameter=value*". 
 There are three types of parameters
+
 - `Must Have Parameters`_ : They are required for the API to work and need a value inserted
 - `Required Parameters`_ : They are required for the API to work but can be left empty.
 - `Optional Parameters`_ : These parameters are not necessary to get a functional request.
@@ -124,8 +126,7 @@ Geocoding API
 
 here comes the geocoding api 
 
-Required Parameters
-++++++++++++++++++++
+
 
 
 Here will be the required Parameters
@@ -146,8 +147,6 @@ Accessibility Analysis API
 
 aaaaand the aa api
 
-Required Parameters
-++++++++++++++++++++
 
 
 +------------------+--------------------------------+

@@ -94,14 +94,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#geocoding-api">Geocoding API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Required Parameters</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#accessibility-analysis-api">Accessibility Analysis API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Required Parameters</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#geocoding-api">Geocoding API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accessibility-analysis-api">Accessibility Analysis API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#response-type">Response Type</a></li>
 </ul>
 </li>
@@ -191,11 +185,13 @@ Therefore you have to directly contact the respective API of the tool you would 
 <div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/route?
 </pre></div>
 </div>
-<p>After the <strong>&#8221;?&#8221;</strong> you have to add parameters with <strong>&#8220;&amp;&#8221;</strong>. For the first parameter the <strong>&#8220;&amp;&#8221;</strong> can be omitted. The pattern for parameter usage is &#8220;<em>parameter*=*value</em>&#8221;.
-There are three types of parameters
-- <a class="reference internal" href="#must-have-parameters">Must Have Parameters</a> : They are required for the API to work and need a value inserted
-- <a href="#id3"><span class="problematic" id="id4">`Required Parameters`_</span></a> : They are required for the API to work but can be left empty.
-- <a class="reference internal" href="#optional-parameters">Optional Parameters</a> : These parameters are not necessary to get a functional request.</p>
+<p>After the <strong>&#8221;?&#8221;</strong> you have to add parameters with <strong>&#8220;&amp;&#8221;</strong>. For the first parameter the <strong>&#8220;&amp;&#8221;</strong> can be omitted. The pattern for parameter usage is &#8220;<em>parameter=value</em>&#8221;.
+There are three types of parameters</p>
+<ul class="simple">
+<li><a class="reference internal" href="#must-have-parameters">Must Have Parameters</a> : They are required for the API to work and need a value inserted</li>
+<li><a class="reference internal" href="#required-parameters">Required Parameters</a> : They are required for the API to work but can be left empty.</li>
+<li><a class="reference internal" href="#optional-parameters">Optional Parameters</a> : These parameters are not necessary to get a functional request.</li>
+</ul>
 <div class="section" id="must-have-parameters">
 <h3>Must Have Parameters<a class="headerlink" href="#must-have-parameters" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
@@ -371,8 +367,6 @@ There are three types of parameters
 <div class="section" id="geocoding-api">
 <h2>Geocoding API<a class="headerlink" href="#geocoding-api" title="Permalink to this headline">¶</a></h2>
 <p>here comes the geocoding api</p>
-<div class="section" id="id1">
-<h3>Required Parameters<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Here will be the required Parameters</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -394,13 +388,10 @@ There are three types of parameters
 </tbody>
 </table>
 </div>
-</div>
 <hr class="docutils" />
 <div class="section" id="accessibility-analysis-api">
 <h2>Accessibility Analysis API<a class="headerlink" href="#accessibility-analysis-api" title="Permalink to this headline">¶</a></h2>
 <p>aaaaand the aa api</p>
-<div class="section" id="id2">
-<h3>Required Parameters<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="36%" />
@@ -420,7 +411,6 @@ There are three types of parameters
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="response-type">
