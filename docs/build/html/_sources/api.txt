@@ -34,6 +34,8 @@ There are three types of parameters
 Must Have Parameters
 ++++++++++++++++++++
 
+The following table contains parameters where you absolutely have to add the 
+
 +-----------------+--------------------------------+---------------------------------------------+
 | Parameters      | Description                    | Values   ``example``                        |
 +=================+================================+=============================================+
@@ -45,7 +47,7 @@ Must Have Parameters
 +-----------------+--------------------------------+---------------------------------------------+
 | end             | Set the end Point of your route| *latitude*,\ *longitude*                    |
 |                 |                                |                                             |
-|                 | form of geographic coordinates | ``9.505250,47``                             |
+|                 | in geographic coordinates      | ``9.505250,47``                             |
 +-----------------+--------------------------------+---------------------------------------------+
 | lang            | Set the language for the       | de; en   ``lang=en``                        |
 |                 |                                |                                             |
@@ -66,13 +68,31 @@ Must Have Parameters
 |                 |                                | ``api_key=eb85f2a6a61aafaebe7e2f2a89b102f5``|
 +-----------------+--------------------------------+---------------------------------------------+
 
+routepref
+>>>>>>>>>
+
++--------------+--------------------------------------------------------------------------------------------------------------+
+| value        | description                                                                                                  |
++==============+==============================================================================================================+
+| Car          | This pathing will avoid footways and bicycle lanes and uses highways, streets and ways cars are allowed on   |
++--------------+--------------------------------------------------------------------------------------------------------------+
+| Pedestrian   | this routing algorithm uses footways and tries to avoid highways                                             |
++--------------+--------------------------------------------------------------------------------------------------------------+
+| Bicycle      | Uses bicycle ways if available, can also use footpaths where bicycle is allowed and streets                  |
++--------------+--------------------------------------------------------------------------------------------------------------+
+| Wheelchair   | This algorithm uses footways and tries to use the smothest surface type. In addition stairs will be avoided. |
++--------------+--------------------------------------------------------------------------------------------------------------+
+| HeavyVehicle | i dont know what kind of road this uses                                                                      |
++--------------+--------------------------------------------------------------------------------------------------------------+
 
 .. note:: languages
 
 Required Parameters
 +++++++++++++++++++
 
-If
+The following parameters still are required for the api to work, but contrary to the prior the values can be left empty.
+Except for "via" there will be a default value if you leave it empty
+
 
 +-----------------+---------------------------------+--------------------------+--------------------------+
 | Parameters      | Description                     | Values (**default**)     | Example                  |
@@ -99,8 +119,24 @@ If
 +-----------------+---------------------------------+--------------------------+--------------------------+
 
 
+weighting
+>>>>>>>>>
+
++-------------+------------------------------------------------------------+
+| value       | description                                                |
++=============+============================================================+
+| Fastest     | The fastest route uses speed limits etc.....               |
++-------------+------------------------------------------------------------+
+| Shortest    | The shortest route ...                                     |
++-------------+------------------------------------------------------------+
+| Recommended | This mode will include POIs to give you a trip to remember |
++-------------+------------------------------------------------------------+
+
+
 Optional Parameters
 +++++++++++++++++++
+
+
 
 +-----------------+---------------------------------+--------------------------+--------------------------+
 | Parameters      | Description                     | Values (**default**)     | Example                  |
@@ -108,7 +144,7 @@ Optional Parameters
 | useTMC          | Set a stopover Point            | True/**False**           | ``useTMC=True``          |
 +-----------------+---------------------------------+--------------------------+--------------------------+
 
-here will be the optionals
+
 
 Example
 +++++++

@@ -7,12 +7,11 @@ This is tho glossary where you can look up words or abbreviations you don't unde
 .. glossary::
 
   TCM
-  Traffic Control Manager
-    The TMC is the TMC
-
+  Traffic Message Channel
+    A road graph with real time traffic information to estimate the best route.
 
   API
-    The API is bla
+    apiapiapiapia
 
   API-Key
-    The API-Key is the Key to the API
+    A code of authorization passed in to an API request as a parameter that identifies the requester. 

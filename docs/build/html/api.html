@@ -88,8 +88,14 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Application Programming Interfaces</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#api-keys">API Keys</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#routing-api">Routing API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#must-have-parameters">Must Have Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#required-parameters">Required Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#must-have-parameters">Must Have Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#routepref">routepref</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#required-parameters">Required Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#weighting">weighting</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 </ul>
@@ -194,6 +200,7 @@ There are three types of parameters</p>
 </ul>
 <div class="section" id="must-have-parameters">
 <h3>Must Have Parameters<a class="headerlink" href="#must-have-parameters" title="Permalink to this headline">¶</a></h3>
+<p>The following table contains parameters where you absolutely have to add the</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="18%" />
@@ -218,7 +225,7 @@ There are three types of parameters</p>
 </tr>
 <tr class="row-odd"><td>end</td>
 <td><p class="first">Set the end Point of your route</p>
-<p class="last">form of geographic coordinates</p>
+<p class="last">in geographic coordinates</p>
 </td>
 <td><p class="first"><em>latitude</em>,<em>longitude</em></p>
 <p class="last"><code class="docutils literal"><span class="pre">9.505250,47</span></code></p>
@@ -253,14 +260,46 @@ There are three types of parameters</p>
 </tr>
 </tbody>
 </table>
+<div class="section" id="routepref">
+<h4>routepref<a class="headerlink" href="#routepref" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">value</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Car</td>
+<td>This pathing will avoid footways and bicycle lanes and uses highways, streets and ways cars are allowed on</td>
+</tr>
+<tr class="row-odd"><td>Pedestrian</td>
+<td>this routing algorithm uses footways and tries to avoid highways</td>
+</tr>
+<tr class="row-even"><td>Bicycle</td>
+<td>Uses bicycle ways if available, can also use footpaths where bicycle is allowed and streets</td>
+</tr>
+<tr class="row-odd"><td>Wheelchair</td>
+<td>This algorithm uses footways and tries to use the smothest surface type. In addition stairs will be avoided.</td>
+</tr>
+<tr class="row-even"><td>HeavyVehicle</td>
+<td>i dont know what kind of road this uses</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">languages</p>
 </div>
 </div>
+</div>
 <div class="section" id="required-parameters">
 <h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this headline">¶</a></h3>
-<p>If</p>
+<p>The following parameters still are required for the api to work, but contrary to the prior the values can be left empty.
+Except for &#8220;via&#8221; there will be a default value if you leave it empty</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="17%" />
@@ -324,6 +363,31 @@ There are three types of parameters</p>
 </tr>
 </tbody>
 </table>
+<div class="section" id="weighting">
+<h4>weighting<a class="headerlink" href="#weighting" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">value</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Fastest</td>
+<td>The fastest route uses speed limits etc.....</td>
+</tr>
+<tr class="row-odd"><td>Shortest</td>
+<td>The shortest route ...</td>
+</tr>
+<tr class="row-even"><td>Recommended</td>
+<td>This mode will include POIs to give you a trip to remember</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div class="section" id="optional-parameters">
 <h3>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this headline">¶</a></h3>
@@ -349,7 +413,6 @@ There are three types of parameters</p>
 </tr>
 </tbody>
 </table>
-<p>here will be the optionals</p>
 </div>
 <div class="section" id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
