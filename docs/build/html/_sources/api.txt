@@ -23,56 +23,57 @@ To do a direkt routing request via GET you need to open up your URL with::
  http://openls.geog.uni-heidelberg.de/route?
 
 After the **"?"** you have to add parameters with **"&"**. For the first parameter the **"&"** can be omitted. The pattern for parameter usage is "*parameter=value*". 
-There are three types of parameters
+There are two types of parameters:
 
-- `Must Have Parameters`_ : They are required for the API to work and need a value inserted
-- `Required Parameters`_ : They are required for the API to work but can be left empty.
-- `Optional Parameters`_ : These parameters are not necessary to get a functional request.
-
+:`Required Parameters`_: They are required for the API to work.
+:`Optional Parameters`_: These parameters are not necessary to get a functional request. But you can fine-tune you request through these.
 
 
-Must Have Parameters
-++++++++++++++++++++
 
-The following table contains parameters where you absolutely have to add the 
+Required Parameters
++++++++++++++++++++
 
-+-----------------+--------------------------------+---------------------------------------------+
-| Parameters      | Description                    | Values   ``example``                        |
-+=================+================================+=============================================+
-| start           | Set the starting Point of      | *latitude*,\ *longitude*                    |
-|                 |                                |                                             |
-|                 | your route in form of          | ``9.3785,47.2250``                          |
-|                 |                                |                                             |
-|                 | geographic coordinates         |                                             |
-+-----------------+--------------------------------+---------------------------------------------+
-| end             | Set the end Point of your route| *latitude*,\ *longitude*                    |
-|                 |                                |                                             |
-|                 | in geographic coordinates      | ``9.505250,47``                             |
-+-----------------+--------------------------------+---------------------------------------------+
-| lang            | Set the language for the       | de; en   ``lang=en``                        |
-|                 |                                |                                             |
-|                 | instructions                   |                                             |
-+-----------------+--------------------------------+---------------------------------------------+
-| distunit        | Set the unit in which you want | KM(kilometers); M(meters); MI(miles)        |
-|                 |                                |                                             |
-|                 | to view the distances in       | ``distunit=M``                              |
-+-----------------+--------------------------------+---------------------------------------------+
-| routepref       | Set the way you are taveling   | Car; Pedestrian; Bicycle;                   |
-|                 |                                |                                             |
-|                 |                                | Wheelchair; HeavyVehicle                    |
-|                 |                                |                                             |
-|                 |                                | ``routepref=Bicycle``                       |
-+-----------------+--------------------------------+---------------------------------------------+
-| api_key         | Input your :term:`API-Key` here| `your_api_key`                              |
-|                 |                                |                                             |
-|                 |                                | ``api_key=eb85f2a6a61aafaebe7e2f2a89b102f5``|
-+-----------------+--------------------------------+---------------------------------------------+
+The following parameters are required for the api to work. For a valid request you need **every single parameter** of this table in your request-URL. You can ommit the value if the parameter has a default value. The parameter will then be set to this default value which can be identified by **bold characters** in the `Value` column. In the case of `via` there is no default value. If you don't want a stopover point just leave the parameter empty.
+
++----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
+| Parameter      | Description                                                            | Value                                              | Example                                                          |
++================+========================================================================+====================================================+==================================================================+
+| start          | Set the starting Point of your route in form of geographic coordinates | *latitude*,\ *longitude*                           | ``9.3785,47.2250``                                               |
++----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
+| end            | Set the end Point of your route in geographic coordinates              | *latitude*,\ *longitude*                           | ``9.505250,47``                                                  |
++----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
+| via            | Set a stopover Point                                                   | *latitude*,\ *longitude*                           | ``via`` ``via=9.43,47.1``                                        |
++----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
+| lang           | Set the language for the instructions                                  | de\/en                                             | ``lang=en``                                                      |
++----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
+| distunit       | Set the unit in which you want to view the distances in                | KM(kilometers)\R/(meters)\/MI(miles)               | ``distunit=KM/M/MI``                                             |
++----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
+| `routepref`_   | Set the way you are taveling                                           | Car\/Pedestrian\/Bicycle\/Wheelchair\/HeavyVehicle | ``routepref=Bicycle/Pedestrian/Bicycle/Wheelchair/HeavyVehicle`` |
++----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
+| instructions   | Set True if you want step by step by step instructions                 | True/**False**                                     | ``instructions=True/False``                                      |
++----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
+| `weighting`_   | Set the route type                                                     | **Fastest**\/Shortest\/Recommended                 | ``wighting=Fastest/Shortest/Recommended``                        |
++----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
+| noMotorways    | Set True to avoid motorways                                            | True\/**False**                                    | ``noMotorways=True/False``                                       |
++----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
+| noTollways     | Set True to avoid tollways                                             | True\/**False**                                    | ``noTollways=True/False``                                        |
++----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
+| noUnpavedroads | Set True to avoid unpaved roads                                        | True\/**False**                                    | ``noUnpavedroads=True/False``                                    |
++----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
+| noSteps        | Set True to avoid steps                                                | True\/**False**                                    | ``noSteps=True/False``                                           |
++----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
+| noFerries      | Set True to avoid ferries                                              | True\/**False**                                    | ``noFerries=True/False``                                         |
++----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
+| api_key        | Input your :term:`API-Key` here                                        | `your_api_key`                                     | ``api_key=eb85f2a6a61aafaebe7e2f2a89b102f5``                     |
++----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
 
 routepref
 >>>>>>>>>
 
+The parameter routepref contains the main routepreferences. There are additional routepreferences for the Bicycle and the HeavyVehicle type. 
+
 +--------------+--------------------------------------------------------------------------------------------------------------+
-| value        | description                                                                                                  |
+| Value        | Description                                                                                                  |
 +==============+==============================================================================================================+
 | Car          | This pathing will avoid footways and bicycle lanes and uses highways, streets and ways cars are allowed on   |
 +--------------+--------------------------------------------------------------------------------------------------------------+
@@ -85,45 +86,16 @@ routepref
 | HeavyVehicle | i dont know what kind of road this uses                                                                      |
 +--------------+--------------------------------------------------------------------------------------------------------------+
 
-.. note:: languages
+.. note:: in the newer version there are only english, german and ...  supported . There are other languages available that are too difficult to maintain. You can request them and implement them yourself if you feel like it.
 
-Required Parameters
-+++++++++++++++++++
-
-The following parameters still are required for the api to work, but contrary to the prior the values can be left empty.
-Except for "via" there will be a default value if you leave it empty
-
-
-+-----------------+---------------------------------+--------------------------+--------------------------+
-| Parameters      | Description                     | Values (**default**)     | Example                  |
-+=================+=================================+==========================+==========================+
-| via             | Set a stopover Point            | *latitude*,\ *longitude* | ``via`` ``via=9.43,47.1``|
-+-----------------+---------------------------------+--------------------------+--------------------------+
-| instructions    | Set True if you want step by    | True/**False**           | ``instructions=True``    |
-|                 |                                 |                          |                          |
-|                 | step by step instructions       |                          | ``instructions``         |
-+-----------------+---------------------------------+--------------------------+--------------------------+
-| weighting       | Set the route type              | **Fastest**; Shortest ;  | ``wighting=Shortest``    |
-|                 |                                 |                          |                          |
-|                 |                                 | Recommended              |                          |
-+-----------------+---------------------------------+--------------------------+--------------------------+
-| noMotorways     | Set True to avoid motorways     | True/**False**           | ``noMotorways``          |
-+-----------------+---------------------------------+--------------------------+--------------------------+
-| noTollways      | Set True to avoid tollways      | True/**False**           | ``noTollways=True``      |
-+-----------------+---------------------------------+--------------------------+--------------------------+
-| noUnpavedroads  | Set True to avoid unpaved roads | True/**False**           | ``noUnpavedroads=False`` |
-+-----------------+---------------------------------+--------------------------+--------------------------+
-| noSteps         | Set True to avoid steps         | True/**False**           | ``noSteps``              |
-+-----------------+---------------------------------+--------------------------+--------------------------+
-| noFerries       | Set True to avoid ferries       | True/**False**           | ``noFerries``            |
-+-----------------+---------------------------------+--------------------------+--------------------------+
 
 
 weighting
 >>>>>>>>>
 
+
 +-------------+------------------------------------------------------------+
-| value       | description                                                |
+| Value       | Description                                                |
 +=============+============================================================+
 | Fastest     | The fastest route uses speed limits etc.....               |
 +-------------+------------------------------------------------------------+
@@ -136,7 +108,7 @@ weighting
 Optional Parameters
 +++++++++++++++++++
 
-
+textblock
 
 +-----------------+---------------------------------+--------------------------+--------------------------+
 | Parameters      | Description                     | Values (**default**)     | Example                  |
