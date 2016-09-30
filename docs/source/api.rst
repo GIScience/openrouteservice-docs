@@ -10,7 +10,7 @@ Therefore you have to directly contact the respective API of the tool you would 
 API Keys
 --------
 
-Before you can use the APIs of the OpenRouteService you need an :term:`API-Key`. 
+Before you can use the APIs of the OpenRouteService you need an :term:`API-Key`. This is a token which relates the request to the user. In case of miss- or overuse (see license) of the APIs it is a lot easier for us to maintain order.
 
 
 ------------
@@ -22,12 +22,12 @@ To do a direkt routing request via GET you need to open up your URL with::
 
  http://openls.geog.uni-heidelberg.de/route?
 
-After the **"?"** you have to add parameters with **"&"**. For the first parameter the **"&"** can be omitted. The pattern for parameter usage is "*parameter=value*". 
+After the **"?"** you have to add parameters with **"&"**. For the first parameter the **"&"** can be omitted. The pattern for parameter usage is "*parameter=value*". If you don't get the picture, you can look at the `Example`_ below.
 
 There are two types of parameters:
 
-:`Required Parameters`_:They are required for the API to work.
-:`Optional Parameters`_:These parameters are not necessary to get a functional request. But you can fine-tune you request through these.
+:`Required Parameters`_: They are required for the API to work.
+:`Optional Parameters`_: These parameters are not necessary to get a functional request. But you can fine-tune you request through these.
 
 
 
@@ -71,7 +71,7 @@ The following parameters are required for the api to work. For a valid request y
 routepref
 >>>>>>>>>
 
-The parameter routepref contains the main routepreferences. There are additional routepreferences for the Bicycle and the HeavyVehicle type. 
+The parameter routepref contains the main routepreferences. There are `additional routepreferences`_ for the Bicycle and the HeavyVehicle type. 
 
 +--------------+--------------------------------------------------------------------------------------------------------------+
 | Value        | Description                                                                                                  |
@@ -112,11 +112,47 @@ Optional Parameters
 textblock
 
 +-----------------+---------------------------------+--------------------------+--------------------------+
-| Parameters      | Description                     | Values (**default**)     | Example                  |
+| Parameter       | Description                     | Value                    | Example                  |
 +=================+=================================+==========================+==========================+
-| useTMC          | Set a stopover Point            | True/**False**           | ``useTMC=True``          |
+| useTMC          | Set a stopover Point            | True/**False**           | ``useTMC=True/False``    |
 +-----------------+---------------------------------+--------------------------+--------------------------+
 
+additional routepreferences
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+For each of these special route profiles you can set specific parameters
+
+Bicycle-type
+<<<<<<<<<<<<
+
++----------------+-----------------------+
+| Value          | Description           |
++================+=======================+
+| BicycleMTB     | Mountainbike profile  |
++----------------+-----------------------+
+| BicycleRacer   | Racing profile        |
++----------------+-----------------------+
+| BicycleTouring | Touring profile       |
++----------------+-----------------------+
+| BicycleSafety  | Safety profile        |
++----------------+-----------------------+
+
+HeavyVehicle-type
+<<<<<<<<<<<<<<<<<
+
++--------------+----------------------+
+| Value        | Description          |
++==============+======================+
+| Goods        | Goods profile        |
++--------------+----------------------+
+| Bus          | Bus profile          |
++--------------+----------------------+
+| Agricultural | Agricultural profile |
++--------------+----------------------+
+| Foresty      | Foresty profile      |
++--------------+----------------------+
+| Delivery     | Delivery profile     |
++--------------+----------------------+
 
 
 Example

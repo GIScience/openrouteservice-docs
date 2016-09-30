@@ -93,7 +93,14 @@
 <li class="toctree-l4"><a class="reference internal" href="#weighting">weighting</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#additional-routepreferences">additional routepreferences</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#bicycle-type">Bicycle-type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#heavyvehicle-type">HeavyVehicle-type</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
@@ -179,7 +186,7 @@ Instead of using the ORS website you can also request the Data in the form of an
 Therefore you have to directly contact the respective API of the tool you would like to use.</p>
 <div class="section" id="api-keys">
 <h2>API Keys<a class="headerlink" href="#api-keys" title="Permalink to this headline">¶</a></h2>
-<p>Before you can use the APIs of the OpenRouteService you need an <a class="reference internal" href="glossary.html#term-api-key"><span class="xref std std-term">API-Key</span></a>.</p>
+<p>Before you can use the APIs of the OpenRouteService you need an <a class="reference internal" href="glossary.html#term-api-key"><span class="xref std std-term">API-Key</span></a>. This is a token which relates the request to the user. In case of miss- or overuse (see license) of the APIs it is a lot easier for us to maintain order.</p>
 </div>
 <hr class="docutils" />
 <div class="section" id="routing-api">
@@ -188,8 +195,8 @@ Therefore you have to directly contact the respective API of the tool you would 
 <div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/route?
 </pre></div>
 </div>
-<p>After the <strong>&#8221;?&#8221;</strong> you have to add parameters with <strong>&#8220;&amp;&#8221;</strong>. For the first parameter the <strong>&#8220;&amp;&#8221;</strong> can be omitted. The pattern for parameter usage is &#8220;<em>parameter=value</em>&#8221;.
-There are two types of parameters:</p>
+<p>After the <strong>&#8221;?&#8221;</strong> you have to add parameters with <strong>&#8220;&amp;&#8221;</strong>. For the first parameter the <strong>&#8220;&amp;&#8221;</strong> can be omitted. The pattern for parameter usage is &#8220;<em>parameter=value</em>&#8221;. If you don&#8217;t get the picture, you can look at the <a class="reference internal" href="#example">Example</a> below.</p>
+<p>There are two types of parameters:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -204,7 +211,7 @@ There are two types of parameters:</p>
 </table>
 <div class="section" id="required-parameters">
 <h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this headline">¶</a></h3>
-<p>The following parameters are required for the api to work. For a valid request you need <strong>every single parameter</strong> of this table in your request-URL. You can ommit the value if the parameter has a default value. The parameter will then be set to this default value which can be identified by <strong>bold characters</strong> in the <cite>Value</cite> column. In the case of <cite>via</cite> there is no default value. If you don&#8217;t want a stopover point just leave the parameter empty.</p>
+<p>The following parameters are required for the api to work. For a valid request you need <strong>every single parameter</strong> of this table in your request-URL. You can omit the value if the parameter has a default value. The parameter will then be set to this default value which can be identified by <strong>bold characters</strong> in the <cite>Value</cite> column. In the case of <cite>via</cite> there is no default value. If you don&#8217;t want a stopover point just leave the parameter empty.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="8%" />
@@ -294,7 +301,7 @@ There are two types of parameters:</p>
 </table>
 <div class="section" id="routepref">
 <h4>routepref<a class="headerlink" href="#routepref" title="Permalink to this headline">¶</a></h4>
-<p>The parameter routepref contains the main routepreferences. There are additional routepreferences for the Bicycle and the HeavyVehicle type.</p>
+<p>The parameter routepref contains the main routepreferences. There are <a class="reference internal" href="#additional-routepreferences">additional routepreferences</a> for the Bicycle and the HeavyVehicle type.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="11%" />
@@ -365,9 +372,9 @@ There are two types of parameters:</p>
 <col width="25%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Parameters</th>
+<tr class="row-odd"><th class="head">Parameter</th>
 <th class="head">Description</th>
-<th class="head">Values (<strong>default</strong>)</th>
+<th class="head">Value</th>
 <th class="head">Example</th>
 </tr>
 </thead>
@@ -375,10 +382,73 @@ There are two types of parameters:</p>
 <tr class="row-even"><td>useTMC</td>
 <td>Set a stopover Point</td>
 <td>True/<strong>False</strong></td>
-<td><code class="docutils literal"><span class="pre">useTMC=True</span></code></td>
+<td><code class="docutils literal"><span class="pre">useTMC=True/False</span></code></td>
 </tr>
 </tbody>
 </table>
+<div class="section" id="additional-routepreferences">
+<h4>additional routepreferences<a class="headerlink" href="#additional-routepreferences" title="Permalink to this headline">¶</a></h4>
+<p>For each of these special route profiles you can set specific parameters</p>
+<div class="section" id="bicycle-type">
+<h5>Bicycle-type<a class="headerlink" href="#bicycle-type" title="Permalink to this headline">¶</a></h5>
+<table border="1" class="docutils">
+<colgroup>
+<col width="41%" />
+<col width="59%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>BicycleMTB</td>
+<td>Mountainbike profile</td>
+</tr>
+<tr class="row-odd"><td>BicycleRacer</td>
+<td>Racing profile</td>
+</tr>
+<tr class="row-even"><td>BicycleTouring</td>
+<td>Touring profile</td>
+</tr>
+<tr class="row-odd"><td>BicycleSafety</td>
+<td>Safety profile</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="heavyvehicle-type">
+<h5>HeavyVehicle-type<a class="headerlink" href="#heavyvehicle-type" title="Permalink to this headline">¶</a></h5>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Goods</td>
+<td>Goods profile</td>
+</tr>
+<tr class="row-odd"><td>Bus</td>
+<td>Bus profile</td>
+</tr>
+<tr class="row-even"><td>Agricultural</td>
+<td>Agricultural profile</td>
+</tr>
+<tr class="row-odd"><td>Foresty</td>
+<td>Foresty profile</td>
+</tr>
+<tr class="row-even"><td>Delivery</td>
+<td>Delivery profile</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div class="section" id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
