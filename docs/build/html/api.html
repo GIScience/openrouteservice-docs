@@ -85,7 +85,7 @@
                 <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Tools</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Application Programming Interfaces</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Application Programming Interfaces</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#api-keys">API Keys</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#routing-api">Routing API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#required-parameters">Required Parameters</a><ul>
@@ -94,7 +94,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional Parameters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#additional-routepreferences">additional routepreferences</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#additional-routepreferences">Additional Routepreferences</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#bicycle-type">Bicycle-type</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#heavyvehicle-type">HeavyVehicle-type</a></li>
 </ul>
@@ -180,10 +180,8 @@
             
   <div class="section" id="application-programming-interfaces">
 <h1>Application Programming Interfaces<a class="headerlink" href="#application-programming-interfaces" title="Permalink to this headline">¶</a></h1>
-<p>End point:
-In this Section we will let the user know what the <a class="reference internal" href="glossary.html#term-api"><span class="xref std std-term">API</span></a> is for.
-Instead of using the ORS website you can also request the Data in the form of an .gml file.
-Therefore you have to directly contact the respective API of the tool you would like to use.</p>
+<p>Instead of using the ORS website you can also request the Data in the form of an .gml file.
+Therefore you have to directly contact the respective <a class="reference internal" href="glossary.html#term-api"><span class="xref std std-term">API</span></a> of the tool you would like to use.</p>
 <div class="section" id="api-keys">
 <h2>API Keys<a class="headerlink" href="#api-keys" title="Permalink to this headline">¶</a></h2>
 <p>Before you can use the APIs of the OpenRouteService you need an <a class="reference internal" href="glossary.html#term-api-key"><span class="xref std std-term">API-Key</span></a>. This is a token which relates the request to the user. In case of miss- or overuse (see license) of the APIs it is a lot easier for us to maintain order.</p>
@@ -192,7 +190,7 @@ Therefore you have to directly contact the respective API of the tool you would 
 <div class="section" id="routing-api">
 <h2>Routing API<a class="headerlink" href="#routing-api" title="Permalink to this headline">¶</a></h2>
 <p>To do a direkt routing request via GET you need to open up your URL with:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/route?
+<div class="highlight-python"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?
 </pre></div>
 </div>
 <p>After the <strong>&#8221;?&#8221;</strong> you have to add parameters with <strong>&#8220;&amp;&#8221;</strong>. For the first parameter the <strong>&#8220;&amp;&#8221;</strong> can be omitted. The pattern for parameter usage is &#8220;<em>parameter=value</em>&#8221;. If you don&#8217;t get the picture, you can look at the <a class="reference internal" href="#example">Example</a> below.</p>
@@ -332,7 +330,7 @@ Therefore you have to directly contact the respective API of the tool you would 
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">in the newer version there are only english, german and ...  supported . There are other languages available that are too difficult to maintain. You can request them and implement them yourself if you feel like it.</p>
+<p class="last">in the newer version there are only english and german. There are other languages available that are too difficult to maintain. You can request them and implement them yourself if you feel like it.</p>
 </div>
 </div>
 <div class="section" id="weighting">
@@ -366,10 +364,10 @@ Therefore you have to directly contact the respective API of the tool you would 
 <p>textblock</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="17%" />
-<col width="32%" />
-<col width="25%" />
-<col width="25%" />
+<col width="12%" />
+<col width="44%" />
+<col width="18%" />
+<col width="26%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -384,11 +382,16 @@ Therefore you have to directly contact the respective API of the tool you would 
 <td>True/<strong>False</strong></td>
 <td><code class="docutils literal"><span class="pre">useTMC=True/False</span></code></td>
 </tr>
+<tr class="row-odd"><td>maxspeed</td>
+<td>Set a maximum speed in km/h for what ?</td>
+<td>True/<strong>False</strong></td>
+<td><code class="docutils literal"><span class="pre">maxspeed=10</span></code></td>
+</tr>
 </tbody>
 </table>
 <div class="section" id="additional-routepreferences">
-<h4>additional routepreferences<a class="headerlink" href="#additional-routepreferences" title="Permalink to this headline">¶</a></h4>
-<p>For each of these special route profiles you can set specific parameters</p>
+<h4>Additional Routepreferences<a class="headerlink" href="#additional-routepreferences" title="Permalink to this headline">¶</a></h4>
+<p>There are additional profiles for the <a class="reference internal" href="#routepref">routepref</a>  parameter for different Bicycle and Heavyvehicle Types. For each of these special route profiles you can set specific parameters.</p>
 <div class="section" id="bicycle-type">
 <h5>Bicycle-type<a class="headerlink" href="#bicycle-type" title="Permalink to this headline">¶</a></h5>
 <table border="1" class="docutils">
@@ -453,9 +456,10 @@ Therefore you have to directly contact the respective API of the tool you would 
 <div class="section" id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>The shortest version of a full functioning routing URL would look like this:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;via&amp;end=9.156506,49.230011&amp;lang=en&amp;distunit=KM&amp;routepref=Car&amp;weighting&amp;useTMC&amp;noMotorways&amp;noTollways&amp;noUnpavedroads&amp;noSteps&amp;noFerries&amp;instructions&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<div class="highlight-python"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;via&amp;end=9.156506,49.230011&amp;lang=en&amp;distunit=KM&amp;routepref=Car&amp;weighting&amp;noMotorways&amp;noTollways&amp;noUnpavedroads&amp;noSteps&amp;noFerries&amp;instructions&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 </pre></div>
 </div>
+<p>It is a simple route for a car from A to B with no direction-instructions. The distances will be in kilometers, the weighting is <cite>shortest</cite> and</p>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
 <p class="last">Parameters as well as values are <cite>case sensitive</cite>. The input order doesn&#8217;t matter though.</p>
@@ -465,7 +469,6 @@ Therefore you have to directly contact the respective API of the tool you would 
 <hr class="docutils" />
 <div class="section" id="geocoding-api">
 <h2>Geocoding API<a class="headerlink" href="#geocoding-api" title="Permalink to this headline">¶</a></h2>
-<p>here comes the geocoding api</p>
 <p>Here will be the required Parameters</p>
 <table border="1" class="docutils">
 <colgroup>

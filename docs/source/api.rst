@@ -1,10 +1,10 @@
 Application Programming Interfaces
 ==================================
 
-End point:
-In this Section we will let the user know what the :term:`API` is for.
 Instead of using the ORS website you can also request the Data in the form of an .gml file.
-Therefore you have to directly contact the respective API of the tool you would like to use.
+Therefore you have to directly contact the respective :term:`API` of the tool you would like to use.
+
+
 
 
 API Keys
@@ -87,7 +87,7 @@ The parameter routepref contains the main routepreferences. There are `additiona
 | HeavyVehicle | i dont know what kind of road this uses                                                                      |
 +--------------+--------------------------------------------------------------------------------------------------------------+
 
-.. note:: in the newer version there are only english, german and ...  supported . There are other languages available that are too difficult to maintain. You can request them and implement them yourself if you feel like it.
+.. note:: in the newer version there are only english and german. There are other languages available that are too difficult to maintain. You can request them and implement them yourself if you feel like it.
 
 
 
@@ -111,16 +111,19 @@ Optional Parameters
 
 textblock
 
-+-----------------+---------------------------------+--------------------------+--------------------------+
-| Parameter       | Description                     | Value                    | Example                  |
-+=================+=================================+==========================+==========================+
-| useTMC          | Set a stopover Point            | True/**False**           | ``useTMC=True/False``    |
-+-----------------+---------------------------------+--------------------------+--------------------------+
++-----------+----------------------------------------+----------------+-----------------------+
+| Parameter | Description                            | Value          | Example               |
++===========+========================================+================+=======================+
+| useTMC    | Set a stopover Point                   | True/**False** | ``useTMC=True/False`` |
++-----------+----------------------------------------+----------------+-----------------------+
+| maxspeed  | Set a maximum speed in km/h for what ? | True/**False** | ``maxspeed=10``       |
++-----------+----------------------------------------+----------------+-----------------------+
 
-additional routepreferences
+
+Additional Routepreferences
 >>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-For each of these special route profiles you can set specific parameters
+There are additional profiles for the `routepref`_  parameter for different Bicycle and Heavyvehicle Types. For each of these special route profiles you can set specific parameters.
 
 Bicycle-type
 <<<<<<<<<<<<
@@ -160,16 +163,18 @@ Example
 
 The shortest version of a full functioning routing URL would look like this::
 
-  http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&via&end=9.156506,49.230011&lang=en&distunit=KM&routepref=Car&weighting&useTMC&noMotorways&noTollways&noUnpavedroads&noSteps&noFerries&instructions&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+  http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&via&end=9.156506,49.230011&lang=en&distunit=KM&routepref=Car&weighting&noMotorways&noTollways&noUnpavedroads&noSteps&noFerries&instructions&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 
-.. attention:: Parameters as well as values are `case sensitive`. The input order doesn't matter though.
+It is a simple route for a car from A to B with no direction-instructions. The distances will be in kilometers, the weighting is `shortest` and 	
+
+.. attention:: Parameters as well as values are `case sensitive`. The input order doesn't matter though. 
 
 -----------
 
 Geocoding API
 -------------
 
-here comes the geocoding api 
+
 
 
 
