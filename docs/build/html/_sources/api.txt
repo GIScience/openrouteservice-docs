@@ -49,11 +49,11 @@ The following parameters are required for the api to work. For a valid request y
 +----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
 | distunit       | Set the unit in which you want to view the distances in                | KM(kilometers)\R/(meters)\/MI(miles)               | ``distunit=KM/M/MI``                                             |
 +----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
-| `routepref`_   | Set the way you are taveling                                           | Car\/Pedestrian\/Bicycle\/Wheelchair\/HeavyVehicle | ``routepref=Bicycle/Pedestrian/Bicycle/Wheelchair/HeavyVehicle`` |
+| `routepref`_   | Set the way you are taveling                                           | :term:`Car`\/:term:`Pedestrian`\/:term:`Bicycle`\/:term:`Wheelchair`\/:term:`HeavyVehicle` | ``routepref=Bicycle/Pedestrian/Bicycle/Wheelchair/HeavyVehicle`` |
 +----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
 | instructions   | Set True if you want step by step by step instructions                 | True/**False**                                     | ``instructions=True/False``                                      |
 +----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
-| `weighting`_   | Set the route type                                                     | **Fastest**\/Shortest\/Recommended                 | ``wighting=Fastest/Shortest/Recommended``                        |
+| `weighting`_   | Set the route type                                                     | **:term:`Fastest`**\/:term:`Shortest`\/:term:`Recommended`                 | ``wighting=Fastest/Shortest/Recommended``                        |
 +----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
 | noMotorways    | Set True to avoid motorways                                            | True\/**False**                                    | ``noMotorways=True/False``                                       |
 +----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
@@ -90,20 +90,18 @@ The parameter routepref contains the main routepreferences. There are `additiona
 .. note:: in the newer version there are only english and german. There are other languages available that are too difficult to maintain. You can request them and implement them yourself if you feel like it.
 
 
-
-weighting
->>>>>>>>>
-
-
-+-------------+------------------------------------------------------------+
-| Value       | Description                                                |
-+=============+============================================================+
-| Fastest     | The fastest route uses speed limits etc.....               |
-+-------------+------------------------------------------------------------+
-| Shortest    | The shortest route ...                                     |
-+-------------+------------------------------------------------------------+
-| Recommended | This mode will include POIs to give you a trip to remember |
-+-------------+------------------------------------------------------------+
+..
+	weighting
+	>>>>>>>>>
+	+-------------+------------------------------------------------------------+
+	| Value       | Description                                                |
+	+=============+============================================================+
+	| Fastest     | The fastest route uses speed limits etc.....               |
+	+-------------+------------------------------------------------------------+
+	| Shortest    | The shortest route ...                                     |
+	+-------------+------------------------------------------------------------+
+	| Recommended | This mode will include POIs to give you a trip to remember |
+	+-------------+------------------------------------------------------------+
 
 
 Optional Parameters

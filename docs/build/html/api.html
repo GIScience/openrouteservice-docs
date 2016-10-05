@@ -90,7 +90,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#routing-api">Routing API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#required-parameters">Required Parameters</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#routepref">routepref</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#weighting">weighting</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional Parameters</a><ul>
@@ -210,93 +209,6 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="required-parameters">
 <h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this headline">¶</a></h3>
 <p>The following parameters are required for the api to work. For a valid request you need <strong>every single parameter</strong> of this table in your request-URL. You can omit the value if the parameter has a default value. The parameter will then be set to this default value which can be identified by <strong>bold characters</strong> in the <cite>Value</cite> column. In the case of <cite>via</cite> there is no default value. If you don&#8217;t want a stopover point just leave the parameter empty.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="8%" />
-<col width="35%" />
-<col width="25%" />
-<col width="32%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Parameter</th>
-<th class="head">Description</th>
-<th class="head">Value</th>
-<th class="head">Example</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>start</td>
-<td>Set the starting Point of your route in form of geographic coordinates</td>
-<td><em>latitude</em>,<em>longitude</em></td>
-<td><code class="docutils literal"><span class="pre">9.3785,47.2250</span></code></td>
-</tr>
-<tr class="row-odd"><td>end</td>
-<td>Set the end Point of your route in geographic coordinates</td>
-<td><em>latitude</em>,<em>longitude</em></td>
-<td><code class="docutils literal"><span class="pre">9.505250,47</span></code></td>
-</tr>
-<tr class="row-even"><td>via</td>
-<td>Set a stopover Point</td>
-<td><em>latitude</em>,<em>longitude</em></td>
-<td><code class="docutils literal"><span class="pre">via</span></code> <code class="docutils literal"><span class="pre">via=9.43,47.1</span></code></td>
-</tr>
-<tr class="row-odd"><td>lang</td>
-<td>Set the language for the instructions</td>
-<td>de/en</td>
-<td><code class="docutils literal"><span class="pre">lang=en</span></code></td>
-</tr>
-<tr class="row-even"><td>distunit</td>
-<td>Set the unit in which you want to view the distances in</td>
-<td>KM(kilometers)R/(meters)/MI(miles)</td>
-<td><code class="docutils literal"><span class="pre">distunit=KM/M/MI</span></code></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#routepref">routepref</a></td>
-<td>Set the way you are taveling</td>
-<td>Car/Pedestrian/Bicycle/Wheelchair/HeavyVehicle</td>
-<td><code class="docutils literal"><span class="pre">routepref=Bicycle/Pedestrian/Bicycle/Wheelchair/HeavyVehicle</span></code></td>
-</tr>
-<tr class="row-even"><td>instructions</td>
-<td>Set True if you want step by step by step instructions</td>
-<td>True/<strong>False</strong></td>
-<td><code class="docutils literal"><span class="pre">instructions=True/False</span></code></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#weighting">weighting</a></td>
-<td>Set the route type</td>
-<td><strong>Fastest</strong>/Shortest/Recommended</td>
-<td><code class="docutils literal"><span class="pre">wighting=Fastest/Shortest/Recommended</span></code></td>
-</tr>
-<tr class="row-even"><td>noMotorways</td>
-<td>Set True to avoid motorways</td>
-<td>True/<strong>False</strong></td>
-<td><code class="docutils literal"><span class="pre">noMotorways=True/False</span></code></td>
-</tr>
-<tr class="row-odd"><td>noTollways</td>
-<td>Set True to avoid tollways</td>
-<td>True/<strong>False</strong></td>
-<td><code class="docutils literal"><span class="pre">noTollways=True/False</span></code></td>
-</tr>
-<tr class="row-even"><td>noUnpavedroads</td>
-<td>Set True to avoid unpaved roads</td>
-<td>True/<strong>False</strong></td>
-<td><code class="docutils literal"><span class="pre">noUnpavedroads=True/False</span></code></td>
-</tr>
-<tr class="row-odd"><td>noSteps</td>
-<td>Set True to avoid steps</td>
-<td>True/<strong>False</strong></td>
-<td><code class="docutils literal"><span class="pre">noSteps=True/False</span></code></td>
-</tr>
-<tr class="row-even"><td>noFerries</td>
-<td>Set True to avoid ferries</td>
-<td>True/<strong>False</strong></td>
-<td><code class="docutils literal"><span class="pre">noFerries=True/False</span></code></td>
-</tr>
-<tr class="row-odd"><td>api_key</td>
-<td>Input your <a class="reference internal" href="glossary.html#term-api-key"><span class="xref std std-term">API-Key</span></a> here</td>
-<td><cite>your_api_key</cite></td>
-<td><code class="docutils literal"><span class="pre">api_key=eb85f2a6a61aafaebe7e2f2a89b102f5</span></code></td>
-</tr>
-</tbody>
-</table>
 <div class="section" id="routepref">
 <h4>routepref<a class="headerlink" href="#routepref" title="Permalink to this headline">¶</a></h4>
 <p>The parameter routepref contains the main routepreferences. There are <a class="reference internal" href="#additional-routepreferences">additional routepreferences</a> for the Bicycle and the HeavyVehicle type.</p>
@@ -332,31 +244,6 @@ Therefore you have to directly contact the respective <a class="reference intern
 <p class="first admonition-title">Note</p>
 <p class="last">in the newer version there are only english and german. There are other languages available that are too difficult to maintain. You can request them and implement them yourself if you feel like it.</p>
 </div>
-</div>
-<div class="section" id="weighting">
-<h4>weighting<a class="headerlink" href="#weighting" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="docutils">
-<colgroup>
-<col width="18%" />
-<col width="82%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Value</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>Fastest</td>
-<td>The fastest route uses speed limits etc.....</td>
-</tr>
-<tr class="row-odd"><td>Shortest</td>
-<td>The shortest route ...</td>
-</tr>
-<tr class="row-even"><td>Recommended</td>
-<td>This mode will include POIs to give you a trip to remember</td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div class="section" id="optional-parameters">
