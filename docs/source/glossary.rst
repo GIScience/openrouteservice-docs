@@ -6,7 +6,7 @@ This is tho glossary where you can look up words or abbreviations you don't unde
 
 .. glossary::
 
-  TCM
+  TMC
   Traffic Message Channel
     A road graph with real time traffic information to estimate the best route
 
@@ -67,4 +67,3 @@ This is tho glossary where you can look up words or abbreviations you don't unde
   Delivery
   	Delivery profile
 
-  

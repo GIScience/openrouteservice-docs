@@ -1,16 +1,8 @@
 Application Programming Interfaces
 ==================================
 
-Instead of using the ORS website you can also request the Data in the form of an .gml file.
+Instead of using the ORS website you can also request the Data via GET in the form of an .gml file.
 Therefore you have to directly contact the respective :term:`API` of the tool you would like to use.
-
-
-
-
-API Keys
---------
-
-Before you can use the APIs of the OpenRouteService you need an :term:`API-Key`. This is a token which relates the request to the user. In case of miss- or overuse (see license) of the APIs it is a lot easier for us to maintain order.
 
 
 ------------
@@ -49,7 +41,7 @@ The following parameters are required for the api to work. For a valid request y
 +----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
 | distunit       | Set the unit in which you want to view the distances in                | KM(kilometers)\R/(meters)\/MI(miles)               | ``distunit=KM/M/MI``                                             |
 +----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
-| `routepref`_   | Set the way you are taveling                                           | :term:`Car`\/:term:`Pedestrian`\/:term:`Bicycle`\/:term:`Wheelchair`\/:term:`HeavyVehicle` | ``routepref=Bicycle/Pedestrian/Bicycle/Wheelchair/HeavyVehicle`` |
+| routepref   | Set the way you are taveling                                           | :term:`Car`\/:term:`Pedestrian`\/:term:`Bicycle`\/:term:`Wheelchair`\/:term:`HeavyVehicle` | ``routepref=Bicycle/Pedestrian/Bicycle/Wheelchair/HeavyVehicle`` |
 +----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
 | instructions   | Set True if you want step by step by step instructions                 | True/**False**                                     | ``instructions=True/False``                                      |
 +----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
@@ -68,24 +60,25 @@ The following parameters are required for the api to work. For a valid request y
 | api_key        | Input your :term:`API-Key` here                                        | `your_api_key`                                     | ``api_key=eb85f2a6a61aafaebe7e2f2a89b102f5``                     |
 +----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
 
-routepref
->>>>>>>>>
-
-The parameter routepref contains the main routepreferences. There are `additional routepreferences`_ for the Bicycle and the HeavyVehicle type. 
-
-+--------------+--------------------------------------------------------------------------------------------------------------+
-| Value        | Description                                                                                                  |
-+==============+==============================================================================================================+
-| Car          | This pathing will avoid footways and bicycle lanes and uses highways, streets and ways cars are allowed on   |
-+--------------+--------------------------------------------------------------------------------------------------------------+
-| Pedestrian   | this routing algorithm uses footways and tries to avoid highways                                             |
-+--------------+--------------------------------------------------------------------------------------------------------------+
-| Bicycle      | Uses bicycle ways if available, can also use footpaths where bicycle is allowed and streets                  |
-+--------------+--------------------------------------------------------------------------------------------------------------+
-| Wheelchair   | This algorithm uses footways and tries to use the smothest surface type. In addition stairs will be avoided. |
-+--------------+--------------------------------------------------------------------------------------------------------------+
-| HeavyVehicle | i dont know what kind of road this uses                                                                      |
-+--------------+--------------------------------------------------------------------------------------------------------------+
+..
+	routepref
+	>>>>>>>>>
+..
+	The parameter routepref contains the main routepreferences. There are `additional routepreferences`_ for the Bicycle and the HeavyVehicle type. 
+..
+	+--------------+--------------------------------------------------------------------------------------------------------------+
+	| Value        | Description                                                                                                  |
+	+==============+==============================================================================================================+
+	| Car          | This pathing will avoid footways and bicycle lanes and uses highways, streets and ways cars are allowed on   |
+	+--------------+--------------------------------------------------------------------------------------------------------------+
+	| Pedestrian   | this routing algorithm uses footways and tries to avoid highways                                             |
+	+--------------+--------------------------------------------------------------------------------------------------------------+
+	| Bicycle      | Uses bicycle ways if available, can also use footpaths where bicycle is allowed and streets                  |
+	+--------------+--------------------------------------------------------------------------------------------------------------+
+	| Wheelchair   | This algorithm uses footways and tries to use the smothest surface type. In addition stairs will be avoided. |
+	+--------------+--------------------------------------------------------------------------------------------------------------+
+	| HeavyVehicle | i dont know what kind of road this uses                                                                      |
+	+--------------+--------------------------------------------------------------------------------------------------------------+
 
 .. note:: in the newer version there are only english and german. There are other languages available that are too difficult to maintain. You can request them and implement them yourself if you feel like it.
 
@@ -117,53 +110,82 @@ textblock
 | maxspeed  | Set a maximum speed in km/h for what ? | True/**False** | ``maxspeed=10``       |
 +-----------+----------------------------------------+----------------+-----------------------+
 
+..
+	Additional Routepreferences
+	>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	There are additional profiles for the `routepref` parameter for different Bicycle and Heavyvehicle Types. For each of these special route profiles you can set specific parameters.
+	Bicycle-type
+	<<<<<<<<<<<<
+	+----------------+-----------------------+
+	| Value          | Description           |
+	+================+=======================+
+	| BicycleMTB     | Mountainbike profile  |
+	+----------------+-----------------------+
+	| BicycleRacer   | Racing profile        |
+	+----------------+-----------------------+
+	| BicycleTouring | Touring profile       |
+	+----------------+-----------------------+
+	| BicycleSafety  | Safety profile        |
+	+----------------+-----------------------+
+	HeavyVehicle-type
+	<<<<<<<<<<<<<<<<<
+	+--------------+----------------------+
+	| Value        | Description          |
+	+==============+======================+
+	| Goods        | Goods profile        |
+	+--------------+----------------------+
+	| Bus          | Bus profile          |
+	+--------------+----------------------+
+	| Agricultural | Agricultural profile |
+	+--------------+----------------------+
+	| Foresty      | Foresty profile      |
+	+--------------+----------------------+
+	| Delivery     | Delivery profile     |
+	+--------------+----------------------+
 
-Additional Routepreferences
->>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-There are additional profiles for the `routepref`_  parameter for different Bicycle and Heavyvehicle Types. For each of these special route profiles you can set specific parameters.
-
-Bicycle-type
-<<<<<<<<<<<<
-
-+----------------+-----------------------+
-| Value          | Description           |
-+================+=======================+
-| BicycleMTB     | Mountainbike profile  |
-+----------------+-----------------------+
-| BicycleRacer   | Racing profile        |
-+----------------+-----------------------+
-| BicycleTouring | Touring profile       |
-+----------------+-----------------------+
-| BicycleSafety  | Safety profile        |
-+----------------+-----------------------+
-
-HeavyVehicle-type
-<<<<<<<<<<<<<<<<<
-
-+--------------+----------------------+
-| Value        | Description          |
-+==============+======================+
-| Goods        | Goods profile        |
-+--------------+----------------------+
-| Bus          | Bus profile          |
-+--------------+----------------------+
-| Agricultural | Agricultural profile |
-+--------------+----------------------+
-| Foresty      | Foresty profile      |
-+--------------+----------------------+
-| Delivery     | Delivery profile     |
-+--------------+----------------------+
-
+.. highlight:: xml
 
 Example
 +++++++
 
 The shortest version of a full functioning routing URL would look like this::
 
-  http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&via&end=9.156506,49.230011&lang=en&distunit=KM&routepref=Car&weighting&noMotorways&noTollways&noUnpavedroads&noSteps&noFerries&instructions&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+  http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&via&end=9.2556609,49.2397316&lang=en&distunit=KM&routepref=Car&weighting&noMotorways&noTollways&noUnpavedroads&noSteps&noFerries&instructions&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 
-It is a simple route for a car from A to B with no direction-instructions. The distances will be in kilometers, the weighting is `shortest` and 	
+..needs revision
+It is a simple route for a car from A to B with no direction-instructions. The distances will be in kilometers, the weighting is `shortest` and ferries, motorways, tollways, unpavedroads and steps will be considered. The Result will be the following:
+
+::
+
+	<xls:XLS version="1.1" xsi:schemaLocation="http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/RouteService.xsd">
+	 <xls:ResponseHeader xsi:type="xls:ResponseHeaderType"/>
+	 <xls:Response xsi:type="xls:ResponseType" requestID="123456789" version="1.1" numberOfResponses="1">
+	  <xls:DetermineRouteResponse xsi:type="xls:DetermineRouteResponseType">
+	   <xls:RouteSummary>
+	    <xls:TotalTime>PT16S</xls:TotalTime>
+	    <xls:TotalDistance uom="KM" value="0.2"/><xls:ActualDistance uom="KM" value="0.0"/>
+	    <xls:BoundingBox srsName="EPSG:4326">
+	     <gml:pos>9.2556609 49.2396869</gml:pos>
+	     <gml:pos>9.2585339 49.2399278</gml:pos>
+	    </xls:BoundingBox>
+	   </xls:RouteSummary>
+	   <xls:RouteGeometry>
+	    <gml:LineString srsName="EPSG:4326">
+	     <gml:pos>9.2585339 49.2399278</gml:pos>
+	     <gml:pos>9.2583569 49.2399026</gml:pos>
+	     <gml:pos>9.2581138 49.239894</gml:pos>
+	     <gml:pos>9.2578367 49.2398938</gml:pos>
+	     <gml:pos>9.2575036 49.2398741</gml:pos>
+	     <gml:pos>9.2571842 49.2398199</gml:pos>
+	     <gml:pos>9.2568038 49.2397191</gml:pos>
+	     <gml:pos>9.2565134 49.2396869</gml:pos>
+	     <gml:pos>9.2556609 49.2397316</gml:pos>
+	     <gml:pos>9.2556609 49.2397316</gml:pos>
+	    </gml:LineString>
+	   </xls:RouteGeometry>
+	  </xls:DetermineRouteResponse>
+	 </xls:Response>
+	</xls:XLS>
 
 .. attention:: Parameters as well as values are `case sensitive`. The input order doesn't matter though. 
 

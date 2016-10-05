@@ -32,7 +32,7 @@
   
     <link rel="top" title="OpenRouteService API Documentation 0.0.1 documentation" href="index.html"/>
         <link rel="next" title="Disclaimer" href="tos.html"/>
-        <link rel="prev" title="Tools" href="overview.html"/> 
+        <link rel="prev" title="API Keys" href="api_key.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -84,22 +84,12 @@
             
                 <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_key.html">API Keys</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Application Programming Interfaces</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#api-keys">API Keys</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#routing-api">Routing API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#required-parameters">Required Parameters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#routepref">routepref</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional Parameters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#additional-routepreferences">Additional Routepreferences</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#bicycle-type">Bicycle-type</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#heavyvehicle-type">HeavyVehicle-type</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#required-parameters">Required Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
@@ -179,12 +169,8 @@
             
   <div class="section" id="application-programming-interfaces">
 <h1>Application Programming Interfaces<a class="headerlink" href="#application-programming-interfaces" title="Permalink to this headline">¶</a></h1>
-<p>Instead of using the ORS website you can also request the Data in the form of an .gml file.
+<p>Instead of using the ORS website you can also request the Data via GET in the form of an .gml file.
 Therefore you have to directly contact the respective <a class="reference internal" href="glossary.html#term-api"><span class="xref std std-term">API</span></a> of the tool you would like to use.</p>
-<div class="section" id="api-keys">
-<h2>API Keys<a class="headerlink" href="#api-keys" title="Permalink to this headline">¶</a></h2>
-<p>Before you can use the APIs of the OpenRouteService you need an <a class="reference internal" href="glossary.html#term-api-key"><span class="xref std std-term">API-Key</span></a>. This is a token which relates the request to the user. In case of miss- or overuse (see license) of the APIs it is a lot easier for us to maintain order.</p>
-</div>
 <hr class="docutils" />
 <div class="section" id="routing-api">
 <h2>Routing API<a class="headerlink" href="#routing-api" title="Permalink to this headline">¶</a></h2>
@@ -209,41 +195,9 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="required-parameters">
 <h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this headline">¶</a></h3>
 <p>The following parameters are required for the api to work. For a valid request you need <strong>every single parameter</strong> of this table in your request-URL. You can omit the value if the parameter has a default value. The parameter will then be set to this default value which can be identified by <strong>bold characters</strong> in the <cite>Value</cite> column. In the case of <cite>via</cite> there is no default value. If you don&#8217;t want a stopover point just leave the parameter empty.</p>
-<div class="section" id="routepref">
-<h4>routepref<a class="headerlink" href="#routepref" title="Permalink to this headline">¶</a></h4>
-<p>The parameter routepref contains the main routepreferences. There are <a class="reference internal" href="#additional-routepreferences">additional routepreferences</a> for the Bicycle and the HeavyVehicle type.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="11%" />
-<col width="89%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Value</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>Car</td>
-<td>This pathing will avoid footways and bicycle lanes and uses highways, streets and ways cars are allowed on</td>
-</tr>
-<tr class="row-odd"><td>Pedestrian</td>
-<td>this routing algorithm uses footways and tries to avoid highways</td>
-</tr>
-<tr class="row-even"><td>Bicycle</td>
-<td>Uses bicycle ways if available, can also use footpaths where bicycle is allowed and streets</td>
-</tr>
-<tr class="row-odd"><td>Wheelchair</td>
-<td>This algorithm uses footways and tries to use the smothest surface type. In addition stairs will be avoided.</td>
-</tr>
-<tr class="row-even"><td>HeavyVehicle</td>
-<td>i dont know what kind of road this uses</td>
-</tr>
-</tbody>
-</table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">in the newer version there are only english and german. There are other languages available that are too difficult to maintain. You can request them and implement them yourself if you feel like it.</p>
-</div>
 </div>
 </div>
 <div class="section" id="optional-parameters">
@@ -276,77 +230,46 @@ Therefore you have to directly contact the respective <a class="reference intern
 </tr>
 </tbody>
 </table>
-<div class="section" id="additional-routepreferences">
-<h4>Additional Routepreferences<a class="headerlink" href="#additional-routepreferences" title="Permalink to this headline">¶</a></h4>
-<p>There are additional profiles for the <a class="reference internal" href="#routepref">routepref</a>  parameter for different Bicycle and Heavyvehicle Types. For each of these special route profiles you can set specific parameters.</p>
-<div class="section" id="bicycle-type">
-<h5>Bicycle-type<a class="headerlink" href="#bicycle-type" title="Permalink to this headline">¶</a></h5>
-<table border="1" class="docutils">
-<colgroup>
-<col width="41%" />
-<col width="59%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Value</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>BicycleMTB</td>
-<td>Mountainbike profile</td>
-</tr>
-<tr class="row-odd"><td>BicycleRacer</td>
-<td>Racing profile</td>
-</tr>
-<tr class="row-even"><td>BicycleTouring</td>
-<td>Touring profile</td>
-</tr>
-<tr class="row-odd"><td>BicycleSafety</td>
-<td>Safety profile</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="heavyvehicle-type">
-<h5>HeavyVehicle-type<a class="headerlink" href="#heavyvehicle-type" title="Permalink to this headline">¶</a></h5>
-<table border="1" class="docutils">
-<colgroup>
-<col width="39%" />
-<col width="61%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Value</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>Goods</td>
-<td>Goods profile</td>
-</tr>
-<tr class="row-odd"><td>Bus</td>
-<td>Bus profile</td>
-</tr>
-<tr class="row-even"><td>Agricultural</td>
-<td>Agricultural profile</td>
-</tr>
-<tr class="row-odd"><td>Foresty</td>
-<td>Foresty profile</td>
-</tr>
-<tr class="row-even"><td>Delivery</td>
-<td>Delivery profile</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 </div>
 <div class="section" id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>The shortest version of a full functioning routing URL would look like this:</p>
-<div class="highlight-python"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;via&amp;end=9.156506,49.230011&amp;lang=en&amp;distunit=KM&amp;routepref=Car&amp;weighting&amp;noMotorways&amp;noTollways&amp;noUnpavedroads&amp;noSteps&amp;noFerries&amp;instructions&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;via&amp;end=9.2556609,49.2397316&amp;lang=en&amp;distunit=KM&amp;routepref=Car&amp;weighting&amp;noMotorways&amp;noTollways&amp;noUnpavedroads&amp;noSteps&amp;noFerries&amp;instructions&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 </pre></div>
 </div>
-<p>It is a simple route for a car from A to B with no direction-instructions. The distances will be in kilometers, the weighting is <cite>shortest</cite> and</p>
+<p>..needs revision
+It is a simple route for a car from A to B with no direction-instructions. The distances will be in kilometers, the weighting is <cite>shortest</cite> and ferries, motorways, tollways, unpavedroads and steps will be considered. The Result will be the following:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;xls:XLS</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/RouteService.xsd&quot;</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;xls:ResponseHeader</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseHeaderType&quot;</span><span class="nt">/&gt;</span>
+ <span class="nt">&lt;xls:Response</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseType&quot;</span> <span class="na">requestID=</span><span class="s">&quot;123456789&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">numberOfResponses=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;xls:DetermineRouteResponse</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:DetermineRouteResponseType&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;xls:RouteSummary&gt;</span>
+    <span class="nt">&lt;xls:TotalTime&gt;</span>PT16S<span class="nt">&lt;/xls:TotalTime&gt;</span>
+    <span class="nt">&lt;xls:TotalDistance</span> <span class="na">uom=</span><span class="s">&quot;KM&quot;</span> <span class="na">value=</span><span class="s">&quot;0.2&quot;</span><span class="nt">/&gt;&lt;xls:ActualDistance</span> <span class="na">uom=</span><span class="s">&quot;KM&quot;</span> <span class="na">value=</span><span class="s">&quot;0.0&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;xls:BoundingBox</span> <span class="na">srsName=</span><span class="s">&quot;EPSG:4326&quot;</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2556609 49.2396869<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2585339 49.2399278<span class="nt">&lt;/gml:pos&gt;</span>
+    <span class="nt">&lt;/xls:BoundingBox&gt;</span>
+   <span class="nt">&lt;/xls:RouteSummary&gt;</span>
+   <span class="nt">&lt;xls:RouteGeometry&gt;</span>
+    <span class="nt">&lt;gml:LineString</span> <span class="na">srsName=</span><span class="s">&quot;EPSG:4326&quot;</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2585339 49.2399278<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2583569 49.2399026<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2581138 49.239894<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2578367 49.2398938<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2575036 49.2398741<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2571842 49.2398199<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2568038 49.2397191<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2565134 49.2396869<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2556609 49.2397316<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2556609 49.2397316<span class="nt">&lt;/gml:pos&gt;</span>
+    <span class="nt">&lt;/gml:LineString&gt;</span>
+   <span class="nt">&lt;/xls:RouteGeometry&gt;</span>
+  <span class="nt">&lt;/xls:DetermineRouteResponse&gt;</span>
+ <span class="nt">&lt;/xls:Response&gt;</span>
+<span class="nt">&lt;/xls:XLS&gt;</span>
+</pre></div>
+</div>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
 <p class="last">Parameters as well as values are <cite>case sensitive</cite>. The input order doesn&#8217;t matter though.</p>
@@ -418,7 +341,7 @@ Therefore you have to directly contact the respective <a class="reference intern
         <a href="tos.html" class="btn btn-neutral float-right" title="Disclaimer" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="overview.html" class="btn btn-neutral" title="Tools" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="api_key.html" class="btn btn-neutral" title="API Keys" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
