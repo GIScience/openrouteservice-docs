@@ -41,7 +41,7 @@ The following parameters are required for the api to work. For a valid request y
 +----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
 | distunit       | Set the unit in which you want to view the distances in                | KM(kilometers)\R/(meters)\/MI(miles)               | ``distunit=KM/M/MI``                                             |
 +----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
-| routepref   | Set the way you are taveling                                           | :term:`Car`\/:term:`Pedestrian`\/:term:`Bicycle`\/:term:`Wheelchair`\/:term:`HeavyVehicle` | ``routepref=Bicycle/Pedestrian/Bicycle/Wheelchair/HeavyVehicle`` |
+| routepref   | Set the way you are taveling                                           | :term:`Car`\/:term:`Pedestrian`\/:term:`Bicycle`\/:term:`BicycleMTB`\/:term:`BicycleRacer`\/:term:`BicycleTouring`\/:term:`BicycleSafety`\/:term:`Wheelchair`\/:term:`HeavyVehicle`\/:term:`Goods`\/:term:`Agricultural`\/:term:`Bus`\/:term:`Foresty`\/:term:`Delivery` | ``routepref=Bicycle/Pedestrian/Bicycle/Wheelchair/HeavyVehicle`` |
 +----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
 | instructions   | Set True if you want step by step by step instructions                 | True/**False**                                     | ``instructions=True/False``                                      |
 +----------------+------------------------------------------------------------------------+----------------------------------------------------+------------------------------------------------------------------+
@@ -147,6 +147,8 @@ textblock
 
 Example
 +++++++
+
+
 
 The shortest version of a full functioning routing URL would look like this::
 
