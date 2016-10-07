@@ -1,23 +1,29 @@
-.wy-tray-container li.wy-tray-item-info {
-	background:#b5152b
+.wy-menu-vertical header,.wy-menu-vertical p.caption {
+	color:#c34f5f;
 }
-.btn-info {
-	background-color:#b5152b !important
+.wy-side-nav-search {
+	background-color:#b5152b;
 }
-.btn-info:hover {
-	background-color:#ad4a58 !important
+.wy-nav-top {
+	background-color:#b5152b;
 }
-.btn-link {
-	background-color:transparent !important;
-	color:#b5152b;
-	box-shadow:none;
-	border-color:transparent !important
+.wy-nav-top img {
+	background-color:#b5152b;
 }
-.btn-link:hover {
-	background-color:transparent !important;
-	color:#ad4a58 !important;
-	box-shadow:none
+.wy-side-nav-search input[type=text] {
+	border-color:#c34f5f;
 }
-.wy-inline-validate.wy-inline-validate-info .wy-input-context {
-	color:#b5152b
+.wy-side-nav-search img {
+	background-color:#b5152b;
+}
+a {
+	color:#c34f5f;
+	text-decoration:none;
+	cursor:pointer
+}
+a:hover {
+	color:#cf727e
+}
+a:visited {
+	color:#752f39
 }
