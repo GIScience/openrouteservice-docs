@@ -22,7 +22,7 @@ Contents:
    :maxdepth: 2
 
    overview
-   api_key.rst
+   api_key
    api
 
 .. _tos-docs:

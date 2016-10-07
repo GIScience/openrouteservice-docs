@@ -21,11 +21,13 @@ Aiding or implementing practices violating basic human rights or civil liberties
 - Transmitting viruses, trojan horses, or any other malicious code or program
 - Engaging in any other activity deemed by OpenRouteService to be in conflict with the spirit or intent of these Terms
 
+.. _tos-ref:
 
 Terms of Service
 ================
 
  If you intend to use OpenRouteService in your own applications please contact us. We are interested in spreading the usage of OpenRouteService in academic and non-profit projects.
+
 Commercial usage of the services provided by OpenRouteService does need approval!
 When accessing, requesting and using OpenRouteService and the provided APIs, depending on your daily amount of API requests and regardless of the consumer's legal entity or legal body, we distinguish between three different types of usage:
 
@@ -67,3 +69,4 @@ Licence
 
 Content is available under `Creative Commons Attribution-ShareAlike 2.0 license <http://wiki.openstreetmap.org/wiki/OpenStreetMap_License>`__.
 Version last modified: 11.02.2016 
+.. date should match license modify date

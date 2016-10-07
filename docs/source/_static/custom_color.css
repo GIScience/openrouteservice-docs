@@ -1,0 +1,23 @@
+.wy-tray-container li.wy-tray-item-info {
+	background:#b5152b
+}
+.btn-info {
+	background-color:#b5152b !important
+}
+.btn-info:hover {
+	background-color:#ad4a58 !important
+}
+.btn-link {
+	background-color:transparent !important;
+	color:#b5152b;
+	box-shadow:none;
+	border-color:transparent !important
+}
+.btn-link:hover {
+	background-color:transparent !important;
+	color:#ad4a58 !important;
+	box-shadow:none
+}
+.wy-inline-validate.wy-inline-validate-info .wy-input-context {
+	color:#b5152b
+}

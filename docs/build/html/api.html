@@ -232,13 +232,12 @@ Therefore you have to directly contact the respective <a class="reference intern
 </table>
 </div>
 <div class="section" id="example">
-<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<span id="example-ref"></span><h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>The shortest version of a full functioning routing URL would look like this:</p>
 <div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;via&amp;end=9.2556609,49.2397316&amp;lang=en&amp;distunit=KM&amp;routepref=Car&amp;weighting&amp;noMotorways&amp;noTollways&amp;noUnpavedroads&amp;noSteps&amp;noFerries&amp;instructions&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 </pre></div>
 </div>
-<p>..needs revision
-It is a simple route for a car from A to B with no direction-instructions. The distances will be in kilometers, the weighting is <cite>shortest</cite> and ferries, motorways, tollways, unpavedroads and steps will be considered. The Result will be the following:</p>
+<p>It is a simple route for a car from A to B with no direction-instructions. The distances will be in kilometers, the weighting is <cite>shortest</cite> and ferries, motorways, tollways, unpavedroads and steps will be considered. The Result will be the following:</p>
 <div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;xls:XLS</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/RouteService.xsd&quot;</span><span class="nt">&gt;</span>
  <span class="nt">&lt;xls:ResponseHeader</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseHeaderType&quot;</span><span class="nt">/&gt;</span>
  <span class="nt">&lt;xls:Response</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseType&quot;</span> <span class="na">requestID=</span><span class="s">&quot;123456789&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">numberOfResponses=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>

@@ -5,6 +5,7 @@ This is tho glossary where you can look up words or abbreviations you don't unde
 
 
 .. glossary::
+  :sorted:
 
   TMC
   Traffic Message Channel
@@ -27,7 +28,7 @@ This is tho glossary where you can look up words or abbreviations you don't unde
 
   Wheelchair
   	This algorithm uses footways and tries to use the smothest surface type. In addition stairs will be avoided
-.. needs revision
+
   HeavyVehicle
   	i dont know what kind of road this uses 
 
@@ -67,3 +68,4 @@ This is tho glossary where you can look up words or abbreviations you don't unde
   Delivery
   	Delivery profile
 
+.. this section needs revision

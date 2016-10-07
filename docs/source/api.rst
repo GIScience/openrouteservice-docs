@@ -145,6 +145,8 @@ textblock
 
 .. highlight:: xml
 
+.. _example-ref:
+
 Example
 +++++++
 
@@ -154,7 +156,8 @@ The shortest version of a full functioning routing URL would look like this::
 
   http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&via&end=9.2556609,49.2397316&lang=en&distunit=KM&routepref=Car&weighting&noMotorways&noTollways&noUnpavedroads&noSteps&noFerries&instructions&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 
-..needs revision
+.. needs revision
+
 It is a simple route for a car from A to B with no direction-instructions. The distances will be in kilometers, the weighting is `shortest` and ferries, motorways, tollways, unpavedroads and steps will be considered. The Result will be the following:
 
 ::
