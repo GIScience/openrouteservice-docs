@@ -21,7 +21,7 @@ There are two types of parameters:
 :`Required Parameters`_: They are required for the API to work.
 :`Optional Parameters`_: These parameters are not necessary to get a functional request. But you can fine-tune you request through these.
 
-
+.. _req-ref:
 
 Required Parameters
 +++++++++++++++++++
