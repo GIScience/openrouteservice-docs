@@ -88,7 +88,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api_key.html">API Keys</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Application Programming Interfaces</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Application Programming Interfaces</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#routing-api">Routing API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#required-parameters">Required Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional Parameters</a></li>
@@ -97,7 +97,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#geocoding-api">Geocoding API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#accessibility-analysis-api">Accessibility Analysis API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#response-type">Response Type</a></li>
 </ul>
 </li>
 </ul>
@@ -171,16 +170,18 @@
             
   <div class="section" id="application-programming-interfaces">
 <h1>Application Programming Interfaces<a class="headerlink" href="#application-programming-interfaces" title="Permalink to this headline">¶</a></h1>
-<p>Instead of using the <a class="reference external" href="https://www.openrouteservice.org">ORS website</a> you can also request the Data via GET in the form of an .gml file.
+<p>Instead of using the <a class="reference external" href="http://www.openrouteservice.org">ORS website</a> you can also request the Data via GET in the form of an .gml file.
 Therefore you have to directly contact the respective <a class="reference internal" href="glossary.html#term-api"><span class="xref std std-term">API</span></a> of the tool you would like to use.</p>
 <hr class="docutils" />
 <div class="section" id="routing-api">
 <h2>Routing API<a class="headerlink" href="#routing-api" title="Permalink to this headline">¶</a></h2>
-<p>To do a direkt routing request via GET you need to open up your URL with:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/route?
+<p>To do a direct routing request via GET you need to open up your URL with:</p>
+<div class="highlight-python"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?
 </pre></div>
 </div>
-<p>After the <strong>&#8221;?&#8221;</strong> you have to add parameters with <strong>&#8220;&amp;&#8221;</strong>. For the first parameter the <strong>&#8220;&amp;&#8221;</strong> can be omitted. The pattern for parameter usage is &#8220;<em>parameter=value</em>&#8221;. If you don&#8217;t get the picture, you can look at the <a class="reference internal" href="#example">Example</a> below.</p>
+<p>After the <strong>&#8221;?&#8221;</strong> you have to add parameters with <strong>&#8220;&amp;&#8221;</strong>. For the first parameter the <strong>&#8220;&amp;&#8221;</strong> can be omitted. The value of the parameter is defined with a <strong>&#8220;=&#8221;</strong>. Therefore the pattern for parameter usage is:</p>
+<p class="centered">
+<strong><strong>&amp;</strong><code class="docutils literal"><span class="pre">parameter</span></code><strong>=</strong><code class="docutils literal"><span class="pre">value</span></code></strong></p><p>If you don&#8217;t get the picture, you can look at the <a class="reference internal" href="#example">Example</a> below.</p>
 <p>There are two types of parameters:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -190,7 +191,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 <tr class="field-odd field"><td>&nbsp;</td><td class="field-body">They are required for the API to work.</td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2"><a class="reference internal" href="#optional-parameters">Optional Parameters</a>:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">These parameters are not necessary to get a functional request. But you can fine-tune you request through these.</td>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">These parameters are not necessary to get a functional request. But you can fine-tune your request through these.</td>
 </tr>
 </tbody>
 </table>
@@ -199,88 +200,72 @@ Therefore you have to directly contact the respective <a class="reference intern
 <p>The following parameters are required for the api to work. For a valid request you need <strong>every single parameter</strong> of this table in your request-URL. You can omit the value if the parameter has a default value. The parameter will then be set to this default value which can be identified by <strong>bold characters</strong> in the <cite>Value</cite> column. In the case of <cite>via</cite> there is no default value. If you don&#8217;t want a stopover point just leave the parameter empty.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="4%" />
-<col width="17%" />
-<col width="63%" />
-<col width="16%" />
+<col width="6%" />
+<col width="20%" />
+<col width="74%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
 <th class="head">Description</th>
 <th class="head">Value</th>
-<th class="head">Example</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>start</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">start</span></code></td>
 <td>Set the starting Point of your route in form of geographic coordinates</td>
 <td><em>latitude</em>,<em>longitude</em></td>
-<td><code class="docutils literal"><span class="pre">9.3785,47.2250</span></code></td>
 </tr>
-<tr class="row-odd"><td>end</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">end</span></code></td>
 <td>Set the end Point of your route in geographic coordinates</td>
 <td><em>latitude</em>,<em>longitude</em></td>
-<td><code class="docutils literal"><span class="pre">9.505250,47</span></code></td>
 </tr>
-<tr class="row-even"><td>via</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">via</span></code></td>
 <td>Set a stopover Point</td>
 <td><em>latitude</em>,<em>longitude</em></td>
-<td><code class="docutils literal"><span class="pre">via</span></code> <code class="docutils literal"><span class="pre">via=9.43,47.1</span></code></td>
 </tr>
-<tr class="row-odd"><td>lang</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">lang</span></code></td>
 <td>Set the language for the instructions</td>
 <td>de/en</td>
-<td><code class="docutils literal"><span class="pre">lang=en</span></code></td>
 </tr>
-<tr class="row-even"><td>distunit</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">distunit</span></code></td>
 <td>Set the unit in which you want to view the distances in</td>
 <td>KM(kilometers)/M(meters)/MI(miles)</td>
-<td><code class="docutils literal"><span class="pre">distunit=KM/M/MI</span></code></td>
 </tr>
-<tr class="row-odd"><td>routepref</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">routepref</span></code></td>
 <td>Set the way you are taveling</td>
 <td><a class="reference internal" href="glossary.html#term-car"><span class="xref std std-term">Car</span></a>/<a class="reference internal" href="glossary.html#term-pedestrian"><span class="xref std std-term">Pedestrian</span></a>/<a class="reference internal" href="glossary.html#term-bicycle"><span class="xref std std-term">Bicycle</span></a>/<a class="reference internal" href="glossary.html#term-bicyclemtb"><span class="xref std std-term">BicycleMTB</span></a>/<a class="reference internal" href="glossary.html#term-bicycleracer"><span class="xref std std-term">BicycleRacer</span></a>/<a class="reference internal" href="glossary.html#term-bicycletouring"><span class="xref std std-term">BicycleTouring</span></a>/<a class="reference internal" href="glossary.html#term-bicyclesafety"><span class="xref std std-term">BicycleSafety</span></a>/<a class="reference internal" href="glossary.html#term-wheelchair"><span class="xref std std-term">Wheelchair</span></a>/<a class="reference internal" href="glossary.html#term-heavyvehicle"><span class="xref std std-term">HeavyVehicle</span></a>/<a class="reference internal" href="glossary.html#term-goods"><span class="xref std std-term">Goods</span></a>/<a class="reference internal" href="glossary.html#term-agricultural"><span class="xref std std-term">Agricultural</span></a>/<a class="reference internal" href="glossary.html#term-bus"><span class="xref std std-term">Bus</span></a>/<a class="reference internal" href="glossary.html#term-foresty"><span class="xref std std-term">Foresty</span></a>/<a class="reference internal" href="glossary.html#term-delivery"><span class="xref std std-term">Delivery</span></a></td>
-<td><code class="docutils literal"><span class="pre">routepref=Bicycle/Pedestrian/Bicycle/Wheelchair/HeavyVehicle</span></code></td>
 </tr>
-<tr class="row-even"><td>instructions</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">instructions</span></code></td>
 <td>Set True if you want step by step by step instructions</td>
 <td>True/<strong>False</strong></td>
-<td><code class="docutils literal"><span class="pre">instructions=True/False</span></code></td>
 </tr>
-<tr class="row-odd"><td>weighting</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">weighting</span></code></td>
 <td>Set the route type</td>
 <td>:term:<strong>`Fastest`</strong>/<a class="reference internal" href="glossary.html#term-shortest"><span class="xref std std-term">Shortest</span></a>/<a class="reference internal" href="glossary.html#term-recommended"><span class="xref std std-term">Recommended</span></a></td>
-<td><code class="docutils literal"><span class="pre">wighting=Fastest/Shortest/Recommended</span></code></td>
 </tr>
-<tr class="row-even"><td>noMotorways</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">noMotorways</span></code></td>
 <td>Set True to avoid motorways</td>
 <td>True/<strong>False</strong></td>
-<td><code class="docutils literal"><span class="pre">noMotorways=True/False</span></code></td>
 </tr>
-<tr class="row-odd"><td>noTollways</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">noTollways</span></code></td>
 <td>Set True to avoid tollways</td>
 <td>True/<strong>False</strong></td>
-<td><code class="docutils literal"><span class="pre">noTollways=True/False</span></code></td>
 </tr>
-<tr class="row-even"><td>noUnpavedroads</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">noUnpavedroads</span></code></td>
 <td>Set True to avoid unpaved roads</td>
 <td>True/<strong>False</strong></td>
-<td><code class="docutils literal"><span class="pre">noUnpavedroads=True/False</span></code></td>
 </tr>
-<tr class="row-odd"><td>noSteps</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">noSteps</span></code></td>
 <td>Set True to avoid steps</td>
 <td>True/<strong>False</strong></td>
-<td><code class="docutils literal"><span class="pre">noSteps=True/False</span></code></td>
 </tr>
-<tr class="row-even"><td>noFerries</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">noFerries</span></code></td>
 <td>Set True to avoid ferries</td>
 <td>True/<strong>False</strong></td>
-<td><code class="docutils literal"><span class="pre">noFerries=True/False</span></code></td>
 </tr>
-<tr class="row-odd"><td>api_key</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">api_key</span></code></td>
 <td>Input your <a class="reference internal" href="glossary.html#term-api-key"><span class="xref std std-term">API-Key</span></a> here</td>
 <td><cite>your_api_key</cite></td>
-<td><code class="docutils literal"><span class="pre">api_key=eb85f2a6a61aafaebe7e2f2a89b102f5</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -291,13 +276,12 @@ Therefore you have to directly contact the respective <a class="reference intern
 </div>
 <div class="section" id="optional-parameters">
 <h3>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this headline">¶</a></h3>
-<p>textblock</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="12%" />
-<col width="44%" />
-<col width="18%" />
-<col width="26%" />
+<col width="16%" />
+<col width="43%" />
+<col width="17%" />
+<col width="24%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -307,12 +291,12 @@ Therefore you have to directly contact the respective <a class="reference intern
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>useTMC</td>
-<td>Set a stopover Point</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">useTMC</span></code></td>
+<td>Use traffic information for your route</td>
 <td>True/<strong>False</strong></td>
 <td><code class="docutils literal"><span class="pre">useTMC=True/False</span></code></td>
 </tr>
-<tr class="row-odd"><td>maxspeed</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">maxspeed</span></code></td>
 <td>Set a maximum speed in km/h for what ?</td>
 <td>True/<strong>False</strong></td>
 <td><code class="docutils literal"><span class="pre">maxspeed=10</span></code></td>
@@ -323,40 +307,39 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="example">
 <span id="example-ref"></span><h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>The shortest version of a full functioning routing URL would look like this:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;via&amp;end=9.2556609,49.2397316&amp;lang=en&amp;distunit=KM&amp;routepref=Car&amp;weighting&amp;noMotorways&amp;noTollways&amp;noUnpavedroads&amp;noSteps&amp;noFerries&amp;instructions&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<div class="highlight-python"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;via&amp;end=9.2556609,49.2397316&amp;lang=en&amp;distunit=KM&amp;routepref=Car&amp;weighting&amp;noMotorways&amp;noTollways&amp;noUnpavedroads&amp;noSteps&amp;noFerries&amp;instructions&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 </pre></div>
 </div>
-<p>It is a simple route for a car from A to B with no direction-instructions. The distances will be in kilometers, the weighting is <cite>shortest</cite> and ferries, motorways, tollways, unpavedroads and steps will be considered. The Result will be the following:
-.. highlight:: xml</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">xls</span><span class="p">:</span><span class="n">XLS</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.1&quot;</span> <span class="n">xsi</span><span class="p">:</span><span class="n">schemaLocation</span><span class="o">=</span><span class="s2">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/RouteService.xsd&quot;</span><span class="o">&gt;</span>
- <span class="o">&lt;</span><span class="n">xls</span><span class="p">:</span><span class="n">ResponseHeader</span> <span class="n">xsi</span><span class="p">:</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;xls:ResponseHeaderType&quot;</span><span class="o">/&gt;</span>
- <span class="o">&lt;</span><span class="n">xls</span><span class="p">:</span><span class="n">Response</span> <span class="n">xsi</span><span class="p">:</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;xls:ResponseType&quot;</span> <span class="n">requestID</span><span class="o">=</span><span class="s2">&quot;123456789&quot;</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.1&quot;</span> <span class="n">numberOfResponses</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="o">&gt;</span>
-  <span class="o">&lt;</span><span class="n">xls</span><span class="p">:</span><span class="n">DetermineRouteResponse</span> <span class="n">xsi</span><span class="p">:</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;xls:DetermineRouteResponseType&quot;</span><span class="o">&gt;</span>
-   <span class="o">&lt;</span><span class="n">xls</span><span class="p">:</span><span class="n">RouteSummary</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="n">xls</span><span class="p">:</span><span class="n">TotalTime</span><span class="o">&gt;</span><span class="n">PT16S</span><span class="o">&lt;/</span><span class="n">xls</span><span class="p">:</span><span class="n">TotalTime</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="n">xls</span><span class="p">:</span><span class="n">TotalDistance</span> <span class="n">uom</span><span class="o">=</span><span class="s2">&quot;KM&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0.2&quot;</span><span class="o">/&gt;&lt;</span><span class="n">xls</span><span class="p">:</span><span class="n">ActualDistance</span> <span class="n">uom</span><span class="o">=</span><span class="s2">&quot;KM&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0.0&quot;</span><span class="o">/&gt;</span>
-    <span class="o">&lt;</span><span class="n">xls</span><span class="p">:</span><span class="n">BoundingBox</span> <span class="n">srsName</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="o">&gt;</span>
-     <span class="o">&lt;</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span><span class="mf">9.2556609</span> <span class="mf">49.2396869</span><span class="o">&lt;/</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span>
-     <span class="o">&lt;</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span><span class="mf">9.2585339</span> <span class="mf">49.2399278</span><span class="o">&lt;/</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span>
-    <span class="o">&lt;/</span><span class="n">xls</span><span class="p">:</span><span class="n">BoundingBox</span><span class="o">&gt;</span>
-   <span class="o">&lt;/</span><span class="n">xls</span><span class="p">:</span><span class="n">RouteSummary</span><span class="o">&gt;</span>
-   <span class="o">&lt;</span><span class="n">xls</span><span class="p">:</span><span class="n">RouteGeometry</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="n">gml</span><span class="p">:</span><span class="n">LineString</span> <span class="n">srsName</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="o">&gt;</span>
-     <span class="o">&lt;</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span><span class="mf">9.2585339</span> <span class="mf">49.2399278</span><span class="o">&lt;/</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span>
-     <span class="o">&lt;</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span><span class="mf">9.2583569</span> <span class="mf">49.2399026</span><span class="o">&lt;/</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span>
-     <span class="o">&lt;</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span><span class="mf">9.2581138</span> <span class="mf">49.239894</span><span class="o">&lt;/</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span>
-     <span class="o">&lt;</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span><span class="mf">9.2578367</span> <span class="mf">49.2398938</span><span class="o">&lt;/</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span>
-     <span class="o">&lt;</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span><span class="mf">9.2575036</span> <span class="mf">49.2398741</span><span class="o">&lt;/</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span>
-     <span class="o">&lt;</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span><span class="mf">9.2571842</span> <span class="mf">49.2398199</span><span class="o">&lt;/</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span>
-     <span class="o">&lt;</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span><span class="mf">9.2568038</span> <span class="mf">49.2397191</span><span class="o">&lt;/</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span>
-     <span class="o">&lt;</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span><span class="mf">9.2565134</span> <span class="mf">49.2396869</span><span class="o">&lt;/</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span>
-     <span class="o">&lt;</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span><span class="mf">9.2556609</span> <span class="mf">49.2397316</span><span class="o">&lt;/</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span>
-     <span class="o">&lt;</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span><span class="mf">9.2556609</span> <span class="mf">49.2397316</span><span class="o">&lt;/</span><span class="n">gml</span><span class="p">:</span><span class="n">pos</span><span class="o">&gt;</span>
-    <span class="o">&lt;/</span><span class="n">gml</span><span class="p">:</span><span class="n">LineString</span><span class="o">&gt;</span>
-   <span class="o">&lt;/</span><span class="n">xls</span><span class="p">:</span><span class="n">RouteGeometry</span><span class="o">&gt;</span>
-  <span class="o">&lt;/</span><span class="n">xls</span><span class="p">:</span><span class="n">DetermineRouteResponse</span><span class="o">&gt;</span>
- <span class="o">&lt;/</span><span class="n">xls</span><span class="p">:</span><span class="n">Response</span><span class="o">&gt;</span>
-<span class="o">&lt;/</span><span class="n">xls</span><span class="p">:</span><span class="n">XLS</span><span class="o">&gt;</span>
+<p>It is a simple route for a car from A to B with no direction-instructions. The distances will be in kilometers, the weighting is <cite>shortest</cite> and ferries, motorways, tollways, unpavedroads and steps will be considered. The result will be the following:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;xls:XLS</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/RouteService.xsd&quot;</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;xls:ResponseHeader</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseHeaderType&quot;</span><span class="nt">/&gt;</span>
+ <span class="nt">&lt;xls:Response</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseType&quot;</span> <span class="na">requestID=</span><span class="s">&quot;123456789&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">numberOfResponses=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;xls:DetermineRouteResponse</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:DetermineRouteResponseType&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;xls:RouteSummary&gt;</span>
+    <span class="nt">&lt;xls:TotalTime&gt;</span>PT16S<span class="nt">&lt;/xls:TotalTime&gt;</span>
+    <span class="nt">&lt;xls:TotalDistance</span> <span class="na">uom=</span><span class="s">&quot;KM&quot;</span> <span class="na">value=</span><span class="s">&quot;0.2&quot;</span><span class="nt">/&gt;&lt;xls:ActualDistance</span> <span class="na">uom=</span><span class="s">&quot;KM&quot;</span> <span class="na">value=</span><span class="s">&quot;0.0&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;xls:BoundingBox</span> <span class="na">srsName=</span><span class="s">&quot;EPSG:4326&quot;</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2556609 49.2396869<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2585339 49.2399278<span class="nt">&lt;/gml:pos&gt;</span>
+    <span class="nt">&lt;/xls:BoundingBox&gt;</span>
+   <span class="nt">&lt;/xls:RouteSummary&gt;</span>
+   <span class="nt">&lt;xls:RouteGeometry&gt;</span>
+    <span class="nt">&lt;gml:LineString</span> <span class="na">srsName=</span><span class="s">&quot;EPSG:4326&quot;</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2585339 49.2399278<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2583569 49.2399026<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2581138 49.239894<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2578367 49.2398938<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2575036 49.2398741<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2571842 49.2398199<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2568038 49.2397191<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2565134 49.2396869<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2556609 49.2397316<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;gml:pos&gt;</span>9.2556609 49.2397316<span class="nt">&lt;/gml:pos&gt;</span>
+    <span class="nt">&lt;/gml:LineString&gt;</span>
+   <span class="nt">&lt;/xls:RouteGeometry&gt;</span>
+  <span class="nt">&lt;/xls:DetermineRouteResponse&gt;</span>
+ <span class="nt">&lt;/xls:Response&gt;</span>
+<span class="nt">&lt;/xls:XLS&gt;</span>
 </pre></div>
 </div>
 <div class="admonition attention">
@@ -368,7 +351,6 @@ Therefore you have to directly contact the respective <a class="reference intern
 <hr class="docutils" />
 <div class="section" id="geocoding-api">
 <h2>Geocoding API<a class="headerlink" href="#geocoding-api" title="Permalink to this headline">¶</a></h2>
-<p>Here will be the required Parameters</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="36%" />
@@ -380,10 +362,10 @@ Therefore you have to directly contact the respective <a class="reference intern
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>parameter 1</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">lat</span></code></td>
 <td>this is for parameting</td>
 </tr>
-<tr class="row-odd"><td>parameter 2</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">lon</span></code></td>
 <td>etcetera</td>
 </tr>
 </tbody>
@@ -412,11 +394,6 @@ Therefore you have to directly contact the respective <a class="reference intern
 </tr>
 </tbody>
 </table>
-</div>
-<hr class="docutils" />
-<div class="section" id="response-type">
-<h2>Response Type<a class="headerlink" href="#response-type" title="Permalink to this headline">¶</a></h2>
-<p>response type text</p>
 </div>
 </div>
 

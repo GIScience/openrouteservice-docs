@@ -16,7 +16,6 @@
 .wy-side-nav-search img {
 	background-color:#b5152b;
 }
-/*
 a {
 	color:#c34f5f;
 	text-decoration:none;
@@ -26,5 +25,23 @@ a:hover {
 	color:#cf727e
 }
 a:visited {
-	color:#752f39
-}*/
+	color:#c34f5f/*#752f39*/
+}
+a:visited:hover {
+	color:#cf727e
+}
+.wy-side-scroll a {
+	color:#b3b3b3
+}
+.wy-side-scroll a:hover {
+	background-color:#c34f5f;
+	color:#fff
+}
+a.icon.icon-home {
+	color:#fff
+}
+/*
+toctree-l2 a:hover {
+	background-color:##cf727e
+}
+*/
