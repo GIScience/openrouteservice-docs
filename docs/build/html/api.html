@@ -95,7 +95,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#geocoding-api">Geocoding API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#geocoding-api">Geocoding API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#normal-geocoding">Normal Geocoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reverse-geocoding">Reverse Geocoding</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#accessibility-analysis-api">Accessibility Analysis API</a></li>
 </ul>
 </li>
@@ -201,8 +205,8 @@ Therefore you have to directly contact the respective <a class="reference intern
 <table border="1" class="docutils">
 <colgroup>
 <col width="6%" />
-<col width="20%" />
-<col width="74%" />
+<col width="21%" />
+<col width="73%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -220,7 +224,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 <td><em>latitude</em>,<em>longitude</em></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">via</span></code></td>
-<td>Set a stopover Point</td>
+<td>Ampersand-separated list of <cite>longitude,latitude</cite> coord pairs vis i o</td>
 <td><em>latitude</em>,<em>longitude</em></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">lang</span></code></td>
@@ -241,7 +245,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">weighting</span></code></td>
 <td>Set the route type</td>
-<td>:term:<strong>`Fastest`</strong>/<a class="reference internal" href="glossary.html#term-shortest"><span class="xref std std-term">Shortest</span></a>/<a class="reference internal" href="glossary.html#term-recommended"><span class="xref std std-term">Recommended</span></a></td>
+<td><a class="reference internal" href="glossary.html#term-fastest"><span class="xref std std-term">Fastest</span></a>/<a class="reference internal" href="glossary.html#term-shortest"><span class="xref std std-term">Shortest</span></a>/<a class="reference internal" href="glossary.html#term-recommended"><span class="xref std std-term">Recommended</span></a></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">noMotorways</span></code></td>
 <td>Set True to avoid motorways</td>
@@ -278,9 +282,9 @@ Therefore you have to directly contact the respective <a class="reference intern
 <h3>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="16%" />
-<col width="43%" />
-<col width="17%" />
+<col width="15%" />
+<col width="41%" />
+<col width="20%" />
 <col width="24%" />
 </colgroup>
 <thead valign="bottom">
@@ -293,12 +297,12 @@ Therefore you have to directly contact the respective <a class="reference intern
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">useTMC</span></code></td>
 <td>Use traffic information for your route</td>
-<td>True/<strong>False</strong></td>
+<td>True|<strong>False</strong></td>
 <td><code class="docutils literal"><span class="pre">useTMC=True/False</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">maxspeed</span></code></td>
 <td>Set a maximum speed in km/h for what ?</td>
-<td>True/<strong>False</strong></td>
+<td>True|<strong>False</strong></td>
 <td><code class="docutils literal"><span class="pre">maxspeed=10</span></code></td>
 </tr>
 </tbody>
@@ -351,10 +355,34 @@ Therefore you have to directly contact the respective <a class="reference intern
 <hr class="docutils" />
 <div class="section" id="geocoding-api">
 <h2>Geocoding API<a class="headerlink" href="#geocoding-api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="normal-geocoding">
+<h3>Normal Geocoding<a class="headerlink" href="#normal-geocoding" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="36%" />
-<col width="64%" />
+<col width="38%" />
+<col width="62%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Query Parameters</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">FreeFormAdress</span></code></td>
+<td>this is for parameting</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">MaxResponse</span></code></td>
+<td>etcetera</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="reverse-geocoding">
+<h3>Reverse Geocoding<a class="headerlink" href="#reverse-geocoding" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="62%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Query Parameters</th>
@@ -368,8 +396,12 @@ Therefore you have to directly contact the respective <a class="reference intern
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">lon</span></code></td>
 <td>etcetera</td>
 </tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">MaxResponse</span></code></td>
+<td>etcetera</td>
+</tr>
 </tbody>
 </table>
+</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="accessibility-analysis-api">
