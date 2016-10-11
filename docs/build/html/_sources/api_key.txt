@@ -17,5 +17,5 @@ To use your API key simply add it as a parameter in your request URL with: ::
 
 Here is an |**This**|.
 
-.. |**This**| replace:: :ref:`Here <example-ref>`
+.. |**This**| replace:: ``This``
 

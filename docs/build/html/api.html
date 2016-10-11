@@ -201,75 +201,59 @@ Therefore you have to directly contact the respective <a class="reference intern
 </table>
 <div class="section" id="required-parameters">
 <span id="req-ref"></span><h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this headline">¶</a></h3>
-<p>The following parameters are required for the api to work. For a valid request you need <strong>every single parameter</strong> of this table in your request-URL. You can omit the value if the parameter has a default value. The parameter will then be set to this default value which can be identified by <strong>bold characters</strong> in the <cite>Value</cite> column. In the case of <cite>via</cite> there is no default value. If you don&#8217;t want a stopover point just leave the parameter empty.</p>
+<p>The following parameters are required for the api to work. For a valid request you need <strong>every single parameter</strong> of this table in your request-URL. You can omit the value if the parameter has a default value. The parameter will then be set to this default value. In the case of <cite>via</cite> there is no default value. If you don&#8217;t want a stopover point just leave the parameter empty. For more information regarding the specific routing profiles please visit our <a class="reference internal" href="glossary.html"><em>glossary</em></a>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="6%" />
-<col width="21%" />
-<col width="73%" />
+<col width="94%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
 <th class="head">Description</th>
-<th class="head">Value</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">start</span></code></td>
-<td>Set the starting Point of your route in form of geographic coordinates</td>
-<td><em>latitude</em>,<em>longitude</em></td>
+<td>Pair of <code class="docutils literal"><span class="pre">longitude,latitude</span></code> coordinate used as starting point of the route</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">end</span></code></td>
-<td>Set the end Point of your route in geographic coordinates</td>
-<td><em>latitude</em>,<em>longitude</em></td>
+<td>Pair of <code class="docutils literal"><span class="pre">longitude,latitude</span></code> coordinate used as destination of the route</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">via</span></code></td>
-<td>Ampersand-separated list of <cite>longitude,latitude</cite> coord pairs vis i o</td>
-<td><em>latitude</em>,<em>longitude</em></td>
+<td>Ampersand-separated list of <cite>longitude,latitude</cite> coordinate pairs visited in order</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">lang</span></code></td>
-<td>Set the language for the instructions</td>
-<td>de/en</td>
+<td>Language for the step by step instructions. <code class="docutils literal"><span class="pre">en</span></code> English or <code class="docutils literal"><span class="pre">de</span></code> German</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">distunit</span></code></td>
-<td>Set the unit in which you want to view the distances in</td>
-<td>KM(kilometers)/M(meters)/MI(miles)</td>
+<td>Unit in which you want to view the distances in : <code class="docutils literal"><span class="pre">KM</span></code>(kilometers)/<code class="docutils literal"><span class="pre">M</span></code>(meters)/<code class="docutils literal"><span class="pre">MI</span></code>(miles)</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">routepref</span></code></td>
-<td>Set the way you are taveling</td>
-<td><a class="reference internal" href="glossary.html#term-car"><span class="xref std std-term">Car</span></a>/<a class="reference internal" href="glossary.html#term-pedestrian"><span class="xref std std-term">Pedestrian</span></a>/<a class="reference internal" href="glossary.html#term-bicycle"><span class="xref std std-term">Bicycle</span></a>/<a class="reference internal" href="glossary.html#term-bicyclemtb"><span class="xref std std-term">BicycleMTB</span></a>/<a class="reference internal" href="glossary.html#term-bicycleracer"><span class="xref std std-term">BicycleRacer</span></a>/<a class="reference internal" href="glossary.html#term-bicycletouring"><span class="xref std std-term">BicycleTouring</span></a>/<a class="reference internal" href="glossary.html#term-bicyclesafety"><span class="xref std std-term">BicycleSafety</span></a>/<a class="reference internal" href="glossary.html#term-wheelchair"><span class="xref std std-term">Wheelchair</span></a>/<a class="reference internal" href="glossary.html#term-heavyvehicle"><span class="xref std std-term">HeavyVehicle</span></a>/<a class="reference internal" href="glossary.html#term-goods"><span class="xref std std-term">Goods</span></a>/<a class="reference internal" href="glossary.html#term-agricultural"><span class="xref std std-term">Agricultural</span></a>/<a class="reference internal" href="glossary.html#term-bus"><span class="xref std std-term">Bus</span></a>/<a class="reference internal" href="glossary.html#term-foresty"><span class="xref std std-term">Foresty</span></a>/<a class="reference internal" href="glossary.html#term-delivery"><span class="xref std std-term">Delivery</span></a></td>
+<td>Route profile for your course. Available profiles are <code class="docutils literal"><span class="pre">Car</span></code>/<code class="docutils literal"><span class="pre">Pedestrian</span></code>/<code class="docutils literal"><span class="pre">Bicycle</span></code>/<code class="docutils literal"><span class="pre">BicycleMTB</span></code>/<code class="docutils literal"><span class="pre">BicycleRacer</span></code>/<code class="docutils literal"><span class="pre">BicycleTouring</span></code>/<code class="docutils literal"><span class="pre">BicycleSafety</span></code>/<code class="docutils literal"><span class="pre">Wheelchair</span></code>/<code class="docutils literal"><span class="pre">HeavyVehicle</span></code>/<code class="docutils literal"><span class="pre">Goods</span></code>/<code class="docutils literal"><span class="pre">Agricultural</span></code>/<code class="docutils literal"><span class="pre">Bus</span></code>/<code class="docutils literal"><span class="pre">Foresty</span></code>/<code class="docutils literal"><span class="pre">Delivery</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">instructions</span></code></td>
-<td>Set True if you want step by step by step instructions</td>
-<td>True/<strong>False</strong></td>
+<td>For step by step instructions in your chosen language set <code class="docutils literal"><span class="pre">True</span></code>. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">weighting</span></code></td>
-<td>Set the route type</td>
-<td><a class="reference internal" href="glossary.html#term-fastest"><span class="xref std std-term">Fastest</span></a>/<a class="reference internal" href="glossary.html#term-shortest"><span class="xref std std-term">Shortest</span></a>/<a class="reference internal" href="glossary.html#term-recommended"><span class="xref std std-term">Recommended</span></a></td>
+<td>Type of route the algorithm chooses. Options are <code class="docutils literal"><span class="pre">Fastest</span></code> (<em>default</em>), <code class="docutils literal"><span class="pre">Shortest</span></code> and <code class="docutils literal"><span class="pre">Recommended</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">noMotorways</span></code></td>
-<td>Set True to avoid motorways</td>
-<td>True/<strong>False</strong></td>
+<td>Set <code class="docutils literal"><span class="pre">True</span></code> to avoid motorways. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">noTollways</span></code></td>
-<td>Set True to avoid tollways</td>
-<td>True/<strong>False</strong></td>
+<td>Set <code class="docutils literal"><span class="pre">True</span></code> to avoid tollways. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">noUnpavedroads</span></code></td>
-<td>Set True to avoid unpaved roads</td>
-<td>True/<strong>False</strong></td>
+<td>Set <code class="docutils literal"><span class="pre">True</span></code> to avoid unpaved roads. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">noSteps</span></code></td>
-<td>Set True to avoid steps</td>
-<td>True/<strong>False</strong></td>
+<td>Set <code class="docutils literal"><span class="pre">True</span></code> to avoid steps. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">noFerries</span></code></td>
-<td>Set True to avoid ferries</td>
-<td>True/<strong>False</strong></td>
+<td>Set <code class="docutils literal"><span class="pre">True</span></code> to avoid ferries. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">api_key</span></code></td>
-<td>Input your <a class="reference internal" href="glossary.html#term-api-key"><span class="xref std std-term">API-Key</span></a> here</td>
-<td><cite>your_api_key</cite></td>
+<td><code class="docutils literal"><span class="pre">your_api_key</span></code> is placed in this parameter</td>
 </tr>
 </tbody>
 </table>
