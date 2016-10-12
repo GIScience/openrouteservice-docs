@@ -13,9 +13,7 @@ To use your API key simply add it as a parameter in your request URL with: ::
 
 	&api_key=`your-api-key`
 
-:ref:`Here <example-ref>` you can see an example with the API key at the end of the request.
+:ref:`Here <example-ref2>` you can see an example with the API key at the end of the request.
 
-Here is an |**This**|.
 
-.. |**This**| replace:: ``This``
 

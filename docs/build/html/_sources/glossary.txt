@@ -42,15 +42,19 @@ This is tho glossary where you can look up words or abbreviations you don't unde
   	This mode will include POIs to give you a trip to remember
 
   BicycleMTB
+  MTB
   	Mountainbike profile
 
   BicycleRacer
+  Racer
   	Racing bike profile
 
   BicycleTouring
+  Touring
   	Touring bike profile
 
   BicycleSafety
+  Safety
   	safety profile
 
   Goods

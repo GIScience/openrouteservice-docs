@@ -39,9 +39,10 @@ Contents:
    :caption: Help Section
    :maxdepth: 2
 
+   contact
    faq
    glossary
-   contact
+
 
 .. _index-docs:
 

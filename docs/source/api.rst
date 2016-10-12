@@ -18,7 +18,7 @@ After the **"?"** you have to add parameters with **"&"**. For the first paramet
 
 .. centered:: **&**\ ``parameter``\ **=**\ ``value``
 
-If you don't get the picture, you can look at the `Example`_ below.
+If you don't get the picture, you can look at the :ref:`example-ref` below.
 
 There are two types of parameters:
 
@@ -32,58 +32,58 @@ Required Parameters
 
 The following parameters are required for the api to work. For a valid request you need **every single parameter** of this table in your request-URL. You can omit the value if the parameter has a default value. The parameter will then be set to this default value. In the case of `via` there is no default value. If you don't want a stopover point just leave the parameter empty. For more information regarding the specific routing profiles please visit our :doc:`glossary </glossary>`.
 
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Parameter          | Description                                                                                                                                                                                                                                                                                      |
-+====================+==================================================================================================================================================================================================================================================================================================+
-| ``start``          | Pair of ``longitude,latitude`` coordinate used as starting point of the route                                                                                                                                                                                                                    |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``end``            | Pair of ``longitude,latitude`` coordinate used as destination of the route                                                                                                                                                                                                                       |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``via``            | Ampersand-separated list of ``longitude,latitude`` coordinate pairs visited in order                                                                                                                                                                                                             |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``lang``           | Language for the step by step instructions. ``en`` English or ``de`` German                                                                                                                                                                                                                      |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``distunit``       | Unit in which you want to view the distances in : ``KM``\ (kilometers)\/``M``\ (meters)\/``MI``\ (miles)                                                                                                                                                                                         |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``routepref``      | Route profile for your course. Available profiles are ``Car``\/\ ``Pedestrian``\/\ ``Bicycle``\/\ ``BicycleMTB``\/\ ``BicycleRacer``\/\ ``BicycleTouring``\/\ ``BicycleSafety``\/\ ``Wheelchair``\/\ ``HeavyVehicle``\/\ ``Goods``\/\ ``Agricultural``\/\ ``Bus``\/\ ``Foresty``\/\ ``Delivery`` |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``instructions``   | For step by step instructions in your chosen language set ``True``. Default is ``False``                                                                                                                                                                                                         |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``weighting``      | Type of route the algorithm chooses. Options are ``Fastest`` (*default*), ``Shortest`` and ``Recommended``                                                                                                                                                                                       |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``noMotorways``    | Set ``True`` to avoid motorways. Default is ``False``                                                                                                                                                                                                                                            |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``noTollways``     | Set ``True`` to avoid tollways. Default is ``False``                                                                                                                                                                                                                                             |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``noUnpavedroads`` | Set ``True`` to avoid unpaved roads. Default is ``False``                                                                                                                                                                                                                                        |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``noSteps``        | Set ``True`` to avoid steps. Default is ``False``                                                                                                                                                                                                                                                |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``noFerries``      | Set ``True`` to avoid ferries. Default is ``False``                                                                                                                                                                                                                                              |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``api_key``        | ``your_api_key`` is placed in this parameter                                                                                                                                                                                                                                                     |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------------+------------------------------------------------------------------------------------------------------------+
+| Parameter          | Description                                                                                                |
++====================+============================================================================================================+
+| ``start``          | Pair of ``longitude,latitude`` coordinate used as starting point of the route                              |
++--------------------+------------------------------------------------------------------------------------------------------------+
+| ``end``            | Pair of ``longitude,latitude`` coordinate used as destination of the route                                 |
++--------------------+------------------------------------------------------------------------------------------------------------+
+| ``via``            | Ampersand-separated list of ``longitude,latitude`` coordinate pairs visited in order                       |
++--------------------+------------------------------------------------------------------------------------------------------------+
+| ``lang``           | Language for the step by step instructions. ``en`` English or ``de`` German                                |
++--------------------+------------------------------------------------------------------------------------------------------------+
+| ``distunit``       | Unit in which you want to view the distances in : ``KM``\ (kilometers)\/``M``\ (meters)\/``MI``\ (miles)   |
++--------------------+------------------------------------------------------------------------------------------------------------+
+| ``routepref``      | Route profile for your course. Available profiles can be found in the `table <routepref>`_ below.          |
++--------------------+------------------------------------------------------------------------------------------------------------+
+| ``instructions``   | For step by step instructions in your chosen language set ``True``. Default is ``False``                   |
++--------------------+------------------------------------------------------------------------------------------------------------+
+| ``weighting``      | Type of route the algorithm chooses. Options are ``Fastest`` (*default*), ``Shortest`` and ``Recommended`` |
++--------------------+------------------------------------------------------------------------------------------------------------+
+| ``noMotorways``    | Set ``True`` to avoid motorways. Default is ``False``                                                      |
++--------------------+------------------------------------------------------------------------------------------------------------+
+| ``noTollways``     | Set ``True`` to avoid tollways. Default is ``False``                                                       |
++--------------------+------------------------------------------------------------------------------------------------------------+
+| ``noUnpavedroads`` | Set ``True`` to avoid unpaved roads. Default is ``False``                                                  |
++--------------------+------------------------------------------------------------------------------------------------------------+
+| ``noSteps``        | Set ``True`` to avoid steps. Default is ``False``                                                          |
++--------------------+------------------------------------------------------------------------------------------------------------+
+| ``noFerries``      | Set ``True`` to avoid ferries. Default is ``False``                                                        |
++--------------------+------------------------------------------------------------------------------------------------------------+
+| ``api_key``        | ``your_api_key`` is placed in this parameter                                                               |
++--------------------+------------------------------------------------------------------------------------------------------------+
 
-..
-	routepref
-	>>>>>>>>>
-..
-	The parameter routepref contains the main routepreferences. There are `additional routepreferences`_ for the Bicycle and the HeavyVehicle type. 
-..
-	+--------------+--------------------------------------------------------------------------------------------------------------+
-	| Value        | Description                                                                                                  |
-	+==============+==============================================================================================================+
-	| Car          | This pathing will avoid footways and bicycle lanes and uses highways, streets and ways cars are allowed on   |
-	+--------------+--------------------------------------------------------------------------------------------------------------+
-	| Pedestrian   | this routing algorithm uses footways and tries to avoid highways                                             |
-	+--------------+--------------------------------------------------------------------------------------------------------------+
-	| Bicycle      | Uses bicycle ways if available, can also use footpaths where bicycle is allowed and streets                  |
-	+--------------+--------------------------------------------------------------------------------------------------------------+
-	| Wheelchair   | This algorithm uses footways and tries to use the smothest surface type. In addition stairs will be avoided. |
-	+--------------+--------------------------------------------------------------------------------------------------------------+
-	| HeavyVehicle | i dont know what kind of road this uses                                                                      |
-	+--------------+--------------------------------------------------------------------------------------------------------------+
 
+routepref
+>>>>>>>>>
+
+The parameter routepref contains all routepreferences. There are additional routepreferences for the Bicycle and the HeavyVehicle type.
+
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+| Main Value       | Additional Values and Glossary Link                                                                                                                |
++==================+====================================================================================================================================================+
+| ``Car``          | :term:`Car`                                                                                                                                        |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``Pedestrian``   | :term:`Pedestrian`                                                                                                                                 |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``Bicycle``      | ``BicycleMTB``:term:`MTB`\/\ ``BicycleRacer``:term:`Racer`\/\ ``BicycleTouring``:term:`Touring`\/\ ``BicycleSafety``:term:`Safety`                 |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``Wheelchair``   | :term:`Wheelchair`                                                                                                                                 |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``HeavyVehicle`` | ``Goods``:term:`Goods`\/\ ``Agricultural``:term:`Agricultural`\/\ ``Bus``:term:`Bus`\/\ ``Foresty``:term:`Foresty`\/\ ``Delivery``:term:`Delivery` |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+					
 .. note:: in the newer version there are only english and german. There are other languages available that are too difficult to maintain. You can request them and implement them yourself if you feel like it.
 
 
@@ -106,13 +106,13 @@ Optional Parameters
 
 
 
-+---------------+----------------------------------------+-------------------+-----------------------+
-| Parameter     | Description                            | Value             | Example               |
-+===============+========================================+===================+=======================+
-| ``useTMC``    | Use traffic information for your route | True\|\ **False** | ``useTMC=True/False`` |
-+---------------+----------------------------------------+-------------------+-----------------------+
-| ``maxspeed``  | Set a maximum speed in km/h for what ? | True\|\ **False** | ``maxspeed=10``       |
-+---------------+----------------------------------------+-------------------+-----------------------+
++--------------+---------------------------------------------------------------------------+
+| Parameter    | Description                                                               |
++==============+===========================================================================+
+| ``useTMC``   | ``True`` to use traffic information for your route. Default is ``False``  |
++--------------+---------------------------------------------------------------------------+
+| ``maxspeed`` | Maximum speed in km/h for the selected route profile e.g. ``maxspeed=10`` |
++--------------+---------------------------------------------------------------------------+
 
 ..
 	Additional Routepreferences
@@ -196,7 +196,59 @@ It is a simple route for a car from A to B with no direction-instructions. The d
 	 </xls:Response>
 	</xls:XLS>
 
+Further examples (without response):
+
+
 .. attention:: Parameters as well as values are `case sensitive`. The input order doesn't matter though. 
+
+Errors
+++++++
+
+Is there a list for the different possible errors?
+
+..
+	<xls:ErrorList>
+	      <xls:Error errorCode="Unknown" severity="Error" locationPath="OpenLS Route Service - RSListener, Message: " message="Internal Service Exception: java.lang.Exception
+	Internal Service Exception Message: Cannot find point 0: 20.38325080173755,14.721679687500002
+	 [Exception]org.freeopenls.routeservice.routing.Routing.doRouting(Routing.java:94)
+	 [Exception]org.freeopenls.routeservice.documents.RequestXLSDocument.doRoutePlan(RequestXLSDocument.java:467)
+	 [Exception]org.freeopenls.routeservice.documents.RequestXLSDocument.doRouteRequest(RequestXLSDocument.java:152)
+	 [Exception]org.freeopenls.routeservice.RSListener.receiveCompleteRequest(RSListener.java:139)
+	 [Exception]org.freeopenls.routeservice.RequestOperator.doOperation(RequestOperator.java:67)
+	 [Exception]org.freeopenls.routeservice.RSServlet.doPost(RSServlet.java:125)
+	 [Exception]javax.servlet.http.HttpServlet.service(HttpServlet.java:646)
+	 [Exception]javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
+	 [Exception]org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:303)
+	 [Exception]org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
+	 [Exception]org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	 [Exception]org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)
+	 [Exception]org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
+	 [Exception]org.freeopenls.servlet.filters.PiwikRequestFilter.doFilter(PiwikRequestFilter.java:82)
+	 [Exception]org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)
+	 [Exception]org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
+	 [Exception]org.freeopenls.servlet.filters.RequestRateThrottleFilter.doFilter(RequestRateThrottleFilter.java:125)
+	 [Exception]org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)
+	 [Exception]org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
+	 [Exception]org.freeopenls.servlet.filters.UserAuthenticationFilter.doFilter(UserAuthenticationFilter.java:113)
+	 [Exception]org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)
+	 [Exception]org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
+	 [Exception]org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:220)
+	 [Exception]org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:122)
+	 [Exception]org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:501)
+	 [Exception]org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	 [Exception]org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	 [Exception]org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:950)
+	 [Exception]org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:116)
+	 [Exception]org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	 [Exception]org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1040)
+	 [Exception]org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:607)
+	 [Exception]org.apache.tomcat.util.net.AprEndpoint$SocketWithOptionsProcessor.run(AprEndpoint.java:2379)
+	 [Exception]java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	 [Exception]java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	 [Exception]org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	 [Exception]java.lang.Thread.run(Thread.java:745)
+	"/>
+	    </xls:ErrorList>
 
 -----------
 
@@ -206,27 +258,98 @@ Geocoding API
 Normal Geocoding
 ++++++++++++++++
 
-+--------------------+--------------------------------+
-| Query Parameters   | Description                    |
-+====================+================================+
-| ``FreeFormAdress`` | this is for parameting         |
-+--------------------+--------------------------------+
-| ``MaxResponse``    | etcetera                       |
-+--------------------+--------------------------------+
++--------------------+------------------------------------+
+| Query Parameters   | Description                        |
++====================+====================================+
+| ``FreeFormAdress`` |                                    |
++--------------------+------------------------------------+
+| ``MaxResponse``    | Maximum number of responses ``10`` |
++--------------------+------------------------------------+
 
 
 Reverse Geocoding
 +++++++++++++++++
 
-+--------------------+--------------------------------+
-| Query Parameters   | Description                    |
-+====================+================================+
-| ``lat``            | this is for parameting         |
-+--------------------+--------------------------------+
-| ``lon``            | etcetera                       |
-+--------------------+--------------------------------+
-| ``MaxResponse``    | etcetera                       |
-+--------------------+--------------------------------+
+
+
+
++------------------+-------------------------------------------------------------------------------------+
+| Query Parameters | Description                                                                         |
++==================+=====================================================================================+
+| ``lon``          | ``Longitude`` of coordinate of interest                                             |
++------------------+-------------------------------------------------------------------------------------+
+| ``lat``          | ``Latitude`` of coordinate of interest                                              |
++------------------+-------------------------------------------------------------------------------------+
+| ``MaxResponse``  | Maximum number of responses e.g. ``10``                                             |
++------------------+-------------------------------------------------------------------------------------+
+| ``lang``         | Language of Reverse Geocode response ``de`` (Deutsch)`(default)`, ``en`` (English), |
++------------------+-------------------------------------------------------------------------------------+
+
+.. _example-ref2:
+
+Example
++++++++
+
+
+::
+
+	<xls:XLS version="1.1" xsi:schemaLocation="http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/LocationUtilityService.xsd">
+	 <xls:ResponseHeader xsi:type="xls:ResponseHeaderType"/>
+	 <xls:Response xsi:type="xls:ResponseType" requestID="123456789" version="1.1" numberOfResponses="1">
+	  <xls:GeocodeResponse xsi:type="xls:GeocodeResponseType">
+	   <xls:GeocodeResponseList numberOfGeocodedAddresses="3">
+	    <xls:GeocodedAddress>
+	     <gml:Point>
+	      <gml:pos srsName="EPSG:4326">8.6754713 49.4184374</gml:pos>
+	     </gml:Point>
+	     <xls:Address countryCode="">
+	      <xls:StreetAddress>
+	       <xls:Building buildingName="Mathematikon" number="41-49"/>
+	       <xls:Street officialName="Berliner Straße"/>
+	      </xls:StreetAddress>
+	      <xls:Place type="Country">Deutschland</xls:Place>
+	      <xls:Place type="CountrySubdivision">Baden-Württemberg</xls:Place>
+	      <xls:Place type="Municipality">Heidelberg</xls:Place>
+	      <xls:PostalCode>69120</xls:PostalCode>
+	     </xls:Address>
+	     <xls:GeocodeMatchCode accuracy="1.0"/>
+	    </xls:GeocodedAddress>
+	    <xls:GeocodedAddress>
+	     <gml:Point>
+	      <gml:pos srsName="EPSG:4326">8.6754603 49.4189858</gml:pos>
+	     </gml:Point>
+	   	 <xls:Address countryCode="">
+	   	  <xls:StreetAddress>
+	   	   <xls:Building buildingName="Mathematikon" number="41-47"/>
+	   	   <xls:Street officialName="Berliner Straße"/>
+	   	  </xls:StreetAddress>
+	   	  <xls:Place type="Country">Deutschland</xls:Place>
+	   	  <xls:Place type="CountrySubdivision">Baden-Württemberg</xls:Place>
+	   	  <xls:Place type="Municipality">Heidelberg</xls:Place>
+	   	  <xls:PostalCode>69120</xls:PostalCode>
+	   	 </xls:Address>
+	   	 <xls:GeocodeMatchCode accuracy="1.0"/>
+	    </xls:GeocodedAddress>
+	    <xls:GeocodedAddress>
+	     <gml:Point>
+	      <gml:pos srsName="EPSG:4326">8.6751818 49.4175293</gml:pos>
+	     </gml:Point>
+	    <xls:Address countryCode="">
+	     <xls:StreetAddress>
+	      <xls:Building buildingName="INF 205 Mathematikon" number="205"/>
+	       <xls:Street officialName="Im Neuenheimer Feld"/>
+	       </xls:StreetAddress>
+	      <xls:Place type="Country">Deutschland</xls:Place>
+	      <xls:Place type="CountrySubdivision">Baden-Württemberg</xls:Place>
+	      <xls:Place type="Municipality">Heidelberg</xls:Place>
+	      <xls:PostalCode>69120</xls:PostalCode>
+	     </xls:Address>
+	     <xls:GeocodeMatchCode accuracy="1.0"/>
+	    </xls:GeocodedAddress>
+	   </xls:GeocodeResponseList>
+	  </xls:GeocodeResponse>
+     </xls:Response>
+    </xls:XLS>
 
 --------
 
@@ -237,13 +360,17 @@ aaaaand the aa api
 
 
 
-+------------------+--------------------------------+
-| Query Parameters | Description                    |
-+==================+================================+
-| parameter 1      | this is for parameting         |
-+------------------+--------------------------------+
-| parameter 2      | etcetera                       |
-+------------------+--------------------------------+
++---------------------+------------------------------------------------------------------------------------------------+
+| Query Parameters    | Description                                                                                    |
++=====================+================================================================================================+
+| ``position``        | Pair of ``longitude,latitude`` coordinates for the point of interest                           |
++---------------------+------------------------------------------------------------------------------------------------+
+| ``routePreference`` | Route profile of the AA. Options are ``Car``, ``Pedestrian``, ``Bicycle`` and ``HeavyVehicle`` |
++---------------------+------------------------------------------------------------------------------------------------+
+| ``method``          | Method of generating the Isochrones. Can be ``RecursiveGrid`` or ``TIN``                       |
++---------------------+------------------------------------------------------------------------------------------------+
+| ``interval``        | Interval of the Isochrones in minutes e.g. ``15``                                              |
++---------------------+------------------------------------------------------------------------------------------------+
 
 ..
 	------------

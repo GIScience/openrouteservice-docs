@@ -90,14 +90,19 @@
 <li class="toctree-l1"><a class="reference internal" href="api_key.html">API Keys</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Application Programming Interfaces</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#routing-api">Routing API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#required-parameters">Required Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#required-parameters">Required Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#routepref">routepref</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#errors">Errors</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#geocoding-api">Geocoding API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#normal-geocoding">Normal Geocoding</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#reverse-geocoding">Reverse Geocoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-ref2">Example</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#accessibility-analysis-api">Accessibility Analysis API</a></li>
@@ -112,9 +117,9 @@
 </ul>
 <p class="caption"><span class="caption-text">Help Section</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
 </ul>
 
             
@@ -185,7 +190,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 </div>
 <p>After the <strong>&#8221;?&#8221;</strong> you have to add parameters with <strong>&#8220;&amp;&#8221;</strong>. For the first parameter the <strong>&#8220;&amp;&#8221;</strong> can be omitted. The value of the parameter is defined with a <strong>&#8220;=&#8221;</strong>. Therefore the pattern for parameter usage is:</p>
 <p class="centered">
-<strong><strong>&amp;</strong><code class="docutils literal"><span class="pre">parameter</span></code><strong>=</strong><code class="docutils literal"><span class="pre">value</span></code></strong></p><p>If you don&#8217;t get the picture, you can look at the <a class="reference internal" href="#example">Example</a> below.</p>
+<strong><strong>&amp;</strong><code class="docutils literal"><span class="pre">parameter</span></code><strong>=</strong><code class="docutils literal"><span class="pre">value</span></code></strong></p><p>If you don&#8217;t get the picture, you can look at the <a class="reference internal" href="#example-ref"><span>Example</span></a> below.</p>
 <p>There are two types of parameters:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -204,8 +209,8 @@ Therefore you have to directly contact the respective <a class="reference intern
 <p>The following parameters are required for the api to work. For a valid request you need <strong>every single parameter</strong> of this table in your request-URL. You can omit the value if the parameter has a default value. The parameter will then be set to this default value. In the case of <cite>via</cite> there is no default value. If you don&#8217;t want a stopover point just leave the parameter empty. For more information regarding the specific routing profiles please visit our <a class="reference internal" href="glossary.html"><em>glossary</em></a>.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="6%" />
-<col width="94%" />
+<col width="16%" />
+<col width="84%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -220,7 +225,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 <td>Pair of <code class="docutils literal"><span class="pre">longitude,latitude</span></code> coordinate used as destination of the route</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">via</span></code></td>
-<td>Ampersand-separated list of <cite>longitude,latitude</cite> coordinate pairs visited in order</td>
+<td>Ampersand-separated list of <code class="docutils literal"><span class="pre">longitude,latitude</span></code> coordinate pairs visited in order</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">lang</span></code></td>
 <td>Language for the step by step instructions. <code class="docutils literal"><span class="pre">en</span></code> English or <code class="docutils literal"><span class="pre">de</span></code> German</td>
@@ -229,7 +234,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 <td>Unit in which you want to view the distances in : <code class="docutils literal"><span class="pre">KM</span></code>(kilometers)/<code class="docutils literal"><span class="pre">M</span></code>(meters)/<code class="docutils literal"><span class="pre">MI</span></code>(miles)</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">routepref</span></code></td>
-<td>Route profile for your course. Available profiles are <code class="docutils literal"><span class="pre">Car</span></code>/<code class="docutils literal"><span class="pre">Pedestrian</span></code>/<code class="docutils literal"><span class="pre">Bicycle</span></code>/<code class="docutils literal"><span class="pre">BicycleMTB</span></code>/<code class="docutils literal"><span class="pre">BicycleRacer</span></code>/<code class="docutils literal"><span class="pre">BicycleTouring</span></code>/<code class="docutils literal"><span class="pre">BicycleSafety</span></code>/<code class="docutils literal"><span class="pre">Wheelchair</span></code>/<code class="docutils literal"><span class="pre">HeavyVehicle</span></code>/<code class="docutils literal"><span class="pre">Goods</span></code>/<code class="docutils literal"><span class="pre">Agricultural</span></code>/<code class="docutils literal"><span class="pre">Bus</span></code>/<code class="docutils literal"><span class="pre">Foresty</span></code>/<code class="docutils literal"><span class="pre">Delivery</span></code></td>
+<td>Route profile for your course. Available profiles can be found in the <a class="reference external" href="routepref">table</a> below.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">instructions</span></code></td>
 <td>For step by step instructions in your chosen language set <code class="docutils literal"><span class="pre">True</span></code>. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
@@ -257,37 +262,61 @@ Therefore you have to directly contact the respective <a class="reference intern
 </tr>
 </tbody>
 </table>
+<div class="section" id="routepref">
+<h4>routepref<a class="headerlink" href="#routepref" title="Permalink to this headline">¶</a></h4>
+<p>The parameter routepref contains all routepreferences. There are additional routepreferences for the Bicycle and the HeavyVehicle type.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Main Value</th>
+<th class="head">Additional Values and Glossary Link</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">Car</span></code></td>
+<td><a class="reference internal" href="glossary.html#term-car"><span class="xref std std-term">Car</span></a></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">Pedestrian</span></code></td>
+<td><a class="reference internal" href="glossary.html#term-pedestrian"><span class="xref std std-term">Pedestrian</span></a></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">Bicycle</span></code></td>
+<td><code class="docutils literal"><span class="pre">BicycleMTB</span></code><a class="reference internal" href="glossary.html#term-mtb"><span class="xref std std-term">MTB</span></a>/<code class="docutils literal"><span class="pre">BicycleRacer</span></code><a class="reference internal" href="glossary.html#term-racer"><span class="xref std std-term">Racer</span></a>/<code class="docutils literal"><span class="pre">BicycleTouring</span></code><a class="reference internal" href="glossary.html#term-touring"><span class="xref std std-term">Touring</span></a>/<code class="docutils literal"><span class="pre">BicycleSafety</span></code><a class="reference internal" href="glossary.html#term-safety"><span class="xref std std-term">Safety</span></a></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">Wheelchair</span></code></td>
+<td><a class="reference internal" href="glossary.html#term-wheelchair"><span class="xref std std-term">Wheelchair</span></a></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">HeavyVehicle</span></code></td>
+<td><code class="docutils literal"><span class="pre">Goods</span></code><a class="reference internal" href="glossary.html#term-goods"><span class="xref std std-term">Goods</span></a>/<code class="docutils literal"><span class="pre">Agricultural</span></code><a class="reference internal" href="glossary.html#term-agricultural"><span class="xref std std-term">Agricultural</span></a>/<code class="docutils literal"><span class="pre">Bus</span></code><a class="reference internal" href="glossary.html#term-bus"><span class="xref std std-term">Bus</span></a>/<code class="docutils literal"><span class="pre">Foresty</span></code><a class="reference internal" href="glossary.html#term-foresty"><span class="xref std std-term">Foresty</span></a>/<code class="docutils literal"><span class="pre">Delivery</span></code><a class="reference internal" href="glossary.html#term-delivery"><span class="xref std std-term">Delivery</span></a></td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">in the newer version there are only english and german. There are other languages available that are too difficult to maintain. You can request them and implement them yourself if you feel like it.</p>
+</div>
 </div>
 </div>
 <div class="section" id="optional-parameters">
 <h3>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="15%" />
-<col width="41%" />
-<col width="20%" />
-<col width="24%" />
+<col width="16%" />
+<col width="84%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
 <th class="head">Description</th>
-<th class="head">Value</th>
-<th class="head">Example</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">useTMC</span></code></td>
-<td>Use traffic information for your route</td>
-<td>True|<strong>False</strong></td>
-<td><code class="docutils literal"><span class="pre">useTMC=True/False</span></code></td>
+<td><code class="docutils literal"><span class="pre">True</span></code> to use traffic information for your route. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">maxspeed</span></code></td>
-<td>Set a maximum speed in km/h for what ?</td>
-<td>True|<strong>False</strong></td>
-<td><code class="docutils literal"><span class="pre">maxspeed=10</span></code></td>
+<td>Maximum speed in km/h for the selected route profile e.g. <code class="docutils literal"><span class="pre">maxspeed=10</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -330,10 +359,15 @@ Therefore you have to directly contact the respective <a class="reference intern
 <span class="nt">&lt;/xls:XLS&gt;</span>
 </pre></div>
 </div>
+<p>Further examples (without response):</p>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
 <p class="last">Parameters as well as values are <cite>case sensitive</cite>. The input order doesn&#8217;t matter though.</p>
 </div>
+</div>
+<div class="section" id="errors">
+<h3>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h3>
+<p>Is there a list for the different possible errors?</p>
 </div>
 </div>
 <hr class="docutils" />
@@ -341,56 +375,6 @@ Therefore you have to directly contact the respective <a class="reference intern
 <h2>Geocoding API<a class="headerlink" href="#geocoding-api" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="normal-geocoding">
 <h3>Normal Geocoding<a class="headerlink" href="#normal-geocoding" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="38%" />
-<col width="62%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Query Parameters</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">FreeFormAdress</span></code></td>
-<td>this is for parameting</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">MaxResponse</span></code></td>
-<td>etcetera</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="reverse-geocoding">
-<h3>Reverse Geocoding<a class="headerlink" href="#reverse-geocoding" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="38%" />
-<col width="62%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Query Parameters</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">lat</span></code></td>
-<td>this is for parameting</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">lon</span></code></td>
-<td>etcetera</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">MaxResponse</span></code></td>
-<td>etcetera</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<hr class="docutils" />
-<div class="section" id="accessibility-analysis-api">
-<h2>Accessibility Analysis API<a class="headerlink" href="#accessibility-analysis-api" title="Permalink to this headline">¶</a></h2>
-<p>aaaaand the aa api</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="36%" />
@@ -402,11 +386,132 @@ Therefore you have to directly contact the respective <a class="reference intern
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>parameter 1</td>
-<td>this is for parameting</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">FreeFormAdress</span></code></td>
+<td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>parameter 2</td>
-<td>etcetera</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">MaxResponse</span></code></td>
+<td>Maximum number of responses <code class="docutils literal"><span class="pre">10</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="reverse-geocoding">
+<h3>Reverse Geocoding<a class="headerlink" href="#reverse-geocoding" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Query Parameters</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">lon</span></code></td>
+<td><code class="docutils literal"><span class="pre">Longitude</span></code> of coordinate of interest</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">lat</span></code></td>
+<td><code class="docutils literal"><span class="pre">Latitude</span></code> of coordinate of interest</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">MaxResponse</span></code></td>
+<td>Maximum number of responses e.g. <code class="docutils literal"><span class="pre">10</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">lang</span></code></td>
+<td>Language of Reverse Geocode response <code class="docutils literal"><span class="pre">de</span></code> (Deutsch)`(default)`, <code class="docutils literal"><span class="pre">en</span></code> (English),</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="example-ref2">
+<span id="id1"></span><h3>Example<a class="headerlink" href="#example-ref2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml"><div class="highlight"><pre>    <span class="nt">&lt;xls:XLS</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/LocationUtilityService.xsd&quot;</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;xls:ResponseHeader</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseHeaderType&quot;</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;xls:Response</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseType&quot;</span> <span class="na">requestID=</span><span class="s">&quot;123456789&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">numberOfResponses=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;xls:GeocodeResponse</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:GeocodeResponseType&quot;</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;xls:GeocodeResponseList</span> <span class="na">numberOfGeocodedAddresses=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;xls:GeocodedAddress&gt;</span>
+         <span class="nt">&lt;gml:Point&gt;</span>
+          <span class="nt">&lt;gml:pos</span> <span class="na">srsName=</span><span class="s">&quot;EPSG:4326&quot;</span><span class="nt">&gt;</span>8.6754713 49.4184374<span class="nt">&lt;/gml:pos&gt;</span>
+         <span class="nt">&lt;/gml:Point&gt;</span>
+         <span class="nt">&lt;xls:Address</span> <span class="na">countryCode=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;xls:StreetAddress&gt;</span>
+           <span class="nt">&lt;xls:Building</span> <span class="na">buildingName=</span><span class="s">&quot;Mathematikon&quot;</span> <span class="na">number=</span><span class="s">&quot;41-49&quot;</span><span class="nt">/&gt;</span>
+           <span class="nt">&lt;xls:Street</span> <span class="na">officialName=</span><span class="s">&quot;Berliner Straße&quot;</span><span class="nt">/&gt;</span>
+          <span class="nt">&lt;/xls:StreetAddress&gt;</span>
+          <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Country&quot;</span><span class="nt">&gt;</span>Deutschland<span class="nt">&lt;/xls:Place&gt;</span>
+          <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;CountrySubdivision&quot;</span><span class="nt">&gt;</span>Baden-Württemberg<span class="nt">&lt;/xls:Place&gt;</span>
+          <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Municipality&quot;</span><span class="nt">&gt;</span>Heidelberg<span class="nt">&lt;/xls:Place&gt;</span>
+          <span class="nt">&lt;xls:PostalCode&gt;</span>69120<span class="nt">&lt;/xls:PostalCode&gt;</span>
+         <span class="nt">&lt;/xls:Address&gt;</span>
+         <span class="nt">&lt;xls:GeocodeMatchCode</span> <span class="na">accuracy=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/xls:GeocodedAddress&gt;</span>
+        <span class="nt">&lt;xls:GeocodedAddress&gt;</span>
+         <span class="nt">&lt;gml:Point&gt;</span>
+          <span class="nt">&lt;gml:pos</span> <span class="na">srsName=</span><span class="s">&quot;EPSG:4326&quot;</span><span class="nt">&gt;</span>8.6754603 49.4189858<span class="nt">&lt;/gml:pos&gt;</span>
+         <span class="nt">&lt;/gml:Point&gt;</span>
+             <span class="nt">&lt;xls:Address</span> <span class="na">countryCode=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;xls:StreetAddress&gt;</span>
+               <span class="nt">&lt;xls:Building</span> <span class="na">buildingName=</span><span class="s">&quot;Mathematikon&quot;</span> <span class="na">number=</span><span class="s">&quot;41-47&quot;</span><span class="nt">/&gt;</span>
+               <span class="nt">&lt;xls:Street</span> <span class="na">officialName=</span><span class="s">&quot;Berliner Straße&quot;</span><span class="nt">/&gt;</span>
+              <span class="nt">&lt;/xls:StreetAddress&gt;</span>
+              <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Country&quot;</span><span class="nt">&gt;</span>Deutschland<span class="nt">&lt;/xls:Place&gt;</span>
+              <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;CountrySubdivision&quot;</span><span class="nt">&gt;</span>Baden-Württemberg<span class="nt">&lt;/xls:Place&gt;</span>
+              <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Municipality&quot;</span><span class="nt">&gt;</span>Heidelberg<span class="nt">&lt;/xls:Place&gt;</span>
+              <span class="nt">&lt;xls:PostalCode&gt;</span>69120<span class="nt">&lt;/xls:PostalCode&gt;</span>
+             <span class="nt">&lt;/xls:Address&gt;</span>
+             <span class="nt">&lt;xls:GeocodeMatchCode</span> <span class="na">accuracy=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/xls:GeocodedAddress&gt;</span>
+        <span class="nt">&lt;xls:GeocodedAddress&gt;</span>
+         <span class="nt">&lt;gml:Point&gt;</span>
+          <span class="nt">&lt;gml:pos</span> <span class="na">srsName=</span><span class="s">&quot;EPSG:4326&quot;</span><span class="nt">&gt;</span>8.6751818 49.4175293<span class="nt">&lt;/gml:pos&gt;</span>
+         <span class="nt">&lt;/gml:Point&gt;</span>
+        <span class="nt">&lt;xls:Address</span> <span class="na">countryCode=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;xls:StreetAddress&gt;</span>
+          <span class="nt">&lt;xls:Building</span> <span class="na">buildingName=</span><span class="s">&quot;INF 205 Mathematikon&quot;</span> <span class="na">number=</span><span class="s">&quot;205&quot;</span><span class="nt">/&gt;</span>
+           <span class="nt">&lt;xls:Street</span> <span class="na">officialName=</span><span class="s">&quot;Im Neuenheimer Feld&quot;</span><span class="nt">/&gt;</span>
+           <span class="nt">&lt;/xls:StreetAddress&gt;</span>
+          <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Country&quot;</span><span class="nt">&gt;</span>Deutschland<span class="nt">&lt;/xls:Place&gt;</span>
+          <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;CountrySubdivision&quot;</span><span class="nt">&gt;</span>Baden-Württemberg<span class="nt">&lt;/xls:Place&gt;</span>
+          <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Municipality&quot;</span><span class="nt">&gt;</span>Heidelberg<span class="nt">&lt;/xls:Place&gt;</span>
+          <span class="nt">&lt;xls:PostalCode&gt;</span>69120<span class="nt">&lt;/xls:PostalCode&gt;</span>
+         <span class="nt">&lt;/xls:Address&gt;</span>
+         <span class="nt">&lt;xls:GeocodeMatchCode</span> <span class="na">accuracy=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/xls:GeocodedAddress&gt;</span>
+       <span class="nt">&lt;/xls:GeocodeResponseList&gt;</span>
+      <span class="nt">&lt;/xls:GeocodeResponse&gt;</span>
+ <span class="nt">&lt;/xls:Response&gt;</span>
+<span class="nt">&lt;/xls:XLS&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="accessibility-analysis-api">
+<h2>Accessibility Analysis API<a class="headerlink" href="#accessibility-analysis-api" title="Permalink to this headline">¶</a></h2>
+<p>aaaaand the aa api</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Query Parameters</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">position</span></code></td>
+<td>Pair of <code class="docutils literal"><span class="pre">longitude,latitude</span></code> coordinates for the point of interest</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">routePreference</span></code></td>
+<td>Route profile of the AA. Options are <code class="docutils literal"><span class="pre">Car</span></code>, <code class="docutils literal"><span class="pre">Pedestrian</span></code>, <code class="docutils literal"><span class="pre">Bicycle</span></code> and <code class="docutils literal"><span class="pre">HeavyVehicle</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">method</span></code></td>
+<td>Method of generating the Isochrones. Can be <code class="docutils literal"><span class="pre">RecursiveGrid</span></code> or <code class="docutils literal"><span class="pre">TIN</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">interval</span></code></td>
+<td>Interval of the Isochrones in minutes e.g. <code class="docutils literal"><span class="pre">15</span></code></td>
 </tr>
 </tbody>
 </table>

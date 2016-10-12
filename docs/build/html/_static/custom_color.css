@@ -1,3 +1,4 @@
+/*Change the background color of the side bar/top bar in small mode to ORS red*/
 .wy-menu-vertical header,.wy-menu-vertical p.caption {
 	color:#c34f5f;
 }
@@ -16,6 +17,7 @@
 .wy-side-nav-search img {
 	background-color:#b5152b;
 }
+/* change the color of links to a matching red*/
 a {
 	color:#c34f5f;
 	text-decoration:none;
@@ -30,6 +32,7 @@ a:visited {
 a:visited:hover {
 	color:#cf727e
 }
+/*leave the linkcolor in the sidebar like it was */
 .wy-side-scroll a {
 	color:#b3b3b3
 }
@@ -37,6 +40,7 @@ a:visited:hover {
 	background-color:#c34f5f;
 	color:#fff
 }
+/*leave the title of the side bar in a pure white for readability*/
 a.icon.icon-home {
 	color:#fff
 }
@@ -45,3 +49,11 @@ toctree-l2 a:hover {
 	background-color:##cf727e
 }
 */
+/*get paragraphs in justified form*/
+p {
+	text-align:justify
+}
+/*fix the width of content section*/
+.wy-nav-content {
+	max-width:800px
+}

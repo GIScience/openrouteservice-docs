@@ -55,12 +55,12 @@ We reserve the right to modify these Terms at any time by posting the changed te
 
 Privacy
 -------
-**Cookies**
- We use cookies, system logs and other data storage technologies to (a) preserve information so you will not have to re-enter it during your visit or in subsequent visits; (b) maintain sessions for authenticated users; and (c) monitor aggregate metrics such as total number of visitors and pages viewed. If you disable cookies parts of OpenRouteService.org main website may not work as intended.
-**Location Information** 
- OpenRouteService.org allows you to approximate your geographic location, when accessed via (mobile) browser. To provide service, OpenRouteService must record your route information, including your point of origin, the address of your destination, and the route you are instructed to follow. We do not share this aggregated location information or connect this information with your personal information. Currently HTTPS is not supported.
-**Information Collection**
- We do not collect or store any personal information about you or personally identifiable information about you, except what you voluntarily provide through direct contact. We do not share analytic data with any service providers or partners. 
+- **Cookies**
+   We use cookies, system logs and other data storage technologies to (a) preserve information so you will not have to re-enter it during your visit or in subsequent visits; (b) maintain sessions for authenticated users; and (c) monitor aggregate metrics such as total number of visitors and pages viewed. If you disable cookies parts of OpenRouteService.org main website may not work as intended.
+- **Location Information** 
+   OpenRouteService.org allows you to approximate your geographic location, when accessed via (mobile) browser. To provide service, OpenRouteService must record your route information, including your point of origin, the address of your destination, and the route you are instructed to follow. We do not share this aggregated location information or connect this information with your personal information. Currently HTTPS is not supported.
+- **Information Collection**
+   We do not collect or store any personal information about you or personally identifiable information about you, except what you voluntarily provide through direct contact. We do not share analytic data with any service providers or partners. 
 
 
 
