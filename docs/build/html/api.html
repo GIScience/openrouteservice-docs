@@ -100,12 +100,16 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#geocoding-api">Geocoding API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#normal-geocoding">Normal Geocoding</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reverse-geocoding">Reverse Geocoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#normal-geocoding-parameters">Normal Geocoding Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reverse-geocoding-parameters">Reverse Geocoding Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example-ref2">Example</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#accessibility-analysis-api">Accessibility Analysis API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accessibility-analysis-api">Accessibility Analysis API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Example</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -188,7 +192,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="highlight-python"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?
 </pre></div>
 </div>
-<p>After the <strong>&#8221;?&#8221;</strong> you have to add parameters with <strong>&#8220;&amp;&#8221;</strong>. For the first parameter the <strong>&#8220;&amp;&#8221;</strong> can be omitted. The value of the parameter is defined with a <strong>&#8220;=&#8221;</strong>. Therefore the pattern for parameter usage is:</p>
+<p id="par-ref">After the <strong>&#8221;?&#8221;</strong> you have to add parameters with <strong>&#8220;&amp;&#8221;</strong>. For the first parameter the <strong>&#8220;&amp;&#8221;</strong> can be omitted. The value of the parameter is defined with a <strong>&#8220;=&#8221;</strong>. Therefore the pattern for parameter usage is:</p>
 <p class="centered">
 <strong><strong>&amp;</strong><code class="docutils literal"><span class="pre">parameter</span></code><strong>=</strong><code class="docutils literal"><span class="pre">value</span></code></strong></p><p>If you don&#8217;t get the picture, you can look at the <a class="reference internal" href="#example-ref"><span>Example</span></a> below.</p>
 <p>There are two types of parameters:</p>
@@ -267,8 +271,8 @@ Therefore you have to directly contact the respective <a class="reference intern
 <p>The parameter routepref contains all routepreferences. There are additional routepreferences for the Bicycle and the HeavyVehicle type.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="11%" />
-<col width="89%" />
+<col width="9%" />
+<col width="91%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Main Value</th>
@@ -283,19 +287,19 @@ Therefore you have to directly contact the respective <a class="reference intern
 <td><a class="reference internal" href="glossary.html#term-pedestrian"><span class="xref std std-term">Pedestrian</span></a></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">Bicycle</span></code></td>
-<td><code class="docutils literal"><span class="pre">BicycleMTB</span></code><a class="reference internal" href="glossary.html#term-mtb"><span class="xref std std-term">MTB</span></a>/<code class="docutils literal"><span class="pre">BicycleRacer</span></code><a class="reference internal" href="glossary.html#term-racer"><span class="xref std std-term">Racer</span></a>/<code class="docutils literal"><span class="pre">BicycleTouring</span></code><a class="reference internal" href="glossary.html#term-touring"><span class="xref std std-term">Touring</span></a>/<code class="docutils literal"><span class="pre">BicycleSafety</span></code><a class="reference internal" href="glossary.html#term-safety"><span class="xref std std-term">Safety</span></a></td>
+<td><a class="reference internal" href="glossary.html#term-bicycle"><span class="xref std std-term">Bicycle</span></a>/<code class="docutils literal"><span class="pre">BicycleMTB</span></code><a class="reference internal" href="glossary.html#term-mtb"><span class="xref std std-term">MTB</span></a>/<code class="docutils literal"><span class="pre">BicycleRacer</span></code><a class="reference internal" href="glossary.html#term-racer"><span class="xref std std-term">Racer</span></a>/<code class="docutils literal"><span class="pre">BicycleTouring</span></code><a class="reference internal" href="glossary.html#term-touring"><span class="xref std std-term">Touring</span></a>/<code class="docutils literal"><span class="pre">BicycleSafety</span></code><a class="reference internal" href="glossary.html#term-safety"><span class="xref std std-term">Safety</span></a></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">Wheelchair</span></code></td>
 <td><a class="reference internal" href="glossary.html#term-wheelchair"><span class="xref std std-term">Wheelchair</span></a></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">HeavyVehicle</span></code></td>
-<td><code class="docutils literal"><span class="pre">Goods</span></code><a class="reference internal" href="glossary.html#term-goods"><span class="xref std std-term">Goods</span></a>/<code class="docutils literal"><span class="pre">Agricultural</span></code><a class="reference internal" href="glossary.html#term-agricultural"><span class="xref std std-term">Agricultural</span></a>/<code class="docutils literal"><span class="pre">Bus</span></code><a class="reference internal" href="glossary.html#term-bus"><span class="xref std std-term">Bus</span></a>/<code class="docutils literal"><span class="pre">Foresty</span></code><a class="reference internal" href="glossary.html#term-foresty"><span class="xref std std-term">Foresty</span></a>/<code class="docutils literal"><span class="pre">Delivery</span></code><a class="reference internal" href="glossary.html#term-delivery"><span class="xref std std-term">Delivery</span></a></td>
+<td><a class="reference internal" href="glossary.html#term-heavyvehicle"><span class="xref std std-term">HeavyVehicle</span></a>/<code class="docutils literal"><span class="pre">Goods</span></code><a class="reference internal" href="glossary.html#term-goods"><span class="xref std std-term">Goods</span></a>/<code class="docutils literal"><span class="pre">Agricultural</span></code><a class="reference internal" href="glossary.html#term-agricultural"><span class="xref std std-term">Agricultural</span></a>/<code class="docutils literal"><span class="pre">Bus</span></code><a class="reference internal" href="glossary.html#term-bus"><span class="xref std std-term">Bus</span></a>/<code class="docutils literal"><span class="pre">Foresty</span></code><a class="reference internal" href="glossary.html#term-foresty"><span class="xref std std-term">Foresty</span></a>/<code class="docutils literal"><span class="pre">Delivery</span></code><a class="reference internal" href="glossary.html#term-delivery"><span class="xref std std-term">Delivery</span></a></td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">in the newer version there are only english and german. There are other languages available that are too difficult to maintain. You can request them and implement them yourself if you feel like it.</p>
+<p class="last">The only languages supported are English and German. There are other language packages available that are too difficult to maintain. You can request them and implement them yourself if you want to.</p>
 </div>
 </div>
 </div>
@@ -327,7 +331,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="highlight-python"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;via&amp;end=9.2556609,49.2397316&amp;lang=en&amp;distunit=KM&amp;routepref=Car&amp;weighting&amp;noMotorways&amp;noTollways&amp;noUnpavedroads&amp;noSteps&amp;noFerries&amp;instructions&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 </pre></div>
 </div>
-<p>It is a simple route for a car from A to B with no direction-instructions. The distances will be in kilometers, the weighting is <cite>shortest</cite> and ferries, motorways, tollways, unpavedroads and steps will be considered. The result will be the following:</p>
+<p>This is a simple route for a car from starting point A(9.258506,49.240011) to destination B(9.2556609,49.2397316) with no direction-instructions. The measurement will be in kilometers, the weighting is <cite>shortest</cite> and ferries, motorways, tollways, unpavedroads and steps will be considered. The result will be the following:</p>
 <div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;xls:XLS</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/RouteService.xsd&quot;</span><span class="nt">&gt;</span>
  <span class="nt">&lt;xls:ResponseHeader</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseHeaderType&quot;</span><span class="nt">/&gt;</span>
  <span class="nt">&lt;xls:Response</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseType&quot;</span> <span class="na">requestID=</span><span class="s">&quot;123456789&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">numberOfResponses=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
@@ -373,37 +377,45 @@ Therefore you have to directly contact the respective <a class="reference intern
 <hr class="docutils" />
 <div class="section" id="geocoding-api">
 <h2>Geocoding API<a class="headerlink" href="#geocoding-api" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="normal-geocoding">
-<h3>Normal Geocoding<a class="headerlink" href="#normal-geocoding" title="Permalink to this headline">¶</a></h3>
+<p>If you want to carry out either a normal geocoding or a reverse geocoding query via GET start your query with:</p>
+<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?
+</pre></div>
+</div>
+<p>Whether you get a normal or a reverse response depends on your input Parameters. The usage of the parameters is the same as for the <a class="reference internal" href="#par-ref"><span>routing section</span></a>.</p>
+<div class="section" id="normal-geocoding-parameters">
+<h3>Normal Geocoding Parameters<a class="headerlink" href="#normal-geocoding-parameters" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="36%" />
-<col width="64%" />
+<col width="29%" />
+<col width="71%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Query Parameters</th>
+<tr class="row-odd"><th class="head">Parameter</th>
 <th class="head">Description</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">FreeFormAdress</span></code></td>
-<td>&nbsp;</td>
+<td>Name of location, street address or postal code</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">MaxResponse</span></code></td>
-<td>Maximum number of responses <code class="docutils literal"><span class="pre">10</span></code></td>
+<td>Maximum number of responses e.g. <code class="docutils literal"><span class="pre">10</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">api_key</span></code></td>
+<td><code class="docutils literal"><span class="pre">your_api_key</span></code> is placed in this parameter</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="section" id="reverse-geocoding">
-<h3>Reverse Geocoding<a class="headerlink" href="#reverse-geocoding" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="reverse-geocoding-parameters">
+<h3>Reverse Geocoding Parameters<a class="headerlink" href="#reverse-geocoding-parameters" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="17%" />
 <col width="83%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Query Parameters</th>
+<tr class="row-odd"><th class="head">Parameter</th>
 <th class="head">Description</th>
 </tr>
 </thead>
@@ -418,25 +430,47 @@ Therefore you have to directly contact the respective <a class="reference intern
 <td>Maximum number of responses e.g. <code class="docutils literal"><span class="pre">10</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">lang</span></code></td>
-<td>Language of Reverse Geocode response <code class="docutils literal"><span class="pre">de</span></code> (Deutsch)`(default)`, <code class="docutils literal"><span class="pre">en</span></code> (English),</td>
+<td>Language of Reverse Geocode response <code class="docutils literal"><span class="pre">de</span></code> (Deutsch)<em>(default)</em>, <code class="docutils literal"><span class="pre">en</span></code> (English)</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">api_key</span></code></td>
+<td><code class="docutils literal"><span class="pre">your_api_key</span></code> is placed in this parameter</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="example-ref2">
 <span id="id1"></span><h3>Example<a class="headerlink" href="#example-ref2" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-xml"><div class="highlight"><pre>    <span class="nt">&lt;xls:XLS</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/LocationUtilityService.xsd&quot;</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;xls:ResponseHeader</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseHeaderType&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;xls:Response</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseType&quot;</span> <span class="na">requestID=</span><span class="s">&quot;123456789&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">numberOfResponses=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;xls:GeocodeResponse</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:GeocodeResponseType&quot;</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;xls:GeocodeResponseList</span> <span class="na">numberOfGeocodedAddresses=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;xls:GeocodedAddress&gt;</span>
-         <span class="nt">&lt;gml:Point&gt;</span>
-          <span class="nt">&lt;gml:pos</span> <span class="na">srsName=</span><span class="s">&quot;EPSG:4326&quot;</span><span class="nt">&gt;</span>8.6754713 49.4184374<span class="nt">&lt;/gml:pos&gt;</span>
-         <span class="nt">&lt;/gml:Point&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?FreeFormAdress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+</pre></div>
+</div>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;xls:XLS</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/LocationUtilityService.xsd&quot;</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;xls:ResponseHeader</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseHeaderType&quot;</span><span class="nt">/&gt;</span>
+ <span class="nt">&lt;xls:Response</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseType&quot;</span> <span class="na">requestID=</span><span class="s">&quot;123456789&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">numberOfResponses=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;xls:GeocodeResponse</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:GeocodeResponseType&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;xls:GeocodeResponseList</span> <span class="na">numberOfGeocodedAddresses=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;xls:GeocodedAddress&gt;</span>
+     <span class="nt">&lt;gml:Point&gt;</span>
+      <span class="nt">&lt;gml:pos</span> <span class="na">srsName=</span><span class="s">&quot;EPSG:4326&quot;</span><span class="nt">&gt;</span>8.6754713 49.4184374<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;/gml:Point&gt;</span>
+     <span class="nt">&lt;xls:Address</span> <span class="na">countryCode=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;xls:StreetAddress&gt;</span>
+       <span class="nt">&lt;xls:Building</span> <span class="na">buildingName=</span><span class="s">&quot;Mathematikon&quot;</span> <span class="na">number=</span><span class="s">&quot;41-49&quot;</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;xls:Street</span> <span class="na">officialName=</span><span class="s">&quot;Berliner Straße&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/xls:StreetAddress&gt;</span>
+      <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Country&quot;</span><span class="nt">&gt;</span>Deutschland<span class="nt">&lt;/xls:Place&gt;</span>
+      <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;CountrySubdivision&quot;</span><span class="nt">&gt;</span>Baden-Württemberg<span class="nt">&lt;/xls:Place&gt;</span>
+      <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Municipality&quot;</span><span class="nt">&gt;</span>Heidelberg<span class="nt">&lt;/xls:Place&gt;</span>
+      <span class="nt">&lt;xls:PostalCode&gt;</span>69120<span class="nt">&lt;/xls:PostalCode&gt;</span>
+     <span class="nt">&lt;/xls:Address&gt;</span>
+     <span class="nt">&lt;xls:GeocodeMatchCode</span> <span class="na">accuracy=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/xls:GeocodedAddress&gt;</span>
+    <span class="nt">&lt;xls:GeocodedAddress&gt;</span>
+     <span class="nt">&lt;gml:Point&gt;</span>
+      <span class="nt">&lt;gml:pos</span> <span class="na">srsName=</span><span class="s">&quot;EPSG:4326&quot;</span><span class="nt">&gt;</span>8.6754603 49.4189858<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;/gml:Point&gt;</span>
          <span class="nt">&lt;xls:Address</span> <span class="na">countryCode=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
           <span class="nt">&lt;xls:StreetAddress&gt;</span>
-           <span class="nt">&lt;xls:Building</span> <span class="na">buildingName=</span><span class="s">&quot;Mathematikon&quot;</span> <span class="na">number=</span><span class="s">&quot;41-49&quot;</span><span class="nt">/&gt;</span>
+           <span class="nt">&lt;xls:Building</span> <span class="na">buildingName=</span><span class="s">&quot;Mathematikon&quot;</span> <span class="na">number=</span><span class="s">&quot;41-47&quot;</span><span class="nt">/&gt;</span>
            <span class="nt">&lt;xls:Street</span> <span class="na">officialName=</span><span class="s">&quot;Berliner Straße&quot;</span><span class="nt">/&gt;</span>
           <span class="nt">&lt;/xls:StreetAddress&gt;</span>
           <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Country&quot;</span><span class="nt">&gt;</span>Deutschland<span class="nt">&lt;/xls:Place&gt;</span>
@@ -445,41 +479,53 @@ Therefore you have to directly contact the respective <a class="reference intern
           <span class="nt">&lt;xls:PostalCode&gt;</span>69120<span class="nt">&lt;/xls:PostalCode&gt;</span>
          <span class="nt">&lt;/xls:Address&gt;</span>
          <span class="nt">&lt;xls:GeocodeMatchCode</span> <span class="na">accuracy=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;/xls:GeocodedAddress&gt;</span>
-        <span class="nt">&lt;xls:GeocodedAddress&gt;</span>
-         <span class="nt">&lt;gml:Point&gt;</span>
-          <span class="nt">&lt;gml:pos</span> <span class="na">srsName=</span><span class="s">&quot;EPSG:4326&quot;</span><span class="nt">&gt;</span>8.6754603 49.4189858<span class="nt">&lt;/gml:pos&gt;</span>
-         <span class="nt">&lt;/gml:Point&gt;</span>
-             <span class="nt">&lt;xls:Address</span> <span class="na">countryCode=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
-              <span class="nt">&lt;xls:StreetAddress&gt;</span>
-               <span class="nt">&lt;xls:Building</span> <span class="na">buildingName=</span><span class="s">&quot;Mathematikon&quot;</span> <span class="na">number=</span><span class="s">&quot;41-47&quot;</span><span class="nt">/&gt;</span>
-               <span class="nt">&lt;xls:Street</span> <span class="na">officialName=</span><span class="s">&quot;Berliner Straße&quot;</span><span class="nt">/&gt;</span>
-              <span class="nt">&lt;/xls:StreetAddress&gt;</span>
-              <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Country&quot;</span><span class="nt">&gt;</span>Deutschland<span class="nt">&lt;/xls:Place&gt;</span>
-              <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;CountrySubdivision&quot;</span><span class="nt">&gt;</span>Baden-Württemberg<span class="nt">&lt;/xls:Place&gt;</span>
-              <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Municipality&quot;</span><span class="nt">&gt;</span>Heidelberg<span class="nt">&lt;/xls:Place&gt;</span>
-              <span class="nt">&lt;xls:PostalCode&gt;</span>69120<span class="nt">&lt;/xls:PostalCode&gt;</span>
-             <span class="nt">&lt;/xls:Address&gt;</span>
-             <span class="nt">&lt;xls:GeocodeMatchCode</span> <span class="na">accuracy=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;/xls:GeocodedAddress&gt;</span>
-        <span class="nt">&lt;xls:GeocodedAddress&gt;</span>
-         <span class="nt">&lt;gml:Point&gt;</span>
-          <span class="nt">&lt;gml:pos</span> <span class="na">srsName=</span><span class="s">&quot;EPSG:4326&quot;</span><span class="nt">&gt;</span>8.6751818 49.4175293<span class="nt">&lt;/gml:pos&gt;</span>
-         <span class="nt">&lt;/gml:Point&gt;</span>
-        <span class="nt">&lt;xls:Address</span> <span class="na">countryCode=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
-         <span class="nt">&lt;xls:StreetAddress&gt;</span>
-          <span class="nt">&lt;xls:Building</span> <span class="na">buildingName=</span><span class="s">&quot;INF 205 Mathematikon&quot;</span> <span class="na">number=</span><span class="s">&quot;205&quot;</span><span class="nt">/&gt;</span>
-           <span class="nt">&lt;xls:Street</span> <span class="na">officialName=</span><span class="s">&quot;Im Neuenheimer Feld&quot;</span><span class="nt">/&gt;</span>
-           <span class="nt">&lt;/xls:StreetAddress&gt;</span>
-          <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Country&quot;</span><span class="nt">&gt;</span>Deutschland<span class="nt">&lt;/xls:Place&gt;</span>
-          <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;CountrySubdivision&quot;</span><span class="nt">&gt;</span>Baden-Württemberg<span class="nt">&lt;/xls:Place&gt;</span>
-          <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Municipality&quot;</span><span class="nt">&gt;</span>Heidelberg<span class="nt">&lt;/xls:Place&gt;</span>
-          <span class="nt">&lt;xls:PostalCode&gt;</span>69120<span class="nt">&lt;/xls:PostalCode&gt;</span>
-         <span class="nt">&lt;/xls:Address&gt;</span>
-         <span class="nt">&lt;xls:GeocodeMatchCode</span> <span class="na">accuracy=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;/xls:GeocodedAddress&gt;</span>
-       <span class="nt">&lt;/xls:GeocodeResponseList&gt;</span>
-      <span class="nt">&lt;/xls:GeocodeResponse&gt;</span>
+    <span class="nt">&lt;/xls:GeocodedAddress&gt;</span>
+    <span class="nt">&lt;xls:GeocodedAddress&gt;</span>
+     <span class="nt">&lt;gml:Point&gt;</span>
+      <span class="nt">&lt;gml:pos</span> <span class="na">srsName=</span><span class="s">&quot;EPSG:4326&quot;</span><span class="nt">&gt;</span>8.6751818 49.4175293<span class="nt">&lt;/gml:pos&gt;</span>
+     <span class="nt">&lt;/gml:Point&gt;</span>
+    <span class="nt">&lt;xls:Address</span> <span class="na">countryCode=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;xls:StreetAddress&gt;</span>
+      <span class="nt">&lt;xls:Building</span> <span class="na">buildingName=</span><span class="s">&quot;INF 205 Mathematikon&quot;</span> <span class="na">number=</span><span class="s">&quot;205&quot;</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;xls:Street</span> <span class="na">officialName=</span><span class="s">&quot;Im Neuenheimer Feld&quot;</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;/xls:StreetAddress&gt;</span>
+      <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Country&quot;</span><span class="nt">&gt;</span>Deutschland<span class="nt">&lt;/xls:Place&gt;</span>
+      <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;CountrySubdivision&quot;</span><span class="nt">&gt;</span>Baden-Württemberg<span class="nt">&lt;/xls:Place&gt;</span>
+      <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Municipality&quot;</span><span class="nt">&gt;</span>Heidelberg<span class="nt">&lt;/xls:Place&gt;</span>
+      <span class="nt">&lt;xls:PostalCode&gt;</span>69120<span class="nt">&lt;/xls:PostalCode&gt;</span>
+     <span class="nt">&lt;/xls:Address&gt;</span>
+     <span class="nt">&lt;xls:GeocodeMatchCode</span> <span class="na">accuracy=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/xls:GeocodedAddress&gt;</span>
+   <span class="nt">&lt;/xls:GeocodeResponseList&gt;</span>
+  <span class="nt">&lt;/xls:GeocodeResponse&gt;</span>
+ <span class="nt">&lt;/xls:Response&gt;</span>
+<span class="nt">&lt;/xls:XLS&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?lon=8.6754713&amp;lat=49.4184374&amp;MaxResponse=10&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+</pre></div>
+</div>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;xls:XLS</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/LocationUtilityService.xsd&quot;</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;xls:ResponseHeader</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseHeaderType&quot;</span><span class="nt">/&gt;</span>
+ <span class="nt">&lt;xls:Response</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseType&quot;</span> <span class="na">requestID=</span><span class="s">&quot;123456789&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">numberOfResponses=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;xls:ReverseGeocodeResponse</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ReverseGeocodeResponseType&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;xls:ReverseGeocodedLocation&gt;</span>
+    <span class="nt">&lt;gml:Point&gt;</span>
+     <span class="nt">&lt;gml:pos</span> <span class="na">srsName=</span><span class="s">&quot;EPSG:4326&quot;</span><span class="nt">&gt;</span>8.6754713 49.4184374<span class="nt">&lt;/gml:pos&gt;</span>
+    <span class="nt">&lt;/gml:Point&gt;</span>
+    <span class="nt">&lt;xls:Address</span> <span class="na">countryCode=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;xls:StreetAddress&gt;</span>
+      <span class="nt">&lt;xls:Building</span> <span class="na">buildingName=</span><span class="s">&quot;Mathematikon&quot;</span> <span class="na">number=</span><span class="s">&quot;41-49&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;xls:Street</span> <span class="na">officialName=</span><span class="s">&quot;Berliner Straße&quot;</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;/xls:StreetAddress&gt;</span>
+     <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Country&quot;</span><span class="nt">&gt;</span>Germany<span class="nt">&lt;/xls:Place&gt;</span>
+     <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;CountrySubdivision&quot;</span><span class="nt">&gt;</span>Baden-Württemberg<span class="nt">&lt;/xls:Place&gt;</span>
+     <span class="nt">&lt;xls:Place</span> <span class="na">type=</span><span class="s">&quot;Municipality&quot;</span><span class="nt">&gt;</span>Heidelberg<span class="nt">&lt;/xls:Place&gt;</span>
+     <span class="nt">&lt;xls:PostalCode&gt;</span>69120<span class="nt">&lt;/xls:PostalCode&gt;</span>
+    <span class="nt">&lt;/xls:Address&gt;</span>
+    <span class="nt">&lt;xls:SearchCentreDistance</span> <span class="na">uom=</span><span class="s">&quot;M&quot;</span> <span class="na">value=</span><span class="s">&quot;0.0&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/xls:ReverseGeocodedLocation&gt;</span>
+  <span class="nt">&lt;/xls:ReverseGeocodeResponse&gt;</span>
  <span class="nt">&lt;/xls:Response&gt;</span>
 <span class="nt">&lt;/xls:XLS&gt;</span>
 </pre></div>
@@ -489,14 +535,20 @@ Therefore you have to directly contact the respective <a class="reference intern
 <hr class="docutils" />
 <div class="section" id="accessibility-analysis-api">
 <h2>Accessibility Analysis API<a class="headerlink" href="#accessibility-analysis-api" title="Permalink to this headline">¶</a></h2>
-<p>aaaaand the aa api</p>
+<p>For an Accessibillity Analysis of a geographical position open your query URL with:</p>
+<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/analyse?
+</pre></div>
+</div>
+<p>The usage of the parameters is the same as for the <a class="reference internal" href="#par-ref"><span>routing section</span></a>.</p>
+<div class="section" id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="18%" />
 <col width="82%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Query Parameters</th>
+<tr class="row-odd"><th class="head">Parameter</th>
 <th class="head">Description</th>
 </tr>
 </thead>
@@ -513,8 +565,15 @@ Therefore you have to directly contact the respective <a class="reference intern
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">interval</span></code></td>
 <td>Interval of the Isochrones in minutes e.g. <code class="docutils literal"><span class="pre">15</span></code></td>
 </tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">api_key</span></code></td>
+<td><code class="docutils literal"><span class="pre">your_api_key</span></code> is placed in this parameter</td>
+</tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="id2">
+<h3>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+</div>
 </div>
 </div>
 

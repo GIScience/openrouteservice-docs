@@ -14,6 +14,8 @@ To do a direct routing request via GET you need to open up your URL with::
 
  http://openls.geog.uni-heidelberg.de/route?
 
+.. _par-ref:
+
 After the **"?"** you have to add parameters with **"&"**. For the first parameter the **"&"** can be omitted. The value of the parameter is defined with a **"="**. Therefore the pattern for parameter usage is:
 
 .. centered:: **&**\ ``parameter``\ **=**\ ``value``
@@ -70,21 +72,21 @@ routepref
 
 The parameter routepref contains all routepreferences. There are additional routepreferences for the Bicycle and the HeavyVehicle type.
 
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| Main Value       | Additional Values and Glossary Link                                                                                                                |
-+==================+====================================================================================================================================================+
-| ``Car``          | :term:`Car`                                                                                                                                        |
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``Pedestrian``   | :term:`Pedestrian`                                                                                                                                 |
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``Bicycle``      | ``BicycleMTB``:term:`MTB`\/\ ``BicycleRacer``:term:`Racer`\/\ ``BicycleTouring``:term:`Touring`\/\ ``BicycleSafety``:term:`Safety`                 |
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``Wheelchair``   | :term:`Wheelchair`                                                                                                                                 |
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``HeavyVehicle`` | ``Goods``:term:`Goods`\/\ ``Agricultural``:term:`Agricultural`\/\ ``Bus``:term:`Bus`\/\ ``Foresty``:term:`Foresty`\/\ ``Delivery``:term:`Delivery` |
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Main Value       | Additional Values and Glossary Link                                                                                                                                        |
++==================+============================================================================================================================================================================+
+| ``Car``          | :term:`Car`                                                                                                                                                                |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``Pedestrian``   | :term:`Pedestrian`                                                                                                                                                         |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``Bicycle``      | :term:`Bicycle`\/\ ``BicycleMTB``:term:`MTB`\/\ ``BicycleRacer``:term:`Racer`\/\ ``BicycleTouring``:term:`Touring`\/\ ``BicycleSafety``:term:`Safety`                      |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``Wheelchair``   | :term:`Wheelchair`                                                                                                                                                         |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``HeavyVehicle`` | :term:`HeavyVehicle`\/\ ``Goods``:term:`Goods`\/\ ``Agricultural``:term:`Agricultural`\/\ ``Bus``:term:`Bus`\/\ ``Foresty``:term:`Foresty`\/\ ``Delivery``:term:`Delivery` |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 					
-.. note:: in the newer version there are only english and german. There are other languages available that are too difficult to maintain. You can request them and implement them yourself if you feel like it.
+.. note:: The only languages supported are English and German. There are other language packages available that are too difficult to maintain. You can request them and implement them yourself if you want to.
 
 
 ..
@@ -160,7 +162,7 @@ The shortest version of a full functioning routing URL would look like this::
 
 .. needs revision
 
-It is a simple route for a car from A to B with no direction-instructions. The distances will be in kilometers, the weighting is `shortest` and ferries, motorways, tollways, unpavedroads and steps will be considered. The result will be the following:
+This is a simple route for a car from starting point A(9.258506,49.240011) to destination B(9.2556609,49.2397316) with no direction-instructions. The measurement will be in kilometers, the weighting is `shortest` and ferries, motorways, tollways, unpavedroads and steps will be considered. The result will be the following:
 
 .. highlight:: xml
 
@@ -255,40 +257,54 @@ Is there a list for the different possible errors?
 Geocoding API
 -------------
 
-Normal Geocoding
-++++++++++++++++
+If you want to carry out either a normal geocoding or a reverse geocoding query via GET start your query with::
 
-+--------------------+------------------------------------+
-| Query Parameters   | Description                        |
-+====================+====================================+
-| ``FreeFormAdress`` |                                    |
-+--------------------+------------------------------------+
-| ``MaxResponse``    | Maximum number of responses ``10`` |
-+--------------------+------------------------------------+
+ http://openls.geog.uni-heidelberg.de/geocode?
+
+Whether you get a normal or a reverse response depends on your input Parameters. The usage of the parameters is the same as for the :ref:`routing section <par-ref>`.
 
 
-Reverse Geocoding
-+++++++++++++++++
+Normal Geocoding Parameters
++++++++++++++++++++++++++++
+
++--------------------+-------------------------------------------------+
+| Parameter          | Description                                     |
++====================+=================================================+
+| ``FreeFormAdress`` | Name of location, street address or postal code |
++--------------------+-------------------------------------------------+
+| ``MaxResponse``    | Maximum number of responses e.g. ``10``         |
++--------------------+-------------------------------------------------+
+| ``api_key``        | ``your_api_key`` is placed in this parameter    |
++--------------------+-------------------------------------------------+
 
 
+Reverse Geocoding Parameters
+++++++++++++++++++++++++++++
 
 
-+------------------+-------------------------------------------------------------------------------------+
-| Query Parameters | Description                                                                         |
-+==================+=====================================================================================+
-| ``lon``          | ``Longitude`` of coordinate of interest                                             |
-+------------------+-------------------------------------------------------------------------------------+
-| ``lat``          | ``Latitude`` of coordinate of interest                                              |
-+------------------+-------------------------------------------------------------------------------------+
-| ``MaxResponse``  | Maximum number of responses e.g. ``10``                                             |
-+------------------+-------------------------------------------------------------------------------------+
-| ``lang``         | Language of Reverse Geocode response ``de`` (Deutsch)`(default)`, ``en`` (English), |
-+------------------+-------------------------------------------------------------------------------------+
++-----------------+--------------------------------------------------------------------------------------+
+| Parameter       | Description                                                                          |
++=================+======================================================================================+
+| ``lon``         | ``Longitude`` of coordinate of interest                                              |
++-----------------+--------------------------------------------------------------------------------------+
+| ``lat``         | ``Latitude`` of coordinate of interest                                               |
++-----------------+--------------------------------------------------------------------------------------+
+| ``MaxResponse`` | Maximum number of responses e.g. ``10``                                              |
++-----------------+--------------------------------------------------------------------------------------+
+| ``lang``        | Language of Reverse Geocode response ``de`` (Deutsch)\ *(default)*, ``en`` (English) |
++-----------------+--------------------------------------------------------------------------------------+
+| ``api_key``     | ``your_api_key`` is placed in this parameter                                         |
++-----------------+--------------------------------------------------------------------------------------+
 
 .. _example-ref2:
 
 Example
 +++++++
+
+
+:: 
+
+	http://openls.geog.uni-heidelberg.de/geocode?FreeFormAdress=Heidelberg,%20Mathematikon&MaxResponse=10&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 
 
 ::
@@ -348,20 +364,57 @@ Example
 	    </xls:GeocodedAddress>
 	   </xls:GeocodeResponseList>
 	  </xls:GeocodeResponse>
-     </xls:Response>
-    </xls:XLS>
+	 </xls:Response>
+	</xls:XLS>
+
+:: 
+
+	http://openls.geog.uni-heidelberg.de/geocode?lon=8.6754713&lat=49.4184374&MaxResponse=10&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+
+
+::
+
+	<xls:XLS version="1.1" xsi:schemaLocation="http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/LocationUtilityService.xsd">
+	 <xls:ResponseHeader xsi:type="xls:ResponseHeaderType"/>
+	 <xls:Response xsi:type="xls:ResponseType" requestID="123456789" version="1.1" numberOfResponses="1">
+	  <xls:ReverseGeocodeResponse xsi:type="xls:ReverseGeocodeResponseType">
+	   <xls:ReverseGeocodedLocation>
+	    <gml:Point>
+	     <gml:pos srsName="EPSG:4326">8.6754713 49.4184374</gml:pos>
+	    </gml:Point>
+	    <xls:Address countryCode="">
+	     <xls:StreetAddress>
+	      <xls:Building buildingName="Mathematikon" number="41-49"/>
+	      <xls:Street officialName="Berliner Straße"/>
+	     </xls:StreetAddress>
+	     <xls:Place type="Country">Germany</xls:Place>
+	     <xls:Place type="CountrySubdivision">Baden-Württemberg</xls:Place>
+	     <xls:Place type="Municipality">Heidelberg</xls:Place>
+	     <xls:PostalCode>69120</xls:PostalCode>
+	    </xls:Address>
+	    <xls:SearchCentreDistance uom="M" value="0.0"/>
+	   </xls:ReverseGeocodedLocation>
+	  </xls:ReverseGeocodeResponse>
+	 </xls:Response>
+	</xls:XLS>
+
 
 --------
 
 Accessibility Analysis API
 --------------------------
 
-aaaaand the aa api
+For an Accessibillity Analysis of a geographical position open your query URL with::
 
+ http://openls.geog.uni-heidelberg.de/analyse?
 
+The usage of the parameters is the same as for the :ref:`routing section <par-ref>`.
+
+Parameters
+++++++++++
 
 +---------------------+------------------------------------------------------------------------------------------------+
-| Query Parameters    | Description                                                                                    |
+| Parameter           | Description                                                                                    |
 +=====================+================================================================================================+
 | ``position``        | Pair of ``longitude,latitude`` coordinates for the point of interest                           |
 +---------------------+------------------------------------------------------------------------------------------------+
@@ -371,6 +424,11 @@ aaaaand the aa api
 +---------------------+------------------------------------------------------------------------------------------------+
 | ``interval``        | Interval of the Isochrones in minutes e.g. ``15``                                              |
 +---------------------+------------------------------------------------------------------------------------------------+
+| ``api_key``         | ``your_api_key`` is placed in this parameter                                                   |
++---------------------+------------------------------------------------------------------------------------------------+
+
+Example
++++++++
 
 ..
 	------------
