@@ -5,4 +5,10 @@ In case you have any further questions, concerns or feedback about this
 service agreement, please contact us via Email:
 openrouteservice@geog.uni-heidelberg.de
 
+Lets see how this works
 
+.. image:: _images/Logo_Uni.svg
+	:width: 200px
+	:alt: alternate text
+
+There should be text around this thing
