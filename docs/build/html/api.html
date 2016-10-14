@@ -94,7 +94,13 @@
 <li class="toctree-l4"><a class="reference internal" href="#routepref">routepref</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#universal-parameters">Universal Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avoid-type-parameters-profile-specific">Avoid Type Parameters (profile specific)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bicycle-specific-parameters">Bicycle Specific Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#heavyvehicle-specific-parameters">HeavyVehicle Specific Parameters</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#errors">Errors</a></li>
 </ul>
@@ -251,22 +257,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">weighting</span></code></td>
 <td>Type of route the algorithm chooses. Options are <code class="docutils literal"><span class="pre">Fastest</span></code> (<em>default</em>), <code class="docutils literal"><span class="pre">Shortest</span></code> and <code class="docutils literal"><span class="pre">Recommended</span></code></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">noMotorways</span></code></td>
-<td>Set <code class="docutils literal"><span class="pre">True</span></code> to avoid motorways. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">noTollways</span></code></td>
-<td>Set <code class="docutils literal"><span class="pre">True</span></code> to avoid tollways. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">noUnpavedroads</span></code></td>
-<td>Set <code class="docutils literal"><span class="pre">True</span></code> to avoid unpaved roads. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">noSteps</span></code></td>
-<td>Set <code class="docutils literal"><span class="pre">True</span></code> to avoid steps. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">noFerries</span></code></td>
-<td>Set <code class="docutils literal"><span class="pre">True</span></code> to avoid ferries. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">api_key</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">api_key</span></code></td>
 <td><code class="docutils literal"><span class="pre">your_api_key</span></code> is placed in this parameter</td>
 </tr>
 </tbody>
@@ -310,6 +301,9 @@ Therefore you have to directly contact the respective <a class="reference intern
 </div>
 <div class="section" id="optional-parameters">
 <h3>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this headline">¶</a></h3>
+<p>Parameters in this Section are not required for a working request. Although they can contribute to the accurancy of your query. Some parameters only work with specific routing profiles. <code class="docutils literal"><span class="pre">noStep</span></code> for example only works with the <strong>Pedestrian</strong> or one of the <strong>Bicycle</strong> profiles. Please be aware which routepreference you chose.</p>
+<div class="section" id="universal-parameters">
+<h4>Universal Parameters<a class="headerlink" href="#universal-parameters" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
 <colgroup>
 <col width="16%" />
@@ -322,13 +316,64 @@ Therefore you have to directly contact the respective <a class="reference intern
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">useTMC</span></code></td>
-<td><code class="docutils literal"><span class="pre">True</span></code> to use traffic information for your route. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
+<td>True to use traffic information for your route. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">maxspeed</span></code></td>
 <td>Maximum speed in km/h for the selected route profile e.g. <code class="docutils literal"><span class="pre">maxspeed=10</span></code></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="avoid-type-parameters-profile-specific">
+<h4>Avoid Type Parameters (profile specific)<a class="headerlink" href="#avoid-type-parameters-profile-specific" title="Permalink to this headline">¶</a></h4>
+<p>There are some Parameters that if <code class="docutils literal"><span class="pre">true</span></code> let you avoid certain objects in your route. You have to use them with their appropriate routpref profile. To avoid the named</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Profiles</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">noMotorways</span></code></td>
+<td><code class="docutils literal"><span class="pre">Car</span></code>, <code class="docutils literal"><span class="pre">HeavyVehicle</span></code><cite>(all)</cite></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">noTollways</span></code></td>
+<td><code class="docutils literal"><span class="pre">Car</span></code>, <code class="docutils literal"><span class="pre">HeavyVehicle</span></code><cite>(all)</cite></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">noTunnels</span></code></td>
+<td><code class="docutils literal"><span class="pre">Car</span></code>, <code class="docutils literal"><span class="pre">HeavyVehicle</span></code><cite>(all)</cite></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">noPavedroads</span></code></td>
+<td><code class="docutils literal"><span class="pre">Bicycle</span></code><cite>(all)</cite>,</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">noUnpavedroads</span></code></td>
+<td><code class="docutils literal"><span class="pre">Car</span></code>, <code class="docutils literal"><span class="pre">Bicycle</span></code><cite>(all)</cite>, <code class="docutils literal"><span class="pre">HeavyVehicle</span></code><cite>(all)</cite></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">noTracks</span></code></td>
+<td><code class="docutils literal"><span class="pre">Car</span></code>, <code class="docutils literal"><span class="pre">HeavyVehicle</span></code><cite>(all)</cite></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">noFerries</span></code></td>
+<td><code class="docutils literal"><span class="pre">Car</span></code>, <code class="docutils literal"><span class="pre">Bicycle</span></code><cite>(all)</cite>, <code class="docutils literal"><span class="pre">Pedestrian</span></code>, <code class="docutils literal"><span class="pre">HeavyVehicle</span></code><cite>(all)</cite></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">noFords</span></code></td>
+<td><code class="docutils literal"><span class="pre">Car</span></code>, <code class="docutils literal"><span class="pre">Bicycle</span></code><cite>(all)</cite>, <code class="docutils literal"><span class="pre">Pedestrian</span></code>, <code class="docutils literal"><span class="pre">HeavyVehicle</span></code><cite>(all)</cite></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">noSteps</span></code></td>
+<td><code class="docutils literal"><span class="pre">Bicycle</span></code>, <code class="docutils literal"><span class="pre">Pedestrian</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="bicycle-specific-parameters">
+<h4>Bicycle Specific Parameters<a class="headerlink" href="#bicycle-specific-parameters" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="heavyvehicle-specific-parameters">
+<h4>HeavyVehicle Specific Parameters<a class="headerlink" href="#heavyvehicle-specific-parameters" title="Permalink to this headline">¶</a></h4>
+</div>
 </div>
 <div class="section" id="example">
 <span id="example-ref"></span><h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
@@ -369,7 +414,6 @@ Therefore you have to directly contact the respective <a class="reference intern
 <span class="nt">&lt;/xls:XLS&gt;</span>
 </pre></div>
 </div>
-<p>Further examples (without response):</p>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
 <p class="last">Parameters as well as values are <cite>case sensitive</cite>. The input order doesn&#8217;t matter though.</p>

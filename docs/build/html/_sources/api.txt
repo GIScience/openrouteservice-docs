@@ -56,16 +56,6 @@ The following parameters are required for the api to work. For a valid request y
 +--------------------+------------------------------------------------------------------------------------------------------------+
 | ``weighting``      | Type of route the algorithm chooses. Options are ``Fastest`` (*default*), ``Shortest`` and ``Recommended`` |
 +--------------------+------------------------------------------------------------------------------------------------------------+
-| ``noMotorways``    | Set ``True`` to avoid motorways. Default is ``False``                                                      |
-+--------------------+------------------------------------------------------------------------------------------------------------+
-| ``noTollways``     | Set ``True`` to avoid tollways. Default is ``False``                                                       |
-+--------------------+------------------------------------------------------------------------------------------------------------+
-| ``noUnpavedroads`` | Set ``True`` to avoid unpaved roads. Default is ``False``                                                  |
-+--------------------+------------------------------------------------------------------------------------------------------------+
-| ``noSteps``        | Set ``True`` to avoid steps. Default is ``False``                                                          |
-+--------------------+------------------------------------------------------------------------------------------------------------+
-| ``noFerries``      | Set ``True`` to avoid ferries. Default is ``False``                                                        |
-+--------------------+------------------------------------------------------------------------------------------------------------+
 | ``api_key``        | ``your_api_key`` is placed in this parameter                                                               |
 +--------------------+------------------------------------------------------------------------------------------------------------+
 
@@ -89,7 +79,7 @@ The parameter routepref contains all routepreferences. There are additional rout
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``HeavyVehicle`` | :term:`HeavyVehicle`\/\ ``Goods``:term:`Goods`\/\ ``Agricultural``:term:`Agricultural`\/\ ``Bus``:term:`Bus`\/\ ``Foresty``:term:`Foresty`\/\ ``Delivery``:term:`Delivery` |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-					
+				
 .. note:: The only languages supported are English and German. There are other language packages available that are too difficult to maintain. You can request them and implement them yourself if you want to.
 
 
@@ -110,15 +100,56 @@ The parameter routepref contains all routepreferences. There are additional rout
 Optional Parameters
 +++++++++++++++++++
 
+Parameters in this Section are not required for a working request. Although they can contribute to the accurancy of your query. Some parameters only work with specific routing profiles. ``noStep`` for example only works with the **Pedestrian** or one of the **Bicycle** profiles. Please be aware which routepreference you chose.
 
+
+Universal Parameters
+>>>>>>>>>>>>>>>>>>>>
 
 +--------------+---------------------------------------------------------------------------+
 | Parameter    | Description                                                               |
 +==============+===========================================================================+
-| ``useTMC``   | ``True`` to use traffic information for your route. Default is ``False``  |
+| ``useTMC``   | True to use traffic information for your route. Default is ``False``      |
 +--------------+---------------------------------------------------------------------------+
 | ``maxspeed`` | Maximum speed in km/h for the selected route profile e.g. ``maxspeed=10`` |
 +--------------+---------------------------------------------------------------------------+
+
+
+Avoid Type Parameters (profile specific)
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+There are some Parameters that if ``true`` let you avoid certain objects in your route. You have to use them with their appropriate routpref profile. To avoid the named
+
++--------------------+--------------------------------------------------------------------------+
+| Parameter          | Profiles                                                                 |
++====================+==========================================================================+
+| ``noMotorways``    | ``Car``, ``HeavyVehicle``\ `(all)`                                       |
++--------------------+--------------------------------------------------------------------------+
+| ``noTollways``     | ``Car``, ``HeavyVehicle``\ `(all)`                                       |
++--------------------+--------------------------------------------------------------------------+
+| ``noTunnels``      | ``Car``, ``HeavyVehicle``\ `(all)`                                       |
++--------------------+--------------------------------------------------------------------------+
+| ``noPavedroads``   | ``Bicycle``\ `(all)`,                                                    |
++--------------------+--------------------------------------------------------------------------+
+| ``noUnpavedroads`` | ``Car``, ``Bicycle``\ `(all)`, ``HeavyVehicle``\ `(all)`                 |
++--------------------+--------------------------------------------------------------------------+
+| ``noTracks``       | ``Car``, ``HeavyVehicle``\ `(all)`                                       |
++--------------------+--------------------------------------------------------------------------+
+| ``noFerries``      | ``Car``, ``Bicycle``\ `(all)`, ``Pedestrian``, ``HeavyVehicle``\ `(all)` |
++--------------------+--------------------------------------------------------------------------+
+| ``noFords``        | ``Car``, ``Bicycle``\ `(all)`, ``Pedestrian``, ``HeavyVehicle``\ `(all)` |
++--------------------+--------------------------------------------------------------------------+
+| ``noSteps``        | ``Bicycle``, ``Pedestrian``                                              |
++--------------------+--------------------------------------------------------------------------+
+
+Bicycle Specific Parameters
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+HeavyVehicle Specific Parameters
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 
 ..
 	Additional Routepreferences
@@ -203,7 +234,8 @@ This is a simple route for a car from starting point A (9.258506,49.240011) to d
 	 </xls:Response>
 	</xls:XLS>
 
-Further examples (without response):
+..
+ Further examples (without response):
 
 
 .. attention:: Parameters as well as values are `case sensitive`. The input order doesn't matter though. 
