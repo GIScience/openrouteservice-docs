@@ -53,6 +53,9 @@ toctree-l2 a:hover {
 p {
 	text-align:justify
 }
+div {
+	text-align:justify 
+}
 /*fix the width of content section*/
 .wy-nav-content {
 	max-width:800px

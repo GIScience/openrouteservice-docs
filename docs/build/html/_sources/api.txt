@@ -17,6 +17,10 @@ To do a direct routing request via GET you need to open up your query with::
 
  http://openls.geog.uni-heidelberg.de/route?
 
+for curl::
+
+ curl http://openls.geog.uni-heidelberg.de/route?
+
 .. _par-ref:
 
 After the **"?"** you have to add parameters with **"&"**. For the first parameter the **"&"** can be omitted. The value of the parameter is defined with a **"="**. Therefore the pattern for parameter usage is:
@@ -103,13 +107,13 @@ Optional Parameters
 Parameters in this Section are not required for a working request. Although they can contribute to the accurancy of your query. Some parameters only work with specific routing profiles. ``noStep`` for example only works with the **Pedestrian** or one of the **Bicycle** profiles. Please be aware which routepreference you chose.
 
 
-Universal Parameters
+General Parameters
 >>>>>>>>>>>>>>>>>>>>
 
 +--------------+---------------------------------------------------------------------------+
 | Parameter    | Description                                                               |
 +==============+===========================================================================+
-| ``useTMC``   | True to use traffic information for your route. Default is ``False``      |
+| ``useTMC``   | ``True`` to use traffic information for your route. Default is ``False``  |
 +--------------+---------------------------------------------------------------------------+
 | ``maxspeed`` | Maximum speed in km/h for the selected route profile e.g. ``maxspeed=10`` |
 +--------------+---------------------------------------------------------------------------+
@@ -145,11 +149,112 @@ There are some Parameters that if ``true`` let you avoid certain objects in your
 Bicycle Specific Parameters
 >>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+Additional Parameters for the ``Bicycle`` Proflies:
 
++---------------+-------------------------------------------------------------------------------------+
+| Parameter     | Description                                                                         |
++===============+=====================================================================================+
+| ``elevation`` | ``True`` to retrieve elevation information for each waypoint (in meters above NHN?) |
++---------------+-------------------------------------------------------------------------------------+
+| ``surface``   | ``True`` to retrieve way surface information.                                       |
++---------------+-------------------------------------------------------------------------------------+
+
+The surface parameter provides decoded values for the surfacetype and the waytype. The encoding is shown in the the following tables:
+
+Response Surfacetype List
+<<<<<<<<<<<<<<<<<<<<<<<<<
+
++--------+------------------+
+| Value  | Encoding         |
++========+==================+
+| ``0``  | Unknown          |
++--------+------------------+
+| ``1``  | Paved            |
++--------+------------------+
+| ``2``  | Unpaved          |
++--------+------------------+
+| ``3``  | Asphalt          |
++--------+------------------+
+| ``4``  | Concrete         |
++--------+------------------+
+| ``5``  | Cobblestone      |
++--------+------------------+
+| ``6``  | Metal            |
++--------+------------------+
+| ``7``  | Wood             |
++--------+------------------+
+| ``8``  | Compacted Gravel |
++--------+------------------+
+| ``9``  | Fine Gravel      |
++--------+------------------+
+| ``10`` | Gravel           |
++--------+------------------+
+| ``11`` | Dirt             |
++--------+------------------+
+| ``12`` | Ground           |
++--------+------------------+
+| ``13`` | Ice              |
++--------+------------------+
+| ``14`` | Salt             |
++--------+------------------+
+| ``15`` | Sand             |
++--------+------------------+
+| ``16`` | Woodchips        |
++--------+------------------+
+| ``17`` | Grass            |
++--------+------------------+
+| ``18`` | Grass Paver      |
++--------+------------------+
+
+Response Waytype List
+<<<<<<<<<<<<<<<<<<<<<
+
++--------+--------------+
+| Value  | Encoding     |
++========+==============+
+| ``0``  | Unknown      |
++--------+--------------+
+| ``1``  | State Road   |
++--------+--------------+
+| ``2``  | Road         |
++--------+--------------+
+| ``3``  | Street       |
++--------+--------------+
+| ``4``  | Path         |
++--------+--------------+
+| ``5``  | Track        |
++--------+--------------+
+| ``6``  | Cycleway     |
++--------+--------------+
+| ``7``  | Footway      |
++--------+--------------+
+| ``8``  | Steps        |
++--------+--------------+
+| ``9``  | Ferry        |
++--------+--------------+
+| ``10`` | Construction |
++--------+--------------+
 
 HeavyVehicle Specific Parameters
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+Additional Parameters for the ``HeavyVehicle`` Profiles:
+
++-------------------+---------------------------------------------------------------------------------------------------+
+| Parameter         | Description                                                                                       |
++===================+===================================================================================================+
+| ``hazardous``     | ``True`` for appropriate routing while delivering hazardous cargo. Avoids water protection areas. |
++-------------------+---------------------------------------------------------------------------------------------------+
+| ``value_weight``  | maximum weight restriction in tons                                                                |
++-------------------+---------------------------------------------------------------------------------------------------+
+| ``value_height``  | maximum height restriction in meter                                                               |
++-------------------+---------------------------------------------------------------------------------------------------+
+| ``value_width``   | maximum width restriction in meter                                                                |
++-------------------+---------------------------------------------------------------------------------------------------+
+| ``value_length``  | maximum length restriction in meter                                                               |
++-------------------+---------------------------------------------------------------------------------------------------+
+| ``value_axeload`` | maximum axeload restriction in tons                                                               |
++-------------------+---------------------------------------------------------------------------------------------------+
 
 ..
 	Additional Routepreferences
@@ -303,6 +408,10 @@ Geocoding API
 If you want to carry out either a normal geocoding or a reverse geocoding query via GET start your request with::
 
  http://openls.geog.uni-heidelberg.de/geocode?
+
+for curl::
+
+ curl http://openls.geog.uni-heidelberg.de/geocode?
 
 Whether you get a normal or a reverse response depends on your input Parameters. The usage of the parameters is the same as for the :ref:`routing section <par-ref>`.
 
@@ -459,6 +568,10 @@ Accessibility Analysis API
 For an Accessibillity Analysis of a geographical position open your query with::
 
  http://openls.geog.uni-heidelberg.de/analyse?
+
+for curl::
+
+ curl http://openls.geog.uni-heidelberg.de/analyse?
 
 The usage of the parameters is the same as for the :ref:`routing section <par-ref>`.
 

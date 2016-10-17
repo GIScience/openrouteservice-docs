@@ -95,9 +95,13 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#optional-parameters">Optional Parameters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#universal-parameters">Universal Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#general-parameters">General Parameters</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#avoid-type-parameters-profile-specific">Avoid Type Parameters (profile specific)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#bicycle-specific-parameters">Bicycle Specific Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bicycle-specific-parameters">Bicycle Specific Parameters</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#response-surfacetype-list">Response Surfacetype List</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#response-waytype-list">Response Waytype List</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#heavyvehicle-specific-parameters">HeavyVehicle Specific Parameters</a></li>
 </ul>
 </li>
@@ -203,6 +207,10 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="highlight-python"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?
 </pre></div>
 </div>
+<p>for curl:</p>
+<div class="highlight-python"><div class="highlight"><pre>curl http://openls.geog.uni-heidelberg.de/route?
+</pre></div>
+</div>
 <p id="par-ref">After the <strong>&#8221;?&#8221;</strong> you have to add parameters with <strong>&#8220;&amp;&#8221;</strong>. For the first parameter the <strong>&#8220;&amp;&#8221;</strong> can be omitted. The value of the parameter is defined with a <strong>&#8220;=&#8221;</strong>. Therefore the pattern for parameter usage is:</p>
 <p class="centered">
 <strong><strong>&amp;</strong><code class="docutils literal"><span class="pre">parameter</span></code><strong>=</strong><code class="docutils literal"><span class="pre">value</span></code></strong></p><p>If you don&#8217;t get the picture, you can look at the <a class="reference internal" href="#example-ref"><span>Example</span></a> below.</p>
@@ -302,8 +310,8 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="optional-parameters">
 <h3>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this headline">¶</a></h3>
 <p>Parameters in this Section are not required for a working request. Although they can contribute to the accurancy of your query. Some parameters only work with specific routing profiles. <code class="docutils literal"><span class="pre">noStep</span></code> for example only works with the <strong>Pedestrian</strong> or one of the <strong>Bicycle</strong> profiles. Please be aware which routepreference you chose.</p>
-<div class="section" id="universal-parameters">
-<h4>Universal Parameters<a class="headerlink" href="#universal-parameters" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="general-parameters">
+<h4>General Parameters<a class="headerlink" href="#general-parameters" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
 <colgroup>
 <col width="16%" />
@@ -316,7 +324,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">useTMC</span></code></td>
-<td>True to use traffic information for your route. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
+<td><code class="docutils literal"><span class="pre">True</span></code> to use traffic information for your route. Default is <code class="docutils literal"><span class="pre">False</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">maxspeed</span></code></td>
 <td>Maximum speed in km/h for the selected route profile e.g. <code class="docutils literal"><span class="pre">maxspeed=10</span></code></td>
@@ -370,9 +378,184 @@ Therefore you have to directly contact the respective <a class="reference intern
 </div>
 <div class="section" id="bicycle-specific-parameters">
 <h4>Bicycle Specific Parameters<a class="headerlink" href="#bicycle-specific-parameters" title="Permalink to this headline">¶</a></h4>
+<p>Additional Parameters for the <code class="docutils literal"><span class="pre">Bicycle</span></code> Proflies:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">elevation</span></code></td>
+<td><code class="docutils literal"><span class="pre">True</span></code> to retrieve elevation information for each waypoint (in meters above NHN?)</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">surface</span></code></td>
+<td><code class="docutils literal"><span class="pre">True</span></code> to retrieve way surface information.</td>
+</tr>
+</tbody>
+</table>
+<p>The surface parameter provides decoded values for the surfacetype and the waytype. The encoding is shown in the the following tables:</p>
+<div class="section" id="response-surfacetype-list">
+<h5>Response Surfacetype List<a class="headerlink" href="#response-surfacetype-list" title="Permalink to this headline">¶</a></h5>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Encoding</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">0</span></code></td>
+<td>Unknown</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">1</span></code></td>
+<td>Paved</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2</span></code></td>
+<td>Unpaved</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">3</span></code></td>
+<td>Asphalt</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">4</span></code></td>
+<td>Concrete</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">5</span></code></td>
+<td>Cobblestone</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">6</span></code></td>
+<td>Metal</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">7</span></code></td>
+<td>Wood</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">8</span></code></td>
+<td>Compacted Gravel</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">9</span></code></td>
+<td>Fine Gravel</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">10</span></code></td>
+<td>Gravel</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">11</span></code></td>
+<td>Dirt</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">12</span></code></td>
+<td>Ground</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">13</span></code></td>
+<td>Ice</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">14</span></code></td>
+<td>Salt</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">15</span></code></td>
+<td>Sand</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">16</span></code></td>
+<td>Woodchips</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">17</span></code></td>
+<td>Grass</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">18</span></code></td>
+<td>Grass Paver</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="response-waytype-list">
+<h5>Response Waytype List<a class="headerlink" href="#response-waytype-list" title="Permalink to this headline">¶</a></h5>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Encoding</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">0</span></code></td>
+<td>Unknown</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">1</span></code></td>
+<td>State Road</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2</span></code></td>
+<td>Road</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">3</span></code></td>
+<td>Street</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">4</span></code></td>
+<td>Path</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">5</span></code></td>
+<td>Track</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">6</span></code></td>
+<td>Cycleway</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">7</span></code></td>
+<td>Footway</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">8</span></code></td>
+<td>Steps</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">9</span></code></td>
+<td>Ferry</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">10</span></code></td>
+<td>Construction</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div class="section" id="heavyvehicle-specific-parameters">
 <h4>HeavyVehicle Specific Parameters<a class="headerlink" href="#heavyvehicle-specific-parameters" title="Permalink to this headline">¶</a></h4>
+<p>Additional Parameters for the <code class="docutils literal"><span class="pre">HeavyVehicle</span></code> Profiles:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">hazardous</span></code></td>
+<td><code class="docutils literal"><span class="pre">True</span></code> for appropriate routing while delivering hazardous cargo. Avoids water protection areas.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">value_weight</span></code></td>
+<td>maximum weight restriction in tons</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">value_height</span></code></td>
+<td>maximum height restriction in meter</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">value_width</span></code></td>
+<td>maximum width restriction in meter</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">value_length</span></code></td>
+<td>maximum length restriction in meter</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">value_axeload</span></code></td>
+<td>maximum axeload restriction in tons</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="section" id="example">
@@ -435,6 +618,10 @@ Therefore you have to directly contact the respective <a class="reference intern
 <h2>Geocoding API<a class="headerlink" href="#geocoding-api" title="Permalink to this headline">¶</a></h2>
 <p>If you want to carry out either a normal geocoding or a reverse geocoding query via GET start your request with:</p>
 <div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?
+</pre></div>
+</div>
+<p>for curl:</p>
+<div class="highlight-xml"><div class="highlight"><pre>curl http://openls.geog.uni-heidelberg.de/geocode?
 </pre></div>
 </div>
 <p>Whether you get a normal or a reverse response depends on your input Parameters. The usage of the parameters is the same as for the <a class="reference internal" href="#par-ref"><span>routing section</span></a>.</p>
@@ -599,6 +786,10 @@ Therefore you have to directly contact the respective <a class="reference intern
 <h2>Accessibility Analysis API<a class="headerlink" href="#accessibility-analysis-api" title="Permalink to this headline">¶</a></h2>
 <p>For an Accessibillity Analysis of a geographical position open your query with:</p>
 <div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/analyse?
+</pre></div>
+</div>
+<p>for curl:</p>
+<div class="highlight-xml"><div class="highlight"><pre>curl http://openls.geog.uni-heidelberg.de/analyse?
 </pre></div>
 </div>
 <p>The usage of the parameters is the same as for the <a class="reference internal" href="#par-ref"><span>routing section</span></a>.</p>
