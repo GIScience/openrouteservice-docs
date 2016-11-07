@@ -39,7 +39,7 @@ There are two types of parameters:
 Required Parameters
 +++++++++++++++++++
 
-The following parameters are required for the api to work. For a valid request you need **every single parameter** of this table in your request-URL. You can omit the value if the parameter has a default value. The parameter will then be set to this default value. In the case of `via` there is no default value. If you don't want a stopover point just leave the parameter empty. For more information regarding the specific routing profiles please visit our :doc:`glossary </glossary>`.
+The following parameters are required for the api to work. For a valid request you need at least a starting point and an end point of your route in ``long,lat`` form as well as an API key. You can omit the value if the parameter has a default value. The parameter will then be set to this default value. In the case of `via` there is no default value. If you don't want a stopover point just leave the parameter empty. For more information regarding the specific routing profiles please visit our :doc:`glossary </glossary>`.
 
 +--------------------+------------------------------------------------------------------------------------------------------------+
 | Parameter          | Description                                                                                                |
@@ -70,19 +70,19 @@ routepref
 
 The parameter routepref contains all routepreferences. There are additional routepreferences for the Bicycle and the HeavyVehicle type.
 
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Main Value       | Additional Values and Glossary Link                                                                                                                                        |
-+==================+============================================================================================================================================================================+
-| ``Car``          | :term:`Car`                                                                                                                                                                |
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``Pedestrian``   | :term:`Pedestrian`                                                                                                                                                         |
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``Bicycle``      | :term:`Bicycle`\/\ ``BicycleMTB``:term:`MTB`\/\ ``BicycleRacer``:term:`Racer`\/\ ``BicycleTouring``:term:`Touring`\/\ ``BicycleSafety``:term:`Safety`                      |
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``Wheelchair``   | :term:`Wheelchair`                                                                                                                                                         |
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``HeavyVehicle`` | :term:`HeavyVehicle`\/\ ``Goods``:term:`Goods`\/\ ``Agricultural``:term:`Agricultural`\/\ ``Bus``:term:`Bus`\/\ ``Foresty``:term:`Foresty`\/\ ``Delivery``:term:`Delivery` |
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------+-------------------------------------------------------------------------------+
+| Main Value       | Additional Values and Glossary Link                                           |
++==================+===============================================================================+
+| ``Car``          | -                                                                             |
++------------------+-------------------------------------------------------------------------------+
+| ``Pedestrian``   | -                                                                             |
++------------------+-------------------------------------------------------------------------------+
+| ``Bicycle``      | ``BicycleMTB``\/\ ``BicycleRacer``\/\ ``BicycleTouring``\/\ ``BicycleSafety`` |
++------------------+-------------------------------------------------------------------------------+
+| ``Wheelchair``   | -                                                                             |
++------------------+-------------------------------------------------------------------------------+
+| ``HeavyVehicle`` | there is a subtype list for the HeavyVehicle profile                          |
++------------------+-------------------------------------------------------------------------------+
 				
 .. note:: The only languages supported are English and German. There are other language packages available that are too difficult to maintain. You can request them and implement them yourself if you want to.
 

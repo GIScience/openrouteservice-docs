@@ -229,7 +229,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 </table>
 <div class="section" id="required-parameters">
 <span id="req-ref"></span><h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this headline">¶</a></h3>
-<p>The following parameters are required for the api to work. For a valid request you need <strong>every single parameter</strong> of this table in your request-URL. You can omit the value if the parameter has a default value. The parameter will then be set to this default value. In the case of <cite>via</cite> there is no default value. If you don&#8217;t want a stopover point just leave the parameter empty. For more information regarding the specific routing profiles please visit our <a class="reference internal" href="glossary.html"><em>glossary</em></a>.</p>
+<p>The following parameters are required for the api to work. For a valid request you need at least a starting point and an end point of your route in <code class="docutils literal"><span class="pre">long,lat</span></code> form as well as an API key. You can omit the value if the parameter has a default value. The parameter will then be set to this default value. In the case of <cite>via</cite> there is no default value. If you don&#8217;t want a stopover point just leave the parameter empty. For more information regarding the specific routing profiles please visit our <a class="reference internal" href="glossary.html"><em>glossary</em></a>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="16%" />
@@ -275,8 +275,8 @@ Therefore you have to directly contact the respective <a class="reference intern
 <p>The parameter routepref contains all routepreferences. There are additional routepreferences for the Bicycle and the HeavyVehicle type.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="9%" />
-<col width="91%" />
+<col width="19%" />
+<col width="81%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Main Value</th>
@@ -285,19 +285,28 @@ Therefore you have to directly contact the respective <a class="reference intern
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">Car</span></code></td>
-<td><a class="reference internal" href="glossary.html#term-car"><span class="xref std std-term">Car</span></a></td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">Pedestrian</span></code></td>
-<td><a class="reference internal" href="glossary.html#term-pedestrian"><span class="xref std std-term">Pedestrian</span></a></td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">Bicycle</span></code></td>
-<td><a class="reference internal" href="glossary.html#term-bicycle"><span class="xref std std-term">Bicycle</span></a>/<code class="docutils literal"><span class="pre">BicycleMTB</span></code><a class="reference internal" href="glossary.html#term-mtb"><span class="xref std std-term">MTB</span></a>/<code class="docutils literal"><span class="pre">BicycleRacer</span></code><a class="reference internal" href="glossary.html#term-racer"><span class="xref std std-term">Racer</span></a>/<code class="docutils literal"><span class="pre">BicycleTouring</span></code><a class="reference internal" href="glossary.html#term-touring"><span class="xref std std-term">Touring</span></a>/<code class="docutils literal"><span class="pre">BicycleSafety</span></code><a class="reference internal" href="glossary.html#term-safety"><span class="xref std std-term">Safety</span></a></td>
+<td><code class="docutils literal"><span class="pre">BicycleMTB</span></code>/<code class="docutils literal"><span class="pre">BicycleRacer</span></code>/<code class="docutils literal"><span class="pre">BicycleTouring</span></code>/<code class="docutils literal"><span class="pre">BicycleSafety</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">Wheelchair</span></code></td>
-<td><a class="reference internal" href="glossary.html#term-wheelchair"><span class="xref std std-term">Wheelchair</span></a></td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">HeavyVehicle</span></code></td>
-<td><a class="reference internal" href="glossary.html#term-heavyvehicle"><span class="xref std std-term">HeavyVehicle</span></a>/<code class="docutils literal"><span class="pre">Goods</span></code><a class="reference internal" href="glossary.html#term-goods"><span class="xref std std-term">Goods</span></a>/<code class="docutils literal"><span class="pre">Agricultural</span></code><a class="reference internal" href="glossary.html#term-agricultural"><span class="xref std std-term">Agricultural</span></a>/<code class="docutils literal"><span class="pre">Bus</span></code><a class="reference internal" href="glossary.html#term-bus"><span class="xref std std-term">Bus</span></a>/<code class="docutils literal"><span class="pre">Foresty</span></code><a class="reference internal" href="glossary.html#term-foresty"><span class="xref std std-term">Foresty</span></a>/<code class="docutils literal"><span class="pre">Delivery</span></code><a class="reference internal" href="glossary.html#term-delivery"><span class="xref std std-term">Delivery</span></a></td>
+<td>there is a subtype list for the HeavyVehicle profile</td>
 </tr>
 </tbody>
 </table>
