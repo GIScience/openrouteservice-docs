@@ -39,7 +39,7 @@ There are two types of parameters:
 Required Parameters
 +++++++++++++++++++
 
-The following parameters are required for the api to work. For a valid request you need at least a starting point and an end point of your route in ``long,lat`` form as well as an API key. You can omit the value if the parameter has a default value. The parameter will then be set to this default value. In the case of `via` there is no default value. If you don't want a stopover point just leave the parameter empty. For more information regarding the specific routing profiles please visit our :doc:`glossary </glossary>`.
+The following parameters are required for the api to work. For a valid request you need at least a starting point and an end point of your route in ``long,lat`` form as well as an API key. If no further parameters are defined the API will fall back on a default object. For more information regarding the specific routing profiles please visit our :doc:`glossary </glossary>`.
 
 +--------------------+------------------------------------------------------------------------------------------------------------+
 | Parameter          | Description                                                                                                |
@@ -48,20 +48,56 @@ The following parameters are required for the api to work. For a valid request y
 +--------------------+------------------------------------------------------------------------------------------------------------+
 | ``end``            | Pair of ``longitude,latitude`` coordinate used as destination of the route                                 |
 +--------------------+------------------------------------------------------------------------------------------------------------+
-| ``via``            | Ampersand-separated list of ``longitude,latitude`` coordinate pairs visited in order                       |
-+--------------------+------------------------------------------------------------------------------------------------------------+
-| ``lang``           | Language for the step by step instructions. ``en`` English or ``de`` German                                |
-+--------------------+------------------------------------------------------------------------------------------------------------+
-| ``distunit``       | Unit in which you want to view the distances in : ``KM``\ (kilometers)\/``M``\ (meters)\/``MI``\ (miles)   |
-+--------------------+------------------------------------------------------------------------------------------------------------+
-| ``routepref``      | Route profile for your course. Available profiles can be found in the `table`__ below.                     |
-+--------------------+------------------------------------------------------------------------------------------------------------+
-| ``instructions``   | For step by step instructions in your chosen language set ``True``. Default is ``False``                   |
-+--------------------+------------------------------------------------------------------------------------------------------------+
-| ``weighting``      | Type of route the algorithm chooses. Options are ``Fastest`` (*default*), ``Shortest`` and ``Recommended`` |
-+--------------------+------------------------------------------------------------------------------------------------------------+
 | ``api_key``        | ``your_api_key`` is placed in this parameter                                                               |
 +--------------------+------------------------------------------------------------------------------------------------------------+
+
+Default object
+>>>>>>>>>>>>>>
+
+This is the default 
+
++---------------+-------------+
+| Parameter     | Value       |
++===============+=============+
+| ``distunit``  | ``KM``      |
++---------------+-------------+
+| ``routpref``  | ``Car``     |
++---------------+-------------+
+| ``weighting`` | ``Fastest`` |
++---------------+-------------+
+
+
+
+Optional Parameters
++++++++++++++++++++
+
+Parameters in this Section are not required for a working request. Although they can contribute to the accurancy of your query. Some parameters only work with specific routing profiles. ``noStep`` for example only works with the **Pedestrian** or one of the **Bicycle** profiles. Please be aware which routepreference you chose.
+
+
+General Parameters
+>>>>>>>>>>>>>>>>>>>>
+
++------------------+------------------------------------------------------------------------------------------------------------+
+| Parameter        | Description                                                                                                |
++==================+============================================================================================================+
+| ``via``          | Ampersand-separated list of ``longitude,latitude`` coordinate pairs visited in order                       |
++------------------+------------------------------------------------------------------------------------------------------------+
+| ``lang``         | Language for the step by step instructions. ``en`` English or ``de`` German                                |
++------------------+------------------------------------------------------------------------------------------------------------+
+| ``distunit``     | Unit in which you want to view the distances in : ``KM``\ (kilometers)\/``M``\ (meters)\/``MI``\ (miles)   |
++------------------+------------------------------------------------------------------------------------------------------------+
+| ``routepref``    | Route profile for your course. Available profiles can be found in the `table`__ below.                     |
++------------------+------------------------------------------------------------------------------------------------------------+
+| ``instructions`` | For step by step instructions in your chosen language set ``True``. Default is ``False``                   |
++------------------+------------------------------------------------------------------------------------------------------------+
+| ``weighting``    | Type of route the algorithm chooses. Options are ``Fastest`` (*default*), ``Shortest`` and ``Recommended`` |
++------------------+------------------------------------------------------------------------------------------------------------+
+| ``maxspeed``     | Maximum speed in km/h for the selected route profile e.g. ``maxspeed=10``                                  |
++------------------+------------------------------------------------------------------------------------------------------------+
+
+.. | ``useTMC``   | ``True`` to use traffic information for your route. Default is ``False``  |
+.. +--------------+---------------------------------------------------------------------------+
+
 
 __ routepref_
 
@@ -71,17 +107,17 @@ routepref
 The parameter routepref contains all routepreferences. There are additional routepreferences for the Bicycle and the HeavyVehicle type.
 
 +------------------+-------------------------------------------------------------------------------+
-| Main Value       | Additional Values and Glossary Link                                           |
+| Main Value       | Additional Values                                                             |
 +==================+===============================================================================+
-| ``Car``          | -                                                                             |
+| ``Car``          | \-                                                                            |
 +------------------+-------------------------------------------------------------------------------+
-| ``Pedestrian``   | -                                                                             |
+| ``Pedestrian``   | \-                                                                            |
 +------------------+-------------------------------------------------------------------------------+
 | ``Bicycle``      | ``BicycleMTB``\/\ ``BicycleRacer``\/\ ``BicycleTouring``\/\ ``BicycleSafety`` |
 +------------------+-------------------------------------------------------------------------------+
-| ``Wheelchair``   | -                                                                             |
+| ``Wheelchair``   | \-                                                                            |
 +------------------+-------------------------------------------------------------------------------+
-| ``HeavyVehicle`` | there is a subtype list for the HeavyVehicle profile                          |
+| ``HeavyVehicle`` | There is a subtype list for the HeavyVehicle profile                          |
 +------------------+-------------------------------------------------------------------------------+
 				
 .. note:: The only languages supported are English and German. There are other language packages available that are too difficult to maintain. You can request them and implement them yourself if you want to.
@@ -101,50 +137,33 @@ The parameter routepref contains all routepreferences. There are additional rout
 	+-------------+------------------------------------------------------------+
 
 
-Optional Parameters
-+++++++++++++++++++
-
-Parameters in this Section are not required for a working request. Although they can contribute to the accurancy of your query. Some parameters only work with specific routing profiles. ``noStep`` for example only works with the **Pedestrian** or one of the **Bicycle** profiles. Please be aware which routepreference you chose.
-
-
-General Parameters
->>>>>>>>>>>>>>>>>>>>
-
-+--------------+---------------------------------------------------------------------------+
-| Parameter    | Description                                                               |
-+==============+===========================================================================+
-| ``useTMC``   | ``True`` to use traffic information for your route. Default is ``False``  |
-+--------------+---------------------------------------------------------------------------+
-| ``maxspeed`` | Maximum speed in km/h for the selected route profile e.g. ``maxspeed=10`` |
-+--------------+---------------------------------------------------------------------------+
-
-
-Avoid Type Parameters (profile specific)
+Avoid Type Parameters 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 There are some Parameters that if ``true`` let you avoid certain objects in your route. You have to use them with their appropriate routpref profile. To avoid the named
 
-+--------------------+--------------------------------------------------------------------------+
-| Parameter          | Profiles                                                                 |
-+====================+==========================================================================+
-| ``noMotorways``    | ``Car``, ``HeavyVehicle``\ `(all)`                                       |
-+--------------------+--------------------------------------------------------------------------+
-| ``noTollways``     | ``Car``, ``HeavyVehicle``\ `(all)`                                       |
-+--------------------+--------------------------------------------------------------------------+
-| ``noTunnels``      | ``Car``, ``HeavyVehicle``\ `(all)`                                       |
-+--------------------+--------------------------------------------------------------------------+
-| ``noPavedroads``   | ``Bicycle``\ `(all)`,                                                    |
-+--------------------+--------------------------------------------------------------------------+
-| ``noUnpavedroads`` | ``Car``, ``Bicycle``\ `(all)`, ``HeavyVehicle``\ `(all)`                 |
-+--------------------+--------------------------------------------------------------------------+
-| ``noTracks``       | ``Car``, ``HeavyVehicle``\ `(all)`                                       |
-+--------------------+--------------------------------------------------------------------------+
-| ``noFerries``      | ``Car``, ``Bicycle``\ `(all)`, ``Pedestrian``, ``HeavyVehicle``\ `(all)` |
-+--------------------+--------------------------------------------------------------------------+
-| ``noFords``        | ``Car``, ``Bicycle``\ `(all)`, ``Pedestrian``, ``HeavyVehicle``\ `(all)` |
-+--------------------+--------------------------------------------------------------------------+
-| ``noSteps``        | ``Bicycle``, ``Pedestrian``                                              |
-+--------------------+--------------------------------------------------------------------------+
++--------------------+------------------------------------------------------------------+
+| Parameter          | Profiles                                                         |
++====================+==================================================================+
+| ``noMotorways``    | ``Car``, ``HeavyVehicle``\ `*`                                   |
++--------------------+------------------------------------------------------------------+
+| ``noTollways``     | ``Car``, ``HeavyVehicle``\ `*`                                   |
++--------------------+------------------------------------------------------------------+
+| ``noTunnels``      | ``Car``, ``HeavyVehicle``\ `*`                                   |
++--------------------+------------------------------------------------------------------+
+| ``noPavedroads``   | ``Bicycle``\ `*`                                                 |
++--------------------+------------------------------------------------------------------+
+| ``noUnpavedroads`` | ``Car``, ``Bicycle``\ `*`, ``HeavyVehicle``\ `*`                 |
++--------------------+------------------------------------------------------------------+
+| ``noTracks``       | ``Car``, ``HeavyVehicle``\ `*`                                   |
++--------------------+------------------------------------------------------------------+
+| ``noFerries``      | ``Car``, ``Bicycle``\ `*`, ``Pedestrian``, ``HeavyVehicle``\ `*` |
++--------------------+------------------------------------------------------------------+
+| ``noFords``        | ``Car``, ``Bicycle``\ `*`, ``Pedestrian``, ``HeavyVehicle``\ `*` |
++--------------------+------------------------------------------------------------------+
+| ``noSteps``        | ``Bicycle``\ `*`, ``Pedestrian``                                 |
++--------------------+------------------------------------------------------------------+
+
 
 Bicycle Specific Parameters
 >>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -156,106 +175,42 @@ Additional Parameters for the ``Bicycle`` Proflies:
 +===============+=====================================================================================+
 | ``elevation`` | ``True`` to retrieve elevation information for each waypoint (in meters above NHN?) |
 +---------------+-------------------------------------------------------------------------------------+
-| ``surface``   | ``True`` to retrieve way surface information.                                       |
+| ``surface``   | ``True`` to retrieve way surface information                                        |
++---------------+-------------------------------------------------------------------------------------+
+| ``noHills``   | ``True`` to avoid Hills. You may set either this or ``level``                       |
++---------------+-------------------------------------------------------------------------------------+
+| ``level``     | ``-1`` = not set, ``0`` = Novice, ``1`` = Moderate, ``2`` = Amateur, ``3`` = Pro    |
++---------------+-------------------------------------------------------------------------------------+
+| ``steep``     | Maximum Steepness in Percent. Values range from ``1`` to ``15``                     |
 +---------------+-------------------------------------------------------------------------------------+
 
-The surface parameter provides decoded values for the surfacetype and the waytype. The encoding is shown in the the following tables:
+The surface parameter provides decoded values for the surfacetype and the waytype.
 
-Response Surfacetype List
-<<<<<<<<<<<<<<<<<<<<<<<<<
+.. attention:: The ``steep`` parameter can only be set if ``noHills`` or ``level`` is defined. Also you can only use 
 
-+--------+------------------+
-| Value  | Encoding         |
-+========+==================+
-| ``0``  | Unknown          |
-+--------+------------------+
-| ``1``  | Paved            |
-+--------+------------------+
-| ``2``  | Unpaved          |
-+--------+------------------+
-| ``3``  | Asphalt          |
-+--------+------------------+
-| ``4``  | Concrete         |
-+--------+------------------+
-| ``5``  | Cobblestone      |
-+--------+------------------+
-| ``6``  | Metal            |
-+--------+------------------+
-| ``7``  | Wood             |
-+--------+------------------+
-| ``8``  | Compacted Gravel |
-+--------+------------------+
-| ``9``  | Fine Gravel      |
-+--------+------------------+
-| ``10`` | Gravel           |
-+--------+------------------+
-| ``11`` | Dirt             |
-+--------+------------------+
-| ``12`` | Ground           |
-+--------+------------------+
-| ``13`` | Ice              |
-+--------+------------------+
-| ``14`` | Salt             |
-+--------+------------------+
-| ``15`` | Sand             |
-+--------+------------------+
-| ``16`` | Woodchips        |
-+--------+------------------+
-| ``17`` | Grass            |
-+--------+------------------+
-| ``18`` | Grass Paver      |
-+--------+------------------+
-
-Response Waytype List
-<<<<<<<<<<<<<<<<<<<<<
-
-+--------+--------------+
-| Value  | Encoding     |
-+========+==============+
-| ``0``  | Unknown      |
-+--------+--------------+
-| ``1``  | State Road   |
-+--------+--------------+
-| ``2``  | Road         |
-+--------+--------------+
-| ``3``  | Street       |
-+--------+--------------+
-| ``4``  | Path         |
-+--------+--------------+
-| ``5``  | Track        |
-+--------+--------------+
-| ``6``  | Cycleway     |
-+--------+--------------+
-| ``7``  | Footway      |
-+--------+--------------+
-| ``8``  | Steps        |
-+--------+--------------+
-| ``9``  | Ferry        |
-+--------+--------------+
-| ``10`` | Construction |
-+--------+--------------+
 
 HeavyVehicle Specific Parameters
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 Additional Parameters for the ``HeavyVehicle`` Profiles:
 
-+-------------------+---------------------------------------------------------------------------------------------------+
-| Parameter         | Description                                                                                       |
-+===================+===================================================================================================+
-| ``hazardous``     | ``True`` for appropriate routing while delivering hazardous cargo. Avoids water protection areas. |
-+-------------------+---------------------------------------------------------------------------------------------------+
-| ``value_weight``  | maximum weight restriction in tons                                                                |
-+-------------------+---------------------------------------------------------------------------------------------------+
-| ``value_height``  | maximum height restriction in meter                                                               |
-+-------------------+---------------------------------------------------------------------------------------------------+
-| ``value_width``   | maximum width restriction in meter                                                                |
-+-------------------+---------------------------------------------------------------------------------------------------+
-| ``value_length``  | maximum length restriction in meter                                                               |
-+-------------------+---------------------------------------------------------------------------------------------------+
-| ``value_axeload`` | maximum axeload restriction in tons                                                               |
-+-------------------+---------------------------------------------------------------------------------------------------+
-
++-------------------+-----------------------------------------------------------------------------------------------------------------------+
+| Parameter         | Description                                                                                                           |
++===================+=======================================================================================================================+
+| ``haz``           | ``True`` for appropriate routing while delivering hazardous cargo. Avoids water protection areas.                     |
++-------------------+-----------------------------------------------------------------------------------------------------------------------+
+| ``value_weight``  | maximum weight restriction in tons                                                                                    |
++-------------------+-----------------------------------------------------------------------------------------------------------------------+
+| ``value_height``  | maximum height restriction in meter                                                                                   |
++-------------------+-----------------------------------------------------------------------------------------------------------------------+
+| ``value_width``   | maximum width restriction in meter                                                                                    |
++-------------------+-----------------------------------------------------------------------------------------------------------------------+
+| ``value_length``  | maximum length restriction in meter                                                                                   |
++-------------------+-----------------------------------------------------------------------------------------------------------------------+
+| ``value_axeload`` | maximum axeload restriction in tons                                                                                   |
++-------------------+-----------------------------------------------------------------------------------------------------------------------+
+| ``subtype``       | Defines a HeavyVehicle subtype. ``hgv``\ (*default*), ``Agricultural``, ``Bus``, ``Delivery``, ``Foresty``, ``Goods`` |
++-------------------+-----------------------------------------------------------------------------------------------------------------------+
 ..
 	Additional Routepreferences
 	>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -345,6 +300,86 @@ This is a simple route for a car from starting point A (9.258506,49.240011) to d
 
 .. attention:: Parameters as well as values are `case sensitive`. The input order doesn't matter though. 
 
+Response Values
++++++++++++++++
+
+This is the encoding for the Surface and Waytype parameters:
+
+Response Surfacetype List
+>>>>>>>>>>>>>>>>>>>>>>>>>
+
++--------+------------------+
+| Value  | Encoding         |
++========+==================+
+| ``0``  | Unknown          |
++--------+------------------+
+| ``1``  | Paved            |
++--------+------------------+
+| ``2``  | Unpaved          |
++--------+------------------+
+| ``3``  | Asphalt          |
++--------+------------------+
+| ``4``  | Concrete         |
++--------+------------------+
+| ``5``  | Cobblestone      |
++--------+------------------+
+| ``6``  | Metal            |
++--------+------------------+
+| ``7``  | Wood             |
++--------+------------------+
+| ``8``  | Compacted Gravel |
++--------+------------------+
+| ``9``  | Fine Gravel      |
++--------+------------------+
+| ``10`` | Gravel           |
++--------+------------------+
+| ``11`` | Dirt             |
++--------+------------------+
+| ``12`` | Ground           |
++--------+------------------+
+| ``13`` | Ice              |
++--------+------------------+
+| ``14`` | Salt             |
++--------+------------------+
+| ``15`` | Sand             |
++--------+------------------+
+| ``16`` | Woodchips        |
++--------+------------------+
+| ``17`` | Grass            |
++--------+------------------+
+| ``18`` | Grass Paver      |
++--------+------------------+
+
+Response Waytype List
+<<<<<<<<<<<<<<<<<<<<<
+
++--------+--------------+
+| Value  | Encoding     |
++========+==============+
+| ``0``  | Unknown      |
++--------+--------------+
+| ``1``  | State Road   |
++--------+--------------+
+| ``2``  | Road         |
++--------+--------------+
+| ``3``  | Street       |
++--------+--------------+
+| ``4``  | Path         |
++--------+--------------+
+| ``5``  | Track        |
++--------+--------------+
+| ``6``  | Cycleway     |
++--------+--------------+
+| ``7``  | Footway      |
++--------+--------------+
+| ``8``  | Steps        |
++--------+--------------+
+| ``9``  | Ferry        |
++--------+--------------+
+| ``10`` | Construction |
++--------+--------------+
+
+
 Errors
 ++++++
 
@@ -419,14 +454,14 @@ Whether you get a normal or a reverse response depends on your input Parameters.
 Normal Geocoding Parameters
 +++++++++++++++++++++++++++
 
-Returns a list of coordinates matching your search input.
+A geocoding request returns a list of coordinates matching your search input.
 
 +--------------------+-------------------------------------------------+
 | Parameter          | Description                                     |
 +====================+=================================================+
 | ``FreeFormAdress`` | Name of location, street address or postal code |
 +--------------------+-------------------------------------------------+
-| ``MaxResponse``    | Maximum number of responses e.g. ``10``         |
+| ``MaxResponse``    | Maximum number of responses. Default is ``10``  |
 +--------------------+-------------------------------------------------+
 | ``api_key``        | ``your_api_key`` is placed in this parameter    |
 +--------------------+-------------------------------------------------+
@@ -435,21 +470,21 @@ Returns a list of coordinates matching your search input.
 Reverse Geocoding Parameters
 ++++++++++++++++++++++++++++
 
-As a result of a reverse geocoding request you will always get exactly one match. It is the next enclosing Object which surrounds the given coordinate. The MaxResponse parameter is still needed. (Will be fixed soon)
+As a result of a reverse geocoding request you will always get exactly one match, namely the next enclosing Object which surrounds the given coordinate.
 
-+-----------------+--------------------------------------------------------------------------------------+
-| Parameter       | Description                                                                          |
-+=================+======================================================================================+
-| ``lon``         | ``Longitude`` of coordinate of interest                                              |
-+-----------------+--------------------------------------------------------------------------------------+
-| ``lat``         | ``Latitude`` of coordinate of interest                                               |
-+-----------------+--------------------------------------------------------------------------------------+
-| ``MaxResponse`` | ``1``                                                                                |
-+-----------------+--------------------------------------------------------------------------------------+
-| ``lang``        | Language of Reverse Geocode response ``de`` (Deutsch)\ *(default)*, ``en`` (English) |
-+-----------------+--------------------------------------------------------------------------------------+
-| ``api_key``     | ``your_api_key`` is placed in this parameter                                         |
-+-----------------+--------------------------------------------------------------------------------------+
++-------------+--------------------------------------------------------------------------------------+
+| Parameter   | Description                                                                          |
++=============+======================================================================================+
+| ``lon``     | ``Longitude`` of coordinate of interest                                              |
++-------------+--------------------------------------------------------------------------------------+
+| ``lat``     | ``Latitude`` of coordinate of interest                                               |
++-------------+--------------------------------------------------------------------------------------+
+| ``pos``     | Alternative to the lat and lon parameter. ``Longitude Latitude`` of the coordinate   |
++-------------+--------------------------------------------------------------------------------------+
+| ``lang``    | Language of Reverse Geocode response ``de`` (Deutsch), ``en`` (English)\ *(default)* |
++-------------+--------------------------------------------------------------------------------------+
+| ``api_key`` | ``your_api_key`` is placed in this parameter                                         |
++-------------+--------------------------------------------------------------------------------------+
 
 .. _example-ref2:
 
@@ -529,7 +564,7 @@ For the reverse geocoding example we use the coordinates of the *"Brunnen der VÃ
 
 :: 
 
-	http://openls.geog.uni-heidelberg.de/geocode?lon=13.4127&lat=52.5220&MaxResponse=5&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+	http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&MaxResponse=5&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 
 As result we end up at the right location and get the full address as well as the distance to the center of the object in which the point is located:
 
@@ -578,21 +613,23 @@ The usage of the parameters is the same as for the :ref:`routing section <par-re
 Parameters
 ++++++++++
 
-+---------------------+------------------------------------------------------------------------------------------------+
-| Parameter           | Description                                                                                    |
-+=====================+================================================================================================+
-| ``position``        | Pair of ``longitude,latitude`` coordinates for the point of interest                           |
-+---------------------+------------------------------------------------------------------------------------------------+
-| ``routePreference`` | Route profile of the AA. Options are ``Car``, ``Pedestrian``, ``Bicycle`` and ``HeavyVehicle`` |
-+---------------------+------------------------------------------------------------------------------------------------+
-| ``method``          | Method of generating the Isochrones. Can be ``RecursiveGrid`` or ``TIN``                       |
-+---------------------+------------------------------------------------------------------------------------------------+
-| ``interval``        | Interval of the Isochrones in **seconds** e.g. ``300`` for 5 minutes                           |
-+---------------------+------------------------------------------------------------------------------------------------+
-| ``minutes``         | Maximum range of the analysis in **minutes** e.g. ``0-30``                                     |
-+---------------------+------------------------------------------------------------------------------------------------+
-| ``api_key``         | ``your_api_key`` is placed in this parameter                                                   |
-+---------------------+------------------------------------------------------------------------------------------------+
+You will at least need the position and api_key parameters. There are default values for the remaining parameters. 
+
++---------------------+-----------------------------------------------------------------------------------------------------------+
+| Parameter           | Description                                                                                               |
++=====================+===========================================================================================================+
+| ``position``        | Pair of ``longitude,latitude`` coordinates for the point of interest                                      |
++---------------------+-----------------------------------------------------------------------------------------------------------+
+| ``routePreference`` | Route profile of the AA. Options are ``Car``(*default*), ``Pedestrian``, ``Bicycle`` and ``HeavyVehicle`` |
++---------------------+-----------------------------------------------------------------------------------------------------------+
+| ``method``          | Method of generating the Isochrones. Can be ``RecursiveGrid``(*default*) or ``TIN``                       |
++---------------------+-----------------------------------------------------------------------------------------------------------+
+| ``interval``        | Interval of the Isochrones in **seconds** e.g. ``300`` for 5 minutes. Default is ``300``                  |
++---------------------+-----------------------------------------------------------------------------------------------------------+
+| ``minutes``         | Maximum range of the analysis in **minutes** e.g. ``0-30``. Default is ``10``                             |
++---------------------+-----------------------------------------------------------------------------------------------------------+
+| ``api_key``         | ``your_api_key`` is placed in this parameter                                                              |
++---------------------+-----------------------------------------------------------------------------------------------------------+
 
 .. note:: The ``interval`` parameter has to be equal or smaller than the ``minutes`` parameter. For a maximum range of ``minutes=30`` the maximum interval would be ``interval=1800`` 
 
