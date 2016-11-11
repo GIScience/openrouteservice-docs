@@ -88,7 +88,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api_key.html">API Keys</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Application Programming Interfaces</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Application Programming Interfaces</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#routing-api">Routing API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#required-parameters">Required Parameters</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#default-object">Default object</a></li>
@@ -208,16 +208,16 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="routing-api">
 <h2>Routing API<a class="headerlink" href="#routing-api" title="Permalink to this headline">¶</a></h2>
 <p>To do a direct routing request via GET you need to open up your query with:</p>
-<div class="highlight-python"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/route?
 </pre></div>
 </div>
 <p>for curl:</p>
-<div class="highlight-python"><div class="highlight"><pre>curl http://openls.geog.uni-heidelberg.de/route?
+<div class="highlight-default"><div class="highlight"><pre><span></span>curl http://openls.geog.uni-heidelberg.de/route?
 </pre></div>
 </div>
 <p id="par-ref">After the <strong>&#8221;?&#8221;</strong> you have to add parameters with <strong>&#8220;&amp;&#8221;</strong>. For the first parameter the <strong>&#8220;&amp;&#8221;</strong> can be omitted. The value of the parameter is defined with a <strong>&#8220;=&#8221;</strong>. Therefore the pattern for parameter usage is:</p>
 <p class="centered">
-<strong><strong>&amp;</strong><code class="docutils literal"><span class="pre">parameter</span></code><strong>=</strong><code class="docutils literal"><span class="pre">value</span></code></strong></p><p>If you don&#8217;t get the picture, you can look at the <a class="reference internal" href="#example-ref"><span>Example</span></a> below.</p>
+<strong><strong>&amp;</strong><code class="docutils literal"><span class="pre">parameter</span></code><strong>=</strong><code class="docutils literal"><span class="pre">value</span></code></strong></p><p>If you don&#8217;t get the picture, you can look at the <a class="reference internal" href="#example-ref"><span class="std std-ref">Example</span></a> below.</p>
 <p>There are two types of parameters:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -233,7 +233,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 </table>
 <div class="section" id="required-parameters">
 <span id="req-ref"></span><h3>Required Parameters<a class="headerlink" href="#required-parameters" title="Permalink to this headline">¶</a></h3>
-<p>The following parameters are required for the api to work. For a valid request you need at least a starting point and an end point of your route in <code class="docutils literal"><span class="pre">long,lat</span></code> form as well as an API key. If no further parameters are defined the API will fall back on a default object. For more information regarding the specific routing profiles please visit our <a class="reference internal" href="glossary.html"><em>glossary</em></a>.</p>
+<p>The following parameters are required for the api to work. For a valid request you need at least a starting point and an end point of your route in <code class="docutils literal"><span class="pre">long,lat</span></code> form as well as an API key. If no further parameters are defined the API will fall back on a default object. For more information regarding the specific routing profiles please visit our <a class="reference internal" href="glossary.html"><span class="doc">glossary</span></a>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="16%" />
@@ -258,7 +258,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 </table>
 <div class="section" id="default-object">
 <h4>Default object<a class="headerlink" href="#default-object" title="Permalink to this headline">¶</a></h4>
-<p>This is the default</p>
+<p>If one of these Parameters isn&#8217;t set, it will assume below-mentioned default value. Of course you can always set them to a different value.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="54%" />
@@ -325,7 +325,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 </div>
 <div class="section" id="routepref">
 <h4>routepref<a class="headerlink" href="#routepref" title="Permalink to this headline">¶</a></h4>
-<p>The parameter routepref contains all routepreferences. There are additional routepreferences for the Bicycle and the HeavyVehicle type.</p>
+<p>The parameter routepref contains all routepreferences. There are additional routepreferences for the Bicycle and a subtype list for the HeavyVehicle type.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="19%" />
@@ -437,7 +437,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 <p>The surface parameter provides decoded values for the surfacetype and the waytype.</p>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
-<p class="last">The <code class="docutils literal"><span class="pre">steep</span></code> parameter can only be set if <code class="docutils literal"><span class="pre">noHills</span></code> or <code class="docutils literal"><span class="pre">level</span></code> is defined. Also you can only use</p>
+<p class="last">The <code class="docutils literal"><span class="pre">steep</span></code> parameter can only be set if <code class="docutils literal"><span class="pre">noHills</span></code> or <code class="docutils literal"><span class="pre">level</span></code> is defined. Also you can only use <code class="docutils literal"><span class="pre">noHills</span></code> or <code class="docutils literal"><span class="pre">level</span></code> at a time.</p>
 </div>
 </div>
 <div class="section" id="heavyvehicle-specific-parameters">
@@ -482,11 +482,11 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="example">
 <span id="example-ref"></span><h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>The shortest version of a full functioning routing URL would look like this:</p>
-<div class="highlight-python"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;via&amp;end=9.2556609,49.2397316&amp;lang=en&amp;distunit=KM&amp;routepref=Car&amp;weighting&amp;noMotorways&amp;noTollways&amp;noUnpavedroads&amp;noSteps&amp;noFerries&amp;instructions&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;via&amp;end=9.2556609,49.2397316&amp;lang=en&amp;distunit=KM&amp;routepref=Car&amp;weighting&amp;noMotorways&amp;noTollways&amp;noUnpavedroads&amp;noSteps&amp;noFerries&amp;instructions&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 </pre></div>
 </div>
 <p>This is a simple route for a car from starting point A (9.258506,49.240011) to destination B (9.2556609,49.2397316) with no direction-instructions. The measurement will be in kilometers, the weighting is <cite>Shortest</cite> and ferries, motorways, tollways, unpavedroads and steps will be considered. The result will be the following:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;xls:XLS</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/RouteService.xsd&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;xls:XLS</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/RouteService.xsd&quot;</span><span class="nt">&gt;</span>
  <span class="nt">&lt;xls:ResponseHeader</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseHeaderType&quot;</span><span class="nt">/&gt;</span>
  <span class="nt">&lt;xls:Response</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseType&quot;</span> <span class="na">requestID=</span><span class="s">&quot;123456789&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">numberOfResponses=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;xls:DetermineRouteResponse</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:DetermineRouteResponseType&quot;</span><span class="nt">&gt;</span>
@@ -525,7 +525,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 </div>
 <div class="section" id="response-values">
 <h3>Response Values<a class="headerlink" href="#response-values" title="Permalink to this headline">¶</a></h3>
-<p>This is the encoding for the Surface and Waytype parameters:</p>
+<p>This is the encoding for the Surface and Waytype you will encounter in your response file:</p>
 <div class="section" id="response-surfacetype-list">
 <h4>Response Surfacetype List<a class="headerlink" href="#response-surfacetype-list" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
@@ -652,9 +652,9 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="errors">
 <h3>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h3>
 <p>Currently we are not supporting Error coding. If your route could&#8217;t be rendered the xml file will contain an error Message similar to this:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;xls:ErrorList&gt;</span>
- <span class="nt">&lt;xls:Error</span> <span class="na">errorCode=</span><span class="s">&quot;Unknown&quot;</span> <span class="na">severity=</span><span class="s">&quot;Error&quot;</span> <span class="na">locationPath=</span><span class="s">&quot;OpenLS Route Service - RSListener, Message: &quot;</span> <span class="na">message=</span><span class="s">&quot;Internal Service Exception: java.lang.Exception Internal Service Exception Message: Cannot find point 0: 20.38325080173755,14.721679687500002 ...&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/xls:ErrorList&gt;</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">xls</span><span class="p">:</span><span class="n">ErrorList</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">xls</span><span class="p">:</span><span class="n">Error</span> <span class="n">errorCode</span><span class="o">=</span><span class="s2">&quot;Unknown&quot;</span> <span class="n">severity</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span> <span class="n">locationPath</span><span class="o">=</span><span class="s2">&quot;OpenLS Route Service - RSListener, Message: &quot;</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Internal Service Exception: java.lang.Exception Internal Service Exception Message: Cannot find point 0: 20.38325080173755,14.721679687500002 ...&quot;</span><span class="o">/&gt;</span>
+<span class="o">&lt;/</span><span class="n">xls</span><span class="p">:</span><span class="n">ErrorList</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>In that case there aren&#8217;t any usable roads in the vicinity of the start and endpoints. You can try to place your points closer to existing data.</p>
@@ -664,14 +664,14 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="geocoding-api">
 <h2>Geocoding API<a class="headerlink" href="#geocoding-api" title="Permalink to this headline">¶</a></h2>
 <p>If you want to carry out either a normal geocoding or a reverse geocoding query via GET start your request with:</p>
-<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/geocode?
 </pre></div>
 </div>
 <p>for curl:</p>
-<div class="highlight-xml"><div class="highlight"><pre>curl http://openls.geog.uni-heidelberg.de/geocode?
+<div class="highlight-default"><div class="highlight"><pre><span></span>curl http://openls.geog.uni-heidelberg.de/geocode?
 </pre></div>
 </div>
-<p>Whether you get a normal or a reverse response depends on your input Parameters. The usage of the parameters is the same as for the <a class="reference internal" href="#par-ref"><span>routing section</span></a>.</p>
+<p>Whether you get a normal or a reverse response depends on your input Parameters. The usage of the parameters is the same as for the <a class="reference internal" href="#par-ref"><span class="std std-ref">routing section</span></a>.</p>
 <div class="section" id="normal-geocoding-parameters">
 <h3>Normal Geocoding Parameters<a class="headerlink" href="#normal-geocoding-parameters" title="Permalink to this headline">¶</a></h3>
 <p>A geocoding request returns a list of coordinates matching your search input.</p>
@@ -690,7 +690,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 <td>Name of location, street address or postal code</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">MaxResponse</span></code></td>
-<td>Maximum number of responses. Default is <code class="docutils literal"><span class="pre">10</span></code></td>
+<td>Maximum number of responses. Default is <code class="docutils literal"><span class="pre">20</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">api_key</span></code></td>
 <td><code class="docutils literal"><span class="pre">your_api_key</span></code> is placed in this parameter</td>
@@ -733,11 +733,11 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="example-ref2">
 <span id="id2"></span><h3>Example<a class="headerlink" href="#example-ref2" title="Permalink to this headline">¶</a></h3>
 <p>The following example covers a search request for <em>Heidelberg, Mathematikon</em> with a maximum of 10 responses:</p>
-<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?FreeFormAdress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/geocode?FreeFormAdress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 </pre></div>
 </div>
 <p>As a result we get the following xml file with three matches:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;xls:XLS</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/LocationUtilityService.xsd&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;xls:XLS</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/LocationUtilityService.xsd&quot;</span><span class="nt">&gt;</span>
  <span class="nt">&lt;xls:ResponseHeader</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseHeaderType&quot;</span><span class="nt">/&gt;</span>
  <span class="nt">&lt;xls:Response</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseType&quot;</span> <span class="na">requestID=</span><span class="s">&quot;123456789&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">numberOfResponses=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;xls:GeocodeResponse</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:GeocodeResponseType&quot;</span><span class="nt">&gt;</span>
@@ -797,11 +797,11 @@ Therefore you have to directly contact the respective <a class="reference intern
 </pre></div>
 </div>
 <p>For the reverse geocoding example we use the coordinates of the <em>&#8220;Brunnen der Völkerfreundschaft&#8221;</em> in Berlin:</p>
-<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&amp;MaxResponse=5&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 </pre></div>
 </div>
 <p>As result we end up at the right location and get the full address as well as the distance to the center of the object in which the point is located:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;xls:XLS</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/LocationUtilityService.xsd&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;xls:XLS</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/LocationUtilityService.xsd&quot;</span><span class="nt">&gt;</span>
  <span class="nt">&lt;xls:ResponseHeader</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseHeaderType&quot;</span><span class="nt">/&gt;</span>
  <span class="nt">&lt;xls:Response</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseType&quot;</span> <span class="na">requestID=</span><span class="s">&quot;123456789&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">numberOfResponses=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;xls:ReverseGeocodeResponse</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ReverseGeocodeResponseType&quot;</span><span class="nt">&gt;</span>
@@ -832,14 +832,14 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="accessibility-analysis-api">
 <h2>Accessibility Analysis API<a class="headerlink" href="#accessibility-analysis-api" title="Permalink to this headline">¶</a></h2>
 <p>For an Accessibillity Analysis of a geographical position open your query with:</p>
-<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/analyse?
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/analyse?
 </pre></div>
 </div>
 <p>for curl:</p>
-<div class="highlight-xml"><div class="highlight"><pre>curl http://openls.geog.uni-heidelberg.de/analyse?
+<div class="highlight-default"><div class="highlight"><pre><span></span>curl http://openls.geog.uni-heidelberg.de/analyse?
 </pre></div>
 </div>
-<p>The usage of the parameters is the same as for the <a class="reference internal" href="#par-ref"><span>routing section</span></a>.</p>
+<p>The usage of the parameters is the same as for the <a class="reference internal" href="#par-ref"><span class="std std-ref">routing section</span></a>.</p>
 <div class="section" id="parameters">
 <h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
 <p>You will at least need the position and api_key parameters. There are default values for the remaining parameters.</p>
@@ -882,11 +882,11 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="id3">
 <h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>The following example is rendered with the RecursiveGrid method and has a maximum range of 4 minutes with a 2 minute interval:</p>
-<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&amp;position=8.661367306640742,49.42859632294706&amp;minutes=4&amp;routePreference=Car&amp;method=RecursiveGrid&amp;interval=120
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&amp;position=8.661367306640742,49.42859632294706&amp;minutes=4&amp;routePreference=Car&amp;method=RecursiveGrid&amp;interval=120
 </pre></div>
 </div>
 <p>The result gives us two rings with a 2 minute distance:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;aas:AAS</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.geoinform.fh-mainz.de/aas D:/Schemata/AAS1.0/AccessibilityService.xsd&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;aas:AAS</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.geoinform.fh-mainz.de/aas D:/Schemata/AAS1.0/AccessibilityService.xsd&quot;</span><span class="nt">&gt;</span>
  <span class="nt">&lt;aas:ResponseHeader</span> <span class="na">xsi:type=</span><span class="s">&quot;aas:ResponseHeaderType&quot;</span><span class="nt">/&gt;</span>
  <span class="nt">&lt;aas:Response</span> <span class="na">xsi:type=</span><span class="s">&quot;aas:ResponseType&quot;</span> <span class="na">requestID=</span><span class="s">&quot;00&quot;</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;aas:AccessibilityResponse</span> <span class="na">xsi:type=</span><span class="s">&quot;aas:AccessibilityResponseType&quot;</span><span class="nt">&gt;</span>
