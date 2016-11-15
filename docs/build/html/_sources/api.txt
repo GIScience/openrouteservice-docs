@@ -211,6 +211,7 @@ Additional Parameters for the ``HeavyVehicle`` Profiles:
 +-------------------+-----------------------------------------------------------------------------------------------------------------------+
 | ``subtype``       | Defines a HeavyVehicle subtype. ``hgv``\ (*default*), ``Agricultural``, ``Bus``, ``Delivery``, ``Foresty``, ``Goods`` |
 +-------------------+-----------------------------------------------------------------------------------------------------------------------+
+
 ..
 	Additional Routepreferences
 	>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -251,13 +252,13 @@ Example
 
 
 
-The shortest version of a full functioning routing URL would look like this::
+The shortest version of a full functioning `routing URL <http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&end=9.2556609,49.2397316&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5>`__ would look like this::
 
-  http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&via&end=9.2556609,49.2397316&lang=en&distunit=KM&routepref=Car&weighting&noMotorways&noTollways&noUnpavedroads&noSteps&noFerries&instructions&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5	
+  http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&end=9.2556609,49.2397316&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5	
 
 .. needs revision
 
-This is a simple route for a car from starting point A (9.258506,49.240011) to destination B (9.2556609,49.2397316) with no direction-instructions. The measurement will be in kilometers, the weighting is `Shortest` and ferries, motorways, tollways, unpavedroads and steps will be considered. The result will be the following:
+This is a simple route for Car from starting point A (9.258506,49.240011) to destination B (9.2556609,49.2397316) with no direction-instructions. The measurement will be in kilometers, the weighting is `Shortest`. The result will be the following:
 
 .. highlight:: xml
 
@@ -456,15 +457,15 @@ Normal Geocoding Parameters
 
 A geocoding request returns a list of coordinates matching your search input.
 
-+--------------------+-------------------------------------------------+
-| Parameter          | Description                                     |
-+====================+=================================================+
-| ``FreeFormAdress`` | Name of location, street address or postal code |
-+--------------------+-------------------------------------------------+
-| ``MaxResponse``    | Maximum number of responses. Default is ``10``  |
-+--------------------+-------------------------------------------------+
-| ``api_key``        | ``your_api_key`` is placed in this parameter    |
-+--------------------+-------------------------------------------------+
++---------------------+-------------------------------------------------+
+| Parameter           | Description                                     |
++=====================+=================================================+
+| ``FreeFormAddress`` | Name of location, street address or postal code |
++---------------------+-------------------------------------------------+
+| ``MaxResponse``     | Maximum number of responses. Default is ``10``  |
++---------------------+-------------------------------------------------+
+| ``api_key``         | ``your_api_key`` is placed in this parameter    |
++---------------------+-------------------------------------------------+
 
 
 Reverse Geocoding Parameters
@@ -491,11 +492,11 @@ As a result of a reverse geocoding request you will always get exactly one match
 Example
 +++++++
 
-The following example covers a search request for *Heidelberg, Mathematikon* with a maximum of 10 responses:
+The following example covers a `search request <http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&MaxResponse=10&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5>`__ for *Heidelberg, Mathematikon* with a maximum of 10 responses:
 
 :: 
 
-	http://openls.geog.uni-heidelberg.de/geocode?FreeFormAdress=Heidelberg,%20Mathematikon&MaxResponse=10&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+	http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&MaxResponse=10&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 
 As a result we get the following xml file with three matches:
 
@@ -560,11 +561,11 @@ As a result we get the following xml file with three matches:
 	</xls:XLS>
 
 
-For the reverse geocoding example we use the coordinates of the *"Brunnen der Völkerfreundschaft"* in Berlin:
+For the `reverse geocoding example <http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5>`__ we use the coordinates of the *"Brunnen der Völkerfreundschaft"* in Berlin:
 
 :: 
 
-	http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&MaxResponse=5&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+	http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 
 As result we end up at the right location and get the full address as well as the distance to the center of the object in which the point is located:
 
@@ -636,9 +637,9 @@ You will at least need the position and api_key parameters. There are default va
 Example
 +++++++
 
-The following example is rendered with the RecursiveGrid method and has a maximum range of 4 minutes with a 2 minute interval: ::
+The `following example <http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&position=8.661367306640742,49.42859632294706&minutes=4&interval=120>`__ is rendered with the RecursiveGrid method and has a maximum range of 4 minutes with a 2 minute interval: ::
 
- http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&position=8.661367306640742,49.42859632294706&minutes=4&routePreference=Car&method=RecursiveGrid&interval=120
+ http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&position=8.661367306640742,49.42859632294706&minutes=4&interval=120
 
 The result gives us two rings with a 2 minute distance: ::
 

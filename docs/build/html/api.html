@@ -481,11 +481,11 @@ Therefore you have to directly contact the respective <a class="reference intern
 </div>
 <div class="section" id="example">
 <span id="example-ref"></span><h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
-<p>The shortest version of a full functioning routing URL would look like this:</p>
-<div class="highlight-python"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;via&amp;end=9.2556609,49.2397316&amp;lang=en&amp;distunit=KM&amp;routepref=Car&amp;weighting&amp;noMotorways&amp;noTollways&amp;noUnpavedroads&amp;noSteps&amp;noFerries&amp;instructions&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<p>The shortest version of a full functioning <a class="reference external" href="http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;end=9.2556609,49.2397316&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5">routing URL</a> would look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;end=9.2556609,49.2397316&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 </pre></div>
 </div>
-<p>This is a simple route for a car from starting point A (9.258506,49.240011) to destination B (9.2556609,49.2397316) with no direction-instructions. The measurement will be in kilometers, the weighting is <cite>Shortest</cite> and ferries, motorways, tollways, unpavedroads and steps will be considered. The result will be the following:</p>
+<p>This is a simple route for Car from starting point A (9.258506,49.240011) to destination B (9.2556609,49.2397316) with no direction-instructions. The measurement will be in kilometers, the weighting is <cite>Shortest</cite>. The result will be the following:</p>
 <div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;xls:XLS</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/xls http://schemas.opengis.net/ols/1.1.0/RouteService.xsd&quot;</span><span class="nt">&gt;</span>
  <span class="nt">&lt;xls:ResponseHeader</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseHeaderType&quot;</span><span class="nt">/&gt;</span>
  <span class="nt">&lt;xls:Response</span> <span class="na">xsi:type=</span><span class="s">&quot;xls:ResponseType&quot;</span> <span class="na">requestID=</span><span class="s">&quot;123456789&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">numberOfResponses=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
@@ -677,8 +677,8 @@ Therefore you have to directly contact the respective <a class="reference intern
 <p>A geocoding request returns a list of coordinates matching your search input.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="29%" />
-<col width="71%" />
+<col width="30%" />
+<col width="70%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -686,7 +686,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">FreeFormAdress</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">FreeFormAddress</span></code></td>
 <td>Name of location, street address or postal code</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">MaxResponse</span></code></td>
@@ -732,8 +732,8 @@ Therefore you have to directly contact the respective <a class="reference intern
 </div>
 <div class="section" id="example-ref2">
 <span id="id2"></span><h3>Example<a class="headerlink" href="#example-ref2" title="Permalink to this headline">¶</a></h3>
-<p>The following example covers a search request for <em>Heidelberg, Mathematikon</em> with a maximum of 10 responses:</p>
-<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?FreeFormAdress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<p>The following example covers a <a class="reference external" href="http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5">search request</a> for <em>Heidelberg, Mathematikon</em> with a maximum of 10 responses:</p>
+<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 </pre></div>
 </div>
 <p>As a result we get the following xml file with three matches:</p>
@@ -796,8 +796,8 @@ Therefore you have to directly contact the respective <a class="reference intern
 <span class="nt">&lt;/xls:XLS&gt;</span>
 </pre></div>
 </div>
-<p>For the reverse geocoding example we use the coordinates of the <em>&#8220;Brunnen der Völkerfreundschaft&#8221;</em> in Berlin:</p>
-<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&amp;MaxResponse=5&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<p>For the <a class="reference external" href="http://openls.geog.uni-heidelberg.de/geocode?pos=13.412752.5220&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5">reverse geocoding example</a> we use the coordinates of the <em>&#8220;Brunnen der Völkerfreundschaft&#8221;</em> in Berlin:</p>
+<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 </pre></div>
 </div>
 <p>As result we end up at the right location and get the full address as well as the distance to the center of the object in which the point is located:</p>
@@ -881,8 +881,8 @@ Therefore you have to directly contact the respective <a class="reference intern
 </div>
 <div class="section" id="id3">
 <h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<p>The following example is rendered with the RecursiveGrid method and has a maximum range of 4 minutes with a 2 minute interval:</p>
-<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&amp;position=8.661367306640742,49.42859632294706&amp;minutes=4&amp;routePreference=Car&amp;method=RecursiveGrid&amp;interval=120
+<p>The <a class="reference external" href="http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&amp;position=8.661367306640742,49.42859632294706&amp;minutes=4&amp;interval=120">following example</a> is rendered with the RecursiveGrid method and has a maximum range of 4 minutes with a 2 minute interval:</p>
+<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&amp;position=8.661367306640742,49.42859632294706&amp;minutes=4&amp;interval=120
 </pre></div>
 </div>
 <p>The result gives us two rings with a 2 minute distance:</p>
