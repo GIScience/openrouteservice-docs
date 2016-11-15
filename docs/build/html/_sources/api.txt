@@ -54,7 +54,7 @@ The following parameters are required for the api to work. For a valid request y
 Default object
 >>>>>>>>>>>>>>
 
-This is the default 
+If one of these Parameters isn't set, it will assume below-mentioned default value. Of course you can always set them to a different value. 
 
 +---------------+-------------+
 | Parameter     | Value       |
@@ -104,7 +104,7 @@ __ routepref_
 routepref
 >>>>>>>>>
 
-The parameter routepref contains all routepreferences. There are additional routepreferences for the Bicycle and the HeavyVehicle type.
+The parameter routepref contains all routepreferences. There are additional routepreferences for the Bicycle and a subtype list for the HeavyVehicle type.
 
 +------------------+-------------------------------------------------------------------------------+
 | Main Value       | Additional Values                                                             |
@@ -121,20 +121,6 @@ The parameter routepref contains all routepreferences. There are additional rout
 +------------------+-------------------------------------------------------------------------------+
 				
 .. note:: The only languages supported are English and German. There are other language packages available that are too difficult to maintain. You can request them and implement them yourself if you want to.
-
-
-..
-	weighting
-	>>>>>>>>>
-	+-------------+------------------------------------------------------------+
-	| Value       | Description                                                |
-	+=============+============================================================+
-	| Fastest     | The fastest route uses speed limits etc.....               |
-	+-------------+------------------------------------------------------------+
-	| Shortest    | The shortest route ...                                     |
-	+-------------+------------------------------------------------------------+
-	| Recommended | This mode will include POIs to give you a trip to remember |
-	+-------------+------------------------------------------------------------+
 
 
 Avoid Type Parameters 
@@ -186,7 +172,7 @@ Additional Parameters for the ``Bicycle`` Proflies:
 
 The surface parameter provides decoded values for the surfacetype and the waytype.
 
-.. attention:: The ``steep`` parameter can only be set if ``noHills`` or ``level`` is defined. Also you can only use 
+.. attention:: The ``steep`` parameter can only be set if ``noHills`` or ``level`` is defined. Also you can only use ``noHills`` or ``level`` at a time.
 
 
 HeavyVehicle Specific Parameters
@@ -212,38 +198,6 @@ Additional Parameters for the ``HeavyVehicle`` Profiles:
 | ``subtype``       | Defines a HeavyVehicle subtype. ``hgv``\ (*default*), ``Agricultural``, ``Bus``, ``Delivery``, ``Foresty``, ``Goods`` |
 +-------------------+-----------------------------------------------------------------------------------------------------------------------+
 
-..
-	Additional Routepreferences
-	>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	There are additional profiles for the `routepref` parameter for different Bicycle and Heavyvehicle Types. For each of these special route profiles you can set specific parameters.
-	Bicycle-type
-	<<<<<<<<<<<<
-	+----------------+-----------------------+
-	| Value          | Description           |
-	+================+=======================+
-	| BicycleMTB     | Mountainbike profile  |
-	+----------------+-----------------------+
-	| BicycleRacer   | Racing profile        |
-	+----------------+-----------------------+
-	| BicycleTouring | Touring profile       |
-	+----------------+-----------------------+
-	| BicycleSafety  | Safety profile        |
-	+----------------+-----------------------+
-	HeavyVehicle-type
-	<<<<<<<<<<<<<<<<<
-	+--------------+----------------------+
-	| Value        | Description          |
-	+==============+======================+
-	| Goods        | Goods profile        |
-	+--------------+----------------------+
-	| Bus          | Bus profile          |
-	+--------------+----------------------+
-	| Agricultural | Agricultural profile |
-	+--------------+----------------------+
-	| Foresty      | Foresty profile      |
-	+--------------+----------------------+
-	| Delivery     | Delivery profile     |
-	+--------------+----------------------+
 
 .. _example-ref:
 
@@ -295,6 +249,8 @@ This is a simple route for Car from starting point A (9.258506,49.240011) to des
 	 </xls:Response>
 	</xls:XLS>
 
+.. highlight:: py
+
 ..
  Further examples (without response):
 
@@ -304,7 +260,7 @@ This is a simple route for Car from starting point A (9.258506,49.240011) to des
 Response Values
 +++++++++++++++
 
-This is the encoding for the Surface and Waytype parameters:
+This is the encoding for the Surface and Waytype you will encounter in your response file:
 
 Response Surfacetype List
 >>>>>>>>>>>>>>>>>>>>>>>>>
@@ -462,7 +418,7 @@ A geocoding request returns a list of coordinates matching your search input.
 +=====================+=================================================+
 | ``FreeFormAddress`` | Name of location, street address or postal code |
 +---------------------+-------------------------------------------------+
-| ``MaxResponse``     | Maximum number of responses. Default is ``10``  |
+| ``MaxResponse``     | Maximum number of responses. Default is ``20``  |
 +---------------------+-------------------------------------------------+
 | ``api_key``         | ``your_api_key`` is placed in this parameter    |
 +---------------------+-------------------------------------------------+
@@ -499,6 +455,8 @@ The following example covers a `search request <http://openls.geog.uni-heidelber
 	http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&MaxResponse=10&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 
 As a result we get the following xml file with three matches:
+
+.. highlight:: xml
 
 ::
 
@@ -560,6 +518,8 @@ As a result we get the following xml file with three matches:
 	 </xls:Response>
 	</xls:XLS>
 
+.. highlight:: py
+
 
 For the `reverse geocoding example <http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5>`__ we use the coordinates of the *"Brunnen der Völkerfreundschaft"* in Berlin:
 
@@ -568,6 +528,8 @@ For the `reverse geocoding example <http://openls.geog.uni-heidelberg.de/geocode
 	http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 
 As result we end up at the right location and get the full address as well as the distance to the center of the object in which the point is located:
+
+.. highlight:: xml
 
 ::
 
@@ -595,6 +557,7 @@ As result we end up at the right location and get the full address as well as th
   </xls:Response>
  </xls:XLS>
 
+.. highlight:: py
 
 --------
 
@@ -641,7 +604,11 @@ The `following example <http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0
 
  http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&position=8.661367306640742,49.42859632294706&minutes=4&interval=120
 
-The result gives us two rings with a 2 minute distance: ::
+The result gives us two rings with a 2 minute distance: 
+
+.. highlight:: xml
+
+::
 
  <aas:AAS version="1.0" xsi:schemaLocation="http://www.geoinform.fh-mainz.de/aas D:/Schemata/AAS1.0/AccessibilityService.xsd">
   <aas:ResponseHeader xsi:type="aas:ResponseHeaderType"/>
@@ -771,7 +738,9 @@ The result gives us two rings with a 2 minute distance: ::
    </aas:AccessibilityResponse>
   </aas:Response>
  </aas:AAS>
- 
+
+.. highlight:: py
+
 ..
 	------------
 	Response Type

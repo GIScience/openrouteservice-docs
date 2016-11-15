@@ -258,7 +258,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 </table>
 <div class="section" id="default-object">
 <h4>Default object<a class="headerlink" href="#default-object" title="Permalink to this headline">¶</a></h4>
-<p>This is the default</p>
+<p>If one of these Parameters isn&#8217;t set, it will assume below-mentioned default value. Of course you can always set them to a different value.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="54%" />
@@ -325,7 +325,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 </div>
 <div class="section" id="routepref">
 <h4>routepref<a class="headerlink" href="#routepref" title="Permalink to this headline">¶</a></h4>
-<p>The parameter routepref contains all routepreferences. There are additional routepreferences for the Bicycle and the HeavyVehicle type.</p>
+<p>The parameter routepref contains all routepreferences. There are additional routepreferences for the Bicycle and a subtype list for the HeavyVehicle type.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="19%" />
@@ -437,7 +437,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 <p>The surface parameter provides decoded values for the surfacetype and the waytype.</p>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
-<p class="last">The <code class="docutils literal"><span class="pre">steep</span></code> parameter can only be set if <code class="docutils literal"><span class="pre">noHills</span></code> or <code class="docutils literal"><span class="pre">level</span></code> is defined. Also you can only use</p>
+<p class="last">The <code class="docutils literal"><span class="pre">steep</span></code> parameter can only be set if <code class="docutils literal"><span class="pre">noHills</span></code> or <code class="docutils literal"><span class="pre">level</span></code> is defined. Also you can only use <code class="docutils literal"><span class="pre">noHills</span></code> or <code class="docutils literal"><span class="pre">level</span></code> at a time.</p>
 </div>
 </div>
 <div class="section" id="heavyvehicle-specific-parameters">
@@ -525,7 +525,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 </div>
 <div class="section" id="response-values">
 <h3>Response Values<a class="headerlink" href="#response-values" title="Permalink to this headline">¶</a></h3>
-<p>This is the encoding for the Surface and Waytype parameters:</p>
+<p>This is the encoding for the Surface and Waytype you will encounter in your response file:</p>
 <div class="section" id="response-surfacetype-list">
 <h4>Response Surfacetype List<a class="headerlink" href="#response-surfacetype-list" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
@@ -652,9 +652,9 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="errors">
 <h3>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h3>
 <p>Currently we are not supporting Error coding. If your route could&#8217;t be rendered the xml file will contain an error Message similar to this:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;xls:ErrorList&gt;</span>
- <span class="nt">&lt;xls:Error</span> <span class="na">errorCode=</span><span class="s">&quot;Unknown&quot;</span> <span class="na">severity=</span><span class="s">&quot;Error&quot;</span> <span class="na">locationPath=</span><span class="s">&quot;OpenLS Route Service - RSListener, Message: &quot;</span> <span class="na">message=</span><span class="s">&quot;Internal Service Exception: java.lang.Exception Internal Service Exception Message: Cannot find point 0: 20.38325080173755,14.721679687500002 ...&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/xls:ErrorList&gt;</span>
+<div class="highlight-py"><div class="highlight"><pre>&lt;xls:ErrorList&gt;
+ &lt;xls:Error errorCode=&quot;Unknown&quot; severity=&quot;Error&quot; locationPath=&quot;OpenLS Route Service - RSListener, Message: &quot; message=&quot;Internal Service Exception: java.lang.Exception Internal Service Exception Message: Cannot find point 0: 20.38325080173755,14.721679687500002 ...&quot;/&gt;
+&lt;/xls:ErrorList&gt;
 </pre></div>
 </div>
 <p>In that case there aren&#8217;t any usable roads in the vicinity of the start and endpoints. You can try to place your points closer to existing data.</p>
@@ -664,11 +664,11 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="geocoding-api">
 <h2>Geocoding API<a class="headerlink" href="#geocoding-api" title="Permalink to this headline">¶</a></h2>
 <p>If you want to carry out either a normal geocoding or a reverse geocoding query via GET start your request with:</p>
-<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?
+<div class="highlight-py"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?
 </pre></div>
 </div>
 <p>for curl:</p>
-<div class="highlight-xml"><div class="highlight"><pre>curl http://openls.geog.uni-heidelberg.de/geocode?
+<div class="highlight-py"><div class="highlight"><pre>curl http://openls.geog.uni-heidelberg.de/geocode?
 </pre></div>
 </div>
 <p>Whether you get a normal or a reverse response depends on your input Parameters. The usage of the parameters is the same as for the <a class="reference internal" href="#par-ref"><span>routing section</span></a>.</p>
@@ -690,7 +690,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 <td>Name of location, street address or postal code</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">MaxResponse</span></code></td>
-<td>Maximum number of responses. Default is <code class="docutils literal"><span class="pre">10</span></code></td>
+<td>Maximum number of responses. Default is <code class="docutils literal"><span class="pre">20</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">api_key</span></code></td>
 <td><code class="docutils literal"><span class="pre">your_api_key</span></code> is placed in this parameter</td>
@@ -733,7 +733,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="example-ref2">
 <span id="id2"></span><h3>Example<a class="headerlink" href="#example-ref2" title="Permalink to this headline">¶</a></h3>
 <p>The following example covers a <a class="reference external" href="http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5">search request</a> for <em>Heidelberg, Mathematikon</em> with a maximum of 10 responses:</p>
-<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<div class="highlight-py"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 </pre></div>
 </div>
 <p>As a result we get the following xml file with three matches:</p>
@@ -797,7 +797,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 </pre></div>
 </div>
 <p>For the <a class="reference external" href="http://openls.geog.uni-heidelberg.de/geocode?pos=13.412752.5220&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5">reverse geocoding example</a> we use the coordinates of the <em>&#8220;Brunnen der Völkerfreundschaft&#8221;</em> in Berlin:</p>
-<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<div class="highlight-py"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 </pre></div>
 </div>
 <p>As result we end up at the right location and get the full address as well as the distance to the center of the object in which the point is located:</p>
@@ -832,11 +832,11 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="accessibility-analysis-api">
 <h2>Accessibility Analysis API<a class="headerlink" href="#accessibility-analysis-api" title="Permalink to this headline">¶</a></h2>
 <p>For an Accessibillity Analysis of a geographical position open your query with:</p>
-<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/analyse?
+<div class="highlight-py"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/analyse?
 </pre></div>
 </div>
 <p>for curl:</p>
-<div class="highlight-xml"><div class="highlight"><pre>curl http://openls.geog.uni-heidelberg.de/analyse?
+<div class="highlight-py"><div class="highlight"><pre>curl http://openls.geog.uni-heidelberg.de/analyse?
 </pre></div>
 </div>
 <p>The usage of the parameters is the same as for the <a class="reference internal" href="#par-ref"><span>routing section</span></a>.</p>
@@ -882,7 +882,7 @@ Therefore you have to directly contact the respective <a class="reference intern
 <div class="section" id="id3">
 <h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference external" href="http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&amp;position=8.661367306640742,49.42859632294706&amp;minutes=4&amp;interval=120">following example</a> is rendered with the RecursiveGrid method and has a maximum range of 4 minutes with a 2 minute interval:</p>
-<div class="highlight-xml"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&amp;position=8.661367306640742,49.42859632294706&amp;minutes=4&amp;interval=120
+<div class="highlight-py"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&amp;position=8.661367306640742,49.42859632294706&amp;minutes=4&amp;interval=120
 </pre></div>
 </div>
 <p>The result gives us two rings with a 2 minute distance:</p>
