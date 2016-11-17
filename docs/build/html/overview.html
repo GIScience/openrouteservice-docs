@@ -1,252 +1,265 @@
-
-
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Overview &mdash; OpenRouteService API Documentation 0.0.1 documentation</title>
-  
-
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/custom_color.css" type="text/css" />
-  
-
-  
-    <link rel="top" title="OpenRouteService API Documentation 0.0.1 documentation" href="index.html"/>
-        <link rel="next" title="API Keys" href="api_key.html"/>
-        <link rel="prev" title="OpenRouteService APIs" href="index.html"/> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
-</head>
-
-<body class="wy-body-for-nav" role="document">
-
-   
-  <div class="wy-grid-for-nav">
-
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
-          
-
-          
-            <a href="index.html" class="icon icon-home"> OpenRouteService API Documentation
-          
-
-          
-          </a>
-
-          
-            
-            
-              <div class="version">
-                0.0.1
-              </div>
-            
-          
-
-          
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-
-          
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+            <meta content="width=device-width, initial-scale=1.0" name="viewport">
+                <title>
+                    Overview — OpenRouteService API Documentation 0.0.1 documentation
+                </title>
+                <link href="_static/css/theme.css" rel="stylesheet" type="text/css"/>
+                <link href="_static/custom_color.css" rel="stylesheet" type="text/css"/>
+                <link href="index.html" rel="top" title="OpenRouteService API Documentation 0.0.1 documentation"/>
+                <link href="api_key.html" rel="next" title="API Keys"/>
+                <link href="index.html" rel="prev" title="OpenRouteService APIs"/>
+                <script src="_static/js/modernizr.min.js">
+                </script>
+            </meta>
+        </meta>
+    </head>
+    <body class="wy-body-for-nav" role="document">
+        <div class="wy-grid-for-nav">
+            <nav class="wy-nav-side" data-toggle="wy-nav-shift">
+                <div class="wy-side-scroll">
+                    <div class="wy-side-nav-search">
+                        <a class="icon icon-home" href="index.html">
+                            OpenRouteService API Documentation
+                        </a>
+                        <div class="version">
+                            0.0.1
+                        </div>
+                        <div role="search">
+                            <form action="search.html" class="wy-form" id="rtd-search-form" method="get">
+                                <input name="q" placeholder="Search docs" type="text"/>
+                                <input name="check_keywords" type="hidden" value="yes"/>
+                                <input name="area" type="hidden" value="default"/>
+                            </form>
+                        </div>
+                    </div>
+                    <div aria-label="main navigation" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+                        <p class="caption">
+                            <span class="caption-text">
+                                Documentation
+                            </span>
+                        </p>
+                        <ul class="current">
+                            <li class="toctree-l1 current">
+                                <a class="current reference internal" href="#">
+                                    Overview
+                                </a>
+                                <ul>
+                                    <li class="toctree-l2">
+                                        <a class="reference internal" href="#routing">
+                                            Routing
+                                        </a>
+                                    </li>
+                                    <li class="toctree-l2">
+                                        <a class="reference internal" href="#geocoding">
+                                            Geocoding
+                                        </a>
+                                    </li>
+                                    <li class="toctree-l2">
+                                        <a class="reference internal" href="#accessibility-analysis">
+                                            Accessibility Analysis
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="toctree-l1">
+                                <a class="reference internal" href="api_key.html">
+                                    API Keys
+                                </a>
+                            </li>
+                            <li class="toctree-l1">
+                                <a class="reference internal" href="api.html">
+                                    Application Programming Interfaces
+                                </a>
+                            </li>
+                        </ul>
+                        <p class="caption">
+                            <span class="caption-text">
+                                Terms of Service & Disclaimer
+                            </span>
+                        </p>
+                        <ul>
+                            <li class="toctree-l1">
+                                <a class="reference internal" href="tos.html">
+                                    Disclaimer
+                                </a>
+                            </li>
+                            <li class="toctree-l1">
+                                <a class="reference internal" href="tos.html#terms-of-service">
+                                    Terms of Service
+                                </a>
+                            </li>
+                            <li class="toctree-l1">
+                                <a class="reference internal" href="tos.html#licence">
+                                    Licence
+                                </a>
+                            </li>
+                        </ul>
+                        <p class="caption">
+                            <span class="caption-text">
+                                Help Section
+                            </span>
+                        </p>
+                        <ul>
+                            <li class="toctree-l1">
+                                <a class="reference internal" href="contact.html">
+                                    Contact
+                                </a>
+                            </li>
+                            <li class="toctree-l1">
+                                <a class="reference internal" href="faq.html">
+                                    Frequently Asked Questions
+                                </a>
+                            </li>
+                            <li class="toctree-l1">
+                                <a class="reference internal" href="glossary.html">
+                                    Glossary
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+                <nav aria-label="top navigation" class="wy-nav-top" role="navigation">
+                    <i class="fa fa-bars" data-toggle="wy-nav-top">
+                    </i>
+                    <a href="index.html">
+                        OpenRouteService API Documentation
+                    </a>
+                </nav>
+                <div class="wy-nav-content">
+                    <div class="rst-content">
+                        <div aria-label="breadcrumbs navigation" role="navigation">
+                            <ul class="wy-breadcrumbs">
+                                <li>
+                                    <a href="index.html">
+                                        Docs
+                                    </a>
+                                    »
+                                </li>
+                                <li>
+                                    Overview
+                                </li>
+                                <li class="wy-breadcrumbs-aside">
+                                    <a href="https://gitlab.com/giscience/ORS_api_documentation/tree/master/docs/source" rel="nofollow">
+                                        View on GitLab
+                                    </a>
+                                </li>
+                            </ul>
+                            <hr/>
+                        </div>
+                        <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+                            <div itemprop="articleBody">
+                                <div class="section" id="overview">
+                                    <h1>
+                                        Overview
+                                        <a class="headerlink" href="#overview" title="Permalink to this headline">
+                                            ¶
+                                        </a>
+                                    </h1>
+                                    <p>
+                                        <b>OpenRouteService.org</b> offers Routing services by using user-generated, collaboratively collected free geographic data from OpenStreetMap.org. This service is based on open standards by the Open Geospatial Consortium (OGC). Currently the following services have been implemented within the frame of OpenRouteService.org, which allow you to include maps, geocoding and routing in your web pages or applications. By accessing, requesting and using OpenRouteService (ORS) and the provided API, you are agreeing to our terms of use. 
+                                    </p>
+                                    <div class="section" id="routing">
+                                        <h2>
+                                            Routing
+                                            <a class="headerlink" href="#routing" title="Permalink to this headline">
+                                                ¶
+                                            </a>
+                                        </h2>
+                                        <p>
+                                            The Route Service determines travel routes and navigation information according to diverse criteria.
+                                        </p>
+                                    </div>
+                                    <div class="section" id="geocoding">
+                                        <h2>
+                                            Geocoding
+                                            <a class="headerlink" href="#geocoding" title="Permalink to this headline">
+                                                ¶
+                                            </a>
+                                        </h2>
+                                        <p>
+                                            The Geocoding Service transforms a description of a location, such as a place name, street address or postal code, into a normalized description of the location with a Point geometry usually placed using Cartesian coordinates, often latitude and longitude.
+                                        </p>
+                                    </div>
+                                    <div class="section" id="accessibility-analysis">
+                                        <h2>
+                                            Accessibility Analysis
+                                            <a class="headerlink" href="#accessibility-analysis" title="Permalink to this headline">
+                                                ¶
+                                            </a>
+                                        </h2>
+                                        <p>
+                                            Provides a maximum reachability service from any given point or route for a set time duration.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <footer>
+                            <div aria-label="footer navigation" class="rst-footer-buttons" role="navigation">
+                                <a accesskey="n" class="btn btn-neutral float-right" href="api_key.html" title="API Keys">
+                                    Next
+                                    <span class="fa fa-arrow-circle-right">
+                                    </span>
+                                </a>
+                                <a accesskey="p" class="btn btn-neutral" href="index.html" title="OpenRouteService APIs">
+                                    <span class="fa fa-arrow-circle-left">
+                                    </span>
+                                    Previous
+                                </a>
+                            </div>
+                            <hr/>
+                            <div role="contentinfo">
+                                <p>
+                                    © Copyright 2016, University Heidelberg.
+                                </p>
+                            </div>
+                            Built with
+                            <a href="http://sphinx-doc.org/">
+                                Sphinx
+                            </a>
+                            using a
+                            <a href="https://github.com/snide/sphinx_rtd_theme">
+                                theme
+                            </a>
+                            provided by
+                            <a href="https://readthedocs.org">
+                                Read the Docs
+                            </a>
+                            .
+                        </footer>
+                    </div>
+                </div>
+            </section>
         </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-                <p class="caption"><span class="caption-text">Documentation</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#routing">Routing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#geocoding">Geocoding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#accessibility-analysis">Accessibility Analysis</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="api_key.html">API Keys</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">Application Programming Interfaces</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Terms of Service &amp; Disclaimer</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="tos.html">Disclaimer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tos.html#terms-of-service">Terms of Service</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tos.html#licence">Licence</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Help Section</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
-<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
-</ul>
-
-            
-          
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">OpenRouteService API Documentation</a>
-        
-      </nav>
-
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html">Docs</a> &raquo;</li>
-        
-      <li>Overview</li>
-    
-    
-      <li class="wy-breadcrumbs-aside">
-        
-          
-            <a href="https://gitlab.com/giscience/ORS_api_documentation/tree/master/docs/source" rel="nofollow"> View on GitLab</a>
-          
-        
-      </li>
-    
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-            
-  <div class="section" id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p>Routing services are probably the most important application for street data - apart from visualizing them on a map. While there are a range of desktop (or even mobile) applications that can provide such functionalities also in combination with OSM data, we focus here on an approach based on the concept of interoperable Service Oriented Architectures (SOA). These are regarded as an important concept for forthcoming software architectures in general, and more and more being applied also in the GI (geographic information) sector. While SOA offer many benefits they are not the solution to all problems.</p>
-<p>A remaining issue is the question of interoperability between different web services from different vendors offering the same or similar services but with different technical programming interfaces. This is the reason why standards are becoming more and more important for a range of applications - in particular in the institutional and governmental sector, but also beyond. Within the geographical information community here the Open Geospatial Consortium (OGC) has developed a range of standards for different GI related functionalities. This is why we choose to develop and set up a routing service that uses OSM data and provides those through the standardized interface specified by the OGC within the Open Location Services initiative (OpenLS or OLS) as one of 3 services:</p>
-<div class="section" id="routing">
-<h2>Routing<a class="headerlink" href="#routing" title="Permalink to this headline">¶</a></h2>
-<p>The Route Service [RS] determines travel routes and navigation information according to diverse criteria.</p>
-</div>
-<div class="section" id="geocoding">
-<h2>Geocoding<a class="headerlink" href="#geocoding" title="Permalink to this headline">¶</a></h2>
-<p>The Geocoder transforms a description of a location, such as a place name, street address or postal code, into a normalized description of the location with a Point geometry usually placed using Cartesian coordinates, often latitude and longitude.</p>
-</div>
-<div class="section" id="accessibility-analysis">
-<h2>Accessibility Analysis<a class="headerlink" href="#accessibility-analysis" title="Permalink to this headline">¶</a></h2>
-<p>Provides a maximum reachability service from any given point or route for a set time duration.</p>
-</div>
-</div>
-
-
-           </div>
-          </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="api_key.html" class="btn btn-neutral float-right" title="API Keys" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral" title="OpenRouteService APIs" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-        &copy; Copyright 2016, Amandus Butzer.
-
-    </p>
-  </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
-
-</footer>
-
-        </div>
-      </div>
-
-    </section>
-
-  </div>
-  
-
-
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
+        <script type="text/javascript">
+            var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
             VERSION:'0.0.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
         };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
-
-  
-  
-  <script type="text/javascript">
-      jQuery(function () {
+        </script>
+        <script src="_static/jquery.js" type="text/javascript">
+        </script>
+        <script src="_static/underscore.js" type="text/javascript">
+        </script>
+        <script src="_static/doctools.js" type="text/javascript">
+        </script>
+        <script src="_static/js/theme.js" type="text/javascript">
+        </script>
+        <script type="text/javascript">
+            jQuery(function () {
           SphinxRtdTheme.StickyNav.enable();
       });
-  </script>
-   
-
-</body>
+        </script>
+    </body>
 </html>

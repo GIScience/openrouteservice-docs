@@ -1,10 +1,13 @@
 API Keys
 ========
 
-Before you can use the APIs of the `OpenRouteService <http://www.openrouteservice.org>`__ you need an :term:`API-Key`. They are a 32-character identifier, made of letters and numbers, which relates the request to the user. In case of miss- or overuse of the APIs (see :ref:`tos-ref`) it is a lot easier for us to maintain order. To get your personal API-Key you have to request it directly from us.
+Before you can access the endpoints of the `OpenRouteService API <http://www.openrouteservice.org>` you will have to contact us to obtain an :term:`API-Key`. 
 
 .. 
-	(openrouteservice@geog.uni-heidelberg.de).
+    openrouteservice@geog.uni-heidelberg.de.
+
+This key is a 32-character identifier, made of letters and numbers, which relates the request to the user. We utilize these keys in order to monitor miss- or overuse of the services (see :ref:`tos-ref`)
+
 
 How to use an API key
 ---------------------
@@ -13,7 +16,7 @@ To use your API key simply add it as a parameter in your request URL with: ::
 
 	&api_key=`your-api-key`
 
-:ref:`Here <example-ref2>` you can see an example with an API key at the end of the request.
+:ref:`Here <example-ref2>` you can see an example with an API key appended to the end of the request.
 
 
 

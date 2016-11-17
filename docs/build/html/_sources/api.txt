@@ -1,8 +1,7 @@
 Application Programming Interfaces
 ==================================
 
-Instead of using the `ORS website <http://www.openrouteservice.org>`__ you can also request the Data via GET and will recieve an xml response.
-Therefore you have to directly contact the respective :term:`API` of the tool you would like to use. You can either use the address line of your browser or do the request in your command line with curl.
+The ORS API allows for programmatic access to our services. We offer a GET scheme for you to directly query the API which is described in the following section. Please note that the response currently follows the OpenLS standard.
 
 #. `Routing API`_
 #. `Geocoding API`_
@@ -13,48 +12,42 @@ Therefore you have to directly contact the respective :term:`API` of the tool yo
 Routing API
 ------------
 
-To do a direct routing request via GET you need to open up your query with::
+To routing endpoint is defined as follows::
 
  http://openls.geog.uni-heidelberg.de/route?
 
-for curl::
-
- curl http://openls.geog.uni-heidelberg.de/route?
-
 .. _par-ref:
 
-After the **"?"** you have to add parameters with **"&"**. For the first parameter the **"&"** can be omitted. The value of the parameter is defined with a **"="**. Therefore the pattern for parameter usage is:
+The query parameters are added to the end of the endpoint with `query string encoding <https://en.wikipedia.org/wiki/Query_string>`. Hence the pattern for parameter usage is:
 
 .. centered:: **&**\ ``parameter``\ **=**\ ``value``
 
-If you don't get the picture, you can look at the :ref:`example-ref` below.
+We distinguish between two types of parameters:
 
-There are two types of parameters:
-
-:`Required Parameters`_: They are required for the API to work.
-:`Optional Parameters`_: These parameters are not necessary to get a functional request. But you can fine-tune your request through these.
+:`Required parameters`_: These are required.
+:`Optional parameters`_: These parameters are not necessary for a functional request.
 
 .. _req-ref:
 
 Required Parameters
 +++++++++++++++++++
 
-The following parameters are required for the api to work. For a valid request you need at least a starting point and an end point of your route in ``long,lat`` form as well as an API key. If no further parameters are defined the API will fall back on a default object. For more information regarding the specific routing profiles please visit our :doc:`glossary </glossary>`.
+The following parameters are required for the routing service to respond. For a valid request we require at least a starting and an end point in the form ``long,lat`` as well as your API key. If no further parameters are defined the API will fall back on a default object. 
 
 +--------------------+------------------------------------------------------------------------------------------------------------+
 | Parameter          | Description                                                                                                |
 +====================+============================================================================================================+
-| ``start``          | Pair of ``longitude,latitude`` coordinate used as starting point of the route                              |
+| ``start``          | Pair of ``longitude,latitude`` coordinates used as the starting point of the route                              |
 +--------------------+------------------------------------------------------------------------------------------------------------+
-| ``end``            | Pair of ``longitude,latitude`` coordinate used as destination of the route                                 |
+| ``end``            | Pair of ``longitude,latitude`` coordinates used as the destination of the route                                 |
 +--------------------+------------------------------------------------------------------------------------------------------------+
-| ``api_key``        | ``your_api_key`` is placed in this parameter                                                               |
+| ``api_key``        | ``your_api_key`` is inserted in this parameter                                                               |
 +--------------------+------------------------------------------------------------------------------------------------------------+
 
-Default object
+The Default Object
 >>>>>>>>>>>>>>
 
-If one of these Parameters isn't set, it will assume below-mentioned default value. Of course you can always set them to a different value. 
+If one of these Parameters isn't set, it will assume the below-mentioned default values.
 
 +---------------+-------------+
 | Parameter     | Value       |
@@ -66,12 +59,13 @@ If one of these Parameters isn't set, it will assume below-mentioned default val
 | ``weighting`` | ``Fastest`` |
 +---------------+-------------+
 
+For further information regarding the specific routing profiles, distance units and weighting options please visit our :doc:`glossary </glossary>`.
 
 
 Optional Parameters
 +++++++++++++++++++
 
-Parameters in this Section are not required for a working request. Although they can contribute to the accurancy of your query. Some parameters only work with specific routing profiles. ``noStep`` for example only works with the **Pedestrian** or one of the **Bicycle** profiles. Please be aware which routepreference you chose.
+Parameters in this section are not required for a functional request, however these may contribute to the accuracy of your query. Some parameters only work with specific routing profiles. ``noStepd`` for example merely works with the **Pedestrian** or one of the **Bicycle** profiles. Please be aware which specific route preference you chose.
 
 
 General Parameters
@@ -82,32 +76,33 @@ General Parameters
 +==================+============================================================================================================+
 | ``via``          | Ampersand-separated list of ``longitude,latitude`` coordinate pairs visited in order                       |
 +------------------+------------------------------------------------------------------------------------------------------------+
-| ``lang``         | Language for the step by step instructions. ``en`` English or ``de`` German                                |
+| ``lang``         | Language for the route instructions. The default language is set to English ``en``.                                 |
 +------------------+------------------------------------------------------------------------------------------------------------+
-| ``distunit``     | Unit in which you want to view the distances in : ``KM``\ (kilometers)\/``M``\ (meters)\/``MI``\ (miles)   |
+| ``distunit``     | Unit in which you want to view the distances in : ``km``\ (kilometers)\/``m``\ (meters)\/``mi``\ (miles).   |
 +------------------+------------------------------------------------------------------------------------------------------------+
-| ``routepref``    | Route profile for your course. Available profiles can be found in the `table`__ below.                     |
+| ``routepref``    | Route profile for your course. Available profiles may be found in the `table`__ below.                     |
 +------------------+------------------------------------------------------------------------------------------------------------+
-| ``instructions`` | For step by step instructions in your chosen language set ``True``. Default is ``False``                   |
+| ``instructions`` | For routing instructions in your chosen language set to ``True``.                   |
 +------------------+------------------------------------------------------------------------------------------------------------+
-| ``weighting``    | Type of route the algorithm chooses. Options are ``Fastest`` (*default*), ``Shortest`` and ``Recommended`` |
+| ``weighting``    | Type of route the algorithm chooses. Modes are ``Fastest`` (*default*), ``Shortest`` and ``Recommended`` |
 +------------------+------------------------------------------------------------------------------------------------------------+
-| ``maxspeed``     | Maximum speed in km/h for the selected route profile e.g. ``maxspeed=10``                                  |
+| ``maxspeed``     | Maximum speed in km/h for the selected route profile e.g. ``maxspeed=10``.                                  |
 +------------------+------------------------------------------------------------------------------------------------------------+
 
-.. | ``useTMC``   | ``True`` to use traffic information for your route. Default is ``False``  |
+.. | ``useTMC``   | Set ``True`` to obtain traffic information from your route. |
 .. +--------------+---------------------------------------------------------------------------+
 
+..TODO: Add languages
 
 __ routepref_
 
 routepref
 >>>>>>>>>
 
-The parameter routepref contains all routepreferences. There are additional routepreferences for the Bicycle and a subtype list for the HeavyVehicle type.
+The parameter ``routepref`` points to the selected routing mode. Please note that there are additional route preferences for the ``Bicycle`` and a subtype list for the ``HeavyVehicle`` type.
 
 +------------------+-------------------------------------------------------------------------------+
-| Main Value       | Additional Values                                                             |
+| Preference Value       | Alternative Values                                                             |
 +==================+===============================================================================+
 | ``Car``          | \-                                                                            |
 +------------------+-------------------------------------------------------------------------------+
@@ -119,55 +114,53 @@ The parameter routepref contains all routepreferences. There are additional rout
 +------------------+-------------------------------------------------------------------------------+
 | ``HeavyVehicle`` | There is a subtype list for the HeavyVehicle profile                          |
 +------------------+-------------------------------------------------------------------------------+
-				
-.. note:: The only languages supported are English and German. There are other language packages available that are too difficult to maintain. You can request them and implement them yourself if you want to.
+			
 
-
-Avoid Type Parameters 
+Avoidable Features Parameters 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-There are some Parameters that if ``true`` let you avoid certain objects in your route. You have to use them with their appropriate routpref profile. To avoid the named
+The following feature types provide means to avoid certain objects along your route. Please be aware that these may be specific to your chosen route preference. Please note that avoidable parameters for alternative route preferences correspond to their parent profile. The default value is set to `False`. 
 
 +--------------------+------------------------------------------------------------------+
 | Parameter          | Profiles                                                         |
 +====================+==================================================================+
-| ``noMotorways``    | ``Car``, ``HeavyVehicle``\ `*`                                   |
+| ``noMotorways``    | ``Car``, ``HeavyVehicle``                                   |
 +--------------------+------------------------------------------------------------------+
-| ``noTollways``     | ``Car``, ``HeavyVehicle``\ `*`                                   |
+| ``noTollways``     | ``Car``, ``HeavyVehicle``                                   |
 +--------------------+------------------------------------------------------------------+
-| ``noTunnels``      | ``Car``, ``HeavyVehicle``\ `*`                                   |
+| ``noTunnels``      | ``Car``, ``HeavyVehicle``                                   |
 +--------------------+------------------------------------------------------------------+
-| ``noPavedroads``   | ``Bicycle``\ `*`                                                 |
+| ``noPavedroads``   | ``Bicycle``                                                 |
 +--------------------+------------------------------------------------------------------+
-| ``noUnpavedroads`` | ``Car``, ``Bicycle``\ `*`, ``HeavyVehicle``\ `*`                 |
+| ``noUnpavedroads`` | ``Car``, ``Bicycle``, ``HeavyVehicle``                 |
 +--------------------+------------------------------------------------------------------+
-| ``noTracks``       | ``Car``, ``HeavyVehicle``\ `*`                                   |
+| ``noTracks``       | ``Car``, ``HeavyVehicle``                                   |
 +--------------------+------------------------------------------------------------------+
-| ``noFerries``      | ``Car``, ``Bicycle``\ `*`, ``Pedestrian``, ``HeavyVehicle``\ `*` |
+| ``noFerries``      | ``Car``, ``Bicycle``, ``Pedestrian``, ``HeavyVehicle`` |
 +--------------------+------------------------------------------------------------------+
-| ``noFords``        | ``Car``, ``Bicycle``\ `*`, ``Pedestrian``, ``HeavyVehicle``\ `*` |
+| ``noFords``        | ``Car``, ``Bicycle``, ``Pedestrian``, ``HeavyVehicle`` |
 +--------------------+------------------------------------------------------------------+
-| ``noSteps``        | ``Bicycle``\ `*`, ``Pedestrian``                                 |
+| ``noSteps``        | ``Bicycle``, ``Pedestrian``                                 |
 +--------------------+------------------------------------------------------------------+
 
 
 Bicycle Specific Parameters
 >>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-Additional Parameters for the ``Bicycle`` Proflies:
+For the ``Bicycle`` profiles we offer additional filters to finetune your route.
 
 +---------------+-------------------------------------------------------------------------------------+
 | Parameter     | Description                                                                         |
 +===============+=====================================================================================+
-| ``elevation`` | ``True`` to retrieve elevation information for each waypoint (in meters above NHN?) |
+| ``elevation`` | ``True`` to retrieve elevation information for each returned point in the response.  |
 +---------------+-------------------------------------------------------------------------------------+
-| ``surface``   | ``True`` to retrieve way surface information                                        |
+| ``surface``   | ``True`` to retrieve way surface information for your route.                                       |
 +---------------+-------------------------------------------------------------------------------------+
-| ``noHills``   | ``True`` to avoid Hills. You may set either this or ``level``                       |
+| ``noHills``   | ``True`` to steep gradients. You may either set this option or set the ``level`` parameter.                     |
 +---------------+-------------------------------------------------------------------------------------+
-| ``level``     | ``-1`` = not set, ``0`` = Novice, ``1`` = Moderate, ``2`` = Amateur, ``3`` = Pro    |
+| ``level``     | Corresponds to the fitness level. ``0`` = Novice, ``1`` = Moderate, ``2`` = Amateur, ``3`` = Pro.    |
 +---------------+-------------------------------------------------------------------------------------+
-| ``steep``     | Maximum Steepness in Percent. Values range from ``1`` to ``15``                     |
+| ``steep``    | Which relates to the maximum steepness given as a percentage. The range of values is from ``1`` to ``15``.                     |
 +---------------+-------------------------------------------------------------------------------------+
 
 The surface parameter provides decoded values for the surfacetype and the waytype.
@@ -178,41 +171,39 @@ The surface parameter provides decoded values for the surfacetype and the waytyp
 HeavyVehicle Specific Parameters
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-Additional Parameters for the ``HeavyVehicle`` Profiles:
+For the ``HeavyVehicle`` profiles we offer additional filters to finetune your route according to specific vehicle options.
 
 +-------------------+-----------------------------------------------------------------------------------------------------------------------+
 | Parameter         | Description                                                                                                           |
 +===================+=======================================================================================================================+
-| ``haz``           | ``True`` for appropriate routing while delivering hazardous cargo. Avoids water protection areas.                     |
+| ``haz``           | ``True`` for an appropriate routing while delivering hazardous goods and avoids water protected areas.                     |
 +-------------------+-----------------------------------------------------------------------------------------------------------------------+
-| ``value_weight``  | maximum weight restriction in tons                                                                                    |
+| ``value_weight``  | Maximum weight restriction in tons.                                                                                   |
 +-------------------+-----------------------------------------------------------------------------------------------------------------------+
-| ``value_height``  | maximum height restriction in meter                                                                                   |
+| ``value_height``  | Maximum height restriction in meters.                                                                                   |
 +-------------------+-----------------------------------------------------------------------------------------------------------------------+
-| ``value_width``   | maximum width restriction in meter                                                                                    |
+| ``value_width``   |Mmaximum width restriction in meters.                                                                                    |
 +-------------------+-----------------------------------------------------------------------------------------------------------------------+
-| ``value_length``  | maximum length restriction in meter                                                                                   |
+| ``value_length``  | Maximum length restriction in meters.                                                                                   |
 +-------------------+-----------------------------------------------------------------------------------------------------------------------+
-| ``value_axeload`` | maximum axeload restriction in tons                                                                                   |
+| ``value_axleload`` | Maximum axeload restriction in tons.                                                                                   |
 +-------------------+-----------------------------------------------------------------------------------------------------------------------+
-| ``subtype``       | Defines a HeavyVehicle subtype. ``hgv``\ (*default*), ``Agricultural``, ``Bus``, ``Delivery``, ``Foresty``, ``Goods`` |
+| ``subtype``       | Defines a HeavyVehicle subtype. ``hgv``\ (*default*), ``Agricultural``, ``Bus``, ``Delivery``, ``Foresty`` or ``Goods``. |
 +-------------------+-----------------------------------------------------------------------------------------------------------------------+
 
 
 .. _example-ref:
 
-Example
+Examples
 +++++++
 
-
-
-The shortest version of a full functioning `routing URL <http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&end=9.2556609,49.2397316&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5>`__ would look like this::
+The shortest version of a full functioning `query <http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&end=9.2556609,49.2397316&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5>`__ would comprise the following parameters::
 
   http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&end=9.2556609,49.2397316&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5	
 
 .. needs revision
 
-This is a simple route for Car from starting point A (9.258506,49.240011) to destination B (9.2556609,49.2397316) with no direction-instructions. The measurement will be in kilometers, the weighting is `Shortest`. The result will be the following:
+This example corresponds to a route for the route preference Car from a starting point to a destination with no direction-instructions. The distance values will be returned in kilometers and the route weight is set to `Shortest`. The response will be in the following format:
 
 .. highlight:: xml
 
@@ -260,8 +251,8 @@ This is a simple route for Car from starting point A (9.258506,49.240011) to des
 Response Values
 +++++++++++++++
 
-This is the encoding for the Surface and Waytype you will encounter in your response file:
-
+This is the encoding for the Surface and Waytype you will encounter in your response file if ``surface`` is set to ``True``.
+ 
 Response Surfacetype List
 >>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -336,79 +327,57 @@ Response Waytype List
 | ``10`` | Construction |
 +--------+--------------+
 
+Response Steepness List
+<<<<<<<<<<<<<<<<<<<<<
+
++--------+--------------+
+| Value  | Encoding     |
++========+==============+
+| ``-5``  |       |
++--------+--------------+
+| ``-4``  |    |
++--------+--------------+
+| ``-3``  |          |
++--------+--------------+
+| ``-2``  |        |
++--------+--------------+
+| ``-1``  |          |
++--------+--------------+
+| ``0``  | 0%        |
++--------+--------------+
+| ``1``  |      |
++--------+--------------+
+| ``2``  |       |
++--------+--------------+
+| ``3``  |         |
++--------+--------------+
+| ``4``  |         |
++--------+--------------+
+| ``5`` |  |
++--------+--------------+
+
 
 Errors
 ++++++
 
-Currently we are not supporting Error coding. If your route could't be rendered the xml file will contain an error Message similar to this: ::
+Currently we are not supporting an error coding. If your route could't be rendered the xml file will contain an error Message similar to this: ::
 
  <xls:ErrorList>
   <xls:Error errorCode="Unknown" severity="Error" locationPath="OpenLS Route Service - RSListener, Message: " message="Internal Service Exception: java.lang.Exception Internal Service Exception Message: Cannot find point 0: 20.38325080173755,14.721679687500002 ..."/>
  </xls:ErrorList>
 
-In that case there aren't any usable roads in the vicinity of the start and endpoints. You can try to place your points closer to existing data.
-
-..
-	<xls:ErrorList>
-	      <xls:Error errorCode="Unknown" severity="Error" locationPath="OpenLS Route Service - RSListener, Message: " message="Internal Service Exception: java.lang.Exception
-	Internal Service Exception Message: Cannot find point 0: 20.38325080173755,14.721679687500002
-	 [Exception]org.freeopenls.routeservice.routing.Routing.doRouting(Routing.java:94)
-	 [Exception]org.freeopenls.routeservice.documents.RequestXLSDocument.doRoutePlan(RequestXLSDocument.java:467)
-	 [Exception]org.freeopenls.routeservice.documents.RequestXLSDocument.doRouteRequest(RequestXLSDocument.java:152)
-	 [Exception]org.freeopenls.routeservice.RSListener.receiveCompleteRequest(RSListener.java:139)
-	 [Exception]org.freeopenls.routeservice.RequestOperator.doOperation(RequestOperator.java:67)
-	 [Exception]org.freeopenls.routeservice.RSServlet.doPost(RSServlet.java:125)
-	 [Exception]javax.servlet.http.HttpServlet.service(HttpServlet.java:646)
-	 [Exception]javax.servlet.http.HttpServlet.service(HttpServlet.java:727)
-	 [Exception]org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:303)
-	 [Exception]org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
-	 [Exception]org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
-	 [Exception]org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)
-	 [Exception]org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
-	 [Exception]org.freeopenls.servlet.filters.PiwikRequestFilter.doFilter(PiwikRequestFilter.java:82)
-	 [Exception]org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)
-	 [Exception]org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
-	 [Exception]org.freeopenls.servlet.filters.RequestRateThrottleFilter.doFilter(RequestRateThrottleFilter.java:125)
-	 [Exception]org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)
-	 [Exception]org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
-	 [Exception]org.freeopenls.servlet.filters.UserAuthenticationFilter.doFilter(UserAuthenticationFilter.java:113)
-	 [Exception]org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)
-	 [Exception]org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
-	 [Exception]org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:220)
-	 [Exception]org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:122)
-	 [Exception]org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:501)
-	 [Exception]org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
-	 [Exception]org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
-	 [Exception]org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:950)
-	 [Exception]org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:116)
-	 [Exception]org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
-	 [Exception]org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1040)
-	 [Exception]org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:607)
-	 [Exception]org.apache.tomcat.util.net.AprEndpoint$SocketWithOptionsProcessor.run(AprEndpoint.java:2379)
-	 [Exception]java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	 [Exception]java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	 [Exception]org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	 [Exception]java.lang.Thread.run(Thread.java:745)
-	"/>
-	    </xls:ErrorList>
-
------------
+In that case there aren't any roads in the vicinity of the start and endpoint. Please try to place your points closer to the road network.
 
 Geocoding API
 -------------
 
-If you want to carry out either a normal geocoding or a reverse geocoding query via GET start your request with::
+To geocoding endpoint is defined as follows::
 
  http://openls.geog.uni-heidelberg.de/geocode?
 
-for curl::
+We distinguish between geocoding and reverse geocoding depending on your input. 
 
- curl http://openls.geog.uni-heidelberg.de/geocode?
-
-Whether you get a normal or a reverse response depends on your input Parameters. The usage of the parameters is the same as for the :ref:`routing section <par-ref>`.
-
-
-Normal Geocoding Parameters
+Geocoding Parameters
 +++++++++++++++++++++++++++
 
 A geocoding request returns a list of coordinates matching your search input.
@@ -416,31 +385,31 @@ A geocoding request returns a list of coordinates matching your search input.
 +---------------------+-------------------------------------------------+
 | Parameter           | Description                                     |
 +=====================+=================================================+
-| ``FreeFormAddress`` | Name of location, street address or postal code |
+| ``FreeFormAddress`` | Name of location, street address or postal code. |
 +---------------------+-------------------------------------------------+
-| ``MaxResponse``     | Maximum number of responses. Default is ``20``  |
+| ``MaxResponse``     | Maximum number of responses. Default is set to ``20``.  |
 +---------------------+-------------------------------------------------+
-| ``api_key``         | ``your_api_key`` is placed in this parameter    |
+| ``api_key``         | ``your_api_key`` which is placed within this parameter    |
 +---------------------+-------------------------------------------------+
 
 
 Reverse Geocoding Parameters
 ++++++++++++++++++++++++++++
 
-As a result of a reverse geocoding request you will always get exactly one match, namely the next enclosing Object which surrounds the given coordinate.
+As a result of a reverse geocoding request you will always get exactly one match, namely the next enclosing object which surrounds the given coordinate.
 
 +-------------+--------------------------------------------------------------------------------------+
 | Parameter   | Description                                                                          |
 +=============+======================================================================================+
-| ``lon``     | ``Longitude`` of coordinate of interest                                              |
+| ``lon``     | ``Longitude`` of coordinate of interest.                                              |
 +-------------+--------------------------------------------------------------------------------------+
-| ``lat``     | ``Latitude`` of coordinate of interest                                               |
+| ``lat``     | ``Latitude`` of coordinate of interest.                                              |
 +-------------+--------------------------------------------------------------------------------------+
-| ``pos``     | Alternative to the lat and lon parameter. ``Longitude Latitude`` of the coordinate   |
+| ``pos``     | Alternative and replaces the lat and lon parameter. ``Longitude Latitude`` of the coordinate.   |
 +-------------+--------------------------------------------------------------------------------------+
-| ``lang``    | Language of Reverse Geocode response ``de`` (Deutsch), ``en`` (English)\ *(default)* |
+| ``lang``    | Language settings of reversed geocode response ``de`` (Deutsch), ``en`` (English)\ *(default)* |
 +-------------+--------------------------------------------------------------------------------------+
-| ``api_key`` | ``your_api_key`` is placed in this parameter                                         |
+| ``api_key`` | ``your_api_key`` which is placed within this parameter                 |
 +-------------+--------------------------------------------------------------------------------------+
 
 .. _example-ref2:
@@ -448,13 +417,13 @@ As a result of a reverse geocoding request you will always get exactly one match
 Example
 +++++++
 
-The following example covers a `search request <http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&MaxResponse=10&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5>`__ for *Heidelberg, Mathematikon* with a maximum of 10 responses:
+The following example shows a `search request <http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&MaxResponse=10&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5>`__ for *Heidelberg, Mathematikon* with a maximum of 10 response objects:
 
 :: 
 
 	http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&MaxResponse=10&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 
-As a result we get the following xml file with three matches:
+As a response you will obtain the following xml file with exactly 3 matches:
 
 .. highlight:: xml
 
@@ -521,13 +490,13 @@ As a result we get the following xml file with three matches:
 .. highlight:: py
 
 
-For the `reverse geocoding example <http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5>`__ we use the coordinates of the *"Brunnen der Völkerfreundschaft"* in Berlin:
+The following example shows a `reverse geocoding example <http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5>`__ which will return exactly one object:
 
 :: 
 
 	http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 
-As result we end up at the right location and get the full address as well as the distance to the center of the object in which the point is located:
+As a result you will obtain the full address as well as the distance from the queried point to the center of the response object:
 
 .. highlight:: xml
 
@@ -564,47 +533,41 @@ As result we end up at the right location and get the full address as well as th
 Accessibility Analysis API
 --------------------------
 
-For an Accessibillity Analysis of a geographical position open your query with::
+To accessibility analysis endpoint is defined as follows::
 
  http://openls.geog.uni-heidelberg.de/analyse?
-
-for curl::
-
- curl http://openls.geog.uni-heidelberg.de/analyse?
-
-The usage of the parameters is the same as for the :ref:`routing section <par-ref>`.
 
 Parameters
 ++++++++++
 
-You will at least need the position and api_key parameters. There are default values for the remaining parameters. 
+ As minimum requirements this endpoint will need the position and api_key parameters. There are default values for the remaining parameters. 
 
 +---------------------+-----------------------------------------------------------------------------------------------------------+
 | Parameter           | Description                                                                                               |
 +=====================+===========================================================================================================+
-| ``position``        | Pair of ``longitude,latitude`` coordinates for the point of interest                                      |
+| ``position``        | Pair of ``longitude,latitude`` coordinates for the specific point of interest.                                      |
 +---------------------+-----------------------------------------------------------------------------------------------------------+
-| ``routePreference`` | Route profile of the AA. Options are ``Car``(*default*), ``Pedestrian``, ``Bicycle`` and ``HeavyVehicle`` |
+| ``routePreference`` | The route preference which may be ``Car``(*default*), ``Pedestrian``, ``Bicycle`` and ``HeavyVehicle``. |
 +---------------------+-----------------------------------------------------------------------------------------------------------+
-| ``method``          | Method of generating the Isochrones. Can be ``RecursiveGrid``(*default*) or ``TIN``                       |
+| ``method``          | Method of generating the Isochrones. This may either be ``RecursiveGrid``(*default*) or ``TIN``                       |
 +---------------------+-----------------------------------------------------------------------------------------------------------+
-| ``interval``        | Interval of the Isochrones in **seconds** e.g. ``300`` for 5 minutes. Default is ``300``                  |
+| ``interval``        | Interval of isochrones in **seconds** e.g. ``300`` for 5 minutes. The default is set to ``300``.                |
 +---------------------+-----------------------------------------------------------------------------------------------------------+
-| ``minutes``         | Maximum range of the analysis in **minutes** e.g. ``0-30``. Default is ``10``                             |
+| ``minutes``         | Maximum range of the analysis in **minutes** e.g. ``0-30``. The default is set to ``10``.                            |
 +---------------------+-----------------------------------------------------------------------------------------------------------+
-| ``api_key``         | ``your_api_key`` is placed in this parameter                                                              |
+| ``api_key``         | ``your_api_key`` is inserted within this parameter.                                                             |
 +---------------------+-----------------------------------------------------------------------------------------------------------+
 
-.. note:: The ``interval`` parameter has to be equal or smaller than the ``minutes`` parameter. For a maximum range of ``minutes=30`` the maximum interval would be ``interval=1800`` 
+.. note:: The ``interval`` parameter must be equal or smaller than the ``minutes`` parameter. For a maximum range of ``minutes=30`` the maximum interval would be ``interval=1800``.
 
 Example
 +++++++
 
-The `following example <http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&position=8.661367306640742,49.42859632294706&minutes=4&interval=120>`__ is rendered with the RecursiveGrid method and has a maximum range of 4 minutes with a 2 minute interval: ::
+The `following example <http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&position=8.661367306640742,49.42859632294706&minutes=4&interval=120>`__ is rendered with the RecursiveGrid method and has a maximum range of 4 minutes with a 2 minute set interval: ::
 
  http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&position=8.661367306640742,49.42859632294706&minutes=4&interval=120
 
-The result gives us two rings with a 2 minute distance: 
+The result gives us two isochrones with a corresponding 2 minute distance: 
 
 .. highlight:: xml
 
