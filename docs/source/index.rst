@@ -48,7 +48,6 @@ Contents:
    :maxdepth: 2
 
    contact
-   faq
    glossary
 
 
