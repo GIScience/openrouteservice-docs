@@ -1,75 +1,65 @@
 Glossary
 ========
 
-This is tho glossary where you can look up words or abbreviations you don't understand.
-
-
 .. glossary::
   :sorted:
 
   TMC
-  Traffic Message Channel
-    A road graph with real time traffic information to estimate the best route
+    The Traffic Message Channel (TMC) is a real time traffic information source in Germany which you may query within your route requests.
 
   API
-    An Interface 
+    An Application Programming Interface.
 
   API-Key
-    A code of authorization passed in to an API request as a parameter that identifies the requester
+    A code of authorization passed within a request as a parameter indentifying the individual or company.
 
   Car
-  	This pathing will avoid footways and bicycle lanes and uses highways, streets and ways cars are allowed on
+  	This route preference prefers highways, streets and tracks which cars are allowed to drive on.
 
   Pedestrian
-  	This routing algorithm uses footways and tries to avoid highways
+  	This route preference prefers footpaths and tries to avoid highways.
 
   Bicycle
-  	Uses bicycle ways if available, can also use footpaths where bicycle is allowed and streets
+  	This route preference prefers bicycle lanes and dedicated bicycle tracks. It also may also consume footpaths and streets where bicycles are allowed.
 
   Wheelchair
-  	This algorithm uses footways and tries to use the smothest surface type. In addition stairs will be avoided
+  	This route preference prefers footways, avoids stairs and aims for the smoothest surface types. 
 
   HeavyVehicle
-  	i dont know what kind of road this uses 
+  	This route preference prefers roads attributed for heavy vehicles and lowers the default speed.
 
   Fastest
-  	The fastest route uses speed limits etc.....
+  	This weight aims to find the fastest route between points.
 
   Shortest
-  	The shortest route ...
+  	This weight aims to find the shortest route between points.
 
   Recommended
-  	This mode will include POIs to give you a trip to remember
+  	This weight aims to find a healthy mixture of the aforementioned weights Fastest and Shortest.
 
   BicycleMTB
-  MTB
-  	Mountainbike profile
+  	This route preference prefers bicycle lanes and dedicated bicycle tracks. It also may also consume footpaths and streets where bicycles are allowed. Additionally it prefers tracks and ways attributed especially to mountain bikes.
 
   BicycleRacer
-  Racer
-  	Racing bike profile
+  	This route preference prefers bicycle lanes and dedicated bicycle tracks. It also may also consume footpaths and streets where bicycles are allowed. Additionally it prefers bicycle paths however avoids rough surfaces.
 
   BicycleTouring
-  Touring
-  	Touring bike profile
+  	This route preference prefers bicycle lanes and dedicated bicycle tracks. It also may also consume footpaths and streets where bicycles are allowed. Additionally it prefers bicycle paths with attributes related to scenic environments.
 
   BicycleSafety
-  Safety
-  	safety profile
+  	This route preference prefers bicycle lanes and dedicated bicycle tracks. It also may also consume footpaths and streets where bicycles are allowed. Additionally it tries to avoid highways.
 
   Goods
-  	Goods profile
+  	This is a vehicle type of HeavyVehicle and prefers broad roads.
 
   Bus
-  	Bus profile
+  	This is a vehicle type of HeavyVehicle and prefers bus lanes.
 
   Agricultural
-  	Agricultural profile
+  	This is a vehicle type of HeavyVehicle and prefers agricultural tracks and roads.
 
   Foresty
-  	Foresty profile
+  	This is a vehicle type of HeavyVehicle and prefers forestry tracks and roads.
 
   Delivery
-  	Delivery profile
-
-.. this section needs revision
+  	This is a vehicle type of HeavyVehicle and prefers roads allowed for delivery.
