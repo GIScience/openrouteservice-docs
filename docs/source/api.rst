@@ -12,13 +12,13 @@ The ORS API allows for programmatic access to our services. We offer a GET schem
 Routing API
 ------------
 
-To routing endpoint is defined as follows::
+The routing endpoint is defined as follows::
 
  http://openls.geog.uni-heidelberg.de/route?
 
 .. _par-ref:
 
-The query parameters are added to the end of the endpoint with `query string encoding <https://en.wikipedia.org/wiki/Query_string>`. Hence the pattern for parameter usage is:
+The query parameters are added to the end of the endpoint with `query string encoding <https://en.wikipedia.org/wiki/Query_string>`__. Hence the pattern for parameter usage is:
 
 .. centered:: **&**\ ``parameter``\ **=**\ ``value``
 
@@ -65,7 +65,7 @@ For further information regarding the specific routing profiles, distance units 
 Optional Parameters
 +++++++++++++++++++
 
-Parameters in this section are not required for a functional request, however these may contribute to the accuracy of your query. Some parameters only work with specific routing profiles. ``noStepd`` for example merely works with the **Pedestrian** or one of the **Bicycle** profiles. Please be aware which specific route preference you chose.
+Parameters in this section are not required for a functional request, however these may contribute to the accuracy of your query. Some parameters only work with specific routing profiles. ``noSteps`` for example merely works with the **Pedestrian** or one of the **Bicycle** profiles. Please be aware which specific route preference you chose.
 
 
 General Parameters
@@ -92,7 +92,7 @@ General Parameters
 .. | ``useTMC``   | Set ``True`` to obtain traffic information from your route. |
 .. +--------------+---------------------------------------------------------------------------+
 
-..TODO: Add languages
+.. TODO: Add languages
 
 __ routepref_
 
@@ -156,7 +156,7 @@ For the ``Bicycle`` profiles we offer additional filters to finetune your route.
 +---------------+------------------------------------------------------------------------------------------------------------+
 | ``surface``   | ``True`` to retrieve way surface information for your route.                                               |
 +---------------+------------------------------------------------------------------------------------------------------------+
-| ``noHills``   | ``True`` to steep gradients. You may either set this option or set the ``level`` parameter.                |
+| ``noHills``   | ``True`` to avoid steep gradients. You may either set this option or set the ``level`` parameter.          |
 +---------------+------------------------------------------------------------------------------------------------------------+
 | ``level``     | Corresponds to the fitness level. ``0`` = Novice, ``1`` = Moderate, ``2`` = Amateur, ``3`` = Pro.          |
 +---------------+------------------------------------------------------------------------------------------------------------+
@@ -176,7 +176,7 @@ For the ``HeavyVehicle`` profiles we offer additional filters to finetune your r
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+
 | Parameter          | Description                                                                                                              |
 +====================+==========================================================================================================================+
-| ``haz``            | ``True`` for an appropriate routing while delivering hazardous goods and avoids water protected areas.                   |
+| ``haz``            | ``True`` for an appropriate routing while delivering hazardous goods and avoiding water protected areas.                 |
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+
 | ``value_weight``   | Maximum weight restriction in tons.                                                                                      |
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+
@@ -333,27 +333,27 @@ Response Steepness List
 +--------+----------+
 | Value  | Encoding |
 +========+==========+
-| ``-5`` |          |
+| ``-5`` | 5% fall  |
 +--------+----------+
-| ``-4`` |          |
+| ``-4`` | 4% fall  |
 +--------+----------+
-| ``-3`` |          |
+| ``-3`` | 3% fall  |
 +--------+----------+
-| ``-2`` |          |
+| ``-2`` | 2% fall  |
 +--------+----------+
-| ``-1`` |          |
+| ``-1`` | 1% fall  |
 +--------+----------+
 | ``0``  | 0%       |
 +--------+----------+
-| ``1``  |          |
+| ``1``  | 1% rise  |
 +--------+----------+
-| ``2``  |          |
+| ``2``  | 2% rise  |
 +--------+----------+
-| ``3``  |          |
+| ``3``  | 3% rise  |
 +--------+----------+
-| ``4``  |          |
+| ``4``  | 4% rise  |
 +--------+----------+
-| ``5``  |          |
+| ``5``  | 5% rise  |
 +--------+----------+
 
 
@@ -371,7 +371,7 @@ In that case there aren't any roads in the vicinity of the start and endpoint. P
 Geocoding API
 -------------
 
-To geocoding endpoint is defined as follows::
+The geocoding endpoint is defined as follows::
 
  http://openls.geog.uni-heidelberg.de/geocode?
 
@@ -533,30 +533,30 @@ As a result you will obtain the full address as well as the distance from the qu
 Accessibility Analysis API
 --------------------------
 
-To accessibility analysis endpoint is defined as follows::
+The accessibility analysis endpoint is defined as follows::
 
  http://openls.geog.uni-heidelberg.de/analyse?
 
 Parameters
 ++++++++++
 
- As minimum requirements this endpoint will need the position and api_key parameters. There are default values for the remaining parameters. 
+As minimum requirements this endpoint will need the position and api_key parameters. There are default values for the remaining parameters. 
 
-+---------------------+---------------------------------------------------------------------------------------------------------+
-| Parameter           | Description                                                                                             |
-+=====================+=========================================================================================================+
-| ``position``        | Pair of ``longitude,latitude`` coordinates for the specific point of interest.                          |
-+---------------------+---------------------------------------------------------------------------------------------------------+
-| ``routePreference`` | The route preference which may be ``Car``(*default*), ``Pedestrian``, ``Bicycle`` and ``HeavyVehicle``. |
-+---------------------+---------------------------------------------------------------------------------------------------------+
-| ``method``          | Method of generating the Isochrones. This may either be ``RecursiveGrid``(*default*) or ``TIN``         |
-+---------------------+---------------------------------------------------------------------------------------------------------+
-| ``interval``        | Interval of isochrones in **seconds** e.g. ``300`` for 5 minutes. The default is set to ``300``.        |
-+---------------------+---------------------------------------------------------------------------------------------------------+
-| ``minutes``         | Maximum range of the analysis in **minutes** e.g. ``0-30``. The default is set to ``10``.               |
-+---------------------+---------------------------------------------------------------------------------------------------------+
-| ``api_key``         | ``your_api_key`` is inserted within this parameter.                                                     |
-+---------------------+---------------------------------------------------------------------------------------------------------+
++---------------------+-----------------------------------------------------------------------------------------------------------+
+| Parameter           | Description                                                                                               |
++=====================+===========================================================================================================+
+| ``position``        | Pair of ``longitude,latitude`` coordinates for the specific point of interest.                            |
++---------------------+-----------------------------------------------------------------------------------------------------------+
+| ``routePreference`` | The route preference which may be ``Car``\ (*default*), ``Pedestrian``, ``Bicycle`` and ``HeavyVehicle``. |
++---------------------+-----------------------------------------------------------------------------------------------------------+
+| ``method``          | Method of generating the Isochrones. This may either be ``RecursiveGrid``\ (*default*) or ``TIN``         |
++---------------------+-----------------------------------------------------------------------------------------------------------+
+| ``interval``        | Interval of isochrones in **seconds** e.g. ``300`` for 5 minutes. The default is set to ``300``.          |
++---------------------+-----------------------------------------------------------------------------------------------------------+
+| ``minutes``         | Maximum range of the analysis in **minutes** e.g. ``0-30``. The default is set to ``10``.                 |
++---------------------+-----------------------------------------------------------------------------------------------------------+
+| ``api_key``         | ``your_api_key`` is inserted within this parameter.                                                       |
++---------------------+-----------------------------------------------------------------------------------------------------------+
 
 .. note:: The ``interval`` parameter must be equal or smaller than the ``minutes`` parameter. For a maximum range of ``minutes=30`` the maximum interval would be ``interval=1800``.
 

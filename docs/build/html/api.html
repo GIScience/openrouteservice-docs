@@ -204,11 +204,11 @@
 <hr class="docutils" />
 <div class="section" id="routing-api">
 <h2>Routing API<a class="headerlink" href="#routing-api" title="Permalink to this headline">¶</a></h2>
-<p>To routing endpoint is defined as follows:</p>
+<p>The routing endpoint is defined as follows:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/route?
 </pre></div>
 </div>
-<p id="par-ref">The query parameters are added to the end of the endpoint with <cite>query string encoding &lt;https://en.wikipedia.org/wiki/Query_string&gt;</cite>. Hence the pattern for parameter usage is:</p>
+<p id="par-ref">The query parameters are added to the end of the endpoint with <a class="reference external" href="https://en.wikipedia.org/wiki/Query_string">query string encoding</a>. Hence the pattern for parameter usage is:</p>
 <p class="centered">
 <strong><strong>&amp;</strong><code class="docutils literal"><span class="pre">parameter</span></code><strong>=</strong><code class="docutils literal"><span class="pre">value</span></code></strong></p><p>We distinguish between two types of parameters:</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -278,7 +278,7 @@
 </div>
 <div class="section" id="optional-parameters">
 <h3>Optional Parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this headline">¶</a></h3>
-<p>Parameters in this section are not required for a functional request, however these may contribute to the accuracy of your query. Some parameters only work with specific routing profiles. <code class="docutils literal"><span class="pre">noStepd</span></code> for example merely works with the <strong>Pedestrian</strong> or one of the <strong>Bicycle</strong> profiles. Please be aware which specific route preference you chose.</p>
+<p>Parameters in this section are not required for a functional request, however these may contribute to the accuracy of your query. Some parameters only work with specific routing profiles. <code class="docutils literal"><span class="pre">noSteps</span></code> for example merely works with the <strong>Pedestrian</strong> or one of the <strong>Bicycle</strong> profiles. Please be aware which specific route preference you chose.</p>
 <div class="section" id="general-parameters">
 <h4>General Parameters<a class="headerlink" href="#general-parameters" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
@@ -315,7 +315,6 @@
 </tr>
 </tbody>
 </table>
-<p>..TODO: Add languages</p>
 </div>
 <div class="section" id="routepref">
 <h4>routepref<a class="headerlink" href="#routepref" title="Permalink to this headline">¶</a></h4>
@@ -414,7 +413,7 @@
 <td><code class="docutils literal"><span class="pre">True</span></code> to retrieve way surface information for your route.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">noHills</span></code></td>
-<td><code class="docutils literal"><span class="pre">True</span></code> to steep gradients. You may either set this option or set the <code class="docutils literal"><span class="pre">level</span></code> parameter.</td>
+<td><code class="docutils literal"><span class="pre">True</span></code> to avoid steep gradients. You may either set this option or set the <code class="docutils literal"><span class="pre">level</span></code> parameter.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">level</span></code></td>
 <td>Corresponds to the fitness level. <code class="docutils literal"><span class="pre">0</span></code> = Novice, <code class="docutils literal"><span class="pre">1</span></code> = Moderate, <code class="docutils literal"><span class="pre">2</span></code> = Amateur, <code class="docutils literal"><span class="pre">3</span></code> = Pro.</td>
@@ -445,7 +444,7 @@
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">haz</span></code></td>
-<td><code class="docutils literal"><span class="pre">True</span></code> for an appropriate routing while delivering hazardous goods and avoids water protected areas.</td>
+<td><code class="docutils literal"><span class="pre">True</span></code> for an appropriate routing while delivering hazardous goods and avoiding water protected areas.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">value_weight</span></code></td>
 <td>Maximum weight restriction in tons.</td>
@@ -652,37 +651,37 @@
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">-5</span></code></td>
-<td>&nbsp;</td>
+<td>5% fall</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">-4</span></code></td>
-<td>&nbsp;</td>
+<td>4% fall</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">-3</span></code></td>
-<td>&nbsp;</td>
+<td>3% fall</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">-2</span></code></td>
-<td>&nbsp;</td>
+<td>2% fall</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">-1</span></code></td>
-<td>&nbsp;</td>
+<td>1% fall</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">0</span></code></td>
 <td>0%</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">1</span></code></td>
-<td>&nbsp;</td>
+<td>1% rise</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">2</span></code></td>
-<td>&nbsp;</td>
+<td>2% rise</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">3</span></code></td>
-<td>&nbsp;</td>
+<td>3% rise</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">4</span></code></td>
-<td>&nbsp;</td>
+<td>4% rise</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">5</span></code></td>
-<td>&nbsp;</td>
+<td>5% rise</td>
 </tr>
 </tbody>
 </table>
@@ -701,7 +700,7 @@
 </div>
 <div class="section" id="geocoding-api">
 <h2>Geocoding API<a class="headerlink" href="#geocoding-api" title="Permalink to this headline">¶</a></h2>
-<p>To geocoding endpoint is defined as follows:</p>
+<p>The geocoding endpoint is defined as follows:</p>
 <div class="highlight-py"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/geocode?
 </pre></div>
 </div>
@@ -865,18 +864,17 @@
 <hr class="docutils" />
 <div class="section" id="accessibility-analysis-api">
 <h2>Accessibility Analysis API<a class="headerlink" href="#accessibility-analysis-api" title="Permalink to this headline">¶</a></h2>
-<p>To accessibility analysis endpoint is defined as follows:</p>
+<p>The accessibility analysis endpoint is defined as follows:</p>
 <div class="highlight-py"><div class="highlight"><pre><span></span>http://openls.geog.uni-heidelberg.de/analyse?
 </pre></div>
 </div>
 <div class="section" id="parameters">
 <h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div>As minimum requirements this endpoint will need the position and api_key parameters. There are default values for the remaining parameters.</div></blockquote>
+<p>As minimum requirements this endpoint will need the position and api_key parameters. There are default values for the remaining parameters.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="17%" />
-<col width="83%" />
+<col width="16%" />
+<col width="84%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -888,10 +886,10 @@
 <td>Pair of <code class="docutils literal"><span class="pre">longitude,latitude</span></code> coordinates for the specific point of interest.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">routePreference</span></code></td>
-<td>The route preference which may be <code class="docutils literal"><span class="pre">Car``(*default*),</span> <span class="pre">``Pedestrian</span></code>, <code class="docutils literal"><span class="pre">Bicycle</span></code> and <code class="docutils literal"><span class="pre">HeavyVehicle</span></code>.</td>
+<td>The route preference which may be <code class="docutils literal"><span class="pre">Car</span></code>(<em>default</em>), <code class="docutils literal"><span class="pre">Pedestrian</span></code>, <code class="docutils literal"><span class="pre">Bicycle</span></code> and <code class="docutils literal"><span class="pre">HeavyVehicle</span></code>.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">method</span></code></td>
-<td>Method of generating the Isochrones. This may either be <code class="docutils literal"><span class="pre">RecursiveGrid``(*default*)</span> <span class="pre">or</span> <span class="pre">``TIN</span></code></td>
+<td>Method of generating the Isochrones. This may either be <code class="docutils literal"><span class="pre">RecursiveGrid</span></code>(<em>default</em>) or <code class="docutils literal"><span class="pre">TIN</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">interval</span></code></td>
 <td>Interval of isochrones in <strong>seconds</strong> e.g. <code class="docutils literal"><span class="pre">300</span></code> for 5 minutes. The default is set to <code class="docutils literal"><span class="pre">300</span></code>.</td>

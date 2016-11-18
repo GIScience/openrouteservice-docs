@@ -1,7 +1,7 @@
 API Keys
 ========
 
-Before you can access the endpoints of the `OpenRouteService API <http://www.openrouteservice.org>` you will have to contact us to obtain an :term:`API-Key`. 
+Before you can access the endpoints of the `OpenRouteService API <http://www.openrouteservice.org>`__ you will have to contact us to obtain an :term:`API-Key`. 
 
 .. 
     openrouteservice@geog.uni-heidelberg.de.

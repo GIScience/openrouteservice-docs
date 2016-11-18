@@ -79,4 +79,5 @@ Licence
 
 Content is available under `Creative Commons Attribution-ShareAlike 2.0 license <http://wiki.openstreetmap.org/wiki/OpenStreetMap_License>`__.
 Version last modified: 11.02.2016 
+
 .. date should match license modify date
