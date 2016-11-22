@@ -99,6 +99,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#routepref">routepref</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#avoidable-features-parameters">Avoidable Features Parameters</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bicycle-specific-parameters">Bicycle Specific Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wheelchair-specific-parameters">Wheelchair Specific Parameters</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#surtype-encoding">surtype Encoding</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#heavyvehicle-specific-parameters">HeavyVehicle Specific Parameters</a></li>
 </ul>
 </li>
@@ -429,6 +433,64 @@
 <p class="last">The <code class="docutils literal"><span class="pre">steep</span></code> parameter can only be set if <code class="docutils literal"><span class="pre">noHills</span></code> or <code class="docutils literal"><span class="pre">level</span></code> is defined. Also you can only use <code class="docutils literal"><span class="pre">noHills</span></code> or <code class="docutils literal"><span class="pre">level</span></code> at a time.</p>
 </div>
 </div>
+<div class="section" id="wheelchair-specific-parameters">
+<h4>Wheelchair Specific Parameters<a class="headerlink" href="#wheelchair-specific-parameters" title="Permalink to this headline">¶</a></h4>
+<p>For the <code class="docutils literal"><span class="pre">Wheelchair</span></code> profile we offer additional filters to finetune your route.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="93%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">surtype</span></code></td>
+<td>Corresponds to the surface type. Ranges from type <code class="docutils literal"><span class="pre">1</span></code> which only uses smooth surface types to <code class="docutils literal"><span class="pre">5</span></code> which uses all traversable surfaces. Default is set to <code class="docutils literal"><span class="pre">2</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">incline</span></code></td>
+<td>Relates to the maximum incline as a percentage. <code class="docutils literal"><span class="pre">3</span></code>, <code class="docutils literal"><span class="pre">6</span></code>(<em>default</em>), <code class="docutils literal"><span class="pre">10</span></code>, <code class="docutils literal"><span class="pre">15</span></code> or <code class="docutils literal"><span class="pre">any</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">curb</span></code></td>
+<td>Corresponds to the maximum height of the soped curb in centimeter. <code class="docutils literal"><span class="pre">3</span></code>, <code class="docutils literal"><span class="pre">6</span></code>(<em>default</em>), <code class="docutils literal"><span class="pre">10</span></code> or <code class="docutils literal"><span class="pre">any</span></code></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="surtype-encoding">
+<h5>surtype Encoding<a class="headerlink" href="#surtype-encoding" title="Permalink to this headline">¶</a></h5>
+<p>This is the encoding for the <code class="docutils literal"><span class="pre">surtype</span></code> values which refer to a specific surface type.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">1</span></code></td>
+<td>concrete, asphalt</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">2</span></code></td>
+<td>flattened cobblestone and better</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">3</span></code></td>
+<td>cobblestone and better</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">4</span></code></td>
+<td>compacted</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">5</span></code></td>
+<td>all traversable surfaces</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <div class="section" id="heavyvehicle-specific-parameters">
 <h4>HeavyVehicle Specific Parameters<a class="headerlink" href="#heavyvehicle-specific-parameters" title="Permalink to this headline">¶</a></h4>
 <p>For the <code class="docutils literal"><span class="pre">HeavyVehicle</span></code> profiles we offer additional filters to finetune your route according to specific vehicle options.</p>
@@ -641,8 +703,8 @@
 <h4>Response Steepness List<a class="headerlink" href="#response-steepness-list" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
 <colgroup>
-<col width="44%" />
-<col width="56%" />
+<col width="38%" />
+<col width="62%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Value</th>
@@ -651,37 +713,37 @@
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">-5</span></code></td>
-<td>5% fall</td>
+<td>&gt;16% fall</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">-4</span></code></td>
-<td>4% fall</td>
+<td>12-15% fall</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">-3</span></code></td>
-<td>3% fall</td>
+<td>7-11% fall</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">-2</span></code></td>
-<td>2% fall</td>
+<td>4-6% fall</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">-1</span></code></td>
-<td>1% fall</td>
+<td>1-3% fall</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">0</span></code></td>
 <td>0%</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">1</span></code></td>
-<td>1% rise</td>
+<td>1-3% rise</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">2</span></code></td>
-<td>2% rise</td>
+<td>4-6% rise</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">3</span></code></td>
-<td>3% rise</td>
+<td>7-11% rise</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">4</span></code></td>
-<td>4% rise</td>
+<td>12-15% rise</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">5</span></code></td>
-<td>5% rise</td>
+<td>&gt;16% rise</td>
 </tr>
 </tbody>
 </table>
