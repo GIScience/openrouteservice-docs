@@ -273,7 +273,7 @@ This example corresponds to a route for the route preference Car from a starting
 	 </xls:Response>
 	</xls:XLS>
 
-.. highlight:: py
+.. highlight:: none
 
 ..
  Further examples (without response):
@@ -401,6 +401,11 @@ Currently we are not supporting an error coding. If your route could't be render
 
 In that case there aren't any roads in the vicinity of the start and endpoint. Please try to place your points closer to the road network.
 
+Restful Webservice Route Request
+++++++++++++++++++++++++++++++++++
+
+This `Link <http://openls.geog.uni-heidelberg.de/routing&help>`__ contains a testclient with meta information and schema file in which an example for a routing request can be viewed.
+
 Geocoding API
 -------------
 
@@ -520,7 +525,7 @@ As a response you will obtain the following xml file with exactly 3 matches:
 	 </xls:Response>
 	</xls:XLS>
 
-.. highlight:: py
+.. highlight:: none
 
 
 The following example shows a `reverse geocoding example <http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5>`__ which will return exactly one object:
@@ -559,7 +564,12 @@ As a result you will obtain the full address as well as the distance from the qu
   </xls:Response>
  </xls:XLS>
 
-.. highlight:: py
+.. highlight:: none
+
+Restful Webservice Geocode Request
+++++++++++++++++++++++++++++++++++
+
+This `Link <http://openls.geog.uni-heidelberg.de/geocoding&help>`__ contains a testclient with meta information and schema file in which an example for a geocode request can be viewed. The reverse geocode request can be found `here <http://openls.geog.uni-heidelberg.de/reversegeocoding&help>`__.
 
 --------
 
@@ -735,10 +745,9 @@ The result gives us two isochrones with a corresponding 2 minute distance:
   </aas:Response>
  </aas:AAS>
 
-.. highlight:: py
+.. highlight:: none
 
-..
-	------------
-	Response Type
-	--------------
-	response type text
+Restful Webservice Accessibility Analysis Request
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This `Link <http://openls.geog.uni-heidelberg.de/analysis&help>`__ contains a testclient with meta information and schema file in which an example for a AA request can be viewed.

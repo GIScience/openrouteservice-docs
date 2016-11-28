@@ -114,17 +114,20 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#errors">Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restful-webservice-route-request">Restful Webservice Route Request</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#geocoding-api">Geocoding API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#geocoding-parameters">Geocoding Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#reverse-geocoding-parameters">Reverse Geocoding Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restful-webservice-geocode-request">Restful Webservice Geocode Request</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#accessibility-analysis-api">Accessibility Analysis API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restful-webservice-accessibility-analysis-request">Restful Webservice Accessibility Analysis Request</a></li>
 </ul>
 </li>
 </ul>
@@ -138,7 +141,9 @@
 </ul>
 <p class="caption"><span class="caption-text">Help Section</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="data.html">ORS Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="donate.html">Donate for ORS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
 
@@ -752,18 +757,22 @@
 <div class="section" id="errors">
 <h3>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h3>
 <p>Currently we are not supporting an error coding. If your route could&#8217;t be rendered the xml file will contain an error Message similar to this:</p>
-<div class="highlight-py"><div class="highlight"><pre>&lt;xls:ErrorList&gt;
+<div class="highlight-none"><div class="highlight"><pre>&lt;xls:ErrorList&gt;
  &lt;xls:Error errorCode=&quot;Unknown&quot; severity=&quot;Error&quot; locationPath=&quot;OpenLS Route Service - RSListener, Message: &quot; message=&quot;Internal Service Exception: java.lang.Exception Internal Service Exception Message: Cannot find point 0: 20.38325080173755,14.721679687500002 ...&quot;/&gt;
 &lt;/xls:ErrorList&gt;
 </pre></div>
 </div>
 <p>In that case there aren&#8217;t any roads in the vicinity of the start and endpoint. Please try to place your points closer to the road network.</p>
 </div>
+<div class="section" id="restful-webservice-route-request">
+<h3>Restful Webservice Route Request<a class="headerlink" href="#restful-webservice-route-request" title="Permalink to this headline">¶</a></h3>
+<p>This <a class="reference external" href="http://openls.geog.uni-heidelberg.de/routing&amp;help">Link</a> contains a testclient with meta information and schema file in which an example for a routing request can be viewed.</p>
+</div>
 </div>
 <div class="section" id="geocoding-api">
 <h2>Geocoding API<a class="headerlink" href="#geocoding-api" title="Permalink to this headline">¶</a></h2>
 <p>The geocoding endpoint is defined as follows:</p>
-<div class="highlight-py"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?
+<div class="highlight-none"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?
 </pre></div>
 </div>
 <p>We distinguish between geocoding and reverse geocoding depending on your input.</p>
@@ -828,7 +837,7 @@
 <div class="section" id="example">
 <span id="example-ref2"></span><h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>The following example shows a <a class="reference external" href="http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5">search request</a> for <em>Heidelberg, Mathematikon</em> with a maximum of 10 response objects:</p>
-<div class="highlight-py"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<div class="highlight-none"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 </pre></div>
 </div>
 <p>As a response you will obtain the following xml file with exactly 3 matches:</p>
@@ -892,7 +901,7 @@
 </pre></div>
 </div>
 <p>The following example shows a <a class="reference external" href="http://openls.geog.uni-heidelberg.de/geocode?pos=13.412752.5220&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5">reverse geocoding example</a> which will return exactly one object:</p>
-<div class="highlight-py"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<div class="highlight-none"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
 </pre></div>
 </div>
 <p>As a result you will obtain the full address as well as the distance from the queried point to the center of the response object:</p>
@@ -922,12 +931,16 @@
 </pre></div>
 </div>
 </div>
+<div class="section" id="restful-webservice-geocode-request">
+<h3>Restful Webservice Geocode Request<a class="headerlink" href="#restful-webservice-geocode-request" title="Permalink to this headline">¶</a></h3>
+<p>This <a class="reference external" href="http://openls.geog.uni-heidelberg.de/geocoding&amp;help">Link</a> contains a testclient with meta information and schema file in which an example for a geocode request can be viewed. The reverse geocode request can be found <a class="reference external" href="http://openls.geog.uni-heidelberg.de/reversegeocoding&amp;help">here</a>.</p>
+</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="accessibility-analysis-api">
 <h2>Accessibility Analysis API<a class="headerlink" href="#accessibility-analysis-api" title="Permalink to this headline">¶</a></h2>
 <p>The accessibility analysis endpoint is defined as follows:</p>
-<div class="highlight-py"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/analyse?
+<div class="highlight-none"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/analyse?
 </pre></div>
 </div>
 <div class="section" id="parameters">
@@ -972,7 +985,7 @@
 <div class="section" id="id2">
 <h3>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference external" href="http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&amp;position=8.661367306640742,49.42859632294706&amp;minutes=4&amp;interval=120">following example</a> is rendered with the RecursiveGrid method and has a maximum range of 4 minutes with a 2 minute set interval:</p>
-<div class="highlight-py"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&amp;position=8.661367306640742,49.42859632294706&amp;minutes=4&amp;interval=120
+<div class="highlight-none"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&amp;position=8.661367306640742,49.42859632294706&amp;minutes=4&amp;interval=120
 </pre></div>
 </div>
 <p>The result gives us two isochrones with a corresponding 2 minute distance:</p>
@@ -1106,6 +1119,10 @@
 <span class="nt">&lt;/aas:AAS&gt;</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="restful-webservice-accessibility-analysis-request">
+<h3>Restful Webservice Accessibility Analysis Request<a class="headerlink" href="#restful-webservice-accessibility-analysis-request" title="Permalink to this headline">¶</a></h3>
+<p>This <a class="reference external" href="http://openls.geog.uni-heidelberg.de/analysis&amp;help">Link</a> contains a testclient with meta information and schema file in which an example for a AA request can be viewed.</p>
 </div>
 </div>
 </div>

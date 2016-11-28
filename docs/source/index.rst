@@ -47,7 +47,9 @@ Contents:
    :caption: Help Section
    :maxdepth: 2
 
+   data
    contact
+   donate
    glossary
 
 
