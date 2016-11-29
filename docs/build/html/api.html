@@ -114,20 +114,20 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#errors">Errors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#restful-webservice-route-request">Restful Webservice Route Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restful-webservice">Restful Webservice</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#geocoding-api">Geocoding API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#geocoding-parameters">Geocoding Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#reverse-geocoding-parameters">Reverse Geocoding Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#restful-webservice-geocode-request">Restful Webservice Geocode Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Restful Webservice</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#accessibility-analysis-api">Accessibility Analysis API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#restful-webservice-accessibility-analysis-request">Restful Webservice Accessibility Analysis Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Restful Webservice</a></li>
 </ul>
 </li>
 </ul>
@@ -142,6 +142,7 @@
 <p class="caption"><span class="caption-text">Help Section</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="data.html">ORS Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pub.html">Related Publications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
 <li class="toctree-l1"><a class="reference internal" href="donate.html">Donate for ORS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
@@ -537,8 +538,8 @@
 </div>
 <div class="section" id="examples">
 <span id="example-ref"></span><h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
-<p>The shortest version of a full functioning <a class="reference external" href="http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;end=9.2556609,49.2397316&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5">query</a> would comprise the following parameters:</p>
-<div class="highlight-python"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;end=9.2556609,49.2397316&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<p>The shortest version of a full functioning <a class="reference external" href="http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;end=9.2556609,49.2397316&amp;api_key=ee0b8233adff52ce9fd6afc2a2859a28">query</a> would comprise the following parameters:</p>
+<div class="highlight-python"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&amp;end=9.2556609,49.2397316&amp;api_key=ee0b8233adff52ce9fd6afc2a2859a28
 </pre></div>
 </div>
 <p>This example corresponds to a route for the route preference Car from a starting point to a destination with no direction-instructions. The distance values will be returned in kilometers and the route weight is set to <cite>Shortest</cite>. The response will be in the following format:</p>
@@ -764,8 +765,8 @@
 </div>
 <p>In that case there aren&#8217;t any roads in the vicinity of the start and endpoint. Please try to place your points closer to the road network.</p>
 </div>
-<div class="section" id="restful-webservice-route-request">
-<h3>Restful Webservice Route Request<a class="headerlink" href="#restful-webservice-route-request" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="restful-webservice">
+<h3>Restful Webservice<a class="headerlink" href="#restful-webservice" title="Permalink to this headline">¶</a></h3>
 <p>This <a class="reference external" href="http://openls.geog.uni-heidelberg.de/routing&amp;help">Link</a> contains a testclient with meta information and schema file in which an example for a routing request can be viewed.</p>
 </div>
 </div>
@@ -836,8 +837,8 @@
 </div>
 <div class="section" id="example">
 <span id="example-ref2"></span><h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
-<p>The following example shows a <a class="reference external" href="http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5">search request</a> for <em>Heidelberg, Mathematikon</em> with a maximum of 10 response objects:</p>
-<div class="highlight-none"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<p>The following example shows a <a class="reference external" href="http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=ee0b8233adff52ce9fd6afc2a2859a28">search request</a> for <em>Heidelberg, Mathematikon</em> with a maximum of 10 response objects:</p>
+<div class="highlight-none"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&amp;MaxResponse=10&amp;api_key=ee0b8233adff52ce9fd6afc2a2859a28
 </pre></div>
 </div>
 <p>As a response you will obtain the following xml file with exactly 3 matches:</p>
@@ -900,8 +901,8 @@
 <span class="nt">&lt;/xls:XLS&gt;</span>
 </pre></div>
 </div>
-<p>The following example shows a <a class="reference external" href="http://openls.geog.uni-heidelberg.de/geocode?pos=13.412752.5220&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5">reverse geocoding example</a> which will return exactly one object:</p>
-<div class="highlight-none"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&amp;api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+<p>The following example shows a <a class="reference external" href="http://openls.geog.uni-heidelberg.de/geocode?pos=13.412752.5220&amp;api_key=ee0b8233adff52ce9fd6afc2a2859a28">reverse geocoding example</a> which will return exactly one object:</p>
+<div class="highlight-none"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&amp;api_key=ee0b8233adff52ce9fd6afc2a2859a28
 </pre></div>
 </div>
 <p>As a result you will obtain the full address as well as the distance from the queried point to the center of the response object:</p>
@@ -931,8 +932,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="restful-webservice-geocode-request">
-<h3>Restful Webservice Geocode Request<a class="headerlink" href="#restful-webservice-geocode-request" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Restful Webservice<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>This <a class="reference external" href="http://openls.geog.uni-heidelberg.de/geocoding&amp;help">Link</a> contains a testclient with meta information and schema file in which an example for a geocode request can be viewed. The reverse geocode request can be found <a class="reference external" href="http://openls.geog.uni-heidelberg.de/reversegeocoding&amp;help">here</a>.</p>
 </div>
 </div>
@@ -982,8 +983,8 @@
 <p class="last">The <code class="docutils literal"><span class="pre">interval</span></code> parameter must be equal or smaller than the <code class="docutils literal"><span class="pre">minutes</span></code> parameter. For a maximum range of <code class="docutils literal"><span class="pre">minutes=30</span></code> the maximum interval would be <code class="docutils literal"><span class="pre">interval=1800</span></code>.</p>
 </div>
 </div>
-<div class="section" id="id2">
-<h3>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference external" href="http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&amp;position=8.661367306640742,49.42859632294706&amp;minutes=4&amp;interval=120">following example</a> is rendered with the RecursiveGrid method and has a maximum range of 4 minutes with a 2 minute set interval:</p>
 <div class="highlight-none"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/analyse?api_key=ee0b8233adff52ce9fd6afc2a2859a28&amp;position=8.661367306640742,49.42859632294706&amp;minutes=4&amp;interval=120
 </pre></div>
@@ -1120,8 +1121,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="restful-webservice-accessibility-analysis-request">
-<h3>Restful Webservice Accessibility Analysis Request<a class="headerlink" href="#restful-webservice-accessibility-analysis-request" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Restful Webservice<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>This <a class="reference external" href="http://openls.geog.uni-heidelberg.de/analysis&amp;help">Link</a> contains a testclient with meta information and schema file in which an example for a AA request can be viewed.</p>
 </div>
 </div>

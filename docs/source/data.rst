@@ -10,8 +10,8 @@ OpenRouteService does use open geographic data for providing routing services, o
 - **TMC traffic Messages:** `BASt <http://www.bast.de>`__
 - **ORS WebFrontend:** `on Github <https://github.com/GIScience/openrouteservice>`__ --> Please report & fix any issues `here <https://github.com/GIScience/openrouteservice/issues>`__
 
-OpenStreetMap use in OpenRouteService - Safety disclaimer
----------------------------------------------------------
+Safety Disclaimer
+-------------------
 
 In order to provide OpenRouteService and all related APIs, OpenRouteService uses OpenStreetMap as a free editable geographic dataset, to derive and process a routable graph for all currently offered modes of transportation. OpenStreetMap is not a complete or accurate map of the world and should not be used in such a manner that deficiencies, omissions, inaccuracies or errors could result in death, loss or injury. It is particularly important to realize that the maps might not be reliable. The maps are an iterative ongoing work-in-progress. OpenRouteService aims to provide maps, which can be relied upon, equally well, or better than other maps. The openly-editable wiki nature of the OpenStreetMap mapping system may help towards this goal, however it may also mean that there will always be some inaccuracies. You should make your own judgement about the accuracy of our maps. Always use our maps in conjunction with your senses, official sources and your common sense. 
 

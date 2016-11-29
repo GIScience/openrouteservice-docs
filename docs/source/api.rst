@@ -230,9 +230,9 @@ For the ``HeavyVehicle`` profiles we offer additional filters to finetune your r
 Examples
 ++++++++
 
-The shortest version of a full functioning `query <http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&end=9.2556609,49.2397316&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5>`__ would comprise the following parameters::
+The shortest version of a full functioning `query <http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&end=9.2556609,49.2397316&api_key=ee0b8233adff52ce9fd6afc2a2859a28>`__ would comprise the following parameters::
 
-  http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&end=9.2556609,49.2397316&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5	
+  http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&end=9.2556609,49.2397316&api_key=ee0b8233adff52ce9fd6afc2a2859a28	
 
 .. needs revision
 
@@ -401,7 +401,7 @@ Currently we are not supporting an error coding. If your route could't be render
 
 In that case there aren't any roads in the vicinity of the start and endpoint. Please try to place your points closer to the road network.
 
-Restful Webservice Route Request
+Restful Webservice
 ++++++++++++++++++++++++++++++++++
 
 This `Link <http://openls.geog.uni-heidelberg.de/routing&help>`__ contains a testclient with meta information and schema file in which an example for a routing request can be viewed.
@@ -455,11 +455,11 @@ As a result of a reverse geocoding request you will always get exactly one match
 Example
 +++++++
 
-The following example shows a `search request <http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&MaxResponse=10&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5>`__ for *Heidelberg, Mathematikon* with a maximum of 10 response objects:
+The following example shows a `search request <http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&MaxResponse=10&api_key=ee0b8233adff52ce9fd6afc2a2859a28>`__ for *Heidelberg, Mathematikon* with a maximum of 10 response objects:
 
 :: 
 
-	http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&MaxResponse=10&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+	http://openls.geog.uni-heidelberg.de/geocode?FreeFormAddress=Heidelberg,%20Mathematikon&MaxResponse=10&api_key=ee0b8233adff52ce9fd6afc2a2859a28
 
 As a response you will obtain the following xml file with exactly 3 matches:
 
@@ -528,11 +528,11 @@ As a response you will obtain the following xml file with exactly 3 matches:
 .. highlight:: none
 
 
-The following example shows a `reverse geocoding example <http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5>`__ which will return exactly one object:
+The following example shows a `reverse geocoding example <http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&api_key=ee0b8233adff52ce9fd6afc2a2859a28>`__ which will return exactly one object:
 
 :: 
 
-	http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&api_key=eb85f2a6a61aafaebe7e2f2a89b102f5
+	http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&api_key=ee0b8233adff52ce9fd6afc2a2859a28
 
 As a result you will obtain the full address as well as the distance from the queried point to the center of the response object:
 
@@ -566,7 +566,7 @@ As a result you will obtain the full address as well as the distance from the qu
 
 .. highlight:: none
 
-Restful Webservice Geocode Request
+Restful Webservice
 ++++++++++++++++++++++++++++++++++
 
 This `Link <http://openls.geog.uni-heidelberg.de/geocoding&help>`__ contains a testclient with meta information and schema file in which an example for a geocode request can be viewed. The reverse geocode request can be found `here <http://openls.geog.uni-heidelberg.de/reversegeocoding&help>`__.
@@ -747,7 +747,7 @@ The result gives us two isochrones with a corresponding 2 minute distance:
 
 .. highlight:: none
 
-Restful Webservice Accessibility Analysis Request
+Restful Webservice 
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
 This `Link <http://openls.geog.uni-heidelberg.de/analysis&help>`__ contains a testclient with meta information and schema file in which an example for a AA request can be viewed.

@@ -11,7 +11,7 @@ If you intend to use OpenRouteService in your own applications please contact us
 Supported Web browsers
 ----------------------
 
-Please note that this project is developed by a small group of individuals. We don't have the man power to guarantee that this client works in all browsers and all operating systems. When accessing OpenRouteService.org as a Web frontend use, we currently provide full support of all provided services for any version of Mozilla Firefox, Google Chrome and Safari browsers. Any other web browser (e.g. Internet Explorer) is currently not supported.
+Please note that this project is developed by a small group of individuals. We don't have the man power to guarantee that this client works in all browsers and all operating systems. When accessing OpenRouteService.org as a Web frontend use, we currently provide full support of all provided services for any version of **Mozilla Firefox**, **Google Chrome** and **Safari** browsers. Any other web browser (e.g. Internet Explorer) is currently not supported.
 
 
 This site is structured into following sections:
@@ -48,6 +48,7 @@ Contents:
    :maxdepth: 2
 
    data
+   pub
    contact
    donate
    glossary
