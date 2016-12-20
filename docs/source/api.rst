@@ -84,6 +84,8 @@ General Parameters
 +------------------+-----------------------------------------------------------------------------------------------------------+
 | ``instructions`` | For routing instructions in your chosen language set to ``True``.                                         |
 +------------------+-----------------------------------------------------------------------------------------------------------+
+| ``geometry``     | Set to ``False`` to exclude the route geometry from your response. Default is set to ``True``             |
++------------------+-----------------------------------------------------------------------------------------------------------+
 | ``weighting``    | Type of route the algorithm chooses. Modes are ``Fastest`` (*default*), ``Shortest`` and ``Recommended``  |
 +------------------+-----------------------------------------------------------------------------------------------------------+
 | ``maxspeed``     | Maximum speed in km/h for the selected route profile e.g. ``maxspeed=10``.                                |
@@ -93,6 +95,8 @@ General Parameters
 .. +--------------+---------------------------------------------------------------------------+
 
 .. TODO: Add languages
+
+.. hint:: If you only want a route summary set ``geometry`` to ``false``. Instructions are still available when set to ``true``
 
 __ routepref_
 
