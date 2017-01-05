@@ -74,7 +74,7 @@ General Parameters
 +------------------+-----------------------------------------------------------------------------------------------------------+
 | Parameter        | Description                                                                                               |
 +==================+===========================================================================================================+
-| ``via``          | Ampersand-separated list of ``longitude,latitude`` coordinate pairs visited in order                      |
+| ``via``          | Semicolon-separated list of ``longitude,latitude`` coordinate pairs visited in order                      |
 +------------------+-----------------------------------------------------------------------------------------------------------+
 | ``lang``         | Language for the route instructions. The default language is set to English ``en``.                       |
 +------------------+-----------------------------------------------------------------------------------------------------------+
