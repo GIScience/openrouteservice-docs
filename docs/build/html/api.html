@@ -115,8 +115,14 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#bbox">Bbox</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#info">info</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#info">Info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Routing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Geocoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Reverse Geocoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Accessibility Analysis</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -199,11 +205,13 @@
 <li><a class="reference internal" href="#api-query">API Query</a></li>
 <li><a class="reference internal" href="#api-response">API Response</a></li>
 </ul>
+<hr class="docutils" />
 <div class="section" id="parameter-usage">
 <h2>Parameter Usage<a class="headerlink" href="#parameter-usage" title="Permalink to this headline">¶</a></h2>
 <p>The query parameters are added to the end of the service endpoint with <a class="reference external" href="https://en.wikipedia.org/wiki/Query_string">query string encoding</a>. Hence the pattern for parameter usage is:</p>
 <p class="centered">
 <strong><strong>&amp;</strong><code class="docutils literal"><span class="pre">parameter</span></code><strong>=</strong><code class="docutils literal"><span class="pre">value</span></code></strong></p></div>
+<hr class="docutils" />
 <div class="section" id="api-query">
 <h2>API Query<a class="headerlink" href="#api-query" title="Permalink to this headline">¶</a></h2>
 <p>The following section is about constructing the query. It contains information and hints on the available parameters for each service.</p>
@@ -257,6 +265,8 @@
 </tr>
 </tbody>
 </table>
+<p><a class="reference internal" href="#gc-response"><span>-&gt; see response</span></a></p>
+<p><a class="reference internal" href="#gc-example"><span>-&gt; see full example</span></a></p>
 </div>
 <div class="section" id="reverse-geocoding-parameters">
 <h4>Reverse Geocoding Parameters<a class="headerlink" href="#reverse-geocoding-parameters" title="Permalink to this headline">¶</a></h4>
@@ -286,6 +296,8 @@
 </tr>
 </tbody>
 </table>
+<p><a class="reference internal" href="#rgc-response"><span>-&gt; see response</span></a></p>
+<p><a class="reference internal" href="#rgc-example"><span>-&gt; see full example</span></a></p>
 </div>
 </div>
 <hr class="docutils" />
@@ -408,6 +420,8 @@
 </tr>
 </tbody>
 </table>
+<p><a class="reference internal" href="#aa-response"><span>-&gt; see response</span></a></p>
+<p><a class="reference internal" href="#aa-example1"><span>-&gt; see full example</span></a></p>
 </div>
 </div>
 </div>
@@ -457,13 +471,13 @@
 <p class="centered">
 <strong>This section is under construction</strong></p></div>
 <div class="section" id="geocoding">
-<h4>Geocoding<a class="headerlink" href="#geocoding" title="Permalink to this headline">¶</a></h4>
+<span id="gc-response"></span><h4>Geocoding<a class="headerlink" href="#geocoding" title="Permalink to this headline">¶</a></h4>
 <p>The geocoding result contains as many features (if existing) as the <code class="docutils literal"><span class="pre">limit</span></code> parameter was set to.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">geometry:</th><td class="field-body">holds the coordinates and the geometry <code class="docutils literal"><span class="pre">type</span></code>, wich is <code class="docutils literal"><span class="pre">Point</span></code></td>
+<tr class="field-odd field"><th class="field-name">geometry:</th><td class="field-body">holds the coordinates and the geometry <code class="docutils literal"><span class="pre">type</span></code> which is <code class="docutils literal"><span class="pre">Point</span></code></td>
 </tr>
 <tr class="field-even field"><th class="field-name">type:</th><td class="field-body">declares the feature as a feature</td>
 </tr>
@@ -471,8 +485,8 @@
 </tr>
 </tbody>
 </table>
-<p>The following <a class="reference external" href="http://129.206.7.158/geocoding-test?format=json&amp;query=Berlin&amp;limit=5&amp;api_key=427d7c4c488faffa37babe6a45d47ccd">example</a> would query:</p>
-<div class="highlight-none"><div class="highlight"><pre>http://129.206.7.158/geocoding-test?format=json&amp;query=Berlin&amp;limit=5&amp;api_key=427d7c4c488faffa37babe6a45d47ccd
+<p>The following <a class="reference external" href="http://129.206.7.158/geocoding-test?format=json&amp;query=Berlin&amp;limit=3&amp;api_key=427d7c4c488faffa37babe6a45d47ccd">example</a></p>
+<div class="highlight-python"><div class="highlight"><pre>http://129.206.7.158/geocoding-test?format=json&amp;query=Berlin&amp;limit=5&amp;api_key=427d7c4c488faffa37babe6a45d47ccd
 </pre></div>
 </div>
 <div class="highlight-json"><div class="highlight"><pre>      <span class="p">{</span>
@@ -524,55 +538,21 @@
               <span class="nt">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;Berlin&quot;</span><span class="p">,</span>
               <span class="nt">&quot;postal_code&quot;</span><span class="p">:</span> <span class="s2">&quot;14053&quot;</span>
             <span class="p">}</span>
-          <span class="p">},</span>
-          <span class="p">{</span>
-            <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="nt">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="mf">13.392906</span><span class="p">,</span>
-                <span class="mf">52.518591</span>
-              <span class="p">],</span>
-              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Point&quot;</span>
-            <span class="p">},</span>
-            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="nt">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;Germany&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;street&quot;</span><span class="p">:</span> <span class="s2">&quot;Unter den Linden&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Humboldt University in Berlin Mitte Campus&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;house_number&quot;</span><span class="p">:</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;Berlin&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;postal_code&quot;</span><span class="p">:</span> <span class="s2">&quot;10117&quot;</span>
-            <span class="p">}</span>
-          <span class="p">},</span>
-          <span class="p">{</span>
-            <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="nt">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="mf">13.393584</span><span class="p">,</span>
-                <span class="mf">52.518522</span>
-              <span class="p">],</span>
-              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Point&quot;</span>
-            <span class="p">},</span>
-            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="nt">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;Germany&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;street&quot;</span><span class="p">:</span> <span class="s2">&quot;Dorotheenstraße&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Humboldt University in Berlin Mitte Campus&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;Berlin&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;postal_code&quot;</span><span class="p">:</span> <span class="s2">&quot;10117&quot;</span>
-            <span class="p">}</span>
           <span class="p">}</span>
         <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p><a class="reference internal" href="#gc-example"><span>-&gt; see full example</span></a></p>
 </div>
 <div class="section" id="reverse-geocoding">
-<h4>Reverse Geocoding<a class="headerlink" href="#reverse-geocoding" title="Permalink to this headline">¶</a></h4>
+<span id="rgc-response"></span><h4>Reverse Geocoding<a class="headerlink" href="#reverse-geocoding" title="Permalink to this headline">¶</a></h4>
 <p>The reverse geocoding result contains one feature (if existing).</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">geometry:</th><td class="field-body">holds the coordinate and the geometry <code class="docutils literal"><span class="pre">type</span></code>, wich is <code class="docutils literal"><span class="pre">Point</span></code></td>
+<tr class="field-odd field"><th class="field-name">geometry:</th><td class="field-body">holds the coordinate and the geometry <code class="docutils literal"><span class="pre">type</span></code> which is <code class="docutils literal"><span class="pre">Point</span></code></td>
 </tr>
 <tr class="field-even field"><th class="field-name">type:</th><td class="field-body">declares the feature as a feature</td>
 </tr>
@@ -580,6 +560,10 @@
 </tr>
 </tbody>
 </table>
+<p>The following <a class="reference external" href="http://129.206.7.158/geocoding-test?format=json&amp;location=13.239515,52.514679&amp;api_key=427d7c4c488faffa37babe6a45d47ccd">example</a> would query:</p>
+<div class="highlight-python"><div class="highlight"><pre>http://129.206.7.158/geocoding-test?format=json&amp;location=13.239515,52.514679&amp;api_key=427d7c4c488faffa37babe6a45d47ccd
+</pre></div>
+</div>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
   <span class="nt">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
@@ -606,65 +590,124 @@
 <span class="p">}</span>
 </pre></div>
 </div>
+<p><a class="reference internal" href="#rgc-example"><span>-&gt; see full example</span></a></p>
 </div>
 <div class="section" id="accessibility-analysis">
-<h4>Accessibility Analysis<a class="headerlink" href="#accessibility-analysis" title="Permalink to this headline">¶</a></h4>
-<p>The feature count for the analysis result depends on  analysis-point</p>
+<span id="aa-response"></span><h4>Accessibility Analysis<a class="headerlink" href="#accessibility-analysis" title="Permalink to this headline">¶</a></h4>
+<p>Every Isochrone/Equidistant will result in an object in the features-block. They will be sorted in groups for each location analysed (see <code class="docutils literal"><span class="pre">group_index</span></code>) as well as from closest to furthest range within each group.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">geometry:</th><td class="field-body">holds the coordinates and the geometry <code class="docutils literal"><span class="pre">type</span></code>, wich is <code class="docutils literal"><span class="pre">Point</span></code></td>
+<tr class="field-odd field"><th class="field-name">geometry:</th><td class="field-body">holds the coordinates and the geometry <code class="docutils literal"><span class="pre">type</span></code> which is <code class="docutils literal"><span class="pre">Polygon</span></code></td>
 </tr>
 <tr class="field-even field"><th class="field-name">type:</th><td class="field-body">declares the feature as a feature</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">properties:</th><td class="field-body">holds the tag information of the point</td>
+<tr class="field-odd field"><th class="field-name">properties:</th><td class="field-body">contains the <code class="docutils literal"><span class="pre">center</span></code>, <code class="docutils literal"><span class="pre">group_index</span></code> and <code class="docutils literal"><span class="pre">value</span></code> parameter</td>
 </tr>
 </tbody>
 </table>
-<p>The accessibility analysis feature result is structured as follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Properties</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">center</span></code></td>
+<td>coordinates of the associated analysis location</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">group_index</span></code></td>
+<td>refers to the number of the point coordinate in the <code class="docutils literal"><span class="pre">loctaions</span></code> query-parameter. For every location there is an own group of Polygons</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">value</span></code></td>
+<td>contains the range value of this isochrone/equidistant in seconds/meters</td>
+</tr>
+</tbody>
+</table>
+<p>The accessibility analysis feature result is structured as follows (coordinate values omited):</p>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
-  <span class="nt">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="p">[</span>  <span class="p">]</span>
-        <span class="p">],</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Polygon&quot;</span>
-      <span class="p">},</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;center&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="mf">8.698495</span><span class="p">,</span>
-          <span class="mf">49.38092</span>
-        <span class="p">],</span>
-        <span class="nt">&quot;group_index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="mi">200</span>
-      <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="p">[</span>  <span class="p">]</span>
-        <span class="p">],</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Polygon&quot;</span>
-      <span class="p">},</span>
-      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;center&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="mf">8.703981</span><span class="p">,</span>
-          <span class="mf">49.388013</span>
-        <span class="p">],</span>
-        <span class="nt">&quot;group_index&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="mi">200</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
+        <span class="nt">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="p">[</span> <span class="p">]</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Polygon&quot;</span>
+              <span class="p">},</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;center&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="mf">8.698495</span><span class="p">,</span>
+                  <span class="mf">49.38092</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;group_index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="mi">300</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="p">[</span> <span class="p">]</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Polygon&quot;</span>
+              <span class="p">},</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;center&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="mf">8.698495</span><span class="p">,</span>
+                  <span class="mf">49.38092</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;group_index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="mi">600</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="p">[</span> <span class="p">]</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Polygon&quot;</span>
+              <span class="p">},</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;center&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="mf">8.703932</span><span class="p">,</span>
+                  <span class="mf">49.383472</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;group_index&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="mi">300</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="p">[</span> <span class="p">]</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Polygon&quot;</span>
+              <span class="p">},</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;center&quot;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="mf">8.703932</span><span class="p">,</span>
+                  <span class="mf">49.383472</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;group_index&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="mi">600</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p><a class="reference internal" href="#aa-example1"><span>-&gt; see full example</span></a></p>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="bbox">
 <h3>Bbox<a class="headerlink" href="#bbox" title="Permalink to this headline">¶</a></h3>
 <p>The Bbox-block shows the values of the minimum bounding rectangle surrounding all feature results as follows:</p>
@@ -679,7 +722,7 @@
 </div>
 <hr class="docutils" />
 <div class="section" id="info">
-<h3>info<a class="headerlink" href="#info" title="Permalink to this headline">¶</a></h3>
+<h3>Info<a class="headerlink" href="#info" title="Permalink to this headline">¶</a></h3>
 <p>The Info-block displays facts about your query.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -731,8 +774,15 @@
 <hr class="docutils" />
 <div class="section" id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
-<p>The following example shows a <a class="reference external" href="http://129.206.7.158/geocoding-test?format=json&amp;query=Berlin&amp;api_key=427d7c4c488faffa37babe6a45d47ccd">search request</a> for <em>Berlin</em> with a maximum of 5 response objects:</p>
-<div class="highlight-none"><div class="highlight"><pre>http://129.206.7.158/geocoding-test?format=json&amp;query=Berlin&amp;api_key=427d7c4c488faffa37babe6a45d47ccd
+<p>Some model querys with full response for every service.</p>
+<div class="section" id="id1">
+<h4>Routing<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p class="centered">
+<strong>This section is under construction</strong></p></div>
+<div class="section" id="id2">
+<h4>Geocoding<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p id="gc-example">The following <a class="reference external" href="http://129.206.7.158/geocoding-test?format=json&amp;query=Berlin&amp;limit=5&amp;api_key=427d7c4c488faffa37babe6a45d47ccd">geocoding request</a> searches for <code class="docutils literal"><span class="pre">Berlin</span></code> with a maximum of <code class="docutils literal"><span class="pre">5</span></code> response objects:</p>
+<div class="highlight-python"><div class="highlight"><pre>http://129.206.7.158/geocoding-test?format=json&amp;query=Berlin&amp;limit=5&amp;api_key=427d7c4c488faffa37babe6a45d47ccd
 </pre></div>
 </div>
 <p>As a response you will obtain the following JSON file with exactly 5 matches:</p>
@@ -842,11 +892,67 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The following example shows a <a class="reference external" href="http://openls.geog.uni-heidelberg.de/geocode?pos=13.412752.5220&amp;api_key=ee0b8233adff52ce9fd6afc2a2859a28">reverse geocoding example</a> which will return exactly one address:</p>
-<div class="highlight-none"><div class="highlight"><pre>http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&amp;api_key=ee0b8233adff52ce9fd6afc2a2859a28
+</div>
+<div class="section" id="id3">
+<h4>Reverse Geocoding<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p id="rgc-example">The following <a class="reference external" href="http://129.206.7.158/geocoding-test?format=json&amp;location=13.239515,52.514679&amp;api_key=ee0b8233adff52ce9fd6afc2a2859a28">reverse geocoding example</a> is looking for the location <code class="docutils literal"><span class="pre">13.239515,52.514679</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre>http://129.206.7.158/geocoding-test?format=json&amp;location=13.239515,52.514679&amp;api_key=427d7c4c488faffa37babe6a45d47ccd
 </pre></div>
 </div>
-<p>As a result you will obtain the full address as well as the distance from the queried point to the center of the response object:</p>
+<p>One matching address is returned:</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="mf">13.239515</span><span class="p">,</span>
+          <span class="mf">52.514679</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Point&quot;</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;Germany&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;distance&quot;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+        <span class="nt">&quot;street&quot;</span><span class="p">:</span> <span class="s2">&quot;Olympischer Platz&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Berlin Olympic Stadium&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;accuracy_score&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;house_number&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;Berlin&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;postal_code&quot;</span><span class="p">:</span> <span class="s2">&quot;14053&quot;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;bbox&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="mf">13.239515</span><span class="p">,</span>
+    <span class="mf">52.514679</span><span class="p">,</span>
+    <span class="mf">13.239515</span><span class="p">,</span>
+    <span class="mf">52.514679</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;FeatureCollection&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;info&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;service&quot;</span><span class="p">:</span> <span class="s2">&quot;geocoding&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;limit&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&quot;location&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mf">13.239515</span><span class="p">,</span>
+        <span class="mf">52.514679</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;attribution&quot;</span><span class="p">:</span> <span class="s2">&quot;openrouteservice.org&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1484758287130</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h4>Accessibility Analysis<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<p id="aa-example1">full aa example with only range</p>
+<p id="aa-example2">full aa example with range and intervall</p>
+<p id="aa-example3">full aa example with multiple range values</p>
+</div>
 </div>
 </div>
 </div>

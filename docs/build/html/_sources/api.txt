@@ -7,12 +7,16 @@ The ORS API allows for programmatic access to our services. We offer a GET schem
 - `API Query`_
 - `API Response`_
 
+-----
+
 Parameter Usage
 >>>>>>>>>>>>>>>
 
 The query parameters are added to the end of the service endpoint with `query string encoding <https://en.wikipedia.org/wiki/Query_string>`__. Hence the pattern for parameter usage is:
 
 .. centered:: **&**\ ``parameter``\ **=**\ ``value``
+
+-----
 
 API Query
 >>>>>>>>>
@@ -26,7 +30,7 @@ The following section is about constructing the query. It contains information a
 
 
 
-------------
+-----
 
 Routing API
 ------------
@@ -460,6 +464,9 @@ A geocoding request returns a list of coordinates matching your search input.
 | ``api_key`` | ``your_api_key`` is placed within this parameter                                       |
 +-------------+----------------------------------------------------------------------------------------+
 
+:ref:`-> see response<gc_response>`
+
+:ref:`-> see full example<gc_example>`
 
 Reverse Geocoding Parameters
 ++++++++++++++++++++++++++++
@@ -478,6 +485,9 @@ As a result of a reverse geocoding request you will get one match, namely the ne
 | ``api_key``  | ``your_api_key`` is placed within this parameter                                              |
 +--------------+-----------------------------------------------------------------------------------------------+
 
+:ref:`-> see response<rgc_response>`
+
+:ref:`-> see full example<rgc_example>`
 
 --------
 
@@ -550,16 +560,20 @@ attributes
 :area:  displays the area of each polygon in the feature attributes
 :reachfactor:  displays reachability score between ``1`` and ``0``, with ``1`` being a perfect score and ``0`` being not reachable at all.
 
+
+:ref:`-> see response<aa_response>`
+
+:ref:`-> see full example<aa_example1>`
+
 -----
 
 API Response
 >>>>>>>>>>>>
 
+
 The format of your response is JSON. It is structured into four main blocks:
 
-.. highlight:: json
-
-::
+.. code-block:: json
 
 	{
 	  "features": [ ],
@@ -567,8 +581,6 @@ The format of your response is JSON. It is structured into four main blocks:
 	  "type": "FeatureCollection",
 	  "info": { }
 	}
-
-.. highlight:: none
 
 +--------------------------+--------------------------------------------------------------------+
 | block                    | description                                                        |
@@ -594,18 +606,18 @@ Routing
 
 .. centered:: This section is under construction
 
+.. _gc_response:
+
 Geocoding
 +++++++++
 
 The geocoding result contains as many features (if existing) as the ``limit`` parameter was set to.
 
-:geometry: holds the coordinates and the geometry ``type``, wich is ``Point``
+:geometry: holds the coordinates and the geometry ``type`` which is ``Point``
 :type: declares the feature as a feature
 :properties: holds the tag information of the point
 
-.. gc_example:
-
-The following `example <http://129.206.7.158/geocoding-test?format=json&query=Berlin&limit=5&api_key=427d7c4c488faffa37babe6a45d47ccd>`__ would query::
+The following `example <http://129.206.7.158/geocoding-test?format=json&query=Berlin&limit=3&api_key=427d7c4c488faffa37babe6a45d47ccd>`__ ::
 
 	http://129.206.7.158/geocoding-test?format=json&query=Berlin&limit=5&api_key=427d7c4c488faffa37babe6a45d47ccd
 
@@ -660,56 +672,27 @@ The following `example <http://129.206.7.158/geocoding-test?format=json&query=Be
 	        "state": "Berlin",
 	        "postal_code": "14053"
 	      }
-	    },
-	    {
-	      "geometry": {
-	        "coordinates": [
-	          13.392906,
-	          52.518591
-	        ],
-	        "type": "Point"
-	      },
-	      "type": "Feature",
-	      "properties": {
-	        "country": "Germany",
-	        "street": "Unter den Linden",
-	        "name": "Humboldt University in Berlin Mitte Campus",
-	        "house_number": "6",
-	        "state": "Berlin",
-	        "postal_code": "10117"
-	      }
-	    },
-	    {
-	      "geometry": {
-	        "coordinates": [
-	          13.393584,
-	          52.518522
-	        ],
-	        "type": "Point"
-	      },
-	      "type": "Feature",
-	      "properties": {
-	        "country": "Germany",
-	        "street": "Dorotheenstraße",
-	        "name": "Humboldt University in Berlin Mitte Campus",
-	        "state": "Berlin",
-	        "postal_code": "10117"
-	      }
 	    }
 	  ]
   }
 
+:ref:`-> see full example<gc_example>`
 
+.. _rgc_response:
 
 Reverse Geocoding
 +++++++++++++++++
 
 The reverse geocoding result contains one feature (if existing).
 
-:geometry: holds the coordinate and the geometry ``type``, wich is ``Point``
+:geometry: holds the coordinate and the geometry ``type`` which is ``Point``
 :type: declares the feature as a feature
 :properties: contains the ``distance`` between the input location and the result point, the ``accuracy_score`` depending on the ``distance``\ (``1`` is a perfect score with less than 0.1?m distance) as well as the tag information of the point
 
+
+The following `example <http://129.206.7.158/geocoding-test?format=json&location=13.239515,52.514679&api_key=427d7c4c488faffa37babe6a45d47ccd>`__ would query::
+
+	http://129.206.7.158/geocoding-test?format=json&location=13.239515,52.514679&api_key=427d7c4c488faffa37babe6a45d47ccd
 
 
 .. code-block:: json
@@ -739,58 +722,110 @@ The reverse geocoding result contains one feature (if existing).
 	  ]
 	}
 
+:ref:`-> see full example<rgc_example>`
+
+.. _aa_response:
 
 Accessibility Analysis
 ++++++++++++++++++++++
 
-The feature count for the analysis result depends on  analysis-point
+Every Isochrone/Equidistant will result in an object in the features-block. They will be sorted in groups for each location analysed (see ``group_index``) as well as from closest to furthest range within each group.
 
-:geometry: holds the coordinates and the geometry ``type``, wich is ``Point``
+:geometry: holds the coordinates and the geometry ``type`` which is ``Polygon``
 :type: declares the feature as a feature
-:properties: holds the tag information of the point
+:properties: contains the ``center``, ``group_index`` and ``value`` parameter
 
-The accessibility analysis feature result is structured as follows:
++-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| Properties      | Description                                                                                                                             |
++=================+=========================================================================================================================================+
+| ``center``      | coordinates of the associated analysis location                                                                                         |
++-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| ``group_index`` | refers to the number of the point coordinate in the ``loctaions`` query-parameter. For every location there is an own group of Polygons |
++-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| ``value``       | contains the range value of this isochrone/equidistant in seconds/meters                                                                |
++-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+
+
+The accessibility analysis feature result is structured as follows (coordinate values omited): 
 
 .. code-block:: json
-
+	
 	{
-	  "features": [
-	    {
-	      "geometry": {
-	        "coordinates": [
-	          [  ]
-	        ],
-	        "type": "Polygon"
-	      },
-	      "type": "Feature",
-	      "properties": {
-	        "center": [
-	          8.698495,
-	          49.38092
-	        ],
-	        "group_index": 0,
-	        "value": 200
-	      }
-	    },
-	    {
-	      "geometry": {
-	        "coordinates": [
-	          [  ]
-	        ],
-	        "type": "Polygon"
-	      },
-	      "type": "Feature",
-	      "properties": {
-	        "center": [
-	          8.703981,
-	          49.388013
-	        ],
-	        "group_index": 1,
-	        "value": 200
-	      }
-	    }
-	  ]
+		"features": [
+		    {
+		      "geometry": {
+		        "coordinates": [
+		          [ ]
+		        ],
+		        "type": "Polygon"
+		      },
+		      "type": "Feature",
+		      "properties": {
+		        "center": [
+		          8.698495,
+		          49.38092
+		        ],
+		        "group_index": 0,
+		        "value": 300
+		      }
+		    },
+		    {
+		      "geometry": {
+		        "coordinates": [
+		          [ ]
+		        ],
+		        "type": "Polygon"
+		      },
+		      "type": "Feature",
+		      "properties": {
+		        "center": [
+		          8.698495,
+		          49.38092
+		        ],
+		        "group_index": 0,
+		        "value": 600
+		      }
+		    },
+		    {
+		      "geometry": {
+		        "coordinates": [
+		          [ ]
+		        ],
+		        "type": "Polygon"
+		      },
+		      "type": "Feature",
+		      "properties": {
+		        "center": [
+		          8.703932,
+		          49.383472
+		        ],
+		        "group_index": 1,
+		        "value": 300
+		      }
+		    },
+		    {
+		      "geometry": {
+		        "coordinates": [
+		          [ ]
+		        ],
+		        "type": "Polygon"
+		      },
+		      "type": "Feature",
+		      "properties": {
+		        "center": [
+		          8.703932,
+		          49.383472
+		        ],
+		        "group_index": 1,
+		        "value": 600
+		      }
+		    }
+		]
 	}
+
+:ref:`-> see full example<aa_example1>`
+
+-----
 
 Bbox
 ----
@@ -798,10 +833,8 @@ Bbox
 The Bbox-block shows the values of the minimum bounding rectangle surrounding all feature results as follows:
 
 
-.. highlight:: json
+.. code-block:: json
 
-::
-	
 	"bbox": [
 		minimum longitude,
 		minimum latitude,
@@ -809,11 +842,10 @@ The Bbox-block shows the values of the minimum bounding rectangle surrounding al
 		maximum latitude
 	],
 
-.. highlight:: none
 
 ------
 
-info
+Info
 ----
 
 The Info-block displays facts about your query.
@@ -834,9 +866,7 @@ The Info-block displays facts about your query.
 
 Example:
 
-.. highlight:: json
-
-::
+.. code-block:: json
 
 	{
 		"info": {
@@ -854,24 +884,30 @@ Example:
 		}
 	}
 
-.. highlight:: none
-
 ------
 
 Examples
 --------
 
-The following example shows a `search request <http://129.206.7.158/geocoding-test?format=json&query=Berlin&api_key=427d7c4c488faffa37babe6a45d47ccd>`__ for *Berlin* with a maximum of 5 response objects:
+Some model querys with full response for every service.
 
-:: 
+Routing
++++++++
 
-	http://129.206.7.158/geocoding-test?format=json&query=Berlin&api_key=427d7c4c488faffa37babe6a45d47ccd
+.. centered:: This section is under construction
+
+Geocoding
++++++++++
+
+.. _gc_example:
+
+The following `geocoding request <http://129.206.7.158/geocoding-test?format=json&query=Berlin&limit=5&api_key=427d7c4c488faffa37babe6a45d47ccd>`__ searches for ``Berlin`` with a maximum of ``5`` response objects::
+
+	http://129.206.7.158/geocoding-test?format=json&query=Berlin&limit=5&api_key=427d7c4c488faffa37babe6a45d47ccd
 
 As a response you will obtain the following JSON file with exactly 5 matches:
 
-.. highlight:: json
-
-::
+.. code-block:: json
 
 	{
 	  "features": [
@@ -978,13 +1014,76 @@ As a response you will obtain the following JSON file with exactly 5 matches:
 	  }
 	}
 
-.. highlight:: none
 
+Reverse Geocoding
++++++++++++++++++
 
-The following example shows a `reverse geocoding example <http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&api_key=ee0b8233adff52ce9fd6afc2a2859a28>`__ which will return exactly one address:
+.. _rgc_example:
 
-:: 
+The following `reverse geocoding example <http://129.206.7.158/geocoding-test?format=json&location=13.239515,52.514679&api_key=ee0b8233adff52ce9fd6afc2a2859a28>`__ is looking for the location ``13.239515,52.514679`` ::
 
-	http://openls.geog.uni-heidelberg.de/geocode?pos=13.4127 52.5220&api_key=ee0b8233adff52ce9fd6afc2a2859a28
+	http://129.206.7.158/geocoding-test?format=json&location=13.239515,52.514679&api_key=427d7c4c488faffa37babe6a45d47ccd
 
-As a result you will obtain the full address as well as the distance from the queried point to the center of the response object:
+One matching address is returned:
+
+.. code-block:: json
+
+	{
+	  "features": [
+	    {
+	      "geometry": {
+	        "coordinates": [
+	          13.239515,
+	          52.514679
+	        ],
+	        "type": "Point"
+	      },
+	      "type": "Feature",
+	      "properties": {
+	        "country": "Germany",
+	        "distance": 0.05,
+	        "street": "Olympischer Platz",
+	        "name": "Berlin Olympic Stadium",
+	        "accuracy_score": 1,
+	        "house_number": "3",
+	        "state": "Berlin",
+	        "postal_code": "14053"
+	      }
+	    }
+	  ],
+	  "bbox": [
+	    13.239515,
+	    52.514679,
+	    13.239515,
+	    52.514679
+	  ],
+	  "type": "FeatureCollection",
+	  "info": {
+	    "service": "geocoding",
+	    "query": {
+	      "limit": 1,
+	      "location": [
+	        13.239515,
+	        52.514679
+	      ]
+	    },
+	    "attribution": "openrouteservice.org",
+	    "version": "0.1",
+	    "timestamp": 1484758287130
+	  }
+	}
+
+Accessibility Analysis
+++++++++++++++++++++++
+
+.. _aa_example1:
+
+full aa example with only range
+
+.. _aa_example2:
+
+full aa example with range and intervall
+
+.. _aa_example3: 
+
+full aa example with multiple range values

@@ -16,7 +16,7 @@ To use your API key simply add it as a parameter in your request URL with: ::
 
 	&api_key=`your-api-key`
 
-:ref:`Here <example-ref2>` you can see an example with an API key appended to the end of the request.
+:ref:`Here <rgc_example>` you can see an example with an API key appended to the end of the request.
 
 
 
