@@ -3,41 +3,44 @@ Application Programming Interfaces
 
 The ORS API allows for programmatic access to our services. We offer a GET scheme for you to directly query the API which is described in the following section. Please note that the response currently follows the OpenLS standard.
 
-
-- `API Query`_
-- `API Response`_
-
 -----
-
-Parameter Usage
->>>>>>>>>>>>>>>
 
 The query parameters are added to the end of the service endpoint with `query string encoding <https://en.wikipedia.org/wiki/Query_string>`__. Hence the pattern for parameter usage is:
 
 .. centered:: **&**\ ``parameter``\ **=**\ ``value``
 
------
+------
 
-API Query
->>>>>>>>>
+Sections:
 
-The following section is about constructing the query. It contains information and hints on the available parameters for each service.
+- `Routing Service`_
+- `Geocoding Service`_
 
-
-- `Routing API`_
-- `Geocoding API`_
-- `Accessibility Analysis API`_
-
-
+    + `Geocoding`_
+    + `Reverse Geocoding`_
+- `Isochrones Service`_
+- `Meta Information`_
 
 -----
 
-Routing API
-------------
+Routing Service
+>>>>>>>>>>>>>>>
+
+Query Parameters
+++++++++++++++++
 
 The routing endpoint is defined as follows::
 
-	http://openls.geog.uni-heidelberg.de/route?
+	hostname/route?
+
+.. centered:: This section is under construction
+
+
+
+.. _r_response:
+
+Response
+++++++++
 
 .. centered:: This section is under construction
 
@@ -260,9 +263,9 @@ The routing endpoint is defined as follows::
 .. Examples
 .. ++++++++
 
-.. The shortest version of a full functioning `query <http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&end=9.2556609,49.2397316&api_key=ee0b8233adff52ce9fd6afc2a2859a28>`__ would comprise the following parameters::
+.. The shortest version of a full functioning `query <http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&end=9.2556609,49.2397316&api_key=api-key>`__ would comprise the following parameters::
 
-..   http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&end=9.2556609,49.2397316&api_key=ee0b8233adff52ce9fd6afc2a2859a28	
+..   http://openls.geog.uni-heidelberg.de/route?start=9.258506,49.240011&end=9.2556609,49.2397316&api_key=api-key	
 
 .. .. needs revision
 
@@ -438,19 +441,24 @@ The routing endpoint is defined as follows::
 
 ------
 
-Geocoding API
--------------
+.. _gc:
 
-The geocoding endpoint is defined as follows::
+Geocoding Service
+>>>>>>>>>>>>>>>>>
 
- http://openls.geog.uni-heidelberg.de/geocode?
+The geocoding endpoint is defined as follows:
+
+.. centered:: hostname/geocode?
 
 We distinguish between geocoding and reverse geocoding depending on your input. 
 
-Geocoding Parameters
-+++++++++++++++++++++++++++
+Geocoding
++++++++++
 
 A geocoding request returns a list of coordinates matching your search input.
+
+Query Parameters
+----------------
 
 +-------------+----------------------------------------------------------------------------------------+
 | Parameter   | Description                                                                            |
@@ -464,152 +472,11 @@ A geocoding request returns a list of coordinates matching your search input.
 | ``api_key`` | ``your_api_key`` is placed within this parameter                                       |
 +-------------+----------------------------------------------------------------------------------------+
 
-:ref:`-> see response<gc_response>`
-
-:ref:`-> see full example<gc_example>`
-
-Reverse Geocoding Parameters
-++++++++++++++++++++++++++++
-
-As a result of a reverse geocoding request you will get one match, namely the next enclosing object with an address tag which surrounds the given coordinate.
-
-+--------------+-----------------------------------------------------------------------------------------------+
-| Parameter    | Description                                                                                   |
-+==============+===============================================================================================+
-| ``location`` | ``Longitude,Latitude`` of the coordinate.                                                     |
-+--------------+-----------------------------------------------------------------------------------------------+
-| ``lang``     | Language of the response. Available are ``de``, ``en``\ *(default)*, ``fr`` and ``it``        |
-+--------------+-----------------------------------------------------------------------------------------------+
-| ``limit``    | Maximum number of responses. Fixed to ``1`` for now                                           |
-+--------------+-----------------------------------------------------------------------------------------------+
-| ``api_key``  | ``your_api_key`` is placed within this parameter                                              |
-+--------------+-----------------------------------------------------------------------------------------------+
-
-:ref:`-> see response<rgc_response>`
-
-:ref:`-> see full example<rgc_example>`
-
---------
-
-Accessibility Analysis API
---------------------------
-
-The accessibility analysis endpoint is defined as follows::
-
- http://openls.geog.uni-heidelberg.de/analyse?
-
-Parameters
-++++++++++
-
-The Accessibility Analysis Service supports isochrone and isodistance analyses with multiple start or end points. Additionally you can specify the line interval or give multiple exact range values and output some extra attributes for the polygons in the response.
-
-+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Parameter         | Description                                                                                                                                                   |
-+===================+===============================================================================================================================================================+
-| ``locations``     | List of ``longitude,latitude`` coordinates delimited with vertical bar                                                                                        |
-+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``rangetype``     | ``time``\ *(default)* for isochrones or ``distance`` for equidistants                                                                                         |
-+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``range``         | Maximum range ``value`` of the analysis in *seconds* for time and *meters* for distance. Alternatively a comma seperated list of specific single range values |
-+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``interval``      | Interval of isochrones or equidistants for one ``range`` value. ``value`` in *seconds* for time and *meters* for distance                                     |
-+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``units``         | Output unit format. ``m``\ *(default)*, ``km`` or ``mi`` for ``distance``. ``m``\ *(default)*, ``s`` or ``h`` for ``time``                                    |
-+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``location_type`` | ``start`` treats the location(s) as starting point, ``destination`` as goal                                                                                   |
-+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``profile``       | Profile used for the analysis. ``driving-car``\ *(default)*, ``driving-hgv``, ``cycling-road`` , ``foot-walking`` and ``foot-hiking``                         |
-+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``attributes``    | List of attributes delimited with vertical bar. Values are ``area`` and ``reachfactor``                                                                       |
-+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``calcmethod``    | Method of generating the Isochrones. At the moment: ``default`` or ``empty``                                                                                  |
-+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``api_key``       | ``your_api_key`` is inserted within this parameter.                                                                                                           |
-+-------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-range
-+++++
-
-There are three ways to use the range parameter:
-
-:single range:  returns one linear ring with the given range. ``range=value``
-:with interval: gives back linear rings in interval gap with range as outmost ring. ``range=value&interval=smaller_value``
-:range list: returns linear rings at the specified ranges. ``range=value1,value2,...``
-
-units
-+++++
-
-+--------------------+--------------------+------------------------+
-|                    | ``rangetype=time`` | ``rangetype=distance`` |
-+====================+====================+========================+
-| ``m``\ *(default)* | minutes            | meters                 |
-+--------------------+--------------------+------------------------+
-| ``km``             | \-                 | kilometers             |
-+--------------------+--------------------+------------------------+
-| ``mi``             | \-                 | miles                  |
-+--------------------+--------------------+------------------------+
-| ``s``              | seconds            | \-                     |
-+--------------------+--------------------+------------------------+
-| ``h``              | hours              | \-                     |
-+--------------------+--------------------+------------------------+
-
-
-attributes
-++++++++++
-
-:area:  displays the area of each polygon in the feature attributes
-:reachfactor:  displays reachability score between ``1`` and ``0``, with ``1`` being a perfect score and ``0`` being not reachable at all.
-
-
-:ref:`-> see response<aa_response>`
-
-:ref:`-> see full example<aa_example1>`
-
------
-
-API Response
->>>>>>>>>>>>
-
-
-The format of your response is JSON. It is structured into four main blocks:
-
-.. code-block:: json
-
-	{
-	  "features": [ ],
-	  "bbox": [ ],
-	  "type": "FeatureCollection",
-	  "info": { }
-	}
-
-+--------------------------+--------------------------------------------------------------------+
-| block                    | description                                                        |
-+==========================+====================================================================+
-| features                 | contains your actual result objects according to the request type  |
-+--------------------------+--------------------------------------------------------------------+
-| bbox                     | contains bounding box values for feature results                   |
-+--------------------------+--------------------------------------------------------------------+
-| type:"FeatureCollection" | required JSON component                                            |
-+--------------------------+--------------------------------------------------------------------+
-| info                     | displays further information                                       |
-+--------------------------+--------------------------------------------------------------------+
-
------
-
-Features / Results
-------------------
-
-Depending on the used service-type, the features-block differs with your result being a route, multiple locations/linear rings or just single locations. The feature structure however remains the same: Each feature contains the *"geometry"* object, the *"type"* attribute and the *"properties"* object.
-
-Routing
-+++++++
-
-.. centered:: This section is under construction
-
+ 
 .. _gc_response:
 
-Geocoding
-+++++++++
+Response
+--------
 
 The geocoding result contains as many features (if existing) as the ``limit`` parameter was set to.
 
@@ -617,293 +484,9 @@ The geocoding result contains as many features (if existing) as the ``limit`` pa
 :type: declares the feature as a feature
 :properties: holds the tag information of the point
 
-The following `example <http://129.206.7.158/geocoding-test?format=json&query=Berlin&limit=3&api_key=427d7c4c488faffa37babe6a45d47ccd>`__ ::
+The following geocoding request searches for ``Berlin`` with a maximum of ``5`` response objects::
 
-	http://129.206.7.158/geocoding-test?format=json&query=Berlin&limit=5&api_key=427d7c4c488faffa37babe6a45d47ccd
-
-.. code-block:: json
-
-	{
-	  "features": [
-	    {
-	      "geometry": {
-	        "coordinates": [
-	          13.38886,
-	          52.517037
-	        ],
-	        "type": "Point"
-	      },
-	      "type": "Feature",
-	      "properties": {
-	        "country": "Germany",
-	        "name": "Berlin",
-	        "state": "Berlin"
-	      }
-	    },
-	    {
-	      "geometry": {
-	        "coordinates": [
-	          13.438596,
-	          52.519854
-	        ],
-	        "type": "Point"
-	      },
-	      "type": "Feature",
-	      "properties": {
-	        "country": "Germany",
-	        "name": "Berlin",
-	        "state": "Berlin"
-	      }
-	    },
-	    {
-	      "geometry": {
-	        "coordinates": [
-	          13.239515,
-	          52.514679
-	        ],
-	        "type": "Point"
-	      },
-	      "type": "Feature",
-	      "properties": {
-	        "country": "Germany",
-	        "street": "Olympischer Platz",
-	        "name": "Berlin Olympic Stadium",
-	        "house_number": "3",
-	        "state": "Berlin",
-	        "postal_code": "14053"
-	      }
-	    }
-	  ]
-  }
-
-:ref:`-> see full example<gc_example>`
-
-.. _rgc_response:
-
-Reverse Geocoding
-+++++++++++++++++
-
-The reverse geocoding result contains one feature (if existing).
-
-:geometry: holds the coordinate and the geometry ``type`` which is ``Point``
-:type: declares the feature as a feature
-:properties: contains the ``distance`` between the input location and the result point, the ``accuracy_score`` depending on the ``distance``\ (``1`` is a perfect score with less than 0.1?m distance) as well as the tag information of the point
-
-
-The following `example <http://129.206.7.158/geocoding-test?format=json&location=13.239515,52.514679&api_key=427d7c4c488faffa37babe6a45d47ccd>`__ would query::
-
-	http://129.206.7.158/geocoding-test?format=json&location=13.239515,52.514679&api_key=427d7c4c488faffa37babe6a45d47ccd
-
-
-.. code-block:: json
-
-	{
-	  "features": [
-	    {
-	      "geometry": {
-	        "coordinates": [
-	          13.239515,
-	          52.514679
-	        ],
-	        "type": "Point"
-	      },
-	      "type": "Feature",
-	      "properties": {
-	        "country": "Germany",
-	        "distance": 0.05,
-	        "street": "Olympischer Platz",
-	        "name": "Berlin Olympic Stadium",
-	        "accuracy_score": 1,
-	        "house_number": "3",
-	        "state": "Berlin",
-	        "postal_code": "14053"
-	      }
-	    }
-	  ]
-	}
-
-:ref:`-> see full example<rgc_example>`
-
-.. _aa_response:
-
-Accessibility Analysis
-++++++++++++++++++++++
-
-Every Isochrone/Equidistant will result in an object in the features-block. They will be sorted in groups for each location analysed (see ``group_index``) as well as from closest to furthest range within each group.
-
-:geometry: holds the coordinates and the geometry ``type`` which is ``Polygon``
-:type: declares the feature as a feature
-:properties: contains the ``center``, ``group_index`` and ``value`` parameter
-
-+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-| Properties      | Description                                                                                                                             |
-+=================+=========================================================================================================================================+
-| ``center``      | coordinates of the associated analysis location                                                                                         |
-+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-| ``group_index`` | refers to the number of the point coordinate in the ``loctaions`` query-parameter. For every location there is an own group of Polygons |
-+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-| ``value``       | contains the range value of this isochrone/equidistant in seconds/meters                                                                |
-+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-
-
-The accessibility analysis feature result is structured as follows (coordinate values omited): 
-
-.. code-block:: json
-	
-	{
-		"features": [
-		    {
-		      "geometry": {
-		        "coordinates": [
-		          [ ]
-		        ],
-		        "type": "Polygon"
-		      },
-		      "type": "Feature",
-		      "properties": {
-		        "center": [
-		          8.698495,
-		          49.38092
-		        ],
-		        "group_index": 0,
-		        "value": 300
-		      }
-		    },
-		    {
-		      "geometry": {
-		        "coordinates": [
-		          [ ]
-		        ],
-		        "type": "Polygon"
-		      },
-		      "type": "Feature",
-		      "properties": {
-		        "center": [
-		          8.698495,
-		          49.38092
-		        ],
-		        "group_index": 0,
-		        "value": 600
-		      }
-		    },
-		    {
-		      "geometry": {
-		        "coordinates": [
-		          [ ]
-		        ],
-		        "type": "Polygon"
-		      },
-		      "type": "Feature",
-		      "properties": {
-		        "center": [
-		          8.703932,
-		          49.383472
-		        ],
-		        "group_index": 1,
-		        "value": 300
-		      }
-		    },
-		    {
-		      "geometry": {
-		        "coordinates": [
-		          [ ]
-		        ],
-		        "type": "Polygon"
-		      },
-		      "type": "Feature",
-		      "properties": {
-		        "center": [
-		          8.703932,
-		          49.383472
-		        ],
-		        "group_index": 1,
-		        "value": 600
-		      }
-		    }
-		]
-	}
-
-:ref:`-> see full example<aa_example1>`
-
------
-
-Bbox
-----
-
-The Bbox-block shows the values of the minimum bounding rectangle surrounding all feature results as follows:
-
-
-.. code-block:: json
-
-	"bbox": [
-		minimum longitude,
-		minimum latitude,
-		maximum longitude,
-		maximum latitude
-	],
-
-
-------
-
-Info
-----
-
-The Info-block displays facts about your query.
-
-+-------------+---------------------------------------------------------------+
-| About       | Description                                                   |
-+=============+===============================================================+
-| service     | API endpoint used. ``geocoding``, ``analysis`` or ``routing`` |
-+-------------+---------------------------------------------------------------+
-| query       | Parameters that were specified in the query                   |
-+-------------+---------------------------------------------------------------+
-| attribution | Attribution for using our service                             |
-+-------------+---------------------------------------------------------------+
-| version     | Version of our backend server used for the request            |
-+-------------+---------------------------------------------------------------+
-| timestamp   | Unix timestamp of the precise request date                    |
-+-------------+---------------------------------------------------------------+
-
-Example:
-
-.. code-block:: json
-
-	{
-		"info": {
-		    "service": "geocoding",
-		    "query": {
-		      "limit": 1,
-		      "location": [
-		        13.239515,
-		        52.514679
-		      ]
-		    },
-		    "attribution": "openrouteservice.org",
-		    "version": "0.1",
-		    "timestamp": 1484660155896
-		}
-	}
-
-------
-
-Examples
---------
-
-Some model querys with full response for every service.
-
-Routing
-+++++++
-
-.. centered:: This section is under construction
-
-Geocoding
-+++++++++
-
-.. _gc_example:
-
-The following `geocoding request <http://129.206.7.158/geocoding-test?format=json&query=Berlin&limit=5&api_key=427d7c4c488faffa37babe6a45d47ccd>`__ searches for ``Berlin`` with a maximum of ``5`` response objects::
-
-	http://129.206.7.158/geocoding-test?format=json&query=Berlin&limit=5&api_key=427d7c4c488faffa37babe6a45d47ccd
+	hostname/geocoding-test?format=json&query=Berlin&limit=5&api_key=api-key
 
 As a response you will obtain the following JSON file with exactly 5 matches:
 
@@ -1014,17 +597,45 @@ As a response you will obtain the following JSON file with exactly 5 matches:
 	  }
 	}
 
+.. _rgc:
 
 Reverse Geocoding
 +++++++++++++++++
 
-.. _rgc_example:
+Query Parameters
+----------------
 
-The following `reverse geocoding example <http://129.206.7.158/geocoding-test?format=json&location=13.239515,52.514679&api_key=ee0b8233adff52ce9fd6afc2a2859a28>`__ is looking for the location ``13.239515,52.514679`` ::
+As a result of a reverse geocoding request you will get one match, namely the next enclosing object with an address tag which surrounds the given coordinate.
 
-	http://129.206.7.158/geocoding-test?format=json&location=13.239515,52.514679&api_key=427d7c4c488faffa37babe6a45d47ccd
++--------------+-----------------------------------------------------------------------------------------------+
+| Parameter    | Description                                                                                   |
++==============+===============================================================================================+
+| ``location`` | ``Longitude,Latitude`` of the coordinate.                                                     |
++--------------+-----------------------------------------------------------------------------------------------+
+| ``lang``     | Language of the response. Available are ``de``, ``en``\ *(default)*, ``fr`` and ``it``        |
++--------------+-----------------------------------------------------------------------------------------------+
+| ``limit``    | Maximum number of responses. Fixed to ``1`` for now                                           |
++--------------+-----------------------------------------------------------------------------------------------+
+| ``api_key``  | ``your_api_key`` is placed within this parameter                                              |
++--------------+-----------------------------------------------------------------------------------------------+
 
-One matching address is returned:
+.. _rgc_response:
+
+Response
+--------
+
+The reverse geocoding result contains one feature (if existing).
+
+:geometry: holds the coordinate and the geometry ``type`` which is ``Point``
+:type: declares the feature as a feature
+:properties: contains the ``distance`` between the input location and the result point, the ``accuracy_score`` depending on the ``distance``\ (``1`` is a perfect score with less than 0.1?m distance) as well as the tag information of the point
+
+
+The following example examines the location ``13.239515,52.514679``::
+
+	hostname/geocoding-test?format=json&location=13.239515,52.514679&api_key=key
+
+Resulting in one feature response:
 
 .. code-block:: json
 
@@ -1050,40 +661,461 @@ One matching address is returned:
 	        "postal_code": "14053"
 	      }
 	    }
+	  ]
+	}
+
+
+
+--------
+
+Isochrones Service
+>>>>>>>>>>>>>>>>>>
+
+The accessibility analysis endpoint is defined as follows::
+
+ hostname/analyse?
+
+Query Parameters
+++++++++++++++++
+
+The Isochrone Service supports time and distance analyses with multiple start or end points. Additionally you can specify the line interval or give multiple exact range values and output some extra attributes for the polygons in the :ref:`response <aa_response>`.
+
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Parameter         | Description                                                                                                                                                                                     |
++===================+=================================================================================================================================================================================================+
+| ``locations``     | List of ``longitude,latitude`` coordinates delimited with vertical bar                                                                                                                          |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``range_type``    | ``time``\ *(default)* for isochrones or ``distance`` for equidistants                                                                                                                           |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``range``         | Maximum range ``value`` of the analysis in *seconds* for time and *meters* for distance. Alternatively a comma seperated list of specific single range values                                   |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``interval``      | Interval of isochrones or equidistants for one ``range`` value. ``value`` in *seconds* for time and *meters* for distance                                                                       |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``units``         | Unit format. ``m``\ *(default)*, ``km`` or ``mi`` for ``distance``. ``s`` for ``time``                                                                                                          |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``location_type`` | ``start`` treats the location(s) as starting point, ``destination`` as goal                                                                                                                     |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``profile``       | Profile used for the analysis. ``driving-car``\ *(default)*, ``driving-hgv``, ``cycling-road`` , ``cycling-mountain``, ``cycling-tour``, ``cycling-safe``, ``foot-walking`` and ``foot-hiking`` |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``attributes``    | Values are ``area`` and ``reachfactor``. Delimit with vertical bar for both.                                                                                                                    |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``api_key``       | ``your_api_key`` is inserted within this parameter.                                                                                                                                             |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. | ``calcmethod``    | Method of generating the Isochrones. At the moment: ``default`` or ``empty``                                                                                                                    |
+.. +-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+range
+-----
+
+There are three ways to use the range parameter:
+
+:single range:  returns one linear ring with the given range. ``range=value``
+:with interval: gives back linear rings in interval gap with range as outmost ring. ``range=value&interval=smaller_value``
+:range list: returns linear rings at the specified ranges. ``range=value1,value2,...``
+
+units
+-----
+
++---------------+------------------------------------------------------------------+
+| ``rangetype`` | ``units``                                                        |
++===============+==================================================================+
+| ``time``      | ``m``\(meters *default*), ``km``\(kilometers) and ``mi``\(miles) |
++---------------+------------------------------------------------------------------+
+| ``distance``  | ``s``\(seconds)                                                  |
++---------------+------------------------------------------------------------------+
+
+attributes
+----------
+
+:area:  displays the area of each polygon in the feature attributes
+:reachfactor:  displays reachability score between ``1`` and ``0``
+
+.. note:: As the maximum reachfactor would be achieved by traveling the direct distance at maximum speed in a vacuum without obstacles, naturally it can never be ``1``. The availability of motorways however produces a higher score over normal roads.
+
+.. _aa_response:
+
+Response
+++++++++
+
+Every Isochrone/Equidistant will result in an object in the features-block. They will be sorted in groups for each location analysed (see ``group_index``) as well as from closest to furthest range within each group.
+
+:geometry: holds the coordinates and the geometry ``type`` which is ``Polygon``
+:type: declares the feature as a feature
+:properties: contains the ``center``, ``group_index`` and ``value`` parameter
+
++-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| Properties      | Description                                                                                                                             |
++=================+=========================================================================================================================================+
+| ``center``      | coordinates of the associated analysis location                                                                                         |
++-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| ``group_index`` | refers to the number of the point coordinate in the ``loctaions`` query-parameter. For every location there is an own group of Polygons |
++-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| ``value``       | contains the range value of this isochrone/equidistant in seconds/meters                                                                |
++-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+
+
+This analysis request for the location ``8.6984954,49.38092`` uses the ``driving-car`` profile and searches for accessibility in range ``500`` seconds with interval ``200`` seconds::
+
+	hostname/analysis-test?format=json&range=500&interval=200&locations=8.6984954,49.38092&profile=driving-car&api_key=api-key
+
+The result supplies linear rings at ``200``, ``400`` seconds and ends with the ``500`` seconds as outter ring:
+
+.. code-block:: json
+
+	{
+	  "features": [
+	    {
+	      "geometry": {
+	        "coordinates": [
+	          [
+	            [
+	              8.69426,
+	              49.382367
+	            ],
+	            [
+	              8.694372,
+	              49.381591
+	            ],
+	            [
+	              8.696803,
+	              49.377774
+	            ],
+	            [
+	              8.70053,
+	              49.376973
+	            ],
+	            [
+	              8.700662,
+	              49.377036
+	            ],
+	            [
+	              8.702821,
+	              49.378865
+	            ],
+	            [
+	              8.703981,
+	              49.381551
+	            ],
+	            [
+	              8.703705,
+	              49.384995
+	            ],
+	            [
+	              8.702402,
+	              49.388013
+	            ],
+	            [
+	              8.700544,
+	              49.387879
+	            ],
+	            [
+	              8.69716,
+	              49.384927
+	            ],
+	            [
+	              8.694991,
+	              49.383061
+	            ],
+	            [
+	              8.69426,
+	              49.382367
+	            ]
+	          ]
+	        ],
+	        "type": "Polygon"
+	      },
+	      "type": "Feature",
+	      "properties": {
+	        "center": [
+	          8.698495,
+	          49.38092
+	        ],
+	        "group_index": 0,
+	        "value": 200
+	      }
+	    },
+	    {
+	      "geometry": {
+	        "coordinates": [
+	          [
+	            [
+	              8.692611,
+	              49.388018
+	            ],
+	            [
+	              8.693073,
+	              49.384858
+	            ],
+	            [
+	              8.694372,
+	              49.381591
+	            ],
+	            [
+	              8.697501,
+	              49.375415
+	            ],
+	            [
+	              8.704463,
+	              49.3743
+	            ],
+	            [
+	              8.708623,
+	              49.377393
+	            ],
+	            [
+	              8.714081,
+	              49.38723
+	            ],
+	            [
+	              8.714451,
+	              49.390018
+	            ],
+	            [
+	              8.714369,
+	              49.390475
+	            ],
+	            [
+	              8.713471,
+	              49.392169
+	            ],
+	            [
+	              8.709755,
+	              49.399126
+	            ],
+	            [
+	              8.709744,
+	              49.399145
+	            ],
+	            [
+	              8.698255,
+	              49.398519
+	            ],
+	            [
+	              8.694863,
+	              49.397527
+	            ],
+	            [
+	              8.692611,
+	              49.388018
+	            ]
+	          ]
+	        ],
+	        "type": "Polygon"
+	      },
+	      "type": "Feature",
+	      "properties": {
+	        "center": [
+	          8.698495,
+	          49.38092
+	        ],
+	        "group_index": 0,
+	        "value": 400
+	      }
+	    },
+	    {
+	      "geometry": {
+	        "coordinates": [
+	          [
+	            [
+	              8.690228,
+	              49.400878
+	            ],
+	            [
+	              8.691253,
+	              49.398248
+	            ],
+	            [
+	              8.692611,
+	              49.388018
+	            ],
+	            [
+	              8.693073,
+	              49.384858
+	            ],
+	            [
+	              8.695052,
+	              49.375567
+	            ],
+	            [
+	              8.697151,
+	              49.370614
+	            ],
+	            [
+	              8.697893,
+	              49.369815
+	            ],
+	            [
+	              8.698756,
+	              49.36912
+	            ],
+	            [
+	              8.701019,
+	              49.368275
+	            ],
+	            [
+	              8.701427,
+	              49.36819
+	            ],
+	            [
+	              8.702866,
+	              49.368126
+	            ],
+	            [
+	              8.705924,
+	              49.368181
+	            ],
+	            [
+	              8.70603,
+	              49.36821
+	            ],
+	            [
+	              8.71147,
+	              49.374762
+	            ],
+	            [
+	              8.71618,
+	              49.383764
+	            ],
+	            [
+	              8.717923,
+	              49.384906
+	            ],
+	            [
+	              8.713309,
+	              49.394881
+	            ],
+	            [
+	              8.709744,
+	              49.399145
+	            ],
+	            [
+	              8.706848,
+	              49.400034
+	            ],
+	            [
+	              8.701117,
+	              49.401655
+	            ],
+	            [
+	              8.692159,
+	              49.401869
+	            ],
+	            [
+	              8.691849,
+	              49.401799
+	            ],
+	            [
+	              8.690228,
+	              49.400878
+	            ]
+	          ]
+	        ],
+	        "type": "Polygon"
+	      },
+	      "type": "Feature",
+	      "properties": {
+	        "center": [
+	          8.698495,
+	          49.38092
+	        ],
+	        "group_index": 0,
+	        "value": 500
+	      }
+	    }
 	  ],
 	  "bbox": [
-	    13.239515,
-	    52.514679,
-	    13.239515,
-	    52.514679
+	    8.690228,
+	    49.368126,
+	    8.717923,
+	    49.401869
 	  ],
 	  "type": "FeatureCollection",
 	  "info": {
-	    "service": "geocoding",
+	    "service": "accessibility",
 	    "query": {
-	      "limit": 1,
-	      "location": [
-	        13.239515,
-	        52.514679
-	      ]
+	      "ranges": "200.0,400.0,500.0",
+	      "profile": "driving-car",
+	      "locations": [
+	        [
+	          8.698495,
+	          49.38092
+	        ]
+	      ],
+	      "range_type": "time"
 	    },
 	    "attribution": "openrouteservice.org",
 	    "version": "0.1",
-	    "timestamp": 1484758287130
+	    "timestamp": 1485260015371
 	  }
 	}
 
-Accessibility Analysis
-++++++++++++++++++++++
 
-.. _aa_example1:
+-----
 
-full aa example with only range
+Meta Information
+>>>>>>>>>>>>>>>>
 
-.. _aa_example2:
 
-full aa example with range and intervall
+The format of your response is `GeoJSON <http://geojson.org/geojson-spec.html>`__. 
 
-.. _aa_example3: 
+Bbox
+++++
 
-full aa example with multiple range values
+The Bbox-block shows the values of the `minimum bounding box <https://en.wikipedia.org/wiki/Minimum_bounding_box>`__ surrounding all feature results as follows:
+
+
+.. code-block:: json
+
+	"bbox": [
+		minimum longitude,
+		minimum latitude,
+		maximum longitude,
+		maximum latitude
+	]
+
+
+------
+
+Info
+++++
+
+The Info-block displays facts about your query.
+
++-------------+---------------------------------------------------------------+
+| About       | Description                                                   |
++=============+===============================================================+
+| service     | API endpoint used. ``geocoding``, ``analysis`` or ``routing`` |
++-------------+---------------------------------------------------------------+
+| query       | Parameters that were specified in the query                   |
++-------------+---------------------------------------------------------------+
+| attribution | Attribution for using our service                             |
++-------------+---------------------------------------------------------------+
+| version     | Version of our backend server used for the request            |
++-------------+---------------------------------------------------------------+
+| timestamp   | Unix timestamp of the precise request date                    |
++-------------+---------------------------------------------------------------+
+
+Example:
+
+.. code-block:: json
+
+	{
+		"info": {
+		    "service": "geocoding",
+		    "query": {
+		      "limit": 1,
+		      "location": [
+		        13.239515,
+		        52.514679
+		      ]
+		    },
+		    "attribution": "openrouteservice.org",
+		    "version": "0.1",
+		    "timestamp": 1484660155896
+		}
+	}
+
+.. substitutions
+.. hostname replace::
+.. api-key  replace::

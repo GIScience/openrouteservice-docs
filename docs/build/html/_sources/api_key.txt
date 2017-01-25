@@ -12,11 +12,11 @@ This key is a 32-character identifier, made of letters and numbers, which relate
 How to use an API key
 ---------------------
 
-To use your API key simply add it as a parameter in your request URL with: ::
+To use your API key simply add it as a parameter in your request URL with::
 
 	&api_key=`your-api-key`
 
-:ref:`Here <rgc_example>` you can see an example with an API key appended to the end of the request.
+:ref:`Here<rgc_example>` you can see an example with an API key appended to the end of the request.
 
 
 
