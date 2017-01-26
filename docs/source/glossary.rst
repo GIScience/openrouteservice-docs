@@ -4,8 +4,8 @@ Glossary
 .. glossary::
   :sorted:
 
-  TMC
-    The Traffic Message Channel (TMC) is a real time traffic information source in Germany which you may query within your route requests.
+.. TMC
+..   The Traffic Message Channel (TMC) is a real time traffic information source in Germany which you may query within your route requests.
 
   API
     An Application Programming Interface.
@@ -13,19 +13,22 @@ Glossary
   API-Key
     A code of authorization passed within a request as a parameter indentifying the individual or company.
 
-  Car
+  Driving-Car
   	This route preference prefers highways, streets and tracks which cars are allowed to drive on.
 
-  Pedestrian
+  Foot-Walking
   	This route preference prefers footpaths and tries to avoid highways.
 
-  Bicycle
+  Foot-Hiking
+    This route preference prefers footpaths and tries to avoid highways. Additionally 
+
+  Cycling-Regular
   	This route preference prefers bicycle lanes and dedicated bicycle tracks. It also may also consume footpaths and streets where bicycles are allowed.
 
   Wheelchair
   	This route preference prefers footways, avoids stairs and aims for the smoothest surface types. 
 
-  HeavyVehicle
+  Driving-Hgv
   	This route preference prefers roads attributed for heavy vehicles and lowers the default speed.
 
   Fastest
@@ -37,16 +40,16 @@ Glossary
   Recommended
   	This weight aims to find a healthy mixture of the aforementioned weights Fastest and Shortest.
 
-  BicycleMTB
+  Cycling-Mountain
   	This route preference prefers bicycle lanes and dedicated bicycle tracks. It also may also consume footpaths and streets where bicycles are allowed. Additionally it prefers tracks and ways attributed especially to mountain bikes.
 
-  BicycleRacer
+  Cycling-Road
   	This route preference prefers bicycle lanes and dedicated bicycle tracks. It also may also consume footpaths and streets where bicycles are allowed. Additionally it prefers bicycle paths however avoids rough surfaces.
 
-  BicycleTouring
+  Cycling-Tour
   	This route preference prefers bicycle lanes and dedicated bicycle tracks. It also may also consume footpaths and streets where bicycles are allowed. Additionally it prefers bicycle paths with attributes related to scenic environments.
 
-  BicycleSafety
+  Cycling-Safe
   	This route preference prefers bicycle lanes and dedicated bicycle tracks. It also may also consume footpaths and streets where bicycles are allowed. Additionally it tries to avoid highways.
 
   Goods
