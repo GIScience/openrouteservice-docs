@@ -73,3 +73,9 @@ div {
       overflow: visible !important;
    }
 }
+/*table header styling*/
+.wy-table thead th,.rst-content table.docutils thead th,.rst-content table.field-list thead th {
+	font-weight:bold;
+	border-bottom:solid 2px #e1e4e5;
+    border-left: 1px solid #e1e4e5
+}

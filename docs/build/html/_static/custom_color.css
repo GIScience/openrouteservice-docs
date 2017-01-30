@@ -60,3 +60,22 @@ div {
 .wy-nav-content {
 	max-width:800px
 }
+/* override table width restrictions */
+@media screen and (min-width: 767px) {
+
+   .wy-table-responsive table td {
+      /* !important prevents the common CSS stylesheets from overriding
+         this as on RTD they are loaded after this stylesheet */
+      white-space: normal !important;
+   }
+
+   .wy-table-responsive {
+      overflow: visible !important;
+   }
+}
+/*table header styling*/
+.wy-table thead th,.rst-content table.docutils thead th,.rst-content table.field-list thead th {
+	font-weight:bold;
+	border-bottom:solid 2px #e1e4e5;
+    border-left: 1px solid #e1e4e5
+}

@@ -45,7 +45,7 @@ The routing endpoint is defined as follows::
 
 .. centered:: This section is under construction
 
-
+.. _routing_param:
 
 For further information regarding the specific routing profiles, distance units and weighting options please visit our :doc:`glossary </glossary>`.
 
@@ -76,7 +76,7 @@ For further information regarding the specific routing profiles, distance units 
 +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``instructions``                      | Specifies whether to return instructions or not. Default is ``True``.                                                                                                                                                              |
 +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``prettify_instructions``             | Specifies whether to prettify instructions or not. Default is ``False``.                                                                                                                                                           |
+| ``prettify_instructions``             | Specifies whether to returen more verbose instructions or not. Default is ``False``.                                                                                                                                               |
 +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``elevation``                         | Specifies whether to return elevation values for points or not. Default is ``False``.                                                                                                                                              |
 +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -259,7 +259,9 @@ The routing result is structured into *summary*, *geometry*, *segments* and *way
 routes
 ------
 
-:summary: Contains total duration\ *(in seconds)*, total distance\ *(in* ``units`` *)* and linear distance\ *(in meters)* of the route.
+:summary: Contains total duration\ *(in seconds)*, route distance\ *(in* ``units`` *)* and actual distance\ *(in meters)* of the route.
+:geometry_format: Contains the selected :ref:`geometry format <routing_param>`.
+:bbox:  Contains the `minimum bounding box <https://en.wikipedia.org/wiki/Minimum_bounding_box>`__ of the route.
 :geometry: Contains the geometry in defined :ref:`geometry format<routings>`.
 :segments: Array that contains the segments the route consists of.
 :way_points: Array that contains the geometry-point number for each of the travel ``coordinates``.
@@ -291,10 +293,38 @@ steps
 +-------------+----------------------------------------------------------------------------------+
 | instruction | Contains the routing instruction text for the step.                              |
 +-------------+----------------------------------------------------------------------------------+
-| type        | Contains the type of ??                                                          |
+| type        | Contains the :ref:`instruction type <ins_type>` for symbolisation.               |
 +-------------+----------------------------------------------------------------------------------+
 | way_points  | Array that contains the geometry-point number of the step's start- and endpoint. |
 +-------------+----------------------------------------------------------------------------------+
+
+.. _ins_type:
+
+------
+
+instruction type
+<<<<<<<<<<<<<<<<
+
++-------+--------------+
+| Value | Encoding     |
++=======+==============+
+| 0     | Left         |
++-------+--------------+
+| 1     | Right        |
++-------+--------------+
+| 2     | Sharp Left   |
++-------+--------------+
+| 3     | Sharp Right  |
++-------+--------------+
+| 4     | Slight Left  |
++-------+--------------+
+| 5     | Slight Right |
++-------+--------------+
+| 6     | Straight     |
++-------+--------------+
+| 7     | Roundabout   |
++-------+--------------+
+
 
 .. Response Values
 .. +++++++++++++++
@@ -1314,7 +1344,7 @@ Example:
 		      ]
 		    },
 		    "attribution": "openrouteservice.org",
-		    "version": "0.1",
+		    "version": "4.0.0",
 		    "timestamp": 1484660155896
 		}
 	}

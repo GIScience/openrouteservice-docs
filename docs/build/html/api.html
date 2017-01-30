@@ -104,7 +104,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#response">Response</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id5">routes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id6">segments</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">steps</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#instruction-type">instruction type</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -248,7 +251,7 @@
 </pre></div>
 </div>
 <p class="centered">
-<strong>This section is under construction</strong></p><p>For further information regarding the specific routing profiles, distance units and weighting options please visit our <a class="reference internal" href="glossary.html"><em>glossary</em></a>.</p>
+<strong>This section is under construction</strong></p><p id="routing-param">For further information regarding the specific routing profiles, distance units and weighting options please visit our <a class="reference internal" href="glossary.html"><em>glossary</em></a>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="15%" />
@@ -282,7 +285,7 @@
 <td>Specifies whether to return instructions or not. Default is <code class="docutils literal"><span class="pre">True</span></code>.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">prettify_instructions</span></code></td>
-<td>Specifies whether to prettify instructions or not. Default is <code class="docutils literal"><span class="pre">False</span></code>.</td>
+<td>Specifies whether to returen more verbose instructions or not. Default is <code class="docutils literal"><span class="pre">False</span></code>.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">elevation</span></code></td>
 <td>Specifies whether to return elevation values for points or not. Default is <code class="docutils literal"><span class="pre">False</span></code>.</td>
@@ -440,7 +443,12 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">summary:</th><td class="field-body">Contains total duration<em>(in seconds)</em>, total distance<em>(in</em> <code class="docutils literal"><span class="pre">units</span></code> <em>)</em> and linear distance<em>(in meters)</em> of the route.</td>
+<tr class="field-odd field"><th class="field-name">summary:</th><td class="field-body">Contains total duration<em>(in seconds)</em>, route distance<em>(in</em> <code class="docutils literal"><span class="pre">units</span></code> <em>)</em> and actual distance<em>(in meters)</em> of the route.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">geometry_format:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">Contains the selected <a class="reference internal" href="#routing-param"><span>geometry format</span></a>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">bbox:</th><td class="field-body">Contains the <a class="reference external" href="https://en.wikipedia.org/wiki/Minimum_bounding_box">minimum bounding box</a> of the route.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">geometry:</th><td class="field-body">Contains the geometry in defined <a class="reference internal" href="#routings"><span>geometry format</span></a>.</td>
 </tr>
@@ -491,10 +499,50 @@
 <td>Contains the routing instruction text for the step.</td>
 </tr>
 <tr class="row-odd"><td>type</td>
-<td>Contains the type of ??</td>
+<td>Contains the <a class="reference internal" href="#ins-type"><span>instruction type</span></a> for symbolisation.</td>
 </tr>
 <tr class="row-even"><td>way_points</td>
 <td>Array that contains the geometry-point number of the step&#8217;s start- and endpoint.</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" id="ins-type" />
+<div class="section" id="instruction-type">
+<h5>instruction type<a class="headerlink" href="#instruction-type" title="Permalink to this headline">¶</a></h5>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">value</th>
+<th class="head">encoding</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Left</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Right</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Sharp Left</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Sharp Right</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Slight Left</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>Slight Right</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>Straight</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>Roundabout</td>
 </tr>
 </tbody>
 </table>
@@ -650,6 +698,7 @@
 </pre></div>
 </div>
 </div><hr class="docutils" />
+</div>
 </div>
 </div>
 </div>
@@ -1437,7 +1486,7 @@
               <span class="p">]</span>
             <span class="p">},</span>
             <span class="nt">&quot;attribution&quot;</span><span class="p">:</span> <span class="s2">&quot;openrouteservice.org&quot;</span><span class="p">,</span>
-            <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;4.0.0&quot;</span><span class="p">,</span>
             <span class="nt">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1484660155896</span>
         <span class="p">}</span>
 <span class="p">}</span>
