@@ -446,7 +446,9 @@ The following example routes from coordinate ``8.690614,49.38365`` over ``8.7007
 
 The resulting route has 2 segments with multiple steps:
 
-.. code-block:: json
+.. hidden-code-block:: json
+	:starthidden: True
+	:label: Show/Hide Code
 
 	{
 	  "routes": [
@@ -653,7 +655,9 @@ The following geocoding request searches for ``Berlin`` with a maximum of ``5`` 
 
 As a response you will obtain the following JSON file with exactly 5 matches:
 
-.. code-block:: json
+.. hidden-code-block:: json
+	:starthidden: True
+	:label: Show/Hide Code
 
 	{
 	  "features": [
@@ -954,7 +958,9 @@ This analysis request for the location ``8.6984954,49.38092`` uses the ``driving
 
 The result supplies isochrones at ``200``, ``400`` seconds and ends with the ``500`` seconds as outter ring:
 
-.. code-block:: json
+.. hidden-code-block:: json
+	:starthidden: True
+	:label: Show/Hide Code
 
 	{
 	  "features": [
