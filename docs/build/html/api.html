@@ -254,8 +254,8 @@
 <strong>This section is under construction</strong></p><p id="routing-param">For further information regarding the specific routing profiles, distance units and weighting options please visit our <a class="reference internal" href="glossary.html"><em>glossary</em></a>.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="15%" />
-<col width="85%" />
+<col width="14%" />
+<col width="86%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -279,7 +279,7 @@
 <td>Specifies whether to return geometry or not. Default is <code class="docutils literal"><span class="pre">True</span></code>.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">geometry_format</span></code></td>
-<td>Sets the format of a returned geometry. <a class="reference external" href="link">polyline</a> , <a class="reference external" href="link">encodedpolyline</a>(<em>default</em>) or <a class="reference external" href="http://geojson.org/geojson-spec.html#linestring">geojson</a>.</td>
+<td>Sets the format of a returned geometry. <a class="reference external" href="link">polyline</a> , <a class="reference external" href="https://developers.google.com/maps/documentation/utilities/polylinealgorithm">encodedpolyline</a>(<em>default</em>) or <a class="reference external" href="http://geojson.org/geojson-spec.html#linestring">geojson</a>.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">instructions</span></code></td>
 <td>Specifies whether to return instructions or not. Default is <code class="docutils literal"><span class="pre">True</span></code>.</td>
@@ -330,8 +330,8 @@
 <p>These additional settings can be made in <a class="reference external" href="http://json-schema.org/">json schema</a> :</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="31%" />
-<col width="69%" />
+<col width="19%" />
+<col width="81%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Options</th>
@@ -355,7 +355,7 @@
 <td>Specifies fitness parameters for bicycle.</td>
 </tr>
 <tr class="row-odd"><td>&#8220;avoidPolygons&#8221;</td>
-<td>Sets areas to be avoided as <a class="reference external" href="link">geojson polygon</a> or <a class="reference external" href="link">Multipolygon</a>.</td>
+<td>Sets areas to be avoided as <a class="reference external" href="http://geojson.org/geojson-spec.html#id4">geojson polygon</a> or <a class="reference external" href="http://geojson.org/geojson-spec.html#id7">geojson multipolygon</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -439,22 +439,34 @@
 <hr class="docutils" id="routes" />
 <div class="section" id="id5">
 <h4>routes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Content</th>
+</tr>
+</thead>
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">summary:</th><td class="field-body">Contains total duration<em>(in seconds)</em>, route distance<em>(in</em> <code class="docutils literal"><span class="pre">units</span></code> <em>)</em> and actual distance<em>(in meters)</em> of the route.</td>
+<tr class="row-even"><td>&#8220;summary&#8221;</td>
+<td>Contains total duration<em>(in seconds)</em>, route distance<em>(in</em> <code class="docutils literal"><span class="pre">units</span></code> <em>)</em> and actual distance<em>(in meters)</em> of the route.</td>
 </tr>
-<tr class="field-even field"><th class="field-name" colspan="2">geometry_format:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">Contains the selected <a class="reference internal" href="#routing-param"><span>geometry format</span></a>.</td>
+<tr class="row-odd"><td>&#8220;geometry_format&#8221;</td>
+<td>Contains the defined <a class="reference internal" href="#routing-param"><span>geometry format</span></a>.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">bbox:</th><td class="field-body">Contains the <a class="reference external" href="https://en.wikipedia.org/wiki/Minimum_bounding_box">minimum bounding box</a> of the route.</td>
+<tr class="row-even"><td>&#8220;bbox&#8221;</td>
+<td>Contains the <a class="reference external" href="https://en.wikipedia.org/wiki/Minimum_bounding_box">minimum bounding box</a> of the route.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">geometry:</th><td class="field-body">Contains the geometry in defined <a class="reference internal" href="#routings"><span>geometry format</span></a>.</td>
+<tr class="row-odd"><td>&#8220;geometry&#8221;</td>
+<td>Contains the geometry in defined <a class="reference internal" href="#routings"><span>geometry format</span></a>.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">segments:</th><td class="field-body">Array that contains the segments the route consists of.</td>
+<tr class="row-even"><td>&#8220;segments&#8221;</td>
+<td>Array that contains the segments the route consists of.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">way_points:</th><td class="field-body">Array that contains the geometry-point number for each of the travel <code class="docutils literal"><span class="pre">coordinates</span></code>.</td>
+<tr class="row-odd"><td>&#8220;way_points&#8221;</td>
+<td>Array that contains the geometry-point number for each of the travel <code class="docutils literal"><span class="pre">coordinates</span></code>.</td>
 </tr>
 </tbody>
 </table>
@@ -515,8 +527,8 @@
 <col width="67%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">value</th>
-<th class="head">encoding</th>
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Encoding</th>
 </tr>
 </thead>
 <tbody valign="top">
@@ -705,13 +717,13 @@
 <hr class="docutils" id="geocodings" />
 <div class="section" id="geocoding-service">
 <h2>Geocoding Service<a class="headerlink" href="#geocoding-service" title="Permalink to this headline">¶</a></h2>
-<p>The geocoding endpoint is defined as follows:</p>
+<p>We distinguish between <a class="reference external" href="https://en.wikipedia.org/wiki/Geocoding">geocoding</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Reverse_geocoding">reverse geocoding</a> depending on your input.</p>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Geocoding">geocoding</a> endpoint is defined as follows:</p>
 <p class="centered">
-<strong>hostname/geocode?</strong></p><p>We distinguish between geocoding and reverse geocoding depending on your input.</p>
-<hr class="docutils" id="gc" />
+<strong>hostname/geocode?</strong></p><hr class="docutils" id="gc" />
 <div class="section" id="geocoding">
 <h3>Geocoding<a class="headerlink" href="#geocoding" title="Permalink to this headline">¶</a></h3>
-<p>A geocoding request returns a list of coordinates matching your search input.</p>
+<p>A <a class="reference external" href="https://en.wikipedia.org/wiki/Geocoding">geocoding</a> request returns a list of coordinates matching your search input.</p>
 <div class="section" id="id8">
 <h4>Query Parameters<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
@@ -743,7 +755,7 @@
 <hr class="docutils" id="gc-response" />
 <div class="section" id="id9">
 <h4>Response<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
-<p>The geocoding result contains as many features (if existing) as the <code class="docutils literal"><span class="pre">limit</span></code> parameter was set to. It also contains the standard <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</p>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Geocoding">geocoding</a> result contains as many features (if existing) as the <code class="docutils literal"><span class="pre">limit</span></code> parameter was set to. It also contains the standard <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -886,7 +898,7 @@
 <h3>Reverse Geocoding<a class="headerlink" href="#reverse-geocoding" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id10">
 <h4>Query Parameters<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
-<p>As a result of a reverse geocoding request you will get one match, namely the next enclosing object with an address tag which surrounds the given coordinate.</p>
+<p>As a result of a <a class="reference external" href="https://en.wikipedia.org/wiki/Reverse_geocoding">reverse geocoding</a> request you will get one match, namely the next enclosing object with an address tag which surrounds the given coordinate.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="14%" />
@@ -935,7 +947,18 @@
 </pre></div>
 </div>
 <p>Resulting in one feature response:</p>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<script type="text/javascript">
+    function showhide(element){
+        if (!document.getElementById)
+            return
+
+        if (element.style.display == "block")
+            element.style.display = "none"
+        else
+            element.style.display = "block"
+    };
+</script>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock3'))">Show/Hide Code</a><br /><div id="hiddencodeblock3" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
   <span class="nt">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -961,14 +984,14 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<hr class="docutils" />
+</div><hr class="docutils" />
 </div>
 </div>
 </div>
 <hr class="docutils" id="isos" />
 <div class="section" id="isochrones-service">
 <h2>Isochrones Service<a class="headerlink" href="#isochrones-service" title="Permalink to this headline">¶</a></h2>
-<p>The accessibility analysis endpoint is defined as follows:</p>
+<p>The Isochrones endpoint is defined as follows:</p>
 <div class="highlight-python"><div class="highlight"><pre>hostname/analyse?
 </pre></div>
 </div>
@@ -1027,7 +1050,7 @@
 </tr>
 <tr class="field-even field"><th class="field-name">with interval:</th><td class="field-body">Returns isochrones in <code class="docutils literal"><span class="pre">interval</span></code> gaps with <code class="docutils literal"><span class="pre">range</span></code> as outmost ring. <code class="docutils literal"><span class="pre">range=value&amp;interval=smaller_value</span></code></td>
 </tr>
-<tr class="field-odd field"><th class="field-name">range list:</th><td class="field-body">Returns isochrones at the specified ranges. <code class="docutils literal"><span class="pre">range=value_1,value_2,...,value_N</span></code></td>
+<tr class="field-odd field"><th class="field-name">range list:</th><td class="field-body">Returns isochrones at the specified ranges. <code class="docutils literal"><span class="pre">range=value_1,value_2,...,value_n</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -1062,7 +1085,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">area:</th><td class="field-body">Returns the area of each polygon in the feature properties.</td>
+<tr class="field-odd field"><th class="field-name">area:</th><td class="field-body">Returns the area of each polygon in its feature <a class="reference internal" href="#aa-props"><span>properties</span></a>.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">reachfactor:</th><td class="field-body">Returns reachability score between <code class="docutils literal"><span class="pre">1</span></code> and <code class="docutils literal"><span class="pre">0</span></code></td>
 </tr>
@@ -1070,7 +1093,7 @@
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">As the maximum reachfactor would be achieved by traveling the direct distance at maximum speed in a vacuum without obstacles, naturally it can never be <code class="docutils literal"><span class="pre">1</span></code>. The availability of motorways however produces a higher score over normal roads.</p>
+<p class="last">As the maximum reachfactor would be achieved by traveling as the crow flies at maximum speed in a vacuum without obstacles, naturally it can never be <code class="docutils literal"><span class="pre">1</span></code>. The availability of motorways however produces a higher score over normal roads.</p>
 </div>
 </div>
 </div>
@@ -1090,7 +1113,7 @@
 </tr>
 </tbody>
 </table>
-<table border="1" class="docutils">
+<table border="1" class="docutils" id="aa-props">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
@@ -1118,6 +1141,10 @@
 </tr>
 </tbody>
 </table>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">There is a limit on the server side to the total amount of recieved polygons.</p>
+</div>
 <hr class="docutils" />
 <p>This analysis request for the location <code class="docutils literal"><span class="pre">8.6984954,49.38092</span></code> uses the <code class="docutils literal"><span class="pre">driving-car</span></code> profile and searches for accessibility in range <code class="docutils literal"><span class="pre">500</span></code> seconds with interval <code class="docutils literal"><span class="pre">200</span></code> seconds:</p>
 <div class="highlight-python"><div class="highlight"><pre>hostname/analysis-test?format=json&amp;range=500&amp;interval=200&amp;locations=8.6984954,49.38092&amp;profile=driving-car&amp;api_key=api-key
@@ -1135,7 +1162,7 @@
             element.style.display = "block"
     };
 </script>
-<a href="javascript:showhide(document.getElementById('hiddencodeblock3'))">Show/Hide Code</a><br /><div id="hiddencodeblock3" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock4'))">Show/Hide Code</a><br /><div id="hiddencodeblock4" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
   <span class="nt">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>

@@ -59,31 +59,31 @@ For further information regarding the specific routing profiles, distance units 
 .. General Parameters
 .. >>>>>>>>>>>>>>>>>>>>
 
-+---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Parameter                             | Description                                                                                                                                                                                                                        |
-+=======================================+====================================================================================================================================================================================================================================+
-| ``profile``                           | Specifies the routing profile. Values are ``driving-car``, ``driving-hgv``, ``cycling-regular``, ``cycling-road``, ``cycling-safe``, ``cycling-mountain``, ``cycling-tour``, ``foot-walking``, ``foot-hiking`` and ``wheelchair``. |
-+---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``coordinates``                       | Vertical bar separated List of ``longitude,latitude`` coordinates visited in order.                                                                                                                                                |
-+---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``units``                             | Specifies the distance unit . Values are ``m``\ (meters)\ (*default*)\/``km``\ (kilometers)\/``mi``\ (miles).                                                                                                                      |
-+---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``language``                          | Language for the route instructions. ``en``\ (*default*),``de`` , ``ru``.. .                                                                                                                                                       |
-+---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``geometry``                          | Specifies whether to return geometry or not. Default is ``True``.                                                                                                                                                                  |
-+---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``geometry_format``                   | Sets the format of a returned geometry. `polyline <link>`__ , `encodedpolyline <link>`__\ (*default*) or `geojson <http://geojson.org/geojson-spec.html#linestring>`__\.                                                           |
-+---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``instructions``                      | Specifies whether to return instructions or not. Default is ``True``.                                                                                                                                                              |
-+---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``prettify_instructions``             | Specifies whether to returen more verbose instructions or not. Default is ``False``.                                                                                                                                               |
-+---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``elevation``                         | Specifies whether to return elevation values for points or not. Default is ``False``.                                                                                                                                              |
-+---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``extra_info`` :ref:`\# <extra_info>` | Vertical bar separated List of desired additional information. Values are ``gradients``, ``surface`` and ``waytypes``.                                                                                                             |
-+---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``options`` :ref:`\# <options>`       | Sets advanced options in `json schema <http://json-schema.org/>`_\. Add json as string: ``"{...}"``.                                                                                                                               |
-+---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Parameter                             | Description                                                                                                                                                                                                                                      |
++=======================================+==================================================================================================================================================================================================================================================+
+| ``profile``                           | Specifies the routing profile. Values are ``driving-car``, ``driving-hgv``, ``cycling-regular``, ``cycling-road``, ``cycling-safe``, ``cycling-mountain``, ``cycling-tour``, ``foot-walking``, ``foot-hiking`` and ``wheelchair``.               |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``coordinates``                       | Vertical bar separated List of ``longitude,latitude`` coordinates visited in order.                                                                                                                                                              |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``units``                             | Specifies the distance unit . Values are ``m``\ (meters)\ (*default*)\/``km``\ (kilometers)\/``mi``\ (miles).                                                                                                                                    |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``language``                          | Language for the route instructions. ``en``\ (*default*),``de`` , ``ru``.. .                                                                                                                                                                     |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``geometry``                          | Specifies whether to return geometry or not. Default is ``True``.                                                                                                                                                                                |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``geometry_format``                   | Sets the format of a returned geometry. `polyline <link>`__ , `encodedpolyline <https://developers.google.com/maps/documentation/utilities/polylinealgorithm>`__\ (*default*) or `geojson <http://geojson.org/geojson-spec.html#linestring>`__\. |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``instructions``                      | Specifies whether to return instructions or not. Default is ``True``.                                                                                                                                                                            |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``prettify_instructions``             | Specifies whether to returen more verbose instructions or not. Default is ``False``.                                                                                                                                                             |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``elevation``                         | Specifies whether to return elevation values for points or not. Default is ``False``.                                                                                                                                                            |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``extra_info`` :ref:`\# <extra_info>` | Vertical bar separated List of desired additional information. Values are ``gradients``, ``surface`` and ``waytypes``.                                                                                                                           |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``options`` :ref:`\# <options>`       | Sets advanced options in `json schema <http://json-schema.org/>`_\. Add json as string: ``"{...}"``.                                                                                                                                             |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -136,21 +136,21 @@ Options
 
 These additional settings can be made in `json schema <http://json-schema.org/>`_ :
 
-+--------------------------------------+-------------------------------------------------------------------------------------+
-| Options                              | Descriptions                                                                        |
-+======================================+=====================================================================================+
-| "maximumSpeed"                       | Sets the maximum travel speed.                                                      |
-+--------------------------------------+-------------------------------------------------------------------------------------+
-| "avoidFeatures" :ref:`\# <avoid>`    | Array of features to avoid. ["feat1", "feat2", ..]                                  |
-+--------------------------------------+-------------------------------------------------------------------------------------+
-| "modeType" :ref:`\# <mode>`          | Specifies the heavy vehicle mode. Values are "hgv" and "bus".                       |
-+--------------------------------------+-------------------------------------------------------------------------------------+
-| "vehicleParams" :ref:`\# <vehparam>` | Specifies hgv or wheelchair vehicle parameters.                                     |
-+--------------------------------------+-------------------------------------------------------------------------------------+
-| "fitnessParams" :ref:`\# <fitparam>` | Specifies fitness parameters for bicycle.                                           |
-+--------------------------------------+-------------------------------------------------------------------------------------+
-| "avoidPolygons"                      | Sets areas to be avoided as `geojson polygon <link>`__ or `Multipolygon <link>`__\. |
-+--------------------------------------+-------------------------------------------------------------------------------------+
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Options                              | Descriptions                                                                                                                                                        |
++======================================+=====================================================================================================================================================================+
+| "maximumSpeed"                       | Sets the maximum travel speed.                                                                                                                                      |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "avoidFeatures" :ref:`\# <avoid>`    | Array of features to avoid. ["feat1", "feat2", ..]                                                                                                                  |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "modeType" :ref:`\# <mode>`          | Specifies the heavy vehicle mode. Values are "hgv" and "bus".                                                                                                       |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "vehicleParams" :ref:`\# <vehparam>` | Specifies hgv or wheelchair vehicle parameters.                                                                                                                     |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "fitnessParams" :ref:`\# <fitparam>` | Specifies fitness parameters for bicycle.                                                                                                                           |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "avoidPolygons"                      | Sets areas to be avoided as `geojson polygon <http://geojson.org/geojson-spec.html#id4>`__ or `geojson multipolygon <http://geojson.org/geojson-spec.html#id7>`__\. |
++--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 .. _avoid:
@@ -259,12 +259,21 @@ The routing result is structured into *summary*, *geometry*, *segments* and *way
 routes
 ------
 
-:summary: Contains total duration\ *(in seconds)*, route distance\ *(in* ``units`` *)* and actual distance\ *(in meters)* of the route.
-:geometry_format: Contains the selected :ref:`geometry format <routing_param>`.
-:bbox:  Contains the `minimum bounding box <https://en.wikipedia.org/wiki/Minimum_bounding_box>`__ of the route.
-:geometry: Contains the geometry in defined :ref:`geometry format<routings>`.
-:segments: Array that contains the segments the route consists of.
-:way_points: Array that contains the geometry-point number for each of the travel ``coordinates``.
++-------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| Parameter         | Content                                                                                                                       |
++===================+===============================================================================================================================+
+| "summary"         | Contains total duration\ *(in seconds)*, route distance\ *(in* ``units`` *)* and actual distance\ *(in meters)* of the route. |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| "geometry_format" | Contains the defined :ref:`geometry format <routing_param>`.                                                                  |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| "bbox"            | Contains the `minimum bounding box <https://en.wikipedia.org/wiki/Minimum_bounding_box>`__ of the route.                      |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| "geometry"        | Contains the geometry in defined :ref:`geometry format<routings>`.                                                            |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| "segments"        | Array that contains the segments the route consists of.                                                                       |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------+
+| "way_points"      | Array that contains the geometry-point number for each of the travel ``coordinates``.                                         |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------+
 
 .. _segments:
 
@@ -633,11 +642,11 @@ The resulting route has 2 segments with multiple steps:
 Geocoding Service
 >>>>>>>>>>>>>>>>>
 
-The geocoding endpoint is defined as follows:
+We distinguish between `geocoding <https://en.wikipedia.org/wiki/Geocoding>`__ and `reverse geocoding <https://en.wikipedia.org/wiki/Reverse_geocoding>`__ depending on your input. 
+
+The `geocoding <https://en.wikipedia.org/wiki/Geocoding>`__ endpoint is defined as follows:
 
 .. centered:: hostname/geocode?
-
-We distinguish between geocoding and reverse geocoding depending on your input. 
 
 .. _gc:
 
@@ -646,7 +655,7 @@ We distinguish between geocoding and reverse geocoding depending on your input.
 Geocoding
 +++++++++
 
-A geocoding request returns a list of coordinates matching your search input.
+A `geocoding <https://en.wikipedia.org/wiki/Geocoding>`__ request returns a list of coordinates matching your search input.
 
 Query Parameters
 ----------------
@@ -671,7 +680,7 @@ Query Parameters
 Response
 --------
 
-The geocoding result contains as many features (if existing) as the ``limit`` parameter was set to. It also contains the standard :ref:`meta information<meta_info>`\.
+The `geocoding <https://en.wikipedia.org/wiki/Geocoding>`__ result contains as many features (if existing) as the ``limit`` parameter was set to. It also contains the standard :ref:`meta information<meta_info>`\.
 
 :geometry: Contains the coordinates and the geometry ``type`` which is ``Point``.
 :type: Specifies the JSON feature type.
@@ -804,7 +813,7 @@ Reverse Geocoding
 Query Parameters
 ----------------
 
-As a result of a reverse geocoding request you will get one match, namely the next enclosing object with an address tag which surrounds the given coordinate.
+As a result of a `reverse geocoding <https://en.wikipedia.org/wiki/Reverse_geocoding>`__ request you will get one match, namely the next enclosing object with an address tag which surrounds the given coordinate.
 
 +--------------+----------------------------------------------------------------------------------------+
 | Parameter    | Description                                                                            |
@@ -839,7 +848,9 @@ The following example examines the location ``13.239515,52.514679``::
 
 Resulting in one feature response:
 
-.. code-block:: json
+.. hidden-code-block:: json
+	:starthidden: True
+	:label: Show/Hide Code
 
 	{
 	  "features": [
@@ -877,7 +888,9 @@ Resulting in one feature response:
 Isochrones Service
 >>>>>>>>>>>>>>>>>>
 
-The accessibility analysis endpoint is defined as follows::
+
+
+The Isochrones endpoint is defined as follows::
 
  hostname/analyse?
 
@@ -922,7 +935,7 @@ There are three ways to use the range parameter:
 
 :single range:  Returns one isochrone with the given range. ``range=value``
 :with interval: Returns isochrones in ``interval`` gaps with ``range`` as outmost ring. ``range=value&interval=smaller_value``
-:range list: Returns isochrones at the specified ranges. ``range=value_1,value_2,...,value_N``
+:range list: Returns isochrones at the specified ranges. ``range=value_1,value_2,...,value_n``
 
 .. _units:
 
@@ -946,10 +959,10 @@ Units
 Attributes
 ----------
 
-:area:  Returns the area of each polygon in the feature properties.
+:area:  Returns the area of each polygon in its feature :ref:`properties<aa_props>`.
 :reachfactor:  Returns reachability score between ``1`` and ``0``
 
-.. note:: As the maximum reachfactor would be achieved by traveling the direct distance at maximum speed in a vacuum without obstacles, naturally it can never be ``1``. The availability of motorways however produces a higher score over normal roads.
+.. note:: As the maximum reachfactor would be achieved by traveling as the crow flies at maximum speed in a vacuum without obstacles, naturally it can never be ``1``. The availability of motorways however produces a higher score over normal roads.
 
 .. _aa_response:
 
@@ -964,6 +977,7 @@ Every Isochrone/Equidistant will result in an object in the features-block. They
 :type: Specifies the JSON feature type.
 :properties: Contains the ``center``, ``group_index`` and ``value`` parameter.
 
+.. _aa_props:
 
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Properties      | Description                                                                                                                                               |
@@ -979,6 +993,7 @@ Every Isochrone/Equidistant will result in an object in the features-block. They
 | ``value``       | Contains the range value of this isochrone/equidistant in seconds/meters.                                                                                 |
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+.. attention:: There is a limit on the server side to the total amount of recieved polygons.
 
 -----
 
