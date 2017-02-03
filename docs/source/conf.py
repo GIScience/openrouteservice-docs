@@ -20,7 +20,7 @@ import os
 on_rtd = os.environ.get('READTHEDOCS') == 'True'
 import sys
 sys.path.insert(0, os.path.abspath('.'))
-import sphinx_fontawesome
+# import sphinx_fontawesome
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -33,7 +33,7 @@ import sphinx_fontawesome
 extensions = [
     'sphinx.ext.autodoc',
     'hidden_code_block',
-    'sphinx_fontawesome'
+    # 'sphinx_fontawesome'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
