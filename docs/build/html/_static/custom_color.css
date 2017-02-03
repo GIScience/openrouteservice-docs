@@ -79,3 +79,10 @@ div {
 	border-bottom:solid 2px #e1e4e5;
     border-left: 1px solid #e1e4e5
 }
+
+#headerlink2 {
+	visibility:visible;
+	content:"Ã¯ÂÂ";
+	font-family:FontAwesome;
+	display:inline-block
+}

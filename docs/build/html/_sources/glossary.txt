@@ -1,6 +1,8 @@
 Glossary
 ========
 
+.. centered:: under construction
+
 .. glossary::
   :sorted:
 
@@ -8,7 +10,7 @@ Glossary
 ..   The Traffic Message Channel (TMC) is a real time traffic information source in Germany which you may query within your route requests.
 
   API
-    An Application Programming Interface.
+    An `Application Programming Interface <https://en.wikipedia.org/wiki/Application_programming_interface>`__.
 
   API-Key
     A code of authorization passed within a request as a parameter indentifying the individual or company.
