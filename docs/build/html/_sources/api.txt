@@ -49,8 +49,7 @@ Query Parameters
 .. _routing_param:
 
 The minimum requirements for a valid request are specified ``profile`` and ``coordinates`` parameters. Other parameters are optional but may contribute to the accuracy of your query.
-
-.. For further information regarding the specific routing profiles, distance units and weighting options please visit our :doc:`glossary </glossary>`.
+For further information regarding the specific routing profiles, distance units and weighting options please visit our :doc:`glossary </glossary>`.
 
 
 .. Optional Parameters
@@ -75,37 +74,40 @@ The minimum requirements for a valid request are specified ``profile`` and ``coo
 	</tr>
 	</thead>
 	<tbody valign="top">
-	<tr class="row-even"><td><code class="docutils literal"><span class="pre">profile</span></code></td>
-	<td>Specifies the routing profile. Values are <code class="docutils literal"><span class="pre">driving-car</span></code>, <code class="docutils literal"><span class="pre">driving-hgv</span></code>, <code class="docutils literal"><span class="pre">cycling-regular</span></code>, <code class="docutils literal"><span class="pre">cycling-road</span></code>, <code class="docutils literal"><span class="pre">cycling-safe</span></code>, <code class="docutils literal"><span class="pre">cycling-mountain</span></code>, <code class="docutils literal"><span class="pre">cycling-tour</span></code>, <code class="docutils literal"><span class="pre">foot-walking</span></code>, <code class="docutils literal"><span class="pre">foot-hiking</span></code> and <code class="docutils literal"><span class="pre">wheelchair</span></code>.</td>
-	</tr>
-	<tr class="row-odd"><td><code class="docutils literal"><span class="pre">coordinates</span></code></td>
+	<tr class="row-even"><td><code class="docutils literal"><span class="pre">coordinates</span></code></td>
 	<td>Vertical bar separated List of <code class="docutils literal"><span class="pre">longitude,latitude</span></code> coordinates visited in order.</td>
 	</tr>
-	<tr class="row-even"><td><code class="docutils literal"><span class="pre">units</span></code></td>
+	<tr class="row-odd"><td><code class="docutils literal"><span class="pre">profile</span></code></td>
+	<td>Specifies the routing profile. Values are <code class="docutils literal"><span class="pre">driving-car</span></code>, <code class="docutils literal"><span class="pre">driving-hgv</span></code>, <code class="docutils literal"><span class="pre">cycling-regular</span></code>, <code class="docutils literal"><span class="pre">cycling-road</span></code>, <code class="docutils literal"><span class="pre">cycling-safe</span></code>, <code class="docutils literal"><span class="pre">cycling-mountain</span></code>, <code class="docutils literal"><span class="pre">cycling-tour</span></code>, <code class="docutils literal"><span class="pre">foot-walking</span></code>, <code class="docutils literal"><span class="pre">foot-hiking</span></code> and <code class="docutils literal"><span class="pre">wheelchair</span></code>.</td>
+	</tr>
+	<tr class="row-even"><td><code class="docutils literal"><span class="pre">preference</span></code></td>
+	<td>Specifies the routing preference. Values are <code class="docutils literal"><span class="pre">fastest</span></code>(<em>default</em>)/, <code class="docutils literal"><span class="pre">shortest</span></code> and <code class="docutils literal"><span class="pre">recommended</span></code>.</td>
+	</tr>
+	<tr class="row-odd"><td><code class="docutils literal"><span class="pre">units</span></code></td>
 	<td>Specifies the distance unit . Values are <code class="docutils literal"><span class="pre">m</span></code>(meters)(<em>default</em>)/<code class="docutils literal"><span class="pre">km</span></code>(kilometers)/<code class="docutils literal"><span class="pre">mi</span></code>(miles).</td>
 	</tr>
-	<tr class="row-odd"><td><code class="docutils literal"><span class="pre">language</span></code></td>
+	<tr class="row-even"><td><code class="docutils literal"><span class="pre">language</span></code></td>
 	<td>Language for the route instructions. <code class="docutils literal"><span class="pre">en</span></code>(<em>default</em>),``de`` , <code class="docutils literal"><span class="pre">ru</span></code>.. .</td>
 	</tr>
-	<tr class="row-even"><td><code class="docutils literal"><span class="pre">geometry</span></code></td>
+	<tr class="row-odd"><td><code class="docutils literal"><span class="pre">geometry</span></code></td>
 	<td>Specifies whether to return geometry or not. Default is <code class="docutils literal"><span class="pre">True</span></code>.</td>
 	</tr>
-	<tr class="row-odd"><td><code class="docutils literal"><span class="pre">geometry_format</span></code></td>
+	<tr class="row-even"><td><code class="docutils literal"><span class="pre">geometry_format</span></code></td>
 	<td>Sets the format of a returned geometry. <a class="reference external" href="link">polyline</a> , <a class="reference external" href="https://developers.google.com/maps/documentation/utilities/polylinealgorithm">encodedpolyline</a>(<em>default</em>) or <a class="reference external" href="http://geojson.org/geojson-spec.html#linestring">geojson</a>.</td>
 	</tr>
-	<tr class="row-even"><td><code class="docutils literal"><span class="pre">instructions</span></code></td>
+	<tr class="row-odd"><td><code class="docutils literal"><span class="pre">instructions</span></code></td>
 	<td>Specifies whether to return instructions or not. Default is <code class="docutils literal"><span class="pre">True</span></code>.</td>
 	</tr>
-	<tr class="row-odd"><td><code class="docutils literal"><span class="pre">prettify_instructions</span></code></td>
+	<tr class="row-even"><td><code class="docutils literal"><span class="pre">prettify_instructions</span></code></td>
 	<td>Specifies whether to returen more verbose instructions or not. Default is <code class="docutils literal"><span class="pre">False</span></code>.</td>
 	</tr>
-	<tr class="row-even"><td><code class="docutils literal"><span class="pre">elevation</span></code></td>
+	<tr class="row-odd"><td><code class="docutils literal"><span class="pre">elevation</span></code></td>
 	<td>Specifies whether to return elevation values for points or not. Default is <code class="docutils literal"><span class="pre">False</span></code>.</td>
 	</tr>
-	<tr class="row-odd"><td><code class="docutils literal"><span class="pre">extra_info</span></code><span> </span> <a class="fa fa-link" href="#extra-info"></a></td>
+	<tr class="row-even"><td><code class="docutils literal"><span class="pre">extra_info</span></code><span> </span> <a class="fa fa-link" href="#extra-info"></a></td>
 	<td>Vertical bar separated List of desired additional information. Values are <code class="docutils literal"><span class="pre">gradients</span></code>, <code class="docutils literal"><span class="pre">surface</span></code> and <code class="docutils literal"><span class="pre">waytypes</span></code>.</td>
 	</tr>
-	<tr class="row-even"><td><code class="docutils literal"><span class="pre">options</span></code><span> </span> <a class="fa fa-link" href="#options"></a></td>
+	<tr class="row-odd"><td><code class="docutils literal"><span class="pre">options</span></code><span> </span> <a class="fa fa-link" href="#options"></a></td>
 	<td>Sets advanced options in <a class="reference external" href="http://json-schema.org/">json schema</a>. Add json as string: <code class="docutils literal"><span class="pre">&quot;{...}&quot;</span></code>.</td>
 	</tr>
 	</tbody>
@@ -114,9 +116,11 @@ The minimum requirements for a valid request are specified ``profile`` and ``coo
 .. +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 .. | Parameter                           | Description                                                                                                                                                                                                                                      |
 .. +=====================================+==================================================================================================================================================================================================================================================+
+.. | ``coordinates``                     | Vertical bar separated List of ``longitude,latitude`` coordinates visited in order.                                                                                                                                                              |
+.. +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 .. | ``profile``                         | Specifies the routing profile. Values are ``driving-car``, ``driving-hgv``, ``cycling-regular``, ``cycling-road``, ``cycling-safe``, ``cycling-mountain``, ``cycling-tour``, ``foot-walking``, ``foot-hiking`` and ``wheelchair``.               |
 .. +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-.. | ``coordinates``                     | Vertical bar separated List of ``longitude,latitude`` coordinates visited in order.                                                                                                                                                              |
+.. | ``preference``                      | Specifies the routing preference. Values are ``fastest``\ (*default*), ``shortest`` and ``recommended``.                                                                                                                                         |
 .. +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 .. | ``units``                           | Specifies the distance unit . Values are ``m``\ (meters)\ (*default*)\/``km``\ (kilometers)\/``mi``\ (miles).                                                                                                                                    |
 .. +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -137,29 +141,6 @@ The minimum requirements for a valid request are specified ``profile`` and ``coo
 .. | ``options`` :ref:`\# <options>`     | Sets advanced options in `json schema <http://json-schema.org/>`_\. Add json as string: ``"{...}"``.                                                                                                                                             |
 .. +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-
-
-.. routepref
-.. >>>>>>>>>
-
-.. The parameter ``routepref`` points to the selected routing mode. Please note that there are additional route preferences for the ``Bicycle`` and a subtype list for the ``HeavyVehicle`` type.
-
-.. +------------------+-------------------------------------------------------------------------------+
-.. | Preference Value | Alternative Values                                                            |
-.. +==================+===============================================================================+
-.. | ``driving-car``          | \-                                                                            |
-.. +------------------+-------------------------------------------------------------------------------+
-.. | ``Pedestrian``   | \-                                                                            |
-.. +------------------+-------------------------------------------------------------------------------+
-.. | ``Bicycle``      | ``BicycleMTB``\/\ ``BicycleRacer``\/\ ``BicycleTouring``\/\ ``BicycleSafety`` |
-.. +------------------+-------------------------------------------------------------------------------+
-.. | ``Wheelchair``   | \-                                                                            |
-.. +------------------+-------------------------------------------------------------------------------+
-.. | ``driving-hgv`` | There is a subtype list for the driving-hgv profile                          |
-.. +------------------+-------------------------------------------------------------------------------+
-
-.. _
-
 .. _extra_info:
 
 -----
@@ -169,15 +150,15 @@ Extra Info
 
 Encoding of the ``extra_info`` Values:
 
-+-----------+-----------------------------------------------+
-| Value     | Description                                   |
-+===========+===============================================+
-| gradients | Returns steepneess information for each step. |
-+-----------+-----------------------------------------------+
-| surface   | Returns surface information for each step.    |
-+-----------+-----------------------------------------------+
-| waytypes  | Returns waytype information for each step.    |
-+-----------+-----------------------------------------------+
++---------------+-----------------------------------------------+
+| Value         | Description                                   |
++===============+===============================================+
+| ``gradients`` | Returns steepneess information for each step. |
++---------------+-----------------------------------------------+
+| ``surface``   | Returns surface information for each step.    |
++---------------+-----------------------------------------------+
+| ``waytypes``  | Returns waytype information for each step.    |
++---------------+-----------------------------------------------+
 
 
 
@@ -188,6 +169,7 @@ Encoding of the ``extra_info`` Values:
 Options
 -------
 
+Some parameters only work with specific routing profiles. ``"steps"`` for example merely works with one of the **foot-** or **cycling-** profiles. Please be aware which specific route preference you chose.
 These additional settings can be made in `json schema <http://json-schema.org/>`_ :
 
 .. raw:: html
@@ -203,22 +185,19 @@ These additional settings can be made in `json schema <http://json-schema.org/>`
 	</tr>
 	</thead>
 	<tbody valign="top">
-	<tr class="row-even"><td>&#8220;maximumSpeed&#8221;</td>
+	<tr class="row-even"><td>&#8220;maximum_speed&#8221;</td>
 	<td>Sets the maximum travel speed in km/h.</td>
 	</tr>
-	<tr class="row-odd"><td>&#8220;avoidFeatures&#8221;<span> </span> <a class="fa fa-link" href="#avoid"></a></td>
+	<tr class="row-odd"><td>&#8220;avoid_features&#8221;<span> </span> <a class="fa fa-link" href="#avoid"></a></td>
 	<td>Array of features to avoid. <code class="docutils literal"><span class="pre">[&quot;feat1&quot;,</span> <span class="pre">&quot;feat2&quot;,</span> <span class="pre">..]</span></code></td>
 	</tr>
-	<tr class="row-even"><td>&#8220;modeType&#8221;<span> </span> <a class="fa fa-link" href="#mode"></a></td>
+	<tr class="row-even"><td>&#8220;vehicle_type&#8221;<span> </span> <a class="fa fa-link" href="#mode"></a></td>
 	<td>Specifies the heavy vehicle mode. Values are &#8220;hgv&#8221; and &#8220;bus&#8221;.</td>
 	</tr>
-	<tr class="row-odd"><td>&#8220;vehicleParams&#8221;<span> </span> <a class="fa fa-link" href="#vehparam"></a></td>
+	<tr class="row-odd"><td>&#8220;profile_params&#8221;<span> </span> <a class="fa fa-link" href="#vehparam"></a></td>
 	<td>Specifies hgv or wheelchair vehicle parameters.</td>
 	</tr>
-	<tr class="row-even"><td>&#8220;fitnessParams&#8221;<span> </span> <a class="fa fa-link" href="#fitparam"></a></td>
-	<td>Specifies fitness parameters for bicycle.</td>
-	</tr>
-	<tr class="row-odd"><td>&#8220;avoidPolygons&#8221;</td>
+	<tr class="row-even"><td>&#8220;avoid_polygons&#8221;</td>
 	<td>Sets areas to be avoided as <a class="reference external" href="http://geojson.org/geojson-spec.html#id4">geojson polygon</a> or <a class="reference external" href="http://geojson.org/geojson-spec.html#id7">geojson multipolygon</a>.</td>
 	</tr>
 	</tbody>
@@ -227,17 +206,15 @@ These additional settings can be made in `json schema <http://json-schema.org/>`
 .. +--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 .. | Options                              | Descriptions                                                                                                                                                        |
 .. +======================================+=====================================================================================================================================================================+
-.. | "maximumSpeed"                       | Sets the maximum travel speed in km/h.                                                                                                                              |
+.. | "maximum_speed"                       | Sets the maximum travel speed in km/h.                                                                                                                              |
 .. +--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-.. | "avoidFeatures" :ref:`\# <avoid>`    | Array of features to avoid. ``["feat1", "feat2", ..]``                                                                                                              |
+.. | "avoid_features" :ref:`\# <avoid>`    | Array of features to avoid. ``["feat1", "feat2", ..]``                                                                                                              |
 .. +--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-.. | "modeType" :ref:`\# <mode>`          | Specifies the heavy vehicle mode. Values are "hgv" and "bus".                                                                                                       |
+.. | "vehicle_type" :ref:`\# <type>`          | Specifies the heavy vehicle type. Values are "hgv" and "bus".                                                                                                       |
 .. +--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-.. | "vehicleParams" :ref:`\# <vehparam>` | Specifies hgv or wheelchair vehicle parameters.                                                                                                                     |
+.. | "profile_params" :ref:`\# <proparam>` | Specifies hgv or wheelchair vehicle parameters.                                                                                                                     |
 .. +--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-.. | "fitnessParams" :ref:`\# <fitparam>` | Specifies fitness parameters for bicycle.                                                                                                                           |
-.. +--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-.. | "avoidPolygons"                      | Sets areas to be avoided as `geojson polygon <http://geojson.org/geojson-spec.html#id4>`__ or `geojson multipolygon <http://geojson.org/geojson-spec.html#id7>`__\. |
+.. | "avoid_polygons"                      | Sets areas to be avoided as `geojson polygon <http://geojson.org/geojson-spec.html#id4>`__ or `geojson multipolygon <http://geojson.org/geojson-spec.html#id7>`__\. |
 .. +--------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -252,62 +229,69 @@ Avoid Features
 
 .. The following feature types provide means to avoid certain objects along your route. Please be aware that these may be specific to your chosen route preference. Please note that avoidable parameters for alternative route preferences correspond to their parent profile. The default value is set to `False`. 
 
++--------------------+-------------------------------------------------------------------------+
+| Parameter          | Profiles                                                                |
++====================+=========================================================================+
+| ``"highways"``     | ``driving-car``, ``driving-hgv``                                        |
++--------------------+-------------------------------------------------------------------------+
+| ``"tollways"``     | ``driving-car``, ``driving-hgv``                                        |
++--------------------+-------------------------------------------------------------------------+
+| ``"ferries"``      | ``driving-car``, ``cycling-regular``, ``foot-walking``, ``driving-hgv`` |
++--------------------+-------------------------------------------------------------------------+
+| ``"tunnels"``      | ``driving-car``, ``driving-hgv``                                        |
++--------------------+-------------------------------------------------------------------------+
+| ``"pavedroads"``   | ``cycling-regular``                                                     |
++--------------------+-------------------------------------------------------------------------+
+| ``"unpavedroads"`` | ``driving-car``, ``cycling-regular``, ``driving-hgv``                   |
++--------------------+-------------------------------------------------------------------------+
+| ``"tracks"``       | ``driving-car``, ``driving-hgv``                                        |
++--------------------+-------------------------------------------------------------------------+
+| ``"fords"``        | ``driving-car``, ``cycling-regular``, ``foot-walking``, ``driving-hgv`` |
++--------------------+-------------------------------------------------------------------------+
+| ``"steps"``        | ``cycling-regular``, ``Pedestrian``                                     |
++--------------------+-------------------------------------------------------------------------+
+| ``"hills"``        | ``cycling-regular``, ``Pedestrian``                                     |
++--------------------+-------------------------------------------------------------------------+
+
+.. | ``"bridges"``        | ``cycling-regular``, ``Pedestrian``                            |
 .. +--------------------+--------------------------------------------------------+
-.. | Parameter          | Profiles                                               |
-.. +====================+========================================================+
-.. | "motorways"    | ``driving-car``, ``driving-hgv``                              |
-.. +--------------------+--------------------------------------------------------+
-.. | "tollways"     | ``driving-car``, ``driving-hgv``                              |
-.. +--------------------+--------------------------------------------------------+
-.. | "tunnels"      | ``driving-car``, ``driving-hgv``                              |
-.. +--------------------+--------------------------------------------------------+
-.. | "pavedroads"   | ``cycling-regular``                                            |
-.. +--------------------+--------------------------------------------------------+
-.. | "unpavedroads" | ``driving-car``, ``cycling-regular``, ``driving-hgv``                 |
-.. +--------------------+--------------------------------------------------------+
-.. | "tracks"       | ``driving-car``, ``driving-hgv``                              |
-.. +--------------------+--------------------------------------------------------+
-.. | "ferry"      | ``driving-car``, ``cycling-regular``, ``Pedestrian``, ``driving-hgv`` |
-.. +--------------------+--------------------------------------------------------+
-.. | "ford"        | ``driving-car``, ``cycling-regular``, ``Pedestrian``, ``driving-hgv`` |
-.. +--------------------+--------------------------------------------------------+
-.. | "steps"        | ``cycling-regular``, ``Pedestrian``                            |
+.. | ``"borders"``        | ``cycling-regular``, ``Pedestrian``                            |
 .. +--------------------+--------------------------------------------------------+
 
-.. _mode:
+.. _type:
 
 -----
 
-Mode
-<<<<
+Vehicle Type
+<<<<<<<<<<<<
 
 .. centered:: under construction
 
-.. _vehparam:
+.. _proparam:
 
 -----
 
-Vehicle Parameter
+Profile Parameter
 <<<<<<<<<<<<<<<<<
 
 
-For the ``driving-hgv`` profile we offer additional filters to finetune your route according to specific vehicle options.
+For the ``driving-hgv`` profile we offer additional filters to finetune your route according to specific profile options.
 
-+-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Parameter   | Description                                                                                                                           |
-+=============+=======================================================================================================================================+
-| "length"    | Specifies length restriction in meters.                                                                                               |
-+-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| "width"     | Specifies width restriction in meters.                                                                                                |
-+-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| "height"    | Specifies height restriction in meters.                                                                                               |
-+-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| "axleload"  | Specifies axeload restriction in tons.                                                                                                |
-+-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| "weight"    | Specifies weight restriction in tons.                                                                                                 |
-+-------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| "hazardous" | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is ``False``. |
-+-------------+---------------------------------------------------------------------------------------------------------------------------------------+
++-----------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Parameter       | Description                                                                                                                           |
++=================+=======================================================================================================================================+
+| ``"length"``    | Specifies length restriction in meters.                                                                                               |
++-----------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| ``"width"``     | Specifies width restriction in meters.                                                                                                |
++-----------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| ``"height"``    | Specifies height restriction in meters.                                                                                               |
++-----------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| ``"axleload"``  | Specifies axeload restriction in tons.                                                                                                |
++-----------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| ``"weight"``    | Specifies weight restriction in tons.                                                                                                 |
++-----------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| ``"hazardous"`` | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is ``False``. |
++-----------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 .. _fitparam:
 
@@ -318,15 +302,22 @@ Fitness Parameter
 
 For the ``cycling`` profiles we offer additional filters to finetune your route.
 
-+---------------------+----------------------------------------------------------------------------------------------+
-| Value               | Description                                                                                  |
-+=====================+==============================================================================================+
-| ``level``           | Specifies the fitness level. ``0`` = Novice, ``1`` = Moderate, ``2`` = Amateur, ``3`` = Pro. |
-+---------------------+----------------------------------------------------------------------------------------------+
-| ``maximumGradient`` | Specifies the maximum steepness as a percentage. Values from ``1`` to ``15``.                |
-+---------------------+----------------------------------------------------------------------------------------------+
++----------------------+----------------------------------------------------------------------------------------------+
+| Value                | Description                                                                                  |
++======================+==============================================================================================+
+| ``difficulty_level`` | Specifies the fitness level. ``0`` = Novice, ``1`` = Moderate, ``2`` = Amateur, ``3`` = Pro. |
++----------------------+----------------------------------------------------------------------------------------------+
+| ``maximumGradient``  | Specifies the maximum steepness as a percentage. Values from ``1`` to ``15``.                |
++----------------------+----------------------------------------------------------------------------------------------+
 
-.. .. attention:: The ``maximumGradient`` parameter can only be set if ``hills`` are avoided or ``level`` is defined. Also you can only use ``level`` OR avoid ``hills`` at a time.
+.. attention:: The ``maximumGradient`` parameter can only be set if ``hills`` are avoided or ``level`` is defined. Also you can only use ``level`` OR avoid ``hills`` at a time.
+
+For the Wheelchair profile we offer additional filters to finetune your route.
+Parameter 	Description
+surface_type 	Corresponds to the surface type. Ranges from type 1 which only uses smooth surface types to 5 which uses all traversable surfaces. Default is set to 2
+track_type  Specifies the minimum `OSM grade <http://wiki.openstreetmap.org/wiki/Key:tracktype>`__ of the route. 
+incline 	Relates to the maximum incline as a percentage. 3, 6(default), 10, 15 or any
+curb 	Corresponds to the maximum height of the sloped curb in centimeter. 3, 6(default), 10 or any
 
 
 .. _r_response:
