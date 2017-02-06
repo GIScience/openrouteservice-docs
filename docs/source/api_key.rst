@@ -1,7 +1,7 @@
 API Keys
 ========
 
-Before you can access the endpoints of the `OpenRouteService API <http://www.openrouteservice.org>`__ you will have to contact us to obtain an :term:`API-Key`. 
+Before you can access the endpoints of the `OpenRouteService API <http://www.openrouteservice.org>`__ you will have to `contact 	<openrouteservice@geog.uni-heidelberg.de>`__ us to obtain an :term:`API-Key`. 
 
 .. 
     openrouteservice@geog.uni-heidelberg.de.
@@ -16,7 +16,7 @@ To use your API key simply add it as a parameter in your request URL with::
 
 	&api_key=`your-api-key`
 
-:ref:`Here<rgc_example>` you can see an example with an API key appended to the end of the request.
+:ref:`Here<gc_example>` you can see an example with an API key appended to the end of the request.
 
 
 

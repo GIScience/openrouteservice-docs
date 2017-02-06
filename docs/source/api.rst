@@ -774,6 +774,8 @@ The `geocoding <https://en.wikipedia.org/wiki/Geocoding>`__ result contains as m
 :type: Specifies the JSON feature type.
 :properties: Contains the tag information of the point.
 
+.. _gc_example:
+
 -----
 
 The following geocoding request searches for ``Berlin`` with a maximum of ``5`` response objects::
