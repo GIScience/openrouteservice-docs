@@ -1,13 +1,8 @@
 Glossary
 ========
 
-.. centered:: under construction
-
 .. glossary::
   :sorted:
-
-.. TMC
-..   The Traffic Message Channel (TMC) is a real time traffic information source in Germany which you may query within your route requests.
 
   API
     An `Application Programming Interface <https://en.wikipedia.org/wiki/Application_programming_interface>`__.
@@ -68,3 +63,6 @@ Glossary
 
   Delivery
   	This is a vehicle type of HeavyVehicle and prefers roads allowed for delivery.
+
+.. TMC
+..   The Traffic Message Channel (TMC) is a real time traffic information source in Germany which you may query within your route requests.
