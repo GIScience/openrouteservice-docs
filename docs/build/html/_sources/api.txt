@@ -403,7 +403,7 @@ Routes
 +---------------------+-------------------------------------------------------------------------------------------------------------------------------+
 | ``geometry``        | Contains the geometry in the defined :ref:`geometry format<routings>`.                                                        |
 +---------------------+-------------------------------------------------------------------------------------------------------------------------------+
-| ``segments``        | List containing the segments and its correspoding steps which make up the route.                                              |
+| ``segments``        | List containing the :ref:`segments<segments>` and its correspoding steps which make up the route.                             |
 +---------------------+-------------------------------------------------------------------------------------------------------------------------------+
 | ``way_points``      | List containing the indices of way points corresponding to the ``geometry``.                                                  |
 +---------------------+-------------------------------------------------------------------------------------------------------------------------------+
@@ -417,7 +417,7 @@ Segments
 
 :duration: Contains the duration of the segment in seconds.
 :distance: Contains the distance of the segment in ``units``.
-:steps: List containing the specific steps the segment consists of.
+:steps: List containing the specific :ref:`steps<steps>` the segment consists of.
 
 .. _steps:
 
