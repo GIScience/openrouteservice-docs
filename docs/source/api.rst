@@ -219,7 +219,7 @@ Options Examples
 
 .. hidden-code-block:: json
 	:starthidden: True
-	:label: HGV-Example
+	:label: - HGV example
 
 	{
 	    "maximum_speed": 120,
@@ -237,7 +237,7 @@ Options Examples
 
 .. hidden-code-block:: json
 	:starthidden: True
-	:label: Cycling-Example
+	:label: - Cycling example
 
 	{
 	    "maximum_speed": 18,
@@ -255,7 +255,7 @@ Options Examples
 
 .. hidden-code-block:: json
 	:starthidden: True
-	:label: Wheelchair-Example
+	:label: - Wheelchair example
 
 	{
 	    "avoid_features": "hills|ferries|steps",
@@ -439,27 +439,27 @@ Steps
 
 ------
 
-instruction type
+Instruction Types
 <<<<<<<<<<<<<<<<
 
 +-------+--------------+
 | Value | Encoding     |
 +=======+==============+
-| 0     | Left         |
+| ``0``     | Left         |
 +-------+--------------+
-| 1     | Right        |
+| ``1``     | Right        |
 +-------+--------------+
-| 2     | Sharp left   |
+| ``2``     | Sharp left   |
 +-------+--------------+
-| 3     | Sharp right  |
+| ``3``     | Sharp right  |
 +-------+--------------+
-| 4     | Slight left  |
+| ``4``     | Slight left  |
 +-------+--------------+
-| 5     | Slight right |
+| ``5``     | Slight right |
 +-------+--------------+
-| 6     | Straight     |
+| ``6``     | Straight     |
 +-------+--------------+
-| 7     | Roundabout   |
+| ``7``     | Roundabout   |
 +-------+--------------+
 
 
@@ -615,7 +615,7 @@ The resulting route has two segments with multiple steps:
 
 .. hidden-code-block:: json
 	:starthidden: True
-	:label: Toggle Code
+	:label: Toggle Example
 
 	{
 	  "routes": [
@@ -811,13 +811,13 @@ The `geocoding <https://en.wikipedia.org/wiki/Geocoding>`__ result contains as m
 
 The following geocoding request searches for ``Berlin`` with a maximum of ``5`` response objects::
 
-	hostname/geocoding-test?format=json&query=Berlin&limit=5&api_key=api-key
+	hostname/geocoding?format=json&query=Berlin&limit=5&api_key=api-key
 
 As a response you will obtain the following JSON file with exactly 5 matches:
 
 .. hidden-code-block:: json
 	:starthidden: True
-	:label: Toggle Code
+	:label: Toggle Example
 
 	{
 	  "features": [
@@ -973,7 +973,7 @@ Resulting in one feature response:
 
 .. hidden-code-block:: json
 	:starthidden: True
-	:label: Toggle Code
+	:label: Toggle Example
 
 	{
 	  "features": [
@@ -1074,8 +1074,8 @@ Query Parameters
 +---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``attributes`` :ref:`\# <attr>` | Values are ``area`` and ``reachfactor``. Delimit with pipe for both.                                                                                                                             |
 +---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``api_key``                     | ``your_api_key`` is inserted within this parameter.                                                                                                                                              |
-+---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``options`` :ref:`\# <options>`       | For advanced options formatted as `json <http://json-schema.org/>`_\. Add object as string: ``"{...}"``.                                                                                                                                         |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. | ``calcmethod``    | Method of generating the Isochrones. At the moment only ``default``.                                                                                                                |
 .. +-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1155,13 +1155,13 @@ Every isochrone/equidistant will result in an object in the features-block. They
 
 This analysis request for the location ``8.6984954,49.38092`` uses the ``driving-car`` profile and searches for accessibility in range ``500`` seconds with an interval ``200`` seconds::
 
-	hostname/analysis-test?format=json&range=500&interval=200&locations=8.6984954,49.38092&profile=driving-car&api_key=api-key
+	hostname/analyse?format=json&range=500&interval=200&locations=8.6984954,49.38092&profile=driving-car&api_key=api-key
 
 The result supplies isochrones at ``200`` and ``400`` seconds and finally ``500`` seconds which corresponds to the ``range`` setting:
 
 .. hidden-code-block:: json
 	:starthidden: True
-	:label: Toggle Code
+	:label: Toggle Example
 
 	{
 	  "features": [
@@ -1487,15 +1487,15 @@ The Info object summarizes your query settings.
 +-------------+---------------------------------------------------------------+
 | About       | Description                                                   |
 +=============+===============================================================+
-| service     | API endpoint used. ``geocoding``, ``analysis`` or ``routing`` |
+| ``service``     | API endpoint used. ``geocoding``, ``analysis`` or ``routing`` |
 +-------------+---------------------------------------------------------------+
-| query       | Parameters that were specified in the query                   |
+| ``query``       | Parameters that were specified in the query                   |
 +-------------+---------------------------------------------------------------+
-| attribution | Attribution for using our service                             |
+| ``attribution`` | Attribution for using our service                             |
 +-------------+---------------------------------------------------------------+
-| version     | The ORS API version used for the request                      |
+| ``version``     | The ORS API version used for the request                      |
 +-------------+---------------------------------------------------------------+
-| timestamp   | Unix timestamp of the precise request date                    |
+| ``timestamp``   | Unix timestamp of the precise request date                    |
 +-------------+---------------------------------------------------------------+
 
 Example:
