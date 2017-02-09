@@ -88,22 +88,22 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api_key.html">API Keys</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Application Programming Interfaces</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Application Programming Interfaces</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#routing-service">Routing Service</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#query-parameters">Query Parameters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1">Extra Info</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2">Options</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#extra-information">Extra Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Options</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#avoid-features">Avoid Features</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#profile-parameter">Profile Parameter</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#profile-parameters">Profile Parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#options-examples">Options Examples</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#response">Response</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id3">routes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4">segments</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">steps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Routes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Segments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Steps</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#instruction-type">instruction type</a></li>
 </ul>
 </li>
@@ -113,25 +113,25 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#geocoding-service">Geocoding Service</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#geocoding">Geocoding</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id6">Query Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">Response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Query Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Response</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#reverse-geocoding">Reverse Geocoding</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id8">Query Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id9">Response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Query Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">Response</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#isochrones-service">Isochrones Service</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id10">Query Parameters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id11">Range</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id12">Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Query Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">Units</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#attributes">Attributes</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Response</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#meta-information">Meta Information</a><ul>
@@ -214,42 +214,36 @@
             
   <div class="section" id="application-programming-interfaces">
 <h1>Application Programming Interfaces<a class="headerlink" href="#application-programming-interfaces" title="Permalink to this headline">¶</a></h1>
-<p>The ORS API allows for programmatic access to our services. We offer a GET scheme for you to directly query the API which is described in the following section. Please note that the response currently follows the OpenLS standard.</p>
+<p>The <strong>OpenRouteService</strong> API allows for programmatic access to our services and responds in <strong>JSON</strong>. We offer a comprehensive GET scheme for you to directly query the different services which is described in the following sections.</p>
 <hr class="docutils" />
-<p>The query parameters are added to the end of the service endpoint with <a class="reference external" href="https://en.wikipedia.org/wiki/Query_string">query string encoding</a>. Hence the pattern for parameter usage is:</p>
+<p>The query parameters are appended to the end of the specific service endpoint by means of <a class="reference external" href="https://en.wikipedia.org/wiki/Query_string">query string encoding</a>. Hence the general pattern for parameter usage is:</p>
 <p class="centered">
 <strong><strong>&amp;</strong><code class="docutils literal"><span class="pre">parameter</span></code><strong>=</strong><code class="docutils literal"><span class="pre">value</span></code></strong></p><hr class="docutils" />
-<p>Sections:</p>
+<p><strong>Sections:</strong></p>
 <ul>
-<li><p class="first"><a class="reference internal" href="#routings"><span>Routing Service</span></a></p>
+<li><p class="first"><a class="reference internal" href="#routings"><span class="std std-ref">Routing Service</span></a></p>
 </li>
-<li><p class="first"><a class="reference internal" href="#geocodings"><span>Geocoding Service</span></a></p>
+<li><p class="first"><a class="reference internal" href="#geocodings"><span class="std std-ref">Geocoding Service</span></a></p>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference internal" href="#gc"><span>Geocoding</span></a></li>
-<li><a class="reference internal" href="#rgc"><span>Reverse Geocoding</span></a></li>
+<li><a class="reference internal" href="#gc"><span class="std std-ref">Geocoding</span></a></li>
+<li><a class="reference internal" href="#rgc"><span class="std std-ref">Reverse Geocoding</span></a></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first"><a class="reference internal" href="#isos"><span>Isochrones Service</span></a></p>
+<li><p class="first"><a class="reference internal" href="#isos"><span class="std std-ref">Isochrones Service</span></a></p>
 </li>
-<li><p class="first"><a class="reference internal" href="#meta-info"><span>Meta Information</span></a></p>
+<li><p class="first"><a class="reference internal" href="#meta-info"><span class="std std-ref">Meta Information</span></a></p>
 </li>
 </ul>
-<hr class="docutils" />
 <hr class="docutils" id="routings" />
 <div class="section" id="routing-service">
 <h2>Routing Service<a class="headerlink" href="#routing-service" title="Permalink to this headline">¶</a></h2>
-<p>Returns the fastest route between two or more points for a selected profile as <a class="reference external" href="http://geojson.org/geojson-spec.html">GeoJSON</a> <a class="reference internal" href="#r-response"><span>response</span></a>.</p>
-<p>The routing endpoint is defined as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre>hostname/route?
-</pre></div>
-</div>
+<p>Returns a route between two or more locations for a selected profile and its settings as <a class="reference external" href="http://geojson.org/geojson-spec.html">GeoJSON</a> <a class="reference internal" href="#r-response"><span class="std std-ref">response</span></a>. The routing endpoint uses <code class="docutils literal"><span class="pre">/route?</span></code> as the request action.</p>
 <hr class="docutils" />
 <div class="section" id="query-parameters">
 <h3>Query Parameters<a class="headerlink" href="#query-parameters" title="Permalink to this headline">¶</a></h3>
-<p id="routing-param">The minimum requirements for a valid request are specified <code class="docutils literal"><span class="pre">profile</span></code> and <code class="docutils literal"><span class="pre">coordinates</span></code> parameters. Other parameters are optional but may contribute to the accuracy of your query.
-For further information regarding the specific routing profiles, distance units and weighting options please visit our <a class="reference internal" href="glossary.html"><em>glossary</em></a>.</p>
+<p id="routing-param">The minimum requirements for a valid request are specified <code class="docutils literal"><span class="pre">profile</span></code> and <code class="docutils literal"><span class="pre">coordinates</span></code> parameters. Other parameters are optional but may contribute to the accuracy of your query.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="14%" />
@@ -298,14 +292,15 @@ For further information regarding the specific routing profiles, distance units 
 <td>Sets advanced options in <a class="reference external" href="http://json-schema.org/">json schema</a>. Add json as string: <code class="docutils literal"><span class="pre">&quot;{...}&quot;</span></code>.</td>
 </tr>
 </tbody>
-</table><hr class="docutils" id="extra-info" />
-<div class="section" id="id1">
-<h4>Extra Info<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+</table><p>For further information regarding the differences between routing profiles, distance units and preference settings please visit our <a class="reference internal" href="glossary.html"><span class="doc">glossary</span></a>.</p>
+<hr class="docutils" id="extra-info" />
+<div class="section" id="extra-information">
+<h4>Extra Information<a class="headerlink" href="#extra-information" title="Permalink to this headline">¶</a></h4>
 <p>Encoding of the <code class="docutils literal"><span class="pre">extra_info</span></code> Values:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="24%" />
-<col width="76%" />
+<col width="18%" />
+<col width="82%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Value</th>
@@ -322,13 +317,16 @@ For further information regarding the specific routing profiles, distance units 
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">waytypes</span></code></td>
 <td>Returns waytype information for each step.</td>
 </tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">priority</span></code></td>
+<td>Returns the suitability of a segment considering the chosen profile</td>
+</tr>
 </tbody>
 </table>
 </div>
 <hr class="docutils" id="options" />
-<div class="section" id="id2">
-<h4>Options<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
-<p>These additional settings can be made in <a class="reference external" href="http://json-schema.org/">json schema</a> :</p>
+<div class="section" id="id1">
+<h4>Options<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>The following settings may be appended as strings to the options object.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="24%" />
@@ -344,31 +342,31 @@ For further information regarding the specific routing profiles, distance units 
 <td>Sets the maximum travel speed in km/h.</td>
 </tr>
 <tr class="row-odd"><td>&#8220;avoid_features&#8221;<span> </span> <a class="fa fa-link" href="#avoid"></a></td>
-<td>Specifies a list of avoided features seperated by pipe. <code class="docutils literal"><span class="pre">&quot;hills|ferries|...&quot;</span></code></td>
+<td>Pipe seperated list of features to avoid. <code class="docutils literal"><span class="pre">&quot;hills|ferries|...&quot;</span></code></td>
 </tr>
 <tr class="row-even"><td>&#8220;vehicle_type&#8221;<span> </span> <!--<a class="fa fa-link" href="#mode">--></a></td>
 <td>Specifies the heavy vehicle mode of the <code class="docutils literal">driving-hgv</code>profile. Values are <code class="docutils literal">&#8220;hgv&#8221;</code> and <code class="docutils literal">&#8220;bus&#8221;</code>.</td>
 </tr>
 <tr class="row-odd"><td>&#8220;profile_params&#8221;<span> </span> <a class="fa fa-link" href="#vehparam"></a></td>
-<td>Specifies hgv, bicycle or wheelchair profile parameters.</td>
+<td>Specifies hgv, bicycle or wheelchair specific profile settings.</td>
 </tr>
 <tr class="row-even"><td>&#8220;avoid_polygons&#8221;</td>
-<td>Sets areas to be avoided as <a class="reference external" href="http://geojson.org/geojson-spec.html#id4">geojson polygon</a> or <a class="reference external" href="http://geojson.org/geojson-spec.html#id7">geojson multipolygon</a>.</td>
+<td>Depicts areas to be avoided within the route, formatted as <a class="reference external" href="http://geojson.org/geojson-spec.html#id4">geojson polygon</a> or <a class="reference external" href="http://geojson.org/geojson-spec.html#id7">geojson multipolygon</a>.</td>
 </tr>
 </tbody>
 </table><div class="admonition attention">
 <p class="first admonition-title">Attention</p>
-<p class="last">The available parameters for <code class="docutils literal"><span class="pre">avoid_features</span></code> and <code class="docutils literal"><span class="pre">profile_params</span></code> change with the chosen routing profile. Please be aware which profile you chose!</p>
+<p class="last">The available parameters for <code class="docutils literal"><span class="pre">avoid_features</span></code> and <code class="docutils literal"><span class="pre">profile_params</span></code> may differ according to the selected routing profile.</p>
 </div>
-<p>see <a class="reference internal" href="#option-examples"><span>examples</span></a></p>
+<p>see <a class="reference internal" href="#option-examples"><span class="std std-ref">examples</span></a></p>
 <hr class="docutils" id="avoid" />
 <div class="section" id="avoid-features">
 <h5>Avoid Features<a class="headerlink" href="#avoid-features" title="Permalink to this headline">¶</a></h5>
-<p>The following feature types provide means to avoid certain objects along your route. Please be aware that these may be specific to your chosen route preference:</p>
+<p>The following feature types provide means to avoid certain objects along your route:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="23%" />
-<col width="77%" />
+<col width="24%" />
+<col width="76%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -377,42 +375,42 @@ For further information regarding the specific routing profiles, distance units 
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">highways</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-..</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">tollways</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-..</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">ferries</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-..</span></code>, <code class="docutils literal"><span class="pre">cycling-..</span></code>, <code class="docutils literal"><span class="pre">foot-..</span></code>, <code class="docutils literal"><span class="pre">wheelchair</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code>, <code class="docutils literal"><span class="pre">cycling-*</span></code>, <code class="docutils literal"><span class="pre">foot-*</span></code>, <code class="docutils literal"><span class="pre">wheelchair</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">tunnels</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-..</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">pavedroads</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-..</span></code>, <code class="docutils literal"><span class="pre">cycling-..</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code>, <code class="docutils literal"><span class="pre">cycling-*</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">unpavedroads</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-..</span></code>, <code class="docutils literal"><span class="pre">cycling-..</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code>, <code class="docutils literal"><span class="pre">cycling-*</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">tracks</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-..</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">fords</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-..</span></code>, <code class="docutils literal"><span class="pre">cycling-..</span></code>, <code class="docutils literal"><span class="pre">foot-..</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code>, <code class="docutils literal"><span class="pre">cycling-*</span></code>, <code class="docutils literal"><span class="pre">foot-*</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">steps</span></code></td>
-<td><code class="docutils literal"><span class="pre">cycling-..</span></code>, <code class="docutils literal"><span class="pre">foot-..</span></code>, <code class="docutils literal"><span class="pre">wheelchair</span></code></td>
+<td><code class="docutils literal"><span class="pre">cycling-*</span></code>, <code class="docutils literal"><span class="pre">foot-*</span></code>, <code class="docutils literal"><span class="pre">wheelchair</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">hills</span></code></td>
-<td><code class="docutils literal"><span class="pre">cycling-..</span></code>, <code class="docutils literal"><span class="pre">foot-..</span></code></td>
+<td><code class="docutils literal"><span class="pre">cycling-*</span></code>, <code class="docutils literal"><span class="pre">foot-*</span></code></td>
 </tr>
 </tbody>
 </table>
 </div>
 <hr class="docutils" id="proparam" />
-<div class="section" id="profile-parameter">
-<h5>Profile Parameter<a class="headerlink" href="#profile-parameter" title="Permalink to this headline">¶</a></h5>
-<p>For the <code class="docutils literal"><span class="pre">driving-hgv</span></code> profile we offer additional vehicle specifications to finetune your route:</p>
+<div class="section" id="profile-parameters">
+<h5>Profile Parameters<a class="headerlink" href="#profile-parameters" title="Permalink to this headline">¶</a></h5>
+<p>For the <code class="docutils literal"><span class="pre">driving-hgv</span></code> profile we offer the following vehicle specifications to customize the route:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="11%" />
@@ -434,7 +432,7 @@ For further information regarding the specific routing profiles, distance units 
 <td>Specifies height restriction in meters.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">&quot;axleload&quot;</span></code></td>
-<td>Specifies axeload restriction in tons.</td>
+<td>Specifies axleload restriction in tons.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;weight&quot;</span></code></td>
 <td>Specifies weight restriction in tons.</td>
@@ -445,7 +443,7 @@ For further information regarding the specific routing profiles, distance units 
 </tbody>
 </table>
 <hr class="docutils" />
-<p>For the <code class="docutils literal"><span class="pre">cycling-..</span></code> profiles we offer fitness parameters to finetune your route:</p>
+<p>For the <code class="docutils literal"><span class="pre">cycling-..</span></code> profiles we offer the following fitness parameters to individualize the route:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="19%" />
@@ -461,20 +459,20 @@ For further information regarding the specific routing profiles, distance units 
 <td>Specifies the fitness level. <code class="docutils literal"><span class="pre">0</span></code> = Novice, <code class="docutils literal"><span class="pre">1</span></code> = Moderate, <code class="docutils literal"><span class="pre">2</span></code> = Amateur, <code class="docutils literal"><span class="pre">3</span></code> = Pro.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">maximum_gradient</span></code></td>
-<td>Specifies the maximum route steepness as a percentage. Values from <code class="docutils literal"><span class="pre">1</span></code> to <code class="docutils literal"><span class="pre">15</span></code>.</td>
+<td>Specifies the maximum route steepness in percent. Values range from <code class="docutils literal"><span class="pre">1</span></code> to <code class="docutils literal"><span class="pre">15</span></code>.</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
-<p class="last">The <code class="docutils literal"><span class="pre">maximum_gradient</span></code> parameter can only be set if <code class="docutils literal"><span class="pre">hills</span></code> are avoided or <code class="docutils literal"><span class="pre">difficulty_level</span></code> is defined. Also you can only use <code class="docutils literal"><span class="pre">difficulty_level</span></code> OR avoid <code class="docutils literal"><span class="pre">hills</span></code> at a time.</p>
+<p class="last">The <code class="docutils literal"><span class="pre">maximum_gradient</span></code> parameter can only be set if <code class="docutils literal"><span class="pre">hills</span></code> are avoided or <code class="docutils literal"><span class="pre">difficulty_level</span></code> is defined. Also you can only use <code class="docutils literal"><span class="pre">difficulty_level</span></code> or avoid <code class="docutils literal"><span class="pre">hills</span></code> at a time.</p>
 </div>
 <hr class="docutils" />
-<p>For the <code class="docutils literal"><span class="pre">wheelchair</span></code> profile we offer additional filters to finetune your route:</p>
+<p>For the <code class="docutils literal"><span class="pre">wheelchair</span></code> profile we offer the following filters to individualize the route:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="15%" />
-<col width="85%" />
+<col width="16%" />
+<col width="84%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -483,26 +481,26 @@ For further information regarding the specific routing profiles, distance units 
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">surface_type</span></code></td>
-<td>Specifies the minimum <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:surface">surface type</a>. Default is <code class="docutils literal"><span class="pre">&quot;cobblestone:flattened&quot;</span></code>. (what values)</td>
+<td>Specifies the <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:surface">surface type</a>. Default is <code class="docutils literal"><span class="pre">&quot;cobblestone:flattened&quot;</span></code>. (what values)</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">track_type</span></code></td>
-<td>Specifies the minimum <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:tracktype">grade</a> of the route. Default is <code class="docutils literal"><span class="pre">&quot;grade1&quot;</span></code></td>
+<td>Specifies the <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:tracktype">grade</a> of the route. Default is <code class="docutils literal"><span class="pre">&quot;grade1&quot;</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">smoothness_type</span></code></td>
-<td>Specifies the minimum <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:smoothness">smoothness</a> of the route. Default is <code class="docutils literal"><span class="pre">&quot;good&quot;</span></code></td>
+<td>Specifies the <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:smoothness">smoothness</a> of the route. Default is <code class="docutils literal"><span class="pre">&quot;good&quot;</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">maximum_sloped_curb</span></code></td>
-<td>Specifies the maximum height of the sloped curb in meters. Values are <code class="docutils literal"><span class="pre">0.03</span></code>, <code class="docutils literal"><span class="pre">0.06</span></code>/(<em>default</em>), <code class="docutils literal"><span class="pre">0.1</span></code> or <code class="docutils literal"><span class="pre">any</span></code></td>
+<td>Specifies the maximum height of the sloped curb in meters. Values are <code class="docutils literal"><span class="pre">0.03</span></code>, <code class="docutils literal"><span class="pre">0.06</span></code>/<em>(default)</em>, <code class="docutils literal"><span class="pre">0.1</span></code> or <code class="docutils literal"><span class="pre">any</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">maximum_incline</span></code></td>
-<td>Specifies the maximum incline as a percentage. <code class="docutils literal"><span class="pre">3</span></code>, <code class="docutils literal"><span class="pre">6</span></code>(<em>default</em>), <code class="docutils literal"><span class="pre">10</span></code>, <code class="docutils literal"><span class="pre">15</span></code> or <code class="docutils literal"><span class="pre">any</span></code></td>
+<td>Specifies the maximum incline as a percentage. <code class="docutils literal"><span class="pre">3</span></code>, <code class="docutils literal"><span class="pre">6</span></code>*(default)*, <code class="docutils literal"><span class="pre">10</span></code>, <code class="docutils literal"><span class="pre">15</span></code> or <code class="docutils literal"><span class="pre">any</span></code></td>
 </tr>
 </tbody>
 </table>
 </div>
 <hr class="docutils" id="option-examples" />
-<div class="section" id="examples">
-<h5>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h5>
+<div class="section" id="options-examples">
+<h5>Options Examples<a class="headerlink" href="#options-examples" title="Permalink to this headline">¶</a></h5>
 <script type="text/javascript">
     function showhide(element){
         if (!document.getElementById)
@@ -514,7 +512,7 @@ For further information regarding the specific routing profiles, distance units 
             element.style.display = "block"
     };
 </script>
-<a href="javascript:showhide(document.getElementById('hiddencodeblock1'))">HGV-Example</a><br /><div id="hiddencodeblock1" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock1'))">HGV-Example</a><br /><div id="hiddencodeblock1" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;maximum_speed&quot;</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span>
     <span class="nt">&quot;avoid_features&quot;</span><span class="p">:</span> <span class="s2">&quot;tollways|tunnels&quot;</span><span class="p">,</span>
     <span class="nt">&quot;vechile_type&quot;</span><span class="p">:</span> <span class="s2">&quot;hgv&quot;</span><span class="p">,</span>
@@ -540,8 +538,8 @@ For further information regarding the specific routing profiles, distance units 
             element.style.display = "block"
     };
 </script>
-<a href="javascript:showhide(document.getElementById('hiddencodeblock2'))">Cycling-Example</a><br /><div id="hiddencodeblock2" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
-    <span class="nt">&quot;maximum_speed&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock2'))">Cycling-Example</a><br /><div id="hiddencodeblock2" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;maximum_speed&quot;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
     <span class="nt">&quot;avoid_features&quot;</span><span class="p">:</span> <span class="s2">&quot;hills|unpavedroads&quot;</span><span class="p">,</span>
     <span class="nt">&quot;profile_params&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;difficulty_level&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
@@ -566,7 +564,7 @@ For further information regarding the specific routing profiles, distance units 
             element.style.display = "block"
     };
 </script>
-<a href="javascript:showhide(document.getElementById('hiddencodeblock3'))">Wheelchair-Example</a><br /><div id="hiddencodeblock3" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock3'))">Wheelchair-Example</a><br /><div id="hiddencodeblock3" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;avoid_features&quot;</span><span class="p">:</span> <span class="s2">&quot;hills|ferries|steps&quot;</span><span class="p">,</span>
     <span class="nt">&quot;profile_params&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;surface_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cobblestone:flattened&quot;</span><span class="p">,</span>
@@ -585,14 +583,14 @@ For further information regarding the specific routing profiles, distance units 
 <div class="section" id="response">
 <h3>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h3>
 <p class="centered">
-<strong>This section is under construction</strong></p><p>The routing result is structured into <em>summary</em>, <em>geometry_format</em>, <em>bbox</em>, <em>geometry</em>, <em>segments</em> and <em>way_points</em> for each route. It also includes the standard <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</p>
+<strong>This section is under construction</strong></p><p>The routing response consists of several components and is structured into <strong>summary</strong>, <strong>geometry_format</strong>, <strong>bbox*, **geometry</strong>, <strong>segments* and **way_points</strong> for each route. By default it also includes the <a class="reference internal" href="#meta-info"><span class="std std-ref">meta information</span></a>.</p>
 <hr class="docutils" id="routes" />
-<div class="section" id="id3">
-<h4>routes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id2">
+<h4>Routes<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
 <colgroup>
-<col width="13%" />
-<col width="87%" />
+<col width="14%" />
+<col width="86%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -600,30 +598,30 @@ For further information regarding the specific routing profiles, distance units 
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>&#8220;summary&#8221;</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">summary</span></code></td>
 <td>Contains total duration<em>(in seconds)</em>, route distance<em>(in</em> <code class="docutils literal"><span class="pre">units</span></code> <em>)</em> and actual distance<em>(in meters)</em> of the route.</td>
 </tr>
-<tr class="row-odd"><td>&#8220;geometry_format&#8221;</td>
-<td>Contains the defined <a class="reference internal" href="#routing-param"><span>geometry format</span></a>.</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">geometry_format</span></code></td>
+<td>Contains the defined <a class="reference internal" href="#routing-param"><span class="std std-ref">geometry format</span></a>.</td>
 </tr>
-<tr class="row-even"><td>&#8220;bbox&#8221;</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">bbox</span></code></td>
 <td>Contains the <a class="reference external" href="https://en.wikipedia.org/wiki/Minimum_bounding_box">minimum bounding box</a> of the route.</td>
 </tr>
-<tr class="row-odd"><td>&#8220;geometry&#8221;</td>
-<td>Contains the geometry in defined <a class="reference internal" href="#routings"><span>geometry format</span></a>.</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">geometry</span></code></td>
+<td>Contains the geometry in the defined <a class="reference internal" href="#routings"><span class="std std-ref">geometry format</span></a>.</td>
 </tr>
-<tr class="row-even"><td>&#8220;segments&#8221;</td>
-<td>Array that contains the segments the route consists of.</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">segments</span></code></td>
+<td>List containing the <a class="reference internal" href="#segments"><span class="std std-ref">segments</span></a> and its correspoding steps which make up the route.</td>
 </tr>
-<tr class="row-odd"><td>&#8220;way_points&#8221;</td>
-<td>Array that contains the geometry-point number for each of the travel <code class="docutils literal"><span class="pre">coordinates</span></code>.</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">way_points</span></code></td>
+<td>List containing the indices of way points corresponding to the <code class="docutils literal"><span class="pre">geometry</span></code>.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <hr class="docutils" id="segments" />
-<div class="section" id="id4">
-<h4>segments<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id3">
+<h4>Segments<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -632,18 +630,18 @@ For further information regarding the specific routing profiles, distance units 
 </tr>
 <tr class="field-even field"><th class="field-name">distance:</th><td class="field-body">Contains the distance of the segment in <code class="docutils literal"><span class="pre">units</span></code>.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">steps:</th><td class="field-body">Array that contains the steps the segment consists of.</td>
+<tr class="field-odd field"><th class="field-name">steps:</th><td class="field-body">List containing the specific <a class="reference internal" href="#steps"><span class="std std-ref">steps</span></a> the segment consists of.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <hr class="docutils" id="steps" />
-<div class="section" id="id5">
-<h4>steps<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id4">
+<h4>Steps<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
 <colgroup>
-<col width="14%" />
-<col width="86%" />
+<col width="15%" />
+<col width="85%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -651,20 +649,20 @@ For further information regarding the specific routing profiles, distance units 
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>duration</td>
-<td>Contains duration for the step in seconds.</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">duration</span></code></td>
+<td>The duration for the step in seconds.</td>
 </tr>
-<tr class="row-odd"><td>distance</td>
-<td>Contains distance for the step in meters.</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">distance</span></code></td>
+<td>The distance for the step in meters.</td>
 </tr>
-<tr class="row-even"><td>instruction</td>
-<td>Contains the routing instruction text for the step.</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">instruction</span></code></td>
+<td>The routing instruction text for the step.</td>
 </tr>
-<tr class="row-odd"><td>type</td>
-<td>Contains the <a class="reference internal" href="#ins-type"><span>instruction type</span></a> for symbolisation.</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">type</span></code></td>
+<td>The <a class="reference internal" href="#ins-type"><span class="std std-ref">instruction action</span></a> for symbolisation purposes.</td>
 </tr>
-<tr class="row-even"><td>way_points</td>
-<td>Array that contains the geometry-point number of the step&#8217;s start- and endpoint.</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">way_points</span></code></td>
+<td>List containing the indices of the steps start- and endpoint corresponding to the <code class="docutils literal"><span class="pre">geometry</span></code>.</td>
 </tr>
 </tbody>
 </table>
@@ -689,16 +687,16 @@ For further information regarding the specific routing profiles, distance units 
 <td>Right</td>
 </tr>
 <tr class="row-even"><td>2</td>
-<td>Sharp Left</td>
+<td>Sharp left</td>
 </tr>
 <tr class="row-odd"><td>3</td>
-<td>Sharp Right</td>
+<td>Sharp right</td>
 </tr>
 <tr class="row-even"><td>4</td>
-<td>Slight Left</td>
+<td>Slight left</td>
 </tr>
 <tr class="row-odd"><td>5</td>
-<td>Slight Right</td>
+<td>Slight right</td>
 </tr>
 <tr class="row-even"><td>6</td>
 <td>Straight</td>
@@ -709,11 +707,11 @@ For further information regarding the specific routing profiles, distance units 
 </tbody>
 </table>
 <hr class="docutils" />
-<p>The following example routes from coordinate <code class="docutils literal"><span class="pre">8.690614,49.38365</span></code> over <code class="docutils literal"><span class="pre">8.7007,49.411699</span></code> to <code class="docutils literal"><span class="pre">8.7107,49.45169</span></code> using the <code class="docutils literal"><span class="pre">cycling-regular</span></code> profile:</p>
-<div class="highlight-python"><div class="highlight"><pre>hostname/routing-test?profile=cycling-regular&amp;coordinates=8.690614,49.38365|8.7007,49.411699|8.7107,49.45169&amp;api_key=api-key
+<p>The following example routes from coordinate <code class="docutils literal"><span class="pre">8.690614,49.38365</span></code> via <code class="docutils literal"><span class="pre">8.7007,49.411699</span></code> to <code class="docutils literal"><span class="pre">8.7107,49.45169</span></code> using the <code class="docutils literal"><span class="pre">cycling-regular</span></code> profile:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>hostname/routing-test?profile=cycling-regular&amp;coordinates=8.690614,49.38365|8.7007,49.411699|8.7107,49.45169&amp;api_key=api-key
 </pre></div>
 </div>
-<p>The resulting route has 2 segments with multiple steps:</p>
+<p>The resulting route has two segments with multiple steps:</p>
 <script type="text/javascript">
     function showhide(element){
         if (!document.getElementById)
@@ -725,7 +723,7 @@ For further information regarding the specific routing profiles, distance units 
             element.style.display = "block"
     };
 </script>
-<a href="javascript:showhide(document.getElementById('hiddencodeblock4'))">Toggle Code</a><br /><div id="hiddencodeblock4" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock4'))">Toggle Code</a><br /><div id="hiddencodeblock4" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;routes&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="nt">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -868,20 +866,17 @@ For further information regarding the specific routing profiles, distance units 
 <div class="section" id="geocoding-service">
 <h2>Geocoding Service<a class="headerlink" href="#geocoding-service" title="Permalink to this headline">¶</a></h2>
 <p>We distinguish between <a class="reference external" href="https://en.wikipedia.org/wiki/Geocoding">geocoding</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Reverse_geocoding">reverse geocoding</a> depending on your input.</p>
-<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Geocoding">geocoding</a> endpoint is defined as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre>hostname/geocode?
-</pre></div>
-</div>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Geocoding">geocoding</a> endpoint uses <code class="docutils literal"><span class="pre">/geocode?</span></code> as the request action.</p>
 <hr class="docutils" id="gc" />
 <div class="section" id="geocoding">
 <h3>Geocoding<a class="headerlink" href="#geocoding" title="Permalink to this headline">¶</a></h3>
-<p>A <a class="reference external" href="https://en.wikipedia.org/wiki/Geocoding">geocoding</a> request returns a list of coordinates matching your search input.</p>
-<div class="section" id="id6">
-<h4>Query Parameters<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<p>A <a class="reference external" href="https://en.wikipedia.org/wiki/Geocoding">geocoding</a> request a returns a <a class="reference external" href="http://geojson.org/geojson-spec.html">GeoJSON</a> formatted list of objects corresponding to the search input.</p>
+<div class="section" id="id5">
+<h4>Query Parameters<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
 <colgroup>
-<col width="12%" />
-<col width="88%" />
+<col width="10%" />
+<col width="90%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -896,23 +891,20 @@ For further information regarding the specific routing profiles, distance units 
 <td>Sets the language of the response. Available are <code class="docutils literal"><span class="pre">de</span></code>, <code class="docutils literal"><span class="pre">en</span></code><em>(default)</em>, <code class="docutils literal"><span class="pre">fr</span></code> and <code class="docutils literal"><span class="pre">it</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">limit</span></code></td>
-<td>Specifies the maximum number of responses. Default is <code class="docutils literal"><span class="pre">20</span></code>.</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">api_key</span></code></td>
-<td><code class="docutils literal"><span class="pre">your_api_key</span></code> is placed within this parameter</td>
+<td>Specifies the maximum number of responses. Default is set to <code class="docutils literal"><span class="pre">20</span></code>.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <hr class="docutils" id="gc-response" />
-<div class="section" id="id7">
-<h4>Response<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
-<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Geocoding">geocoding</a> result contains as many features (if existing) as the <code class="docutils literal"><span class="pre">limit</span></code> parameter was set to. It also contains the standard <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</p>
+<div class="section" id="id6">
+<h4>Response<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Geocoding">geocoding</a> result contains as many features (if they exist) as the <code class="docutils literal"><span class="pre">limit</span></code> parameter was set to. It also contains the standard <a class="reference internal" href="#meta-info"><span class="std std-ref">meta information</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">geometry:</th><td class="field-body">Contains the coordinates and the geometry <code class="docutils literal"><span class="pre">type</span></code> which is <code class="docutils literal"><span class="pre">Point</span></code>.</td>
+<tr class="field-odd field"><th class="field-name">geometry:</th><td class="field-body">Contains the coordinates and the geometry <code class="docutils literal"><span class="pre">type</span></code> which is a <code class="docutils literal"><span class="pre">Point</span></code>.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">type:</th><td class="field-body">Specifies the JSON feature type.</td>
 </tr>
@@ -922,7 +914,7 @@ For further information regarding the specific routing profiles, distance units 
 </table>
 <hr class="docutils" id="gc-example" />
 <p>The following geocoding request searches for <code class="docutils literal"><span class="pre">Berlin</span></code> with a maximum of <code class="docutils literal"><span class="pre">5</span></code> response objects:</p>
-<div class="highlight-python"><div class="highlight"><pre>hostname/geocoding-test?format=json&amp;query=Berlin&amp;limit=5&amp;api_key=api-key
+<div class="highlight-default"><div class="highlight"><pre><span></span>hostname/geocoding-test?format=json&amp;query=Berlin&amp;limit=5&amp;api_key=api-key
 </pre></div>
 </div>
 <p>As a response you will obtain the following JSON file with exactly 5 matches:</p>
@@ -937,7 +929,7 @@ For further information regarding the specific routing profiles, distance units 
             element.style.display = "block"
     };
 </script>
-<a href="javascript:showhide(document.getElementById('hiddencodeblock5'))">Toggle Code</a><br /><div id="hiddencodeblock5" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock5'))">Toggle Code</a><br /><div id="hiddencodeblock5" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -1048,9 +1040,9 @@ For further information regarding the specific routing profiles, distance units 
 <hr class="docutils" id="rgc" />
 <div class="section" id="reverse-geocoding">
 <h3>Reverse Geocoding<a class="headerlink" href="#reverse-geocoding" title="Permalink to this headline">¶</a></h3>
-<p>As a result of a <a class="reference external" href="https://en.wikipedia.org/wiki/Reverse_geocoding">reverse geocoding</a> request you will get one match, namely the next enclosing object with an address tag which surrounds the given coordinate.</p>
-<div class="section" id="id8">
-<h4>Query Parameters<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<p>As a result of a <a class="reference external" href="https://en.wikipedia.org/wiki/Reverse_geocoding">reverse geocoding</a> request you will obtain one match (if it exists), namely the next enclosing object with an address tag which surrounds the given coordinate.</p>
+<div class="section" id="id7">
+<h4>Query Parameters<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
 <colgroup>
 <col width="14%" />
@@ -1069,18 +1061,15 @@ For further information regarding the specific routing profiles, distance units 
 <td>Language of the response. Available are <code class="docutils literal"><span class="pre">de</span></code>, <code class="docutils literal"><span class="pre">en</span></code><em>(default)</em>, <code class="docutils literal"><span class="pre">fr</span></code> and <code class="docutils literal"><span class="pre">it</span></code></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">limit</span></code></td>
-<td>Specifies the maximum number of responses. Fixed to <code class="docutils literal"><span class="pre">1</span></code> for now.</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">api_key</span></code></td>
-<td><code class="docutils literal"><span class="pre">your_api_key</span></code> is placed within this parameter</td>
+<td>Specifies the maximum number of responses. Set to <code class="docutils literal"><span class="pre">1</span></code> for now.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <hr class="docutils" id="rgc-response" />
-<div class="section" id="id9">
-<h4>Response<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
-<p>The reverse geocoding result contains one feature (if existing) as well as the standard <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</p>
+<div class="section" id="id8">
+<h4>Response<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<p>The reverse geocoding result contains one feature (if it exists) as well as the <a class="reference internal" href="#meta-info"><span class="std std-ref">meta information</span></a>by default.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1098,8 +1087,8 @@ For further information regarding the specific routing profiles, distance units 
 <p class="last">The <code class="docutils literal"><span class="pre">accuracy_score</span></code> is based on the <code class="docutils literal"><span class="pre">distance</span></code>. The closer a result is to the queried point, the higher the score.</p>
 </div>
 <hr class="docutils" />
-<p>The following example examines the location <code class="docutils literal"><span class="pre">13.239515,52.514679</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre>hostname/geocoding-test?format=json&amp;location=13.239515,52.514679&amp;api_key=key
+<p>The following example reverse geocodes the location <code class="docutils literal"><span class="pre">13.239515,52.514679</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>hostname/geocoding-test?format=json&amp;location=13.239515,52.514679&amp;api_key=key
 </pre></div>
 </div>
 <p>Resulting in one feature response:</p>
@@ -1114,7 +1103,7 @@ For further information regarding the specific routing profiles, distance units 
             element.style.display = "block"
     };
 </script>
-<a href="javascript:showhide(document.getElementById('hiddencodeblock6'))">Toggle Code</a><br /><div id="hiddencodeblock6" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock6'))">Toggle Code</a><br /><div id="hiddencodeblock6" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -1147,13 +1136,9 @@ For further information regarding the specific routing profiles, distance units 
 <hr class="docutils" id="isos" />
 <div class="section" id="isochrones-service">
 <h2>Isochrones Service<a class="headerlink" href="#isochrones-service" title="Permalink to this headline">¶</a></h2>
-<p>The Isochrone Service supports time and distance analyses with multiple start or end points. Additionally you can specify the line interval or give multiple exact range values and output some extra attributes for the polygons in the <a class="reference internal" href="#aa-response"><span>response</span></a>.</p>
-<p>The Isochrones endpoint is defined as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre>hostname/analyse?
-</pre></div>
-</div>
-<div class="section" id="id10">
-<h3>Query Parameters<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>The Isochrone Service supports time and distance analyses for one single or multiple locations. You may also specify the isochrone interval or provide multiple exact isochrone range values. This service allows the same range of profile options listed in the <strong>ORS Routing</strong> section which help you to further customize your request to obtain a more detailed reachability area <a class="reference internal" href="#aa-response"><span class="std std-ref">response</span></a>. The isochrones endpoint uses <code class="docutils literal"><span class="pre">/analyse?</span></code> as the request action.</p>
+<div class="section" id="id9">
+<h3>Query Parameters<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="15%" />
@@ -1166,13 +1151,13 @@ For further information regarding the specific routing profiles, distance units 
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">locations</span></code></td>
-<td>List of <code class="docutils literal"><span class="pre">longitude,latitude</span></code> coordinates delimited with pipe.</td>
+<td>List of pipe seperated <code class="docutils literal"><span class="pre">longitude,latitude</span></code> coordinates.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">range_type</span></code></td>
 <td><code class="docutils literal"><span class="pre">time</span></code><em>(default)</em> for isochrones or <code class="docutils literal"><span class="pre">distance</span></code> for equidistants.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">range</span></code><span> </span> <a class="fa fa-link" href="#range"></a></td>
-<td>Maximum range <code class="docutils literal"><span class="pre">value</span></code> of the analysis in <em>seconds</em> for time and <em>meters</em> for distance. Alternatively a comma separated list of specific single range values</td>
+<td>Maximum range <code class="docutils literal"><span class="pre">value</span></code> of the analysis in <em>seconds</em> for time and <em>meters</em> for distance. Alternatively a comma separated list of specific single range values.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">interval</span></code></td>
 <td>Interval of isochrones or equidistants for one <code class="docutils literal"><span class="pre">range</span></code> value. <code class="docutils literal"><span class="pre">value</span></code> in <em>seconds</em> for time and <em>meters</em> for distance.</td>
@@ -1194,8 +1179,8 @@ For further information regarding the specific routing profiles, distance units 
 </tr>
 </tbody>
 </table><hr class="docutils" id="range" />
-<div class="section" id="id11">
-<h4>Range<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id10">
+<h4>Range<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
 <p>There are three ways to use the range parameter:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1211,8 +1196,8 @@ For further information regarding the specific routing profiles, distance units 
 </table>
 </div>
 <hr class="docutils" id="units" />
-<div class="section" id="id12">
-<h4>Units<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id11">
+<h4>Units<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
 <colgroup>
 <col width="19%" />
@@ -1240,22 +1225,22 @@ For further information regarding the specific routing profiles, distance units 
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">area:</th><td class="field-body">Returns the area of each polygon in its feature <a class="reference internal" href="#aa-props"><span>properties</span></a>.</td>
+<tr class="field-odd field"><th class="field-name">area:</th><td class="field-body">Returns the area of each polygon in its feature <a class="reference internal" href="#aa-props"><span class="std std-ref">properties</span></a>.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">reachfactor:</th><td class="field-body">Returns reachability score between <code class="docutils literal"><span class="pre">1</span></code> and <code class="docutils literal"><span class="pre">0</span></code></td>
+<tr class="field-even field"><th class="field-name">reachfactor:</th><td class="field-body">Returns a reachability score between <code class="docutils literal"><span class="pre">1</span></code> and <code class="docutils literal"><span class="pre">0</span></code></td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">As the maximum reachfactor would be achieved by traveling as the crow flies at maximum speed in a vacuum without obstacles, naturally it can never be <code class="docutils literal"><span class="pre">1</span></code>. The availability of motorways however produces a higher score over normal roads.</p>
+<p class="last">As the maximum reachfactor would be achieved by travelling as the crow flies at maximum speed in a vacuum without obstacles, naturally it can never be <code class="docutils literal"><span class="pre">1</span></code>. The availability of motorways however produces a higher score over normal roads.</p>
 </div>
 </div>
 </div>
 <hr class="docutils" id="aa-response" />
-<div class="section" id="id13">
-<h3>Response<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
-<p>Every Isochrone/Equidistant will result in an object in the features-block. They will be sorted in groups for each location analysed (see <code class="docutils literal"><span class="pre">group_index</span></code>) as well as from closest to furthest range within each group. The result also contains the standard <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</p>
+<div class="section" id="id12">
+<h3>Response<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<p>Every isochrone/equidistant will result in an object in the features-block. They will be sorted in groups for each location analysed (see <code class="docutils literal"><span class="pre">group_index</span></code>) as well as from closest to furthest range within each group. The result contains the standard <a class="reference internal" href="#meta-info"><span class="std std-ref">meta information</span></a>by default.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1270,8 +1255,8 @@ For further information regarding the specific routing profiles, distance units 
 </table>
 <table border="1" class="docutils" id="aa-props">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col width="11%" />
+<col width="89%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Properties</th>
@@ -1280,32 +1265,32 @@ For further information regarding the specific routing profiles, distance units 
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">area</span></code></td>
-<td>Contains the area of the polygon in square meters.</td>
+<td>The area of the polygon in square meters.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">reachfactor</span></code></td>
-<td>Contains the <a class="reference internal" href="#attr"><span>reachability score</span></a>.</td>
+<td>The <a class="reference internal" href="#attr"><span class="std std-ref">reachability score</span></a>.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">center</span></code></td>
-<td>Contains the coordinates of the associated analysis location.</td>
+<td>The coordinates of the specific analysis location.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">group_index</span></code></td>
-<td>Contains the ID of the point coordinate based on the position in the <code class="docutils literal"><span class="pre">loctaions</span></code> query-parameter. For every location there is an own group of Polygons.</td>
+<td>The id of the isochrone based on the position in the <code class="docutils literal"><span class="pre">locations</span></code> query-parameter. Every location comprises its own group of polygons.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">value</span></code></td>
-<td>Contains the range value of this isochrone/equidistant in seconds/meters.</td>
+<td>The range value of this isochrone/equidistant in seconds/meters.</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
-<p class="last">There is a limit on the server side to the total amount of recieved polygons.</p>
+<p class="last">Due to computational reasons we limit the total amount of received isochrones to 10 for each location.</p>
 </div>
 <hr class="docutils" />
-<p>This analysis request for the location <code class="docutils literal"><span class="pre">8.6984954,49.38092</span></code> uses the <code class="docutils literal"><span class="pre">driving-car</span></code> profile and searches for accessibility in range <code class="docutils literal"><span class="pre">500</span></code> seconds with interval <code class="docutils literal"><span class="pre">200</span></code> seconds:</p>
-<div class="highlight-python"><div class="highlight"><pre>hostname/analysis-test?format=json&amp;range=500&amp;interval=200&amp;locations=8.6984954,49.38092&amp;profile=driving-car&amp;api_key=api-key
+<p>This analysis request for the location <code class="docutils literal"><span class="pre">8.6984954,49.38092</span></code> uses the <code class="docutils literal"><span class="pre">driving-car</span></code> profile and searches for accessibility in range <code class="docutils literal"><span class="pre">500</span></code> seconds with an interval <code class="docutils literal"><span class="pre">200</span></code> seconds:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>hostname/analysis-test?format=json&amp;range=500&amp;interval=200&amp;locations=8.6984954,49.38092&amp;profile=driving-car&amp;api_key=api-key
 </pre></div>
 </div>
-<p>The result supplies isochrones at <code class="docutils literal"><span class="pre">200</span></code>, <code class="docutils literal"><span class="pre">400</span></code> seconds and ends with the <code class="docutils literal"><span class="pre">500</span></code> seconds as outter ring:</p>
+<p>The result supplies isochrones at <code class="docutils literal"><span class="pre">200</span></code> and <code class="docutils literal"><span class="pre">400</span></code> seconds and finally <code class="docutils literal"><span class="pre">500</span></code> seconds which corresponds to the <code class="docutils literal"><span class="pre">range</span></code> setting:</p>
 <script type="text/javascript">
     function showhide(element){
         if (!document.getElementById)
@@ -1317,7 +1302,7 @@ For further information regarding the specific routing profiles, distance units 
             element.style.display = "block"
     };
 </script>
-<a href="javascript:showhide(document.getElementById('hiddencodeblock7'))">Toggle Code</a><br /><div id="hiddencodeblock7" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock7'))">Toggle Code</a><br /><div id="hiddencodeblock7" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -1611,23 +1596,25 @@ For further information regarding the specific routing profiles, distance units 
 <hr class="docutils" id="meta-info" />
 <div class="section" id="meta-information">
 <h2>Meta Information<a class="headerlink" href="#meta-information" title="Permalink to this headline">¶</a></h2>
-<p>The format of your response is <a class="reference external" href="http://geojson.org/geojson-spec.html">GeoJSON</a>.</p>
+<p>The format of your response for all service endpoints is <a class="reference external" href="http://geojson.org/geojson-spec.html">GeoJSON</a> formatted.</p>
 <div class="section" id="bbox">
 <h3>Bbox<a class="headerlink" href="#bbox" title="Permalink to this headline">¶</a></h3>
-<p>The Bbox-block shows the values of the <a class="reference external" href="https://en.wikipedia.org/wiki/Minimum_bounding_box">minimum bounding box</a> surrounding all feature results as follows:</p>
-<div class="highlight-json"><div class="highlight"><pre>&quot;bbox&quot;: [
-        minimum longitude,
-        minimum latitude,
-        maximum longitude,
-        maximum latitude
-]
+<p>The Bbox object depicts the values of the <a class="reference external" href="https://en.wikipedia.org/wiki/Minimum_bounding_box">minimum bounding box</a>  enclosing all feature results as follows:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span>{
+        &quot;bbox&quot;: [
+                minimum longitude,
+                minimum latitude,
+                maximum longitude,
+                maximum latitude
+        ]
+}
 </pre></div>
 </div>
 </div>
 <hr class="docutils" />
 <div class="section" id="info">
 <h3>Info<a class="headerlink" href="#info" title="Permalink to this headline">¶</a></h3>
-<p>The Info-block displays facts about your query.</p>
+<p>The Info object summarizes your query settings.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="17%" />
@@ -1649,7 +1636,7 @@ For further information regarding the specific routing profiles, distance units 
 <td>Attribution for using our service</td>
 </tr>
 <tr class="row-odd"><td>version</td>
-<td>Version of our backend server used for the request</td>
+<td>The ORS API version used for the request</td>
 </tr>
 <tr class="row-even"><td>timestamp</td>
 <td>Unix timestamp of the precise request date</td>
@@ -1657,7 +1644,7 @@ For further information regarding the specific routing profiles, distance units 
 </tbody>
 </table>
 <p>Example:</p>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
         <span class="nt">&quot;info&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&quot;service&quot;</span><span class="p">:</span> <span class="s2">&quot;geocoding&quot;</span><span class="p">,</span>
             <span class="nt">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span>

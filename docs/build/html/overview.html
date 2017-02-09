@@ -86,10 +86,10 @@
             
                 <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#routing">Routing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#geocoding">Geocoding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#isochrones">Isochrones</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ors-routing">ORS Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ors-geocoding">ORS Geocoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ors-isochrones">ORS Isochrones</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api_key.html">API Keys</a></li>
@@ -167,21 +167,22 @@
             
   <div class="section" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p>OpenRouteService.org offers spatial services by using user-generated, collaboratively collected free geographic data from OpenStreetMap.org. This service is based on open standards by the Open Geospatial Consortium (OGC). Currently the following services have been implemented within the frame of OpenRouteService.org, which allow you to include maps, geocoding and routing in your web pages or applications. By accessing, requesting and using OpenRouteService (ORS) and the provided API, you are agreeing to our <a class="reference internal" href="tos.html#tos-ref"><span>terms of use</span></a>.</p>
-<div class="section" id="routing">
-<h2>Routing<a class="headerlink" href="#routing" title="Permalink to this headline">¶</a></h2>
-<p>The route service determines travel routes and navigation information according to diverse criteria.</p>
+<p><strong>OpenRouteService</strong> (ORS) offers global spatial services by utilizing user-generated and collaboratively collected free geographic data from <strong>OpenStreetMap.org</strong>. The API currently comprises a geocoding, routing and isochrone endpoint allowing you to consume its results in your applications. By accessing, requesting and using the ORS API, you are agreeing to our <a class="reference internal" href="tos.html#tos-ref"><span class="std std-ref">terms of use</span></a>.</p>
+<p>To get started with the service, you first need to obtain an API key. Sign up at <a class="reference external" href="https://openrouteservice.org/developers">https://openrouteservice.org/developers</a> to create and manage your ORS access. Please be aware that there are limitations on requests to avoid individual users from degrading the overall system performance.</p>
+<p>Feel free to browse to <a class="reference external" href="www.openrouteservice.org">OpenRouteService.org</a> in order to see a demonstration of the ORS API.</p>
+<div class="section" id="ors-routing">
+<h2>ORS Routing<a class="headerlink" href="#ors-routing" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>ORS Routing</strong> service works globally and allows you to determine travel routes and navigation information. To this end, we offer a wide range of travelling options for different profiles. Amongst these you may choose between car, bike, foot, wheelchair or heavy vehicle. Additionally ORS offers the possibility to customize and individualize the selected profile with specific settings.</p>
 <a class="reference internal image-reference" href="_images/routing2.png"><img alt="Routing Image" src="_images/routing2.png" style="width: 700px;" /></a>
 </div>
-<div class="section" id="geocoding">
-<h2>Geocoding<a class="headerlink" href="#geocoding" title="Permalink to this headline">¶</a></h2>
-<p>The geocoding service transforms a description of a location, such as a place name, street address or postal code, into a normalized description of the location with a Point geometry usually placed using Cartesian coordinates, often latitude and longitude.</p>
-<p>The reverse geocoding service does exactly the opposite. It transforms the coordinate of a Point into the description of the next enclosing object which surrounds the given coordinate</p>
+<div class="section" id="ors-geocoding">
+<h2>ORS Geocoding<a class="headerlink" href="#ors-geocoding" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>ORS Geocoding</strong> service accesses global databases and transforms a description of a location, such as a place name, street address or postal code, into a normalized description of the location with a point geometry. Additionaly ORS Geocoding offers a reverse geocoding service which does exactly the opposite. It transforms the coordinate of a point into the description of the next enclosing object which surrounds the given coordinate. To obtain more relevant results you may also set a radius tolerance around the requested coordinates.</p>
 <a class="reference internal image-reference" href="_images/geocode.png"><img alt="Geocoding Image" src="_images/geocode.png" style="width: 700px;" /></a>
 </div>
-<div class="section" id="isochrones">
-<h2>Isochrones<a class="headerlink" href="#isochrones" title="Permalink to this headline">¶</a></h2>
-<p>The isochrone service provides a maximum reachability area from up to three given points for a set duration. You may specify intervals to return a list of isochrones.</p>
+<div class="section" id="ors-isochrones">
+<h2>ORS Isochrones<a class="headerlink" href="#ors-isochrones" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>ORS Isochrones</strong> service helps you determine the maximum reachability area from a given point(s) on the map and returns these regions as contours of polygons. In this context you may specify two different types of input, namely the time or the distance as well as corresponding intervals. If your input consists of a list of points the service will return intersections of the isochrones if any exist. Additionaly you are able to use the same set of profiles and settings as in ORS Routing.</p>
 <a class="reference internal image-reference" href="_images/analysis.png"><img alt="Accessibility Analysis Image" src="_images/analysis.png" style="width: 700px;" /></a>
 </div>
 </div>
