@@ -5,7 +5,7 @@ Overview
 
 To get started with the service, you first need to obtain an API key. Sign up at https://openrouteservice.org/developers to create and manage your ORS access. Please be aware that there are limitations on requests to avoid individual users from degrading the overall system performance.
 
-Feel free to browse to `OpenRouteService.org <www.openrouteservice.org>`_ in order to see a demonstration of the ORS API.
+Feel free to browse to `OpenRouteService.org <www.openrouteservice.org>`_  to see a demonstration of the ORS API. We currently support recent versions of **Mozilla Firefox**, **Google Chrome**, **Opera** and **Safari** browsers. 
 
 
 ORS Routing

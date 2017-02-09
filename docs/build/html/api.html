@@ -93,9 +93,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#query-parameters">Query Parameters</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#extra-information">Extra Information</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id1">Options</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#options-examples">Options Examples</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#avoid-features">Avoid Features</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#profile-parameters">Profile Parameters</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#options-examples">Options Examples</a></li>
 </ul>
 </li>
 </ul>
@@ -262,37 +262,38 @@
 <td>Specifies the routing profile. Values are <code class="docutils literal"><span class="pre">driving-car</span></code>, <code class="docutils literal"><span class="pre">driving-hgv</span></code>, <code class="docutils literal"><span class="pre">cycling-regular</span></code>, <code class="docutils literal"><span class="pre">cycling-road</span></code>, <code class="docutils literal"><span class="pre">cycling-safe</span></code>, <code class="docutils literal"><span class="pre">cycling-mountain</span></code>, <code class="docutils literal"><span class="pre">cycling-tour</span></code>, <code class="docutils literal"><span class="pre">foot-walking</span></code>, <code class="docutils literal"><span class="pre">foot-hiking</span></code> and <code class="docutils literal"><span class="pre">wheelchair</span></code>.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">preference</span></code></td>
-<td>Specifies the routing preference. Values are <code class="docutils literal"><span class="pre">fastest</span></code>(<em>default</em>)/, <code class="docutils literal"><span class="pre">shortest</span></code> and <code class="docutils literal"><span class="pre">recommended</span></code>.</td>
+<td>Specifies the routing preference. Values are <code class="docutils literal"><span class="pre">fastest</span></code>(<em>default</em>), <code class="docutils literal"><span class="pre">shortest</span></code> and <code class="docutils literal"><span class="pre">recommended</span></code>.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">units</span></code></td>
-<td>Specifies the distance unit . Values are <code class="docutils literal"><span class="pre">m</span></code>(meters)(<em>default</em>)/<code class="docutils literal"><span class="pre">km</span></code>(kilometers)/<code class="docutils literal"><span class="pre">mi</span></code>(miles).</td>
+<td>Specifies the distance unit . Values are <code class="docutils literal"><span class="pre">m</span></code>(meters, <em>default</em>) , <code class="docutils literal"><span class="pre">km</span></code>(kilometers) or <code class="docutils literal"><span class="pre">mi</span></code>(miles).</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">language</span></code></td>
-<td>Language for the route instructions. <code class="docutils literal"><span class="pre">en</span></code>(<em>default</em>),``de`` , <code class="docutils literal"><span class="pre">ru</span></code>.. .</td>
+<td>Language for the route instructions. We currently support <code class="docutils literal"><span class="pre">en</span></code>(english - <em>default</em>), <code class="docutils literal"><span class="pre">de</span></code>(german), <code class="docutils literal"><span class="pre">ru</span></code>(russian), <code class="docutils literal"><span class="pre">es</span></code>(spanish) and <code class="docutils literal"><span class="pre">cn</span></code>(chinese), .</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">geometry</span></code></td>
-<td>Specifies whether to return geometry or not. Default is <code class="docutils literal"><span class="pre">True</span></code>.</td>
+<td>Specifies whether to return geometry or not (<em>default is</em> <code class="docutils literal"><span class="pre">True</span></code>).</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">geometry_format</span></code></td>
 <td>Sets the format of a returned geometry. <a class="reference external" href="link">polyline</a> , <a class="reference external" href="https://developers.google.com/maps/documentation/utilities/polylinealgorithm">encodedpolyline</a>(<em>default</em>) or <a class="reference external" href="http://geojson.org/geojson-spec.html#linestring">geojson</a>.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">instructions</span></code></td>
-<td>Specifies whether to return instructions or not. Default is <code class="docutils literal"><span class="pre">True</span></code>.</td>
+<td>Specifies whether to return instructions or not (<em>default is ``True``</em>).</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">prettify_instructions</span></code></td>
-<td>Specifies whether to returen more verbose instructions or not. Default is <code class="docutils literal"><span class="pre">False</span></code>.</td>
+<td>Specifies whether to returen more verbose instructions or not (<em>default is</em> <code class="docutils literal"><span class="pre">False</span></code>).</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">elevation</span></code></td>
-<td>Specifies whether to return elevation values for points or not. Default is <code class="docutils literal"><span class="pre">False</span></code>.</td>
+<td>Specifies whether to return elevation values for points or not (<em>default is</em> <code class="docutils literal"><span class="pre">False</span></code>).</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">extra_info</span></code><span> </span> <a class="fa fa-link" href="#extra-info"></a></td>
-<td>Pipe separated List of desired additional information. Values are <code class="docutils literal"><span class="pre">gradients</span></code>, <code class="docutils literal"><span class="pre">surface</span></code> and <code class="docutils literal"><span class="pre">waytypes</span></code>.</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">extra_info</span></code> <a class="reference internal" href="#extra-info"><span class="std std-ref">#</span></a></td>
+<td>Pipe separated List of desired additional information. Values are <code class="docutils literal"><span class="pre">gradients</span></code>, <code class="docutils literal"><span class="pre">priorty</span></code>, <code class="docutils literal"><span class="pre">surface</span></code> and <code class="docutils literal"><span class="pre">waytypes</span></code>.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">options</span></code><span> </span> <a class="fa fa-link" href="#options"></a></td>
-<td>Sets advanced options in <a class="reference external" href="http://json-schema.org/">json schema</a>. Add json as string: <code class="docutils literal"><span class="pre">&quot;{...}&quot;</span></code>.</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">options</span></code> <a class="reference internal" href="#options"><span class="std std-ref">#</span></a></td>
+<td>For advanced options formatted as <a class="reference external" href="http://json-schema.org/">json</a>. Add object as string: <code class="docutils literal"><span class="pre">&quot;{...}&quot;</span></code>.</td>
 </tr>
 </tbody>
-</table><p>For further information regarding the differences between routing profiles, distance units and preference settings please visit our <a class="reference internal" href="glossary.html"><span class="doc">glossary</span></a>.</p>
+</table>
+<p>For further information regarding the differences between routing profiles, distance units and preference settings please visit our <a class="reference internal" href="glossary.html"><span class="doc">glossary</span></a>.</p>
 <hr class="docutils" id="extra-info" />
 <div class="section" id="extra-information">
 <h4>Extra Information<a class="headerlink" href="#extra-information" title="Permalink to this headline">¶</a></h4>
@@ -329,8 +330,8 @@
 <p>The following settings may be appended as strings to the options object.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="24%" />
-<col width="76%" />
+<col width="17%" />
+<col width="83%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Options</th>
@@ -338,165 +339,26 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>&#8220;maximum_speed&#8221;</td>
-<td>Sets the maximum travel speed in km/h.</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">maximum_speed</span></code></td>
+<td>Specifies a maximum travel speed in km/h.</td>
 </tr>
-<tr class="row-odd"><td>&#8220;avoid_features&#8221;<span> </span> <a class="fa fa-link" href="#avoid"></a></td>
-<td>Pipe seperated list of features to avoid. <code class="docutils literal"><span class="pre">&quot;hills|ferries|...&quot;</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">avoid_features</span></code> <a class="reference internal" href="#avoid"><span class="std std-ref">#</span></a></td>
+<td>Pipe seperated list of features to avoid. <code class="docutils literal"><span class="pre">hills|ferries|...</span></code></td>
 </tr>
-<tr class="row-even"><td>&#8220;vehicle_type&#8221;<span> </span> <!--<a class="fa fa-link" href="#mode">--></a></td>
-<td>Specifies the heavy vehicle mode of the <code class="docutils literal">driving-hgv</code>profile. Values are <code class="docutils literal">&#8220;hgv&#8221;</code> and <code class="docutils literal">&#8220;bus&#8221;</code>.</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">vehicle_type</span></code></td>
+<td>Specifies the vehicle type.</td>
 </tr>
-<tr class="row-odd"><td>&#8220;profile_params&#8221;<span> </span> <a class="fa fa-link" href="#vehparam"></a></td>
-<td>Specifies hgv, bicycle or wheelchair specific profile settings.</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">profile_params</span></code> <a class="reference internal" href="#proparam"><span class="std std-ref">#</span></a></td>
+<td>Specifies vehicle parameters.</td>
 </tr>
-<tr class="row-even"><td>&#8220;avoid_polygons&#8221;</td>
-<td>Depicts areas to be avoided within the route, formatted as <a class="reference external" href="http://geojson.org/geojson-spec.html#id4">geojson polygon</a> or <a class="reference external" href="http://geojson.org/geojson-spec.html#id7">geojson multipolygon</a>.</td>
-</tr>
-</tbody>
-</table><div class="admonition attention">
-<p class="first admonition-title">Attention</p>
-<p class="last">The available parameters for <code class="docutils literal"><span class="pre">avoid_features</span></code> and <code class="docutils literal"><span class="pre">profile_params</span></code> may differ according to the selected routing profile.</p>
-</div>
-<p>see <a class="reference internal" href="#option-examples"><span class="std std-ref">examples</span></a></p>
-<hr class="docutils" id="avoid" />
-<div class="section" id="avoid-features">
-<h5>Avoid Features<a class="headerlink" href="#avoid-features" title="Permalink to this headline">¶</a></h5>
-<p>The following feature types provide means to avoid certain objects along your route:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="24%" />
-<col width="76%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Parameter</th>
-<th class="head">Available For</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">highways</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-*</span></code></td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">tollways</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-*</span></code></td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">ferries</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-*</span></code>, <code class="docutils literal"><span class="pre">cycling-*</span></code>, <code class="docutils literal"><span class="pre">foot-*</span></code>, <code class="docutils literal"><span class="pre">wheelchair</span></code></td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">tunnels</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-*</span></code></td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">pavedroads</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-*</span></code>, <code class="docutils literal"><span class="pre">cycling-*</span></code></td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">unpavedroads</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-*</span></code>, <code class="docutils literal"><span class="pre">cycling-*</span></code></td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">tracks</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-*</span></code></td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">fords</span></code></td>
-<td><code class="docutils literal"><span class="pre">driving-*</span></code>, <code class="docutils literal"><span class="pre">cycling-*</span></code>, <code class="docutils literal"><span class="pre">foot-*</span></code></td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">steps</span></code></td>
-<td><code class="docutils literal"><span class="pre">cycling-*</span></code>, <code class="docutils literal"><span class="pre">foot-*</span></code>, <code class="docutils literal"><span class="pre">wheelchair</span></code></td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">hills</span></code></td>
-<td><code class="docutils literal"><span class="pre">cycling-*</span></code>, <code class="docutils literal"><span class="pre">foot-*</span></code></td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr class="docutils" id="proparam" />
-<div class="section" id="profile-parameters">
-<h5>Profile Parameters<a class="headerlink" href="#profile-parameters" title="Permalink to this headline">¶</a></h5>
-<p>For the <code class="docutils literal"><span class="pre">driving-hgv</span></code> profile we offer the following vehicle specifications to customize the route:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="11%" />
-<col width="89%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Parameter</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;length&quot;</span></code></td>
-<td>Specifies length restriction in meters.</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">&quot;width&quot;</span></code></td>
-<td>Specifies width restriction in meters.</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;height&quot;</span></code></td>
-<td>Specifies height restriction in meters.</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">&quot;axleload&quot;</span></code></td>
-<td>Specifies axleload restriction in tons.</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;weight&quot;</span></code></td>
-<td>Specifies weight restriction in tons.</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">&quot;hazmat&quot;</span></code></td>
-<td>Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is <code class="docutils literal"><span class="pre">false</span></code>.</td>
-</tr>
-</tbody>
-</table>
-<hr class="docutils" />
-<p>For the <code class="docutils literal"><span class="pre">cycling-..</span></code> profiles we offer the following fitness parameters to individualize the route:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="19%" />
-<col width="81%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Value</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">difficulty_level</span></code></td>
-<td>Specifies the fitness level. <code class="docutils literal"><span class="pre">0</span></code> = Novice, <code class="docutils literal"><span class="pre">1</span></code> = Moderate, <code class="docutils literal"><span class="pre">2</span></code> = Amateur, <code class="docutils literal"><span class="pre">3</span></code> = Pro.</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">maximum_gradient</span></code></td>
-<td>Specifies the maximum route steepness in percent. Values range from <code class="docutils literal"><span class="pre">1</span></code> to <code class="docutils literal"><span class="pre">15</span></code>.</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">avoid_polygons</span></code></td>
+<td>Comprises areas to be avoided for the route. Formatted as <a class="reference external" href="http://geojson.org/geojson-spec.html#id4">geojson polygon</a> or <a class="reference external" href="http://geojson.org/geojson-spec.html#id7">geojson multipolygon</a>.</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition attention">
 <p class="first admonition-title">Attention</p>
-<p class="last">The <code class="docutils literal"><span class="pre">maximum_gradient</span></code> parameter can only be set if <code class="docutils literal"><span class="pre">hills</span></code> are avoided or <code class="docutils literal"><span class="pre">difficulty_level</span></code> is defined. Also you can only use <code class="docutils literal"><span class="pre">difficulty_level</span></code> or avoid <code class="docutils literal"><span class="pre">hills</span></code> at a time.</p>
-</div>
-<hr class="docutils" />
-<p>For the <code class="docutils literal"><span class="pre">wheelchair</span></code> profile we offer the following filters to individualize the route:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="16%" />
-<col width="84%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Parameter</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">surface_type</span></code></td>
-<td>Specifies the <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:surface">surface type</a>. Default is <code class="docutils literal"><span class="pre">&quot;cobblestone:flattened&quot;</span></code>. (what values)</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">track_type</span></code></td>
-<td>Specifies the <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:tracktype">grade</a> of the route. Default is <code class="docutils literal"><span class="pre">&quot;grade1&quot;</span></code></td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">smoothness_type</span></code></td>
-<td>Specifies the <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:smoothness">smoothness</a> of the route. Default is <code class="docutils literal"><span class="pre">&quot;good&quot;</span></code></td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">maximum_sloped_curb</span></code></td>
-<td>Specifies the maximum height of the sloped curb in meters. Values are <code class="docutils literal"><span class="pre">0.03</span></code>, <code class="docutils literal"><span class="pre">0.06</span></code>/<em>(default)</em>, <code class="docutils literal"><span class="pre">0.1</span></code> or <code class="docutils literal"><span class="pre">any</span></code></td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">maximum_incline</span></code></td>
-<td>Specifies the maximum incline as a percentage. <code class="docutils literal"><span class="pre">3</span></code>, <code class="docutils literal"><span class="pre">6</span></code>*(default)*, <code class="docutils literal"><span class="pre">10</span></code>, <code class="docutils literal"><span class="pre">15</span></code> or <code class="docutils literal"><span class="pre">any</span></code></td>
-</tr>
-</tbody>
-</table>
+<p class="last">The available parameters for <code class="docutils literal"><span class="pre">avoid_features</span></code> and <code class="docutils literal"><span class="pre">profile_params</span></code> may differ according to the selected routing profile.</p>
 </div>
 <hr class="docutils" id="option-examples" />
 <div class="section" id="options-examples">
@@ -577,13 +439,151 @@
 </pre></div>
 </div>
 </div></div>
+<hr class="docutils" id="avoid" />
+<div class="section" id="avoid-features">
+<h5>Avoid Features<a class="headerlink" href="#avoid-features" title="Permalink to this headline">¶</a></h5>
+<p>The following feature types provide means to avoid certain objects along your route:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Available For</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">highways</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">tollways</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">ferries</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code>, <code class="docutils literal"><span class="pre">cycling-*</span></code>, <code class="docutils literal"><span class="pre">foot-*</span></code>, <code class="docutils literal"><span class="pre">wheelchair</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">tunnels</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">pavedroads</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code>, <code class="docutils literal"><span class="pre">cycling-*</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">unpavedroads</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code>, <code class="docutils literal"><span class="pre">cycling-*</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">tracks</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">fords</span></code></td>
+<td><code class="docutils literal"><span class="pre">driving-*</span></code>, <code class="docutils literal"><span class="pre">cycling-*</span></code>, <code class="docutils literal"><span class="pre">foot-*</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">steps</span></code></td>
+<td><code class="docutils literal"><span class="pre">cycling-*</span></code>, <code class="docutils literal"><span class="pre">foot-*</span></code>, <code class="docutils literal"><span class="pre">wheelchair</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">hills</span></code></td>
+<td><code class="docutils literal"><span class="pre">cycling-*</span></code>, <code class="docutils literal"><span class="pre">foot-*</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" id="proparam" />
+<div class="section" id="profile-parameters">
+<h5>Profile Parameters<a class="headerlink" href="#profile-parameters" title="Permalink to this headline">¶</a></h5>
+<p>For the <code class="docutils literal"><span class="pre">driving-hgv</span></code> profile we offer the following vehicle specifications to customize the route:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">length</span></code></td>
+<td>Specifies length restriction in meters.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">width</span></code></td>
+<td>Specifies width restriction in meters.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">height</span></code></td>
+<td>Specifies height restriction in meters.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">axleload</span></code></td>
+<td>Specifies axleload restriction in tons.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">weight</span></code></td>
+<td>Specifies weight restriction in tons.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">hazmat</span></code></td>
+<td>Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is <code class="docutils literal"><span class="pre">false</span></code>.</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+<p>For the <code class="docutils literal"><span class="pre">cycling-*</span></code> profiles we offer the following fitness parameters to individualize the route:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">difficulty_level</span></code></td>
+<td>Specifies the fitness level. <code class="docutils literal"><span class="pre">0</span></code> = Novice, <code class="docutils literal"><span class="pre">1</span></code> = Moderate, <code class="docutils literal"><span class="pre">2</span></code> = Amateur, <code class="docutils literal"><span class="pre">3</span></code> = Pro.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">maximum_gradient</span></code></td>
+<td>Specifies the maximum route steepness in percent. Values range from <code class="docutils literal"><span class="pre">1</span></code> to <code class="docutils literal"><span class="pre">15</span></code>.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">The <code class="docutils literal"><span class="pre">maximum_gradient</span></code> parameter can only be set if <code class="docutils literal"><span class="pre">hills</span></code> are avoided or <code class="docutils literal"><span class="pre">difficulty_level</span></code> is defined. Also you can only use <code class="docutils literal"><span class="pre">difficulty_level</span></code> or avoid <code class="docutils literal"><span class="pre">hills</span></code> at a time.</p>
+</div>
+<hr class="docutils" />
+<p>For the <code class="docutils literal"><span class="pre">wheelchair</span></code> profile we offer the following filters to individualize the route:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">surface_type</span></code></td>
+<td>Specifies the <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:surface">surface type</a>. Default is <code class="docutils literal"><span class="pre">&quot;cobblestone:flattened&quot;</span></code>. (what values)</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">track_type</span></code></td>
+<td>Specifies the <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:tracktype">grade</a> of the route. Default is <code class="docutils literal"><span class="pre">&quot;grade1&quot;</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">smoothness_type</span></code></td>
+<td>Specifies the <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:smoothness">smoothness</a> of the route. Default is <code class="docutils literal"><span class="pre">&quot;good&quot;</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">maximum_sloped_curb</span></code></td>
+<td>Specifies the maximum height of the sloped curb in meters. Values are <code class="docutils literal"><span class="pre">0.03</span></code>, <code class="docutils literal"><span class="pre">0.06</span></code><em>(default)</em>, <code class="docutils literal"><span class="pre">0.1</span></code> or <code class="docutils literal"><span class="pre">any</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">maximum_incline</span></code></td>
+<td>Specifies the maximum incline as a percentage. <code class="docutils literal"><span class="pre">3</span></code>, <code class="docutils literal"><span class="pre">6</span></code><em>(default)</em>, <code class="docutils literal"><span class="pre">10</span></code>, <code class="docutils literal"><span class="pre">15</span></code> or <code class="docutils literal"><span class="pre">any</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <hr class="docutils" id="r-response" />
 <div class="section" id="response">
 <h3>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h3>
-<p class="centered">
-<strong>This section is under construction</strong></p><p>The routing response consists of several components and is structured into <strong>summary</strong>, <strong>geometry_format</strong>, <strong>bbox*, **geometry</strong>, <strong>segments* and **way_points</strong> for each route. By default it also includes the <a class="reference internal" href="#meta-info"><span class="std std-ref">meta information</span></a>.</p>
+<p>The routing response consists of several components and is structured into <strong>summary</strong>, <strong>geometry_format</strong>, <strong>bbox</strong>, <strong>geometry</strong>, <strong>segments</strong> and <strong>way_points</strong> for each route. By default it also includes the <a class="reference internal" href="#meta-info"><span class="std std-ref">meta information</span></a>.</p>
 <hr class="docutils" id="routes" />
 <div class="section" id="id2">
 <h4>Routes<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
@@ -857,8 +857,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-</div><hr class="docutils" />
-</div>
+</div></div>
 </div>
 </div>
 </div>
@@ -1069,7 +1068,7 @@
 <hr class="docutils" id="rgc-response" />
 <div class="section" id="id8">
 <h4>Response<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
-<p>The reverse geocoding result contains one feature (if it exists) as well as the <a class="reference internal" href="#meta-info"><span class="std std-ref">meta information</span></a>by default.</p>
+<p>The reverse geocoding result contains one feature (if it exists) as well as the <a class="reference internal" href="#meta-info"><span class="std std-ref">meta information</span></a> by default.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1129,14 +1128,13 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-</div><hr class="docutils" />
-</div>
+</div></div>
 </div>
 </div>
 <hr class="docutils" id="isos" />
 <div class="section" id="isochrones-service">
 <h2>Isochrones Service<a class="headerlink" href="#isochrones-service" title="Permalink to this headline">¶</a></h2>
-<p>The Isochrone Service supports time and distance analyses for one single or multiple locations. You may also specify the isochrone interval or provide multiple exact isochrone range values. This service allows the same range of profile options listed in the <strong>ORS Routing</strong> section which help you to further customize your request to obtain a more detailed reachability area <a class="reference internal" href="#aa-response"><span class="std std-ref">response</span></a>. The isochrones endpoint uses <code class="docutils literal"><span class="pre">/analyse?</span></code> as the request action.</p>
+<p>The Isochrone Service supports time and distance analyses for one single or multiple locations. You may also specify the isochrone interval or provide multiple exact isochrone range values. This service allows the same range of profile options listed in the <a class="reference internal" href="#options"><span class="std std-ref">ORS Routing</span></a> section which help you to further customize your request to obtain a more detailed reachability area <a class="reference internal" href="#aa-response"><span class="std std-ref">response</span></a>. The isochrones endpoint uses <code class="docutils literal"><span class="pre">/analyse?</span></code> as the request action.</p>
 <div class="section" id="id9">
 <h3>Query Parameters<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
@@ -1151,18 +1149,18 @@
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">locations</span></code></td>
-<td>List of pipe seperated <code class="docutils literal"><span class="pre">longitude,latitude</span></code> coordinates.</td>
+<td>List of <code class="docutils literal"><span class="pre">longitude,latitude</span></code> coordinates delimited with pipe.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">range_type</span></code></td>
 <td><code class="docutils literal"><span class="pre">time</span></code><em>(default)</em> for isochrones or <code class="docutils literal"><span class="pre">distance</span></code> for equidistants.</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">range</span></code><span> </span> <a class="fa fa-link" href="#range"></a></td>
-<td>Maximum range <code class="docutils literal"><span class="pre">value</span></code> of the analysis in <em>seconds</em> for time and <em>meters</em> for distance. Alternatively a comma separated list of specific single range values.</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">range</span></code> <a class="reference internal" href="#range"><span class="std std-ref">#</span></a></td>
+<td>Maximum range <code class="docutils literal"><span class="pre">value</span></code> of the analysis in <em>seconds</em> for time and <em>meters</em> for distance. Alternatively a comma separated list of specific single range values</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">interval</span></code></td>
 <td>Interval of isochrones or equidistants for one <code class="docutils literal"><span class="pre">range</span></code> value. <code class="docutils literal"><span class="pre">value</span></code> in <em>seconds</em> for time and <em>meters</em> for distance.</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">units</span></code><span> </span> <a class="fa fa-link" href="#units"></a></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">units</span></code> <a class="reference internal" href="#units"><span class="std std-ref">#</span></a></td>
 <td>Unit format. <code class="docutils literal"><span class="pre">m</span></code><em>(default)</em>, <code class="docutils literal"><span class="pre">km</span></code> or <code class="docutils literal"><span class="pre">mi</span></code> for <code class="docutils literal"><span class="pre">distance</span></code>. <code class="docutils literal"><span class="pre">s</span></code> for <code class="docutils literal"><span class="pre">time</span></code>.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">location_type</span></code></td>
@@ -1171,14 +1169,15 @@
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">profile</span></code></td>
 <td>Profile used for the analysis. <code class="docutils literal"><span class="pre">driving-car</span></code><em>(default)</em>, <code class="docutils literal"><span class="pre">driving-hgv</span></code>, <code class="docutils literal"><span class="pre">cycling-road</span></code> , <code class="docutils literal"><span class="pre">cycling-mountain</span></code>, <code class="docutils literal"><span class="pre">cycling-tour</span></code>, <code class="docutils literal"><span class="pre">cycling-safe</span></code>, <code class="docutils literal"><span class="pre">foot-walking</span></code> and <code class="docutils literal"><span class="pre">foot-hiking</span></code>.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">attributes</span></code><span> </span> <a class="fa fa-link" href="#attr"></a></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">attributes</span></code> <a class="reference internal" href="#attr"><span class="std std-ref">#</span></a></td>
 <td>Values are <code class="docutils literal"><span class="pre">area</span></code> and <code class="docutils literal"><span class="pre">reachfactor</span></code>. Delimit with pipe for both.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">api_key</span></code></td>
 <td><code class="docutils literal"><span class="pre">your_api_key</span></code> is inserted within this parameter.</td>
 </tr>
 </tbody>
-</table><hr class="docutils" id="range" />
+</table>
+<hr class="docutils" id="range" />
 <div class="section" id="id10">
 <h4>Range<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
 <p>There are three ways to use the range parameter:</p>
@@ -1590,8 +1589,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-</div><hr class="docutils" />
-</div>
+</div></div>
 </div>
 <hr class="docutils" id="meta-info" />
 <div class="section" id="meta-information">
