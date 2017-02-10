@@ -102,8 +102,15 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#response">Response</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id2">Routes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id3">Segments</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4">Steps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Extras</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#steepness">Steepness</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#suitability">Suitability</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#surface">Surface</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#waytypes">Waytypes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">Segments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">Steps</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#instruction-types">Instruction Types</a></li>
 </ul>
 </li>
@@ -113,26 +120,26 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#geocoding-service">Geocoding Service</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#geocoding">Geocoding</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id5">Query Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">Response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">Query Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">Response</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#reverse-geocoding">Reverse Geocoding</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id7">Query Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id8">Response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">Query Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">Response</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#isochrones-service">Isochrones Service</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id9">Query Parameters</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id11">Range</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id12">Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">Query Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id16">Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">Units</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#attributes">Attributes</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">Response</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id14">Contours</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">Response</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id19">Contours</a></li>
 </ul>
 </li>
 </ul>
@@ -300,11 +307,11 @@
 <hr class="docutils" id="extra-info" />
 <div class="section" id="extra-information">
 <h4>Extra Information<a class="headerlink" href="#extra-information" title="Permalink to this headline">¶</a></h4>
-<p>Encoding of the <code class="docutils literal"><span class="pre">extra_info</span></code> Values:</p>
+<p>For the encoding of the <code class="docutils literal"><span class="pre">extra_info</span></code> values see the <a class="reference internal" href="#extras"><span>response section</span></a> or click on the respective link in the table:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="20%" />
-<col width="80%" />
+<col width="16%" />
+<col width="84%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Value</th>
@@ -313,16 +320,16 @@
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">steepness</span></code></td>
-<td>Returns steepness information for each step.</td>
+<td>Returns <a class="reference internal" href="#steepness"><span>steepness information</span></a> for each step.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">surface</span></code></td>
-<td>Returns surface information for each step.</td>
+<td>Returns :<a class="reference internal" href="#surface"><span>surface information</span></a> for each step.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">waytypes</span></code></td>
-<td>Returns waytype information for each step.</td>
+<td>Returns <a class="reference internal" href="#waytypes"><span>waytype information</span></a> for each step.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">suitability</span></code></td>
-<td>Returns the suitability of a segment considering the chosen profile</td>
+<td>Returns the <a class="reference internal" href="#suitability"><span>suitability</span></a> of a segment considering the chosen profile</td>
 </tr>
 </tbody>
 </table>
@@ -586,7 +593,7 @@
 <hr class="docutils" id="r-response" />
 <div class="section" id="response">
 <h3>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h3>
-<p>The routing response consists of several components and is structured into <strong>summary</strong>, <strong>geometry_format</strong>, <strong>bbox</strong>, <strong>geometry</strong>, <strong>segments</strong> and <strong>way_points</strong> for each route. By default it also includes the <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</p>
+<p>The routing response consists of several components and is structured into <strong>summary</strong>, <strong>geometry_format</strong>, <strong>bbox</strong>, <strong>extras</strong>,**geometry**, <strong>segments</strong> and <strong>way_points</strong> for each route. By default it also includes the <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</p>
 <hr class="docutils" id="routes" />
 <div class="section" id="id2">
 <h4>Routes<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
@@ -610,21 +617,245 @@
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">bbox</span></code></td>
 <td>Contains the <a class="reference external" href="https://en.wikipedia.org/wiki/Minimum_bounding_box">minimum bounding box</a> of the route.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">geometry</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">extras</span></code></td>
+<td>Contains the <a class="reference internal" href="#extras"><span>specified extra information</span></a>.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">geometry</span></code></td>
 <td>Contains the geometry in the defined <a class="reference internal" href="#routings"><span>geometry format</span></a>.</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">segments</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">segments</span></code></td>
 <td>List containing the <a class="reference internal" href="#segments"><span>segments</span></a> and its correspoding steps which make up the route.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">way_points</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">way_points</span></code></td>
 <td>List containing the indices of way points corresponding to the <code class="docutils literal"><span class="pre">geometry</span></code>.</td>
 </tr>
 </tbody>
 </table>
 </div>
-<hr class="docutils" id="segments" />
+<hr class="docutils" id="extras" />
 <div class="section" id="id3">
-<h4>Segments<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<h4>Extras<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p>For every information item there is an associated block divided into <strong>summary</strong> and <strong>values</strong>:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">summary:</th><td class="field-body">broken down by information values.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">values:</th><td class="field-body">broken down by <a class="reference internal" href="#steps"><span>way_points</span></a>.</td>
+</tr>
+</tbody>
+</table>
+<p>Encoding of the extra information in detail:</p>
+<div class="section" id="steepness">
+<span id="id4"></span><h5>Steepness<a class="headerlink" href="#steepness" title="Permalink to this headline">¶</a></h5>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Encoding</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-5</span></code></td>
+<td>&gt;16%</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-4</span></code></td>
+<td>12-15%</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-3</span></code></td>
+<td>7-11%</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-2</span></code></td>
+<td>4-6%</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-1</span></code></td>
+<td>1-3%</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">0</span></code></td>
+<td>0%</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">1</span></code></td>
+<td>1-3%</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">2</span></code></td>
+<td>4-6%</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">3</span></code></td>
+<td>7-11%</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">4</span></code></td>
+<td>12-15%</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">5</span></code></td>
+<td>&gt;16%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="suitability">
+<span id="id5"></span><h5>Suitability<a class="headerlink" href="#suitability" title="Permalink to this headline">¶</a></h5>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="74%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">10</span></code></td>
+<td>Perfect suitability</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">9</span></code></td>
+<td>Excellent suitability</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">8</span></code></td>
+<td>Good suitability</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">7</span></code></td>
+<td>Mediocre suitability</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">6</span></code></td>
+<td>Bad suitability</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">5</span></code></td>
+<td>Worst suitability</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="surface">
+<span id="id6"></span><h5>Surface<a class="headerlink" href="#surface" title="Permalink to this headline">¶</a></h5>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Encoding</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">0</span></code></td>
+<td>Unknown</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">1</span></code></td>
+<td>Paved</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2</span></code></td>
+<td>Unpaved</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">3</span></code></td>
+<td>Asphalt</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">4</span></code></td>
+<td>Concrete</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">5</span></code></td>
+<td>Cobblestone</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">6</span></code></td>
+<td>Metal</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">7</span></code></td>
+<td>Wood</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">8</span></code></td>
+<td>Compacted Gravel</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">9</span></code></td>
+<td>Fine Gravel</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">10</span></code></td>
+<td>Gravel</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">11</span></code></td>
+<td>Dirt</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">12</span></code></td>
+<td>Ground</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">13</span></code></td>
+<td>Ice</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">14</span></code></td>
+<td>Salt</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">15</span></code></td>
+<td>Sand</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">16</span></code></td>
+<td>Woodchips</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">17</span></code></td>
+<td>Grass</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">18</span></code></td>
+<td>Grass Paver</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="waytypes">
+<span id="id7"></span><h5>Waytypes<a class="headerlink" href="#waytypes" title="Permalink to this headline">¶</a></h5>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Encoding</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">0</span></code></td>
+<td>Unknown</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">1</span></code></td>
+<td>State Road</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2</span></code></td>
+<td>Road</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">3</span></code></td>
+<td>Street</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">4</span></code></td>
+<td>Path</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">5</span></code></td>
+<td>Track</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">6</span></code></td>
+<td>Cycleway</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">7</span></code></td>
+<td>Footway</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">8</span></code></td>
+<td>Steps</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">9</span></code></td>
+<td>Ferry</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">10</span></code></td>
+<td>Construction</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr class="docutils" id="segments" />
+<div class="section" id="id8">
+<h4>Segments<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -639,8 +870,8 @@
 </table>
 </div>
 <hr class="docutils" id="steps" />
-<div class="section" id="id4">
-<h4>Steps<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id9">
+<h4>Steps<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
 <colgroup>
 <col width="15%" />
@@ -873,8 +1104,8 @@
 <div class="section" id="geocoding">
 <h3>Geocoding<a class="headerlink" href="#geocoding" title="Permalink to this headline">¶</a></h3>
 <p>A <a class="reference external" href="https://en.wikipedia.org/wiki/Geocoding">geocoding</a> request a returns a <a class="reference external" href="http://geojson.org/geojson-spec.html">GeoJSON</a> formatted list of objects corresponding to the search input.</p>
-<div class="section" id="id5">
-<h4>Query Parameters<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id10">
+<h4>Query Parameters<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
 <colgroup>
 <col width="10%" />
@@ -899,8 +1130,8 @@
 </table>
 </div>
 <hr class="docutils" id="gc-response" />
-<div class="section" id="id6">
-<h4>Response<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id11">
+<h4>Response<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Geocoding">geocoding</a> result contains as many features (if they exist) as the <code class="docutils literal"><span class="pre">limit</span></code> parameter was set to. It also contains the standard <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1043,8 +1274,8 @@
 <div class="section" id="reverse-geocoding">
 <h3>Reverse Geocoding<a class="headerlink" href="#reverse-geocoding" title="Permalink to this headline">¶</a></h3>
 <p>As a result of a <a class="reference external" href="https://en.wikipedia.org/wiki/Reverse_geocoding">reverse geocoding</a> request you will obtain one match (if it exists), namely the next enclosing object with an address tag which surrounds the given coordinate.</p>
-<div class="section" id="id7">
-<h4>Query Parameters<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id12">
+<h4>Query Parameters<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
 <colgroup>
 <col width="14%" />
@@ -1069,8 +1300,8 @@
 </table>
 </div>
 <hr class="docutils" id="rgc-response" />
-<div class="section" id="id8">
-<h4>Response<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id13">
+<h4>Response<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h4>
 <p>The reverse geocoding result contains one feature (if it exists) as well as the <a class="reference internal" href="#meta-info"><span>meta information</span></a> by default.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1138,8 +1369,8 @@
 <div class="section" id="isochrones-service">
 <h2>Isochrones Service<a class="headerlink" href="#isochrones-service" title="Permalink to this headline">¶</a></h2>
 <p>The Isochrone Service supports time and distance analyses for one single or multiple locations. You may also specify the isochrone interval or provide multiple exact isochrone range values. This service allows the same range of profile options listed in the <a class="reference internal" href="#options"><span>ORS Routing</span></a> section which help you to further customize your request to obtain a more detailed reachability area <a class="reference internal" href="#aa-response"><span>response</span></a>. The isochrones endpoint uses <code class="docutils literal"><span class="pre">/analyse?</span></code> as the request action.</p>
-<div class="section" id="id9">
-<h3>Query Parameters<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id14">
+<h3>Query Parameters<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="15%" />
@@ -1184,8 +1415,8 @@
 </tbody>
 </table>
 <hr class="docutils" id="range" />
-<div class="section" id="id11">
-<h4>Range<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id16">
+<h4>Range<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h4>
 <p>There are three ways to use the range parameter:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1201,8 +1432,8 @@
 </table>
 </div>
 <hr class="docutils" id="units" />
-<div class="section" id="id12">
-<h4>Units<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id17">
+<h4>Units<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
 <colgroup>
 <col width="20%" />
@@ -1243,8 +1474,8 @@
 </div>
 </div>
 <hr class="docutils" id="aa-response" />
-<div class="section" id="id13">
-<h3>Response<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id18">
+<h3>Response<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
 <p>Every isochrone/equidistant will result in an object in the features-block. They will be sorted in groups for each location analysed (see <code class="docutils literal"><span class="pre">group_index</span></code>) as well as from closest to furthest range within each group. The result contains the standard <a class="reference internal" href="#meta-info"><span>meta information</span></a>by default.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1294,8 +1525,8 @@
 <p class="last">Due to computational reasons we limit the total amount of received isochrones to 10 for each location.</p>
 </div>
 <hr class="docutils" id="contours" />
-<div class="section" id="id14">
-<h4>Contours<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id19">
+<h4>Contours<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
 <p>Every intersection polygon comprises contours with an index array for each participating isochrone.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1304,6 +1535,25 @@
 <tr class="field-odd field"><th class="field-name">first value:</th><td class="field-body">Contains the <code class="docutils literal"><span class="pre">group_index</span></code> of the isochrone.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">second value:</th><td class="field-body">Contains the isochrone-index numbered from the center, starting with <code class="docutils literal"><span class="pre">0</span></code>.</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Index Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>[X,..]</td>
+<td>Contains the <code class="docutils literal"><span class="pre">group_index</span></code> of the isochrone.</td>
+</tr>
+<tr class="row-odd"><td>[..,X]</td>
+<td>Contains the isochrone-index numbered from the center, starting with <code class="docutils literal"><span class="pre">0</span></code>.</td>
 </tr>
 </tbody>
 </table>
