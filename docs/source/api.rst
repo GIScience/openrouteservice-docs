@@ -442,25 +442,25 @@ Steps
 Instruction Types
 <<<<<<<<<<<<<<<<
 
-+-------+--------------+
-| Value | Encoding     |
-+=======+==============+
-| ``0``     | Left         |
-+-------+--------------+
-| ``1``     | Right        |
-+-------+--------------+
-| ``2``     | Sharp left   |
-+-------+--------------+
-| ``3``     | Sharp right  |
-+-------+--------------+
-| ``4``     | Slight left  |
-+-------+--------------+
-| ``5``     | Slight right |
-+-------+--------------+
-| ``6``     | Straight     |
-+-------+--------------+
-| ``7``     | Roundabout   |
-+-------+--------------+
++-------+------------------+
+| Value | Encoding     	   |
++=======+==================+
+| ``0`` | Left         	   |
++-------+------------------+
+| ``1`` | Right            |
++-------+------------------+
+| ``2`` | Sharp left       |
++-------+------------------+
+| ``3`` | Sharp right      |
++-------+------------------+
+| ``4`` | Slight left      |
++-------+------------------+
+| ``5`` | Slight right     |
++-------+------------------+
+| ``6`` | Straight         |
++-------+------------------+
+| ``7`` | Roundabout       |
++-------+------------------+
 
 
 .. Response Values
@@ -1116,7 +1116,7 @@ Attributes
 ----------
 
 :area:  Returns the area of each polygon in its feature :ref:`properties<aa_props>`.
-:reachfactor:  Returns a reachability score between ``1`` and ``0``
+:reachfactor:  Returns a reachability score between ``0`` and ``1``
 
 .. note:: As the maximum reachfactor would be achieved by travelling as the crow flies at maximum speed in a vacuum without obstacles, naturally it can never be ``1``. The availability of motorways however produces a higher score over normal roads.
 
