@@ -123,7 +123,7 @@ The minimum requirements for a valid request are specified ``profile`` and ``coo
 +---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``elevation``                         | Specifies whether to return elevation values for points or not (*default is* ``False``).                                                                                                                                                         |
 +---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``extra_info`` :ref:`\# <extra_info>` | Pipe separated List of desired additional information. Values are ``gradients``, ``priorty``, ``surface`` and ``waytypes``.                                                                                                                      |
+| ``extra_info`` :ref:`\# <extra_info>` | Pipe separated List of desired additional information. Values are ``steepness``, ``suitability``, ``surface`` and ``waytypes``.                                                                                                                  |
 +---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``options`` :ref:`\# <options>`       | For advanced options formatted as `json <http://json-schema.org/>`_\. Add object as string: ``"{...}"``.                                                                                                                                         |
 +---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -140,17 +140,17 @@ Extra Information
 
 Encoding of the ``extra_info`` Values:
 
-+---------------+---------------------------------------------------------------------+
-| Value         | Description                                                         |
-+===============+=====================================================================+
-| ``gradients`` | Returns steepneess information for each step.                       |
-+---------------+---------------------------------------------------------------------+
-| ``surface``   | Returns surface information for each step.                          |
-+---------------+---------------------------------------------------------------------+
-| ``waytypes``  | Returns waytype information for each step.                          |
-+---------------+---------------------------------------------------------------------+
-| ``priority``  | Returns the suitability of a segment considering the chosen profile |
-+---------------+---------------------------------------------------------------------+
++-----------------+---------------------------------------------------------------------+
+| Value           | Description                                                         |
++=================+=====================================================================+
+| ``steepness``   | Returns steepness information for each step.                        |
++-----------------+---------------------------------------------------------------------+
+| ``surface``     | Returns surface information for each step.                          |
++-----------------+---------------------------------------------------------------------+
+| ``waytypes``    | Returns waytype information for each step.                          |
++-----------------+---------------------------------------------------------------------+
+| ``suitability`` | Returns the suitability of a segment considering the chosen profile |
++-----------------+---------------------------------------------------------------------+
 
 
 
@@ -219,7 +219,7 @@ Options Examples
 
 .. hidden-code-block:: json
 	:starthidden: True
-	:label: HGV-Example
+	:label: - HGV example
 
 	{
 	    "maximum_speed": 120,
@@ -237,7 +237,7 @@ Options Examples
 
 .. hidden-code-block:: json
 	:starthidden: True
-	:label: Cycling-Example
+	:label: - Cycling example
 
 	{
 	    "maximum_speed": 18,
@@ -255,7 +255,7 @@ Options Examples
 
 .. hidden-code-block:: json
 	:starthidden: True
-	:label: Wheelchair-Example
+	:label: - Wheelchair example
 
 	{
 	    "avoid_features": "hills|ferries|steps",
@@ -387,21 +387,21 @@ The routing response consists of several components and is structured into **sum
 Routes
 ------
 
-+---------------------+-------------------------------------------------------------------------------------------------------------------------------+
-| Parameter           | Content                                                                                                                       |
-+=====================+===============================================================================================================================+
-| ``summary``         | Contains total duration\ *(in seconds)*, route distance\ *(in* ``units`` *)* and actual distance\ *(in meters)* of the route. |
-+---------------------+-------------------------------------------------------------------------------------------------------------------------------+
-| ``geometry_format`` | Contains the defined :ref:`geometry format <routing_param>`.                                                                  |
-+---------------------+-------------------------------------------------------------------------------------------------------------------------------+
-| ``bbox``            | Contains the `minimum bounding box <https://en.wikipedia.org/wiki/Minimum_bounding_box>`__ of the route.                      |
-+---------------------+-------------------------------------------------------------------------------------------------------------------------------+
-| ``geometry``        | Contains the geometry in the defined :ref:`geometry format<routings>`.                                                        |
-+---------------------+-------------------------------------------------------------------------------------------------------------------------------+
-| ``segments``        | List containing the :ref:`segments<segments>` and its correspoding steps which make up the route.                             |
-+---------------------+-------------------------------------------------------------------------------------------------------------------------------+
-| ``way_points``      | List containing the indices of way points corresponding to the ``geometry``.                                                  |
-+---------------------+-------------------------------------------------------------------------------------------------------------------------------+
++---------------------+--------------------------------------------------------------------------------------------------------------------------------+
+| Parameter           | Content                                                                                                                        |
++=====================+================================================================================================================================+
+| ``summary``         | Contains total duration\ *(in seconds)*, route distance\ *(in* ``units``\ *)* and actual distance\ *(in meters)* of the route. |
++---------------------+--------------------------------------------------------------------------------------------------------------------------------+
+| ``geometry_format`` | Contains the defined :ref:`geometry format <routing_param>`.                                                                   |
++---------------------+--------------------------------------------------------------------------------------------------------------------------------+
+| ``bbox``            | Contains the `minimum bounding box <https://en.wikipedia.org/wiki/Minimum_bounding_box>`__ of the route.                       |
++---------------------+--------------------------------------------------------------------------------------------------------------------------------+
+| ``geometry``        | Contains the geometry in the defined :ref:`geometry format<routings>`.                                                         |
++---------------------+--------------------------------------------------------------------------------------------------------------------------------+
+| ``segments``        | List containing the :ref:`segments<segments>` and its correspoding steps which make up the route.                              |
++---------------------+--------------------------------------------------------------------------------------------------------------------------------+
+| ``way_points``      | List containing the indices of way points corresponding to the ``geometry``.                                                   |
++---------------------+--------------------------------------------------------------------------------------------------------------------------------+
 
 .. _segments:
 
@@ -439,28 +439,28 @@ Steps
 
 ------
 
-instruction type
-<<<<<<<<<<<<<<<<
+Instruction Types
+<<<<<<<<<<<<<<<<<
 
-+-------+--------------+
-| Value | Encoding     |
-+=======+==============+
-| 0     | Left         |
-+-------+--------------+
-| 1     | Right        |
-+-------+--------------+
-| 2     | Sharp left   |
-+-------+--------------+
-| 3     | Sharp right  |
-+-------+--------------+
-| 4     | Slight left  |
-+-------+--------------+
-| 5     | Slight right |
-+-------+--------------+
-| 6     | Straight     |
-+-------+--------------+
-| 7     | Roundabout   |
-+-------+--------------+
++-------+------------------+
+| Value | Encoding     	   |
++=======+==================+
+| ``0`` | Left         	   |
++-------+------------------+
+| ``1`` | Right            |
++-------+------------------+
+| ``2`` | Sharp left       |
++-------+------------------+
+| ``3`` | Sharp right      |
++-------+------------------+
+| ``4`` | Slight left      |
++-------+------------------+
+| ``5`` | Slight right     |
++-------+------------------+
+| ``6`` | Straight         |
++-------+------------------+
+| ``7`` | Roundabout       |
++-------+------------------+
 
 
 .. Response Values
@@ -615,7 +615,7 @@ The resulting route has two segments with multiple steps:
 
 .. hidden-code-block:: json
 	:starthidden: True
-	:label: Toggle Code
+	:label: Toggle Example
 
 	{
 	  "routes": [
@@ -811,13 +811,13 @@ The `geocoding <https://en.wikipedia.org/wiki/Geocoding>`__ result contains as m
 
 The following geocoding request searches for ``Berlin`` with a maximum of ``5`` response objects::
 
-	hostname/geocoding-test?format=json&query=Berlin&limit=5&api_key=api-key
+	hostname/geocoding?format=json&query=Berlin&limit=5&api_key=api-key
 
 As a response you will obtain the following JSON file with exactly 5 matches:
 
 .. hidden-code-block:: json
 	:starthidden: True
-	:label: Toggle Code
+	:label: Toggle Example
 
 	{
 	  "features": [
@@ -973,7 +973,7 @@ Resulting in one feature response:
 
 .. hidden-code-block:: json
 	:starthidden: True
-	:label: Toggle Code
+	:label: Toggle Example
 
 	{
 	  "features": [
@@ -1068,14 +1068,17 @@ Query Parameters
 +---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``units`` :ref:`\# <units>`     | Unit format. ``m``\ *(default)*, ``km`` or ``mi`` for ``distance``. ``s`` for ``time``.                                                                                                          |
 +---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``location_type``               | ``start`` treats the location(s) as starting point, ``destination`` as goal.                                                                                                                     |
+| ``location_type``               | ``start``\ *(default)* treats the location(s) as starting point, ``destination`` as goal.                                                                                                        |
 +---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``profile``                     | Profile used for the analysis. ``driving-car``\ *(default)*, ``driving-hgv``, ``cycling-road`` , ``cycling-mountain``, ``cycling-tour``, ``cycling-safe``, ``foot-walking`` and ``foot-hiking``. |
 +---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``attributes`` :ref:`\# <attr>` | Values are ``area`` and ``reachfactor``. Delimit with pipe for both.                                                                                                                             |
 +---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``api_key``                     | ``your_api_key`` is inserted within this parameter.                                                                                                                                              |
+| ``options`` :ref:`\# <options>` | For advanced options formatted as `json <http://json-schema.org/>`_\. Add object as string: ``"{...}"``.                                                                                         |
 +---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``intersections``               | Specifies whether to return :ref:`intersection polygons <contours>`. Default is ``False``.                                                                                                       |
++---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 
 .. | ``calcmethod``    | Method of generating the Isochrones. At the moment only ``default``.                                                                                                                |
 .. +-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1100,13 +1103,13 @@ There are three ways to use the range parameter:
 Units
 -----
 
-+---------------+------------------------------------------------------------------+
-| ``rangetype`` | ``units``                                                        |
-+===============+==================================================================+
-| ``time``      | ``m``\(meters *default*), ``km``\(kilometers) and ``mi``\(miles) |
-+---------------+------------------------------------------------------------------+
-| ``distance``  | ``s``\(seconds)                                                  |
-+---------------+------------------------------------------------------------------+
++----------------+------------------------------------------------------------------+
+| ``range_type`` | ``units``                                                        |
++================+==================================================================+
+| ``time``       | ``m``\(meters *default*), ``km``\(kilometers) and ``mi``\(miles) |
++----------------+------------------------------------------------------------------+
+| ``distance``   | ``s``\(seconds)                                                  |
++----------------+------------------------------------------------------------------+
 
 .. _attr:
 
@@ -1116,7 +1119,7 @@ Attributes
 ----------
 
 :area:  Returns the area of each polygon in its feature :ref:`properties<aa_props>`.
-:reachfactor:  Returns a reachability score between ``1`` and ``0``
+:reachfactor:  Returns a reachability score between ``0`` and ``1``
 
 .. note:: As the maximum reachfactor would be achieved by travelling as the crow flies at maximum speed in a vacuum without obstacles, naturally it can never be ``1``. The availability of motorways however produces a higher score over normal roads.
 
@@ -1131,7 +1134,7 @@ Every isochrone/equidistant will result in an object in the features-block. They
 
 :geometry: Contains the coordinates and the geometry ``type`` which is ``Polygon``.
 :type: Specifies the JSON feature type.
-:properties: Contains the ``center``, ``group_index`` and ``value`` parameter.
+:properties: Contains the ``center``, ``group_index`` and ``value`` parameter for **normal polygons**. Contains ``contours`` for **intersection polygons**.
 
 .. _aa_props:
 
@@ -1148,20 +1151,59 @@ Every isochrone/equidistant will result in an object in the features-block. They
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | ``value``       | The range value of this isochrone/equidistant in seconds/meters.                                                                        |
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| ``contours``    | The :ref:`indices<contours>` of this intersection polygon.                                                                              |
++-----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 
 .. attention:: Due to computational reasons we limit the total amount of received isochrones to 10 for each location.
+
+.. _contours:
+
+-----
+
+Contours
+--------
+
+Every intersection polygon comprises contours with an index array for each participating isochrone.
+
+:first value: Contains the ``group_index`` of the isochrone.
+:second value: Contains the isochrone-index numbered from the center, starting with ``0``.
+
+The following example would indicate the intersection polygon between the 2nd isochrone of the 1st location, the 2nd isochrone of th 2nd location and the 1st isochrone of the 3rd location: 
+
+.. hidden-code-block:: json
+	:starthidden: True
+	:label: Toggle Example
+
+	{
+	  "contours": [
+	    [
+	      0,
+	      1
+	    ],
+	    [
+	      1,
+	      1
+	    ],
+	    [
+	      2,
+	      0
+	    ]
+	  ]
+	}
+
+
 
 -----
 
 This analysis request for the location ``8.6984954,49.38092`` uses the ``driving-car`` profile and searches for accessibility in range ``500`` seconds with an interval ``200`` seconds::
 
-	hostname/analysis-test?format=json&range=500&interval=200&locations=8.6984954,49.38092&profile=driving-car&api_key=api-key
+	hostname/analyse?format=json&range=500&interval=200&locations=8.6984954,49.38092&profile=driving-car&api_key=api-key
 
 The result supplies isochrones at ``200`` and ``400`` seconds and finally ``500`` seconds which corresponds to the ``range`` setting:
 
 .. hidden-code-block:: json
 	:starthidden: True
-	:label: Toggle Code
+	:label: Toggle Example
 
 	{
 	  "features": [
@@ -1484,19 +1526,19 @@ Info
 
 The Info object summarizes your query settings.
 
-+-------------+---------------------------------------------------------------+
-| About       | Description                                                   |
-+=============+===============================================================+
-| service     | API endpoint used. ``geocoding``, ``analysis`` or ``routing`` |
-+-------------+---------------------------------------------------------------+
-| query       | Parameters that were specified in the query                   |
-+-------------+---------------------------------------------------------------+
-| attribution | Attribution for using our service                             |
-+-------------+---------------------------------------------------------------+
-| version     | The ORS API version used for the request                      |
-+-------------+---------------------------------------------------------------+
-| timestamp   | Unix timestamp of the precise request date                    |
-+-------------+---------------------------------------------------------------+
++-----------------+---------------------------------------------------------------+
+| About           | Description                                                   |
++=================+===============================================================+
+| ``service``     | API endpoint used. ``geocoding``, ``analysis`` or ``routing`` |
++-----------------+---------------------------------------------------------------+
+| ``query``       | Parameters that were specified in the query                   |
++-----------------+---------------------------------------------------------------+
+| ``attribution`` | Attribution for using our service                             |
++-----------------+---------------------------------------------------------------+
+| ``version``     | The ORS API version used for the request                      |
++-----------------+---------------------------------------------------------------+
+| ``timestamp``   | Unix timestamp of the precise request date                    |
++-----------------+---------------------------------------------------------------+
 
 Example:
 
