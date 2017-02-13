@@ -100,33 +100,36 @@ The minimum requirements for a valid request are specified ``profile`` and ``coo
 .. 	</tbody>
 .. 	</table>
 
-+---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Parameter                             | Description                                                                                                                                                                                                                                      |
-+=======================================+==================================================================================================================================================================================================================================================+
-| ``coordinates``                       | Pipe separated List of ``longitude,latitude`` coordinates visited in order.                                                                                                                                                                      |
-+---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``profile``                           | Specifies the routing profile. Values are ``driving-car``, ``driving-hgv``, ``cycling-regular``, ``cycling-road``, ``cycling-safe``, ``cycling-mountain``, ``cycling-tour``, ``foot-walking``, ``foot-hiking`` and ``wheelchair``.               |
-+---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``preference``                        | Specifies the routing preference. Values are ``fastest``\ (*default*), ``shortest`` and ``recommended``.                                                                                                                                         |
-+---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``units``                             | Specifies the distance unit . Values are ``m``\ (meters, *default*) , ``km``\ (kilometers) or ``mi``\ (miles).                                                                                                                                   |
-+---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``language``                          | Language for the route instructions. We currently support ``en``\ (english - *default*), ``de``\ (german), ``ru``\ (russian), ``es``\ (spanish) and ``cn``\ (chinese), .                                                                         |
-+---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``geometry``                          | Specifies whether to return geometry or not (*default is* ``True``).                                                                                                                                                                             |
-+---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``geometry_format``                   | Sets the format of a returned geometry. `polyline <link>`__ , `encodedpolyline <https://developers.google.com/maps/documentation/utilities/polylinealgorithm>`__\ (*default*) or `geojson <http://geojson.org/geojson-spec.html#linestring>`__\. |
-+---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``instructions``                      | Specifies whether to return instructions or not (*default is ``True``*).                                                                                                                                                                         |
-+---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``prettify_instructions``             | Specifies whether to returen more verbose instructions or not (*default is* ``False``).                                                                                                                                                          |
-+---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``elevation``                         | Specifies whether to return elevation values for points or not (*default is* ``False``).                                                                                                                                                         |
-+---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``extra_info`` :ref:`\# <extra_info>` | Pipe separated List of desired additional information. Values are ``steepness``, ``suitability``, ``surface`` and ``waytypes``.                                                                                                                  |
-+---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``options`` :ref:`\# <options>`       | For advanced options formatted as `json <http://json-schema.org/>`_\. Add object as string: ``"{...}"``.                                                                                                                                         |
-+---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Parameter                             | Description                                                                                                                                                                                                                                             |
++=======================================+=========================================================================================================================================================================================================================================================+
+| ``coordinates``                       | Pipe separated List of ``longitude,latitude`` coordinates visited in order.                                                                                                                                                                             |
++---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``profile``                           | Specifies the routing profile. Values are ``driving-car``, ``driving-hgv``, ``cycling-regular``, ``cycling-road``, ``cycling-safe``, ``cycling-mountain``, ``cycling-tour``, ``foot-walking``, ``foot-hiking`` and ``wheelchair``.                      |
++---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``preference``                        | Specifies the routing preference. Values are ``fastest``\ (*default*), ``shortest`` and ``recommended``.                                                                                                                                                |
++---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``units``                             | Specifies the distance unit . Values are ``m``\ (meters, *default*) , ``km``\ (kilometers) or ``mi``\ (miles).                                                                                                                                          |
++---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``language``                          | Language for the route instructions. We currently support ``en``\ (english - *default*), ``de``\ (german), ``ru``\ (russian), ``es``\ (spanish) and ``cn``\ (chinese), .                                                                                |
++---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``geometry``                          | Specifies whether to return geometry or not (*default is* ``True``).                                                                                                                                                                                    |
++---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``geometry_format``                   | Sets the format of a returned geometry. :ref:`polyline <r_example>`, `encodedpolyline <https://developers.google.com/maps/documentation/utilities/polylinealgorithm>`__\ (*default*) or `geojson <http://geojson.org/geojson-spec.html#linestring>`__\. |
++---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``instructions``                      | Specifies whether to return instructions or not (*default is* ``True``).                                                                                                                                                                                |
++---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``prettify_instructions``             | Specifies whether to returen more verbose instructions or not (*default is* ``False``).                                                                                                                                                                 |
++---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``elevation``                         | Specifies whether to return elevation values for points or not (*default is* ``False``).                                                                                                                                                                |
++---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``extra_info`` :ref:`\# <extra_info>` | Pipe separated List of desired additional information. Values are ``steepness``, ``suitability``, ``surface`` and ``waytypes``.                                                                                                                         |
++---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``options`` :ref:`\# <options>`       | For advanced options formatted as `json <http://json-schema.org/>`_\. Add object as string: ``"{...}"``.                                                                                                                                                |
++---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``id``                                | Arbitrary identification string of the request reflected in the :ref:`meta information <meta_info>`.                                                                                                                                                    |
++---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 
 For further information regarding the differences between routing profiles, distance units and preference settings please visit our :doc:`glossary </glossary>`.
 
@@ -145,7 +148,7 @@ For the encoding of the ``extra_info`` values see the :ref:`response section<ext
 +=================+=========================================================================================+
 | ``steepness``   | Returns :ref:`steepness information<steepness>` for each step.                          |
 +-----------------+-----------------------------------------------------------------------------------------+
-| ``surface``     | Returns ::ref:`surface information<surface>` for each step.                             |
+| ``surface``     | Returns :ref:`surface information<surface>` for each step.                              |
 +-----------------+-----------------------------------------------------------------------------------------+
 | ``waytypes``    | Returns :ref:`waytype information<waytypes>` for each step.                             |
 +-----------------+-----------------------------------------------------------------------------------------+
@@ -357,19 +360,19 @@ For the ``cycling-*`` profiles we offer the following fitness parameters to indi
 
 For the ``wheelchair`` profile we offer the following filters to individualize the route:
 
-+-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-| Parameter               | Description                                                                                                                            |
-+=========================+========================================================================================================================================+
-| ``surface_type``        | Specifies the `surface type <http://wiki.openstreetmap.org/wiki/Key:surface>`__. Default is ``"cobblestone:flattened"``. (what values) |
-+-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-| ``track_type``          | Specifies the `grade <http://wiki.openstreetmap.org/wiki/Key:tracktype>`__ of the route. Default is ``"grade1"``                       |
-+-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-| ``smoothness_type``     | Specifies the `smoothness <http://wiki.openstreetmap.org/wiki/Key:smoothness>`__ of the route. Default is ``"good"``                   |
-+-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-| ``maximum_sloped_curb`` | Specifies the maximum height of the sloped curb in meters. Values are ``0.03``, ``0.06``\ *(default)*, ``0.1`` or ``any``              |
-+-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-| ``maximum_incline``     | Specifies the maximum incline as a percentage. ``3``, ``6``\ *(default)*, ``10``, ``15`` or ``any``                                    |
-+-------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
++-------------------------+----------------------------------------------------------------------------------------------------------------------------+
+| Parameter               | Description                                                                                                                |
++=========================+============================================================================================================================+
+| ``surface_type``        | Specifies the `surface type <http://wiki.openstreetmap.org/wiki/Key:surface>`__. Default is ``"cobblestone:flattened"``.   |
++-------------------------+----------------------------------------------------------------------------------------------------------------------------+
+| ``track_type``          | Specifies the `grade <http://wiki.openstreetmap.org/wiki/Key:tracktype>`__ of the route. Default is ``"grade1"``.          |
++-------------------------+----------------------------------------------------------------------------------------------------------------------------+
+| ``smoothness_type``     | Specifies the `smoothness <http://wiki.openstreetmap.org/wiki/Key:smoothness>`__ of the route. Default is ``"good"``.      |
++-------------------------+----------------------------------------------------------------------------------------------------------------------------+
+| ``maximum_sloped_curb`` | Specifies the maximum height of the sloped curb in meters. Values are ``0.03``, ``0.06``\ *(default)*, ``0.1`` or ``any``. |
++-------------------------+----------------------------------------------------------------------------------------------------------------------------+
+| ``maximum_incline``     | Specifies the maximum incline as a percentage. ``3``, ``6``\ *(default)*, ``10``, ``15`` or ``any``.                       |
++-------------------------+----------------------------------------------------------------------------------------------------------------------------+
 
 .. surtype Encoding
 .. <<<<<<<<<<<<<<<<
@@ -397,7 +400,7 @@ For the ``wheelchair`` profile we offer the following filters to individualize t
 Response
 ++++++++
 
-The routing response consists of several components and is structured into **summary**, **geometry_format**, **bbox**, **extras**,**geometry**, **segments** and **way_points** for each route. By default it also includes the :ref:`meta information<meta_info>`\.
+The routing response consists of several components and is structured into **summary**, **geometry_format**, **bbox**, **extras**, **geometry**, **segments** and **way_points** for each route. By default it also includes the :ref:`meta information<meta_info>`\.
 
 .. _routes:
 
@@ -474,21 +477,7 @@ Steepness
 Suitability
 <<<<<<<<<<<
 
-+--------+-----------------------+
-| Value  | Description           |
-+========+=======================+
-| ``10`` | Perfect suitability   |
-+--------+-----------------------+
-| ``9``  | Excellent suitability |
-+--------+-----------------------+
-| ``8``  | Good suitability      |
-+--------+-----------------------+
-| ``7``  | Mediocre suitability  |
-+--------+-----------------------+
-| ``6``  | Bad suitability       |
-+--------+-----------------------+
-| ``5``  | Worst suitability     |
-+--------+-----------------------+
+The suitability values for the selected ``profile`` range from ``10`` for **best suitability** to ``1`` for **worst suitability**.
 
 .. _surface:
 
@@ -627,151 +616,105 @@ Instruction Types
 | ``7`` | Roundabout       |
 +-------+------------------+
 
+.. _r_example:
 
 -----
 
 The following example routes from coordinate ``8.690614,49.38365`` via ``8.7007,49.411699`` to ``8.7107,49.45169`` using the ``cycling-regular`` profile::
 
-	hostname/routing-test?profile=cycling-regular&coordinates=8.690614,49.38365|8.7007,49.411699|8.7107,49.45169&api_key=api-key
+	hostname/routing-test?profile=cycling-regular&coordinates=8.690614,49.38365|8.7007,49.411699|8.7107,49.45169&instructions=false&geometry_format=polyline&api_key=api-key
 
-The resulting route has two segments with multiple steps:
+The resulting route has two segments with multiple steps. The ``geometry`` is returned as a polyline:
 
 .. hidden-code-block:: json
 	:starthidden: True
 	:label: Toggle Example
 
 	{
-	  "routes": [
-	    {
-	      "summary": {
-	        "duration": 4978.3,
-	        "distance_actual": 11762.8,
-	        "distance": 12826.4
-	      },
-	      "bbox": [
-	        8.690675,
-	        49.383662,
-	        8.690675,
-	        49.383662
-	      ],
-	      "geometry": "{fllHwk`t@SH?d@sIM}EDo@?oHJ{Ud@aDJoRbAeD^g@FK@_FRWAS@_AFOESKa@m@KQCKEIO@[q@_@]OG{Bo@OEaC_AkC{@gHsBwCo@kM{BGAeAEMEa@AMGKMKWJmADsAKg@KWKI_@Im@CCKAOG@I@}E~AKDgDdAoHhBK?SCGBUWYqCO_CCq@eAuNEs@EaBCSP[PGIgEGUIcD?Il@O`@Ka@Jm@NHnC?^ILw@RKDBhAFTNdAVxAPlAjAhPBp@N~BXpCDX_@RoIxAq@Jy@DG^CBcRf@m@HOD]V}ChDEDU?UDqBn@UJOJELCDgAb@q@\\gC|Ay@XeBt@mNvEuAf@MHKJG@GCINCGI?o@N}K`EkBf@aAd@KFSmA{Ab@g@ZELKfA?FiBj@qGlEc@Rk@RsKtBo@FKASx@Cf@@P[?wBMGEKJo@V{A`@wBz@}AjAgJlFs@^c@Lq@HsF|A_ClAeA`@mA^eAVkGjARfCETIFwJhCeDvA{@\\y@f@iArCc@`@gIdGaAn@O}AQyBGgCA_@sDd@o@LUgE?mHE{BGs@MsAi@QIICE?MGQESZmBNc@Di@T{@De@?aBEeCWmEQ}EI{LCe@PPFh@HrCLjBf@dE^fBb@|AfAzCFFF@FK?SQc@Mm@MeBIsBE}B?eA\\cO\\iICi@Sg@m@_@YYEKEU?GIWe@}B@eBJiBCgA@s@^aECmBIoCBkDPaB@{ASy@]q@c@k@a@a@aAi@[MYWLm@B{@C}@Fu@TcAP_BDsCJs@LqBRoHN}BBkAQiDq@gCW{@[Ue@kC_@gAYoAWsAIkAKiASo@O]EG[mCI]",
-	      "segments": [
+	    "routes": [
 	        {
-	          "duration": 879.3,
-	          "distance": 3859.5,
-	          "steps": [
-	            {
-	              "duration": 4.4,
-	              "distance": 25.2,
-	              "instruction": "Heidelberger Straße",
-	              "name": "Heidelberger Straße",
-	              "type": 0,
-	              "way_points": [
+	            "summary": {
+	                "duration": 0,
+	                "distance": 0
+	            },
+	            "geometry_format": "polyline",
+	            "bbox": [
+	                8.674442,
+	                49.411413,
+	                8.71055,
+	                49.451915
+	            ],
+	            "geometry": [
+	                [
+	                    8.690675,
+	                    49.383662
+	                ],
+	                [
+	                    8.69063,
+	                    49.383763
+	                ],
+	                [
+	                    8.690445,
+	                    49.383755
+	                ],
+	                [ ],
+	                [
+	                    8.709689,
+	                    49.451735
+	                ],
+	                [
+	                    8.710396,
+	                    49.451872
+	                ],
+	                [
+	                    8.71055,
+	                    49.451915
+	                ]
+	            ],
+	            "way_points": [
 	                0,
-	                2
-	              ]
-	            },
-	            {
-	              "duration": 67.9,
-	              "distance": 339.6,
-	              "instruction": "Karlsruher Straße",
-	              "name": "Karlsruher Straße",
-	              "type": 2,
-	              "way_points": [
-	                2,
-	                5
-	              ]
-	            }, 
-	            {},
-	            {
-                  "duration": 83.2,
-                  "distance": 46.2,
-                  "instruction": "Karpfengasse",
-                  "name": "Karpfengasse",
-                  "type": 2,
-                  "way_points": [
-                    72,
-                    74
-                  ]
-                }
-	          ]
-	        },
-	        {
-	          "duration": 4099,
-	          "distance": 8966.9,
-	          "steps": [
-	            {
-	              "duration": 41.6,
-	              "distance": 46.2,
-	              "instruction": "Karpfengasse",
-	              "name": "Karpfengasse",
-	              "type": 0,
-	              "way_points": [
-	                74,
-	                76
-	              ]
-	            },
-	            {
-	              "duration": 22.3,
-	              "distance": 111.6,
-	              "instruction": "Untere Neckarstraße",
-	              "name": "Untere Neckarstraße",
-	              "type": -2,
-	              "way_points": [
-	                76,
-	                81
-	              ]
-	            },
-	            {},
-	            {
-	              "duration": 64,
-	              "distance": 71.1,
-	              "instruction": "",
-	              "name": "",
-	              "type": 1,
-	              "way_points": [
-	                273,
-	                275
-	              ]
-	            }
-	          ]
+	                153,
+	                444
+	            ]
 	        }
-	      ],
-	      "way_points": [
-	        0,
-	        74,
-	        275
-	      ]
+	    ],
+	    "bbox": [
+	        8.674442,
+	        49.411413,
+	        8.71055,
+	        49.451915
+	    ],
+	    "info": {
+	        "service": "routing",
+	        "query": {
+	            "geometry_format": "polyline",
+	            "elevation": false,
+	            "instructions": false,
+	            "profile": "cycling-regular",
+	            "preference": "fastest",
+	            "coordinates": [
+	                [
+	                    8.690614,
+	                    49.38365
+	                ],
+	                [
+	                    8.7007,
+	                    49.411699
+	                ],
+	                [
+	                    8.7107,
+	                    49.45169
+	                ]
+	            ],
+	            "language": "en",
+	            "geometry": true,
+	            "units": "meters"
+	        },
+	        "attribution": "tmc - BASt",
+	        "version": "4.0.0",
+	        "timestamp": 1486992874236
 	    }
-	  ],
-	  "info": {
-	    "service": "routing",
-	    "query": {
-	      "geometry_format": "encodedpolyline",
-	      "elevation": false,
-	      "instructions": true,
-	      "profile": "cycling-regular",
-	      "coordinates": [
-	        [
-	          8.690614,
-	          49.38365
-	        ],
-	        [
-	          8.7007,
-	          49.411699
-	        ],
-	        [
-	          8.7107,
-	          49.45169
-	        ]
-	      ],
-	      "units": "meters"
-	    },
-	    "attribution": "tmc - BASt",
-	    "version": "0.1",
-	    "timestamp": 1485363740092
-	  }
-	}	
+	}
 
 .. Errors
 .. ++++++
@@ -804,15 +747,18 @@ A `geocoding <https://en.wikipedia.org/wiki/Geocoding>`__ request a returns a `G
 Query Parameters
 ----------------
 
-+-----------+-------------------------------------------------------------------------------------------------+
-| Parameter | Description                                                                                     |
-+===========+=================================================================================================+
-| ``query`` | Name of location, street address or postal code.                                                |
-+-----------+-------------------------------------------------------------------------------------------------+
-| ``lang``  | Sets the language of the response. Available are ``de``, ``en``\ *(default)*, ``fr`` and ``it`` |
-+-----------+-------------------------------------------------------------------------------------------------+
-| ``limit`` | Specifies the maximum number of responses. Default is set to ``20``.                            |
-+-----------+-------------------------------------------------------------------------------------------------+
++-----------+------------------------------------------------------------------------------------------------------+
+| Parameter | Description                                                                                          |
++===========+======================================================================================================+
+| ``query`` | Name of location, street address or postal code.                                                     |
++-----------+------------------------------------------------------------------------------------------------------+
+| ``lang``  | Sets the language of the response. Available are ``de``, ``en``\ *(default)*, ``fr`` and ``it``.     |
++-----------+------------------------------------------------------------------------------------------------------+
+| ``limit`` | Specifies the maximum number of responses. Default is set to ``20``.                                 |
++-----------+------------------------------------------------------------------------------------------------------+
+| ``id``    | Arbitrary identification string of the request reflected in the :ref:`meta information <meta_info>`. |
++-----------+------------------------------------------------------------------------------------------------------+
+
 
  
 .. _gc_response:
@@ -959,15 +905,17 @@ As a result of a `reverse geocoding <https://en.wikipedia.org/wiki/Reverse_geoco
 Query Parameters
 ----------------
 
-+--------------+----------------------------------------------------------------------------------------+
-| Parameter    | Description                                                                            |
-+==============+========================================================================================+
-| ``location`` | ``Longitude,Latitude`` of the coordinate.                                              |
-+--------------+----------------------------------------------------------------------------------------+
-| ``lang``     | Language of the response. Available are ``de``, ``en``\ *(default)*, ``fr`` and ``it`` |
-+--------------+----------------------------------------------------------------------------------------+
-| ``limit``    | Specifies the maximum number of responses. Set to ``1`` for now.                       |
-+--------------+----------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------+
+| Parameter    | Description                                                                                          |
++==============+======================================================================================================+
+| ``location`` | ``Longitude,Latitude`` of the coordinate.                                                            |
++--------------+------------------------------------------------------------------------------------------------------+
+| ``lang``     | Language of the response. Available are ``de``, ``en``\ *(default)*, ``fr`` and ``it``               |
++--------------+------------------------------------------------------------------------------------------------------+
+| ``limit``    | Specifies the maximum number of responses. Set to ``1`` for now.                                     |
++--------------+------------------------------------------------------------------------------------------------------+
+| ``id``       | Arbitrary identification string of the request reflected in the :ref:`meta information <meta_info>`. |
++--------------+------------------------------------------------------------------------------------------------------+
 
 .. _rgc_response:
 
@@ -1101,7 +1049,8 @@ Query Parameters
 +---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``intersections``               | Specifies whether to return :ref:`intersection polygons <contours>`. Default is ``False``.                                                                                                       |
 +---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
+| ``id``                          | Arbitrary identification string of the request reflected in the :ref:`meta information <meta_info>`.                                                                                             |
++---------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. | ``calcmethod``    | Method of generating the Isochrones. At the moment only ``default``.                                                                                                                |
 .. +-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1557,19 +1506,21 @@ Info
 
 The Info object summarizes your query settings.
 
-+-----------------+---------------------------------------------------------------+
-| About           | Description                                                   |
-+=================+===============================================================+
-| ``service``     | API endpoint used. ``geocoding``, ``analysis`` or ``routing`` |
-+-----------------+---------------------------------------------------------------+
-| ``query``       | Parameters that were specified in the query                   |
-+-----------------+---------------------------------------------------------------+
-| ``attribution`` | Attribution for using our service                             |
-+-----------------+---------------------------------------------------------------+
-| ``version``     | The ORS API version used for the request                      |
-+-----------------+---------------------------------------------------------------+
-| ``timestamp``   | Unix timestamp of the precise request date                    |
-+-----------------+---------------------------------------------------------------+
++-----------------+----------------------------------------------------------------+
+| About           | Description                                                    |
++=================+================================================================+
+| ``service``     | API endpoint used. ``geocoding``, ``analysis`` or ``routing``. |
++-----------------+----------------------------------------------------------------+
+| ``query``       | Parameters that were specified in the query.                   |
++-----------------+----------------------------------------------------------------+
+| ``attribution`` | Attribution for using our service.                             |
++-----------------+----------------------------------------------------------------+
+| ``version``     | The ORS API version used for the request.                      |
++-----------------+----------------------------------------------------------------+
+| ``timestamp``   | Unix timestamp of the precise request date.                    |
++-----------------+----------------------------------------------------------------+
+| ``id``          | ID of the request specified in the ``id``-Parameter.           |
++-----------------+----------------------------------------------------------------+
 
 Example:
 

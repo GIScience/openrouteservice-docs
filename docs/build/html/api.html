@@ -284,10 +284,10 @@
 <td>Specifies whether to return geometry or not (<em>default is</em> <code class="docutils literal"><span class="pre">True</span></code>).</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">geometry_format</span></code></td>
-<td>Sets the format of a returned geometry. <a class="reference external" href="link">polyline</a> , <a class="reference external" href="https://developers.google.com/maps/documentation/utilities/polylinealgorithm">encodedpolyline</a>(<em>default</em>) or <a class="reference external" href="http://geojson.org/geojson-spec.html#linestring">geojson</a>.</td>
+<td>Sets the format of a returned geometry. <a class="reference internal" href="#r-example"><span>polyline</span></a>, <a class="reference external" href="https://developers.google.com/maps/documentation/utilities/polylinealgorithm">encodedpolyline</a>(<em>default</em>) or <a class="reference external" href="http://geojson.org/geojson-spec.html#linestring">geojson</a>.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">instructions</span></code></td>
-<td>Specifies whether to return instructions or not (<em>default is ``True``</em>).</td>
+<td>Specifies whether to return instructions or not (<em>default is</em> <code class="docutils literal"><span class="pre">True</span></code>).</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">prettify_instructions</span></code></td>
 <td>Specifies whether to returen more verbose instructions or not (<em>default is</em> <code class="docutils literal"><span class="pre">False</span></code>).</td>
@@ -300,6 +300,9 @@
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">options</span></code> <a class="reference internal" href="#options"><span>#</span></a></td>
 <td>For advanced options formatted as <a class="reference external" href="http://json-schema.org/">json</a>. Add object as string: <code class="docutils literal"><span class="pre">&quot;{...}&quot;</span></code>.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">id</span></code></td>
+<td>Arbitrary identification string of the request reflected in the <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</td>
 </tr>
 </tbody>
 </table>
@@ -323,7 +326,7 @@
 <td>Returns <a class="reference internal" href="#steepness"><span>steepness information</span></a> for each step.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">surface</span></code></td>
-<td>Returns :<a class="reference internal" href="#surface"><span>surface information</span></a> for each step.</td>
+<td>Returns <a class="reference internal" href="#surface"><span>surface information</span></a> for each step.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">waytypes</span></code></td>
 <td>Returns <a class="reference internal" href="#waytypes"><span>waytype information</span></a> for each step.</td>
@@ -561,8 +564,8 @@
 <p>For the <code class="docutils literal"><span class="pre">wheelchair</span></code> profile we offer the following filters to individualize the route:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="16%" />
-<col width="84%" />
+<col width="17%" />
+<col width="83%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -571,19 +574,19 @@
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">surface_type</span></code></td>
-<td>Specifies the <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:surface">surface type</a>. Default is <code class="docutils literal"><span class="pre">&quot;cobblestone:flattened&quot;</span></code>. (what values)</td>
+<td>Specifies the <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:surface">surface type</a>. Default is <code class="docutils literal"><span class="pre">&quot;cobblestone:flattened&quot;</span></code>.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">track_type</span></code></td>
-<td>Specifies the <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:tracktype">grade</a> of the route. Default is <code class="docutils literal"><span class="pre">&quot;grade1&quot;</span></code></td>
+<td>Specifies the <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:tracktype">grade</a> of the route. Default is <code class="docutils literal"><span class="pre">&quot;grade1&quot;</span></code>.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">smoothness_type</span></code></td>
-<td>Specifies the <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:smoothness">smoothness</a> of the route. Default is <code class="docutils literal"><span class="pre">&quot;good&quot;</span></code></td>
+<td>Specifies the <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:smoothness">smoothness</a> of the route. Default is <code class="docutils literal"><span class="pre">&quot;good&quot;</span></code>.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">maximum_sloped_curb</span></code></td>
-<td>Specifies the maximum height of the sloped curb in meters. Values are <code class="docutils literal"><span class="pre">0.03</span></code>, <code class="docutils literal"><span class="pre">0.06</span></code><em>(default)</em>, <code class="docutils literal"><span class="pre">0.1</span></code> or <code class="docutils literal"><span class="pre">any</span></code></td>
+<td>Specifies the maximum height of the sloped curb in meters. Values are <code class="docutils literal"><span class="pre">0.03</span></code>, <code class="docutils literal"><span class="pre">0.06</span></code><em>(default)</em>, <code class="docutils literal"><span class="pre">0.1</span></code> or <code class="docutils literal"><span class="pre">any</span></code>.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">maximum_incline</span></code></td>
-<td>Specifies the maximum incline as a percentage. <code class="docutils literal"><span class="pre">3</span></code>, <code class="docutils literal"><span class="pre">6</span></code><em>(default)</em>, <code class="docutils literal"><span class="pre">10</span></code>, <code class="docutils literal"><span class="pre">15</span></code> or <code class="docutils literal"><span class="pre">any</span></code></td>
+<td>Specifies the maximum incline as a percentage. <code class="docutils literal"><span class="pre">3</span></code>, <code class="docutils literal"><span class="pre">6</span></code><em>(default)</em>, <code class="docutils literal"><span class="pre">10</span></code>, <code class="docutils literal"><span class="pre">15</span></code> or <code class="docutils literal"><span class="pre">any</span></code>.</td>
 </tr>
 </tbody>
 </table>
@@ -593,7 +596,7 @@
 <hr class="docutils" id="r-response" />
 <div class="section" id="response">
 <h3>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h3>
-<p>The routing response consists of several components and is structured into <strong>summary</strong>, <strong>geometry_format</strong>, <strong>bbox</strong>, <strong>extras</strong>,**geometry**, <strong>segments</strong> and <strong>way_points</strong> for each route. By default it also includes the <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</p>
+<p>The routing response consists of several components and is structured into <strong>summary</strong>, <strong>geometry_format</strong>, <strong>bbox</strong>, <strong>extras</strong>, <strong>geometry</strong>, <strong>segments</strong> and <strong>way_points</strong> for each route. By default it also includes the <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</p>
 <hr class="docutils" id="routes" />
 <div class="section" id="id2">
 <h4>Routes<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
@@ -698,37 +701,7 @@
 </div>
 <div class="section" id="suitability">
 <span id="id5"></span><h5>Suitability<a class="headerlink" href="#suitability" title="Permalink to this headline">¶</a></h5>
-<table border="1" class="docutils">
-<colgroup>
-<col width="26%" />
-<col width="74%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Value</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">10</span></code></td>
-<td>Perfect suitability</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">9</span></code></td>
-<td>Excellent suitability</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">8</span></code></td>
-<td>Good suitability</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">7</span></code></td>
-<td>Mediocre suitability</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">6</span></code></td>
-<td>Bad suitability</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">5</span></code></td>
-<td>Worst suitability</td>
-</tr>
-</tbody>
-</table>
+<p>The suitability values for the selected <code class="docutils literal"><span class="pre">profile</span></code> range from <code class="docutils literal"><span class="pre">10</span></code> for <strong>best suitability</strong> to <code class="docutils literal"><span class="pre">1</span></code> for <strong>worst suitability</strong>.</p>
 </div>
 <div class="section" id="surface">
 <span id="id6"></span><h5>Surface<a class="headerlink" href="#surface" title="Permalink to this headline">¶</a></h5>
@@ -940,12 +913,12 @@
 </tr>
 </tbody>
 </table>
-<hr class="docutils" />
+<hr class="docutils" id="r-example" />
 <p>The following example routes from coordinate <code class="docutils literal"><span class="pre">8.690614,49.38365</span></code> via <code class="docutils literal"><span class="pre">8.7007,49.411699</span></code> to <code class="docutils literal"><span class="pre">8.7107,49.45169</span></code> using the <code class="docutils literal"><span class="pre">cycling-regular</span></code> profile:</p>
-<div class="highlight-python"><div class="highlight"><pre>hostname/routing-test?profile=cycling-regular&amp;coordinates=8.690614,49.38365|8.7007,49.411699|8.7107,49.45169&amp;api_key=api-key
+<div class="highlight-python"><div class="highlight"><pre>hostname/routing-test?profile=cycling-regular&amp;coordinates=8.690614,49.38365|8.7007,49.411699|8.7107,49.45169&amp;instructions=false&amp;geometry_format=polyline&amp;api_key=api-key
 </pre></div>
 </div>
-<p>The resulting route has two segments with multiple steps:</p>
+<p>The resulting route has two segments with multiple steps. The <code class="docutils literal"><span class="pre">geometry</span></code> is returned as a polyline:</p>
 <script type="text/javascript">
     function showhide(element){
         if (!document.getElementById)
@@ -958,136 +931,89 @@
     };
 </script>
 <a href="javascript:showhide(document.getElementById('hiddencodeblock4'))">Toggle Example</a><br /><div id="hiddencodeblock4" style="display: none"><div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
-  <span class="nt">&quot;routes&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;duration&quot;</span><span class="p">:</span> <span class="mf">4978.3</span><span class="p">,</span>
-        <span class="nt">&quot;distance_actual&quot;</span><span class="p">:</span> <span class="mf">11762.8</span><span class="p">,</span>
-        <span class="nt">&quot;distance&quot;</span><span class="p">:</span> <span class="mf">12826.4</span>
-      <span class="p">},</span>
-      <span class="nt">&quot;bbox&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="mf">8.690675</span><span class="p">,</span>
-        <span class="mf">49.383662</span><span class="p">,</span>
-        <span class="mf">8.690675</span><span class="p">,</span>
-        <span class="mf">49.383662</span>
-      <span class="p">],</span>
-      <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="s2">&quot;{fllHwk`t@SH?d@sIM}EDo@?oHJ{Ud@aDJoRbAeD^g@FK@_FRWAS@_AFOESKa@m@KQCKEIO@[q@_@]OG{Bo@OEaC_AkC{@gHsBwCo@kM{BGAeAEMEa@AMGKMKWJmADsAKg@KWKI_@Im@CCKAOG@I@}E~AKDgDdAoHhBK?SCGBUWYqCO_CCq@eAuNEs@EaBCSP[PGIgEGUIcD?Il@O`@Ka@Jm@NHnC?^ILw@RKDBhAFTNdAVxAPlAjAhPBp@N~BXpCDX_@RoIxAq@Jy@DG^CBcRf@m@HOD]V}ChDEDU?UDqBn@UJOJELCDgAb@q@\\gC|Ay@XeBt@mNvEuAf@MHKJG@GCINCGI?o@N}K`EkBf@aAd@KFSmA{Ab@g@ZELKfA?FiBj@qGlEc@Rk@RsKtBo@FKASx@Cf@@P[?wBMGEKJo@V{A`@wBz@}AjAgJlFs@^c@Lq@HsF|A_ClAeA`@mA^eAVkGjARfCETIFwJhCeDvA{@\\y@f@iArCc@`@gIdGaAn@O}AQyBGgCA_@sDd@o@LUgE?mHE{BGs@MsAi@QIICE?MGQESZmBNc@Di@T{@De@?aBEeCWmEQ}EI{LCe@PPFh@HrCLjBf@dE^fBb@|AfAzCFFF@FK?SQc@Mm@MeBIsBE}B?eA\\cO\\iICi@Sg@m@_@YYEKEU?GIWe@}B@eBJiBCgA@s@^aECmBIoCBkDPaB@{ASy@]q@c@k@a@a@aAi@[MYWLm@B{@C}@Fu@TcAP_BDsCJs@LqBRoHN}BBkAQiDq@gCW{@[Ue@kC_@gAYoAWsAIkAKiASo@O]EG[mCI]&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;segments&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nt">&quot;routes&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="nt">&quot;duration&quot;</span><span class="p">:</span> <span class="mf">879.3</span><span class="p">,</span>
-          <span class="nt">&quot;distance&quot;</span><span class="p">:</span> <span class="mf">3859.5</span><span class="p">,</span>
-          <span class="nt">&quot;steps&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-              <span class="nt">&quot;duration&quot;</span><span class="p">:</span> <span class="mf">4.4</span><span class="p">,</span>
-              <span class="nt">&quot;distance&quot;</span><span class="p">:</span> <span class="mf">25.2</span><span class="p">,</span>
-              <span class="nt">&quot;instruction&quot;</span><span class="p">:</span> <span class="s2">&quot;Heidelberger Straße&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Heidelberger Straße&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="nt">&quot;way_points&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="nt">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="nt">&quot;distance&quot;</span><span class="p">:</span> <span class="mi">0</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;geometry_format&quot;</span><span class="p">:</span> <span class="s2">&quot;polyline&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;bbox&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="mf">8.674442</span><span class="p">,</span>
+                <span class="mf">49.411413</span><span class="p">,</span>
+                <span class="mf">8.71055</span><span class="p">,</span>
+                <span class="mf">49.451915</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">[</span>
+                    <span class="mf">8.690675</span><span class="p">,</span>
+                    <span class="mf">49.383662</span>
+                <span class="p">],</span>
+                <span class="p">[</span>
+                    <span class="mf">8.69063</span><span class="p">,</span>
+                    <span class="mf">49.383763</span>
+                <span class="p">],</span>
+                <span class="p">[</span>
+                    <span class="mf">8.690445</span><span class="p">,</span>
+                    <span class="mf">49.383755</span>
+                <span class="p">],</span>
+                <span class="p">[</span> <span class="p">],</span>
+                <span class="p">[</span>
+                    <span class="mf">8.709689</span><span class="p">,</span>
+                    <span class="mf">49.451735</span>
+                <span class="p">],</span>
+                <span class="p">[</span>
+                    <span class="mf">8.710396</span><span class="p">,</span>
+                    <span class="mf">49.451872</span>
+                <span class="p">],</span>
+                <span class="p">[</span>
+                    <span class="mf">8.71055</span><span class="p">,</span>
+                    <span class="mf">49.451915</span>
+                <span class="p">]</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;way_points&quot;</span><span class="p">:</span> <span class="p">[</span>
                 <span class="mi">0</span><span class="p">,</span>
-                <span class="mi">2</span>
-              <span class="p">]</span>
-            <span class="p">},</span>
-            <span class="p">{</span>
-              <span class="nt">&quot;duration&quot;</span><span class="p">:</span> <span class="mf">67.9</span><span class="p">,</span>
-              <span class="nt">&quot;distance&quot;</span><span class="p">:</span> <span class="mf">339.6</span><span class="p">,</span>
-              <span class="nt">&quot;instruction&quot;</span><span class="p">:</span> <span class="s2">&quot;Karlsruher Straße&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Karlsruher Straße&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-              <span class="nt">&quot;way_points&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="mi">2</span><span class="p">,</span>
-                <span class="mi">5</span>
-              <span class="p">]</span>
-            <span class="p">},</span>
-            <span class="p">{},</span>
-            <span class="p">{</span>
-          <span class="nt">&quot;duration&quot;</span><span class="p">:</span> <span class="mf">83.2</span><span class="p">,</span>
-          <span class="nt">&quot;distance&quot;</span><span class="p">:</span> <span class="mf">46.2</span><span class="p">,</span>
-          <span class="nt">&quot;instruction&quot;</span><span class="p">:</span> <span class="s2">&quot;Karpfengasse&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Karpfengasse&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-          <span class="nt">&quot;way_points&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="mi">72</span><span class="p">,</span>
-            <span class="mi">74</span>
-          <span class="p">]</span>
+                <span class="mi">153</span><span class="p">,</span>
+                <span class="mi">444</span>
+            <span class="p">]</span>
         <span class="p">}</span>
-          <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;bbox&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mf">8.674442</span><span class="p">,</span>
+        <span class="mf">49.411413</span><span class="p">,</span>
+        <span class="mf">8.71055</span><span class="p">,</span>
+        <span class="mf">49.451915</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;info&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;service&quot;</span><span class="p">:</span> <span class="s2">&quot;routing&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;geometry_format&quot;</span><span class="p">:</span> <span class="s2">&quot;polyline&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;elevation&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nt">&quot;instructions&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="s2">&quot;cycling-regular&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;preference&quot;</span><span class="p">:</span> <span class="s2">&quot;fastest&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">[</span>
+                    <span class="mf">8.690614</span><span class="p">,</span>
+                    <span class="mf">49.38365</span>
+                <span class="p">],</span>
+                <span class="p">[</span>
+                    <span class="mf">8.7007</span><span class="p">,</span>
+                    <span class="mf">49.411699</span>
+                <span class="p">],</span>
+                <span class="p">[</span>
+                    <span class="mf">8.7107</span><span class="p">,</span>
+                    <span class="mf">49.45169</span>
+                <span class="p">]</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;language&quot;</span><span class="p">:</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;geometry&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nt">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;meters&quot;</span>
         <span class="p">},</span>
-        <span class="p">{</span>
-          <span class="nt">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">4099</span><span class="p">,</span>
-          <span class="nt">&quot;distance&quot;</span><span class="p">:</span> <span class="mf">8966.9</span><span class="p">,</span>
-          <span class="nt">&quot;steps&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-              <span class="nt">&quot;duration&quot;</span><span class="p">:</span> <span class="mf">41.6</span><span class="p">,</span>
-              <span class="nt">&quot;distance&quot;</span><span class="p">:</span> <span class="mf">46.2</span><span class="p">,</span>
-              <span class="nt">&quot;instruction&quot;</span><span class="p">:</span> <span class="s2">&quot;Karpfengasse&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Karpfengasse&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="nt">&quot;way_points&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="mi">74</span><span class="p">,</span>
-                <span class="mi">76</span>
-              <span class="p">]</span>
-            <span class="p">},</span>
-            <span class="p">{</span>
-              <span class="nt">&quot;duration&quot;</span><span class="p">:</span> <span class="mf">22.3</span><span class="p">,</span>
-              <span class="nt">&quot;distance&quot;</span><span class="p">:</span> <span class="mf">111.6</span><span class="p">,</span>
-              <span class="nt">&quot;instruction&quot;</span><span class="p">:</span> <span class="s2">&quot;Untere Neckarstraße&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Untere Neckarstraße&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="mi">-2</span><span class="p">,</span>
-              <span class="nt">&quot;way_points&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="mi">76</span><span class="p">,</span>
-                <span class="mi">81</span>
-              <span class="p">]</span>
-            <span class="p">},</span>
-            <span class="p">{},</span>
-            <span class="p">{</span>
-              <span class="nt">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
-              <span class="nt">&quot;distance&quot;</span><span class="p">:</span> <span class="mf">71.1</span><span class="p">,</span>
-              <span class="nt">&quot;instruction&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-              <span class="nt">&quot;way_points&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="mi">273</span><span class="p">,</span>
-                <span class="mi">275</span>
-              <span class="p">]</span>
-            <span class="p">}</span>
-          <span class="p">]</span>
-        <span class="p">}</span>
-      <span class="p">],</span>
-      <span class="nt">&quot;way_points&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="mi">0</span><span class="p">,</span>
-        <span class="mi">74</span><span class="p">,</span>
-        <span class="mi">275</span>
-      <span class="p">]</span>
+        <span class="nt">&quot;attribution&quot;</span><span class="p">:</span> <span class="s2">&quot;tmc - BASt&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;4.0.0&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1486992874236</span>
     <span class="p">}</span>
-  <span class="p">],</span>
-  <span class="nt">&quot;info&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;service&quot;</span><span class="p">:</span> <span class="s2">&quot;routing&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;geometry_format&quot;</span><span class="p">:</span> <span class="s2">&quot;encodedpolyline&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;elevation&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="nt">&quot;instructions&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-      <span class="nt">&quot;profile&quot;</span><span class="p">:</span> <span class="s2">&quot;cycling-regular&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">[</span>
-          <span class="mf">8.690614</span><span class="p">,</span>
-          <span class="mf">49.38365</span>
-        <span class="p">],</span>
-        <span class="p">[</span>
-          <span class="mf">8.7007</span><span class="p">,</span>
-          <span class="mf">49.411699</span>
-        <span class="p">],</span>
-        <span class="p">[</span>
-          <span class="mf">8.7107</span><span class="p">,</span>
-          <span class="mf">49.45169</span>
-        <span class="p">]</span>
-      <span class="p">],</span>
-      <span class="nt">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;meters&quot;</span>
-    <span class="p">},</span>
-    <span class="nt">&quot;attribution&quot;</span><span class="p">:</span> <span class="s2">&quot;tmc - BASt&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1485363740092</span>
-  <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1121,10 +1047,13 @@
 <td>Name of location, street address or postal code.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">lang</span></code></td>
-<td>Sets the language of the response. Available are <code class="docutils literal"><span class="pre">de</span></code>, <code class="docutils literal"><span class="pre">en</span></code><em>(default)</em>, <code class="docutils literal"><span class="pre">fr</span></code> and <code class="docutils literal"><span class="pre">it</span></code></td>
+<td>Sets the language of the response. Available are <code class="docutils literal"><span class="pre">de</span></code>, <code class="docutils literal"><span class="pre">en</span></code><em>(default)</em>, <code class="docutils literal"><span class="pre">fr</span></code> and <code class="docutils literal"><span class="pre">it</span></code>.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">limit</span></code></td>
 <td>Specifies the maximum number of responses. Default is set to <code class="docutils literal"><span class="pre">20</span></code>.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">id</span></code></td>
+<td>Arbitrary identification string of the request reflected in the <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</td>
 </tr>
 </tbody>
 </table>
@@ -1278,8 +1207,8 @@
 <h4>Query Parameters<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
 <colgroup>
-<col width="14%" />
-<col width="86%" />
+<col width="12%" />
+<col width="88%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Parameter</th>
@@ -1295,6 +1224,9 @@
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">limit</span></code></td>
 <td>Specifies the maximum number of responses. Set to <code class="docutils literal"><span class="pre">1</span></code> for now.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">id</span></code></td>
+<td>Arbitrary identification string of the request reflected in the <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</td>
 </tr>
 </tbody>
 </table>
@@ -1411,6 +1343,9 @@
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">intersections</span></code></td>
 <td>Specifies whether to return <a class="reference internal" href="#contours"><span>intersection polygons</span></a>. Default is <code class="docutils literal"><span class="pre">False</span></code>.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">id</span></code></td>
+<td>Arbitrary identification string of the request reflected in the <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</td>
 </tr>
 </tbody>
 </table>
@@ -1929,19 +1864,22 @@
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">service</span></code></td>
-<td>API endpoint used. <code class="docutils literal"><span class="pre">geocoding</span></code>, <code class="docutils literal"><span class="pre">analysis</span></code> or <code class="docutils literal"><span class="pre">routing</span></code></td>
+<td>API endpoint used. <code class="docutils literal"><span class="pre">geocoding</span></code>, <code class="docutils literal"><span class="pre">analysis</span></code> or <code class="docutils literal"><span class="pre">routing</span></code>.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">query</span></code></td>
-<td>Parameters that were specified in the query</td>
+<td>Parameters that were specified in the query.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">attribution</span></code></td>
-<td>Attribution for using our service</td>
+<td>Attribution for using our service.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">version</span></code></td>
-<td>The ORS API version used for the request</td>
+<td>The ORS API version used for the request.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">timestamp</span></code></td>
-<td>Unix timestamp of the precise request date</td>
+<td>Unix timestamp of the precise request date.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">id</span></code></td>
+<td>ID of the request specified in the <code class="docutils literal"><span class="pre">id</span></code>-Parameter.</td>
 </tr>
 </tbody>
 </table>
