@@ -286,22 +286,25 @@
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">geometry_format</span></code></td>
 <td>Sets the format of a returned geometry. <a class="reference internal" href="#r-example"><span>polyline</span></a>, <a class="reference external" href="https://developers.google.com/maps/documentation/utilities/polylinealgorithm">encodedpolyline</a>(<em>default</em>) or <a class="reference external" href="http://geojson.org/geojson-spec.html#linestring">geojson</a>.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">instructions</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">geometry_simplify</span></code></td>
+<td>Specifies whether to simplify the geometry (<em>default is</em> <code class="docutils literal"><span class="pre">False</span></code>). If <code class="docutils literal"><span class="pre">True</span></code> will be reset to <code class="docutils literal"><span class="pre">False</span></code> for a specified <code class="docutils literal"><span class="pre">extra_info</span></code> parameter.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">instructions</span></code></td>
 <td>Specifies whether to return instructions or not (<em>default is</em> <code class="docutils literal"><span class="pre">True</span></code>).</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">instructions_format</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">instructions_format</span></code></td>
 <td><code class="docutils literal"><span class="pre">html</span></code> for more verbose instructions. Default is <code class="docutils literal"><span class="pre">text</span></code>.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">elevation</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">elevation</span></code></td>
 <td>Specifies whether to return elevation values for points or not (<em>default is</em> <code class="docutils literal"><span class="pre">False</span></code>).</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">extra_info</span></code> <a class="reference internal" href="#extra-info"><span>#</span></a></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">extra_info</span></code> <a class="reference internal" href="#extra-info"><span>#</span></a></td>
 <td>Pipe separated List of desired additional information. Values are <code class="docutils literal"><span class="pre">steepness</span></code>, <code class="docutils literal"><span class="pre">suitability</span></code>, <code class="docutils literal"><span class="pre">surface</span></code> and <code class="docutils literal"><span class="pre">waytypes</span></code>.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">options</span></code> <a class="reference internal" href="#options"><span>#</span></a></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">options</span></code> <a class="reference internal" href="#options"><span>#</span></a></td>
 <td>For advanced options formatted as <a class="reference external" href="http://json-schema.org/">json</a>. Add object as string: <code class="docutils literal"><span class="pre">&quot;{...}&quot;</span></code>.</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">id</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">id</span></code></td>
 <td>Arbitrary identification string of the request reflected in the <a class="reference internal" href="#meta-info"><span>meta information</span></a>.</td>
 </tr>
 </tbody>
