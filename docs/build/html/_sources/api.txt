@@ -92,7 +92,7 @@ The minimum requirements for a valid request are specified ``profile`` and ``coo
 .. 	<td>Specifies whether to return elevation values for points or not. Default is <code class="docutils literal"><span class="pre">False</span></code>.</td>
 .. 	</tr>
 .. 	<tr class="row-even"><td><code class="docutils literal"><span class="pre">extra_info</span></code><span> </span> <a class="fa fa-link" href="#extra-info"></a></td>
-.. 	<td>Pipe separated List of desired additional information. Values are <code class="docutils literal"><span class="pre">gradients</span></code>, <code class="docutils literal"><span class="pre">surface</span></code> and <code class="docutils literal"><span class="pre">waytypes</span></code>.</td>
+.. 	<td>Pipe separated List of desired additional information. Values are <code class="docutils literal"><span class="pre">gradients</span></code>, <code class="docutils literal"><span class="pre">surface</span></code> and <code class="docutils literal"><span class="pre">waytype</span></code>.</td>
 .. 	</tr>
 .. 	<tr class="row-odd"><td><code class="docutils literal"><span class="pre">options</span></code><span> </span> <a class="fa fa-link" href="#options"></a></td>
 .. 	<td>Sets advanced options in <a class="reference external" href="http://json-schema.org/">json schema</a>. Add json as string: <code class="docutils literal"><span class="pre">&quot;{...}&quot;</span></code>.</td>
@@ -125,7 +125,7 @@ The minimum requirements for a valid request are specified ``profile`` and ``coo
 +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``elevation``                         | Specifies whether to return elevation values for points or not (*default is* ``False``).                                                                                                                                                                |
 +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``extra_info`` :ref:`\# <extra_info>` | Pipe separated List of desired additional information. Values are ``steepness``, ``suitability``, ``surface`` and ``waytypes``.                                                                                                                         |
+| ``extra_info`` :ref:`\# <extra_info>` | Pipe separated List of desired additional information. Values are ``steepness``, ``suitability``, ``surface`` and ``waytype``.                                                                                                                          |
 +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``options`` :ref:`\# <options>`       | For advanced options formatted as `json <http://json-schema.org/>`_\. Add object as string: ``"{...}"``.                                                                                                                                                |
 +---------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -152,7 +152,7 @@ For the encoding of the ``extra_info`` values see the :ref:`response section<ext
 +-----------------+-----------------------------------------------------------------------------------------+
 | ``surface``     | Returns :ref:`surface information<surface>` for each step.                              |
 +-----------------+-----------------------------------------------------------------------------------------+
-| ``waytypes``    | Returns :ref:`waytype information<waytypes>` for each step.                             |
+| ``waytype``     | Returns :ref:`waytype information<waytype>` for each step.                              |
 +-----------------+-----------------------------------------------------------------------------------------+
 | ``suitability`` | Returns the :ref:`suitability<suitability>` of a segment considering the chosen profile |
 +-----------------+-----------------------------------------------------------------------------------------+
@@ -528,9 +528,9 @@ Surface
 | ``18`` | Grass Paver      |
 +--------+------------------+
 
-.. _waytypes:
+.. _waytype:
 
-Waytypes
+Waytype
 <<<<<<<<
 
 +--------+--------------+
