@@ -299,7 +299,7 @@
 <td>Specifies whether to return elevation values for points or not (<em>default is</em> <code class="docutils literal"><span class="pre">False</span></code>).</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">extra_info</span></code> <a class="reference internal" href="#extra-info"><span>#</span></a></td>
-<td>Pipe separated List of desired additional information. Values are <code class="docutils literal"><span class="pre">steepness</span></code>, <code class="docutils literal"><span class="pre">suitability</span></code>, <code class="docutils literal"><span class="pre">surface</span></code> and <code class="docutils literal"><span class="pre">waytype</span></code>.</td>
+<td>Pipe separated List of desired additional information. Values are <code class="docutils literal"><span class="pre">steepness</span></code>, <code class="docutils literal"><span class="pre">suitability</span></code>, <code class="docutils literal"><span class="pre">surface</span></code>, <code class="docutils literal"><span class="pre">waycategory</span></code> and <code class="docutils literal"><span class="pre">waytype</span></code>.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">options</span></code> <a class="reference internal" href="#options"><span>#</span></a></td>
 <td>For advanced options formatted as <a class="reference external" href="http://json-schema.org/">json</a>. Add object as string: <code class="docutils literal"><span class="pre">&quot;{...}&quot;</span></code>.</td>
@@ -334,7 +334,10 @@
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">waytype</span></code></td>
 <td>Returns <a class="reference internal" href="#waytype"><span>waytype information</span></a> for each step.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">suitability</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">waycategory</span></code></td>
+<td>Returns <a class="reference internal" href="#waytype"><span>waytype information</span></a> for each step.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">suitability</span></code></td>
 <td>Returns the <a class="reference internal" href="#suitability"><span>suitability</span></a> of a segment considering the chosen profile</td>
 </tr>
 </tbody>
@@ -881,8 +884,8 @@
 <h5>Instruction Types<a class="headerlink" href="#instruction-types" title="Permalink to this headline">¶</a></h5>
 <table border="1" class="docutils">
 <colgroup>
-<col width="28%" />
-<col width="72%" />
+<col width="31%" />
+<col width="69%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Value</th>
@@ -912,7 +915,19 @@
 <td>Straight</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">7</span></code></td>
-<td>Roundabout</td>
+<td>Enter roundabout</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">8</span></code></td>
+<td>Exit roundabout</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">9</span></code></td>
+<td>U-turn</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">10</span></code></td>
+<td>Goal</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">11</span></code></td>
+<td>Unknown</td>
 </tr>
 </tbody>
 </table>
