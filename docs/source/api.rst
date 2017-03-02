@@ -154,7 +154,7 @@ For the encoding of the ``extra_info`` values see the :ref:`response section<ext
 +-----------------+-----------------------------------------------------------------------------------------+
 | ``waytype``     | Returns :ref:`waytype information<waytype>` for each step.                              |
 +-----------------+-----------------------------------------------------------------------------------------+
-| ``waycategory`` | Returns :ref:`waytype information<waytype>` for each step.                              |
+| ``waycategory`` | Returns :ref:`waycategory information<waycategory>` for each step.                      |
 +-----------------+-----------------------------------------------------------------------------------------+
 | ``suitability`` | Returns the :ref:`suitability<suitability>` of a segment considering the chosen profile |
 +-----------------+-----------------------------------------------------------------------------------------+
@@ -441,7 +441,27 @@ Extras
 For every information item there is an associated block divided into **summary** and **values**:
 
 :summary: broken down by information values.  
+
++--------------+-----------------------------------+
+| Parameter    | Description                       |
++==============+===================================+
+| ``amount``   | Percentage of the total route     |
++--------------+-----------------------------------+
+| ``distance`` | Cumulative distance of this value |
++--------------+-----------------------------------+
+| ``value``    | Encoded value                     |
++--------------+-----------------------------------+
+
 :values: broken down by :ref:`way_points<steps>`.
+
+.. code-block:: json
+	
+	"values":[
+		[
+			0, // indice of the starting geometry for this section
+			9, // indice of the end geometry for this section
+			64 // value assigned to this section
+		], ...
 
 Encoding of the extra information in detail:
 
@@ -530,16 +550,36 @@ Surface
 | ``18`` | Grass Paver      |
 +--------+------------------+
 
-.. .. _waycategory:
+.. _waycategory:
 
-.. Waycategory
-.. <<<<<<<<<<<
+Waycategory
+<<<<<<<<<<<
 
-.. +-------+----------+
-.. | Value | Encoding |
-.. +=======+==========+
-.. |       |          |
-.. +-------+----------+
+The exponential assignment of the values is used for `bit fields <http://eddmann.com/posts/using-bit-flags-and-enumsets-in-java/>`__. One route section may belong to different categories. Hence a Value of ``97`` would indicate a belonging to ``Paved road``, ``Tunnel`` and ``Highway`` (``64``+``32``+``1``).
+
++---------+----------------------------------+
+| Value   | Encoding                         |
++=========+==================================+
+| ``0``   | No category                      |
++---------+----------------------------------+
+| ``1``   | Highway                          |
++---------+----------------------------------+
+| ``2``   | Tollway (``driving-*`` profiles) |
++---------+----------------------------------+
+| ``2``   | Steps (other profiles)           |
++---------+----------------------------------+
+| ``4``   | Ferry                            |
++---------+----------------------------------+
+| ``8``   | Unpaved road                     |
++---------+----------------------------------+
+| ``16``  | Track                            |
++---------+----------------------------------+
+| ``32``  | Tunnel                           |
++---------+----------------------------------+
+| ``64``  | Paved road                       |
++---------+----------------------------------+
+| ``128`` | Ford                             |
++---------+----------------------------------+
 
 .. _waytype:
 
@@ -1515,10 +1555,10 @@ The Bbox object depicts the values of the `minimum bounding box <https://en.wiki
 	
 	{
 		"bbox": [
-			minimum longitude,
-			minimum latitude,
-			maximum longitude,
-			maximum latitude
+			//minimum longitude,
+			//minimum latitude,
+			//maximum longitude,
+			//maximum latitude
 		]
 	}
 
