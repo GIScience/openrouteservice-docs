@@ -509,7 +509,7 @@ Surface
 <<<<<<<
 
 +--------+------------------+
-| Value  | Encoding         |
+| Value  | Name             |
 +========+==================+
 | ``0``  | Unknown          |
 +--------+------------------+
@@ -552,13 +552,13 @@ Surface
 
 .. _waycategory:
 
-Waycategory
+WayCategory
 <<<<<<<<<<<
 
-The exponential assignment of the values is used for `bit fields <http://eddmann.com/posts/using-bit-flags-and-enumsets-in-java/>`__. One route section may belong to different categories. Hence a Value of ``97`` would indicate a belonging to ``Paved road``, ``Tunnel`` and ``Highway`` (``64``+``32``+``1``).
+The exponential assignment of the values is used for `bit fields <http://eddmann.com/posts/using-bit-flags-and-enumsets-in-java/>`__. One route section may belong to different categories. Hence a value of ``97`` would indicate a belonging to ``Paved road``, ``Tunnel`` and ``Highway`` (``64``\ +``32``\ +``1``).
 
 +---------+----------------------------------+
-| Value   | Encoding                         |
+| Value   | Name                             |
 +=========+==================================+
 | ``0``   | No category                      |
 +---------+----------------------------------+
@@ -583,11 +583,11 @@ The exponential assignment of the values is used for `bit fields <http://eddmann
 
 .. _waytype:
 
-Waytype
+WayType
 <<<<<<<<
 
 +--------+--------------+
-| Value  | Encoding     |
+| Value  | Name         |
 +========+==============+
 | ``0``  | Unknown      |
 +--------+--------------+
