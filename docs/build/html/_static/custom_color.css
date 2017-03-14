@@ -86,3 +86,9 @@ div {
 	font-family:FontAwesome;
 	display:inline-block
 }
+
+/* field list vertical align fix */
+.rst-content table.field-list .field-name {
+	padding-top: 5px;
+	font-style: italic;
+}
