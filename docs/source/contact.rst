@@ -1,15 +1,17 @@
 Contact
 =======
 
+`HeiGIT project website <http://www.geog.uni-heidelberg.de/gis/heigit_en.html>`__
+
 .. image:: _images/hd_logo_standard.png
 	:width: 200px
 	:alt: Uni Logo
 	:align: left
 
 | 
-| 	        HeiGIT
-| 	        Berliner Straße 45
-| 	        4th floor
+| 	        Heidelberg Institute for 
+|           Geoinformation Technology
+| 	        Berliner Str. 45 (Mathematikon)
 | 	        D-69120 Heidelberg
 
 |
