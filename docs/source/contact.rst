@@ -10,11 +10,10 @@ Contact
 
 | 
 | 	        Heidelberg Institute for 
-|           Geoinformation Technology
+| 	        Geoinformation Technology
 | 	        Berliner Str. 45 (Mathematikon)
 | 	        D-69120 Heidelberg
 
-|
 |
 
 In case you have any further questions, concerns or feedback, please contact us via Email:
