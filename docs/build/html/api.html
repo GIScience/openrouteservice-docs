@@ -150,6 +150,17 @@
 <li class="toctree-l3"><a class="reference internal" href="#info">Info</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#error-codes">Error Codes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#http-status-codes">HTTP Status Codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#internal-error-codes">Internal Error Codes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id21">Geocoding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routing">Routing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#isochrones">Isochrones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#locations">Locations</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1992,6 +2003,156 @@
         <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" id="errors" />
+<div class="section" id="error-codes">
+<h2>Error Codes<a class="headerlink" href="#error-codes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="http-status-codes">
+<h3>HTTP Status Codes<a class="headerlink" href="#http-status-codes" title="Permalink to this headline">¶</a></h3>
+<p>The following table describes the supported HTTP status codes.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">HTTP Status Code</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>200</td>
+<td>Standard response for successfully processed requests.</td>
+</tr>
+<tr class="row-odd"><td>400</td>
+<td>TODO</td>
+</tr>
+<tr class="row-even"><td>405</td>
+<td>TODO</td>
+</tr>
+<tr class="row-odd"><td>413</td>
+<td>TODO</td>
+</tr>
+<tr class="row-even"><td>413</td>
+<td>TODO</td>
+</tr>
+<tr class="row-odd"><td>500</td>
+<td>An unexpected error was encountered and more detailed <a class="reference internal" href="#internal-errors"><span>internal error code</span></a> is provided.</td>
+</tr>
+<tr class="row-even"><td>501</td>
+<td>Indicates that the server does not support the functionality needed to fulfill the request.</td>
+</tr>
+<tr class="row-odd"><td>503</td>
+<td>The server is currently unavailable due to overload or maintenance.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="internal-error-codes">
+<span id="internal-errors"></span><h3>Internal Error Codes<a class="headerlink" href="#internal-error-codes" title="Permalink to this headline">¶</a></h3>
+<p>The following sections describes the list of possible internal error
+codes that might be provided by different ORS EndPoints.</p>
+<div class="section" id="id21">
+<h4>Geocoding<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Error Code</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>100</td>
+<td>Unable to parse JSON request.</td>
+</tr>
+<tr class="row-odd"><td>101</td>
+<td>Required parameter is missing.</td>
+</tr>
+<tr class="row-even"><td>102</td>
+<td>Invalid parameter format.</td>
+</tr>
+<tr class="row-odd"><td>103</td>
+<td>Invalid parameter value.</td>
+</tr>
+<tr class="row-even"><td>104</td>
+<td>Parameter value exceeds the maximum allowed limit.</td>
+</tr>
+<tr class="row-odd"><td>199</td>
+<td>Unknown internal error.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="routing">
+<h4>Routing<a class="headerlink" href="#routing" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Error Code</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>200</td>
+<td>Unable to parse JSON request.</td>
+</tr>
+<tr class="row-odd"><td>299</td>
+<td>Unknown internal error.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="isochrones">
+<h4>Isochrones<a class="headerlink" href="#isochrones" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Error Code</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>300</td>
+<td>Unable to parse JSON request.</td>
+</tr>
+<tr class="row-odd"><td>399</td>
+<td>Unknown internal error.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="locations">
+<h4>Locations<a class="headerlink" href="#locations" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Error Code</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>400</td>
+<td>Unable to parse JSON request.</td>
+</tr>
+<tr class="row-odd"><td>499</td>
+<td>Unknown internal error.</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
