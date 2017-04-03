@@ -1,0 +1,462 @@
+swagger: '2.0'
+info:
+  description: >-
+    This is a test documentation for the ORS api. The api is located at
+    https://api.github.com/
+  version: 0.0.1
+  title: ORS API
+  contact:
+    email: openrouteservice@geog.uni-heidelberg.de
+  license:
+    name: MIT
+    url: 'https://github.com/swagger-api/swagger-ui/blob/master/LICENSE'
+host: api.github.com
+basePath: /
+produces:
+  - text/json; charset=utf-8
+schemes:
+  - http
+securityDefinitions:
+  UserSecurity:
+    description: Add your API Key as the value of the _api_\__key_ parameter to your GET request. (In this Demo you can click the Authentication Button.)
+    type: apiKey
+    in: query
+    name: api_key
+security:
+  - UserSecurity: []
+paths:
+  /routing:
+    get:
+      summary: Routing Service
+      description: |
+        Returns a route between two or more locations for a selected profile and its settings as GeoJSON response.
+      parameters:
+        - name: coordinates
+          in: query
+          description: Pipe separated List of longitude,latitude coordinates visited in order.
+          required: true
+          type: array
+          collectionFormat: pipes
+          items:
+            type: string
+            format: longitude,latitude
+            #description:  Sample values =   8.630614,49.33365 | 8.83007,49.433699 | 8.7107,49.45200
+            
+        - name: profile
+          in: query
+          description: Specifies the routing profile.
+          required: true
+          type: string
+          enum: 
+            - driving-car
+            - driving-hgv
+            - cycling-regular
+            - cycling-road
+            - cycling-safe
+            - cycling-mountain
+            - cycling-tour
+            - foot-walking
+            - foot-hiking
+            - wheelchair
+        - name: preference
+          in: query
+          description: Specifies the routing preference.
+          type: string
+          enum:
+            - fastest
+            - shortest
+            - recommended
+          default: fastest
+        - name: units
+          in: query
+          description: Specifies the distance unit.
+          type: string
+          enum:
+            - m
+            - km
+            - mi
+          default: m
+        - name: language
+          in: query
+          description: Language for the route instructions.
+          type: string
+          enum:
+            - cn
+            - de
+            - en
+            - es
+            - ru
+          default: en
+        - name: geometry
+          in: query
+          description: Specifies whether to return geometry or not.
+          type: boolean
+          enum:
+            - true
+            - false
+          default: true
+        - name: geometry_format
+          in: query
+          description: Sets the format of a returned geometry.
+          type: string
+          enum:
+            - encodedpolyline
+            - geojson
+            - polyline
+          default: encodedpolyline
+        - name: geometry_simplify
+          in: query
+          description: Specifies whether to simplify the geometry. If True will be reset to False for a specified extra_info parameter.
+          type: boolean
+          enum:
+            - true
+            - false
+          default: false
+          format: double
+        - name: instructions
+          in: query
+          description: Specifies whether to return instructions or not.
+          type: boolean
+          enum:
+            - true
+            - false
+          default: true
+        - name: instructions_format
+          in: query
+          description: Select _html_ for more verbose instructions.
+          type: string
+          enum:
+            - html
+            - text
+          default: text
+        - name: elevation
+          in: query
+          description: Specifies whether to return elevation values for points or not.
+          type: boolean
+          enum:
+            - true
+            - false
+          default: false
+        - name: extra_info
+          in: query
+          description: Pipe separated List of desired additional information.
+          type: array
+          collectionFormat: pipes
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+              - steepness
+              - suitability
+              - surface
+              - waycategory
+              - waytype
+        - name: options
+          in: query
+          description: For advanced options formatted as json. Add object as string.
+          type: number
+          format: double
+        - name: id
+          in: query
+          description: Arbitrary identification string of the request reflected in the meta information.
+          type: string
+      responses: 
+        200:
+          description: Standard response for successfully processed requests. Returns JSON.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        400:
+          description: The request is incorrect and therefore can not be processed.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Error'
+        405:
+          description: The specified HTTP method is not supported. For more details, refer to the EndPoint documentation.
+        413:
+          description: The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.
+        500:
+          description: An unexpected error was encountered and more detailed internal error code is provided.
+        501:
+          description: Indicates that the server does not support the functionality needed to fulfill the request.
+        503:
+          description: The server is currently unavailable due to overload or maintenance.
+
+  /geocoding (normal):
+    get:
+      summary: Geocoding Service
+      description: |
+        Returns a JSON formatted list of objects corresponding to the search input.
+      parameters:
+        - name: query
+          in: query
+          description: Name of location, street address or postal code.
+          required: true
+          type: string
+        - name: lang
+          in: query
+          description: Sets the language of the response.
+          type: string
+          enum:
+            - de
+            - en
+            - fr
+            - it
+          default: en
+        - name: limit
+          in: query
+          description: Specifies the maximum number of responses.
+          type: number
+          format: double
+          default: 20
+        - name: id
+          in: query
+          description: Arbitrary identification string of the request reflected in the meta information.
+          type: string
+      responses: 
+        200:
+          description: Standard response for successfully processed requests. Returns JSON.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        400:
+          description: The request is incorrect and therefore can not be processed.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Error'
+        405:
+          description: The specified HTTP method is not supported. For more details, refer to the EndPoint documentation.
+        413:
+          description: The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.
+        500:
+          description: An unexpected error was encountered and more detailed internal error code is provided.
+        501:
+          description: Indicates that the server does not support the functionality needed to fulfill the request.
+        503:
+          description: The server is currently unavailable due to overload or maintenance.
+        
+  /geocoding (reverse):
+    get:
+      summary: Reverse Geocoding Service
+      description: |
+        Returns the next enclosing object with an address tag which surrounds the given coordinate.
+      parameters:
+        - name: location
+          in: query
+          description: Coordinate to be inquired
+          required: true
+          type: number
+          format: longitude,latitude
+        - name: lang
+          in: query
+          description: Sets the language of the response.
+          type: string
+          enum:
+            - de
+            - en
+            - fr
+            - it
+          default: en
+        - name: id
+          in: query
+          description: Arbitrary identification string of the request reflected in the meta information.
+          type: string
+      responses: 
+        200:
+          description: Standard response for successfully processed requests. Returns JSON.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        400:
+          description: The request is incorrect and therefore can not be processed.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Error'
+        405:
+          description: The specified HTTP method is not supported. For more details, refer to the EndPoint documentation.
+        413:
+          description: The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.
+        500:
+          description: An unexpected error was encountered and more detailed internal error code is provided.
+        501:
+          description: Indicates that the server does not support the functionality needed to fulfill the request.
+        503:
+          description: The server is currently unavailable due to overload or maintenance.
+              
+  /isochrones:
+    get:
+      summary: Isochrones Service
+      description: |
+        The Isochrone Service supports time and distance analyses for one single or multiple locations. You may also specify the isochrone interval or provide multiple exact isochrone range values. This service allows the same range of profile options listed in the ORS Routing section which help you to further customize your request to obtain a more detailed reachability area response.
+      parameters:
+        - name: locations
+          in: query
+          description: |
+            List of longitude,latitude coordinates delimited with pipe.
+          required: true
+          type: number
+          format: longitude,latitude
+        - name: profile
+          in: query
+          description: Specifies the routing profile.
+          type: string
+          enum: 
+            - driving-car
+            - driving-hgv
+            - cycling-regular
+            - cycling-road
+            - cycling-safe
+            - cycling-mountain
+            - cycling-tour
+            - foot-walking
+            - foot-hiking
+          default: driving-car
+        - name: range_type
+          in: query
+          description: |
+            Set 'time' for isochrones or 'distance' for equidistants.
+          type: string
+          default: time
+        - name: range
+          in: query
+          description: |
+            Maximum range value of the analysis in seconds for time and meters for distance. Alternatively a comma separated list of specific single range values
+          required: true
+          type: number
+          format: double
+        - name: interval
+          in: query
+          description: |
+            Interval of isochrones or equidistants for one range value. value in seconds for time and meters for distance.
+          type: number
+          format: double
+        - name: units
+          in: query
+          description: |
+            Unit format.
+          type: string
+          enum:
+            - m
+            - km
+            - mi
+            - s
+          default: m
+        - name: location_type
+          in: query
+          description: |
+            start(default) treats the location(s) as starting point, destination as goal.
+          type: string
+          enum:
+            - start
+            - destination
+          default: start
+        - name: attributes
+          in: query
+          description: |
+            Values are area and reachfactor. Delimit with pipe for both.
+          type: array
+          collectionFormat: pipes
+          uniqueItems: true
+          items:
+            type: string
+            enum: 
+              - area
+              - reachfactor
+        - name: options
+          in: query
+          description: |
+            For advanced options formatted as json. Add object as string: "{...}".
+          type: string
+        - name: intersections
+          in: query
+          description: |
+            Specifies whether to return intersection polygons.
+          type: boolean
+          default: false
+        - name: id
+          in: query
+          description: Arbitrary identification string of the request reflected in the meta information.
+          type: string
+          
+      responses: 
+        200:
+          description: Standard response for successfully processed requests. Returns JSON.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        400:
+          description: The request is incorrect and therefore can not be processed.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Error'
+        405:
+          description: The specified HTTP method is not supported. For more details, refer to the EndPoint documentation.
+        413:
+          description: The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.
+        500:
+          description: An unexpected error was encountered and more detailed internal error code is provided.
+        501:
+          description: Indicates that the server does not support the functionality needed to fulfill the request.
+        503:
+          description: The server is currently unavailable due to overload or maintenance.
+definitions:
+  Product:
+    type: object
+    properties:
+      product_id:
+        type: string
+        description: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+      description:
+        type: string
+        description: Description of product.
+      display_name:
+        type: string
+        description: Display name of product.
+      capacity:
+        type: string
+        description: Capacity of product. For example, 4 people.
+      image:
+        type: string
+        description: Image URL representing the product.
+  PriceEstimate:
+    type: object
+    properties:
+      product_id:
+        type: string
+        description: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles
+      currency_code:
+        type: string
+        description: "[ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code."
+      display_name:
+        type: string
+        description: Display name of product.
+      estimate:
+        type: string
+        description: Formatted string of estimate in local currency of the start location. Estimate could be a range, a single number (flat rate) or "Metered" for TAXI.
+      low_estimate:
+        type: number
+        description: Lower bound of the estimated price.
+      high_estimate:
+        type: number
+        description: Upper bound of the estimated price.
+      surge_multiplier:
+        type: number
+        description: Expected surge multiplier. Surge is active if surge_multiplier is greater than 1. Price estimate already factors in the surge multiplier.
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string

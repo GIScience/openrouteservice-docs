@@ -241,68 +241,6 @@
                     },
                     "503": {
                         "description": "The server is currently unavailable due to overload or maintenance."
-                    },
-                    "NotFound": {
-                        "description": "Entity not found."
-                    },
-                    "IllegalInput": {
-                        "description": "Illegal input for operation."
-                    }
-                },
-                "x-internal-responses": {
-                    "200": {
-                        "description": "Unable to parse JSON request.",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Error"
-                            }
-                        }
-                    },
-                    "201": {
-                        "description": "Required parameter is missing.",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Error"
-                            }
-                        }
-                    },
-                    "202": {
-                        "description": "Invalid parameter format.",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Error"
-                            }
-                        }
-                    },
-                    "203": {
-                        "description": "Invalid parameter value.",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Error"
-                            }
-                        }
-                    },
-                    "204": {
-                        "description": "Parameter value exceeds the maximum allowed limit.",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Error"
-                            }
-                        }
-                    },
-                    "299": {
-                        "description": "Unknown internal error.",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Error"
-                            }
-                        }
                     }
                 }
             }
