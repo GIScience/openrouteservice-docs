@@ -12,8 +12,8 @@
             "url": "https://github.com/swagger-api/swagger-ui/blob/master/LICENSE"
         }
     },
-    "host": "api.github.com",
-    "basePath": "/",
+    "host": "129.206.7.188:8080",
+    "basePath": "/ors",
     "produces": [
         "text/json; charset=utf-8"
     ],
@@ -487,7 +487,7 @@
                     {
                         "name": "options",
                         "in": "query",
-                        "description": "For advanced options formatted as json. Add object as string: \"{...}\".\n",
+                        "description": "For advanced options formatted as JSON. Add object as string: \"{...}\".\n",
                         "type": "string"
                     },
                     {
@@ -540,10 +540,186 @@
                     }
                 }
             }
+        },
+        "/locations": {
+            "get": {
+                "summary": "Location Service",
+                "description": "Returns Points of Interest in the area surrounding a geometry.\n",
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "query",
+                        "description": "\"pois\" will return POI geometry as well as requested details. \"category_stats\" returns a POI count for each requested category. \"category_list\" returns a list of all categories. (only the id parameter will be considered)\n",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "pois",
+                            "category_stats",
+                            "category_list"
+                        ]
+                    },
+                    {
+                        "name": "category_group_ids",
+                        "in": "query",
+                        "description": "Comma seperated list of category group ids.\n",
+                        "collectionFormat": "csv",
+                        "type": "string"
+                    },
+                    {
+                        "name": "category_ids",
+                        "in": "query",
+                        "description": "Comma seperated list of category ids.\n",
+                        "collectionFormat": "csv",
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name to filter the POIs by.\n",
+                        "type": "string"
+                    },
+                    {
+                        "name": "wheelchair",
+                        "in": "query",
+                        "description": "Filter returned features by wheelchair tag entries.\n",
+                        "type": "string",
+                        "enum": [
+                            "yes",
+                            "no",
+                            "limited"
+                        ]
+                    },
+                    {
+                        "name": "smoking",
+                        "in": "query",
+                        "description": "Filter returned features by wheelchair tag entries.\n",
+                        "type": "string",
+                        "enum": [
+                            "yes",
+                            "no"
+                        ]
+                    },
+                    {
+                        "name": "fee",
+                        "in": "query",
+                        "description": "Filter returned features by fee tag entries.\n",
+                        "type": "string",
+                        "enum": [
+                            "yes",
+                            "no"
+                        ]
+                    },
+                    {
+                        "name": "bbox",
+                        "in": "query",
+                        "description": "Defines a clipping bounding box\n",
+                        "required": false,
+                        "type": "array",
+                        "collectionFormat": "csv",
+                        "maxItems": 4,
+                        "minItems": 4,
+                        "items": {
+                            "type": "number",
+                            "format": "double"
+                        }
+                    },
+                    {
+                        "name": "geometry",
+                        "in": "query",
+                        "description": "GeoJSON geometry object (Point, Linestring or Polygon)\n",
+                        "type": "string"
+                    },
+                    {
+                        "name": "radius",
+                        "in": "query",
+                        "required": true,
+                        "description": "Search radius in meters around the given (might be limited in the backend)\n",
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0,
+                        "maximum": 1000
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Maximum number of returned objects (might be limited in the backend)\n",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "sortby",
+                        "in": "query",
+                        "description": "Sorts the returned features by _distance_ or _category_.\n",
+                        "type": "string",
+                        "enum": [
+                            "distance",
+                            "category"
+                        ]
+                    },
+                    {
+                        "name": "details",
+                        "in": "query",
+                        "description": "Pipe seperated list of desired details.\n",
+                        "type": "array",
+                        "collectionFormat": "pipes",
+                        "uniqueItems": true,
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "address",
+                                "contact",
+                                "attributes"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Arbitrary identification string of the request reflected in the meta information.",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Standard response for successfully processed requests. Returns JSON.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The request is incorrect and therefore can not be processed.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Error"
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
+                    },
+                    "413": {
+                        "description": "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
+                    },
+                    "500": {
+                        "description": "An unexpected error was encountered and more detailed internal error code is provided."
+                    },
+                    "501": {
+                        "description": "Indicates that the server does not support the functionality needed to fulfill the request."
+                    },
+                    "503": {
+                        "description": "The server is currently unavailable due to overload or maintenance."
+                    }
+                }
+            }
         }
     },
     "definitions": {
         "Product": {
+            "title": "Response",
             "type": "object",
             "properties": {
                 "product_id": {
@@ -565,6 +741,190 @@
                 "image": {
                     "type": "string",
                     "description": "Image URL representing the product."
+                }
+            }
+        },
+        "RouteResponse": {
+            "type": "object",
+            "title": null,
+            "properties": {
+                "routes": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "summary": {
+                                "type": "object",
+                                "description": "TBD",
+                                "properties": {
+                                    "duration": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "description": "TBD"
+                                    },
+                                    "distance_actual": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "description": "TBD"
+                                    },
+                                    "distance": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "description": "TBD"
+                                    }
+                                }
+                            },
+                            "bbox": {
+                                "type": "array",
+                                "description": "TBD",
+                                "collectionFormat": "csv",
+                                "maxItems": 4,
+                                "minItems": 4,
+                                "items": {
+                                    "type": "number",
+                                    "format": "double"
+                                }
+                            },
+                            "geometry": {
+                                "type": "string",
+                                "description": "TBD"
+                            },
+                            "segments": {
+                                "type": "array",
+                                "description": "TBD",
+                                "maxItems": 1,
+                                "items": {
+                                    "type": "object",
+                                    "description": "TBD",
+                                    "properties": {
+                                        "duration": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "description": "TBD"
+                                        },
+                                        "distance": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "description": "TBD"
+                                        },
+                                        "steps": {
+                                            "type": "array",
+                                            "description": "TBD",
+                                            "items": {
+                                                "type": "object",
+                                                "parameters": {
+                                                    "duration": {
+                                                        "type": "number",
+                                                        "format": "double",
+                                                        "description": "TBD"
+                                                    },
+                                                    "distance": {
+                                                        "type": "number",
+                                                        "format": "double",
+                                                        "description": "TBD"
+                                                    },
+                                                    "instruction": {
+                                                        "type": "string",
+                                                        "description": "TBD"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "description": "TBD"
+                                                    },
+                                                    "type": {
+                                                        "type": "integer",
+                                                        "fomrat": "int64"
+                                                    },
+                                                    "way_points": {
+                                                        "type": "array",
+                                                        "description": "TBD",
+                                                        "minItems": 2,
+                                                        "maxItems": 2,
+                                                        "items": {
+                                                            "type": "integer",
+                                                            "format": "int64"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "way_points": {
+                                "type": "array",
+                                "description": "TBD",
+                                "minItems": 2,
+                                "maxItems": 2,
+                                "items": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            }
+                        }
+                    }
+                },
+                "info": {
+                    "type": "object",
+                    "description": "TBD",
+                    "properties": {
+                        "service": {
+                            "type": "string",
+                            "description": "TBD"
+                        },
+                        "query": {
+                            "type": "object",
+                            "description": "TBD",
+                            "required": [
+                                "geometry_format",
+                                "profile",
+                                "coordinates"
+                            ],
+                            "properties": {
+                                "geometry_format": {
+                                    "type": "string"
+                                },
+                                "profile": {
+                                    "type": "string"
+                                },
+                                "coordinates": {
+                                    "type": "array",
+                                    "collectionFormat": "csv",
+                                    "items": {
+                                        "type": "array",
+                                        "collectionFormat": "csv",
+                                        "maxItems": 2,
+                                        "minItems": 2,
+                                        "items": {
+                                            "type": "number",
+                                            "format": "double"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "attribution": {
+                            "type": "string"
+                        },
+                        "version": {
+                            "type": "string"
+                        },
+                        "timestamp": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                }
+            }
+        },
+        "array": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "hello": {
+                        "type": "string"
+                    }
                 }
             }
         },
