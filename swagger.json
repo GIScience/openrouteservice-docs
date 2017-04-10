@@ -214,7 +214,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Product"
+                                "$ref": "#/definitions/Routeresponse"
                             }
                         }
                     },
@@ -744,9 +744,9 @@
                 }
             }
         },
-        "RouteResponse": {
+        "Routeresponse": {
             "type": "object",
-            "title": null,
+            "title": "Response",
             "properties": {
                 "routes": {
                     "type": "array",
@@ -890,6 +890,7 @@
                                 "coordinates": {
                                     "type": "array",
                                     "collectionFormat": "csv",
+                                    "minItems": 2,
                                     "items": {
                                         "type": "array",
                                         "collectionFormat": "csv",
@@ -915,6 +916,115 @@
                         }
                     }
                 }
+            }
+        },
+        "Geocoderesponse": {
+            "type": "object",
+            "properties": {
+                "features": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "geometry": {
+                                "type": "object",
+                                "description": "TBD",
+                                "properties": {
+                                    "coordinates": {
+                                        "type": "array",
+                                        "minItems": 2,
+                                        "maxItems": 2,
+                                        "items": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "description": "TBD"
+                                        }
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "type": {
+                                "type": "string"
+                            },
+                            "properties": {
+                                "type": "object",
+                                "properties": {
+                                    "country": {
+                                        "type": "string"
+                                    },
+                                    "street": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "house_number": {
+                                        "type": "string"
+                                    },
+                                    "state": {
+                                        "type": "string"
+                                    },
+                                    "postal_code": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "bbox": {
+                    "type": "array",
+                    "description": "TBD",
+                    "collectionFormat": "csv",
+                    "maxItems": 4,
+                    "minItems": 4,
+                    "items": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "type": {
+                    "type": "string"
+                },
+                "info": {
+                    "type": "object",
+                    "properties": {
+                        "service": {
+                            "type": "string"
+                        },
+                        "query": {
+                            "type": "object",
+                            "properties": {
+                                "query": {
+                                    "type": "string"
+                                },
+                                "limit": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            },
+                            "attribution": {
+                                "type": "string"
+                            },
+                            "version": {
+                                "type": "string"
+                            },
+                            "timestamp": {
+                                "type": "integer",
+                                "format": "int64"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "coordinates": {
+            "type": "array",
+            "items": {
+                "type": "number",
+                "format": "double"
             }
         },
         "array": {
