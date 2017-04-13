@@ -291,7 +291,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Product"
+                                "$ref": "#/definitions/Geocoderesponse"
                             }
                         }
                     },
@@ -361,7 +361,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Product"
+                                "$ref": "#/definitions/Reversegeocoderesponse"
                             }
                         }
                     },
@@ -510,7 +510,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Product"
+                                "$ref": "#/definitions/IsochronesResponse"
                             }
                         }
                     },
@@ -685,7 +685,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Product"
+                                "$ref": "#/definitions/LocationsPoiResponse"
                             }
                         }
                     },
@@ -1020,6 +1020,254 @@
                 }
             }
         },
+        "IsochronesResponse": {
+            "type": "objec",
+            "properties": {
+                "features": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "geometry": {
+                                "type": "object",
+                                "properties": {
+                                    "coordinates": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "number",
+                                                "format": "double"
+                                            }
+                                        }
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "default": "Polygon"
+                                    }
+                                }
+                            },
+                            "type": {
+                                "type": "string",
+                                "default": "Feature"
+                            },
+                            "properties": {
+                                "type": "object",
+                                "properties": {
+                                    "center": {
+                                        "type": "array",
+                                        "minItems": 2,
+                                        "maxItems": 2,
+                                        "items": {
+                                            "type": "number",
+                                            "format": "double"
+                                        }
+                                    },
+                                    "group_index": {
+                                        "type": "integer",
+                                        "format": "int64"
+                                    },
+                                    "value": {
+                                        "type": "integer",
+                                        "format": "int64"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "bbox": {
+                    "type": "array",
+                    "maxItems": 4,
+                    "minItmes": 4,
+                    "items": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "default": "FeatureCollection"
+                },
+                "info": {
+                    "type": "object",
+                    "properties": {
+                        "service": {
+                            "type": "string"
+                        },
+                        "query": {
+                            "type": "object",
+                            "properties": {
+                                "mode": {
+                                    "type": "string"
+                                },
+                                "rangetype": {
+                                    "type": "string"
+                                },
+                                "range": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                },
+                                "interval": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                },
+                                "locations": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "number",
+                                            "format": "double"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "attribution": {
+                            "type": "string"
+                        },
+                        "version": {
+                            "type": "string"
+                        },
+                        "timestamp": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                }
+            }
+        },
+        "LocationsPoiResponse": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "default": "FeatureCollection"
+                },
+                "features": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "default": "Feature"
+                            },
+                            "geometry": {
+                                "type": "object",
+                                "parameters": {
+                                    "type": {
+                                        "type": "string",
+                                        "default": "Point"
+                                    },
+                                    "coordinates": {
+                                        "type": "array",
+                                        "minItems": 2,
+                                        "maxItems": 2,
+                                        "items": {
+                                            "type": "number",
+                                            "format": "double"
+                                        }
+                                    }
+                                }
+                            },
+                            "properties": {
+                                "type": "object",
+                                "properties": {
+                                    "osm_id": {
+                                        "type": "string"
+                                    },
+                                    "category": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "website": {
+                                        "type": "string"
+                                    },
+                                    "opening_hours": {
+                                        "type": "string"
+                                    },
+                                    "wheelchair": {
+                                        "type": "string"
+                                    },
+                                    "distance": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "bbox": {
+                    "type": "array",
+                    "maxItems": 4,
+                    "minItmes": 4,
+                    "items": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "info": {
+                        "type": "object",
+                        "properties": {
+                            "service": {
+                                "type": "string"
+                            },
+                            "version": {
+                                "type": "string"
+                            },
+                            "attribution": {
+                                "type": "string"
+                            },
+                            "timestamp": {
+                                "type": "integer",
+                                "format": "int64"
+                            },
+                            "query": {
+                                "type": "object",
+                                "properties": {
+                                    "filter": {
+                                        "type": "object",
+                                        "properties": {
+                                            "category_group_ids": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer",
+                                                    "format": "int64"
+                                                }
+                                            },
+                                            "catoegory_ids": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer",
+                                                    "format": "int64"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "radius": {
+                                        "type": "integer",
+                                        "format": "int64"
+                                    },
+                                    "limit": {
+                                        "type": "integer",
+                                        "format": "int64"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "coordinates": {
             "type": "array",
             "items": {
@@ -1035,39 +1283,6 @@
                     "hello": {
                         "type": "string"
                     }
-                }
-            }
-        },
-        "PriceEstimate": {
-            "type": "object",
-            "properties": {
-                "product_id": {
-                    "type": "string",
-                    "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles"
-                },
-                "currency_code": {
-                    "type": "string",
-                    "description": "[ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code."
-                },
-                "display_name": {
-                    "type": "string",
-                    "description": "Display name of product."
-                },
-                "estimate": {
-                    "type": "string",
-                    "description": "Formatted string of estimate in local currency of the start location. Estimate could be a range, a single number (flat rate) or \"Metered\" for TAXI."
-                },
-                "low_estimate": {
-                    "type": "number",
-                    "description": "Lower bound of the estimated price."
-                },
-                "high_estimate": {
-                    "type": "number",
-                    "description": "Upper bound of the estimated price."
-                },
-                "surge_multiplier": {
-                    "type": "number",
-                    "description": "Expected surge multiplier. Surge is active if surge_multiplier is greater than 1. Price estimate already factors in the surge multiplier."
                 }
             }
         },
