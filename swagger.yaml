@@ -10,7 +10,7 @@ info:
   license:
     name: MIT
     url: 'https://github.com/swagger-api/swagger-ui/blob/master/LICENSE'
-host: "129.206.7.188:8080"
+host: "host"
 basePath: /ors
 produces:
   - text/json; charset=utf-8
@@ -578,91 +578,7 @@ definitions:
       routes:
         type: array
         items:
-          type: object
-          properties:
-            summary:
-              type: object
-              description: TBD
-              properties:
-                duration:
-                  type: number
-                  format: double
-                  description: TBD
-                distance_actual:
-                  type: number
-                  format: double
-                  description: TBD
-                distance:
-                  type: number
-                  format: double
-                  description: TBD
-            bbox:
-              type: array
-              description: TBD
-              collectionFormat: csv
-              maxItems: 4
-              minItems: 4
-              items:
-                type: number
-                format: double
-            geometry:
-              type: string
-              description: TBD
-            segments:
-              type: array
-              description: TBD
-              maxItems: 1
-              items:
-                type: object
-                description: TBD
-                properties:
-                  duration:
-                    type: number
-                    format: double
-                    description: TBD
-                  distance:
-                    type: number
-                    format: double
-                    description: TBD
-                  steps:
-                    type: array
-                    description: TBD
-                    items:
-                      type: object
-                      parameters:
-                        duration:
-                          type: number
-                          format: double
-                          description: TBD
-                        distance:
-                          type: number
-                          format: double
-                          description: TBD
-                        instruction:
-                          type: string
-                          description: TBD
-                        name:
-                          type: string
-                          description: TBD
-                        type:
-                          type: integer
-                          fomrat: int64
-                        way_points:
-                          type: array
-                          description: TBD
-                          minItems: 2
-                          maxItems: 2
-                          items:
-                            type: integer
-                            format: int64
-            way_points:
-              type: array
-              description: TBD
-              minItems: 2
-              maxItems: 2
-              items:
-                type: integer
-                format: int64
+          $ref: '#/definitions/routes'
       info:
         type: object
         description: TBD
@@ -682,11 +598,9 @@ definitions:
                 type: string
               coordinates:
                 type: array
-                collectionFormat: csv
                 minItems: 2
                 items:
                   type: array
-                  collectionFormat: csv
                   maxItems: 2
                   minItems: 2
                   items:
@@ -742,7 +656,6 @@ definitions:
       bbox:
         type: array
         description: TBD
-        collectionFormat: csv
         maxItems: 4
         minItems: 4
         items:
@@ -763,18 +676,20 @@ definitions:
               limit:
                 type: integer
                 format: int64
-            attribution:
-              type: string
-            version:
-              type: string
-            timestamp:
-              type: integer
-              format: int64  
+          attribution:
+            type: string
+          version:
+            type: string
+          timestamp:
+            type: integer
+            format: int64  
 
-  #Reversegeocoderesponse:
+  Reversegeocoderesponse:
+    type: string
+    description: TBD
   
   IsochronesResponse:
-    type: objec
+    type: object
     properties:
       features:
         type: array
@@ -816,7 +731,7 @@ definitions:
       bbox:
         type: array
         maxItems: 4
-        minItmes: 4
+        minItems: 4
         items:
           type: number
           format: double
@@ -865,96 +780,55 @@ definitions:
       features:
         type: array
         items:
-          type: object
-          properties:
-            type:
-              type: string
-              default: Feature
-            geometry:
-              type: object
-              parameters:
-                type:
-                  type: string
-                  default: Point
-                coordinates:
-                  type: array
-                  minItems: 2
-                  maxItems: 2
-                  items:
-                    type: number
-                    format: double
-            properties:
-              type: object
-              properties:
-                osm_id:
-                  type: string
-                category:
-                  type: string
-                name:
-                  type: string
-                address:
-                  type: string
-                phone:
-                  type: string
-                website:
-                  type: string
-                opening_hours:
-                  type: string
-                wheelchair:
-                  type: string
-                distance:
-                  type: string
+          $ref: '#/definitions/location_features'
       bbox:
         type: array
         maxItems: 4
-        minItmes: 4
+        minItems: 4
         items:
           type: number
           format: double
-        info:
-          type: object
-          properties:
-            service:
-              type: string
-            version:
-              type: string
-            attribution:
-              type: string
-            timestamp:
-              type: integer
-              format: int64
-            query:
-              type: object
-              properties:
-                filter:
-                  type: object
-                  properties:
-                    category_group_ids:
-                      type: array
-                      items:
-                        type: integer
-                        format: int64
-                    catoegory_ids:
-                      type: array
-                      items:
-                        type: integer
-                        format: int64
-                radius:
-                  type: integer
-                  format: int64
-                limit:
-                  type: integer
-                  format: int64
+      info:
+        type: object
+        properties:
+          service:
+            type: string
+          version:
+            type: string
+          attribution:
+            type: string
+          timestamp:
+            type: integer
+            format: int64
+          query:
+            type: object
+            properties:
+              filter:
+                type: object
+                properties:
+                  category_group_ids:
+                    type: array
+                    items:
+                      type: integer
+                      format: int64
+                  catoegory_ids:
+                    type: array
+                    items:
+                      type: integer
+                      format: int64
+              radius:
+                type: integer
+                format: int64
+              limit:
+                type: integer
+                format: int64
 
-
-  
   coordinates:
     type: array
     items:
       type: number
       format: double
-    
-          
+
   array:
     type: array
     items:
@@ -962,7 +836,140 @@ definitions:
       properties:
         hello:
           type: string
-            
+
+  routes:
+    type: object
+    properties:
+      summary:
+        type: object
+        description: TBD
+        properties:
+          duration:
+            type: number
+            format: double
+            description: TBD
+          distance_actual:
+            type: number
+            format: double
+            description: TBD
+          distance:
+            type: number
+            format: double
+            description: TBD
+      bbox:
+        type: array
+        description: TBD
+        maxItems: 4
+        minItems: 4
+        items:
+          type: number
+          format: double
+      geometry:
+        type: string
+        description: TBD
+      segments:
+        type: array
+        description: TBD
+        maxItems: 1
+        items:
+          $ref: '#/definitions/segments'
+      way_points:
+        type: array
+        description: TBD
+        minItems: 2
+        maxItems: 2
+        items:
+          type: integer
+          format: int64
+
+  location_features:
+    type: object
+    properties:
+      type:
+        type: string
+        default: Feature
+      geometry:
+        type: object
+        properties:
+          type:
+            type: string
+            default: Point
+          coordinates:
+            type: array
+            minItems: 2
+            maxItems: 2
+            items:
+              type: number
+              format: double
+      properties:
+        type: object
+        properties:
+          osm_id:
+            type: string
+          category:
+            type: string
+          name:
+            type: string
+          address:
+            type: string
+          phone:
+            type: string
+          website:
+            type: string
+          opening_hours:
+            type: string
+          wheelchair:
+            type: string
+          distance:
+            type: string
+
+  segments:
+    type: object
+    description: TBD
+    properties:
+      duration:
+        type: number
+        format: double
+        description: TBD
+      distance:
+        type: number
+        format: double
+        description: TBD
+      steps:
+        type: array
+        description: TBD
+        items:
+          $ref: '#/definitions/steps'
+
+  steps:
+    type: object
+    properties:
+      duration:
+        type: number
+        format: double
+        description: TBD
+      distance:
+        type: number
+        format: double
+        description: TBD
+      instruction:
+        type: string
+        description: TBD
+      name:
+        type: string
+        description: TBD
+      type:
+        type: integer
+        format: int64
+      way_points:
+        type: array
+        description: TBD
+        minItems: 2
+        maxItems: 2
+        items:
+          type: integer
+          format: int64
+
   Error:
     type: object
     properties:
