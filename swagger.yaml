@@ -445,7 +445,7 @@ paths:
             \ needed to fulfill the request."
         503:
           description: "The server is currently unavailable due to overload or maintenance."
-  /locations:
+  /places:
     get:
       summary: "Location Service"
       description: "Returns Points of Interest in the area surrounding a geometry.\n"
@@ -678,7 +678,7 @@ definitions:
       features:
         type: "array"
         items:
-          $ref: "#/definitions/location_features"
+          $ref: "#/definitions/features"
       bbox:
         type: "array"
         items:
@@ -727,16 +727,16 @@ definitions:
           format: "int64"
         maxItems: 2
         minItems: 2
-  location_features:
+  features:
     type: "object"
     properties:
       type:
         type: "string"
         default: "Feature"
       geometry:
-        $ref: "#/definitions/location_features_geometry"
+        $ref: "#/definitions/features_geometry"
       properties:
-        $ref: "#/definitions/location_features_properties"
+        $ref: "#/definitions/features_properties"
   segments:
     type: "object"
     properties:
@@ -1005,7 +1005,7 @@ definitions:
         format: "double"
         description: "TBD"
     description: "TBD"
-  location_features_geometry:
+  features_geometry:
     properties:
       type:
         type: "string"
@@ -1017,7 +1017,7 @@ definitions:
           format: "double"
         maxItems: 2
         minItems: 2
-  location_features_properties:
+  features_properties:
     properties:
       osm_id:
         type: "string"
