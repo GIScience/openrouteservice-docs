@@ -435,7 +435,7 @@
         }
       }
     },
-    "/locations" : {
+    "/places" : {
       "get" : {
         "summary" : "Location Service",
         "description" : "Returns Points of Interest in the area surrounding a geometry.\n",
@@ -702,7 +702,7 @@
         "features" : {
           "type" : "array",
           "items" : {
-            "$ref" : "#/definitions/location_features"
+            "$ref" : "#/definitions/features"
           }
         },
         "bbox" : {
@@ -772,7 +772,7 @@
         }
       }
     },
-    "location_features" : {
+    "features" : {
       "type" : "object",
       "properties" : {
         "type" : {
@@ -780,10 +780,10 @@
           "default" : "Feature"
         },
         "geometry" : {
-          "$ref" : "#/definitions/location_features_geometry"
+          "$ref" : "#/definitions/features_geometry"
         },
         "properties" : {
-          "$ref" : "#/definitions/location_features_properties"
+          "$ref" : "#/definitions/features_properties"
         }
       }
     },
@@ -1174,7 +1174,7 @@
       },
       "description" : "TBD"
     },
-    "location_features_geometry" : {
+    "features_geometry" : {
       "properties" : {
         "type" : {
           "type" : "string",
@@ -1191,7 +1191,7 @@
         }
       }
     },
-    "location_features_properties" : {
+    "features_properties" : {
       "properties" : {
         "osm_id" : {
           "type" : "string"
