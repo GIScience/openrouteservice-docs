@@ -1,21 +1,19 @@
 swagger: '2.0'
 info:
-  description: >-
-    This is a test documentation for the ORS api. The api is located at
-    https://api.github.com/
-  version: 0.0.1
-  title: ORS API
+  description: 'This is the documentation for the OpenRouteService API.'
+  version: 4.0.0
+  title: OpenRouteService API
   contact:
     email: openrouteservice@geog.uni-heidelberg.de
   license:
     name: MIT
     url: 'https://github.com/swagger-api/swagger-ui/blob/master/LICENSE'
-host: "host"
-basePath: /ors
+host: developers.openrouteservice.org
+#basePath: /ors
 produces:
   - text/json; charset=utf-8
 schemes:
-  - http
+  - https
 securityDefinitions:
   UserSecurity:
     description: Add your API Key as the value of the _api_\__key_ parameter to your GET request. (In this Demo you can click the Authentication Button.)
@@ -25,29 +23,27 @@ securityDefinitions:
 security:
   - UserSecurity: []
 paths:
-  /routing:
+  /routes:
     get:
-      summary: Routing Service
+      summary: Route Service
       description: |
         Returns a route between two or more locations for a selected profile and its settings as GeoJSON response.
       parameters:
         - name: coordinates
           in: query
-          description: Pipe separated List of longitude,latitude coordinates visited in order.
+          description: 'Pipe separated List of longitude,latitude coordinates visited in order.'
           required: true
           type: array
           collectionFormat: pipes
           items:
             type: string
-            format: longitude,latitude
-            #description:  Sample values =   8.630614,49.33365 | 8.83007,49.433699 | 8.7107,49.45200
-            
+            format: 'longitude,latitude'
         - name: profile
           in: query
-          description: Specifies the routing profile.
+          description: Specifies the route profile.
           required: true
           type: string
-          enum: 
+          enum:
             - driving-car
             - driving-hgv
             - cycling-regular
@@ -60,7 +56,7 @@ paths:
             - wheelchair
         - name: preference
           in: query
-          description: Specifies the routing preference.
+          description: Specifies the route preference.
           type: string
           enum:
             - fastest
@@ -89,7 +85,7 @@ paths:
           default: en
         - name: geometry
           in: query
-          description: Specifies whether to return geometry or not.
+          description: Specifies whether to return geometry.
           type: boolean
           enum:
             - true
@@ -97,7 +93,7 @@ paths:
           default: true
         - name: geometry_format
           in: query
-          description: Sets the format of a returned geometry.
+          description: Sets the format of the returned geometry.
           type: string
           enum:
             - encodedpolyline
@@ -106,7 +102,7 @@ paths:
           default: encodedpolyline
         - name: geometry_simplify
           in: query
-          description: Specifies whether to simplify the geometry. If True will be reset to False for a specified extra_info parameter.
+          description: Specifies whether to simplify the geometry. True will automatically be set to False if extra_info parameter is specified.
           type: boolean
           enum:
             - true
@@ -115,7 +111,7 @@ paths:
           format: double
         - name: instructions
           in: query
-          description: Specifies whether to return instructions or not.
+          description: Specifies whether to return instructions.
           type: boolean
           enum:
             - true
@@ -131,7 +127,7 @@ paths:
           default: text
         - name: elevation
           in: query
-          description: Specifies whether to return elevation values for points or not.
+          description: Specifies whether to return elevation values for points.
           type: boolean
           enum:
             - true
@@ -139,7 +135,7 @@ paths:
           default: false
         - name: extra_info
           in: query
-          description: Pipe separated List of desired additional information.
+          description: Pipe separated List of additional information.
           type: array
           collectionFormat: pipes
           uniqueItems: true
@@ -153,38 +149,37 @@ paths:
               - waytype
         - name: options
           in: query
-          description: For advanced options formatted as json. Add object as string.
+          description: For advanced options formatted as json. Add this object as string.
           type: number
           format: double
         - name: id
           in: query
           description: Arbitrary identification string of the request reflected in the meta information.
           type: string
-      responses: 
-        200:
+      responses:
+        '200':
           description: Standard response for successfully processed requests. Returns JSON.
           schema:
             type: array
             items:
               $ref: '#/definitions/Routeresponse'
-        400:
+        '400':
           description: The request is incorrect and therefore can not be processed.
           schema:
             type: array
             items:
               $ref: '#/definitions/Error'
-        405:
-          description: The specified HTTP method is not supported. For more details, refer to the EndPoint documentation.
-        413:
-          description: The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.
-        500:
+        '405':
+          description: 'The specified HTTP method is not supported. For more details, refer to the EndPoint documentation.'
+        '413':
+          description: 'The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.'
+        '500':
           description: An unexpected error was encountered and more detailed internal error code is provided.
-        501:
+        '501':
           description: Indicates that the server does not support the functionality needed to fulfill the request.
-        503:
+        '503':
           description: The server is currently unavailable due to overload or maintenance.
-
-  /geocoding (normal):
+  /geocode:
     get:
       summary: Geocoding Service
       description: |
@@ -192,7 +187,7 @@ paths:
       parameters:
         - name: query
           in: query
-          description: Name of location, street address or postal code.
+          description: 'Name of location, street address or postal code.'
           required: true
           type: string
         - name: lang
@@ -215,31 +210,30 @@ paths:
           in: query
           description: Arbitrary identification string of the request reflected in the meta information.
           type: string
-      responses: 
-        200:
+      responses:
+        '200':
           description: Standard response for successfully processed requests. Returns JSON.
           schema:
             type: array
             items:
               $ref: '#/definitions/Geocoderesponse'
-        400:
+        '400':
           description: The request is incorrect and therefore can not be processed.
           schema:
             type: array
             items:
               $ref: '#/definitions/Error'
-        405:
-          description: The specified HTTP method is not supported. For more details, refer to the EndPoint documentation.
-        413:
-          description: The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.
-        500:
+        '405':
+          description: 'The specified HTTP method is not supported. For more details, refer to the EndPoint documentation.'
+        '413':
+          description: 'The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.'
+        '500':
           description: An unexpected error was encountered and more detailed internal error code is provided.
-        501:
+        '501':
           description: Indicates that the server does not support the functionality needed to fulfill the request.
-        503:
+        '503':
           description: The server is currently unavailable due to overload or maintenance.
-        
-  /geocoding (reverse):
+  /geocode (reverse):
     get:
       summary: Reverse Geocoding Service
       description: |
@@ -247,10 +241,10 @@ paths:
       parameters:
         - name: location
           in: query
-          description: Coordinate to be inquired
+          description: Coordinate to be inquired.
           required: true
           type: number
-          format: longitude,latitude
+          format: 'longitude,latitude'
         - name: lang
           in: query
           description: Sets the language of the response.
@@ -265,30 +259,29 @@ paths:
           in: query
           description: Arbitrary identification string of the request reflected in the meta information.
           type: string
-      responses: 
-        200:
+      responses:
+        '200':
           description: Standard response for successfully processed requests. Returns JSON.
           schema:
             type: array
             items:
               $ref: '#/definitions/Reversegeocoderesponse'
-        400:
+        '400':
           description: The request is incorrect and therefore can not be processed.
           schema:
             type: array
             items:
               $ref: '#/definitions/Error'
-        405:
-          description: The specified HTTP method is not supported. For more details, refer to the EndPoint documentation.
-        413:
-          description: The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.
-        500:
+        '405':
+          description: 'The specified HTTP method is not supported. For more details, refer to the EndPoint documentation.'
+        '413':
+          description: 'The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.'
+        '500':
           description: An unexpected error was encountered and more detailed internal error code is provided.
-        501:
+        '501':
           description: Indicates that the server does not support the functionality needed to fulfill the request.
-        503:
+        '503':
           description: The server is currently unavailable due to overload or maintenance.
-              
   /isochrones:
     get:
       summary: Isochrones Service
@@ -298,15 +291,15 @@ paths:
         - name: locations
           in: query
           description: |
-            List of longitude,latitude coordinates delimited with pipe.
+            List of longitude, latitude coordinates delimited with pipe.
           required: true
           type: number
-          format: longitude,latitude
+          format: 'longitude,latitude'
         - name: profile
           in: query
           description: Specifies the routing profile.
           type: string
-          enum: 
+          enum:
             - driving-car
             - driving-hgv
             - cycling-regular
@@ -320,13 +313,13 @@ paths:
         - name: range_type
           in: query
           description: |
-            Set 'time' for isochrones or 'distance' for equidistants.
+            Set _time_ for isochrones or _distance_ for equidistants.
           type: string
           default: time
         - name: range
           in: query
           description: |
-            Maximum range value of the analysis in seconds for time and meters for distance. Alternatively a comma separated list of specific single range values
+            Maximum range value of the analysis in seconds for time and meters for distance. Alternatively a comma separated list of specific single range values.
           required: true
           type: number
           format: double
@@ -365,7 +358,7 @@ paths:
           uniqueItems: true
           items:
             type: string
-            enum: 
+            enum:
               - area
               - reachfactor
         - name: options
@@ -383,29 +376,28 @@ paths:
           in: query
           description: Arbitrary identification string of the request reflected in the meta information.
           type: string
-          
-      responses: 
-        200:
+      responses:
+        '200':
           description: Standard response for successfully processed requests. Returns JSON.
           schema:
             type: array
             items:
               $ref: '#/definitions/IsochronesResponse'
-        400:
+        '400':
           description: The request is incorrect and therefore can not be processed.
           schema:
             type: array
             items:
               $ref: '#/definitions/Error'
-        405:
-          description: The specified HTTP method is not supported. For more details, refer to the EndPoint documentation.
-        413:
-          description: The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.
-        500:
+        '405':
+          description: 'The specified HTTP method is not supported. For more details, refer to the EndPoint documentation.'
+        '413':
+          description: 'The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.'
+        '500':
           description: An unexpected error was encountered and more detailed internal error code is provided.
-        501:
+        '501':
           description: Indicates that the server does not support the functionality needed to fulfill the request.
-        503:
+        '503':
           description: The server is currently unavailable due to overload or maintenance.
   /locations:
     get:
@@ -421,11 +413,8 @@ paths:
           type: string
           enum:
             - pois
-              # description: Returns POI geometry as well as requested details.
             - category_stats
-              # description: Returns a POI count for each requested category.
-            - category_list 
-              # description: Returns the full category list (only the id parameter will be considered).
+            - category_list
         - name: category_group_ids
           in: query
           description: |
@@ -449,8 +438,8 @@ paths:
             Filter returned features by wheelchair tag entries.
           type: string
           enum:
-            - yes
-            - no
+            - true
+            - false
             - limited
         - name: smoking
           in: query
@@ -458,16 +447,16 @@ paths:
             Filter returned features by wheelchair tag entries.
           type: string
           enum:
-            - yes
-            - no
+            - true
+            - false
         - name: fee
           in: query
           description: |
             Filter returned features by fee tag entries.
           type: string
           enum:
-            - yes
-            - no
+            - true
+            - false
         - name: bbox
           in: query
           description: |
@@ -525,31 +514,29 @@ paths:
           in: query
           description: Arbitrary identification string of the request reflected in the meta information.
           type: string
-          
       responses:
-        200:
+        '200':
           description: Standard response for successfully processed requests. Returns JSON.
           schema:
             type: array
             items:
               $ref: '#/definitions/LocationsPoiResponse'
-        400:
+        '400':
           description: The request is incorrect and therefore can not be processed.
           schema:
             type: array
             items:
               $ref: '#/definitions/Error'
-        405:
-          description: The specified HTTP method is not supported. For more details, refer to the EndPoint documentation.
-        413:
-          description: The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.
-        500:
+        '405':
+          description: 'The specified HTTP method is not supported. For more details, refer to the EndPoint documentation.'
+        '413':
+          description: 'The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.'
+        '500':
           description: An unexpected error was encountered and more detailed internal error code is provided.
-        501:
+        '501':
           description: Indicates that the server does not support the functionality needed to fulfill the request.
-        503:
+        '503':
           description: The server is currently unavailable due to overload or maintenance.
-            
 definitions:
   Product:
     title: Response
@@ -557,7 +544,7 @@ definitions:
     properties:
       product_id:
         type: string
-        description: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+        description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
       description:
         type: string
         description: Description of product.
@@ -566,11 +553,10 @@ definitions:
         description: Display name of product.
       capacity:
         type: string
-        description: Capacity of product. For example, 4 people.
+        description: 'Capacity of product. For example, 4 people.'
       image:
         type: string
         description: Image URL representing the product.
-        
   Routeresponse:
     type: object
     title: Response
@@ -586,12 +572,14 @@ definitions:
           service:
             type: string
             description: TBD
-            #enum?
           query:
             type: object
             description: TBD
-            required: [ geometry_format, profile, coordinates ]
-            properties: 
+            required:
+              - geometry_format
+              - profile
+              - coordinates
+            properties:
               geometry_format:
                 type: string
               profile:
@@ -613,7 +601,6 @@ definitions:
           timestamp:
             type: integer
             format: int64
-  
   Geocoderesponse:
     type: object
     properties:
@@ -682,12 +669,10 @@ definitions:
             type: string
           timestamp:
             type: integer
-            format: int64  
-
+            format: int64
   Reversegeocoderesponse:
     type: string
     description: TBD
-  
   IsochronesResponse:
     type: object
     properties:
@@ -760,7 +745,7 @@ definitions:
                 type: array
                 items:
                   type: array
-                  items: 
+                  items:
                     type: number
                     format: double
           attribution:
@@ -770,7 +755,6 @@ definitions:
           timestamp:
             type: integer
             format: int64
-  
   LocationsPoiResponse:
     type: object
     properties:
@@ -822,13 +806,11 @@ definitions:
               limit:
                 type: integer
                 format: int64
-
   coordinates:
     type: array
     items:
       type: number
       format: double
-
   array:
     type: array
     items:
@@ -836,7 +818,6 @@ definitions:
       properties:
         hello:
           type: string
-
   routes:
     type: object
     properties:
@@ -881,7 +862,6 @@ definitions:
         items:
           type: integer
           format: int64
-
   location_features:
     type: object
     properties:
@@ -922,7 +902,6 @@ definitions:
             type: string
           distance:
             type: string
-
   segments:
     type: object
     description: TBD
@@ -940,7 +919,6 @@ definitions:
         description: TBD
         items:
           $ref: '#/definitions/steps'
-
   steps:
     type: object
     properties:
@@ -969,7 +947,6 @@ definitions:
         items:
           type: integer
           format: int64
-
   Error:
     type: object
     properties:
