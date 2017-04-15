@@ -1,1 +1,1226 @@
-{"swagger":"2.0","info":{"description":"This is the documentation for the OpenRouteService API.","version":"4.0.0","title":"OpenRouteService API","contact":{"email":"openrouteservice@geog.uni-heidelberg.de"},"license":{"name":"MIT","url":"https://github.com/swagger-api/swagger-ui/blob/master/LICENSE"}},"host":"developers.openrouteservice.org","produces":["text/json; charset=utf-8"],"schemes":["https"],"securityDefinitions":{"UserSecurity":{"description":"Add your API Key as the value of the _api_\\__key_ parameter to your GET request. (In this Demo you can click the Authentication Button.)","type":"apiKey","in":"query","name":"api_key"}},"security":[{"UserSecurity":[]}],"paths":{"/routes":{"get":{"summary":"Route Service","description":"Returns a route between two or more locations for a selected profile and its settings as GeoJSON response.\n","parameters":[{"name":"coordinates","in":"query","description":"Pipe separated List of longitude,latitude coordinates visited in order.","required":true,"type":"array","collectionFormat":"pipes","items":{"type":"string","format":"longitude,latitude"}},{"name":"profile","in":"query","description":"Specifies the route profile.","required":true,"type":"string","enum":["driving-car","driving-hgv","cycling-regular","cycling-road","cycling-safe","cycling-mountain","cycling-tour","foot-walking","foot-hiking","wheelchair"]},{"name":"preference","in":"query","description":"Specifies the route preference.","type":"string","enum":["fastest","shortest","recommended"],"default":"fastest"},{"name":"units","in":"query","description":"Specifies the distance unit.","type":"string","enum":["m","km","mi"],"default":"m"},{"name":"language","in":"query","description":"Language for the route instructions.","type":"string","enum":["cn","de","en","es","ru"],"default":"en"},{"name":"geometry","in":"query","description":"Specifies whether to return geometry.","type":"boolean","enum":[true,false],"default":true},{"name":"geometry_format","in":"query","description":"Sets the format of the returned geometry.","type":"string","enum":["encodedpolyline","geojson","polyline"],"default":"encodedpolyline"},{"name":"geometry_simplify","in":"query","description":"Specifies whether to simplify the geometry. True will automatically be set to False if extra_info parameter is specified.","type":"boolean","enum":[true,false],"default":false,"format":"double"},{"name":"instructions","in":"query","description":"Specifies whether to return instructions.","type":"boolean","enum":[true,false],"default":true},{"name":"instructions_format","in":"query","description":"Select _html_ for more verbose instructions.","type":"string","enum":["html","text"],"default":"text"},{"name":"elevation","in":"query","description":"Specifies whether to return elevation values for points.","type":"boolean","enum":[true,false],"default":false},{"name":"extra_info","in":"query","description":"Pipe separated List of additional information.","type":"array","collectionFormat":"pipes","uniqueItems":true,"items":{"type":"string","enum":["steepness","suitability","surface","waycategory","waytype"]}},{"name":"options","in":"query","description":"For advanced options formatted as json. Add this object as string.","type":"number","format":"double"},{"name":"id","in":"query","description":"Arbitrary identification string of the request reflected in the meta information.","type":"string"}],"responses":{"200":{"description":"Standard response for successfully processed requests. Returns JSON.","schema":{"type":"array","items":{"$ref":"#/definitions/Routeresponse"}}},"400":{"description":"The request is incorrect and therefore can not be processed.","schema":{"type":"array","items":{"$ref":"#/definitions/Error"}}},"405":{"description":"The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."},"413":{"description":"The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."},"500":{"description":"An unexpected error was encountered and more detailed internal error code is provided."},"501":{"description":"Indicates that the server does not support the functionality needed to fulfill the request."},"503":{"description":"The server is currently unavailable due to overload or maintenance."}}}},"/geocode":{"get":{"summary":"Geocoding Service","description":"Returns a JSON formatted list of objects corresponding to the search input.\n","parameters":[{"name":"query","in":"query","description":"Name of location, street address or postal code.","required":true,"type":"string"},{"name":"lang","in":"query","description":"Sets the language of the response.","type":"string","enum":["de","en","fr","it"],"default":"en"},{"name":"limit","in":"query","description":"Specifies the maximum number of responses.","type":"number","format":"double","default":20},{"name":"id","in":"query","description":"Arbitrary identification string of the request reflected in the meta information.","type":"string"}],"responses":{"200":{"description":"Standard response for successfully processed requests. Returns JSON.","schema":{"type":"array","items":{"$ref":"#/definitions/Geocoderesponse"}}},"400":{"description":"The request is incorrect and therefore can not be processed.","schema":{"type":"array","items":{"$ref":"#/definitions/Error"}}},"405":{"description":"The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."},"413":{"description":"The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."},"500":{"description":"An unexpected error was encountered and more detailed internal error code is provided."},"501":{"description":"Indicates that the server does not support the functionality needed to fulfill the request."},"503":{"description":"The server is currently unavailable due to overload or maintenance."}}}},"/geocode (reverse)":{"get":{"summary":"Reverse Geocoding Service","description":"Returns the next enclosing object with an address tag which surrounds the given coordinate.\n","parameters":[{"name":"location","in":"query","description":"Coordinate to be inquired.","required":true,"type":"number","format":"longitude,latitude"},{"name":"lang","in":"query","description":"Sets the language of the response.","type":"string","enum":["de","en","fr","it"],"default":"en"},{"name":"id","in":"query","description":"Arbitrary identification string of the request reflected in the meta information.","type":"string"}],"responses":{"200":{"description":"Standard response for successfully processed requests. Returns JSON.","schema":{"type":"array","items":{"$ref":"#/definitions/Reversegeocoderesponse"}}},"400":{"description":"The request is incorrect and therefore can not be processed.","schema":{"type":"array","items":{"$ref":"#/definitions/Error"}}},"405":{"description":"The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."},"413":{"description":"The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."},"500":{"description":"An unexpected error was encountered and more detailed internal error code is provided."},"501":{"description":"Indicates that the server does not support the functionality needed to fulfill the request."},"503":{"description":"The server is currently unavailable due to overload or maintenance."}}}},"/isochrones":{"get":{"summary":"Isochrones Service","description":"The Isochrone Service supports time and distance analyses for one single or multiple locations. You may also specify the isochrone interval or provide multiple exact isochrone range values. This service allows the same range of profile options listed in the ORS Routing section which help you to further customize your request to obtain a more detailed reachability area response.\n","parameters":[{"name":"locations","in":"query","description":"List of longitude, latitude coordinates delimited with pipe.\n","required":true,"type":"number","format":"longitude,latitude"},{"name":"profile","in":"query","description":"Specifies the routing profile.","type":"string","enum":["driving-car","driving-hgv","cycling-regular","cycling-road","cycling-safe","cycling-mountain","cycling-tour","foot-walking","foot-hiking"],"default":"driving-car"},{"name":"range_type","in":"query","description":"Set _time_ for isochrones or _distance_ for equidistants.\n","type":"string","default":"time"},{"name":"range","in":"query","description":"Maximum range value of the analysis in seconds for time and meters for distance. Alternatively a comma separated list of specific single range values.\n","required":true,"type":"number","format":"double"},{"name":"interval","in":"query","description":"Interval of isochrones or equidistants for one range value. value in seconds for time and meters for distance.\n","type":"number","format":"double"},{"name":"units","in":"query","description":"Unit format.\n","type":"string","enum":["m","km","mi","s"],"default":"m"},{"name":"location_type","in":"query","description":"start(default) treats the location(s) as starting point, destination as goal.\n","type":"string","enum":["start","destination"],"default":"start"},{"name":"attributes","in":"query","description":"Values are area and reachfactor. Delimit with pipe for both.\n","type":"array","collectionFormat":"pipes","uniqueItems":true,"items":{"type":"string","enum":["area","reachfactor"]}},{"name":"options","in":"query","description":"For advanced options formatted as JSON. Add object as string: \"{...}\".\n","type":"string"},{"name":"intersections","in":"query","description":"Specifies whether to return intersection polygons.\n","type":"boolean","default":false},{"name":"id","in":"query","description":"Arbitrary identification string of the request reflected in the meta information.","type":"string"}],"responses":{"200":{"description":"Standard response for successfully processed requests. Returns JSON.","schema":{"type":"array","items":{"$ref":"#/definitions/IsochronesResponse"}}},"400":{"description":"The request is incorrect and therefore can not be processed.","schema":{"type":"array","items":{"$ref":"#/definitions/Error"}}},"405":{"description":"The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."},"413":{"description":"The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."},"500":{"description":"An unexpected error was encountered and more detailed internal error code is provided."},"501":{"description":"Indicates that the server does not support the functionality needed to fulfill the request."},"503":{"description":"The server is currently unavailable due to overload or maintenance."}}}},"/locations":{"get":{"summary":"Location Service","description":"Returns Points of Interest in the area surrounding a geometry.\n","parameters":[{"name":"request","in":"query","description":"\"pois\" will return POI geometry as well as requested details. \"category_stats\" returns a POI count for each requested category. \"category_list\" returns a list of all categories. (only the id parameter will be considered)\n","required":true,"type":"string","enum":["pois","category_stats","category_list"]},{"name":"category_group_ids","in":"query","description":"Comma seperated list of category group ids.\n","collectionFormat":"csv","type":"string"},{"name":"category_ids","in":"query","description":"Comma seperated list of category ids.\n","collectionFormat":"csv","type":"string"},{"name":"name","in":"query","description":"Name to filter the POIs by.\n","type":"string"},{"name":"wheelchair","in":"query","description":"Filter returned features by wheelchair tag entries.\n","type":"string","enum":[true,false,"limited"]},{"name":"smoking","in":"query","description":"Filter returned features by wheelchair tag entries.\n","type":"string","enum":[true,false]},{"name":"fee","in":"query","description":"Filter returned features by fee tag entries.\n","type":"string","enum":[true,false]},{"name":"bbox","in":"query","description":"Defines a clipping bounding box\n","required":false,"type":"array","collectionFormat":"csv","maxItems":4,"minItems":4,"items":{"type":"number","format":"double"}},{"name":"geometry","in":"query","description":"GeoJSON geometry object (Point, Linestring or Polygon)\n","type":"string"},{"name":"radius","in":"query","required":true,"description":"Search radius in meters around the given (might be limited in the backend)\n","type":"number","format":"double","minimum":0,"maximum":1000},{"name":"limit","in":"query","description":"Maximum number of returned objects (might be limited in the backend)\n","type":"integer","format":"int64"},{"name":"sortby","in":"query","description":"Sorts the returned features by _distance_ or _category_.\n","type":"string","enum":["distance","category"]},{"name":"details","in":"query","description":"Pipe seperated list of desired details.\n","type":"array","collectionFormat":"pipes","uniqueItems":true,"items":{"type":"string","enum":["address","contact","attributes"]}},{"name":"id","in":"query","description":"Arbitrary identification string of the request reflected in the meta information.","type":"string"}],"responses":{"200":{"description":"Standard response for successfully processed requests. Returns JSON.","schema":{"type":"array","items":{"$ref":"#/definitions/LocationsPoiResponse"}}},"400":{"description":"The request is incorrect and therefore can not be processed.","schema":{"type":"array","items":{"$ref":"#/definitions/Error"}}},"405":{"description":"The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."},"413":{"description":"The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."},"500":{"description":"An unexpected error was encountered and more detailed internal error code is provided."},"501":{"description":"Indicates that the server does not support the functionality needed to fulfill the request."},"503":{"description":"The server is currently unavailable due to overload or maintenance."}}}}},"definitions":{"Product":{"title":"Response","type":"object","properties":{"product_id":{"type":"string","description":"Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."},"description":{"type":"string","description":"Description of product."},"display_name":{"type":"string","description":"Display name of product."},"capacity":{"type":"string","description":"Capacity of product. For example, 4 people."},"image":{"type":"string","description":"Image URL representing the product."}}},"Routeresponse":{"type":"object","title":"Response","properties":{"routes":{"type":"array","items":{"$ref":"#/definitions/routes"}},"info":{"type":"object","description":"TBD","properties":{"service":{"type":"string","description":"TBD"},"query":{"type":"object","description":"TBD","required":["geometry_format","profile","coordinates"],"properties":{"geometry_format":{"type":"string"},"profile":{"type":"string"},"coordinates":{"type":"array","minItems":2,"items":{"type":"array","maxItems":2,"minItems":2,"items":{"type":"number","format":"double"}}}}},"attribution":{"type":"string"},"version":{"type":"string"},"timestamp":{"type":"integer","format":"int64"}}}}},"Geocoderesponse":{"type":"object","properties":{"features":{"type":"array","items":{"type":"object","properties":{"geometry":{"type":"object","description":"TBD","properties":{"coordinates":{"type":"array","minItems":2,"maxItems":2,"items":{"type":"number","format":"double","description":"TBD"}},"type":{"type":"string"}}},"type":{"type":"string"},"properties":{"type":"object","properties":{"country":{"type":"string"},"street":{"type":"string"},"name":{"type":"string"},"house_number":{"type":"string"},"state":{"type":"string"},"postal_code":{"type":"string"}}}}}},"bbox":{"type":"array","description":"TBD","maxItems":4,"minItems":4,"items":{"type":"number","format":"double"}},"type":{"type":"string"},"info":{"type":"object","properties":{"service":{"type":"string"},"query":{"type":"object","properties":{"query":{"type":"string"},"limit":{"type":"integer","format":"int64"}}},"attribution":{"type":"string"},"version":{"type":"string"},"timestamp":{"type":"integer","format":"int64"}}}}},"Reversegeocoderesponse":{"type":"string","description":"TBD"},"IsochronesResponse":{"type":"object","properties":{"features":{"type":"array","items":{"type":"object","properties":{"geometry":{"type":"object","properties":{"coordinates":{"type":"array","items":{"type":"array","items":{"type":"number","format":"double"}}},"type":{"type":"string","default":"Polygon"}}},"type":{"type":"string","default":"Feature"},"properties":{"type":"object","properties":{"center":{"type":"array","minItems":2,"maxItems":2,"items":{"type":"number","format":"double"}},"group_index":{"type":"integer","format":"int64"},"value":{"type":"integer","format":"int64"}}}}}},"bbox":{"type":"array","maxItems":4,"minItems":4,"items":{"type":"number","format":"double"}},"type":{"type":"string","default":"FeatureCollection"},"info":{"type":"object","properties":{"service":{"type":"string"},"query":{"type":"object","properties":{"mode":{"type":"string"},"rangetype":{"type":"string"},"range":{"type":"integer","format":"int64"},"interval":{"type":"integer","format":"int64"},"locations":{"type":"array","items":{"type":"array","items":{"type":"number","format":"double"}}}}},"attribution":{"type":"string"},"version":{"type":"string"},"timestamp":{"type":"integer","format":"int64"}}}}},"LocationsPoiResponse":{"type":"object","properties":{"type":{"type":"string","default":"FeatureCollection"},"features":{"type":"array","items":{"$ref":"#/definitions/location_features"}},"bbox":{"type":"array","maxItems":4,"minItems":4,"items":{"type":"number","format":"double"}},"info":{"type":"object","properties":{"service":{"type":"string"},"version":{"type":"string"},"attribution":{"type":"string"},"timestamp":{"type":"integer","format":"int64"},"query":{"type":"object","properties":{"filter":{"type":"object","properties":{"category_group_ids":{"type":"array","items":{"type":"integer","format":"int64"}},"catoegory_ids":{"type":"array","items":{"type":"integer","format":"int64"}}}},"radius":{"type":"integer","format":"int64"},"limit":{"type":"integer","format":"int64"}}}}}}},"coordinates":{"type":"array","items":{"type":"number","format":"double"}},"array":{"type":"array","items":{"type":"object","properties":{"hello":{"type":"string"}}}},"routes":{"type":"object","properties":{"summary":{"type":"object","description":"TBD","properties":{"duration":{"type":"number","format":"double","description":"TBD"},"distance_actual":{"type":"number","format":"double","description":"TBD"},"distance":{"type":"number","format":"double","description":"TBD"}}},"bbox":{"type":"array","description":"TBD","maxItems":4,"minItems":4,"items":{"type":"number","format":"double"}},"geometry":{"type":"string","description":"TBD"},"segments":{"type":"array","description":"TBD","maxItems":1,"items":{"$ref":"#/definitions/segments"}},"way_points":{"type":"array","description":"TBD","minItems":2,"maxItems":2,"items":{"type":"integer","format":"int64"}}}},"location_features":{"type":"object","properties":{"type":{"type":"string","default":"Feature"},"geometry":{"type":"object","properties":{"type":{"type":"string","default":"Point"},"coordinates":{"type":"array","minItems":2,"maxItems":2,"items":{"type":"number","format":"double"}}}},"properties":{"type":"object","properties":{"osm_id":{"type":"string"},"category":{"type":"string"},"name":{"type":"string"},"address":{"type":"string"},"phone":{"type":"string"},"website":{"type":"string"},"opening_hours":{"type":"string"},"wheelchair":{"type":"string"},"distance":{"type":"string"}}}}},"segments":{"type":"object","description":"TBD","properties":{"duration":{"type":"number","format":"double","description":"TBD"},"distance":{"type":"number","format":"double","description":"TBD"},"steps":{"type":"array","description":"TBD","items":{"$ref":"#/definitions/steps"}}}},"steps":{"type":"object","properties":{"duration":{"type":"number","format":"double","description":"TBD"},"distance":{"type":"number","format":"double","description":"TBD"},"instruction":{"type":"string","description":"TBD"},"name":{"type":"string","description":"TBD"},"type":{"type":"integer","format":"int64"},"way_points":{"type":"array","description":"TBD","minItems":2,"maxItems":2,"items":{"type":"integer","format":"int64"}}}},"Error":{"type":"object","properties":{"code":{"type":"integer","format":"int32"},"message":{"type":"string"},"fields":{"type":"string"}}}}}
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is the documentation for the OpenRouteService API.",
+    "version" : "4.0.0",
+    "title" : "OpenRouteService API",
+    "contact" : {
+      "email" : "openrouteservice@geog.uni-heidelberg.de"
+    },
+    "license" : {
+      "name" : "MIT",
+      "url" : "https://github.com/swagger-api/swagger-ui/blob/master/LICENSE"
+    }
+  },
+  "host" : "api.openrouteservice.org",
+  "schemes" : [ "https" ],
+  "produces" : [ "text/json; charset=utf-8" ],
+  "security" : [ {
+    "UserSecurity" : [ ]
+  } ],
+  "paths" : {
+    "/routes" : {
+      "get" : {
+        "summary" : "Route Service",
+        "description" : "Returns a route between two or more locations for a selected profile and its settings as GeoJSON response.\n",
+        "parameters" : [ {
+          "name" : "coordinates",
+          "in" : "query",
+          "description" : "Pipe separated List of longitude,latitude coordinates visited in order.",
+          "required" : true,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "longitude,latitude"
+          },
+          "collectionFormat" : "pipes"
+        }, {
+          "name" : "profile",
+          "in" : "query",
+          "description" : "Specifies the route profile.",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "driving-car", "driving-hgv", "cycling-regular", "cycling-road", "cycling-safe", "cycling-mountain", "cycling-tour", "foot-walking", "foot-hiking", "wheelchair" ]
+        }, {
+          "name" : "preference",
+          "in" : "query",
+          "description" : "Specifies the route preference.",
+          "required" : false,
+          "type" : "string",
+          "default" : "fastest",
+          "enum" : [ "fastest", "shortest", "recommended" ]
+        }, {
+          "name" : "units",
+          "in" : "query",
+          "description" : "Specifies the distance unit.",
+          "required" : false,
+          "type" : "string",
+          "default" : "m",
+          "enum" : [ "m", "km", "mi" ]
+        }, {
+          "name" : "language",
+          "in" : "query",
+          "description" : "Language for the route instructions.",
+          "required" : false,
+          "type" : "string",
+          "default" : "en",
+          "enum" : [ "cn", "de", "en", "es", "ru" ]
+        }, {
+          "name" : "geometry",
+          "in" : "query",
+          "description" : "Specifies whether to return geometry.",
+          "required" : false,
+          "type" : "boolean",
+          "default" : true,
+          "enum" : [ "true", "false" ]
+        }, {
+          "name" : "geometry_format",
+          "in" : "query",
+          "description" : "Sets the format of the returned geometry.",
+          "required" : false,
+          "type" : "string",
+          "default" : "encodedpolyline",
+          "enum" : [ "encodedpolyline", "geojson", "polyline" ]
+        }, {
+          "name" : "geometry_simplify",
+          "in" : "query",
+          "description" : "Specifies whether to simplify the geometry. True will automatically be set to False if extra_info parameter is specified.",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false,
+          "format" : "double",
+          "enum" : [ "true", "false" ]
+        }, {
+          "name" : "instructions",
+          "in" : "query",
+          "description" : "Specifies whether to return instructions.",
+          "required" : false,
+          "type" : "boolean",
+          "default" : true,
+          "enum" : [ "true", "false" ]
+        }, {
+          "name" : "instructions_format",
+          "in" : "query",
+          "description" : "Select _html_ for more verbose instructions.",
+          "required" : false,
+          "type" : "string",
+          "default" : "text",
+          "enum" : [ "html", "text" ]
+        }, {
+          "name" : "elevation",
+          "in" : "query",
+          "description" : "Specifies whether to return elevation values for points.",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false,
+          "enum" : [ "true", "false" ]
+        }, {
+          "name" : "extra_info",
+          "in" : "query",
+          "description" : "Pipe separated List of additional information.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "steepness", "suitability", "surface", "waycategory", "waytype" ]
+          },
+          "collectionFormat" : "pipes",
+          "uniqueItems" : true
+        }, {
+          "name" : "options",
+          "in" : "query",
+          "description" : "For advanced options formatted as json. Add this object as string.",
+          "required" : false,
+          "type" : "number",
+          "format" : "double"
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "description" : "Arbitrary identification string of the request reflected in the meta information.",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Standard response for successfully processed requests. Returns JSON.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Routeresponse"
+              }
+            }
+          },
+          "400" : {
+            "description" : "The request is incorrect and therefore can not be processed.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Error"
+              }
+            }
+          },
+          "405" : {
+            "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
+          },
+          "413" : {
+            "description" : "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
+          },
+          "500" : {
+            "description" : "An unexpected error was encountered and more detailed internal error code is provided."
+          },
+          "501" : {
+            "description" : "Indicates that the server does not support the functionality needed to fulfill the request."
+          },
+          "503" : {
+            "description" : "The server is currently unavailable due to overload or maintenance."
+          }
+        }
+      }
+    },
+    "/geocode" : {
+      "get" : {
+        "summary" : "Geocoding Service",
+        "description" : "Returns a JSON formatted list of objects corresponding to the search input.\n",
+        "parameters" : [ {
+          "name" : "query",
+          "in" : "query",
+          "description" : "Name of location, street address or postal code.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "lang",
+          "in" : "query",
+          "description" : "Sets the language of the response.",
+          "required" : false,
+          "type" : "string",
+          "default" : "en",
+          "enum" : [ "de", "en", "fr", "it" ]
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Specifies the maximum number of responses.",
+          "required" : false,
+          "type" : "number",
+          "default" : 20.0,
+          "format" : "double"
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "description" : "Arbitrary identification string of the request reflected in the meta information.",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Standard response for successfully processed requests. Returns JSON.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Geocoderesponse"
+              }
+            }
+          },
+          "400" : {
+            "description" : "The request is incorrect and therefore can not be processed.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Error"
+              }
+            }
+          },
+          "405" : {
+            "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
+          },
+          "413" : {
+            "description" : "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
+          },
+          "500" : {
+            "description" : "An unexpected error was encountered and more detailed internal error code is provided."
+          },
+          "501" : {
+            "description" : "Indicates that the server does not support the functionality needed to fulfill the request."
+          },
+          "503" : {
+            "description" : "The server is currently unavailable due to overload or maintenance."
+          }
+        }
+      }
+    },
+    "/geocode (reverse)" : {
+      "get" : {
+        "summary" : "Reverse Geocoding Service",
+        "description" : "Returns the next enclosing object with an address tag which surrounds the given coordinate.\n",
+        "parameters" : [ {
+          "name" : "location",
+          "in" : "query",
+          "description" : "Coordinate to be inquired.",
+          "required" : true,
+          "type" : "number",
+          "format" : "longitude,latitude"
+        }, {
+          "name" : "lang",
+          "in" : "query",
+          "description" : "Sets the language of the response.",
+          "required" : false,
+          "type" : "string",
+          "default" : "en",
+          "enum" : [ "de", "en", "fr", "it" ]
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "description" : "Arbitrary identification string of the request reflected in the meta information.",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Standard response for successfully processed requests. Returns JSON.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Reversegeocoderesponse"
+              }
+            }
+          },
+          "400" : {
+            "description" : "The request is incorrect and therefore can not be processed.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Error"
+              }
+            }
+          },
+          "405" : {
+            "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
+          },
+          "413" : {
+            "description" : "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
+          },
+          "500" : {
+            "description" : "An unexpected error was encountered and more detailed internal error code is provided."
+          },
+          "501" : {
+            "description" : "Indicates that the server does not support the functionality needed to fulfill the request."
+          },
+          "503" : {
+            "description" : "The server is currently unavailable due to overload or maintenance."
+          }
+        }
+      }
+    },
+    "/isochrones" : {
+      "get" : {
+        "summary" : "Isochrones Service",
+        "description" : "The Isochrone Service supports time and distance analyses for one single or multiple locations. You may also specify the isochrone interval or provide multiple exact isochrone range values. This service allows the same range of profile options listed in the ORS Routing section which help you to further customize your request to obtain a more detailed reachability area response.\n",
+        "parameters" : [ {
+          "name" : "locations",
+          "in" : "query",
+          "description" : "List of longitude, latitude coordinates delimited with pipe.\n",
+          "required" : true,
+          "type" : "number",
+          "format" : "longitude,latitude"
+        }, {
+          "name" : "profile",
+          "in" : "query",
+          "description" : "Specifies the routing profile.",
+          "required" : false,
+          "type" : "string",
+          "default" : "driving-car",
+          "enum" : [ "driving-car", "driving-hgv", "cycling-regular", "cycling-road", "cycling-safe", "cycling-mountain", "cycling-tour", "foot-walking", "foot-hiking" ]
+        }, {
+          "name" : "range_type",
+          "in" : "query",
+          "description" : "Set _time_ for isochrones or _distance_ for equidistants.\n",
+          "required" : false,
+          "type" : "string",
+          "default" : "time"
+        }, {
+          "name" : "range",
+          "in" : "query",
+          "description" : "Maximum range value of the analysis in seconds for time and meters for distance. Alternatively a comma separated list of specific single range values.\n",
+          "required" : true,
+          "type" : "number",
+          "format" : "double"
+        }, {
+          "name" : "interval",
+          "in" : "query",
+          "description" : "Interval of isochrones or equidistants for one range value. value in seconds for time and meters for distance.\n",
+          "required" : false,
+          "type" : "number",
+          "format" : "double"
+        }, {
+          "name" : "units",
+          "in" : "query",
+          "description" : "Unit format.\n",
+          "required" : false,
+          "type" : "string",
+          "default" : "m",
+          "enum" : [ "m", "km", "mi", "s" ]
+        }, {
+          "name" : "location_type",
+          "in" : "query",
+          "description" : "start(default) treats the location(s) as starting point, destination as goal.\n",
+          "required" : false,
+          "type" : "string",
+          "default" : "start",
+          "enum" : [ "start", "destination" ]
+        }, {
+          "name" : "attributes",
+          "in" : "query",
+          "description" : "Values are area and reachfactor. Delimit with pipe for both.\n",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "area", "reachfactor" ]
+          },
+          "collectionFormat" : "pipes",
+          "uniqueItems" : true
+        }, {
+          "name" : "options",
+          "in" : "query",
+          "description" : "For advanced options formatted as JSON. Add object as string: \"{...}\".\n",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "intersections",
+          "in" : "query",
+          "description" : "Specifies whether to return intersection polygons.\n",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "description" : "Arbitrary identification string of the request reflected in the meta information.",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Standard response for successfully processed requests. Returns JSON.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/IsochronesResponse"
+              }
+            }
+          },
+          "400" : {
+            "description" : "The request is incorrect and therefore can not be processed.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Error"
+              }
+            }
+          },
+          "405" : {
+            "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
+          },
+          "413" : {
+            "description" : "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
+          },
+          "500" : {
+            "description" : "An unexpected error was encountered and more detailed internal error code is provided."
+          },
+          "501" : {
+            "description" : "Indicates that the server does not support the functionality needed to fulfill the request."
+          },
+          "503" : {
+            "description" : "The server is currently unavailable due to overload or maintenance."
+          }
+        }
+      }
+    },
+    "/locations" : {
+      "get" : {
+        "summary" : "Location Service",
+        "description" : "Returns Points of Interest in the area surrounding a geometry.\n",
+        "parameters" : [ {
+          "name" : "request",
+          "in" : "query",
+          "description" : "\"pois\" will return POI geometry as well as requested details. \"category_stats\" returns a POI count for each requested category. \"category_list\" returns a list of all categories. (only the id parameter will be considered)\n",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "pois", "category_stats", "category_list" ]
+        }, {
+          "name" : "category_group_ids",
+          "in" : "query",
+          "description" : "Comma seperated list of category group ids.\n",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "category_ids",
+          "in" : "query",
+          "description" : "Comma seperated list of category ids.\n",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "Name to filter the POIs by.\n",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "wheelchair",
+          "in" : "query",
+          "description" : "Filter returned features by wheelchair tag entries.\n",
+          "required" : false,
+          "type" : "string",
+          "enum" : [ "true", "false", "limited" ]
+        }, {
+          "name" : "smoking",
+          "in" : "query",
+          "description" : "Filter returned features by wheelchair tag entries.\n",
+          "required" : false,
+          "type" : "string",
+          "enum" : [ "true", "false" ]
+        }, {
+          "name" : "fee",
+          "in" : "query",
+          "description" : "Filter returned features by fee tag entries.\n",
+          "required" : false,
+          "type" : "string",
+          "enum" : [ "true", "false" ]
+        }, {
+          "name" : "bbox",
+          "in" : "query",
+          "description" : "Defines a clipping bounding box\n",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "collectionFormat" : "csv",
+          "maxItems" : 4,
+          "minItems" : 4
+        }, {
+          "name" : "geometry",
+          "in" : "query",
+          "description" : "GeoJSON geometry object (Point, Linestring or Polygon)\n",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "radius",
+          "in" : "query",
+          "description" : "Search radius in meters around the given (might be limited in the backend)\n",
+          "required" : true,
+          "type" : "number",
+          "maximum" : 1000,
+          "minimum" : 0,
+          "format" : "double"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Maximum number of returned objects (might be limited in the backend)\n",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "sortby",
+          "in" : "query",
+          "description" : "Sorts the returned features by _distance_ or _category_.\n",
+          "required" : false,
+          "type" : "string",
+          "enum" : [ "distance", "category" ]
+        }, {
+          "name" : "details",
+          "in" : "query",
+          "description" : "Pipe seperated list of desired details.\n",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "address", "contact", "attributes" ]
+          },
+          "collectionFormat" : "pipes",
+          "uniqueItems" : true
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "description" : "Arbitrary identification string of the request reflected in the meta information.",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Standard response for successfully processed requests. Returns JSON.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/LocationsPoiResponse"
+              }
+            }
+          },
+          "400" : {
+            "description" : "The request is incorrect and therefore can not be processed.",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Error"
+              }
+            }
+          },
+          "405" : {
+            "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
+          },
+          "413" : {
+            "description" : "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
+          },
+          "500" : {
+            "description" : "An unexpected error was encountered and more detailed internal error code is provided."
+          },
+          "501" : {
+            "description" : "Indicates that the server does not support the functionality needed to fulfill the request."
+          },
+          "503" : {
+            "description" : "The server is currently unavailable due to overload or maintenance."
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "UserSecurity" : {
+      "description" : "Add your API Key as the value of the _api_\\__key_ parameter to your GET request. (In this Demo you can click the Authentication Button.)",
+      "type" : "apiKey",
+      "name" : "api_key",
+      "in" : "query"
+    }
+  },
+  "definitions" : {
+    "Product" : {
+      "type" : "object",
+      "properties" : {
+        "product_id" : {
+          "type" : "string",
+          "description" : "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Description of product."
+        },
+        "display_name" : {
+          "type" : "string",
+          "description" : "Display name of product."
+        },
+        "capacity" : {
+          "type" : "string",
+          "description" : "Capacity of product. For example, 4 people."
+        },
+        "image" : {
+          "type" : "string",
+          "description" : "Image URL representing the product."
+        }
+      },
+      "title" : "Response"
+    },
+    "Routeresponse" : {
+      "type" : "object",
+      "properties" : {
+        "routes" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/routes"
+          }
+        },
+        "info" : {
+          "$ref" : "#/definitions/Routeresponse_info"
+        }
+      },
+      "title" : "Response"
+    },
+    "Geocoderesponse" : {
+      "type" : "object",
+      "properties" : {
+        "features" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Geocoderesponse_features"
+          }
+        },
+        "bbox" : {
+          "type" : "array",
+          "description" : "TBD",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "maxItems" : 4,
+          "minItems" : 4
+        },
+        "type" : {
+          "type" : "string"
+        },
+        "info" : {
+          "$ref" : "#/definitions/Geocoderesponse_info"
+        }
+      }
+    },
+    "Reversegeocoderesponse" : {
+      "type" : "string",
+      "description" : "TBD"
+    },
+    "IsochronesResponse" : {
+      "type" : "object",
+      "properties" : {
+        "features" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/IsochronesResponse_features"
+          }
+        },
+        "bbox" : {
+          "type" : "array",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "maxItems" : 4,
+          "minItems" : 4
+        },
+        "type" : {
+          "type" : "string",
+          "default" : "FeatureCollection"
+        },
+        "info" : {
+          "$ref" : "#/definitions/IsochronesResponse_info"
+        }
+      }
+    },
+    "LocationsPoiResponse" : {
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "default" : "FeatureCollection"
+        },
+        "features" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/location_features"
+          }
+        },
+        "bbox" : {
+          "type" : "array",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "maxItems" : 4,
+          "minItems" : 4
+        },
+        "info" : {
+          "$ref" : "#/definitions/LocationsPoiResponse_info"
+        }
+      }
+    },
+    "coordinates" : {
+      "type" : "array",
+      "items" : {
+        "type" : "number",
+        "format" : "double"
+      }
+    },
+    "array" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/array_inner"
+      }
+    },
+    "routes" : {
+      "type" : "object",
+      "properties" : {
+        "summary" : {
+          "$ref" : "#/definitions/routes_summary"
+        },
+        "bbox" : {
+          "type" : "array",
+          "description" : "TBD",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "maxItems" : 4,
+          "minItems" : 4
+        },
+        "geometry" : {
+          "type" : "string",
+          "description" : "TBD"
+        },
+        "segments" : {
+          "type" : "array",
+          "description" : "TBD",
+          "items" : {
+            "$ref" : "#/definitions/segments"
+          },
+          "maxItems" : 1
+        },
+        "way_points" : {
+          "type" : "array",
+          "description" : "TBD",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "maxItems" : 2,
+          "minItems" : 2
+        }
+      }
+    },
+    "location_features" : {
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "default" : "Feature"
+        },
+        "geometry" : {
+          "$ref" : "#/definitions/location_features_geometry"
+        },
+        "properties" : {
+          "$ref" : "#/definitions/location_features_properties"
+        }
+      }
+    },
+    "segments" : {
+      "type" : "object",
+      "properties" : {
+        "duration" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "TBD"
+        },
+        "distance" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "TBD"
+        },
+        "steps" : {
+          "type" : "array",
+          "description" : "TBD",
+          "items" : {
+            "$ref" : "#/definitions/steps"
+          }
+        }
+      },
+      "description" : "TBD"
+    },
+    "steps" : {
+      "type" : "object",
+      "properties" : {
+        "duration" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "TBD"
+        },
+        "distance" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "TBD"
+        },
+        "instruction" : {
+          "type" : "string",
+          "description" : "TBD"
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "TBD"
+        },
+        "type" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "way_points" : {
+          "type" : "array",
+          "description" : "TBD",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "maxItems" : 2,
+          "minItems" : 2
+        }
+      }
+    },
+    "Error" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "fields" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Routeresponse_info_query" : {
+      "required" : [ "coordinates", "geometry_format", "profile" ],
+      "properties" : {
+        "geometry_format" : {
+          "type" : "string"
+        },
+        "profile" : {
+          "type" : "string"
+        },
+        "coordinates" : {
+          "type" : "array",
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "type" : "number",
+              "format" : "double"
+            },
+            "maxItems" : 2,
+            "minItems" : 2
+          },
+          "minItems" : 2
+        }
+      },
+      "description" : "TBD"
+    },
+    "Routeresponse_info" : {
+      "properties" : {
+        "service" : {
+          "type" : "string",
+          "description" : "TBD"
+        },
+        "query" : {
+          "$ref" : "#/definitions/Routeresponse_info_query"
+        },
+        "attribution" : {
+          "type" : "string"
+        },
+        "version" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      },
+      "description" : "TBD"
+    },
+    "Geocoderesponse_geometry" : {
+      "properties" : {
+        "coordinates" : {
+          "type" : "array",
+          "items" : {
+            "type" : "number",
+            "format" : "double",
+            "description" : "TBD"
+          },
+          "maxItems" : 2,
+          "minItems" : 2
+        },
+        "type" : {
+          "type" : "string"
+        }
+      },
+      "description" : "TBD"
+    },
+    "Geocoderesponse_properties" : {
+      "properties" : {
+        "country" : {
+          "type" : "string"
+        },
+        "street" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "house_number" : {
+          "type" : "string"
+        },
+        "state" : {
+          "type" : "string"
+        },
+        "postal_code" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Geocoderesponse_features" : {
+      "properties" : {
+        "geometry" : {
+          "$ref" : "#/definitions/Geocoderesponse_geometry"
+        },
+        "type" : {
+          "type" : "string"
+        },
+        "properties" : {
+          "$ref" : "#/definitions/Geocoderesponse_properties"
+        }
+      }
+    },
+    "Geocoderesponse_info_query" : {
+      "properties" : {
+        "query" : {
+          "type" : "string"
+        },
+        "limit" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "Geocoderesponse_info" : {
+      "properties" : {
+        "service" : {
+          "type" : "string"
+        },
+        "query" : {
+          "$ref" : "#/definitions/Geocoderesponse_info_query"
+        },
+        "attribution" : {
+          "type" : "string"
+        },
+        "version" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "IsochronesResponse_geometry" : {
+      "properties" : {
+        "coordinates" : {
+          "type" : "array",
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "type" : "number",
+              "format" : "double"
+            }
+          }
+        },
+        "type" : {
+          "type" : "string",
+          "default" : "Polygon"
+        }
+      }
+    },
+    "IsochronesResponse_properties" : {
+      "properties" : {
+        "center" : {
+          "type" : "array",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "maxItems" : 2,
+          "minItems" : 2
+        },
+        "group_index" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "value" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "IsochronesResponse_features" : {
+      "properties" : {
+        "geometry" : {
+          "$ref" : "#/definitions/IsochronesResponse_geometry"
+        },
+        "type" : {
+          "type" : "string",
+          "default" : "Feature"
+        },
+        "properties" : {
+          "$ref" : "#/definitions/IsochronesResponse_properties"
+        }
+      }
+    },
+    "IsochronesResponse_info_query" : {
+      "properties" : {
+        "mode" : {
+          "type" : "string"
+        },
+        "rangetype" : {
+          "type" : "string"
+        },
+        "range" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "interval" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "locations" : {
+          "type" : "array",
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "type" : "number",
+              "format" : "double"
+            }
+          }
+        }
+      }
+    },
+    "IsochronesResponse_info" : {
+      "properties" : {
+        "service" : {
+          "type" : "string"
+        },
+        "query" : {
+          "$ref" : "#/definitions/IsochronesResponse_info_query"
+        },
+        "attribution" : {
+          "type" : "string"
+        },
+        "version" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "LocationsPoiResponse_info_query_filter" : {
+      "properties" : {
+        "category_group_ids" : {
+          "type" : "array",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "catoegory_ids" : {
+          "type" : "array",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      }
+    },
+    "LocationsPoiResponse_info_query" : {
+      "properties" : {
+        "filter" : {
+          "$ref" : "#/definitions/LocationsPoiResponse_info_query_filter"
+        },
+        "radius" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "limit" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "LocationsPoiResponse_info" : {
+      "properties" : {
+        "service" : {
+          "type" : "string"
+        },
+        "version" : {
+          "type" : "string"
+        },
+        "attribution" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "query" : {
+          "$ref" : "#/definitions/LocationsPoiResponse_info_query"
+        }
+      }
+    },
+    "array_inner" : {
+      "properties" : {
+        "hello" : {
+          "type" : "string"
+        }
+      }
+    },
+    "routes_summary" : {
+      "properties" : {
+        "duration" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "TBD"
+        },
+        "distance_actual" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "TBD"
+        },
+        "distance" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "TBD"
+        }
+      },
+      "description" : "TBD"
+    },
+    "location_features_geometry" : {
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "default" : "Point"
+        },
+        "coordinates" : {
+          "type" : "array",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "maxItems" : 2,
+          "minItems" : 2
+        }
+      }
+    },
+    "location_features_properties" : {
+      "properties" : {
+        "osm_id" : {
+          "type" : "string"
+        },
+        "category" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "address" : {
+          "type" : "string"
+        },
+        "phone" : {
+          "type" : "string"
+        },
+        "website" : {
+          "type" : "string"
+        },
+        "opening_hours" : {
+          "type" : "string"
+        },
+        "wheelchair" : {
+          "type" : "string"
+        },
+        "distance" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}
