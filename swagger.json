@@ -21,7 +21,7 @@
   "paths" : {
     "/routes" : {
       "get" : {
-        "summary" : "Route Service",
+        "summary" : "Routes Service",
         "description" : "Returns a route between two or more locations for a selected profile and its settings as GeoJSON response.\n",
         "parameters" : [ {
           "name" : "coordinates",
@@ -30,8 +30,11 @@
           "required" : true,
           "type" : "array",
           "items" : {
-            "type" : "string",
-            "format" : "longitude,latitude"
+            "type" : "array",
+            "items" : {
+              "type" : "number",
+              "format" : "double"
+            }
           },
           "collectionFormat" : "pipes"
         }, {
@@ -177,7 +180,7 @@
         }
       }
     },
-    "/geocode" : {
+    "/geocoding" : {
       "get" : {
         "summary" : "Geocoding Service",
         "description" : "Returns a JSON formatted list of objects corresponding to the search input.\n",
@@ -256,8 +259,15 @@
           "in" : "query",
           "description" : "Coordinate to be inquired.",
           "required" : true,
-          "type" : "number",
-          "format" : "longitude,latitude"
+          "type" : "array",
+          "items" : {
+            "type" : "number",
+            "format" : "double",
+            "enum" : [ 48.23948, 8.9384 ]
+          },
+          "collectionFormat" : "csv",
+          "maxItems" : 2,
+          "minItems" : 2
         }, {
           "name" : "lang",
           "in" : "query",
@@ -417,6 +427,9 @@
               }
             }
           },
+          "403" : {
+            "description" : "The access to this API has been disallowed."
+          },
           "405" : {
             "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
           },
@@ -437,7 +450,7 @@
     },
     "/places" : {
       "get" : {
-        "summary" : "Location Service",
+        "summary" : "Places Service",
         "description" : "Returns Points of Interest in the area surrounding a geometry.\n",
         "parameters" : [ {
           "name" : "request",
@@ -508,7 +521,7 @@
           "name" : "radius",
           "in" : "query",
           "description" : "Search radius in meters around the given (might be limited in the backend)\n",
-          "required" : true,
+          "required" : false,
           "type" : "number",
           "maximum" : 1000,
           "minimum" : 0,
@@ -552,7 +565,7 @@
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/definitions/LocationsPoiResponse"
+                "$ref" : "#/definitions/PlacesResponse"
               }
             }
           },
@@ -565,6 +578,9 @@
               }
             }
           },
+          "403" : {
+            "description" : "The access to this API has been disallowed."
+          },
           "405" : {
             "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
           },
@@ -572,13 +588,36 @@
             "description" : "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
           },
           "500" : {
-            "description" : "An unexpected error was encountered and more detailed internal error code is provided."
+            "description" : "An unexpected error was encountered and more detailed internal error code is provided.",
+            "schema" : {
+              "$ref" : "#/definitions/inline_response_500"
+            }
           },
           "501" : {
             "description" : "Indicates that the server does not support the functionality needed to fulfill the request."
           },
           "503" : {
             "description" : "The server is currently unavailable due to overload or maintenance."
+          }
+        },
+        "x-internal" : {
+          "400" : {
+            "description" : "Unable to parse JSON request."
+          },
+          "401" : {
+            "description" : "Required parameter is missing."
+          },
+          "402" : {
+            "description" : "Invalid parameter format."
+          },
+          "403" : {
+            "description" : "Invalid parameter value."
+          },
+          "404" : {
+            "description" : "Parameter value exceeds the maximum allowed limit."
+          },
+          "499" : {
+            "description" : "Unknown internal error."
           }
         }
       }
@@ -593,32 +632,6 @@
     }
   },
   "definitions" : {
-    "Product" : {
-      "type" : "object",
-      "properties" : {
-        "product_id" : {
-          "type" : "string",
-          "description" : "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
-        },
-        "description" : {
-          "type" : "string",
-          "description" : "Description of product."
-        },
-        "display_name" : {
-          "type" : "string",
-          "description" : "Display name of product."
-        },
-        "capacity" : {
-          "type" : "string",
-          "description" : "Capacity of product. For example, 4 people."
-        },
-        "image" : {
-          "type" : "string",
-          "description" : "Image URL representing the product."
-        }
-      },
-      "title" : "Response"
-    },
     "Routeresponse" : {
       "type" : "object",
       "properties" : {
@@ -662,8 +675,32 @@
       }
     },
     "Reversegeocoderesponse" : {
-      "type" : "string",
-      "description" : "TBD"
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "default" : "FeatureCollection"
+        },
+        "features" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Reversegeocoderesponse_features"
+          }
+        },
+        "bbox" : {
+          "type" : "array",
+          "description" : "TBD",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "maxItems" : 4,
+          "minItems" : 4
+        },
+        "info" : {
+          "$ref" : "#/definitions/Reversegeocoderesponse_info"
+        }
+      }
     },
     "IsochronesResponse" : {
       "type" : "object",
@@ -692,7 +729,7 @@
         }
       }
     },
-    "LocationsPoiResponse" : {
+    "PlacesResponse" : {
       "type" : "object",
       "properties" : {
         "type" : {
@@ -715,21 +752,8 @@
           "minItems" : 4
         },
         "info" : {
-          "$ref" : "#/definitions/LocationsPoiResponse_info"
+          "$ref" : "#/definitions/PlacesResponse_info"
         }
-      }
-    },
-    "coordinates" : {
-      "type" : "array",
-      "items" : {
-        "type" : "number",
-        "format" : "double"
-      }
-    },
-    "array" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/array_inner"
       }
     },
     "routes" : {
@@ -859,6 +883,26 @@
         },
         "fields" : {
           "type" : "string"
+        }
+      }
+    },
+    "inline_response_500_error" : {
+      "properties" : {
+        "code" : {
+          "type" : "integer",
+          "format" : "int64",
+          "enum" : [ 400, 401, 402, 403, 404, 499 ]
+        },
+        "message" : {
+          "type" : "string",
+          "enum" : [ "Places request parameters are missing or invalid." ]
+        }
+      }
+    },
+    "inline_response_500" : {
+      "properties" : {
+        "error" : {
+          "$ref" : "#/definitions/inline_response_500_error"
         }
       }
     },
@@ -993,6 +1037,98 @@
         }
       }
     },
+    "Reversegeocoderesponse_geometry" : {
+      "properties" : {
+        "type" : {
+          "type" : "string"
+        },
+        "coordinates" : {
+          "type" : "array",
+          "items" : {
+            "type" : "number",
+            "format" : "double",
+            "description" : "TBD"
+          },
+          "maxItems" : 2,
+          "minItems" : 2
+        }
+      },
+      "description" : "TBD"
+    },
+    "Reversegeocoderesponse_properties" : {
+      "properties" : {
+        "country" : {
+          "type" : "string"
+        },
+        "street" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "house_number" : {
+          "type" : "string"
+        },
+        "state" : {
+          "type" : "string"
+        },
+        "postal_code" : {
+          "type" : "string"
+        },
+        "distance" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "confidence" : {
+          "type" : "number",
+          "format" : "double"
+        }
+      }
+    },
+    "Reversegeocoderesponse_features" : {
+      "properties" : {
+        "type" : {
+          "type" : "string"
+        },
+        "geometry" : {
+          "$ref" : "#/definitions/Reversegeocoderesponse_geometry"
+        },
+        "properties" : {
+          "$ref" : "#/definitions/Reversegeocoderesponse_properties"
+        }
+      }
+    },
+    "Reversegeocoderesponse_info_query" : {
+      "properties" : {
+        "location" : {
+          "type" : "string"
+        },
+        "limit" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "Reversegeocoderesponse_info" : {
+      "properties" : {
+        "service" : {
+          "type" : "string"
+        },
+        "query" : {
+          "$ref" : "#/definitions/Reversegeocoderesponse_info_query"
+        },
+        "attribution" : {
+          "type" : "string"
+        },
+        "version" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
     "IsochronesResponse_geometry" : {
       "properties" : {
         "coordinates" : {
@@ -1094,7 +1230,7 @@
         }
       }
     },
-    "LocationsPoiResponse_info_query_filter" : {
+    "PlacesResponse_info_query_filter" : {
       "properties" : {
         "category_group_ids" : {
           "type" : "array",
@@ -1112,10 +1248,10 @@
         }
       }
     },
-    "LocationsPoiResponse_info_query" : {
+    "PlacesResponse_info_query" : {
       "properties" : {
         "filter" : {
-          "$ref" : "#/definitions/LocationsPoiResponse_info_query_filter"
+          "$ref" : "#/definitions/PlacesResponse_info_query_filter"
         },
         "radius" : {
           "type" : "integer",
@@ -1127,7 +1263,7 @@
         }
       }
     },
-    "LocationsPoiResponse_info" : {
+    "PlacesResponse_info" : {
       "properties" : {
         "service" : {
           "type" : "string"
@@ -1143,14 +1279,7 @@
           "format" : "int64"
         },
         "query" : {
-          "$ref" : "#/definitions/LocationsPoiResponse_info_query"
-        }
-      }
-    },
-    "array_inner" : {
-      "properties" : {
-        "hello" : {
-          "type" : "string"
+          "$ref" : "#/definitions/PlacesResponse_info_query"
         }
       }
     },
