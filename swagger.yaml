@@ -179,7 +179,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Error"
+              $ref: "#/definitions/error"
         401:
           description: "Authorization field missing."
         405:
@@ -251,7 +251,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Error"
+              $ref: "#/definitions/error"
         401:
           description: "Authorization field missing."
         405:
@@ -317,7 +317,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Error"
+              $ref: "#/definitions/error"
         401:
           description: "Authorization field missing."
         405:
@@ -456,9 +456,7 @@ paths:
         400:
           description: "The request is incorrect and therefore can not be processed."
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
+            $ref: "#/definitions/inline_response_400"
         401:
           description: "Authorization field missing."
         403:
@@ -612,7 +610,7 @@ paths:
         400:
           description: "The request is incorrect and therefore can not be processed."
           schema:
-            $ref: "#/definitions/Error"
+            $ref: "#/definitions/inline_response_400"
         401:
           description: "Authorization field missing."
         403:
@@ -818,7 +816,7 @@ definitions:
           format: "int64"
         maxItems: 2
         minItems: 2
-  Error:
+  error:
     type: "object"
     properties:
       code:
@@ -828,6 +826,36 @@ definitions:
         type: "string"
       fields:
         type: "string"
+  info:
+    type: "object"
+    properties:
+      version:
+        type: "string"
+      timestamp:
+        type: "integer"
+        format: "int64"
+  inline_response_400_error:
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
+      fields:
+        type: "string"
+  inline_response_400_info:
+    properties:
+      version:
+        type: "string"
+      timestamp:
+        type: "integer"
+        format: "int64"
+  inline_response_400:
+    properties:
+      error:
+        $ref: "#/definitions/inline_response_400_error"
+      info:
+        $ref: "#/definitions/inline_response_400_info"
   Routeresponse_info_query:
     required:
     - "coordinates"
