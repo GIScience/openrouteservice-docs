@@ -662,8 +662,32 @@
       }
     },
     "Reversegeocoderesponse" : {
-      "type" : "string",
-      "description" : "TBD"
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "default" : "FeatureCollection"
+        },
+        "features" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Reversegeocoderesponse_features"
+          }
+        },
+        "bbox" : {
+          "type" : "array",
+          "description" : "TBD",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "maxItems" : 4,
+          "minItems" : 4
+        },
+        "info" : {
+          "$ref" : "#/definitions/Reversegeocoderesponse_info"
+        }
+      }
     },
     "IsochronesResponse" : {
       "type" : "object",
@@ -702,7 +726,7 @@
         "features" : {
           "type" : "array",
           "items" : {
-            "$ref" : "#/definitions/location_features"
+            "$ref" : "#/definitions/features"
           }
         },
         "bbox" : {
@@ -724,12 +748,6 @@
       "items" : {
         "type" : "number",
         "format" : "double"
-      }
-    },
-    "array" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/array_inner"
       }
     },
     "routes" : {
@@ -772,7 +790,7 @@
         }
       }
     },
-    "location_features" : {
+    "features" : {
       "type" : "object",
       "properties" : {
         "type" : {
@@ -780,10 +798,10 @@
           "default" : "Feature"
         },
         "geometry" : {
-          "$ref" : "#/definitions/location_features_geometry"
+          "$ref" : "#/definitions/Reversegeocoderesponse_geometry"
         },
         "properties" : {
-          "$ref" : "#/definitions/location_features_properties"
+          "$ref" : "#/definitions/features_properties"
         }
       }
     },
@@ -993,6 +1011,97 @@
         }
       }
     },
+    "Reversegeocoderesponse_geometry" : {
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "default" : "Point"
+        },
+        "coordinates" : {
+          "type" : "array",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "maxItems" : 2,
+          "minItems" : 2
+        }
+      }
+    },
+    "Reversegeocoderesponse_properties" : {
+      "properties" : {
+        "country" : {
+          "type" : "string"
+        },
+        "state" : {
+          "type" : "string"
+        },
+        "city" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "distance" : {
+          "type" : "string"
+        },
+        "confidence" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Reversegeocoderesponse_features" : {
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "default" : "Feature"
+        },
+        "geometry" : {
+          "$ref" : "#/definitions/Reversegeocoderesponse_geometry"
+        },
+        "properties" : {
+          "$ref" : "#/definitions/Reversegeocoderesponse_properties"
+        }
+      }
+    },
+    "Reversegeocoderesponse_info_query" : {
+      "properties" : {
+        "limit" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "location" : {
+          "type" : "array",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "maxItems" : 2,
+          "minItems" : 2
+        }
+      }
+    },
+    "Reversegeocoderesponse_info" : {
+      "properties" : {
+        "service" : {
+          "type" : "string",
+          "default" : "geocoding"
+        },
+        "query" : {
+          "$ref" : "#/definitions/Reversegeocoderesponse_info_query"
+        },
+        "attribution" : {
+          "type" : "string"
+        },
+        "version" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
     "IsochronesResponse_geometry" : {
       "properties" : {
         "coordinates" : {
@@ -1147,13 +1256,6 @@
         }
       }
     },
-    "array_inner" : {
-      "properties" : {
-        "hello" : {
-          "type" : "string"
-        }
-      }
-    },
     "routes_summary" : {
       "properties" : {
         "duration" : {
@@ -1174,24 +1276,7 @@
       },
       "description" : "TBD"
     },
-    "location_features_geometry" : {
-      "properties" : {
-        "type" : {
-          "type" : "string",
-          "default" : "Point"
-        },
-        "coordinates" : {
-          "type" : "array",
-          "items" : {
-            "type" : "number",
-            "format" : "double"
-          },
-          "maxItems" : 2,
-          "minItems" : 2
-        }
-      }
-    },
-    "location_features_properties" : {
+    "features_properties" : {
       "properties" : {
         "osm_id" : {
           "type" : "string"
