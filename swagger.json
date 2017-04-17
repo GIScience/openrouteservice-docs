@@ -155,7 +155,7 @@
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/definitions/Error"
+                "$ref" : "#/definitions/error"
               }
             }
           },
@@ -228,7 +228,7 @@
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/definitions/Error"
+                "$ref" : "#/definitions/error"
               }
             }
           },
@@ -294,7 +294,7 @@
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/definitions/Error"
+                "$ref" : "#/definitions/error"
               }
             }
           },
@@ -420,10 +420,7 @@
           "400" : {
             "description" : "The request is incorrect and therefore can not be processed.",
             "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/Error"
-              }
+              "$ref" : "#/definitions/inline_response_400"
             }
           },
           "401" : {
@@ -574,7 +571,7 @@
           "400" : {
             "description" : "The request is incorrect and therefore can not be processed.",
             "schema" : {
-              "$ref" : "#/definitions/Error"
+              "$ref" : "#/definitions/inline_response_400"
             }
           },
           "401" : {
@@ -850,7 +847,7 @@
         }
       }
     },
-    "Error" : {
+    "error" : {
       "type" : "object",
       "properties" : {
         "code" : {
@@ -862,6 +859,53 @@
         },
         "fields" : {
           "type" : "string"
+        }
+      }
+    },
+    "info" : {
+      "type" : "object",
+      "properties" : {
+        "version" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "inline_response_400_error" : {
+      "properties" : {
+        "code" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "fields" : {
+          "type" : "string"
+        }
+      }
+    },
+    "inline_response_400_info" : {
+      "properties" : {
+        "version" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "inline_response_400" : {
+      "properties" : {
+        "error" : {
+          "$ref" : "#/definitions/inline_response_400_error"
+        },
+        "info" : {
+          "$ref" : "#/definitions/inline_response_400_info"
         }
       }
     },
