@@ -177,9 +177,7 @@ paths:
         400:
           description: "The request is incorrect and therefore can not be processed."
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/error"
+            $ref: "#/definitions/error"
         401:
           description: "Authorization field missing."
         405:
@@ -492,10 +490,9 @@ paths:
       parameters:
       - name: "request"
         in: "query"
-        description: "\"pois\" will return POI geometry as well as requested details.\
-          \ \"category_stats\" returns a POI count for each requested category. \"\
-          category_list\" returns a list of all categories. (only the id parameter\
-          \ will be considered)\n"
+        description: "`pois` will return POI geometry as well as requested details.\
+          \ `category_stats` returns a POI count for each requested category. `category_list`\
+          \ returns a list of all categories. (only the id parameter will be considered)\n"
         required: true
         type: "string"
         enum:
@@ -658,6 +655,117 @@ definitions:
       info:
         $ref: "#/definitions/Routeresponse_info"
     title: "Response"
+  routes:
+    type: "object"
+    properties:
+      summary:
+        $ref: "#/definitions/routes_summary"
+      bbox:
+        type: "array"
+        description: "TBD"
+        items:
+          type: "number"
+          format: "double"
+        maxItems: 4
+        minItems: 4
+      geometry:
+        type: "string"
+        description: "TBD"
+      segments:
+        type: "array"
+        description: "TBD"
+        items:
+          $ref: "#/definitions/segments"
+        maxItems: 1
+      way_points:
+        type: "array"
+        description: "TBD"
+        items:
+          type: "integer"
+          format: "int64"
+        maxItems: 2
+        minItems: 2
+  segments:
+    type: "object"
+    properties:
+      duration:
+        type: "number"
+        format: "double"
+        description: "TBD"
+      distance:
+        type: "number"
+        format: "double"
+        description: "TBD"
+      steps:
+        type: "array"
+        description: "TBD"
+        items:
+          $ref: "#/definitions/steps"
+    description: "TBD"
+  steps:
+    type: "object"
+    properties:
+      duration:
+        type: "number"
+        format: "double"
+        description: "TBD"
+      distance:
+        type: "number"
+        format: "double"
+        description: "TBD"
+      instruction:
+        type: "string"
+        description: "TBD"
+      name:
+        type: "string"
+        description: "TBD"
+      type:
+        type: "integer"
+        format: "int64"
+      way_points:
+        type: "array"
+        description: "TBD"
+        items:
+          type: "integer"
+          format: "int64"
+        maxItems: 2
+        minItems: 2
+  Routeresponse_info:
+    properties:
+      service:
+        type: "string"
+        description: "TBD"
+      query:
+        $ref: "#/definitions/Routeresponse_info_query"
+      attribution:
+        type: "string"
+      version:
+        type: "string"
+      timestamp:
+        type: "integer"
+        format: "int64"
+    description: "TBD"
+  Routeresponse_info_query:
+    required:
+    - "coordinates"
+    - "geometry_format"
+    - "profile"
+    properties:
+      geometry_format:
+        type: "string"
+      profile:
+        type: "string"
+      coordinates:
+        type: "array"
+        items:
+          type: "array"
+          items:
+            type: "number"
+            format: "double"
+          maxItems: 2
+          minItems: 2
+        minItems: 2
+    description: "TBD"
   Geocoderesponse:
     type: "object"
     properties:
@@ -796,36 +904,6 @@ definitions:
         minItems: 4
       info:
         $ref: "#/definitions/LocationsPoiResponse_info"
-  routes:
-    type: "object"
-    properties:
-      summary:
-        $ref: "#/definitions/routes_summary"
-      bbox:
-        type: "array"
-        description: "TBD"
-        items:
-          type: "number"
-          format: "double"
-        maxItems: 4
-        minItems: 4
-      geometry:
-        type: "string"
-        description: "TBD"
-      segments:
-        type: "array"
-        description: "TBD"
-        items:
-          $ref: "#/definitions/segments"
-        maxItems: 1
-      way_points:
-        type: "array"
-        description: "TBD"
-        items:
-          type: "integer"
-          format: "int64"
-        maxItems: 2
-        minItems: 2
   location_features:
     type: "object"
     properties:
@@ -836,97 +914,6 @@ definitions:
         $ref: "#/definitions/location_features_geometry"
       properties:
         $ref: "#/definitions/location_features_properties"
-  segments:
-    type: "object"
-    properties:
-      duration:
-        type: "number"
-        format: "double"
-        description: "TBD"
-      distance:
-        type: "number"
-        format: "double"
-        description: "TBD"
-      steps:
-        type: "array"
-        description: "TBD"
-        items:
-          $ref: "#/definitions/steps"
-    description: "TBD"
-  steps:
-    type: "object"
-    properties:
-      duration:
-        type: "number"
-        format: "double"
-        description: "TBD"
-      distance:
-        type: "number"
-        format: "double"
-        description: "TBD"
-      instruction:
-        type: "string"
-        description: "TBD"
-      name:
-        type: "string"
-        description: "TBD"
-      type:
-        type: "integer"
-        format: "int64"
-      way_points:
-        type: "array"
-        description: "TBD"
-        items:
-          type: "integer"
-          format: "int64"
-        maxItems: 2
-        minItems: 2
-  error:
-    type: "object"
-    properties:
-      code:
-        type: "integer"
-        format: "int32"
-      message:
-        type: "string"
-      fields:
-        type: "string"
-  Routeresponse_info_query:
-    required:
-    - "coordinates"
-    - "geometry_format"
-    - "profile"
-    properties:
-      geometry_format:
-        type: "string"
-      profile:
-        type: "string"
-      coordinates:
-        type: "array"
-        items:
-          type: "array"
-          items:
-            type: "number"
-            format: "double"
-          maxItems: 2
-          minItems: 2
-        minItems: 2
-    description: "TBD"
-  Routeresponse_info:
-    properties:
-      service:
-        type: "string"
-        description: "TBD"
-      query:
-        $ref: "#/definitions/Routeresponse_info_query"
-      attribution:
-        type: "string"
-      version:
-        type: "string"
-      timestamp:
-        type: "integer"
-        format: "int64"
-    description: "TBD"
   Geocoderesponse_geometry:
     properties:
       coordinates:
@@ -1132,21 +1119,13 @@ definitions:
         type: "string"
       distance:
         type: "string"
-  info:
-    type: "object"
-    properties:
-      version:
-        type: "string"
-      timestamp:
-        type: "integer"
-        format: "int64"
-  inline_response_400:
+  error:
     properties:
       error:
-        $ref: "#/definitions/inline_response_400_error"
+        $ref: "#/definitions/error_error"
       info:
-        $ref: "#/definitions/inline_response_400_info"
-  inline_response_400_error:
+        $ref: "#/definitions/error_info"
+  error_error:
     properties:
       code:
         type: "integer"
@@ -1155,7 +1134,7 @@ definitions:
         type: "string"
       fields:
         type: "string"
-  inline_response_400_info:
+  error_info:
     properties:
       version:
         type: "string"
