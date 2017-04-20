@@ -21,7 +21,7 @@
   "paths" : {
     "/directions" : {
       "get" : {
-        "summary" : "Route Service",
+        "summary" : "Routing Service",
         "description" : "Returns a route between two or more locations for a selected profile and its settings as GeoJSON response.\n",
         "parameters" : [ {
           "name" : "coordinates",
@@ -84,7 +84,7 @@
         }, {
           "name" : "geometry_simplify",
           "in" : "query",
-          "description" : "Specifies whether to simplify the geometry. True will automatically be set to False if extra_info parameter is specified.",
+          "description" : "Specifies whether to simplify the geometry. `True` will automatically be set to `False` if `extra_info` parameter is specified.",
           "required" : false,
           "type" : "boolean",
           "default" : false,
@@ -101,7 +101,7 @@
         }, {
           "name" : "instructions_format",
           "in" : "query",
-          "description" : "Select _html_ for more verbose instructions.",
+          "description" : "Select `html` for more verbose instructions.",
           "required" : false,
           "type" : "string",
           "default" : "text",
@@ -155,9 +155,12 @@
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/definitions/Error"
+                "$ref" : "#/definitions/error"
               }
             }
+          },
+          "401" : {
+            "description" : "Authorization field missing."
           },
           "405" : {
             "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
@@ -166,7 +169,7 @@
             "description" : "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
           },
           "500" : {
-            "description" : "An unexpected error was encountered and more detailed internal error code is provided."
+            "description" : "An unexpected error was encountered and more detailed internal error\ncode is provided.\n\n| Internal Code | Description                                        |\n|:-------------:|----------------------------------------------------|\n|      200      | Unable to parse JSON request.                      |\n|      201      | Required parameter is missing.                     |\n|      202      | Invalid parameter format.                          |\n|      203      | Invalid parameter value.                           |\n|      204      | Parameter value exceeds the maximum allowed limit. |\n|      299      | Unknown internal error.                            |\n"
           },
           "501" : {
             "description" : "Indicates that the server does not support the functionality needed to fulfill the request."
@@ -225,9 +228,12 @@
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/definitions/Error"
+                "$ref" : "#/definitions/error"
               }
             }
+          },
+          "401" : {
+            "description" : "Authorization field missing."
           },
           "405" : {
             "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
@@ -236,7 +242,7 @@
             "description" : "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
           },
           "500" : {
-            "description" : "An unexpected error was encountered and more detailed internal error code is provided."
+            "description" : "An unexpected error was encountered and more detailed internal error\ncode is provided.\n\n| Internal Code | Description                                        |\n|:-------------:|----------------------------------------------------|\n|      100      | Unable to parse JSON request.                      |\n|      101      | Required parameter is missing.                     |\n|      102      | Invalid parameter format.                          |\n|      103      | Invalid parameter value.                           |\n|      104      | Parameter value exceeds the maximum allowed limit. |\n|      199      | Unknown internal error.                            |\n"
           },
           "501" : {
             "description" : "Indicates that the server does not support the functionality needed to fulfill the request."
@@ -288,9 +294,12 @@
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/definitions/Error"
+                "$ref" : "#/definitions/error"
               }
             }
+          },
+          "401" : {
+            "description" : "Authorization field missing."
           },
           "405" : {
             "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
@@ -299,7 +308,7 @@
             "description" : "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
           },
           "500" : {
-            "description" : "An unexpected error was encountered and more detailed internal error code is provided."
+            "description" : "An unexpected error was encountered and more detailed internal error\ncode is provided.\n\n| Internal Code | Description                                        |\n|:-------------:|----------------------------------------------------|\n|      100      | Unable to parse JSON request.                      |\n|      101      | Required parameter is missing.                     |\n|      102      | Invalid parameter format.                          |\n|      103      | Invalid parameter value.                           |\n|      104      | Parameter value exceeds the maximum allowed limit. |\n|      199      | Unknown internal error.                            |\n"
           },
           "501" : {
             "description" : "Indicates that the server does not support the functionality needed to fulfill the request."
@@ -413,9 +422,15 @@
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/definitions/Error"
+                "$ref" : "#/definitions/error"
               }
             }
+          },
+          "401" : {
+            "description" : "Authorization field missing."
+          },
+          "403" : {
+            "description" : "Access to this API has been disallowed."
           },
           "405" : {
             "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
@@ -424,7 +439,7 @@
             "description" : "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
           },
           "500" : {
-            "description" : "An unexpected error was encountered and more detailed internal error code is provided."
+            "description" : "An unexpected error was encountered and more detailed internal error\ncode is provided.\n\n| Internal Code | Description                                        |\n|:-------------:|----------------------------------------------------|\n|      300      | Unable to parse JSON request.                      |\n|      301      | Required parameter is missing.                     |\n|      302      | Invalid parameter format.                          |\n|      303      | Invalid parameter value.                           |\n|      304      | Parameter value exceeds the maximum allowed limit. |\n|      305      | PRequested feature is not supported.               |\n|      399      | Unknown internal error.                            |\n"
           },
           "501" : {
             "description" : "Indicates that the server does not support the functionality needed to fulfill the request."
@@ -561,9 +576,15 @@
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/definitions/Error"
+                "$ref" : "#/definitions/error"
               }
             }
+          },
+          "401" : {
+            "description" : "Authorization field missing."
+          },
+          "403" : {
+            "description" : "Access to this API has been disallowed."
           },
           "405" : {
             "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
@@ -572,7 +593,7 @@
             "description" : "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
           },
           "500" : {
-            "description" : "An unexpected error was encountered and more detailed internal error code is provided."
+            "description" : "An unexpected error was encountered and more detailed internal error\ncode is provided.\n\n| Internal Code | Description                                        |\n|:-------------:|----------------------------------------------------|\n|      400      | Unable to parse JSON request.                      |\n|      401      | Required parameter is missing.                     |\n|      402      | Invalid parameter format.                          |\n|      403      | Invalid parameter value.                           |\n|      404      | Parameter value exceeds the maximum allowed limit. |\n|      499      | Unknown internal error.                            |\n"
           },
           "501" : {
             "description" : "Indicates that the server does not support the functionality needed to fulfill the request."
@@ -586,39 +607,13 @@
   },
   "securityDefinitions" : {
     "UserSecurity" : {
-      "description" : "Add your API Key as the value of the _api_\\__key_ parameter to your GET request. (In this Demo you can click the Authentication Button.)",
+      "description" : "Add your API Key as the value of the *api_key* parameter to your GET\nrequest. (In this Demo you can click the Authentication Button.)\n",
       "type" : "apiKey",
       "name" : "api_key",
       "in" : "query"
     }
   },
   "definitions" : {
-    "Product" : {
-      "type" : "object",
-      "properties" : {
-        "product_id" : {
-          "type" : "string",
-          "description" : "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
-        },
-        "description" : {
-          "type" : "string",
-          "description" : "Description of product."
-        },
-        "display_name" : {
-          "type" : "string",
-          "description" : "Display name of product."
-        },
-        "capacity" : {
-          "type" : "string",
-          "description" : "Capacity of product. For example, 4 people."
-        },
-        "image" : {
-          "type" : "string",
-          "description" : "Image URL representing the product."
-        }
-      },
-      "title" : "Response"
-    },
     "Routeresponse" : {
       "type" : "object",
       "properties" : {
@@ -662,8 +657,123 @@
       }
     },
     "Reversegeocoderesponse" : {
-      "type" : "string",
-      "description" : "TBD"
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "default" : "FeatureCollection"
+        },
+        "features" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Reversegeocoderesponse_features"
+          }
+        },
+        "bbox" : {
+          "type" : "array",
+          "description" : "TBD",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "maxItems" : 4,
+          "minItems" : 4
+        },
+        "info" : {
+          "$ref" : "#/definitions/Reversegeocoderesponse_info"
+        }
+      }
+    },
+    "Reversegeocoderesponse_geometry" : {
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "default" : "Point"
+        },
+        "coordinates" : {
+          "type" : "array",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "maxItems" : 2,
+          "minItems" : 2
+        }
+      }
+    },
+    "Reversegeocoderesponse_properties" : {
+      "properties" : {
+        "country" : {
+          "type" : "string"
+        },
+        "state" : {
+          "type" : "string"
+        },
+        "city" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "distance" : {
+          "type" : "string"
+        },
+        "confidence" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Reversegeocoderesponse_features" : {
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "default" : "Feature"
+        },
+        "geometry" : {
+          "$ref" : "#/definitions/Reversegeocoderesponse_geometry"
+        },
+        "properties" : {
+          "$ref" : "#/definitions/Reversegeocoderesponse_properties"
+        }
+      }
+    },
+    "Reversegeocoderesponse_info_query" : {
+      "properties" : {
+        "limit" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "location" : {
+          "type" : "array",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "maxItems" : 2,
+          "minItems" : 2
+        }
+      }
+    },
+    "Reversegeocoderesponse_info" : {
+      "properties" : {
+        "service" : {
+          "type" : "string",
+          "default" : "geocoding"
+        },
+        "query" : {
+          "$ref" : "#/definitions/Reversegeocoderesponse_info_query"
+        },
+        "attribution" : {
+          "type" : "string"
+        },
+        "version" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
     },
     "IsochronesResponse" : {
       "type" : "object",
@@ -717,19 +827,6 @@
         "info" : {
           "$ref" : "#/definitions/LocationsPoiResponse_info"
         }
-      }
-    },
-    "coordinates" : {
-      "type" : "array",
-      "items" : {
-        "type" : "number",
-        "format" : "double"
-      }
-    },
-    "array" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/array_inner"
       }
     },
     "routes" : {
@@ -847,7 +944,7 @@
         }
       }
     },
-    "Error" : {
+    "error" : {
       "type" : "object",
       "properties" : {
         "code" : {
@@ -1094,39 +1191,6 @@
         }
       }
     },
-    "LocationsPoiResponse_info_query_filter" : {
-      "properties" : {
-        "category_group_ids" : {
-          "type" : "array",
-          "items" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        },
-        "catoegory_ids" : {
-          "type" : "array",
-          "items" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }
-      }
-    },
-    "LocationsPoiResponse_info_query" : {
-      "properties" : {
-        "filter" : {
-          "$ref" : "#/definitions/LocationsPoiResponse_info_query_filter"
-        },
-        "radius" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "limit" : {
-          "type" : "integer",
-          "format" : "int64"
-        }
-      }
-    },
     "LocationsPoiResponse_info" : {
       "properties" : {
         "service" : {
@@ -1147,10 +1211,36 @@
         }
       }
     },
-    "array_inner" : {
+    "LocationsPoiResponse_info_query" : {
       "properties" : {
-        "hello" : {
-          "type" : "string"
+        "filter" : {
+          "$ref" : "#/definitions/LocationsPoiResponse_info_query_filter"
+        },
+        "radius" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "limit" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "LocationsPoiResponse_info_query_filter" : {
+      "properties" : {
+        "category_group_ids" : {
+          "type" : "array",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "catoegory_ids" : {
+          "type" : "array",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
         }
       }
     },
@@ -1219,6 +1309,53 @@
         },
         "distance" : {
           "type" : "string"
+        }
+      }
+    },
+    "info" : {
+      "type" : "object",
+      "properties" : {
+        "version" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "inline_response_400" : {
+      "properties" : {
+        "error" : {
+          "$ref" : "#/definitions/inline_response_400_error"
+        },
+        "info" : {
+          "$ref" : "#/definitions/inline_response_400_info"
+        }
+      }
+    },
+    "inline_response_400_error" : {
+      "properties" : {
+        "code" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "fields" : {
+          "type" : "string"
+        }
+      }
+    },
+    "inline_response_400_info" : {
+      "properties" : {
+        "version" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "integer",
+          "format" : "int64"
         }
       }
     }
