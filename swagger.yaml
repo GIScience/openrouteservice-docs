@@ -188,8 +188,8 @@ paths:
             \ the data provided in the request exceeds the capacity limit."
         500:
           description: "An unexpected error was encountered and more detailed internal\
-            \ error\ncode is provided.\n\n| Internal Code | Description          \
-            \                              |\n|:-------------:|----------------------------------------------------|\n\
+            \ error\ncode is provided.\n| Internal Code | Description            \
+            \                            |\n|:-------------:|----------------------------------------------------|\n\
             |      200      | Unable to parse JSON request.                      |\n\
             |      201      | Required parameter is missing.                     |\n\
             |      202      | Invalid parameter format.                          |\n\
@@ -646,17 +646,15 @@ securityDefinitions:
     in: "query"
 definitions:
   Routeresponse:
-    type: "object"
     properties:
       routes:
         type: "array"
         items:
-          $ref: "#/definitions/routes"
+          $ref: "#/definitions/Routeresponse_routes"
       info:
         $ref: "#/definitions/Routeresponse_info"
-    title: "Response"
-  routes:
-    type: "object"
+    title: "Route Response Object"
+  Routeresponse_routes:
     properties:
       summary:
         $ref: "#/definitions/routes_summary"
@@ -685,8 +683,24 @@ definitions:
           format: "int64"
         maxItems: 2
         minItems: 2
+    title: "routes object"
+  routes_summary:
+    properties:
+      duration:
+        type: "number"
+        format: "double"
+        description: "TBD"
+      distance_actual:
+        type: "number"
+        format: "double"
+        description: "TBD"
+      distance:
+        type: "number"
+        format: "double"
+        description: "TBD"
+    title: "summary object"
+    description: "TBD"
   segments:
-    type: "object"
     properties:
       duration:
         type: "number"
@@ -701,9 +715,9 @@ definitions:
         description: "TBD"
         items:
           $ref: "#/definitions/steps"
+    title: "segments object"
     description: "TBD"
   steps:
-    type: "object"
     properties:
       duration:
         type: "number"
@@ -730,6 +744,7 @@ definitions:
           format: "int64"
         maxItems: 2
         minItems: 2
+    title: "steps object"
   Routeresponse_info:
     properties:
       service:
@@ -744,6 +759,7 @@ definitions:
       timestamp:
         type: "integer"
         format: "int64"
+    title: "info object"
     description: "TBD"
   Routeresponse_info_query:
     required:
@@ -765,9 +781,9 @@ definitions:
           maxItems: 2
           minItems: 2
         minItems: 2
+    title: "query object"
     description: "TBD"
   Geocoderesponse:
-    type: "object"
     properties:
       features:
         type: "array"
@@ -785,8 +801,68 @@ definitions:
         type: "string"
       info:
         $ref: "#/definitions/Geocoderesponse_info"
+    title: "Geocode Response Object"
+  Geocoderesponse_features:
+    properties:
+      geometry:
+        $ref: "#/definitions/Geocoderesponse_geometry"
+      type:
+        type: "string"
+      properties:
+        $ref: "#/definitions/Geocoderesponse_properties"
+    title: "features object"
+  Geocoderesponse_geometry:
+    properties:
+      coordinates:
+        type: "array"
+        items:
+          type: "number"
+          format: "double"
+          description: "TBD"
+        maxItems: 2
+        minItems: 2
+      type:
+        type: "string"
+    title: "geometry object"
+    description: "TBD"
+  Geocoderesponse_properties:
+    properties:
+      country:
+        type: "string"
+      street:
+        type: "string"
+      name:
+        type: "string"
+      house_number:
+        type: "string"
+      state:
+        type: "string"
+      postal_code:
+        type: "string"
+    title: "porperties object"
+  Geocoderesponse_info:
+    properties:
+      service:
+        type: "string"
+      query:
+        $ref: "#/definitions/Geocoderesponse_info_query"
+      attribution:
+        type: "string"
+      version:
+        type: "string"
+      timestamp:
+        type: "integer"
+        format: "int64"
+    title: "info object"
+  Geocoderesponse_info_query:
+    properties:
+      query:
+        type: "string"
+      limit:
+        type: "integer"
+        format: "int64"
+    title: "query object"
   Reversegeocoderesponse:
-    type: "object"
     properties:
       type:
         type: "string"
@@ -805,6 +881,17 @@ definitions:
         minItems: 4
       info:
         $ref: "#/definitions/Reversegeocoderesponse_info"
+    title: "Reverse Geocode Response Object"
+  Reversegeocoderesponse_features:
+    properties:
+      type:
+        type: "string"
+        default: "Feature"
+      geometry:
+        $ref: "#/definitions/Reversegeocoderesponse_geometry"
+      properties:
+        $ref: "#/definitions/Reversegeocoderesponse_properties"
+    title: "features object"
   Reversegeocoderesponse_geometry:
     properties:
       type:
@@ -817,6 +904,7 @@ definitions:
           format: "double"
         maxItems: 2
         minItems: 2
+    title: "geometry object"
   Reversegeocoderesponse_properties:
     properties:
       country:
@@ -831,27 +919,7 @@ definitions:
         type: "string"
       confidence:
         type: "string"
-  Reversegeocoderesponse_features:
-    properties:
-      type:
-        type: "string"
-        default: "Feature"
-      geometry:
-        $ref: "#/definitions/Reversegeocoderesponse_geometry"
-      properties:
-        $ref: "#/definitions/Reversegeocoderesponse_properties"
-  Reversegeocoderesponse_info_query:
-    properties:
-      limit:
-        type: "integer"
-        format: "int64"
-      location:
-        type: "array"
-        items:
-          type: "number"
-          format: "double"
-        maxItems: 2
-        minItems: 2
+    title: "porperties object"
   Reversegeocoderesponse_info:
     properties:
       service:
@@ -866,6 +934,20 @@ definitions:
       timestamp:
         type: "integer"
         format: "int64"
+    title: "info object"
+  Reversegeocoderesponse_info_query:
+    properties:
+      limit:
+        type: "integer"
+        format: "int64"
+      location:
+        type: "array"
+        items:
+          type: "number"
+          format: "double"
+        maxItems: 2
+        minItems: 2
+    title: "query object"
   IsochronesResponse:
     type: "object"
     properties:
@@ -885,90 +967,17 @@ definitions:
         default: "FeatureCollection"
       info:
         $ref: "#/definitions/IsochronesResponse_info"
-  LocationsPoiResponse:
-    type: "object"
+    title: "Isochrones Response Object"
+  IsochronesResponse_features:
     properties:
-      type:
-        type: "string"
-        default: "FeatureCollection"
-      features:
-        type: "array"
-        items:
-          $ref: "#/definitions/location_features"
-      bbox:
-        type: "array"
-        items:
-          type: "number"
-          format: "double"
-        maxItems: 4
-        minItems: 4
-      info:
-        $ref: "#/definitions/LocationsPoiResponse_info"
-  location_features:
-    type: "object"
-    properties:
+      geometry:
+        $ref: "#/definitions/IsochronesResponse_geometry"
       type:
         type: "string"
         default: "Feature"
-      geometry:
-        $ref: "#/definitions/location_features_geometry"
       properties:
-        $ref: "#/definitions/location_features_properties"
-  Geocoderesponse_geometry:
-    properties:
-      coordinates:
-        type: "array"
-        items:
-          type: "number"
-          format: "double"
-          description: "TBD"
-        maxItems: 2
-        minItems: 2
-      type:
-        type: "string"
-    description: "TBD"
-  Geocoderesponse_properties:
-    properties:
-      country:
-        type: "string"
-      street:
-        type: "string"
-      name:
-        type: "string"
-      house_number:
-        type: "string"
-      state:
-        type: "string"
-      postal_code:
-        type: "string"
-  Geocoderesponse_features:
-    properties:
-      geometry:
-        $ref: "#/definitions/Geocoderesponse_geometry"
-      type:
-        type: "string"
-      properties:
-        $ref: "#/definitions/Geocoderesponse_properties"
-  Geocoderesponse_info_query:
-    properties:
-      query:
-        type: "string"
-      limit:
-        type: "integer"
-        format: "int64"
-  Geocoderesponse_info:
-    properties:
-      service:
-        type: "string"
-      query:
-        $ref: "#/definitions/Geocoderesponse_info_query"
-      attribution:
-        type: "string"
-      version:
-        type: "string"
-      timestamp:
-        type: "integer"
-        format: "int64"
+        $ref: "#/definitions/IsochronesResponse_properties"
+    title: "features object"
   IsochronesResponse_geometry:
     properties:
       coordinates:
@@ -981,6 +990,7 @@ definitions:
       type:
         type: "string"
         default: "Polygon"
+    title: "geometry object"
   IsochronesResponse_properties:
     properties:
       center:
@@ -996,15 +1006,21 @@ definitions:
       value:
         type: "integer"
         format: "int64"
-  IsochronesResponse_features:
+    title: "porperties object"
+  IsochronesResponse_info:
     properties:
-      geometry:
-        $ref: "#/definitions/IsochronesResponse_geometry"
-      type:
+      service:
         type: "string"
-        default: "Feature"
-      properties:
-        $ref: "#/definitions/IsochronesResponse_properties"
+      query:
+        $ref: "#/definitions/IsochronesResponse_info_query"
+      attribution:
+        type: "string"
+      version:
+        type: "string"
+      timestamp:
+        type: "integer"
+        format: "int64"
+    title: "info object"
   IsochronesResponse_info_query:
     properties:
       mode:
@@ -1024,69 +1040,38 @@ definitions:
           items:
             type: "number"
             format: "double"
-  IsochronesResponse_info:
+    title: "query object"
+  LocationsPoiResponse:
+    type: "object"
     properties:
-      service:
+      type:
         type: "string"
-      query:
-        $ref: "#/definitions/IsochronesResponse_info_query"
-      attribution:
-        type: "string"
-      version:
-        type: "string"
-      timestamp:
-        type: "integer"
-        format: "int64"
-  LocationsPoiResponse_info:
-    properties:
-      service:
-        type: "string"
-      version:
-        type: "string"
-      attribution:
-        type: "string"
-      timestamp:
-        type: "integer"
-        format: "int64"
-      query:
-        $ref: "#/definitions/LocationsPoiResponse_info_query"
-  LocationsPoiResponse_info_query:
-    properties:
-      filter:
-        $ref: "#/definitions/LocationsPoiResponse_info_query_filter"
-      radius:
-        type: "integer"
-        format: "int64"
-      limit:
-        type: "integer"
-        format: "int64"
-  LocationsPoiResponse_info_query_filter:
-    properties:
-      category_group_ids:
+        default: "FeatureCollection"
+      features:
         type: "array"
         items:
-          type: "integer"
-          format: "int64"
-      catoegory_ids:
+          $ref: "#/definitions/location_features"
+      bbox:
         type: "array"
         items:
-          type: "integer"
-          format: "int64"
-  routes_summary:
+          type: "number"
+          format: "double"
+        maxItems: 4
+        minItems: 4
+      info:
+        $ref: "#/definitions/LocationsPoiResponse_info"
+    title: "Places Poi Response Object"
+  location_features:
+    type: "object"
     properties:
-      duration:
-        type: "number"
-        format: "double"
-        description: "TBD"
-      distance_actual:
-        type: "number"
-        format: "double"
-        description: "TBD"
-      distance:
-        type: "number"
-        format: "double"
-        description: "TBD"
-    description: "TBD"
+      type:
+        type: "string"
+        default: "Feature"
+      geometry:
+        $ref: "#/definitions/location_features_geometry"
+      properties:
+        $ref: "#/definitions/location_features_properties"
+    title: "features object"
   location_features_geometry:
     properties:
       type:
@@ -1099,6 +1084,7 @@ definitions:
           format: "double"
         maxItems: 2
         minItems: 2
+    title: "geometry object"
   location_features_properties:
     properties:
       osm_id:
@@ -1119,12 +1105,52 @@ definitions:
         type: "string"
       distance:
         type: "string"
+    title: "properties object"
+  LocationsPoiResponse_info:
+    properties:
+      service:
+        type: "string"
+      version:
+        type: "string"
+      attribution:
+        type: "string"
+      timestamp:
+        type: "integer"
+        format: "int64"
+      query:
+        $ref: "#/definitions/LocationsPoiResponse_info_query"
+    title: "info object"
+  LocationsPoiResponse_info_query:
+    properties:
+      filter:
+        $ref: "#/definitions/LocationsPoiResponse_info_query_filter"
+      radius:
+        type: "integer"
+        format: "int64"
+      limit:
+        type: "integer"
+        format: "int64"
+    title: "query object"
+  LocationsPoiResponse_info_query_filter:
+    properties:
+      category_group_ids:
+        type: "array"
+        items:
+          type: "integer"
+          format: "int64"
+      catoegory_ids:
+        type: "array"
+        items:
+          type: "integer"
+          format: "int64"
+    title: "filter object"
   error:
     properties:
       error:
         $ref: "#/definitions/error_error"
       info:
         $ref: "#/definitions/error_info"
+    title: "STANDARD HTML ERROR"
   error_error:
     properties:
       code:
@@ -1134,6 +1160,7 @@ definitions:
         type: "string"
       fields:
         type: "string"
+    title: "error object"
   error_info:
     properties:
       version:
@@ -1141,3 +1168,4 @@ definitions:
       timestamp:
         type: "integer"
         format: "int64"
+    title: "info object"
