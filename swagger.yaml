@@ -1236,6 +1236,7 @@ definitions:
         $ref: "#/definitions/LocationsPoiResponse_info_query_filter"
       details:
         type: "string"
+        example: "address|contact|attributes"
         enum:
         - "address"
         - "contact"
