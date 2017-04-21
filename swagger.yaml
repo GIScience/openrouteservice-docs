@@ -1224,11 +1224,13 @@ definitions:
         items:
           type: "integer"
           format: "int64"
+          example: 560
       catoegory_ids:
         type: "array"
         items:
           type: "integer"
           format: "int64"
+          example: 561
     title: "filter object"
   body:
     properties:
@@ -1258,9 +1260,11 @@ definitions:
         description: "The pattern for this bbox string is `\"minlon,minlat,maxlon,maxlat\"\
           `"
       geometry:
-        $ref: "#/definitions/IsochronesResponse_geometry"
+        $ref: "#/definitions/geometry"
     description: "**You have to specify at least one of** `bbox` **and** `geometry`\
       \ !\n"
+  geometry:
+    description: "The geometry can be either a Point , LineString or Polygon."
   error:
     properties:
       error:
