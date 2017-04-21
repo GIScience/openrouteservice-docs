@@ -156,10 +156,10 @@ paths:
         uniqueItems: true
       - name: "options"
         in: "query"
-        description: "For advanced options formatted as json. Add this object as string."
+        description: "For advanced options formatted as json object. For structure\
+          \ refer to the **options model** below."
         required: false
-        type: "number"
-        format: "double"
+        type: "string"
       - name: "id"
         in: "query"
         description: "Arbitrary identification string of the request reflected in\
@@ -188,8 +188,8 @@ paths:
             \ the data provided in the request exceeds the capacity limit."
         500:
           description: "An unexpected error was encountered and more detailed internal\
-            \ error\ncode is provided.\n| Internal Code | Description            \
-            \                            |\n|:-------------:|----------------------------------------------------|\n\
+            \ error\ncode is provided.\n\n| Internal Code | Description          \
+            \                              |\n|:-------------:|----------------------------------------------------|\n\
             |      200      | Unable to parse JSON request.                      |\n\
             |      201      | Required parameter is missing.                     |\n\
             |      202      | Invalid parameter format.                          |\n\
@@ -637,6 +637,55 @@ paths:
             \ needed to fulfill the request."
         503:
           description: "The server is currently unavailable due to overload or maintenance."
+    post:
+      summary: "Locations Service"
+      description: "Returns Points of Interest in the area surrounding a geometry.\n"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "this is body"
+        required: false
+        schema:
+          $ref: "#/definitions/body"
+      responses:
+        200:
+          description: "Standard response for successfully processed requests. Returns\
+            \ JSON."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/LocationsPoiResponse"
+        400:
+          description: "The request is incorrect and therefore can not be processed."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/error"
+        401:
+          description: "Authorization field missing."
+        403:
+          description: "Access to this API has been disallowed."
+        405:
+          description: "The specified HTTP method is not supported. For more details,\
+            \ refer to the EndPoint documentation."
+        413:
+          description: "The request is larger than the server is able to process,\
+            \ the data provided in the request exceeds the capacity limit."
+        500:
+          description: "An unexpected error was encountered and more detailed internal\
+            \ error\ncode is provided.\n\n| Internal Code | Description          \
+            \                              |\n|:-------------:|----------------------------------------------------|\n\
+            |      400      | Unable to parse JSON request.                      |\n\
+            |      401      | Required parameter is missing.                     |\n\
+            |      402      | Invalid parameter format.                          |\n\
+            |      403      | Invalid parameter value.                           |\n\
+            |      404      | Parameter value exceeds the maximum allowed limit. |\n\
+            |      499      | Unknown internal error.                            |\n"
+        501:
+          description: "Indicates that the server does not support the functionality\
+            \ needed to fulfill the request."
+        503:
+          description: "The server is currently unavailable due to overload or maintenance."
 securityDefinitions:
   UserSecurity:
     description: "Add your API Key as the value of the *api_key* parameter to your\
@@ -645,6 +694,43 @@ securityDefinitions:
     name: "api_key"
     in: "query"
 definitions:
+  options:
+    type: "object"
+    properties:
+      maximum_speed:
+        type: "integer"
+        format: "int64"
+      avoid_features:
+        type: "array"
+        uniqueItems: true
+        items:
+          type: "string"
+          enum:
+          - "highways"
+          - "tollways"
+          - "ferries"
+          - "tunnels"
+          - "pavedroads"
+          - "unpavedroads"
+          - "tracks"
+          - "fords"
+          - "steps"
+          - "hills"
+      vehicle_type:
+        type: "string"
+        description: "Parameter for the driving-hgv Profile"
+        enum:
+        - "hgv"
+        - "bus"
+        - "agricultural"
+        - "foresty"
+        - "goods"
+        - "delivery"
+        default: "hgv"
+      profile_params:
+        $ref: "#/definitions/options_profile_params"
+      avoid_polygons:
+        $ref: "#/definitions/options_avoid_polygons"
   Routeresponse:
     properties:
       routes:
@@ -1144,6 +1230,36 @@ definitions:
           type: "integer"
           format: "int64"
     title: "filter object"
+  body:
+    properties:
+      filter:
+        $ref: "#/definitions/LocationsPoiResponse_info_query_filter"
+      details:
+        type: "string"
+        enum:
+        - "address"
+        - "contact"
+        - "attributes"
+      limit:
+        type: "integer"
+        format: "int64"
+      radius:
+        type: "integer"
+        format: "int64"
+      sortby:
+        type: "string"
+        enum:
+        - "category"
+        - "distance"
+      bbox:
+        type: "string"
+        example: "8.165339,47.265966,8.179995,49.214088"
+        description: "The pattern for this bbox string is `\"minlon,minlat,maxlon,maxlat\"\
+          `"
+      geometry:
+        $ref: "#/definitions/IsochronesResponse_geometry"
+    description: "**You have to specify at least one of** `bbox` **and** `geometry`\
+      \ !\n"
   error:
     properties:
       error:
@@ -1169,3 +1285,49 @@ definitions:
         type: "integer"
         format: "int64"
     title: "info object"
+  options_profile_params:
+    properties:
+      length:
+        type: "number"
+        format: "double"
+      width:
+        type: "number"
+        format: "double"
+      height:
+        type: "number"
+        format: "double"
+      axleload:
+        type: "number"
+        format: "double"
+      weight:
+        type: "number"
+        format: "double"
+      hazmat:
+        type: "boolean"
+      difficulty_level:
+        type: "integer"
+        format: "int64"
+        enum:
+        - 0
+        - 1
+        - 2
+        - 3
+      maximum_gradient:
+        type: "integer"
+        format: "int64"
+        minimum: 1
+        maximum: 15
+  options_avoid_polygons:
+    properties:
+      type:
+        type: "string"
+        default: "Polygon"
+      coordinates:
+        type: "array"
+        items:
+          type: "array"
+          items:
+            type: "number"
+            format: "double"
+          maxItems: 2
+          minItems: 2
