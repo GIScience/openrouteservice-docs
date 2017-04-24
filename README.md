@@ -10,19 +10,130 @@ Encoding of the Extra Information:
 
 ## Steepness
 
+Negative values indicate decline, positive incline.
+
+| Value | Encoding |
+|:-----:|:--------:|
+| -5    | >16%     |
+| -4    | 12-15%   |
+| -3    | 7-11%    |
+| -2    | 4-6%     |
+| -1    | 1-3%     |
+| 0     | 0%       |
+| 1     | 1-3%     |
+| 2     | 4-6%     |
+| 3     | 7-11%    |
+| 4     | 12-15%   |
+| 5     | >16%     |
+
 ## Suitability
+
+The suitability values for the selected profile range from ``10`` for best suitability to ``1`` for worst suitability.
 
 ## Surface
 
+| Value |       Name       |
+|:-----:|:----------------:|
+| 0     | Unknown          |
+| 1     | Paved            |
+| 2     | Unpaved          |
+| 3     | Asphalt          |
+| 4     | Concrete         |
+| 5     | Cobblestone      |
+| 6     | Metal            |
+| 7     | Wood             |
+| 8     | Compacted Gravel |
+| 9     | Fine Gravel      |
+| 10    | Gravel           |
+| 11    | Dirt             |
+| 12    | Ground           |
+| 13    | Ice              |
+| 14    | Salt             |
+| 15    | Sand             |
+| 16    | Woodchips        |
+| 17    | Grass            |
+| 18    | Grass Paver      |
+
 ## WayCategory
 
-The exponential assignment of the values is used for `bit fields <http://eddmann.com/posts/using-bit-flags-and-enumsets-in-java/>`__. One route section may belong to different categories. Hence a value of ``97`` would indicate a belonging to ``Paved road``, ``Tunnel`` and ``Highway`` (``64``\ +\ ``32``\ +\ ``1``\ ).
+The exponential assignment of the values is used for [bit fields](http://eddmann.com/posts/using-bit-flags-and-enumsets-in-java/). One route section may belong to different categories. Hence a value of ``97`` would indicate a belonging to ``Paved road``, ``Tunnel`` and ``Highway`` (``64`` + ``32`` + ``1`` ).
+
+| Value |             Name             |
+|:-----:|:----------------------------:|
+| 0     | No category                  |
+| 1     | Highway                      |
+| 2     | Tollway (driving-* profiles) |
+| 2     | Steps (other profiles)       |
+| 4     | Ferry                        |
+| 8     | Unpaved road                 |
+| 16    | Track                        |
+| 32    | Tunnel                       |
+| 64    | Paved road                   |
+| 128   | Ford                         |
 
 ## Waytype
 
+| Value |     Name     |
+|:-----:|:------------:|
+| 0     | Unknown      |
+| 1     | State Road   |
+| 2     | Road         |
+| 3     | Street       |
+| 4     | Path         |
+| 5     | Track        |
+| 6     | Cycleway     |
+| 7     | Footway      |
+| 8     | Steps        |
+| 9     | Ferry        |
+| 10    | Construction |
+
 ## Instruction Types
 
+| Value |     Encoding     |
+|:-----:|:----------------:|
+| 0     | Left             |
+| 1     | Right            |
+| 2     | Sharp left       |
+| 3     | Sharp right      |
+| 4     | Slight left      |
+| 5     | Slight right     |
+| 6     | Straight         |
+| 7     | Enter roundabout |
+| 8     | Exit roundabout  |
+| 9     | U-turn           |
+| 10    | Goal             |
+| 11    | Unknown          |
+
 # Places Response
+
+The following tables contain the related names for the ``category_group_ids`` and the subordinate ``category_ids``.
+
+## category_group_ids
+
+Category groups
+
+|            Name           | Value |
+|:-------------------------:|:-----:|
+| accomodation              | 100   |
+| animals                   | 120   |
+| arts_and_culture          | 130   |
+| education                 | 150   |
+| facilities                | 160   |
+| financial                 | 190   |
+| healthcare                | 200   |
+| historic                  | 220   |
+| leisure_and_entertainment | 260   |
+| natural                   | 330   |
+| public_places             | 360   |
+| service                   | 390   |
+| shops                     | 420   |
+| sustenance                | 560   |
+| transport                 | 580   |
+| tourism                   | 620   |
+
+## category_ids
+
+Categories listed by group
 
 ### accomodation : 100
 
