@@ -732,6 +732,28 @@ definitions:
         $ref: "#/definitions/options_profile_params"
       avoid_polygons:
         $ref: "#/definitions/options_avoid_polygons"
+    example:
+      maximum_speed: 12
+      avoid_features:
+      - "hills"
+      - "ferries"
+      - "tollways"
+      profile_params:
+        difficulty_level: 2
+        maximum_gradient: 13
+      avoid_polygons:
+        type: "Polygon"
+        coordinates:
+        - - - 100
+            - 0
+          - - 101
+            - 0
+          - - 101
+            - 1
+          - - 100
+            - 1
+          - - 100
+            - 0
   Routeresponse:
     properties:
       routes:
@@ -1236,7 +1258,7 @@ definitions:
   body:
     properties:
       filter:
-        $ref: "#/definitions/LocationsPoiResponse_info_query_filter"
+        $ref: "#/definitions/filter"
       details:
         type: "string"
         example: "address|contact|attributes"
@@ -1247,12 +1269,14 @@ definitions:
       limit:
         type: "integer"
         format: "int64"
+        example: 1000
       radius:
         type: "integer"
         format: "int64"
         example: 500
       sortby:
         type: "string"
+        example: "category"
         enum:
         - "category"
         - "distance"
@@ -1265,6 +1289,21 @@ definitions:
         $ref: "#/definitions/geometry"
     description: "**You have to specify at least one of** `bbox` **and** `geometry`\
       \ !\n"
+  filter:
+    properties:
+      category_group_ids:
+        type: "array"
+        items:
+          type: "integer"
+          format: "int64"
+          example: 560
+      catoegory_ids:
+        type: "array"
+        items:
+          type: "integer"
+          format: "int64"
+          example: 561
+    title: "filter object"
   geometry:
     description: "The geometry can be either a Point , LineString or Polygon."
     example: "{type: LineString, coordinates:[[8.167426,49.272556],[8.167588,47.272445],[8.168082,47.272105],[8.168224,47.271917],[8.16831,47.271941],[8.168926,47.272216],[8.169054,47.272278],[8.169165,47.272186],[8.169256,47.272103],[8.16948,47.271921],[8.170129,47.271408],[8.170265,47.271295],[8.170701,47.27097],[8.171496,47.270485],[8.171796,47.270296]]}\n"
