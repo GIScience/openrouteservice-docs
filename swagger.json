@@ -691,6 +691,18 @@
         "avoid_polygons" : {
           "$ref" : "#/definitions/options_avoid_polygons"
         }
+      },
+      "example" : {
+        "maximum_speed" : 12,
+        "avoid_features" : [ "hills", "ferries", "tollways" ],
+        "profile_params" : {
+          "difficulty_level" : 2,
+          "maximum_gradient" : 13
+        },
+        "avoid_polygons" : {
+          "type" : "Polygon",
+          "coordinates" : [ [ [ 100, 0 ], [ 101, 0 ], [ 101, 1 ], [ 100, 1 ], [ 100, 0 ] ] ]
+        }
       }
     },
     "Routeresponse" : {
@@ -1406,7 +1418,7 @@
     "body" : {
       "properties" : {
         "filter" : {
-          "$ref" : "#/definitions/LocationsPoiResponse_info_query_filter"
+          "$ref" : "#/definitions/filter"
         },
         "details" : {
           "type" : "string",
@@ -1415,7 +1427,8 @@
         },
         "limit" : {
           "type" : "integer",
-          "format" : "int64"
+          "format" : "int64",
+          "example" : 1000
         },
         "radius" : {
           "type" : "integer",
@@ -1424,6 +1437,7 @@
         },
         "sortby" : {
           "type" : "string",
+          "example" : "category",
           "enum" : [ "category", "distance" ]
         },
         "bbox" : {
@@ -1436,6 +1450,27 @@
         }
       },
       "description" : "**You have to specify at least one of** `bbox` **and** `geometry` !\n"
+    },
+    "filter" : {
+      "properties" : {
+        "category_group_ids" : {
+          "type" : "array",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 560
+          }
+        },
+        "catoegory_ids" : {
+          "type" : "array",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 561
+          }
+        }
+      },
+      "title" : "filter object"
     },
     "geometry" : {
       "description" : "The geometry can be either a Point , LineString or Polygon.",
