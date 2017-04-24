@@ -449,7 +449,7 @@
     "/places" : {
       "get" : {
         "summary" : "Location Service",
-        "description" : "Returns Points of Interest in the area surrounding a geometry.\n",
+        "description" : "Returns Points of Interest in the area surrounding a geometry. Use the post endpoint for requests that exceed the get character limit.\n",
         "parameters" : [ {
           "name" : "request",
           "in" : "query",
@@ -600,7 +600,7 @@
         }
       },
       "post" : {
-        "summary" : "Locations Service",
+        "summary" : "Location Service",
         "description" : "Returns Points of Interest in the area surrounding a geometry.\n",
         "parameters" : [ {
           "in" : "body",
