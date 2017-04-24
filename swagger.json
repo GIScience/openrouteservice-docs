@@ -1437,7 +1437,8 @@
       "description" : "**You have to specify at least one of** `bbox` **and** `geometry` !\n"
     },
     "geometry" : {
-      "description" : "The geometry can be either a Point , LineString or Polygon."
+      "description" : "The geometry can be either a Point , LineString or Polygon.",
+      "example" : "{type: LineString, coordinates:[[8.167426,49.272556],[8.167588,47.272445],[8.168082,47.272105],[8.168224,47.271917],[8.16831,47.271941],[8.168926,47.272216],[8.169054,47.272278],[8.169165,47.272186],[8.169256,47.272103],[8.16948,47.271921],[8.170129,47.271408],[8.170265,47.271295],[8.170701,47.27097],[8.171496,47.270485],[8.171796,47.270296]]}\n"
     },
     "error" : {
       "properties" : {
