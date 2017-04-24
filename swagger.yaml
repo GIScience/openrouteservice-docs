@@ -1250,6 +1250,7 @@ definitions:
       radius:
         type: "integer"
         format: "int64"
+        example: 500
       sortby:
         type: "string"
         enum:
