@@ -170,7 +170,7 @@ paths:
       responses:
         200:
           description: "Standard response for successfully processed requests. Returns\
-            \ JSON."
+            \ JSON. The decoded values of the extra information can be found [here](https://github.com/GIScience/openrouteservice-docs).\n"
           schema:
             type: "array"
             items:
@@ -487,8 +487,9 @@ paths:
   /places:
     get:
       summary: "Location Service"
-      description: "Returns Points of Interest in the area surrounding a geometry.\
-        \ Use the post endpoint for requests that exceed the get character limit.\n"
+      description: "Returns Points of Interest in the area surrounding a point or\
+        \ a line geometry. Use the post endpoint for requests that exceed the get\
+        \ character limit.\n"
       parameters:
       - name: "request"
         in: "query"
@@ -845,17 +846,18 @@ definitions:
       duration:
         type: "number"
         format: "double"
-        description: "TBD"
+        description: "Total duration in seconds"
       distance_actual:
         type: "number"
         format: "double"
-        description: "TBD"
+        description: "Distance as the crow flies in meters"
       distance:
         type: "number"
         format: "double"
-        description: "TBD"
+        description: "Total route distance in specified units"
     title: "summary object"
-    description: "TBD"
+    description: "Contains total sums of duration, route distance and actual distance\
+      \ of the route."
   segments:
     properties:
       duration:
