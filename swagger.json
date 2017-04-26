@@ -31,11 +31,9 @@
           "type" : "array",
           "items" : {
             "type" : "string",
-            "format" : "longitude,latitude",
-            "default" : "48.324,8.532"
+            "format" : "longitude,latitude"
           },
-          "collectionFormat" : "pipes",
-          "default" : "[48.1234,8.2314, 48.2345,8.4567]"
+          "collectionFormat" : "pipes"
         }, {
           "name" : "profile",
           "in" : "query",
