@@ -316,7 +316,7 @@
         }, {
           "name" : "attributes",
           "in" : "query",
-          "description" : "Values are area and reachfactor. Delimit with pipe for both.\n",
+          "description" : "Values are area and reachfactor. Delimit with pipe for both.\n`area` returns the area of each polygon in its feature properties.\n`reachfactor` returns a reachability score between 0 and 1.\n",
           "required" : false,
           "type" : "array",
           "items" : {
@@ -901,7 +901,7 @@
             "items" : {
               "type" : "number",
               "format" : "double",
-              "description" : "Value 1: Indice of the starting geometry for this section.\nValue 2: Indice of the end geometry for this section.\nValue 3: Value assigned to this section. Refer to the tables on https://github.com/GIScience/openrouteservice-docs.\n"
+              "description" : "Value 1: Indice of the starting geometry for this section./\nValue 2: Indice of the end geometry for this section.\nValue 3: Value assigned to this section. Refer to the tables on https://github.com/GIScience/openrouteservice-docs.\n"
             }
           }
         },
@@ -1095,20 +1095,22 @@
           "description" : "API endpoint used.",
           "default" : "geocoding"
         },
+        "attribution" : {
+          "type" : "string",
+          "example" : "openrouteservice.org, OpenStreetMap contributors, tmc - BASt",
+          "description" : "Attribution for using our service."
+        },
         "query" : {
           "$ref" : "#/definitions/Geocoderesponse_info_query"
         },
-        "attribution" : {
-          "type" : "string",
-          "description" : "Attribution for using our service.",
-          "default" : "openrouteservice.org, OpenStreetMap contributors"
-        },
         "version" : {
-          "type" : "string"
+          "type" : "string",
+          "description" : "Backend version used for the request."
         },
         "timestamp" : {
           "type" : "integer",
-          "format" : "int64"
+          "format" : "int64",
+          "description" : "Unix timestamp of the precise request date."
         }
       },
       "title" : "info object"
@@ -1146,6 +1148,7 @@
         },
         "bbox" : {
           "type" : "array",
+          "description" : "Contains the minimum bounding box of all features.",
           "items" : {
             "type" : "number",
             "format" : "double"
@@ -1192,6 +1195,7 @@
         },
         "type" : {
           "type" : "string",
+          "example" : "Polygon",
           "default" : "Polygon"
         }
       },
@@ -1199,8 +1203,19 @@
     },
     "IsochronesResponse_properties" : {
       "properties" : {
+        "area" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Area of the polygon in square meters (for attributes=area)."
+        },
+        "reachfactor" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Returns a reachability score between 0 and 1. As the maximum reachfactor would be achieved by travelling as the crow flies at maximum speed in a vacuum without obstacles, naturally it can never be 1. The availability of motorways however produces a higher score over normal roads.\n"
+        },
         "center" : {
           "type" : "array",
+          "description" : "The coordinates of the specific analysis location.",
           "items" : {
             "type" : "number",
             "format" : "double"
@@ -1210,11 +1225,27 @@
         },
         "group_index" : {
           "type" : "integer",
-          "format" : "int64"
+          "format" : "int64",
+          "description" : "Id of the isochrone based on the position in the `locations` query-parameter. Every location comprises its own group of polygons."
         },
         "value" : {
           "type" : "integer",
-          "format" : "int64"
+          "format" : "int64",
+          "description" : "The range value of this isochrone/equidistant in seconds/meters."
+        },
+        "contours" : {
+          "type" : "array",
+          "example" : [ [ 0, 1 ], [ 1, 1 ], [ 2, 0 ] ],
+          "description" : "For intersections=true. Every intersection polygon comprises contours with an index array for each participating isochrone.",
+          "items" : {
+            "type" : "array",
+            "description" : "For each participating isochrone...",
+            "items" : {
+              "type" : "integer",
+              "format" : "int64",
+              "description" : "... the group_index(first value) and the isochrone index(second value), numbered from the center, starting with `0`.\nThe example (\"contours\": [[0,1],[1,1],[2,0]]) would indicate the intersection polygon between the 2nd isochrone of the 1st location, the 2nd isochrone of th 2nd location and the 1st isochrone of the 3rd location.\n"
+            }
+          }
         }
       },
       "title" : "porperties object"
@@ -1222,20 +1253,26 @@
     "IsochronesResponse_info" : {
       "properties" : {
         "service" : {
-          "type" : "string"
+          "type" : "string",
+          "description" : "API endpoint used.",
+          "default" : "isochrones"
         },
         "query" : {
           "$ref" : "#/definitions/IsochronesResponse_info_query"
         },
         "attribution" : {
-          "type" : "string"
+          "type" : "string",
+          "example" : "openrouteservice.org, OpenStreetMap contributors, tmc - BASt",
+          "description" : "Attribution for using our service."
         },
         "version" : {
-          "type" : "string"
+          "type" : "string",
+          "description" : "Backend version used for the request."
         },
         "timestamp" : {
           "type" : "integer",
-          "format" : "int64"
+          "format" : "int64",
+          "description" : "Unix timestamp of the precise request date."
         }
       },
       "title" : "info object"
@@ -1267,7 +1304,8 @@
           }
         }
       },
-      "title" : "query object"
+      "title" : "query object",
+      "description" : "Summarizes your query settings."
     },
     "LocationsPoiResponse" : {
       "type" : "object",
@@ -1284,6 +1322,7 @@
         },
         "bbox" : {
           "type" : "array",
+          "description" : "Contains the minimum bounding box of all features.",
           "items" : {
             "type" : "number",
             "format" : "double"
@@ -1365,18 +1404,23 @@
     },
     "LocationsPoiResponse_info" : {
       "properties" : {
-        "service" : {
-          "type" : "string"
+        "attribution" : {
+          "type" : "string",
+          "example" : "openrouteservice.org, OpenStreetMap contributors, tmc - BASt",
+          "description" : "Attribution for using our service."
         },
         "version" : {
-          "type" : "string"
+          "type" : "string",
+          "description" : "Backend version used for the request."
         },
-        "attribution" : {
-          "type" : "string"
+        "service" : {
+          "type" : "string",
+          "description" : "API endpoint used."
         },
         "timestamp" : {
           "type" : "integer",
-          "format" : "int64"
+          "format" : "int64",
+          "description" : "Unix timestamp of the precise request date."
         },
         "query" : {
           "$ref" : "#/definitions/LocationsPoiResponse_info_query"
@@ -1398,7 +1442,8 @@
           "format" : "int64"
         }
       },
-      "title" : "query object"
+      "title" : "query object",
+      "description" : "Summarizes your query settings."
     },
     "LocationsPoiResponse_info_query_filter" : {
       "properties" : {
@@ -1481,7 +1526,7 @@
     },
     "geometry" : {
       "description" : "The geometry can be either a Point , LineString or Polygon.",
-      "example" : "{type: LineString, coordinates:[[8.167426,49.272556],[8.167588,47.272445],[8.168082,47.272105],[8.168224,47.271917],[8.16831,47.271941],[8.168926,47.272216],[8.169054,47.272278],[8.169165,47.272186],[8.169256,47.272103],[8.16948,47.271921],[8.170129,47.271408],[8.170265,47.271295],[8.170701,47.27097],[8.171496,47.270485],[8.171796,47.270296]]}\n"
+      "example" : "{type: LineString, coordinates:[[8.167426,49.272556],[8.167588,47.272445],[8.168082,47.272105],[8.168224,47.271917],[8.16831,47.271941],[8.168926,47.272216],[8.169054,47.272278],[8.169165,47.272186],[8.169256,47.272103],[8.16948,47.271921],[8.170129,47.271408],[8.170265,47.271295],[8.170701,47.27097],[8.171496,47.270485],[8.171796,47.270296]]}"
     },
     "error" : {
       "properties" : {
