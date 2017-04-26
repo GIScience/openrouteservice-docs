@@ -205,14 +205,23 @@ paths:
   /geocoding:
     get:
       summary: "Geocoding Service"
-      description: "Returns a JSON formatted list of objects corresponding to the\
-        \ search input.\n"
+      description: "This endpoint can be used for geocoding (specified `query`) and\
+        \ reverse geocoding requests (specified `location`)\n\n**geocoding:** Returns\
+        \ a JSON formatted list of objects corresponding to the search input.\n**reverse\
+        \ geocoding:** Returns the next enclosing object with an address tag which\
+        \ surrounds the given coordinate.\n"
       parameters:
       - name: "query"
         in: "query"
         description: "Name of location, street address or postal code."
         required: true
         type: "string"
+      - name: "location"
+        in: "query"
+        description: "Coordinate to be inquired."
+        required: true
+        type: "number"
+        format: "longitude,latitude"
       - name: "lang"
         in: "query"
         description: "Sets the language of the response."
@@ -226,7 +235,7 @@ paths:
         - "it"
       - name: "limit"
         in: "query"
-        description: "Specifies the maximum number of responses."
+        description: "Specifies the maximum number of responses. Not needed for reverse."
         required: false
         type: "number"
         default: 20
@@ -245,72 +254,6 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Geocoderesponse"
-        400:
-          description: "The request is incorrect and therefore can not be processed."
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/error"
-        401:
-          description: "Authorization field missing."
-        405:
-          description: "The specified HTTP method is not supported. For more details,\
-            \ refer to the EndPoint documentation."
-        413:
-          description: "The request is larger than the server is able to process,\
-            \ the data provided in the request exceeds the capacity limit."
-        500:
-          description: "An unexpected error was encountered and more detailed internal\
-            \ error\ncode is provided.\n\n| Internal Code | Description          \
-            \                              |\n|:-------------:|----------------------------------------------------|\n\
-            |      100      | Unable to parse JSON request.                      |\n\
-            |      101      | Required parameter is missing.                     |\n\
-            |      102      | Invalid parameter format.                          |\n\
-            |      103      | Invalid parameter value.                           |\n\
-            |      104      | Parameter value exceeds the maximum allowed limit. |\n\
-            |      199      | Unknown internal error.                            |\n"
-        501:
-          description: "Indicates that the server does not support the functionality\
-            \ needed to fulfill the request."
-        503:
-          description: "The server is currently unavailable due to overload or maintenance."
-  /geocoding (reverse):
-    get:
-      summary: "Reverse Geocoding Service"
-      description: "Returns the next enclosing object with an address tag which surrounds\
-        \ the given coordinate.\n"
-      parameters:
-      - name: "location"
-        in: "query"
-        description: "Coordinate to be inquired."
-        required: true
-        type: "number"
-        format: "longitude,latitude"
-      - name: "lang"
-        in: "query"
-        description: "Sets the language of the response."
-        required: false
-        type: "string"
-        default: "en"
-        enum:
-        - "de"
-        - "en"
-        - "fr"
-        - "it"
-      - name: "id"
-        in: "query"
-        description: "Arbitrary identification string of the request reflected in\
-          \ the meta information."
-        required: false
-        type: "string"
-      responses:
-        200:
-          description: "Standard response for successfully processed requests. Returns\
-            \ JSON."
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Reversegeocoderesponse"
         400:
           description: "The request is incorrect and therefore can not be processed."
           schema:
@@ -815,120 +758,199 @@ definitions:
     properties:
       summary:
         $ref: "#/definitions/routes_summary"
-      bbox:
-        type: "array"
-        description: "TBD"
-        items:
-          type: "number"
-          format: "double"
-        maxItems: 4
-        minItems: 4
-      geometry:
+      geometry_format:
         type: "string"
-        description: "TBD"
+        description: "Contains the defined geometry format."
+      geometry:
+        $ref: "#/definitions/Routeresponse_routes_geometry"
       segments:
         type: "array"
-        description: "TBD"
+        description: "List containing the segments and its correspoding steps which\
+          \ make up the route."
         items:
           $ref: "#/definitions/segments"
         maxItems: 1
       way_points:
         type: "array"
-        description: "TBD"
+        description: "List containing the indices of way points corresponding to the\
+          \ *geometry*."
         items:
           type: "integer"
           format: "int64"
         maxItems: 2
         minItems: 2
+      extras:
+        $ref: "#/definitions/extras"
+      bbox:
+        type: "array"
+        description: "Contains the minimum bounding box of the route."
+        items:
+          type: "number"
+          format: "double"
+        maxItems: 4
+        minItems: 4
     title: "routes object"
   routes_summary:
     properties:
-      duration:
-        type: "number"
-        format: "double"
-        description: "Total duration in seconds"
-      distance_actual:
-        type: "number"
-        format: "double"
-        description: "Distance as the crow flies in meters"
       distance:
         type: "number"
         format: "double"
-        description: "Total route distance in specified units"
+        description: "Total route distance in specified units."
+      duration:
+        type: "number"
+        format: "double"
+        description: "Total duration in seconds."
+      ascent:
+        type: "number"
+        format: "double"
+        description: "Total ascent in meters."
+      descent:
+        type: "number"
+        format: "double"
+        description: "Total descent in meters."
     title: "summary object"
     description: "Contains total sums of duration, route distance and actual distance\
       \ of the route."
-  segments:
-    properties:
-      duration:
+  geometry_coordinates:
+    type: "array"
+    description: "Contains the coordinate arrays of every route point."
+    items:
+      type: "array"
+      description: "Contains longitude, latitude and altitude(for elevation=true)."
+      items:
         type: "number"
         format: "double"
-        description: "TBD"
+      maxItems: 3
+      minItems: 2
+  segments:
+    properties:
       distance:
         type: "number"
         format: "double"
-        description: "TBD"
+        description: "Contains the distance of the segment in specified units."
+      duration:
+        type: "number"
+        format: "double"
+        description: "Contains the duration of the segment in seconds."
+      ascent:
+        type: "number"
+        format: "double"
+        description: "Contains ascent of this segment in meters for `elevation=true`."
+      descent:
+        type: "number"
+        format: "double"
+        description: "Contains descent of this segment in meters for `elevation=true`."
       steps:
         type: "array"
-        description: "TBD"
+        description: "List containing the specific steps the segment consists of."
         items:
           $ref: "#/definitions/steps"
     title: "segments object"
-    description: "TBD"
   steps:
     properties:
-      duration:
-        type: "number"
-        format: "double"
-        description: "TBD"
       distance:
         type: "number"
         format: "double"
-        description: "TBD"
-      instruction:
-        type: "string"
-        description: "TBD"
-      name:
-        type: "string"
-        description: "TBD"
+        description: "The distance for the step in meters."
+      duration:
+        type: "number"
+        format: "double"
+        description: "The duration for the step in seconds."
       type:
         type: "integer"
         format: "int64"
+        description: "The instruction action for symbolisation purposes. Refer to\
+          \ the tables on https://github.com/GIScience/openrouteservice-docs."
+      instruction:
+        type: "string"
+        description: "The routing instruction text for the step."
       way_points:
         type: "array"
-        description: "TBD"
+        description: "List containing the indices of the steps start- and endpoint\
+          \ corresponding to the *geometry*."
         items:
           type: "integer"
           format: "int64"
         maxItems: 2
         minItems: 2
     title: "steps object"
+  extras:
+    properties:
+      steepness:
+        $ref: "#/definitions/extras_property"
+      suitability:
+        $ref: "#/definitions/extras_property"
+      surface:
+        $ref: "#/definitions/extras_property"
+      waycategory:
+        $ref: "#/definitions/extras_property"
+      waytype:
+        $ref: "#/definitions/extras_property"
+    description: "For every information item there is an associated block divided\
+      \ into *summary* and *values*."
+  extras_property:
+    properties:
+      values:
+        type: "array"
+        description: "Broken down by way_points."
+        items:
+          type: "array"
+          items:
+            type: "number"
+            format: "double"
+            description: "Value 1: Indice of the starting geometry for this section.\n\
+              Value 2: Indice of the end geometry for this section.\nValue 3: Value\
+              \ assigned to this section. Refer to the tables on https://github.com/GIScience/openrouteservice-docs.\n"
+      summary:
+        type: "array"
+        description: "Broken down by information category values."
+        items:
+          $ref: "#/definitions/summary_object"
+  summary_object:
+    properties:
+      value:
+        type: "integer"
+        format: "int64"
+        description: "Value of a info category. Refer to the tables on https://github.com/GIScience/openrouteservice-docs."
+      distance:
+        type: "integer"
+        format: "int64"
+        description: "Cumulative distance of this value."
+      amount:
+        type: "integer"
+        format: "int64"
+        description: "Category percentage of the entire route."
   Routeresponse_info:
     properties:
-      service:
-        type: "string"
-        description: "TBD"
-      query:
-        $ref: "#/definitions/Routeresponse_info_query"
       attribution:
         type: "string"
+        example: "openrouteservice.org, OpenStreetMap contributors, tmc - BASt"
+        description: "Attribution for using our service."
       version:
         type: "string"
+        description: "Backend version used for the request."
+      service:
+        type: "string"
+        description: "API endpoint used."
       timestamp:
         type: "integer"
         format: "int64"
+        description: "Unix timestamp of the precise request date."
+      query:
+        $ref: "#/definitions/Routeresponse_info_query"
     title: "info object"
-    description: "TBD"
+    description: "Summarizes your query settings."
   Routeresponse_info_query:
     required:
     - "coordinates"
     - "geometry_format"
     - "profile"
     properties:
-      geometry_format:
-        type: "string"
       profile:
         type: "string"
+      preference:
+        type: "string"
+        default: "fastest"
       coordinates:
         type: "array"
         items:
@@ -939,50 +961,57 @@ definitions:
           maxItems: 2
           minItems: 2
         minItems: 2
+      geometry_format:
+        type: "string"
     title: "query object"
-    description: "TBD"
+    description: "Parameters that were specified in the query."
   Geocoderesponse:
     properties:
+      type:
+        type: "string"
+        example: "FeatureCollection"
+        default: "FeatureCollection"
       features:
         type: "array"
         items:
           $ref: "#/definitions/Geocoderesponse_features"
       bbox:
         type: "array"
-        description: "TBD"
+        description: "Contains the minimum bounding box of all features."
         items:
           type: "number"
           format: "double"
         maxItems: 4
         minItems: 4
-      type:
-        type: "string"
       info:
         $ref: "#/definitions/Geocoderesponse_info"
     title: "Geocode Response Object"
   Geocoderesponse_features:
     properties:
-      geometry:
-        $ref: "#/definitions/Geocoderesponse_geometry"
       type:
         type: "string"
+        example: "Feature"
+        default: "Feature"
+      geometry:
+        $ref: "#/definitions/Geocoderesponse_geometry"
       properties:
         $ref: "#/definitions/Geocoderesponse_properties"
     title: "features object"
   Geocoderesponse_geometry:
     properties:
+      type:
+        type: "string"
+        example: "Point"
+        default: "Point"
       coordinates:
         type: "array"
+        description: "Contains the longitude and latitude"
         items:
           type: "number"
           format: "double"
-          description: "TBD"
         maxItems: 2
         minItems: 2
-      type:
-        type: "string"
     title: "geometry object"
-    description: "TBD"
   Geocoderesponse_properties:
     properties:
       country:
@@ -997,15 +1026,29 @@ definitions:
         type: "string"
       postal_code:
         type: "string"
+      distance:
+        type: "string"
+        description: "Distance between the input location and the result point."
+      confidence:
+        type: "string"
+        description: "Based on the distance. The closer a result is to the queried\
+          \ point, the higher the `confidence`."
     title: "porperties object"
+    description: "Contains the OSM tag information of the point. For reverse request\
+      \ with `distance` and `confidence`."
   Geocoderesponse_info:
     properties:
       service:
         type: "string"
+        example: "geocoding"
+        description: "API endpoint used."
+        default: "geocoding"
       query:
         $ref: "#/definitions/Geocoderesponse_info_query"
       attribution:
         type: "string"
+        description: "Attribution for using our service."
+        default: "openrouteservice.org, OpenStreetMap contributors"
       version:
         type: "string"
       timestamp:
@@ -1016,96 +1059,20 @@ definitions:
     properties:
       query:
         type: "string"
-      limit:
-        type: "integer"
-        format: "int64"
-    title: "query object"
-  Reversegeocoderesponse:
-    properties:
-      type:
-        type: "string"
-        default: "FeatureCollection"
-      features:
-        type: "array"
-        items:
-          $ref: "#/definitions/Reversegeocoderesponse_features"
-      bbox:
-        type: "array"
-        description: "TBD"
-        items:
-          type: "number"
-          format: "double"
-        maxItems: 4
-        minItems: 4
-      info:
-        $ref: "#/definitions/Reversegeocoderesponse_info"
-    title: "Reverse Geocode Response Object"
-  Reversegeocoderesponse_features:
-    properties:
-      type:
-        type: "string"
-        default: "Feature"
-      geometry:
-        $ref: "#/definitions/Reversegeocoderesponse_geometry"
-      properties:
-        $ref: "#/definitions/Reversegeocoderesponse_properties"
-    title: "features object"
-  Reversegeocoderesponse_geometry:
-    properties:
-      type:
-        type: "string"
-        default: "Point"
-      coordinates:
-        type: "array"
-        items:
-          type: "number"
-          format: "double"
-        maxItems: 2
-        minItems: 2
-    title: "geometry object"
-  Reversegeocoderesponse_properties:
-    properties:
-      country:
-        type: "string"
-      state:
-        type: "string"
-      city:
-        type: "string"
-      name:
-        type: "string"
-      distance:
-        type: "string"
-      confidence:
-        type: "string"
-    title: "porperties object"
-  Reversegeocoderesponse_info:
-    properties:
-      service:
-        type: "string"
-        default: "geocoding"
-      query:
-        $ref: "#/definitions/Reversegeocoderesponse_info_query"
-      attribution:
-        type: "string"
-      version:
-        type: "string"
-      timestamp:
-        type: "integer"
-        format: "int64"
-    title: "info object"
-  Reversegeocoderesponse_info_query:
-    properties:
-      limit:
-        type: "integer"
-        format: "int64"
       location:
         type: "array"
+        example:
+        - 13.239515
+        - 52.514679
         items:
           type: "number"
           format: "double"
-        maxItems: 2
-        minItems: 2
+      limit:
+        type: "integer"
+        format: "int64"
+        default: 20
     title: "query object"
+    description: "Summarizes your query settings."
   IsochronesResponse:
     type: "object"
     properties:
@@ -1383,3 +1350,11 @@ definitions:
         type: "integer"
         format: "int64"
     title: "info object"
+  Routeresponse_routes_geometry:
+    properties:
+      type:
+        type: "string"
+        default: "LineString"
+      coordinates:
+        $ref: "#/definitions/geometry_coordinates"
+    description: "Contains the geometry in the defined geometry format."
