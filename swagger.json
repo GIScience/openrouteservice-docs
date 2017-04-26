@@ -33,7 +33,8 @@
             "type" : "string",
             "format" : "longitude,latitude"
           },
-          "collectionFormat" : "pipes"
+          "collectionFormat" : "pipes",
+          "default" : "[48.1234,8.2314, 48.2345,8.4567]"
         }, {
           "name" : "profile",
           "in" : "query",
