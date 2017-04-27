@@ -924,28 +924,28 @@ definitions:
     example:
     - distance: 383.1000000000000227373675443232059478759765625
       duration: 46
-      type: 6
+      type: "6"
       instruction: "Head south on Benatweg"
       way_points:
       - 0
       - 12
     - distance: 757.3999999999999772626324556767940521240234375
       duration: 54.5
-      type: 1
+      type: "1"
       instruction: "Turn right onto Hölzle, K 5528"
       way_points:
       - 12
       - 33
     - distance: 980.200000000000045474735088646411895751953125
       duration: 70.599999999999994315658113919198513031005859375
-      type: 6
+      type: "6"
       instruction: "Continue straight onto Sulzbacher Straße, K 5528"
       way_points:
       - 33
       - 63
     - distance: 3636.6999999999998181010596454143524169921875
       duration: 649.8999999999999772626324556767940521240234375
-      type: 5
+      type: "5"
       instruction: "Turn slight right"
       way_points:
       - 63
