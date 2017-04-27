@@ -259,8 +259,13 @@
           "in" : "query",
           "description" : "List of longitude, latitude coordinates delimited with pipe.\n",
           "required" : true,
-          "type" : "number",
-          "format" : "longitude,latitude"
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "longitude,latitude"
+          },
+          "collectionFormat" : "pipes",
+          "default" : "[8.34234,48.23424]"
         }, {
           "name" : "profile",
           "in" : "query",
@@ -282,6 +287,7 @@
           "description" : "Maximum range value of the analysis in seconds for time and meters for distance. Alternatively a comma separated list of specific single range values.\n",
           "required" : true,
           "type" : "number",
+          "default" : 60.0,
           "format" : "double"
         }, {
           "name" : "interval",
@@ -293,11 +299,10 @@
         }, {
           "name" : "units",
           "in" : "query",
-          "description" : "Unit format.\n",
+          "description" : "Unit format for  `rangetype=distance`.\n",
           "required" : false,
           "type" : "string",
-          "default" : "m",
-          "enum" : [ "m", "km", "mi", "s" ]
+          "enum" : [ "m", "km", "mi" ]
         }, {
           "name" : "location_type",
           "in" : "query",
@@ -385,13 +390,15 @@
           "description" : "`pois` will return POI geometry as well as requested details. `category_stats` returns a POI count for each requested category. `category_list` returns a list of all categories (only the id parameter will be considered).\n",
           "required" : true,
           "type" : "string",
+          "default" : "pois",
           "enum" : [ "pois", "category_stats", "category_list" ]
         }, {
           "name" : "category_group_ids",
           "in" : "query",
           "description" : "Comma seperated list of category group ids.\n",
           "required" : false,
-          "type" : "string"
+          "type" : "string",
+          "default" : "420"
         }, {
           "name" : "category_ids",
           "in" : "query",
@@ -436,6 +443,7 @@
             "format" : "double"
           },
           "collectionFormat" : "csv",
+          "default" : "[8.168082, 47.272105, 8.169165, 48.272186]",
           "maxItems" : 4,
           "minItems" : 4
         }, {
@@ -443,13 +451,15 @@
           "in" : "query",
           "description" : "GeoJSON geometry object (Point, Linestring or Polygon)\n",
           "required" : false,
-          "type" : "string"
+          "type" : "string",
+          "default" : "{type: LineString, coordinates:[[8.167426,49.272556],[8.167588,47.272445],[8.168082,47.272105],[8.168224,47.271917],[8.16831,47.271941],[8.168926,47.272216],[8.169054,47.272278],[8.169165,47.272186],[8.169256,47.272103],[8.16948,47.271921],[8.170129,47.271408],[8.170265,47.271295],[8.170701,47.27097],[8.171496,47.270485],[8.171796,47.270296]]}"
         }, {
           "name" : "radius",
           "in" : "query",
           "description" : "Search radius in meters around the given (might be limited in the backend).\n**Required if geometry is a Point or Linestring**\n",
           "required" : false,
           "type" : "number",
+          "default" : 500.0,
           "maximum" : 1000,
           "minimum" : 0,
           "format" : "double"
@@ -478,6 +488,7 @@
             "enum" : [ "address", "contact", "attributes" ]
           },
           "collectionFormat" : "pipes",
+          "default" : "[address, contact, attributes]",
           "uniqueItems" : true
         }, {
           "name" : "id",
@@ -1252,6 +1263,10 @@
     "IsochronesResponse" : {
       "type" : "object",
       "properties" : {
+        "type" : {
+          "type" : "string",
+          "default" : "FeatureCollection"
+        },
         "features" : {
           "type" : "array",
           "items" : {
@@ -1260,6 +1275,7 @@
         },
         "bbox" : {
           "type" : "array",
+          "example" : [ 8.337413, 48.228996, 8.348807, 48.235437 ],
           "description" : "Contains the minimum bounding box of all features.",
           "items" : {
             "type" : "number",
@@ -1267,10 +1283,6 @@
           },
           "maxItems" : 4,
           "minItems" : 4
-        },
-        "type" : {
-          "type" : "string",
-          "default" : "FeatureCollection"
         },
         "info" : {
           "$ref" : "#/definitions/IsochronesResponse_info"
@@ -1285,6 +1297,7 @@
         },
         "type" : {
           "type" : "string",
+          "example" : "Feature",
           "default" : "Feature"
         },
         "properties" : {
@@ -1297,6 +1310,7 @@
       "properties" : {
         "coordinates" : {
           "type" : "array",
+          "example" : [ [ 8.337413, 48.233333 ], [ 8.337446, 48.233146 ], [ 8.339023, 48.231162 ], [ 8.342829, 48.228996 ], [ 8.344379, 48.229675 ], [ 8.34602, 48.230662 ], [ 8.347124, 48.231837 ], [ 8.348778, 48.233859 ], [ 8.348807, 48.233995 ], [ 8.348731, 48.235059 ], [ 8.347973, 48.235437 ], [ 8.340959, 48.233954 ], [ 8.337413, 48.233333 ] ],
           "items" : {
             "type" : "array",
             "items" : {
@@ -1347,7 +1361,6 @@
         },
         "contours" : {
           "type" : "array",
-          "example" : [ [ 0, 1 ], [ 1, 1 ], [ 2, 0 ] ],
           "description" : "For intersections=true. Every intersection polygon comprises contours with an index array for each participating isochrone.",
           "items" : {
             "type" : "array",
@@ -1360,12 +1373,18 @@
           }
         }
       },
-      "title" : "porperties object"
+      "title" : "porperties object",
+      "example" : {
+        "group_index" : 0,
+        "value" : 60,
+        "center" : [ 8.34234, 48.23424 ]
+      }
     },
     "IsochronesResponse_info" : {
       "properties" : {
         "service" : {
           "type" : "string",
+          "example" : "isochrones",
           "description" : "API endpoint used.",
           "default" : "isochrones"
         },
@@ -1374,16 +1393,18 @@
         },
         "attribution" : {
           "type" : "string",
-          "example" : "openrouteservice.org, OpenStreetMap contributors, tmc - BASt",
+          "example" : "openrouteservice.org, OpenStreetMap contributors",
           "description" : "Attribution for using our service."
         },
         "version" : {
           "type" : "string",
+          "example" : "4.0.0",
           "description" : "Backend version used for the request."
         },
         "timestamp" : {
           "type" : "integer",
           "format" : "int64",
+          "example" : 1493305098226,
           "description" : "Unix timestamp of the precise request date."
         }
       },
@@ -1417,23 +1438,59 @@
         }
       },
       "title" : "query object",
-      "description" : "Summarizes your query settings."
+      "description" : "Summarizes your query settings.",
+      "example" : {
+        "ranges" : "60.0",
+        "profile" : "driving-car",
+        "locations" : [ [ 8.34234, 48.23424 ] ],
+        "range_type" : "time",
+        "location_type" : "start"
+      }
     },
     "LocationsPoiResponse" : {
       "type" : "object",
       "properties" : {
         "type" : {
           "type" : "string",
+          "example" : "FeatureCollection",
           "default" : "FeatureCollection"
         },
         "features" : {
           "type" : "array",
+          "example" : [ {
+            "type" : "Feature",
+            "geometry" : {
+              "type" : "Point",
+              "coordinates" : [ 8.1691, 47.444286 ]
+            },
+            "properties" : {
+              "osm_id" : "4491251090",
+              "category" : "451",
+              "name" : "Volg",
+              "distance" : "115.08"
+            }
+          }, {
+            "type" : "Feature",
+            "geometry" : {
+              "type" : "Point",
+              "coordinates" : [ 8.168594, 47.380072 ]
+            },
+            "properties" : {
+              "osm_id" : "2754058215",
+              "category" : "474",
+              "name" : "Berner Früchte und Gemüse",
+              "phone" : "+41 (0)62 891 34 50/51",
+              "website" : "http://www.berner-gemuese.ch",
+              "distance" : "76.58"
+            }
+          } ],
           "items" : {
             "$ref" : "#/definitions/location_features"
           }
         },
         "bbox" : {
           "type" : "array",
+          "example" : [ 8.168594, 47.380072, 8.1691, 47.444286 ],
           "description" : "Contains the minimum bounding box of all features.",
           "items" : {
             "type" : "number",
@@ -1516,22 +1573,25 @@
     },
     "LocationsPoiResponse_info" : {
       "properties" : {
-        "attribution" : {
+        "service" : {
           "type" : "string",
-          "example" : "openrouteservice.org, OpenStreetMap contributors, tmc - BASt",
-          "description" : "Attribution for using our service."
+          "example" : "places",
+          "description" : "API endpoint used."
         },
         "version" : {
           "type" : "string",
+          "example" : "4.0.0",
           "description" : "Backend version used for the request."
         },
-        "service" : {
+        "attribution" : {
           "type" : "string",
-          "description" : "API endpoint used."
+          "example" : "openrouteservice.org, OpenStreetMap contributors",
+          "description" : "Attribution for using our service."
         },
         "timestamp" : {
           "type" : "integer",
           "format" : "int64",
+          "example" : 1493306341299,
           "description" : "Unix timestamp of the precise request date."
         },
         "query" : {
@@ -1555,7 +1615,14 @@
         }
       },
       "title" : "query object",
-      "description" : "Summarizes your query settings."
+      "description" : "Summarizes your query settings.",
+      "example" : {
+        "filter" : {
+          "category_group_ids" : [ 420 ]
+        },
+        "radius" : 500,
+        "limit" : 20
+      }
     },
     "LocationsPoiResponse_info_query_filter" : {
       "properties" : {
