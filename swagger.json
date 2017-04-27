@@ -909,25 +909,25 @@
       "example" : [ {
         "distance" : 383.1,
         "duration" : 46,
-        "type" : 6,
+        "type" : "6",
         "instruction" : "Head south on Benatweg",
         "way_points" : [ 0, 12 ]
       }, {
         "distance" : 757.4,
         "duration" : 54.5,
-        "type" : 1,
+        "type" : "1",
         "instruction" : "Turn right onto Hölzle, K 5528",
         "way_points" : [ 12, 33 ]
       }, {
         "distance" : 980.2,
         "duration" : 70.6,
-        "type" : 6,
+        "type" : "6",
         "instruction" : "Continue straight onto Sulzbacher Straße, K 5528",
         "way_points" : [ 33, 63 ]
       }, {
         "distance" : 3636.7,
         "duration" : 649.9,
-        "type" : 5,
+        "type" : "5",
         "instruction" : "Turn slight right",
         "way_points" : [ 63, 163 ]
       } ]
