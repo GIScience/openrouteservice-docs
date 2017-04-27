@@ -33,11 +33,13 @@ paths:
           type: "string"
           format: "longitude,latitude"
         collectionFormat: "pipes"
+        default: "[8.34234,48.23424, 8.34423,48.26424]"
       - name: "profile"
         in: "query"
         description: "Specifies the route profile."
         required: true
         type: "string"
+        default: "driving-car"
         enum:
         - "driving-car"
         - "driving-hgv"
@@ -172,9 +174,7 @@ paths:
           description: "Standard response for successfully processed requests. Returns\
             \ JSON. The decoded values of the extra information can be found [here](https://github.com/GIScience/openrouteservice-docs).\n"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Routeresponse"
+            $ref: "#/definitions/Routeresponse"
         400:
           description: "The request is incorrect and therefore can not be processed."
           schema:
@@ -207,7 +207,8 @@ paths:
       summary: "Geocoding Service"
       description: "This endpoint can be used for geocoding (specified `query`) and\
         \ reverse geocoding requests (specified `location`)\n\n**Either** `query`\
-        \ **or** `location` **has to be specified for a valid request!**\n\n- **geocoding:**\
+        \ **or** `location` **has to be specified for a valid request!**\n\nIf both\
+        \ parameters are specified `location` takes precedence.\n\n- **geocoding:**\
         \ Returns a JSON formatted list of objects corresponding to the search input.\n\
         - **reverse geocoding:** Returns the next enclosing object with an address\
         \ tag which surrounds the given coordinate.\n"
@@ -252,15 +253,11 @@ paths:
           description: "Standard response for successfully processed requests. Returns\
             \ JSON."
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Geocoderesponse"
+            $ref: "#/definitions/Geocoderesponse"
         400:
           description: "The request is incorrect and therefore can not be processed."
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/error"
+            $ref: "#/definitions/error"
         401:
           description: "Authorization field missing."
         405:
@@ -395,15 +392,11 @@ paths:
           description: "Standard response for successfully processed requests. Returns\
             \ JSON."
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/IsochronesResponse"
+            $ref: "#/definitions/IsochronesResponse"
         400:
           description: "The request is incorrect and therefore can not be processed."
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/error"
+            $ref: "#/definitions/error"
         401:
           description: "Authorization field missing."
         403:
@@ -435,8 +428,11 @@ paths:
       summary: "Location Service"
       description: "Returns Points of Interest in the area surrounding a point or\n\
         a line geometry. Use the post endpoint for requests that exceed the get\n\
-        character limit.\n\n- **pois:** Either `geometry` or `bbox` are required.\n\
-        - **category_stats:** Either `geometry` or `bbox` are required.\n"
+        character limit.\n\n- **pois:** Either `geometry` or `bbox` are required.\
+        \ `radius` required depending on `geometry`.\n- **category_stats:** Either\
+        \ `geometry` or `bbox` are required. `radius` required depending on `geometry`.\n\
+        - **category_list:** Additionally to this List the category groups and ids\
+        \ can be found [here](https://github.com/GIScience/openrouteservice-docs).\n"
       parameters:
       - name: "request"
         in: "query"
@@ -556,15 +552,11 @@ paths:
           description: "Standard response for successfully processed requests. Returns\
             \ JSON."
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/LocationsPoiResponse"
+            $ref: "#/definitions/LocationsPoiResponse"
         400:
           description: "The request is incorrect and therefore can not be processed."
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/error"
+            $ref: "#/definitions/error"
         401:
           description: "Authorization field missing."
         403:
@@ -605,9 +597,7 @@ paths:
           description: "Standard response for successfully processed requests. Returns\
             \ JSON."
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/LocationsPoiResponse"
+            $ref: "#/definitions/LocationsPoiResponse"
         400:
           description: "The request is incorrect and therefore can not be processed."
           schema:
@@ -767,7 +757,9 @@ definitions:
         $ref: "#/definitions/routes_summary"
       geometry_format:
         type: "string"
+        example: "encodedpolyline"
         description: "Contains the defined geometry format."
+        default: "encodedpolyline"
       geometry:
         $ref: "#/definitions/routes_geometry"
       segments:
@@ -779,6 +771,9 @@ definitions:
         maxItems: 1
       way_points:
         type: "array"
+        example:
+        - 0
+        - 163
         description: "List containing the indices of way points corresponding to the\
           \ *geometry*."
         items:
@@ -790,6 +785,11 @@ definitions:
         $ref: "#/definitions/extras"
       bbox:
         type: "array"
+        example:
+        - 8.327707
+        - 48.231946
+        - 8.345244
+        - 48.263552
         description: "Contains the minimum bounding box of the route."
         items:
           type: "number"
@@ -797,23 +797,46 @@ definitions:
         maxItems: 4
         minItems: 4
     title: "routes object"
+    example:
+      summary:
+        distance:
+          $ref: "#/definitions/routes_summary/properties/distance/example"
+        duration:
+          $ref: "#/definitions/routes_summary/properties/duration/example"
+        ascent:
+          $ref: "#/definitions/routes_summary/properties/ascent/example"
+        descent:
+          $ref: "#/definitions/routes_summary/properties/descent/example"
+      geometry_format:
+        $ref: "#/definitions/Routeresponse_routes/properties/geometry_format/example"
+      geometry:
+        $ref: "#/definitions/routes_geometry/example"
+      segments:
+        distance: 5757.399999999999636202119290828704833984375
+        duration: 821
+        steps:
+          $ref: "#/definitions/steps/example"
   routes_summary:
     properties:
       distance:
         type: "number"
         format: "double"
+        example: 5757.399999999999636202119290828704833984375
         description: "Total route distance in specified units."
       duration:
         type: "number"
         format: "double"
+        example: 821
         description: "Total duration in seconds."
       ascent:
         type: "number"
         format: "double"
+        example: 257
         description: "Total ascent in meters."
       descent:
         type: "number"
         format: "double"
+        example: 336
         description: "Total descent in meters."
     title: "summary object"
     description: "Contains total sums of duration, route distance and actual distance\
@@ -822,10 +845,12 @@ definitions:
     properties:
       type:
         type: "string"
-        default: "LineString"
       coordinates:
         $ref: "#/definitions/geometry_coordinates"
     description: "Contains the geometry in the defined geometry format."
+    example: "mtkeHuv|q@~@VLHz@\\PR|@hBt@j@^n@L\\NjALv@Jh@NXi@zBm@jCKTy@z@qAhBa@\\\
+      [Ne@DgCc@i@?[Ty@hAi@zASRi@R}@H_@N[b@kAdCy@`Au@d@eA|@q@h@WRe@PYHYBqADgAAcAL_A^w@~@q@`@w@Zw@Cm@K[PeA|Aa@p@g@fAiAhBuAv@]VU^k@xAUXe@TqATy@V}@f@_@V[MUWqA_FKy@Me@_@cAu@{Ae@c@aAfBaAv@g@rBm@|@w@x@m@^U@m@Ma@SI\\\
+      mAlEkAjC_AjC_ApCe@z@i@j@q@f@[NsAp@u@T}A\\wATU?WCeBm@q@MwAGUCg@SMaAi@mDQm@K}@Mq@u@mAc@i@c@Ys@[WW_@q@e@a@cA_@w@E{BHmBXqBkBsA}@{Ao@iAB{@QYSi@qCUy@Ee@i@kBWk@yAoCWS_@SaAE{@yAu@mDUsAqA}@EM@QTiA|@iAn@gAd@eAg@_@I]??k@i@yBkEa@}@W}@WkCUqC?_@Hg@ZqABg@Gm@YoAEgAMq@@jAB|CC`@{@rACH"
   geometry_coordinates:
     type: "array"
     description: "Contains the coordinate arrays of every route point."
@@ -842,10 +867,12 @@ definitions:
       distance:
         type: "number"
         format: "double"
+        example: 5757.399999999999636202119290828704833984375
         description: "Contains the distance of the segment in specified units."
       duration:
         type: "number"
         format: "double"
+        example: 821
         description: "Contains the duration of the segment in seconds."
       ascent:
         type: "number"
@@ -861,6 +888,11 @@ definitions:
         items:
           $ref: "#/definitions/steps"
     title: "segments object"
+    example:
+      distance: 5757.399999999999636202119290828704833984375
+      duration: 821
+      steps:
+        $ref: "#/definitions/steps/example"
   steps:
     properties:
       distance:
@@ -889,6 +921,35 @@ definitions:
         maxItems: 2
         minItems: 2
     title: "steps object"
+    example:
+    - distance: 383.1000000000000227373675443232059478759765625
+      duration: 46
+      type: 6
+      instruction: "Head south on Benatweg"
+      way_points:
+      - 0
+      - 12
+    - distance: 757.3999999999999772626324556767940521240234375
+      duration: 54.5
+      type: 1
+      instruction: "Turn right onto Hölzle, K 5528"
+      way_points:
+      - 12
+      - 33
+    - distance: 980.200000000000045474735088646411895751953125
+      duration: 70.599999999999994315658113919198513031005859375
+      type: 6
+      instruction: "Continue straight onto Sulzbacher Straße, K 5528"
+      way_points:
+      - 33
+      - 63
+    - distance: 3636.6999999999998181010596454143524169921875
+      duration: 649.8999999999999772626324556767940521240234375
+      type: 5
+      instruction: "Turn slight right"
+      way_points:
+      - 63
+      - 163
   extras:
     properties:
       steepness:
@@ -943,13 +1004,16 @@ definitions:
         description: "Attribution for using our service."
       version:
         type: "string"
+        example: "4.0.0"
         description: "Backend version used for the request."
       service:
         type: "string"
+        example: "routing"
         description: "API endpoint used."
       timestamp:
         type: "integer"
         format: "int64"
+        example: 1493300103526
         description: "Unix timestamp of the precise request date."
       query:
         $ref: "#/definitions/Routeresponse_info_query"
@@ -963,11 +1027,18 @@ definitions:
     properties:
       profile:
         type: "string"
+        example: "driving-car"
       preference:
         type: "string"
+        example: "fastest"
         default: "fastest"
       coordinates:
         type: "array"
+        example:
+        - - 8.34234
+          - 48.23424
+        - - 48.23424
+          - 48.26424
         items:
           type: "array"
           items:
@@ -976,8 +1047,30 @@ definitions:
           maxItems: 2
           minItems: 2
         minItems: 2
+      language:
+        type: "string"
+        example: "en"
+      units:
+        type: "string"
+        example: "meters"
+      geometry:
+        type: "boolean"
+        example: true
       geometry_format:
         type: "string"
+        example: "encodedpolyline"
+      instructions_format:
+        type: "string"
+        example: "text"
+      instructions:
+        type: "boolean"
+        example: true
+      elevation:
+        type: "boolean"
+        example: false
+      options:
+        type: "string"
+        example: ""
     title: "query object"
     description: "Parameters that were specified in the query."
   Geocoderesponse:
@@ -992,6 +1085,11 @@ definitions:
           $ref: "#/definitions/Geocoderesponse_features"
       bbox:
         type: "array"
+        example:
+        - 13.239515
+        - 52.514679
+        - 13.239515
+        - 52.514679
         description: "Contains the minimum bounding box of all features."
         items:
           type: "number"
@@ -1020,6 +1118,9 @@ definitions:
         default: "Point"
       coordinates:
         type: "array"
+        example:
+        - 13.239515
+        - 52.514679
         description: "Contains the longitude and latitude"
         items:
           type: "number"
@@ -1031,18 +1132,28 @@ definitions:
     properties:
       country:
         type: "string"
-      street:
-        type: "string"
-      name:
-        type: "string"
-      house_number:
-        type: "string"
+        example: "Germany"
       state:
         type: "string"
+        example: "Berlin"
+      city:
+        type: "string"
+        example: "Berlin"
       postal_code:
         type: "string"
+        example: "14053"
+      street:
+        type: "string"
+        example: "Olympischer Platz"
+      house_number:
+        type: "string"
+        example: "3"
+      name:
+        type: "string"
+        example: "Berlin Olympic Stadium"
       distance:
         type: "string"
+        example: "0.33"
         description: "Distance between the input location and the result point."
       confidence:
         type: "string"
@@ -1060,16 +1171,18 @@ definitions:
         default: "geocoding"
       attribution:
         type: "string"
-        example: "openrouteservice.org, OpenStreetMap contributors, tmc - BASt"
+        example: "openrouteservice.org, OpenStreetMap contributors"
         description: "Attribution for using our service."
       query:
         $ref: "#/definitions/Geocoderesponse_info_query"
       version:
         type: "string"
+        example: "4.0.0"
         description: "Backend version used for the request."
       timestamp:
         type: "integer"
         format: "int64"
+        example: 1493288124343
         description: "Unix timestamp of the precise request date."
     title: "info object"
   Geocoderesponse_info_query:
@@ -1087,6 +1200,7 @@ definitions:
       limit:
         type: "integer"
         format: "int64"
+        example: 20
         default: 20
     title: "query object"
     description: "Summarizes your query settings."
