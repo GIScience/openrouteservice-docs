@@ -31,10 +31,10 @@
           "type" : "array",
           "items" : {
             "type" : "string",
-            "format" : "longitude,latitude"
+            "format" : "longitude,latitude",
+            "default" : "8.34234,48.23424"
           },
-          "collectionFormat" : "pipes",
-          "default" : "[8.34234,48.23424, 8.34423,48.26424]"
+          "collectionFormat" : "pipes"
         }, {
           "name" : "profile",
           "in" : "query",
