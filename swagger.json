@@ -33,8 +33,7 @@
             "type" : "string",
             "format" : "longitude,latitude"
           },
-          "collectionFormat" : "pipes",
-          "default" : "[8.34234,48.23424, 8.34423,48.26424]"
+          "collectionFormat" : "pipes"
         }, {
           "name" : "profile",
           "in" : "query",
@@ -264,8 +263,7 @@
             "type" : "string",
             "format" : "longitude,latitude"
           },
-          "collectionFormat" : "pipes",
-          "default" : "[8.34234,48.23424]"
+          "collectionFormat" : "pipes"
         }, {
           "name" : "profile",
           "in" : "query",
@@ -443,7 +441,6 @@
             "format" : "double"
           },
           "collectionFormat" : "csv",
-          "default" : "[8.168082, 47.272105, 8.169165, 48.272186]",
           "maxItems" : 4,
           "minItems" : 4
         }, {
@@ -488,7 +485,6 @@
             "enum" : [ "address", "contact", "attributes" ]
           },
           "collectionFormat" : "pipes",
-          "default" : "[address, contact, attributes]",
           "uniqueItems" : true
         }, {
           "name" : "id",
