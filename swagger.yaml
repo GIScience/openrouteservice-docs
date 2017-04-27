@@ -33,7 +33,7 @@ paths:
           type: "string"
           format: "longitude,latitude"
         collectionFormat: "pipes"
-        default: "[8.34234,48.23424|8.34423,48.26424]"
+        default: "[[8.34234,48.23424|8.34423,48.26424]]"
       - name: "profile"
         in: "query"
         description: "Specifies the route profile."
