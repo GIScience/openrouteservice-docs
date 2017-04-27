@@ -180,18 +180,18 @@
     "/geocoding" : {
       "get" : {
         "summary" : "Geocoding Service",
-        "description" : "This endpoint can be used for geocoding (specified `query`) and reverse geocoding requests (specified `location`)\n\n**geocoding:** Returns a JSON formatted list of objects corresponding to the search input.\n**reverse geocoding:** Returns the next enclosing object with an address tag which surrounds the given coordinate.\n",
+        "description" : "This endpoint can be used for geocoding (specified `query`) and reverse geocoding requests (specified `location`)\n\n**Either** `query` **or** `location` **has to be specified for a valid request!**\n\n- **geocoding:** Returns a JSON formatted list of objects corresponding to the search input.\n- **reverse geocoding:** Returns the next enclosing object with an address tag which surrounds the given coordinate.\n",
         "parameters" : [ {
           "name" : "query",
           "in" : "query",
           "description" : "Name of location, street address or postal code.",
-          "required" : true,
+          "required" : false,
           "type" : "string"
         }, {
           "name" : "location",
           "in" : "query",
           "description" : "Coordinate to be inquired.",
-          "required" : true,
+          "required" : false,
           "type" : "number",
           "format" : "longitude,latitude"
         }, {
@@ -391,7 +391,7 @@
     "/places" : {
       "get" : {
         "summary" : "Location Service",
-        "description" : "Returns Points of Interest in the area surrounding a point or a line geometry. Use the post endpoint for requests that exceed the get character limit.\n",
+        "description" : "Returns Points of Interest in the area surrounding a point or\na line geometry. Use the post endpoint for requests that exceed the get\ncharacter limit.\n\n- **pois:** Either `geometry` or `bbox` are required.\n- **category_stats:** Either `geometry` or `bbox` are required.\n",
         "parameters" : [ {
           "name" : "request",
           "in" : "query",
@@ -414,7 +414,7 @@
         }, {
           "name" : "name",
           "in" : "query",
-          "description" : "Name to filter the POIs by.\n",
+          "description" : "Name to filter the POIs by. **Only finds exact matches**",
           "required" : false,
           "type" : "string"
         }, {
@@ -441,7 +441,7 @@
         }, {
           "name" : "bbox",
           "in" : "query",
-          "description" : "Defines a clipping bounding box\n",
+          "description" : "Defines a clipping bounding box. Can be defined additionally to `geometry`.\n",
           "required" : false,
           "type" : "array",
           "items" : {
@@ -460,8 +460,8 @@
         }, {
           "name" : "radius",
           "in" : "query",
-          "description" : "Search radius in meters around the given (might be limited in the backend)\n",
-          "required" : true,
+          "description" : "Search radius in meters around the given (might be limited in the backend).\n**Required if geometry is a Point or Linestring**\n",
+          "required" : false,
           "type" : "number",
           "maximum" : 1000,
           "minimum" : 0,
@@ -469,21 +469,21 @@
         }, {
           "name" : "limit",
           "in" : "query",
-          "description" : "Maximum number of returned objects (might be limited in the backend)\n",
+          "description" : "Maximum number of returned objects (might be limited in the\nbackend). **For** `request=pois` **only.**\n",
           "required" : false,
           "type" : "integer",
           "format" : "int64"
         }, {
           "name" : "sortby",
           "in" : "query",
-          "description" : "Sorts the returned features by _distance_ or _category_.\n",
+          "description" : "Sorts the returned features by _distance_ or _category_. **For** `request=pois` **only.**\n",
           "required" : false,
           "type" : "string",
           "enum" : [ "distance", "category" ]
         }, {
           "name" : "details",
           "in" : "query",
-          "description" : "Pipe seperated list of desired details.\n",
+          "description" : "Pipe seperated list of desired details. **For** `request=pois` **only.**\n",
           "required" : false,
           "type" : "array",
           "items" : {
@@ -729,7 +729,7 @@
           "description" : "Contains the defined geometry format."
         },
         "geometry" : {
-          "$ref" : "#/definitions/Routeresponse_routes_geometry"
+          "$ref" : "#/definitions/routes_geometry"
         },
         "segments" : {
           "type" : "array",
@@ -790,6 +790,18 @@
       },
       "title" : "summary object",
       "description" : "Contains total sums of duration, route distance and actual distance of the route."
+    },
+    "routes_geometry" : {
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "default" : "LineString"
+        },
+        "coordinates" : {
+          "$ref" : "#/definitions/geometry_coordinates"
+        }
+      },
+      "description" : "Contains the geometry in the defined geometry format."
     },
     "geometry_coordinates" : {
       "type" : "array",
@@ -901,7 +913,7 @@
             "items" : {
               "type" : "number",
               "format" : "double",
-              "description" : "Value 1: Indice of the starting geometry for this section./\nValue 2: Indice of the end geometry for this section.\nValue 3: Value assigned to this section. Refer to the tables on https://github.com/GIScience/openrouteservice-docs.\n"
+              "description" : "Value 1: Indice of the starting geometry for this section.\nValue 2: Indice of the end geometry for this section.\nValue 3: Value assigned to this section. Refer to the tables on https://github.com/GIScience/openrouteservice-docs.\n"
             }
           }
         },
@@ -1565,18 +1577,6 @@
         }
       },
       "title" : "info object"
-    },
-    "Routeresponse_routes_geometry" : {
-      "properties" : {
-        "type" : {
-          "type" : "string",
-          "default" : "LineString"
-        },
-        "coordinates" : {
-          "$ref" : "#/definitions/geometry_coordinates"
-        }
-      },
-      "description" : "Contains the geometry in the defined geometry format."
     }
   }
 }
