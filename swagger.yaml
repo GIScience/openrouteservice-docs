@@ -26,7 +26,7 @@ paths:
       - name: "coordinates"
         in: "query"
         description: "Pipe separated List of longitude,latitude coordinates visited\
-          \ in\norder.\n"
+          \ in order.\n\nExample values:\n  `8.34234,48.23424`\n  `8.34423,48.26424`\n"
         required: true
         type: "array"
         items:
@@ -158,7 +158,55 @@ paths:
       - name: "options"
         in: "query"
         description: "For advanced options formatted as json object. For structure\
-          \ refer to the **options model** below.\n"
+          \ refer to the **options model** below.\nThe available parameters are:\n\
+          \  - `maximum_speed` : Specifies a maximum travel speed in km/h.\n  - `avoid_features`\
+          \ : Pipe seperated list of features to avoid.\n    The available features\
+          \ are :\n\n    |    Feature   |               Available for            \
+          \  |\n    |:------------:|:----------------------------------------:|\n\
+          \    | highways     | driving-*                                |\n    |\
+          \ tollways     | driving-*                                |\n    | ferries\
+          \      | driving-*, cycling-*, foot-*, wheelchair |\n    | tunnels     \
+          \ | driving-*                                |\n    | pavedroads   | driving-*,\
+          \ cycling-*                     |\n    | unpavedroads | driving-*, cycling-*\
+          \                     |\n    | tracks       | driving-*                \
+          \                |\n    | fords        | driving-*, cycling-*, foot-*  \
+          \           |\n    | steps        | cycling-*, foot-*, wheelchair      \
+          \      |\n    | hills        | cycling-*, foot-*                       \
+          \ |\n\n  - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry`\
+          \ and `goods`.\n  - `profile_params` : Specifies vehicle parameters.\n \
+          \   - for `cycling-*` profiles:\n\n      |       Value      |          \
+          \                        Description                                 |\n\
+          \      |:----------------:|:----------------------------------------------------------------------------:|\n\
+          \      | difficulty_level | Specifies the fitness level. 0 = Novice, 1 =\
+          \ Moderate, 2 = Amateur, 3 = Pro. |\n      | maximum_gradient | Specifies\
+          \ the maximum route steepness in percent. Values range from 1 to 15. |\n\
+          \n    - for `driving-hgv` : \n\n      | Parameter |                    \
+          \                                        Description                   \
+          \                                         |\n      |:---------:|:---------------------------------------------------------------------------------------------------------------------------------:|\n\
+          \      | length    | Length restriction in meters.                     \
+          \                                                                      \
+          \          |\n      | width     | Width restriction in meters.         \
+          \                                                                      \
+          \                       |\n      | height    | Height restriction in meters.\
+          \                                                                      \
+          \                               |\n      | axleload  | Axleload restriction\
+          \ in tons.                                                             \
+          \                                        |\n      | weight    | Weight restriction\
+          \ in tons.                                                             \
+          \                                          |\n      | hazmat    | Specifies\
+          \ whether to use appropriate routing for delivering hazardous goods and\
+          \ avoiding water protected areas. Default is false. |\n  - `avoid_polygons`\
+          \ : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4)\
+          \ or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).\n\
+          \nThis is an example options object:\n\n```json\n{\n  \"maximum_speed\"\
+          : 18,\n  \"avoid_features\": \"hills|unpavedroads\",\n  \"profile_params\"\
+          : {\n      \"difficulty_level\": 2,\n      \"maximum_gradient\": 13\n  },\n\
+          \  \"avoid_polygons\": {\n      \"type\": \"Polygon\",\n      \"coordinates\"\
+          : [\n          [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0],\
+          \ [100.0, 0.0] ]\n   ]}\n}\n```\nThe minified form(for copy paste purposes):\n\
+          \n`{\"maximum_speed\":18,\"avoid_features\":\"hills|unpavedroads\",\"profile_params\"\
+          :{\"difficulty_level\":2,\"maximum_gradient\":13},\"avoid_polygons\":{\"\
+          type\":\"Polygon\",\"coordinates\":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`\n"
         required: false
         type: "string"
         default: "{}"
@@ -266,9 +314,9 @@ paths:
           description: "The request is larger than the server is able to process,\
             \ the data provided in the request exceeds the capacity limit."
         500:
-          description: "An unexpected error was encountered and more detailed internal\
-            \ error\ncode is provided.\n\n| Internal Code | Description          \
-            \                              |\n|:-------------:|----------------------------------------------------|\n\
+          description: "An unexpected error was encountered and more detailed internal\n\
+            error\\ncode is provided.\n\n| Internal Code | Description           \
+            \                             |\n|:-------------:|----------------------------------------------------|\n\
             |      100      | Unable to parse JSON request.                      |\n\
             |      101      | Required parameter is missing.                     |\n\
             |      102      | Invalid parameter format.                          |\n\
@@ -292,7 +340,8 @@ paths:
       parameters:
       - name: "locations"
         in: "query"
-        description: "List of longitude, latitude coordinates delimited with pipe.\n"
+        description: "List of longitude, latitude coordinates delimited with pipe.\n\
+          \nExample values:\n  `8.34234,48.23424`\n"
         required: true
         type: "array"
         items:
@@ -409,9 +458,9 @@ paths:
           description: "The request is larger than the server is able to process,\
             \ the data provided in the request exceeds the capacity limit."
         500:
-          description: "An unexpected error was encountered and more detailed internal\
-            \ error\ncode is provided.\n\n| Internal Code | Description          \
-            \                              |\n|:-------------:|----------------------------------------------------|\n\
+          description: "An unexpected error was encountered and more detailed internal\n\
+            error\\ncode is provided.\n\n| Internal Code | Description           \
+            \                             |\n|:-------------:|----------------------------------------------------|\n\
             |      300      | Unable to parse JSON request.                      |\n\
             |      301      | Required parameter is missing.                     |\n\
             |      302      | Invalid parameter format.                          |\n\
@@ -573,9 +622,9 @@ paths:
           description: "The request is larger than the server is able to process,\
             \ the data provided in the request exceeds the capacity limit."
         500:
-          description: "An unexpected error was encountered and more detailed internal\
-            \ error\ncode is provided.\n\n| Internal Code | Description          \
-            \                              |\n|:-------------:|----------------------------------------------------|\n\
+          description: "An unexpected error was encountered and more detailed internal\n\
+            \ error\\ncode is provided.\n\n| Internal Code | Description         \
+            \                               |\n|:-------------:|----------------------------------------------------|\n\
             |      400      | Unable to parse JSON request.                      |\n\
             |      401      | Required parameter is missing.                     |\n\
             |      402      | Invalid parameter format.                          |\n\
@@ -620,9 +669,9 @@ paths:
           description: "The request is larger than the server is able to process,\
             \ the data provided in the request exceeds the capacity limit."
         500:
-          description: "An unexpected error was encountered and more detailed internal\
-            \ error\ncode is provided.\n\n| Internal Code | Description          \
-            \                              |\n|:-------------:|----------------------------------------------------|\n\
+          description: "An unexpected error was encountered and more detailed internal\n\
+            error\\ncode is provided.\n\n| Internal Code | Description           \
+            \                             |\n|:-------------:|----------------------------------------------------|\n\
             |      400      | Unable to parse JSON request.                      |\n\
             |      401      | Required parameter is missing.                     |\n\
             |      402      | Invalid parameter format.                          |\n\
@@ -671,7 +720,7 @@ definitions:
         - "hgv"
         - "bus"
         - "agricultural"
-        - "foresty"
+        - "forestry"
         - "goods"
         - "delivery"
         default: "hgv"
@@ -1042,7 +1091,7 @@ definitions:
         example:
         - - 8.34234
           - 48.23424
-        - - 48.23424
+        - - 8.23424
           - 48.26424
         items:
           type: "array"
