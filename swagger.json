@@ -65,7 +65,7 @@
           "required" : false,
           "type" : "string",
           "default" : "en",
-          "enum" : [ "cn", "de", "en", "es", "ru", "dk", "es", "fr", "it", "nl", "br", "se", "tr" ]
+          "enum" : [ "cn", "de", "en", "es", "ru", "dk", "fr", "it", "nl", "br", "se", "tr" ]
         }, {
           "name" : "geometry",
           "in" : "query",
