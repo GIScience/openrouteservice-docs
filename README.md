@@ -22,50 +22,50 @@ With these you can decode response values where the meaning is not directly evid
 # Routing options examples
 
 For advanced options formatted as json object. For structure refer to the [examples](#examples) below.
-          The available parameters are:
-          
-            - `maximum_speed` : Specifies a maximum travel speed in km/h.
+The available parameters are:
 
-            - `avoid_features` : Pipe seperated list of features to avoid.
-              The available features are :
+- `maximum_speed` : Specifies a maximum travel speed in km/h.
 
-              |     Feature    | Available for                               |
-              |:--------------:|---------------------------------------------|
-              | `highways`     | driving-*                                   |
-              | `tollways`     | driving-*                                   |
-              | `ferries`      | driving-\*, cycling-\*, foot-\*, wheelchair |
-              | `tunnels`      | driving-*                                   |
-              | `pavedroads`   | driving-\*, cycling-*                       |
-              | `unpavedroads` | driving-\*, cycling-*                       |
-              | `tracks`       | driving-*                                   |
-              | `fords`        | driving-\*, cycling-\*, foot-*              |
-              | `steps`        | cycling-\*, foot-\*, wheelchair             |
-              | `hills`        | cycling-\*, foot-\*                         |
+- `avoid_features` : Pipe seperated list of features to avoid.
+  The available features are :
+
+  |     Feature    | Available for                               |
+  |:--------------:|---------------------------------------------|
+  | `highways`     | driving-*                                   |
+  | `tollways`     | driving-*                                   |
+  | `ferries`      | driving-\*, cycling-\*, foot-\*, wheelchair |
+  | `tunnels`      | driving-*                                   |
+  | `pavedroads`   | driving-\*, cycling-*                       |
+  | `unpavedroads` | driving-\*, cycling-*                       |
+  | `tracks`       | driving-*                                   |
+  | `fords`        | driving-\*, cycling-\*, foot-*              |
+  | `steps`        | cycling-\*, foot-\*, wheelchair             |
+  | `hills`        | cycling-\*, foot-\*                         |
 
 
-            - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`.
-            
-            - `profile_params` : Specifies vehicle parameters.
-              - for `cycling-*` profiles:
+- `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`.
 
-                |        Value       |                                  Description                                  |
-                |:------------------:|-------------------------------------------------------------------------------|
-                | `difficulty_level` |  Specifies the fitness level. 0 = Novice, 1 = Moderate, 2 = Amateur, 3 = Pro. |
-                | `maximum_gradient` |  Specifies the maximum route steepness in percent. Values range from 1 to 15. |
+- `profile_params` : Specifies vehicle parameters.
+  - for `cycling-*` profiles:
 
-              - for `driving-hgv` : 
+    |        Value       |                                  Description                                  |
+    |:------------------:|-------------------------------------------------------------------------------|
+    | `difficulty_level` |  Specifies the fitness level. 0 = Novice, 1 = Moderate, 2 = Amateur, 3 = Pro. |
+    | `maximum_gradient` |  Specifies the maximum route steepness in percent. Values range from 1 to 15. |
 
-                |  Parameter | Description                                                                                                                       |
-                |:----------:|-----------------------------------------------------------------------------------------------------------------------------------|
-                | `length`   | Length restriction in meters.                                                                                                     |
-                | `width`    | Width restriction in meters.                                                                                                      |
-                | `height`   | Height restriction in meters.                                                                                                     |
-                | `axleload` | Axleload restriction in tons.                                                                                                     |
-                | `weight`   | Weight restriction in tons.                                                                                                       |
-                | `hazmat`   | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false. |
-                
-                
-            - `avoid_polygons` : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).
+  - for `driving-hgv` : 
+
+    |  Parameter | Description                                                                                                                       |
+    |:----------:|-----------------------------------------------------------------------------------------------------------------------------------|
+    | `length`   | Length restriction in meters.                                                                                                     |
+    | `width`    | Width restriction in meters.                                                                                                      |
+    | `height`   | Height restriction in meters.                                                                                                     |
+    | `axleload` | Axleload restriction in tons.                                                                                                     |
+    | `weight`   | Weight restriction in tons.                                                                                                       |
+    | `hazmat`   | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false. |
+    
+    
+- `avoid_polygons` : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).
 
 
 ## Examples
