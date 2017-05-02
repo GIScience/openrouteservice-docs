@@ -4,6 +4,17 @@ For a live version of this documentation visit https://developers.openrouteservi
 This readme stores coding tables that go beyond the display options of swagger.
 With these you can decode response values where the meaning is not directly evident.
 
+- [Routing Response](#routing-response)
+	- [Steepness](#steepness)
+	- [Suitability](#suitability)
+	- [Surface](#surface)
+	- [WayCategory](#waycategory)
+	- [Waytype](#waytype)
+	- [Instruction Types](#instruction-types)
+- [Places Response](#places-response)
+	- [category_group_ids](#category_group_ids)
+	- [category_ids](#category_ids)
+
 # Routing Response
 
 Encoding of the Extra Information:
@@ -112,24 +123,24 @@ The following tables contain the related names for the ``category_group_ids`` an
 
 Category groups
 
-|            Name           | Value |
-|:-------------------------:|:-----:|
-| accomodation              | 100   |
-| animals                   | 120   |
-| arts_and_culture          | 130   |
-| education                 | 150   |
-| facilities                | 160   |
-| financial                 | 190   |
-| healthcare                | 200   |
-| historic                  | 220   |
-| leisure_and_entertainment | 260   |
-| natural                   | 330   |
-| public_places             | 360   |
-| service                   | 390   |
-| shops                     | 420   |
-| sustenance                | 560   |
-| transport                 | 580   |
-| tourism                   | 620   |
+|                             Name                             | Value |
+|:------------------------------------------------------------:|:-----:|
+| [accomodation](#accomodation--100)                           | 100   |
+| [animals](#animals--120)                                     | 120   |
+| [arts_and_culture]                                           | 130   |
+| [education](#education--150)                                 | 150   |
+| [facilities](#facilities--160)                               | 160   |
+| [financial](#financial--190)                                 | 190   |
+| [healthcare](#healthcare--200)                               | 200   |
+| [historic](#historic--220)                                   | 220   |
+| [leisure_and_entertainment](#leisure_and_entertainment--260) | 260   |
+| [natural](#natural--330)                                     | 330   |
+| [public_places](#public_places--360)                         | 360   |
+| [service](#service--390)                                     | 390   |
+| [shops](#shops--420)                                         | 420   |
+| [sustenance](#sustenance--560)                               | 560   |
+| [transport](#transport--580)                                 | 580   |
+| [tourism](#tourism--620)                                     | 620   |
 
 ## category_ids
 
