@@ -1,5 +1,7 @@
 This repository stores the swagger specifications of the [OpenRouteService](openrouteservice.org "ORS website") API in yaml and json format.
-For a live version of this documentation visit https://developers.openrouteservice.org/portal/apis/.
+For an API-Key please register at our [developers portal](https://developers.openrouteservice.org/portal/register/ "ORS Register").
+Afterwards the Key can be requested in the [API catalogue](https://developers.openrouteservice.org/portal/apis/ "ORS Catalogue").
+A live version of this documentation can be found on [swaggerhub](https://app.swaggerhub.com/apis/OpenRouteService/ors-api/ "Swagger Doku").
 
 ## Content
 
@@ -19,7 +21,7 @@ With these you can decode response values where the meaning is not directly evid
 	- [category_group_ids](#category_group_ids)
 	- [category_ids](#category_ids)
 
-# Routing options examples
+# Routing options
 
 For advanced options formatted as json object. For structure refer to the [examples](#examples) below.
 The available parameters are:
@@ -70,7 +72,7 @@ The available parameters are:
 
 ## Examples
 
-Some options examples in readable and minified form:
+Some options examples in readable and minified JSON form:
 
 for `profile=driving-car`:
 
