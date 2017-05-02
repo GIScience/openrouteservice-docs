@@ -1,0 +1,1668 @@
+---
+swagger: "2.0"
+info:
+  description: |
+    This is the documentation for the OpenRouteService API.
+    For an API-Key please register at our [developers portal](https://developers.openrouteservice.org/portal/register/ "ORS Register").
+    Afterwards the Key can be requested in the [API catalogue](https://developers.openrouteservice.org/portal/apis/ "ORS Catalogue").
+
+    **Instructions:**
+    To send actual requests authorization is needed:
+      - on swaggerhub: Click the green *Authorize* button and enter your API-Key
+      - in the API Catalogue: Insert your API-Key in the *API Key* field at the top of the page. (In case of an 'Authorization Error' please reload the website and insert your Key again.)
+
+    Now the different endpoints are available:
+      - on swaggerhub: click on the *Try it out* button, specify parameters and finally press the *execute* Button at the bottom of the parameter section. 
+      - in the API Catalogue: Documentation specify the parameters first and then press the *Try it out!* Button below the Response Messages Section.
+
+    If you encounter any Bugs in the Documentation or just want to leave a feedback send us an [email](mailto:butzer@stud.uni-heidelberg.de).
+  version: "4.0"
+  title: "OpenRouteService API"
+  contact:
+    email: "openrouteservice@geog.uni-heidelberg.de"
+  license:
+    name: "MIT"
+    url: "https://github.com/swagger-api/swagger-ui/blob/master/LICENSE"
+host: "api.openrouteservice.org"
+schemes:
+- "https"
+produces:
+- "text/json; charset=utf-8"
+security:
+- UserSecurity: []
+paths:
+  /directions:
+    get:
+      summary: "Routing Service"
+      description: |
+        Returns a route between two or more locations for a selected profile and its settings as GeoJSON response.
+
+      parameters:
+      - name: "coordinates"
+        in: "query"
+        description: |
+          Pipe separated List of longitude,latitude coordinates visited in order.
+          
+          Example values:
+            `8.34234,48.23424`
+            `8.34423,48.26424`
+        required: true
+        type: "array"
+        items:
+          type: "string"
+          format: "longitude,latitude"
+        collectionFormat: "pipes"
+        #default:
+        #  - "8.34234,48.23424"
+        #  - "8.34423,48.26424"
+      - name: "profile"
+        in: "query"
+        description: "Specifies the route profile."
+        required: true
+        type: "string"
+        enum:
+        - "driving-car"
+        - "driving-hgv"
+        - "cycling-regular"
+        - "cycling-road"
+        - "cycling-safe"
+        - "cycling-mountain"
+        - "cycling-tour"
+        - "cycling-electric"
+        - "foot-walking"
+        - "foot-hiking"
+        - "wheelchair"
+        default: driving-car
+      - name: "preference"
+        in: "query"
+        description: "Specifies the route preference."
+        type: "string"
+        default: "fastest"
+        enum:
+        - "fastest"
+        - "shortest"
+        - "recommended"
+      - name: "units"
+        in: "query"
+        description: "Specifies the distance unit."
+        type: "string"
+        default: "m"
+        enum:
+        - "m"
+        - "km"
+        - "mi"
+      - name: "language"
+        in: "query"
+        description: "Language for the route instructions."
+        type: "string"
+        default: "en"
+        enum:
+        - "cn"
+        - "de"
+        - "en"
+        - "es"
+        - "ru"
+        - "dk"
+        - "fr"
+        - "it"
+        - "nl"
+        - "br"
+        - "se"
+        - "tr"
+      - name: "geometry"
+        in: "query"
+        description: "Specifies whether to return geometry."
+        type: "boolean"
+        default: true
+        enum:
+        - "true"
+        - "false"
+      - name: "geometry_format"
+        in: "query"
+        description: "Sets the format of the returned geometry."
+        type: "string"
+        default: "encodedpolyline"
+        enum:
+        - "encodedpolyline"
+        - "geojson"
+        - "polyline"
+      - name: "geometry_simplify"
+        in: "query"
+        description: "Specifies whether to simplify the geometry. `true` will automatically\
+          \ be set to `false` if `extra_info` parameter is specified."
+        type: "boolean"
+        default: false
+        format: "double"
+        enum:
+        - "true"
+        - "false"
+      - name: "instructions"
+        in: "query"
+        description: "Specifies whether to return instructions."
+        type: "boolean"
+        default: true
+        enum:
+        - "true"
+        - "false"
+      - name: "instructions_format"
+        in: "query"
+        description: "Select `html` for more verbose instructions."
+        type: "string"
+        default: "text"
+        enum:
+        - "html"
+        - "text"
+      - name: "elevation"
+        in: "query"
+        description: "Specifies whether to return elevation values for points."
+        type: "boolean"
+        default: false
+        enum:
+        - "true"
+        - "false"
+      - name: "extra_info"
+        in: "query"
+        description: "Pipe separated List of additional information."
+        type: "array"
+        items:
+          type: "string"
+          enum:
+          - "steepness"
+          - "suitability"
+          - "surface"
+          - "waycategory"
+          - "waytype"
+        collectionFormat: "pipes"
+        uniqueItems: true
+      - name: "options"
+        in: "query"
+        description: |
+          For advanced options formatted as json object. For structure refer to the **options model** below.
+          The available parameters are:
+
+            - `maximum_speed` : Specifies a maximum travel speed in km/h.
+            
+            - `avoid_features` : Pipe seperated list of features to avoid.
+              The following features are available for listed profiles:
+
+                - `highways`: driving-*
+                - `tollways`: driving-*
+                - `ferries`: driving-\*,cycling-\*,foot-\*,wheelchair
+                - `tunnels`: driving-*
+                - `pavedroads`: driving-\*,cycling-*
+                - `unpavedroads`: driving-\*,cycling-*
+                - `tracks`: driving-*
+                - `fords`: driving-\*,cycling-\*,foot-*
+                - `steps`: cycling-\*,foot-\*,wheelchair
+                - `hills`: cycling-\*,foot-\*
+
+
+            - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`.
+            
+            - `profile_params` : Specifies vehicle parameters.
+              - for `cycling-*` profiles:
+
+                  - `difficulty_level`: Specifies the fitness level. `0` = Novice, `1` = Moderate, `2` = Amateur, `3` = Pro.
+                  - `maximum_gradient`: Specifies the maximum route steepness in percent. Values range from `1` to `15`.
+
+              - for `driving-hgv`: 
+
+                  - `length`: Length restriction in meters.
+                  - `width`: Width restriction in meters.
+                  - `height`: Height restriction in meters.
+                  - `axleload`: Axleload restriction in tons.
+                  - `weight`: Weight restriction in tons.
+                  - `hazmat`: Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false.
+                
+            - `avoid_polygons` : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).
+
+          This is an example options object:
+
+          ```json
+          {
+            "maximum_speed": 18,
+            "avoid_features": "hills|unpavedroads",
+            "profile_params": {
+                "difficulty_level": 2,
+                "maximum_gradient": 13
+            },
+            "avoid_polygons": {
+                "type": "Polygon",
+                "coordinates": [
+                    [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]
+             ]}
+          }
+          ```
+          The minified form(for copy paste purposes):
+  
+          `{"maximum_speed":18,"avoid_features":"hills|unpavedroads","profile_params":{"difficulty_level":2,"maximum_gradient":13},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
+
+          More examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).
+        type: "string"
+        default: "{}"
+      - name: "id"
+        in: "query"
+        description: "Arbitrary identification string of the request reflected in\
+          \ the meta information."
+        type: "string"
+      responses:
+        200:
+          description: "Standard response for successfully processed requests. Returns\
+            \ JSON. The decoded values of the extra information can be found [here](https://github.com/GIScience/openrouteservice-docs).\n"
+          schema:
+            $ref: "#/definitions/Routeresponse"
+        400:
+          description: "The request is incorrect and therefore can not be processed."
+          schema:
+            $ref: "#/definitions/error"
+        401:
+          description: "Authorization field missing."
+        405:
+          description: "The specified HTTP method is not supported. For more details,\
+            \ refer to the EndPoint documentation."
+        413:
+          description: "The request is larger than the server is able to process,\
+            \ the data provided in the request exceeds the capacity limit."
+        500:
+          description: |
+            An unexpected error was encountered and more detailed internal error code is provided: **200**: Unable to parse JSON request. **201**: Required parameter is missing. **202**: Invalid parameter format. **203**: Invalid parameter value. **204**: Parameter value exceeds the maximum allowed limit. **299**: Unknown internal error.
+        501:
+          description: "Indicates that the server does not support the functionality\
+            \ needed to fulfill the request."
+        503:
+          description: "The server is currently unavailable due to overload or maintenance."
+  /geocoding:
+    get:
+      summary: "Geocoding Service"
+      description: |
+        This endpoint can be used for geocoding (specified `query`) and reverse geocoding requests (specified `location`)
+        
+        **Either** `query` **or** `location` **has to be specified for a valid request!**
+
+        If both parameters are specified `location` takes precedence.
+        
+        - **geocoding:** Returns a JSON formatted list of objects corresponding to the search input.
+        - **reverse geocoding:** Returns the next enclosing object with an address tag which surrounds the given coordinate.
+      parameters:
+      - name: "query"
+        in: "query"
+        description: "Name of location, street address or postal code."
+        type: "string"
+      - name: "location"
+        in: "query"
+        description: "Coordinate to be inquired."
+        type: "number"
+        format: "longitude,latitude"
+      - name: "lang"
+        in: "query"
+        description: "Sets the language of the response."
+        type: "string"
+        default: "en"
+        enum:
+        - "de"
+        - "en"
+        - "fr"
+        - "it"
+      - name: "limit"
+        in: "query"
+        description: "Specifies the maximum number of responses. Not needed for reverse."
+        type: "number"
+        default: 20
+        format: "double"
+      - name: "id"
+        in: "query"
+        description: "Arbitrary identification string of the request reflected in\
+          \ the meta information."
+        type: "string"
+      responses:
+        200:
+          description: "Standard response for successfully processed requests. Returns\
+            \ JSON."
+          schema:
+            $ref: "#/definitions/Geocoderesponse"
+        400:
+          description: "The request is incorrect and therefore can not be processed."
+          schema:
+            $ref: "#/definitions/error"
+        401:
+          description: "Authorization field missing."
+        405:
+          description: "The specified HTTP method is not supported. For more details,\
+            \ refer to the EndPoint documentation."
+        413:
+          description: "The request is larger than the server is able to process,\
+            \ the data provided in the request exceeds the capacity limit."
+        500:
+          description: |
+            An unexpected error was encountered and more detailed internal error code is provided: **100**: Unable to parse JSON request. **101**: Required parameter is missing. **102**: Invalid parameter format. **103**: Invalid parameter value. **104**: Parameter value exceeds the maximum allowed limit. **199**: Unknown internal error.
+        501:
+          description: "Indicates that the server does not support the functionality\
+            \ needed to fulfill the request."
+        503:
+          description: "The server is currently unavailable due to overload or maintenance."
+  /isochrones:
+    get:
+      summary: "Isochrones Service"
+      description: "The Isochrone Service supports time and distance analyses for\
+        \ one single\nor multiple locations. You may also specify the isochrone interval\
+        \ or\nprovide multiple exact isochrone range values. This service allows the\n\
+        same range of profile options listed in the ORS Routing section which\nhelp\
+        \ you to further customize your request to obtain a more detailed\nreachability\
+        \ area response.\n"
+      parameters:
+      - name: "locations"
+        in: "query"
+        description: |
+          List of longitude, latitude coordinates delimited with pipe.
+
+          Example values:
+            `8.34234,48.23424`
+        required: true
+        type: "array"
+        items:
+          type: "string"
+          format: "longitude,latitude"
+        collectionFormat: "pipes"
+        #default: 
+        #  - "8.34234,48.23424"
+      - name: "profile"
+        in: "query"
+        description: "Specifies the routing profile."
+        type: "string"
+        default: "driving-car"
+        enum:
+        - "driving-car"
+        - "driving-hgv"
+        - "cycling-regular"
+        - "cycling-road"
+        - "cycling-safe"
+        - "cycling-mountain"
+        - "cycling-tour"
+        - "foot-walking"
+        - "foot-hiking"
+      - name: "range_type"
+        in: "query"
+        description: "Set _time_ for isochrones or _distance_ for equidistants.\n"
+        type: "string"
+        default: "time"
+      - name: "range"
+        in: "query"
+        description: "Maximum range value of the analysis in seconds for time and\
+          \ meters for distance. Alternatively a comma separated list of specific\
+          \ single range values.\n"
+        required: true
+        type: "number"
+        format: "double"
+        default: 60
+      - name: "interval"
+        in: "query"
+        description: "Interval of isochrones or equidistants for one range value.\
+          \ value in seconds for time and meters for distance.\n"
+        type: "number"
+        format: "double"
+      - name: "units"
+        in: "query"
+        description: "Unit format for  `rangetype=distance`.\n"
+        type: "string"
+        default: ""
+        enum:
+        - "m"
+        - "km"
+        - "mi"
+      - name: "location_type"
+        in: "query"
+        description: "start(default) treats the location(s) as starting point, destination\
+          \ as goal.\n"
+        type: "string"
+        default: "start"
+        enum:
+        - "start"
+        - "destination"
+      - name: "attributes"
+        in: "query"
+        description: |
+          Values are area and reachfactor. Delimit with pipe for both.
+          `area` returns the area of each polygon in its feature properties.
+          `reachfactor` returns a reachability score between 0 and 1.
+        type: "array"
+        items:
+          type: "string"
+          enum:
+          - "area"
+          - "reachfactor"
+        collectionFormat: "pipes"
+        uniqueItems: true
+      - name: "options"
+        in: "query"
+        description: "For advanced options formatted as JSON. Add object as string:\
+          \ \"{...}\".\n"
+        type: "string"
+      - name: "intersections"
+        in: "query"
+        description: "Specifies whether to return intersection polygons.\n"
+        type: "boolean"
+        default: false
+      - name: "id"
+        in: "query"
+        description: "Arbitrary identification string of the request reflected in\
+          \ the meta information."
+        type: "string"
+      responses:
+        200:
+          description: "Standard response for successfully processed requests. Returns\
+            \ JSON."
+          schema:
+            $ref: "#/definitions/IsochronesResponse"
+        400:
+          description: "The request is incorrect and therefore can not be processed."
+          schema:
+            $ref: "#/definitions/error"
+        401:
+          description: "Authorization field missing."
+        403:
+          description: "Access to this API has been disallowed."
+        405:
+          description: "The specified HTTP method is not supported. For more details,\
+            \ refer to the EndPoint documentation."
+        413:
+          description: "The request is larger than the server is able to process,\
+            \ the data provided in the request exceeds the capacity limit."
+        500:
+          description: |
+            An unexpected error was encountered and more detailed internal error code is provided: **300**: Unable to parse JSON request. **301**: Required parameter is missing. **302**: Invalid parameter format. **303**: Invalid parameter value. **304**: Parameter value exceeds the maximum allowed limit. **305**: Requested feature is not supported. **399**: Unknown internal error.
+        501:
+          description: "Indicates that the server does not support the functionality\
+            \ needed to fulfill the request."
+        503:
+          description: "The server is currently unavailable due to overload or maintenance."
+  /places:
+    get:
+      summary: "Location Service"
+      description: |
+        Returns Points of Interest in the area surrounding a point or
+        a line geometry. Use the post endpoint for requests that exceed the get
+        character limit.
+
+        - **pois:** Either `geometry` or `bbox` are required. `radius` required depending on `geometry`.
+        - **category_stats:** Either `geometry` or `bbox` are required. `radius` required depending on `geometry`.
+        - **category_list:** Additionally to this List the category groups and ids can be found [here](https://github.com/GIScience/openrouteservice-docs).
+      parameters:
+      - name: "request"
+        in: "query"
+        description: "`pois` will return POI geometry as well as requested details.\
+          \ `category_stats` returns a POI count for each requested category. `category_list`\
+          \ returns a list of all categories (only the id parameter will be considered).\n"
+        required: true
+        type: "string"
+        enum:
+        - "pois"
+        - "category_stats"
+        - "category_list"
+        default: pois
+      - name: "category_group_ids"
+        in: "query"
+        description: "Comma seperated list of category group ids.\n"
+        type: "string"
+        default: 420
+      - name: "category_ids"
+        in: "query"
+        description: "Comma seperated list of category ids.\n"
+        type: "string"
+      - name: "name"
+        in: "query"
+        description: "Name to filter the POIs by. **Only finds exact matches**"
+        type: "string"
+      - name: "wheelchair"
+        in: "query"
+        description: "Filter returned features by wheelchair tag entries.\n"
+        type: "string"
+        enum:
+        - "true"
+        - "false"
+        - "limited"
+      - name: "smoking"
+        in: "query"
+        description: "Filter returned features by wheelchair tag entries.\n"
+        type: "string"
+        enum:
+        - "true"
+        - "false"
+      - name: "fee"
+        in: "query"
+        description: "Filter returned features by fee tag entries.\n"
+        type: "string"
+        enum:
+        - "true"
+        - "false"
+      - name: "bbox"
+        in: "query"
+        description: |
+          Defines a clipping bounding box. Can be defined additionally to `geometry`.
+        type: "array"
+        #default:
+        #  - 8.168082
+        #  - 47.272105
+        #  - 8.169165
+        #  - 48.272186
+        items:
+          type: "number"
+          format: "double"
+        collectionFormat: "csv"
+        maxItems: 4
+        minItems: 4
+      - name: "geometry"
+        in: "query"
+        description: "GeoJSON geometry object (Point, Linestring or Polygon)\n"
+        type: "string"
+        default: "{type: LineString, coordinates:[[8.167426,49.272556],[8.167588,47.272445],[8.168082,47.272105],[8.168224,47.271917],[8.16831,47.271941],[8.168926,47.272216],[8.169054,47.272278],[8.169165,47.272186],[8.169256,47.272103],[8.16948,47.271921],[8.170129,47.271408],[8.170265,47.271295],[8.170701,47.27097],[8.171496,47.270485],[8.171796,47.270296]]}"
+      - name: "radius"
+        in: "query"
+        description: |
+          Search radius in meters around the given (might be limited in the backend).
+          **Required if geometry is a Point or Linestring**
+        type: "number"
+        maximum: 1000
+        minimum: 0
+        format: "double"
+        default: 500
+      - name: "limit"
+        in: "query"
+        description: |
+          Maximum number of returned objects (might be limited in the
+          backend). **For** `request=pois` **only.**
+        type: "integer"
+        format: "int64"
+      - name: "sortby"
+        in: "query"
+        description: |
+          Sorts the returned features by _distance_ or _category_. **For** `request=pois` **only.**
+        type: "string"
+        enum:
+        - "distance"
+        - "category"
+      - name: "details"
+        in: "query"
+        description: |
+          Pipe seperated list of desired details. **For** `request=pois` **only.**
+        type: "array"
+        items:
+          type: "string"
+          enum:
+          - "address"
+          - "contact"
+          - "attributes"
+        collectionFormat: "pipes"
+        #default: 
+        #  - "address"
+        #  - "contact"
+        #  - "attributes"
+        uniqueItems: true
+      - name: "id"
+        in: "query"
+        description: "Arbitrary identification string of the request reflected in\
+          \ the meta information."
+        type: "string"
+      responses:
+        200:
+          description: "Standard response for successfully processed requests. Returns\
+            \ JSON."
+          schema:
+            $ref: "#/definitions/LocationsPoiResponse"
+        400:
+          description: "The request is incorrect and therefore can not be processed."
+          schema:
+            $ref: "#/definitions/error"
+        401:
+          description: "Authorization field missing."
+        403:
+          description: "Access to this API has been disallowed."
+        405:
+          description: "The specified HTTP method is not supported. For more details,\
+            \ refer to the EndPoint documentation."
+        413:
+          description: "The request is larger than the server is able to process,\
+            \ the data provided in the request exceeds the capacity limit."
+        500:
+          description: |
+            An unexpected error was encountered and more detailed internal error code is provided: **400**: Unable to parse JSON request. **401**: Required parameter is missing. **402**: Invalid parameter format. **403**: Invalid parameter value. **404**: Parameter value exceeds the maximum allowed limit. **499**: Unknown internal error.
+        501:
+          description: "Indicates that the server does not support the functionality\
+            \ needed to fulfill the request."
+        503:
+          description: "The server is currently unavailable due to overload or maintenance."
+    post:
+      summary: "Location Service"
+      description: "Returns Points of Interest in the area surrounding a geometry.\n"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "this is body"
+        schema:
+          $ref: "#/definitions/body"
+      responses:
+        200:
+          description: "Standard response for successfully processed requests. Returns\
+            \ JSON."
+          schema:
+            $ref: "#/definitions/LocationsPoiResponse"
+        400:
+          description: "The request is incorrect and therefore can not be processed."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/error"
+        401:
+          description: "Authorization field missing."
+        403:
+          description: "Access to this API has been disallowed."
+        405:
+          description: "The specified HTTP method is not supported. For more details,\
+            \ refer to the EndPoint documentation."
+        413:
+          description: "The request is larger than the server is able to process,\
+            \ the data provided in the request exceeds the capacity limit."
+        500:
+          description: |
+            An unexpected error was encountered and more detailed internal error code is provided: **400**: Unable to parse JSON request. **401**: Required parameter is missing. **402**: Invalid parameter format. **403**: Invalid parameter value. **404**: Parameter value exceeds the maximum allowed limit. **499**: Unknown internal error.
+        501:
+          description: "Indicates that the server does not support the functionality\
+            \ needed to fulfill the request."
+        503:
+          description: "The server is currently unavailable due to overload or maintenance."
+securityDefinitions:
+  UserSecurity:
+    description: "Add your API Key as the value of the *api_key* parameter to your\
+      \ GET\nrequest. (In this Demo you can click the Authentication Button.)\n"
+    type: "apiKey"
+    name: "api_key"
+    in: "query"
+definitions:
+  options:
+    type: "object"
+    properties:
+      maximum_speed:
+        type: "integer"
+        format: "int64"
+      avoid_features:
+        type: "array"
+        uniqueItems: true
+        items:
+          type: "string"
+          enum:
+          - "highways"
+          - "tollways"
+          - "ferries"
+          - "tunnels"
+          - "pavedroads"
+          - "unpavedroads"
+          - "tracks"
+          - "fords"
+          - "steps"
+          - "hills"
+      vehicle_type:
+        type: "string"
+        description: "Parameter for the driving-hgv Profile"
+        enum:
+        - "hgv"
+        - "bus"
+        - "agricultural"
+        - "forestry"
+        - "goods"
+        - "delivery"
+        default: "hgv"
+      profile_params:
+        $ref: "#/definitions/profile_params"
+      avoid_polygons:
+        $ref: "#/definitions/avoid_polygons"
+    example:
+      maximum_speed: 12
+      avoid_features:
+      - "hills"
+      - "ferries"
+      - "tollways"
+      profile_params:
+        difficulty_level: 2
+        maximum_gradient: 13
+      avoid_polygons:
+        type: "Polygon"
+        coordinates:
+        - - - 100
+            - 0
+          - - 101
+            - 0
+          - - 101
+            - 1
+          - - 100
+            - 1
+          - - 100
+            - 0
+  profile_params:
+    properties:
+      length:
+        type: "number"
+        format: "double"
+      width:
+        type: "number"
+        format: "double"
+      height:
+        type: "number"
+        format: "double"
+      axleload:
+        type: "number"
+        format: "double"
+      weight:
+        type: "number"
+        format: "double"
+      hazmat:
+        type: "boolean"
+      difficulty_level:
+        type: "integer"
+        format: "int64"
+        enum:
+        - 0
+        - 1
+        - 2
+        - 3
+      maximum_gradient:
+        type: "integer"
+        format: "int64"
+        minimum: 1
+        maximum: 15
+  avoid_polygons:
+    properties:
+      type:
+        type: "string"
+        default: "Polygon"
+      coordinates:
+        type: "array"
+        items:
+          type: "array"
+          items:
+            type: "number"
+            format: "double"
+          maxItems: 2
+          minItems: 2
+  Routeresponse:
+    properties:
+      routes:
+        type: "array"
+        items:
+          $ref: "#/definitions/Routeresponse_routes"
+      info:
+        $ref: "#/definitions/Routeresponse_info"
+    title: "Route Response Object"
+  Routeresponse_routes:
+    properties:
+      summary:
+        $ref: "#/definitions/routes_summary"
+      geometry_format:
+        type: "string"
+        description: "Contains the defined geometry format."
+        default: encodedpolyline
+        example: encodedpolyline
+      geometry:
+        $ref: "#/definitions/routes_geometry"
+      segments:
+        type: "array"
+        description: "List containing the segments and its correspoding steps which make up the route."
+        items:
+          $ref: "#/definitions/segments"
+        maxItems: 1
+      way_points:
+        type: "array"
+        description: "List containing the indices of way points corresponding to the *geometry*."
+        items:
+          type: "integer"
+          format: "int64"
+        maxItems: 2
+        minItems: 2
+        example:
+          - 0
+          - 163
+      extras:
+        $ref: '#/definitions/extras'
+      bbox:
+        type: "array"
+        description: "Contains the minimum bounding box of the route."
+        items:
+          type: "number"
+          format: "double"
+        maxItems: 4
+        minItems: 4
+        example:
+          - 8.327707
+          - 48.231946
+          - 8.345244
+          - 48.263552
+    title: "routes object"
+    example:
+      summary:
+        distance:
+          $ref: "#/definitions/routes_summary/properties/distance/example"
+        duration:
+          $ref: "#/definitions/routes_summary/properties/duration/example"
+        ascent:
+          $ref: "#/definitions/routes_summary/properties/ascent/example"
+        descent:
+          $ref: "#/definitions/routes_summary/properties/descent/example"
+      geometry_format:
+        $ref: "#/definitions/Routeresponse_routes/properties/geometry_format/example"
+      geometry:
+        $ref: "#/definitions/routes_geometry/example"
+      segments:
+        distance : 5757.4
+        duration : 821
+        steps: 
+          $ref: "#/definitions/steps/example"
+  routes_summary:
+    properties:
+      distance:
+        type: "number"
+        format: "double"
+        description: "Total route distance in specified units."
+        example: 5757.4
+      duration:
+        type: "number"
+        format: "double"
+        description: "Total duration in seconds."
+        example: 821
+      ascent:
+        type: "number"
+        format: "double"
+        description: "Total ascent in meters."
+        example: 257
+      descent:
+        type: "number"
+        format: "double"
+        description: "Total descent in meters."
+        example: 336
+    title: "summary object"
+    description: "Contains total sums of duration, route distance and actual distance\
+      \ of the route."
+  routes_geometry:
+    properties:
+      type:
+        type: string
+      coordinates:
+        $ref: "#/definitions/geometry_coordinates"
+    description: "Contains the geometry in the defined geometry format."
+    example: "mtkeHuv|q@~@VLHz@\\PR|@hBt@j@^n@L\\NjALv@Jh@NXi@zBm@jCKTy@z@qAhBa@\\[Ne@DgCc@i@?[Ty@hAi@zASRi@R}@H_@N[b@kAdCy@`Au@d@eA|@q@h@WRe@PYHYBqADgAAcAL_A^w@~@q@`@w@Zw@Cm@K[PeA|Aa@p@g@fAiAhBuAv@]VU^k@xAUXe@TqATy@V}@f@_@V[MUWqA_FKy@Me@_@cAu@{Ae@c@aAfBaAv@g@rBm@|@w@x@m@^U@m@Ma@SI\\mAlEkAjC_AjC_ApCe@z@i@j@q@f@[NsAp@u@T}A\\wATU?WCeBm@q@MwAGUCg@SMaAi@mDQm@K}@Mq@u@mAc@i@c@Ys@[WW_@q@e@a@cA_@w@E{BHmBXqBkBsA}@{Ao@iAB{@QYSi@qCUy@Ee@i@kBWk@yAoCWS_@SaAE{@yAu@mDUsAqA}@EM@QTiA|@iAn@gAd@eAg@_@I]??k@i@yBkEa@}@W}@WkCUqC?_@Hg@ZqABg@Gm@YoAEgAMq@@jAB|CC`@{@rACH"
+  geometry_coordinates:
+    type: array
+    description: Contains the coordinate arrays of every route point.
+    items:
+      type: array
+      description: Contains longitude, latitude and altitude(for elevation=true).
+      minItems: 2 
+      maxItems: 3
+      items:
+        type: number
+        format: double
+  segments:
+    properties:
+      distance:
+        type: "number"
+        format: "double"
+        description: "Contains the distance of the segment in specified units."
+        example: 5757.4
+      duration:
+        type: "number"
+        format: "double"
+        description: "Contains the duration of the segment in seconds."
+        example: 821
+      ascent:
+        type: number
+        format: double
+        description: Contains ascent of this segment in meters for `elevation=true`.
+      descent:
+        type: number
+        format: double
+        description: Contains descent of this segment in meters for `elevation=true`.
+      steps:
+        type: "array"
+        description: "List containing the specific steps the segment consists of."
+        items:
+          $ref: "#/definitions/steps"          
+    title: "segments object"
+    example:
+      distance : 5757.4
+      duration : 821
+      steps: 
+        $ref: "#/definitions/steps/example"
+  steps:
+    properties:
+      distance:
+        type: "number"
+        format: "double"
+        description: "The distance for the step in meters."
+      duration:
+        type: "number"
+        format: "double"
+        description: "The duration for the step in seconds."
+      type:
+        type: "integer"
+        format: "int64"
+        description: "The instruction action for symbolisation purposes. Refer to the tables on https://github.com/GIScience/openrouteservice-docs."
+      instruction:
+        type: "string"
+        description: "The routing instruction text for the step."
+      way_points:
+        type: "array"
+        description: "List containing the indices of the steps start- and endpoint corresponding to the *geometry*."
+        items:
+          type: "integer"
+          format: "int64"
+        maxItems: 2
+        minItems: 2
+    title: "steps object"
+    example:
+      - {
+          "distance": 383.1,
+          "duration": 46,
+          "type": "6",
+          "instruction": "Head south on Benatweg",
+          "way_points": [
+            0,
+            12
+          ]
+        }
+      - {
+          "distance": 757.4,
+          "duration": 54.5,
+          "type": "1",
+          "instruction": "Turn right onto Hölzle, K 5528",
+          "way_points": [
+            12,
+            33
+          ]
+        }
+      - {
+          "distance": 980.2,
+          "duration": 70.6,
+          "type": "6",
+          "instruction": "Continue straight onto Sulzbacher Straße, K 5528",
+          "way_points": [
+            33,
+            63
+          ]
+        }
+      - {
+          "distance": 3636.7,
+          "duration": 649.9,
+          "type": "5",
+          "instruction": "Turn slight right",
+          "way_points": [
+            63,
+            163
+          ]
+        }
+  extras:
+    description: For every information item there is an associated block divided into *summary* and *values*.
+    properties:
+      steepness:
+        $ref: '#/definitions/extras_property'
+      suitability:
+        $ref: '#/definitions/extras_property'
+      surface:
+        $ref: '#/definitions/extras_property'
+      waycategory:
+        $ref: '#/definitions/extras_property'
+      waytype:
+        $ref: '#/definitions/extras_property'
+  extras_property:
+    properties:
+      values:
+        description: Broken down by way_points.
+        type: array
+        items:
+          type: array
+          items:
+            type: number
+            format: double
+            description: |
+              Value 1: Indice of the starting geometry for this section.
+              Value 2: Indice of the end geometry for this section.
+              Value 3: Value assigned to this section. Refer to the tables on https://github.com/GIScience/openrouteservice-docs.
+      summary:
+        description: Broken down by information category values.
+        type: array
+        items:
+          $ref: '#/definitions/summary_object'
+  summary_object:
+    properties:
+      value:
+        type: integer
+        format: int64
+        description: Value of a info category. Refer to the tables on https://github.com/GIScience/openrouteservice-docs.
+      distance:
+        type: integer
+        format: int64
+        description: Cumulative distance of this value.
+      amount:
+        type: integer
+        format: int64
+        description: Category percentage of the entire route.
+  Routeresponse_info:
+    properties:
+      attribution:
+        type: "string"
+        description: "Attribution for using our service."
+        example: "openrouteservice.org, OpenStreetMap contributors, tmc - BASt"
+      version:
+        type: "string"
+        description: "Backend version used for the request."
+        example: "4.0.0"
+      service:
+        type: "string"
+        description: "API endpoint used."
+        example: "routing"
+      timestamp:
+        type: "integer"
+        format: "int64"
+        description: "Unix timestamp of the precise request date."
+        example: 1493300103526
+      query:
+        $ref: "#/definitions/Routeresponse_info_query"
+    title: "info object"
+    description: "Summarizes your query settings."
+  Routeresponse_info_query:
+    required:
+    - "coordinates"
+    - "geometry_format"
+    - "profile"
+    properties:
+      profile:
+        type: "string"
+        example: "driving-car"
+      preference:
+        type: "string"
+        default: "fastest"
+        example: "fastest"
+      coordinates:
+        type: "array"
+        items:
+          type: "array"
+          items:
+            type: "number"
+            format: "double"
+          maxItems: 2
+          minItems: 2
+        minItems: 2
+        example:
+          - - 8.34234
+            - 48.23424
+          - - 8.23424
+            - 48.26424
+      language:
+        type: string
+        example: en
+      units:
+        type: string
+        example: meters
+      geometry:
+        type: boolean
+        example: true
+      geometry_format:
+        type: "string"
+        example: encodedpolyline
+      instructions_format:
+        type: string
+        example: text
+      instructions:
+        type: boolean
+        example: true
+      elevation:
+        type: boolean
+        example: false
+      options:
+        type: string
+        example: {}
+    title: "query object"
+    description: "Parameters that were specified in the query."
+  Geocoderesponse:
+    properties:
+      type:
+        type: "string"
+        default: FeatureCollection
+        example: FeatureCollection
+      features:
+        type: "array"
+        items:
+          $ref: "#/definitions/Geocoderesponse_features"
+      bbox:
+        type: "array"
+        description: "Contains the minimum bounding box of all features."
+        items:
+          type: "number"
+          format: "double"
+        maxItems: 4
+        minItems: 4
+        example:
+          - 13.239515
+          - 52.514679
+          - 13.239515
+          - 52.514679
+      info:
+        $ref: "#/definitions/Geocoderesponse_info"
+    title: "Geocode Response Object"
+  Geocoderesponse_features:
+    properties:
+      type:
+        type: "string"
+        default: Feature
+        example: Feature
+      geometry:
+        $ref: "#/definitions/Geocoderesponse_geometry"
+      properties:
+        $ref: "#/definitions/Geocoderesponse_properties"
+    title: "features object"
+  Geocoderesponse_geometry:
+    properties:
+      type:
+        type: "string"
+        default: Point
+        example: Point
+      coordinates:
+        description: "Contains the longitude and latitude"
+        type: "array"
+        items:
+          type: "number"
+          format: "double"
+        maxItems: 2
+        minItems: 2
+        example: 
+          - 13.239515
+          - 52.514679
+    title: "geometry object"
+  Geocoderesponse_properties:
+    properties:
+      country:
+        type: string
+        example: Germany
+      state:
+        type: "string"
+        example: Berlin
+      city:
+        type: string
+        example: Berlin
+      postal_code:
+        type: "string"
+        example: 14053
+      street:
+        type: "string"
+        example: Olympischer Platz
+      house_number:
+        type: "string"
+        example: 3
+      name:
+        type: "string"
+        example: Berlin Olympic Stadium
+      distance:
+        type: "string"
+        description: Distance between the input location and the result point.
+        example: 0.33
+      confidence:
+        type: "string"
+        description: Based on the distance. The closer a result is to the queried point, the higher the `confidence`.
+    title: "porperties object"
+    description: Contains the OSM tag information of the point. For reverse request with `distance` and `confidence`.
+  Geocoderesponse_info:
+    properties:
+      service:
+        type: string
+        default: geocoding
+        example: geocoding
+        description: API endpoint used.
+      attribution:
+        type: "string"
+        description: "Attribution for using our service."
+        example: "openrouteservice.org, OpenStreetMap contributors"
+      query:
+        $ref: "#/definitions/Geocoderesponse_info_query"
+      version:
+        type: "string"
+        description: "Backend version used for the request."
+        example: 4.0.0
+      timestamp:
+        type: "integer"
+        format: "int64"
+        description: "Unix timestamp of the precise request date."
+        example: 1493288124343
+    title: "info object"
+  Geocoderesponse_info_query:
+    properties:
+      query:
+        type: "string"
+      location:
+        type: array
+        items:
+          type: number
+          format: double
+        example:
+          - 13.239515
+          - 52.514679
+      limit:
+        type: "integer"
+        format: "int64"
+        default: 20
+        example: 20
+    title: query object
+    description: Summarizes your query settings.
+  IsochronesResponse:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+        default: "FeatureCollection"
+      features:
+        type: "array"
+        items:
+          $ref: "#/definitions/IsochronesResponse_features"
+      bbox:
+        type: "array"
+        items:
+          type: "number"
+          format: "double"
+        maxItems: 4
+        minItems: 4
+        description: "Contains the minimum bounding box of all features."
+        example:
+          - 8.337413
+          - 48.228996
+          - 8.348807
+          - 48.235437
+      info:
+        $ref: "#/definitions/IsochronesResponse_info"
+    title: "Isochrones Response Object"
+  IsochronesResponse_features:
+    properties:
+      geometry:
+        $ref: "#/definitions/IsochronesResponse_geometry"
+      type:
+        type: "string"
+        default: "Feature"
+        example: "Feature"
+      properties:
+        $ref: "#/definitions/IsochronesResponse_properties"
+    title: "features object"
+  IsochronesResponse_geometry:
+    properties:
+      coordinates:
+        type: "array"
+        items:
+          type: "array"
+          items:
+            type: "number"
+            format: "double"
+        example:
+          - - 8.337413
+            - 48.233333
+          - - 8.337446
+            - 48.233146
+          - - 8.339023
+            - 48.231162
+          - - 8.342829
+            - 48.228996
+          - - 8.344379
+            - 48.229675
+          - - 8.34602
+            - 48.230662
+          - - 8.347124
+            - 48.231837
+          - - 8.348778
+            - 48.233859
+          - - 8.348807
+            - 48.233995
+          - - 8.348731
+            - 48.235059
+          - - 8.347973
+            - 48.235437
+          - - 8.340959
+            - 48.233954
+          - - 8.337413
+            - 48.233333
+      type:
+        type: "string"
+        default: "Polygon"
+        example: Polygon
+    title: "geometry object"
+  IsochronesResponse_properties:
+    properties:
+      area:
+        type: number
+        format: double
+        description: Area of the polygon in square meters (for attributes=area).
+      reachfactor:
+        type: number
+        format: double
+        description: |
+          Returns a reachability score between 0 and 1. As the maximum reachfactor would be achieved by travelling as the crow flies at maximum speed in a vacuum without obstacles, naturally it can never be 1. The availability of motorways however produces a higher score over normal roads.
+      center:
+        type: "array"
+        items:
+          type: "number"
+          format: "double"
+        maxItems: 2
+        minItems: 2
+        description: The coordinates of the specific analysis location.
+      group_index:
+        type: "integer"
+        format: "int64"
+        description: Id of the isochrone based on the position in the `locations` query-parameter. Every location comprises its own group of polygons.
+      value:
+        type: "integer"
+        format: "int64"
+        description: The range value of this isochrone/equidistant in seconds/meters.
+      contours:
+        type: array
+        description: For intersections=true. Every intersection polygon comprises contours with an index array for each participating isochrone.
+        items:
+          type: array
+          description: For each participating isochrone...
+          items:
+            type: integer
+            format: int64
+            description: |
+              ... the group_index(first value) and the isochrone index(second value), numbered from the center, starting with `0`.
+              The example ("contours": [[0,1],[1,1],[2,0]]) would indicate the intersection polygon between the 2nd isochrone of the 1st location, the 2nd isochrone of th 2nd location and the 1st isochrone of the 3rd location.
+    title: "porperties object"
+    example:
+      group_index: 0
+      value: 60
+      center:
+        - 8.34234
+        - 48.23424
+  IsochronesResponse_info:
+    properties:
+      service:
+        type: "string"
+        description: "API endpoint used."
+        default: isochrones
+        example: isochrones
+      query:
+        $ref: "#/definitions/IsochronesResponse_info_query"
+      attribution:
+        type: "string"
+        description: "Attribution for using our service."
+        example: "openrouteservice.org, OpenStreetMap contributors"
+      version:
+        type: "string"
+        description: "Backend version used for the request."
+        example: "4.0.0"
+      timestamp:
+        type: "integer"
+        format: "int64"
+        description: "Unix timestamp of the precise request date."
+        example: 1493305098226
+    title: "info object"
+  IsochronesResponse_info_query:
+    properties:
+      mode:
+        type: "string"
+      rangetype:
+        type: "string"
+      range:
+        type: "integer"
+        format: "int64"
+      interval:
+        type: "integer"
+        format: "int64"
+      locations:
+        type: "array"
+        items:
+          type: "array"
+          items:
+            type: "number"
+            format: "double"
+    title: "query object"
+    description: Summarizes your query settings.
+    example:
+      ranges: "60.0"
+      profile: "driving-car"
+      locations:
+        - - 8.34234
+          - 48.23424
+      range_type: "time"
+      location_type: "start"
+  LocationsPoiResponse:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+        default: "FeatureCollection"
+        example: "FeatureCollection"
+      features:
+        type: "array"
+        items:
+          $ref: "#/definitions/location_features"
+        example:
+          - {
+              "type": "Feature",
+              "geometry": {
+                "type": "Point",
+                "coordinates": [
+                  8.1691,
+                  47.444286
+                ]
+              },
+              "properties": {
+                "osm_id": "4491251090",
+                "category": "451",
+                "name": "Volg",
+                "distance": "115.08"
+              }
+            }
+          - {
+              "type": "Feature",
+              "geometry": {
+                "type": "Point",
+                "coordinates": [
+                  8.168594,
+                  47.380072
+                ]
+              },
+              "properties": {
+                "osm_id": "2754058215",
+                "category": "474",
+                "name": "Berner Früchte und Gemüse",
+                "phone": "+41 (0)62 891 34 50/51",
+                "website": "http://www.berner-gemuese.ch",
+                "distance": "76.58"
+              }
+            }
+      bbox:
+        type: "array"
+        items:
+          type: "number"
+          format: "double"
+        maxItems: 4
+        minItems: 4
+        description: "Contains the minimum bounding box of all features."
+        example:
+          - 8.168594
+          - 47.380072
+          -  8.1691
+          - 47.444286
+      info:
+        $ref: "#/definitions/LocationsPoiResponse_info"
+    title: "Places Poi Response Object"
+  location_features:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+        default: "Feature"
+      geometry:
+        $ref: "#/definitions/location_features_geometry"
+      properties:
+        $ref: "#/definitions/location_features_properties"
+    title: "features object"
+  location_features_geometry:
+    properties:
+      type:
+        type: "string"
+        default: "Point"
+      coordinates:
+        type: "array"
+        items:
+          type: "number"
+          format: "double"
+        maxItems: 2
+        minItems: 2
+    title: "geometry object"
+  location_features_properties:
+    properties:
+      osm_id:
+        type: "string"
+      category:
+        type: "string"
+      name:
+        type: "string"
+      address:
+        type: "string"
+      phone:
+        type: "string"
+      website:
+        type: "string"
+      opening_hours:
+        type: "string"
+      wheelchair:
+        type: "string"
+      distance:
+        type: "string"
+    title: "properties object"
+  LocationsPoiResponse_info:
+    properties:
+      service:
+        type: "string"
+        description: "API endpoint used."
+        example: "places"
+      version:
+        type: "string"
+        description: "Backend version used for the request."
+        example: "4.0.0"
+      attribution:
+        type: "string"
+        description: "Attribution for using our service."
+        example: "openrouteservice.org, OpenStreetMap contributors"
+      timestamp:
+        type: "integer"
+        format: "int64"
+        description: "Unix timestamp of the precise request date."
+        example: 1493306341299
+      query:
+        $ref: "#/definitions/LocationsPoiResponse_info_query"
+    title: "info object"
+  LocationsPoiResponse_info_query:
+    properties:
+      filter:
+        $ref: "#/definitions/LocationsPoiResponse_info_query_filter"
+      radius:
+        type: "integer"
+        format: "int64"
+      limit:
+        type: "integer"
+        format: "int64"
+    description: Summarizes your query settings.
+    title: "query object"
+    example:
+      filter:
+        category_group_ids:
+          - 420
+      radius: 500
+      limit: 20
+  LocationsPoiResponse_info_query_filter:
+    properties:
+      category_group_ids:
+        type: "array"
+        items:
+          type: "integer"
+          format: "int64"
+          example: 560
+      catoegory_ids:
+        type: "array"
+        items:
+          type: "integer"
+          format: "int64"
+          example: 561
+    title: "filter object"
+    description: "Filter the results by `category_group_ids` or `category_ids`. If\
+      \ both are specified the *group_ids* take priority."
+  body:
+    properties:
+      filter:
+        $ref: "#/definitions/filter"
+      details:
+        type: "string"
+        example: "address|contact|attributes"
+        enum:
+        - "address"
+        - "contact"
+        - "attributes"
+      limit:
+        type: "integer"
+        format: "int64"
+        example: 1000
+      radius:
+        type: "integer"
+        format: "int64"
+        example: 500
+      sortby:
+        type: "string"
+        example: "category"
+        enum:
+        - "category"
+        - "distance"
+      bbox:
+        type: "string"
+        example: "8.165339,47.265966,8.179995,49.214088"
+        description: "The pattern for this bbox string is `\"minlon,minlat,maxlon,maxlat\"\
+          `"
+      geometry:
+        $ref: "#/definitions/geometry"
+    description: "**You have to specify at least one of** `bbox` **and** `geometry`\
+      \ !\n"
+  filter:
+    properties:
+      category_group_ids:
+        type: "array"
+        items:
+          type: "integer"
+          format: "int64"
+          example: 560
+      catoegory_ids:
+        type: "array"
+        items:
+          type: "integer"
+          format: "int64"
+          example: 561
+    title: "filter object"
+  geometry:
+    description: "The geometry can be either a Point , LineString or Polygon."
+    example:
+      "{type: LineString, coordinates:[[8.167426,49.272556],[8.167588,47.272445],[8.168082,47.272105],[8.168224,47.271917],[8.16831,47.271941],[8.168926,47.272216],[8.169054,47.272278],[8.169165,47.272186],[8.169256,47.272103],[8.16948,47.271921],[8.170129,47.271408],[8.170265,47.271295],[8.170701,47.27097],[8.171496,47.270485],[8.171796,47.270296]]}"
+  error:
+    properties:
+      error:
+        $ref: "#/definitions/error_error"
+      info:
+        $ref: "#/definitions/error_info"
+    title: "STANDARD HTML ERROR"
+  error_error:
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
+      fields:
+        type: "string"
+    title: "error object"
+  error_info:
+    properties:
+      version:
+        type: "string"
+      timestamp:
+        type: "integer"
+        format: "int64"
+    title: "info object"
