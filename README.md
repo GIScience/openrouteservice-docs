@@ -1,9 +1,13 @@
 This repository stores the swagger specifications of the [OpenRouteService](openrouteservice.org "ORS website") API in yaml and json format.
 For a live version of this documentation visit https://developers.openrouteservice.org/portal/apis/.
 
+## Content
+
 This readme stores coding tables that go beyond the display options of swagger.
 With these you can decode response values where the meaning is not directly evident.
 
+- [Routing `options`](#routing-options)
+	- [Examples](#examples)
 - [Routing Response](#routing-response)
 	- [Steepness](#steepness)
 	- [Suitability](#suitability)
@@ -14,6 +18,113 @@ With these you can decode response values where the meaning is not directly evid
 - [Places Response](#places-response)
 	- [category_group_ids](#category_group_ids)
 	- [category_ids](#category_ids)
+
+# Routing options examples
+
+For advanced options formatted as json object. For structure refer to the [examples](#examples) below.
+          The available parameters are:
+          
+            - `maximum_speed` : Specifies a maximum travel speed in km/h.
+
+            - `avoid_features` : Pipe seperated list of features to avoid.
+              The available features are :
+
+              |     Feature    | Available for                               |
+              |:--------------:|---------------------------------------------|
+              | `highways`     | driving-*                                   |
+              | `tollways`     | driving-*                                   |
+              | `ferries`      | driving-\*, cycling-\*, foot-\*, wheelchair |
+              | `tunnels`      | driving-*                                   |
+              | `pavedroads`   | driving-\*, cycling-*                       |
+              | `unpavedroads` | driving-\*, cycling-*                       |
+              | `tracks`       | driving-*                                   |
+              | `fords`        | driving-\*, cycling-\*, foot-*              |
+              | `steps`        | cycling-\*, foot-\*, wheelchair             |
+              | `hills`        | cycling-\*, foot-\*                         |
+
+
+            - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`.
+            
+            - `profile_params` : Specifies vehicle parameters.
+              - for `cycling-*` profiles:
+
+                |        Value       |                                  Description                                  |
+                |:------------------:|-------------------------------------------------------------------------------|
+                | `difficulty_level` |  Specifies the fitness level. 0 = Novice, 1 = Moderate, 2 = Amateur, 3 = Pro. |
+                | `maximum_gradient` |  Specifies the maximum route steepness in percent. Values range from 1 to 15. |
+
+              - for `driving-hgv` : 
+
+                |  Parameter | Description                                                                                                                       |
+                |:----------:|-----------------------------------------------------------------------------------------------------------------------------------|
+                | `length`   | Length restriction in meters.                                                                                                     |
+                | `width`    | Width restriction in meters.                                                                                                      |
+                | `height`   | Height restriction in meters.                                                                                                     |
+                | `axleload` | Axleload restriction in tons.                                                                                                     |
+                | `weight`   | Weight restriction in tons.                                                                                                       |
+                | `hazmat`   | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false. |
+                
+                
+            - `avoid_polygons` : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).
+
+
+## Examples
+
+Some options examples in readable and minified form:
+
+for `profile=driving-car`:
+
+```json
+{
+    "maximum_speed": 100,
+    "avoid_features": ["ferries", "tollways"]
+}
+```
+`{"maximum_speed":100,"avoid_features":["ferries","tollways"]}`
+
+for `profile=cycling-*`:
+
+```json
+{
+"maximum_speed": 18,
+"avoid_features": "hills|unpavedroads",
+"profile_params": {
+    "difficulty_level": 2,
+    "maximum_gradient": 13
+},
+"avoid_polygons": {
+    "type": "Polygon",
+    "coordinates": [
+        [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]
+ ]}
+}
+```
+`{"maximum_speed":18,"avoid_features":"hills|unpavedroads","profile_params":{"difficulty_level":2,"maximum_gradient":13},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
+
+for `profile=driving-hgv`:
+
+```json
+{
+    "maximum_speed": 120,
+    "avoid_features": ["hills", "ferries", "tollways"],
+    "vehcile_type": "hgv",
+    "profile_params": {
+        "length": 30,
+        "width": 30,
+        "height": 3,
+        "axleload": 4,
+        "weight": 3,
+        "hazmat": true
+    },
+    "avoid_polygons": {  
+        "type": "Polygon",
+        "coordinates": [
+            [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]
+     ]}
+}
+```
+`{"maximum_speed":120,"avoid_features":["hills","ferries","tollways"],"vehcile_type":"hgv","profile_params":{"length":30,"width":30,"height":3,"axleload":4,"weight":3,"hazmat":true},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
+
 
 # Routing Response
 
@@ -127,7 +238,7 @@ Category groups
 |:------------------------------------------------------------:|:-----:|
 | [accomodation](#accomodation--100)                           | 100   |
 | [animals](#animals--120)                                     | 120   |
-| [arts_and_culture]                                           | 130   |
+| [arts_and_culture](#arts_and_culture--130)                   | 130   |
 | [education](#education--150)                                 | 150   |
 | [facilities](#facilities--160)                               | 160   |
 | [financial](#financial--190)                                 | 190   |
@@ -367,7 +478,7 @@ Categories listed by group
 | car_rental             | 589   |   | heliport           | 599   |   |                  |       |
 | car_repair             | 590   |   | motorcycle_parking | 600   |   |                  |       |
 
-### tourism: 620
+### tourism : 620
 
 |      Name     | Value |
 |:-------------:|:-----:|
