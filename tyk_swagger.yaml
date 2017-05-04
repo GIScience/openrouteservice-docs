@@ -494,9 +494,10 @@ paths:
           The minified form(for copy paste purposes):
   
           `{"maximum_speed":10,"avoid_features":"unpavedroads","profile_params":{"difficulty_level":1,"maximum_gradient":5},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
-
+          
           More examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).
         type: "string"
+        default: "{}"
       - name: "intersections"
         in: "query"
         description: "Specifies whether to return intersection polygons.\n"
