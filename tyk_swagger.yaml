@@ -202,8 +202,8 @@ paths:
             - `profile_params` : Specifies vehicle parameters.
               - for `cycling-*` profiles:
 
-                  - `difficulty_level`: Specifies the fitness level. `0` = Novice, `1` = Moderate, `2` = Amateur, `3` = Pro.
-                  - `maximum_gradient`: Specifies the maximum route steepness in percent. Values range from `1` to `15`.
+                  - `difficulty_level`: Specifies the fitness level. 0 = Novice, 1 = Moderate, 2 = Amateur, 3 = Pro. The prefered gradient increases with level.
+                  - `maximum_gradient`: Only for avoided `hills` or specified `difficulty_level`. Specifies the maximum route steepness in percent. Values range from 1 to 15. Routes with a higher gradient are avoided.
 
               - for `driving-hgv`: 
 
@@ -220,11 +220,11 @@ paths:
 
           ```json
           {
-            "maximum_speed": 18,
-            "avoid_features": "hills|unpavedroads",
+            "maximum_speed": 10,
+            "avoid_features": "unpavedroads",
             "profile_params": {
-                "difficulty_level": 2,
-                "maximum_gradient": 13
+                "difficulty_level": 1,
+                "maximum_gradient": 5
             },
             "avoid_polygons": {
                 "type": "Polygon",
@@ -235,7 +235,7 @@ paths:
           ```
           The minified form(for copy paste purposes):
   
-          `{"maximum_speed":18,"avoid_features":"hills|unpavedroads","profile_params":{"difficulty_level":2,"maximum_gradient":13},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
+          `{"maximum_speed":10,"avoid_features":"unpavedroads","profile_params":{"difficulty_level":1,"maximum_gradient":5},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
 
           More examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).
         type: "string"
@@ -434,8 +434,68 @@ paths:
         uniqueItems: true
       - name: "options"
         in: "query"
-        description: "For advanced options formatted as JSON. Add object as string:\
-          \ \"{...}\".\n"
+        description: |
+          For advanced options formatted as json object. For structure refer to the **options model** below.
+          The available parameters are:
+
+            - `maximum_speed` : Specifies a maximum travel speed in km/h.
+            
+            - `avoid_features` : Pipe seperated list of features to avoid.
+              The following features are available for listed profiles:
+
+                - `highways`: driving-*
+                - `tollways`: driving-*
+                - `ferries`: driving-\*,cycling-\*,foot-\*,wheelchair
+                - `tunnels`: driving-*
+                - `pavedroads`: driving-\*,cycling-*
+                - `unpavedroads`: driving-\*,cycling-*
+                - `tracks`: driving-*
+                - `fords`: driving-\*,cycling-\*,foot-*
+                - `steps`: cycling-\*,foot-\*,wheelchair
+                - `hills`: cycling-\*,foot-\*
+
+
+            - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`.
+            
+            - `profile_params` : Specifies vehicle parameters.
+              - for `cycling-*` profiles:
+
+                  - `difficulty_level`: Specifies the fitness level. 0 = Novice, 1 = Moderate, 2 = Amateur, 3 = Pro. The prefered gradient increases with level.
+                  - `maximum_gradient`: Only for avoided `hills` or specified `difficulty_level`. Specifies the maximum route steepness in percent. Values range from 1 to 15. Routes with a higher gradient are avoided.
+
+              - for `driving-hgv`: 
+
+                  - `length`: Length restriction in meters.
+                  - `width`: Width restriction in meters.
+                  - `height`: Height restriction in meters.
+                  - `axleload`: Axleload restriction in tons.
+                  - `weight`: Weight restriction in tons.
+                  - `hazmat`: Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false.
+                
+            - `avoid_polygons` : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).
+
+          This is an example options object:
+
+          ```json
+          {
+            "maximum_speed": 10,
+            "avoid_features": "unpavedroads",
+            "profile_params": {
+                "difficulty_level": 1,
+                "maximum_gradient": 5
+            },
+            "avoid_polygons": {
+                "type": "Polygon",
+                "coordinates": [
+                    [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]
+             ]}
+          }
+          ```
+          The minified form(for copy paste purposes):
+  
+          `{"maximum_speed":10,"avoid_features":"unpavedroads","profile_params":{"difficulty_level":1,"maximum_gradient":5},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
+
+          More examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).
         type: "string"
       - name: "intersections"
         in: "query"
