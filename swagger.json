@@ -1,7 +1,7 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "description" : "This is the documentation for the OpenRouteService API.\nFor an API-Key please register at our [developers portal](https://developers.openrouteservice.org/portal/register/ \"ORS Register\").\nAfterwards the Key can be requested in the [API catalogue](https://developers.openrouteservice.org/portal/apis/ \"ORS Catalogue\").\n\n**Instructions:**\nTo send actual requests authorization is needed:\n  - on swaggerhub: Click the green *Authorize* button and enter your API-Key\n  - in the API Catalogue: Insert your API-Key in the *API Key* field at the top of the page. (In case of an 'Authorization Error' please reload the website and insert your Key again.)\n\nTo fire a request:\n  - on swaggerhub: click on the *Try it out* button, specify parameters and click the *execute* Button at the bottom of the corresponding parameter section. \n  - in the API Catalogue: specify the parameters first and then press the *Try it out!* Button below the Response Messages Section.\n\nSwaggerhub additionally generates a curl command string. In order to work, special characters ('|',',','{}','\"\"') have to be decoded aswell as the \"https\"-string placed between the quotes.\n\nIf you encounter any bugs in the documentation or want to send us feedback feel free to send us an [email](mailto:openrouteservice@geog.uni-heidelberg.de).\n",
+    "description" : "This is the documentation for the OpenRouteService API.\nFor an API-Key please register at our [developers portal](https://developers.openrouteservice.org/portal/register/ \"ORS Register\").\nAfterwards the Key can be requested in the [API catalogue](https://developers.openrouteservice.org/portal/apis/ \"ORS Catalogue\").\n\n**Instructions:**\nTo send actual requests authorization is needed:\n  - on swaggerhub: Click the green *Authorize* button and enter your API-Key\n  - in the API Catalogue: Insert your API-Key in the *API Key* field at the top of the page. (In case of an 'Authorization Error' please reload the website and insert your Key again.)\n\nTo fire a request:\n  - on swaggerhub: click on the *Try it out* button, specify parameters and click the *execute* Button at the bottom of the corresponding parameter section. \n  - in the API Catalogue: specify the parameters first and then press the *Try it out!* Button below the Response Messages Section.\n\nSwaggerhub additionally generates a curl command string. In order to work, special characters ( **|** , **,** , **{}** , **\"\"** ) have to be decoded aswell as the \"https\"-string placed between the quotes.\n\nIf you encounter any bugs in the documentation or want to send us feedback feel free to send us an [email](mailto:openrouteservice@geog.uni-heidelberg.de).\n",
     "version" : "4.0",
     "title" : "OpenRouteService API",
     "contact" : {
@@ -65,7 +65,7 @@
           "required" : false,
           "type" : "string",
           "default" : "en",
-          "enum" : [ "cn", "de", "en", "es", "ru", "dk", "fr", "it", "nl", "br", "se", "tr" ]
+          "enum" : [ "cn", "de", "en", "es", "ru", "dk", "fr", "it", "nl", "br", "se", "tr", "gr" ]
         }, {
           "name" : "geometry",
           "in" : "query",
