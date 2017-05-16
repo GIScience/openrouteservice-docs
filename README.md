@@ -79,10 +79,10 @@ for `profile=driving-car`:
 ```json
 {
     "maximum_speed": 100,
-    "avoid_features": ["ferries", "tollways"]
+    "avoid_features": ["ferries"|"tollways"]
 }
 ```
-`{"maximum_speed":100,"avoid_features":["ferries","tollways"]}`
+`{"maximum_speed":100,"avoid_features":["ferries"|"tollways"]}`
 
 for `profile=cycling-*`:
 
@@ -108,7 +108,7 @@ for `profile=driving-hgv`:
 ```json
 {
     "maximum_speed": 120,
-    "avoid_features": ["hills", "ferries", "tollways"],
+    "avoid_features": ["hills"|"ferries"|"tollways"],
     "vehcile_type": "hgv",
     "profile_params": {
         "length": 30,
@@ -125,7 +125,7 @@ for `profile=driving-hgv`:
      ]}
 }
 ```
-`{"maximum_speed":120,"avoid_features":["hills","ferries","tollways"],"vehcile_type":"hgv","profile_params":{"length":30,"width":30,"height":3,"axleload":4,"weight":3,"hazmat":true},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
+`{"maximum_speed":120,"avoid_features":["hills"|"ferries"|"tollways"],"vehcile_type":"hgv","profile_params":{"length":30,"width":30,"height":3,"axleload":4,"weight":3,"hazmat":true},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
 
 
 # Routing Response
