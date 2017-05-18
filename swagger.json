@@ -178,7 +178,7 @@
     "/geocoding" : {
       "get" : {
         "summary" : "Geocoding Service",
-        "description" : "This endpoint can be used for geocoding (specified `query`) and reverse geocoding requests (specified `location`)\n\n**Either** `query` **or** `location` **has to be specified for a valid request!**\n\nIf both parameters are specified `location` takes precedence.\n\n- **geocoding:** Returns a JSON formatted list of objects corresponding to the search input.\n- **reverse geocoding:** Returns the next enclosing object with an address tag which surrounds the given coordinate.\n",
+        "description" : "This endpoint can be used for geocoding (specified `query`) and reverse geocoding requests (specified `location`)\n\n**Either** `query` **or** `location` **has to be specified for a valid request.**\n\nIf both parameters are specified `location` takes precedence.\n\n- **geocoding:** Returns a JSON formatted list of objects corresponding to the search input.\n- **reverse geocoding:** Returns the next enclosing object with an address tag which surrounds the given coordinate.\n",
         "parameters" : [ {
           "name" : "query",
           "in" : "query",
