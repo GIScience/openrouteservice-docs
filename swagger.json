@@ -37,7 +37,7 @@
         }, {
           "name" : "profile",
           "in" : "query",
-          "description" : "Specifies the route profile.",
+          "description" : "Specifies the route profile. (wheelchair only for europe at the moment)",
           "required" : true,
           "type" : "string",
           "default" : "driving-car",
