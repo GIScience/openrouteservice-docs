@@ -37,7 +37,7 @@
         }, {
           "name" : "profile",
           "in" : "query",
-          "description" : "Specifies the route profile. (wheelchair only for europe at the moment)",
+          "description" : "Specifies the route profile.",
           "required" : true,
           "type" : "string",
           "default" : "driving-car",
@@ -65,7 +65,7 @@
           "required" : false,
           "type" : "string",
           "default" : "en",
-          "enum" : [ "cn", "de", "en", "es", "ru", "dk", "fr", "it", "nl", "br", "se", "tr", "gr" ]
+          "enum" : [ "cn", "de", "en", "es", "ru", "fr", "it", "nl", "gr", "pt", "hu" ]
         }, {
           "name" : "geometry",
           "in" : "query",
