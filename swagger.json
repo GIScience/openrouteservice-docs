@@ -201,6 +201,25 @@
           "default" : "en",
           "enum" : [ "de", "en", "fr", "it" ]
         }, {
+          "name" : "boundary_type",
+          "in" : "query",
+          "description" : "Specifies the type of spatial search restriction.  `rect` for a rectangle and `circle`",
+          "required" : false,
+          "type" : "string",
+          "enum" : [ "rect", "circle" ]
+        }, {
+          "name" : "rect",
+          "in" : "query",
+          "description" : "**For `boundary_type=rect` only!** Sets the restriction rectangle's minimum/maximum longitude/latitude: `MinLong,MinLat,MaxLong,Maxlat`. Example: `8.696837,49.408739,8.703489,49.41209`\n",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "circle",
+          "in" : "query",
+          "description" : "\"**For `boundary_type=circle` only!** Sets the restriction circle with a Centerpoint and a Radius in meters: `Long,Lat,Radius`. Example: `8.696837,49.408739,5000`\"\n",
+          "required" : false,
+          "type" : "string"
+        }, {
           "name" : "limit",
           "in" : "query",
           "description" : "Specifies the maximum number of responses. Not needed for reverse.",
@@ -282,7 +301,7 @@
         }, {
           "name" : "range",
           "in" : "query",
-          "description" : "Maximum range value of the analysis in seconds for time and meters for distance. Alternatively a comma separated list of specific single range values.\n",
+          "description" : "Maximum range value of the analysis in **seconds** for time and **meters** for distance. Alternatively a comma separated list of specific single range values.\n",
           "required" : true,
           "type" : "number",
           "default" : 60.0,
@@ -290,7 +309,7 @@
         }, {
           "name" : "interval",
           "in" : "query",
-          "description" : "Interval of isochrones or equidistants for one range value. value in seconds for time and meters for distance.\n",
+          "description" : "Interval of isochrones or equidistants for one range value. value in **seconds** for time and **meters** for distance.\n",
           "required" : false,
           "type" : "number",
           "format" : "double"
@@ -1197,11 +1216,11 @@
         },
         "confidence" : {
           "type" : "string",
-          "description" : "Based on the distance. The closer a result is to the queried point, the higher the `confidence`."
+          "description" : "Value range: `0-1`\n**For reverse geocoding:** Based on the distance. The closer a result is to the queried point, the higher the `confidence`.\n**For normal geocoding:**  Based on the comparison of the query and the result. The closer a result is to the query, the higher the `confidence`.\n"
         }
       },
       "title" : "porperties object",
-      "description" : "Contains the OSM tag information of the point. For reverse request with `distance` and `confidence`."
+      "description" : "Contains the OSM tag information of the point and the `confidence`. For reverse request with `distance`."
     },
     "Geocoderesponse_info" : {
       "properties" : {
