@@ -25,11 +25,13 @@ With these you can decode response values where the meaning is not directly evid
 # URL Encoding
 
 To use the curl command string you have to encode special characters.
-Because you are too lazy to google it, we will show you the values you need in this table:
+Values you need are shown in this table:
 
   | Character |  {  |  \| |  }  |  "  |  [  |  ]  |
   |:---------:|:---:|:---:|:---:|:---:|:---:|:---:|
   |  Encoding | %7B | %7C | %7D | %22 | %5B | %5D |
+
+Sometimes needs to be used for the [options object](#examples).
 
 # Routing options
 
@@ -81,6 +83,8 @@ The available parameters are:
 
 
 ## Examples
+
+**If your request works without the options object, but returns an error with it: try to [%-encode](#url-encoding) the options object!**
 
 Some options examples in readable and minified JSON form:
 
