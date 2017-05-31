@@ -8,6 +8,7 @@ A live version of this documentation can be found on [swaggerhub](https://app.sw
 This readme stores coding tables that go beyond the display options of swagger.
 With these you can decode response values where the meaning is not directly evident.
 
+- [URL Encoding](#url-encoding)
 - [Routing `options`](#routing-options)
 	- [Examples](#examples)
 - [Routing Response](#routing-response)
@@ -20,6 +21,15 @@ With these you can decode response values where the meaning is not directly evid
 - [Places Response](#places-response)
 	- [category_group_ids](#category_group_ids)
 	- [category_ids](#category_ids)
+
+# URL Encoding
+
+To use the curl command string you have to encode special characters.
+Because you are too lazy to google it, we will show you the values you need in this table:
+
+| Character |  {  |  |  |  }  |  "  |  [  |  ]  |
+|:---------:|:---:|:---:|:---:|:---:|:---:|:---:|
+|  Encoding | %7B | %7C | %7D | %22 | %5B | %5D |
 
 # Routing options
 
