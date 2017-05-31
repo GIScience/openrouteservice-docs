@@ -27,9 +27,9 @@ With these you can decode response values where the meaning is not directly evid
 To use the curl command string you have to encode special characters.
 Because you are too lazy to google it, we will show you the values you need in this table:
 
-| Character |  {  |  |  |  }  |  "  |  [  |  ]  |
-|:---------:|:---:|:---:|:---:|:---:|:---:|:---:|
-|  Encoding | %7B | %7C | %7D | %22 | %5B | %5D |
+  | Character |  {  |  |  |  }  |  "  |  [  |  ]  |
+  |:---------:|:---:|:---:|:---:|:---:|:---:|:---:|
+  |  Encoding | %7B | %7C | %7D | %22 | %5B | %5D |
 
 # Routing options
 
