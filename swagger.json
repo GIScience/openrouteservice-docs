@@ -297,7 +297,7 @@
         }, {
           "name" : "units",
           "in" : "query",
-          "description" : "Unit format for  `rangetype=distance`.",
+          "description" : "Unit format for  `range_type=distance`.",
           "required" : false,
           "type" : "string",
           "enum" : [ "m", "km", "mi" ]
