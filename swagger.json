@@ -157,6 +157,9 @@
           "401" : {
             "description" : "Authorization field missing."
           },
+          "403" : {
+            "description" : "Key not authorised."
+          },
           "405" : {
             "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
           },
@@ -230,6 +233,9 @@
           },
           "401" : {
             "description" : "Authorization field missing."
+          },
+          "403" : {
+            "description" : "Key not authorised."
           },
           "405" : {
             "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
@@ -358,7 +364,7 @@
             "description" : "Authorization field missing."
           },
           "403" : {
-            "description" : "Access to this API has been disallowed."
+            "description" : "Key not authorised."
           },
           "405" : {
             "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
@@ -510,7 +516,7 @@
             "description" : "Authorization field missing."
           },
           "403" : {
-            "description" : "Access to this API has been disallowed."
+            "description" : "Key not authorised."
           },
           "405" : {
             "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
@@ -561,7 +567,7 @@
             "description" : "Authorization field missing."
           },
           "403" : {
-            "description" : "Access to this API has been disallowed."
+            "description" : "Key not authorised."
           },
           "405" : {
             "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
