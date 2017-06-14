@@ -5,8 +5,7 @@ A live version of this documentation can be found on [swaggerhub](https://app.sw
 
 ## Content
 
-This readme stores coding tables that go beyond the display options of swagger.
-With these you can decode response values where the meaning is not directly evident.
+This readme stores additional information, examples and encoding tables that go beyond the display options of swagger.
 
 - [URL Encoding](#url-encoding)
 - [Routing `options`](#routing-options)
@@ -21,6 +20,36 @@ With these you can decode response values where the meaning is not directly evid
 - [Places Response](#places-response)
 	- [category_group_ids](#category_group_ids)
 	- [category_ids](#category_ids)
+
+# Travel Time Calculation
+
+The travel time is calculated for each segment by using speed-limits for different [waytypes](https://wiki.openstreetmap.org/wiki/Key:highway) and adjusting them for different [grades](https://wiki.openstreetmap.org/wiki/Key:tracktype) of the road and the Incline. For `cycling` profiles also the [surface](https://wiki.openstreetmap.org/wiki/Key:surface) is considered. These limits can be reduced by setting the `maxSpeed` parameter in the [options](#routing-options). The following table shows the speed-limits used for the main profiles:
+
+_(Values in km/h)_
+
+  | Waytype \ Profile -> | driving-hgv | driving-car | cycling-regular |
+  |:--------------------:|:-----------:|:-----------:|:---------------:|
+  |       motorway       |      80     |     100     |        -        |
+  |     motorway_link    |      50     |      70     |        -        |
+  |       motorroad      |      80     |      90     |        -        |
+  |         trunk        |      80     |      70     |        18       |
+  |      trunk_link      |      50     |      65     |        18       |
+  |        primary       |      60     |      65     |        18       |
+  |     primary_link     |      50     |      60     |        18       |
+  |       secondary      |      60     |      60     |        18       |
+  |    secondary_link    |      50     |      50     |        18       |
+  |       tertiary       |      60     |      50     |        18       |
+  |     tertiary_link    |      50     |      40     |        18       |
+  |     unclassified     |      60     |      30     |        16       |
+  |      residential     |      60     |      30     |        18       |
+  |     living_street    |      10     |      5      |        6        |
+  |        service       |      20     |      20     |        14       |
+  |         road         |      20     |      20     |        12       |
+  |         track        |      15     |      15     |        12       |
+  |         path         |      -      |      -      |        12       |
+  |        footway       |      -      |      -      |        6        |
+  |      pedestrian      |      -      |      -      |        6        |
+  |       cycleway       |      -      |      -      |        18       |
 
 # URL Encoding
 
