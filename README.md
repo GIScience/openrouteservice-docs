@@ -7,6 +7,7 @@ A live version of this documentation can be found on [swaggerhub](https://app.sw
 
 This readme stores additional information, examples and encoding tables that go beyond the display options of swagger.
 
+- [Travel Time Calculation](#travel-time-calculation)
 - [URL Encoding](#url-encoding)
 - [Routing `options`](#routing-options)
 	- [Examples](#examples)
