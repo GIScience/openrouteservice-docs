@@ -91,7 +91,7 @@ The available parameters are:
 
 - `profile_params` : Specifies vehicle parameters.
   
-  -`weightings` : Weightings will prioritize specified factors over the shortest path.
+  - `weightings` : Weightings will prioritize specified factors over the shortest path.
 
     - `fitness` : for `cycling-*` profiles:
 
