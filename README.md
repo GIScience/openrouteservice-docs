@@ -90,24 +90,44 @@ The available parameters are:
 - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`.
 
 - `profile_params` : Specifies vehicle parameters.
-  - for `cycling-*` profiles:
+  
+  -`weightings` : Weightings will prioritize specified factors over the shortest path.
 
-    |        Value       |                                  Description                                  |
-    |:------------------:|-------------------------------------------------------------------------------|
-    | `difficulty_level` |  Specifies the fitness level. 0 = Novice, 1 = Moderate, 2 = Amateur, 3 = Pro. |
-    | `maximum_gradient` |  Specifies the maximum route steepness in percent. Values range from 1 to 15. |
+    - `fitness` : for `cycling-*` profiles:
 
-  - for `driving-hgv` : 
+      |        Value       |                                  Description                                  |
+      |:------------------:|-------------------------------------------------------------------------------|
+      | `difficulty_level` |  Specifies the fitness level. 0 = Novice, 1 = Moderate, 2 = Amateur, 3 = Pro. |
+      | `maximum_gradient` |  Specifies the maximum route steepness in percent. Values range from 1 to 15. |
 
-    |  Parameter | Description                                                                                                                       |
-    |:----------:|-----------------------------------------------------------------------------------------------------------------------------------|
-    | `length`   | Length restriction in meters.                                                                                                     |
-    | `width`    | Width restriction in meters.                                                                                                      |
-    | `height`   | Height restriction in meters.                                                                                                     |
-    | `axleload` | Axleload restriction in tons.                                                                                                     |
-    | `weight`   | Weight restriction in tons.                                                                                                       |
-    | `hazmat`   | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false. |
-    
+    - `green`: Specifies the Green factor for `foot-*` profiles.
+        - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer ways through green areas over a shorter route.
+
+    - `quiet`: Specifies the Quiet factor for `foot-*` profiles.
+        - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer quiet ways over a shorter route.
+
+  - `restrictions` : Specifies restrictions for `driving-hgv` and `wheelchair`
+    - for `driving-hgv`: 
+
+      |  Parameter | Description                                                                                                                       |
+      |:----------:|-----------------------------------------------------------------------------------------------------------------------------------|
+      | `length`   | Length restriction in meters.                                                                                                     |
+      | `width`    | Width restriction in meters.                                                                                                      |
+      | `height`   | Height restriction in meters.                                                                                                     |
+      | `axleload` | Axleload restriction in tons.                                                                                                     |
+      | `weight`   | Weight restriction in tons.                                                                                                       |
+      | `hazmat`   | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false. |
+
+    - for `wheelchair`:
+
+      |       Parameter       | Description                                                                                                         |
+      |:---------------------:|---------------------------------------------------------------------------------------------------------------------|
+      |     `surface_type`    | Specifies the [surface type](http://wiki.openstreetmap.org/wiki/Key:surface). Default is `"cobblestone:flattened"`. |
+      |      `track_type`     | Specifies the [grade](http://wiki.openstreetmap.org/wiki/Key:tracktype) of the route. Default is `"grade1"`.        |
+      |   `smoothness_type`   | Specifies the [smoothness](http://wiki.openstreetmap.org/wiki/Key:smoothness) of the route. Default is `"good"`.    |
+      | `maximum_sloped_curb` | Specifies the maximum height of the sloped curb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.      |
+      |   `maximum_incline`   | Specifies the maximum incline as a percentage. `3`, `6`(default), `10`, `15` or `any`.                              |
+
     
 - `avoid_polygons` : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).
 
@@ -123,10 +143,10 @@ for `profile=driving-car`:
 ```json
 {
     "maximum_speed": 100,
-    "avoid_features": ["ferries"|"tollways"]
+    "avoid_features": "ferries|tollways"
 }
 ```
-`{"maximum_speed":100,"avoid_features":["ferries"|"tollways"]}`
+`{"maximum_speed":100,"avoid_features":"ferries|tollways"}`
 
 for `profile=cycling-*`:
 
@@ -135,8 +155,12 @@ for `profile=cycling-*`:
 "maximum_speed": 18,
 "avoid_features": "hills|unpavedroads",
 "profile_params": {
-    "difficulty_level": 2,
-    "maximum_gradient": 13
+    "weightings": {
+        "fitness": {
+            "difficulty_level": 2,
+            "maximum_gradient": 13
+        }
+    }
 },
 "avoid_polygons": {
     "type": "Polygon",
@@ -145,22 +169,22 @@ for `profile=cycling-*`:
  ]}
 }
 ```
-`{"maximum_speed":18,"avoid_features":"hills|unpavedroads","profile_params":{"difficulty_level":2,"maximum_gradient":13},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
+`{"maximum_speed":18,"avoid_features":"hills|unpavedroads","profile_params":{"weightings":{"fitness":{"difficulty_level":2,"maximum_gradient":13}},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
 
-for `profile=driving-hgv`:
+for `profile=foot-*`:
 
 ```json
 {
-    "maximum_speed": 120,
-    "avoid_features": ["hills"|"ferries"|"tollways"],
-    "vehcile_type": "hgv",
+    "avoid_features": "fords|ferries",
     "profile_params": {
-        "length": 30,
-        "width": 30,
-        "height": 3,
-        "axleload": 4,
-        "weight": 3,
-        "hazmat": true
+        "weightings": {
+            "green": {
+                "factor": 0.8
+              },
+            "quiet": {
+                "factor": 1.0
+            }
+        }
     },
     "avoid_polygons": {  
         "type": "Polygon",
@@ -169,8 +193,50 @@ for `profile=driving-hgv`:
      ]}
 }
 ```
-`{"maximum_speed":120,"avoid_features":["hills"|"ferries"|"tollways"],"vehcile_type":"hgv","profile_params":{"length":30,"width":30,"height":3,"axleload":4,"weight":3,"hazmat":true},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
+`{"avoid_features":"fords|ferries","profile_params":{"weightings":{"green":{"factor":0.8},"quiet":{"factor":1.0}}},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
 
+for `profile=driving-hgv`:
+
+```json
+{
+    "avoid_features": "hills|ferries|tollways",
+    "vehcile_type": "hgv",
+    "profile_params": {
+        "restrictions": {
+            "length": 30,
+            "width": 30,
+            "height": 3,
+            "axleload": 4,
+            "weight": 3,
+            "hazmat": true
+        }
+    },
+    "avoid_polygons": {  
+        "type": "Polygon",
+        "coordinates": [
+            [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]
+     ]}
+}
+```
+`{"avoid_features":"hills|ferries|tollways","vehcile_type":"hgv","profile_params":{"restrictions":{"length":30,"width":30,"height":3,"axleload":4,"weight":3,"hazmat":true}},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
+
+for `profile=wheelchair`:
+
+```json
+{
+    "avoid_features": "hills|ferries|steps",
+    "profile_params": {
+        "restrictions": {
+            "surface_type": "cobblestone:flattened",
+            "track_type": "grade1",
+            "smoothness_type": "good",
+            "maximum_sloped_curb": 0.06,
+            "maximum_incline": 6
+        }
+    }
+}
+```
+`{"avoid_features":"hills|ferries|steps","profile_params":{"restrictions":{"surface_type":"cobblestone:flattened","track_type":"grade1","smoothness_type":"good","maximum_sloped_curb":0.06,"maximum_incline":6}}}`
 
 # Routing Response
 
