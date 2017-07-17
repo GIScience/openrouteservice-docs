@@ -5,9 +5,9 @@ A live version of this documentation can be found on [swaggerhub](https://app.sw
 
 ## Content
 
-This readme stores coding tables that go beyond the display options of swagger.
-With these you can decode response values where the meaning is not directly evident.
+This readme stores additional information, examples and encoding tables that go beyond the display options of swagger.
 
+- [URL Encoding](#url-encoding)
 - [Routing `options`](#routing-options)
 	- [Examples](#examples)
 - [Routing Response](#routing-response)
@@ -20,6 +20,47 @@ With these you can decode response values where the meaning is not directly evid
 - [Places Response](#places-response)
 	- [category_group_ids](#category_group_ids)
 	- [category_ids](#category_ids)
+
+# Travel Time Calculation
+
+The travel time is calculated for each segment by using speed-limits for different [waytypes](https://wiki.openstreetmap.org/wiki/Key:highway) and adjusting them for different [grades](https://wiki.openstreetmap.org/wiki/Key:tracktype) of the road and the Incline. For `cycling` profiles also the [surface](https://wiki.openstreetmap.org/wiki/Key:surface) is considered. These limits can be reduced by setting the `maxSpeed` parameter in the [options](#routing-options). The following table shows the speed-limits used for the main profiles:
+
+_(Values in km/h)_
+
+  | Waytype \ Profile -> | driving-hgv | driving-car | cycling-regular |
+  |:--------------------:|:-----------:|:-----------:|:---------------:|
+  |       motorway       |      80     |     100     |        -        |
+  |     motorway_link    |      50     |      70     |        -        |
+  |       motorroad      |      80     |      90     |        -        |
+  |         trunk        |      80     |      70     |        18       |
+  |      trunk_link      |      50     |      65     |        18       |
+  |        primary       |      60     |      65     |        18       |
+  |     primary_link     |      50     |      60     |        18       |
+  |       secondary      |      60     |      60     |        18       |
+  |    secondary_link    |      50     |      50     |        18       |
+  |       tertiary       |      60     |      50     |        18       |
+  |     tertiary_link    |      50     |      40     |        18       |
+  |     unclassified     |      60     |      30     |        16       |
+  |      residential     |      60     |      30     |        18       |
+  |     living_street    |      10     |      5      |        6        |
+  |        service       |      20     |      20     |        14       |
+  |         road         |      20     |      20     |        12       |
+  |         track        |      15     |      15     |        12       |
+  |         path         |      -      |      -      |        12       |
+  |        footway       |      -      |      -      |        6        |
+  |      pedestrian      |      -      |      -      |        6        |
+  |       cycleway       |      -      |      -      |        18       |
+
+# URL Encoding
+
+To use the curl command string you have to encode special characters.
+Values you need are shown in this table:
+
+  | Character |  {  |  \| |  }  |  "  |  [  |  ]  |
+  |:---------:|:---:|:---:|:---:|:---:|:---:|:---:|
+  |  Encoding | %7B | %7C | %7D | %22 | %5B | %5D |
+
+Sometimes needs to be used for the [options object](#examples).
 
 # Routing options
 
@@ -72,6 +113,8 @@ The available parameters are:
 
 ## Examples
 
+**If your request works without the options object, but returns an error with it: try to [%-encode](#url-encoding) the options object!**
+
 Some options examples in readable and minified JSON form:
 
 for `profile=driving-car`:
@@ -79,10 +122,10 @@ for `profile=driving-car`:
 ```json
 {
     "maximum_speed": 100,
-    "avoid_features": ["ferries", "tollways"]
+    "avoid_features": ["ferries"|"tollways"]
 }
 ```
-`{"maximum_speed":100,"avoid_features":["ferries","tollways"]}`
+`{"maximum_speed":100,"avoid_features":["ferries"|"tollways"]}`
 
 for `profile=cycling-*`:
 
@@ -108,7 +151,7 @@ for `profile=driving-hgv`:
 ```json
 {
     "maximum_speed": 120,
-    "avoid_features": ["hills", "ferries", "tollways"],
+    "avoid_features": ["hills"|"ferries"|"tollways"],
     "vehcile_type": "hgv",
     "profile_params": {
         "length": 30,
@@ -125,7 +168,7 @@ for `profile=driving-hgv`:
      ]}
 }
 ```
-`{"maximum_speed":120,"avoid_features":["hills","ferries","tollways"],"vehcile_type":"hgv","profile_params":{"length":30,"width":30,"height":3,"axleload":4,"weight":3,"hazmat":true},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
+`{"maximum_speed":120,"avoid_features":["hills"|"ferries"|"tollways"],"vehcile_type":"hgv","profile_params":{"length":30,"width":30,"height":3,"axleload":4,"weight":3,"hazmat":true},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
 
 
 # Routing Response
