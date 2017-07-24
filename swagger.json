@@ -13,6 +13,19 @@
     }
   },
   "host" : "api.openrouteservice.org",
+  "tags" : [ {
+    "name" : "Directions",
+    "description" : "Shortest route computation"
+  }, {
+    "name" : "Geocoding",
+    "description" : "Resolving coordinate to address and vice versa"
+  }, {
+    "name" : "Isochrones",
+    "description" : "Accessibility of a centerpoint"
+  }, {
+    "name" : "Places",
+    "description" : "Search for POIs around points or alongside a route"
+  } ],
   "schemes" : [ "https" ],
   "produces" : [ "text/json; charset=utf-8" ],
   "security" : [ {
@@ -21,6 +34,7 @@
   "paths" : {
     "/directions" : {
       "get" : {
+        "tags" : [ "Directions" ],
         "summary" : "Routing Service",
         "description" : "Returns a route between two or more locations for a selected profile and its settings as GeoJSON response.\n",
         "parameters" : [ {
@@ -177,6 +191,7 @@
     },
     "/geocoding" : {
       "get" : {
+        "tags" : [ "Geocoding" ],
         "summary" : "Geocoding Service",
         "description" : "This endpoint can be used for geocoding (specified `query`) and reverse geocoding requests (specified `location`)\n\n**Either** `query` **or** `location` **has to be specified for a valid request!**\n\nIf both parameters are specified `location` takes precedence.\n\n- **geocoding:** Returns a JSON formatted list of objects corresponding to the search input.\n- **reverse geocoding:** Returns the next enclosing object with an address tag which surrounds the given coordinate.\n",
         "parameters" : [ {
@@ -273,6 +288,7 @@
     },
     "/isochrones" : {
       "get" : {
+        "tags" : [ "Isochrones" ],
         "summary" : "Isochrones Service",
         "description" : "The Isochrone Service supports time and distance analyses for one single\nor multiple locations. You may also specify the isochrone interval or\nprovide multiple exact isochrone range values. This service allows the\nsame range of profile options listed in the ORS Routing section which\nhelp you to further customize your request to obtain a more detailed\nreachability area response.\n",
         "parameters" : [ {
@@ -402,6 +418,7 @@
     },
     "/places" : {
       "get" : {
+        "tags" : [ "Places" ],
         "summary" : "Location Service",
         "description" : "Returns Points of Interest in the area surrounding a point or\na line geometry. Use the post endpoint for requests that exceed the get\ncharacter limit.\n\n- **pois:** Either `geometry` or `bbox` are required. `radius` required depending on `geometry`.\n- **category_stats:** Either `geometry` or `bbox` are required. `radius` required depending on `geometry`.\n- **category_list:** Additionally to this List the category groups and ids can be found [here](https://github.com/GIScience/openrouteservice-docs).\n",
         "parameters" : [ {
@@ -552,6 +569,7 @@
         }
       },
       "post" : {
+        "tags" : [ "Places" ],
         "summary" : "Location Service",
         "description" : "Returns Points of Interest in the area surrounding a geometry.\n",
         "parameters" : [ {
