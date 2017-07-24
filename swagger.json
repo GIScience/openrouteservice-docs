@@ -15,16 +15,16 @@
   "host" : "api.openrouteservice.org",
   "tags" : [ {
     "name" : "Directions",
-    "description" : "Shortest route computation"
+    "description" : "Get directions for different modes of transport"
   }, {
     "name" : "Geocoding",
-    "description" : "Resolving coordinate to address and vice versa"
+    "description" : "Resolve input coordinates to addresses and vice versa"
   }, {
     "name" : "Isochrones",
-    "description" : "Accessibility of a centerpoint"
+    "description" : "Obtain areas of reachability from given locations"
   }, {
     "name" : "Places",
-    "description" : "Search for POIs around points or alongside a route"
+    "description" : "Search for points of interest around points or in geometries"
   } ],
   "schemes" : [ "https" ],
   "produces" : [ "text/json; charset=utf-8" ],
