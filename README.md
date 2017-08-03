@@ -8,6 +8,10 @@ A live version of this documentation can be found on [swaggerhub](https://app.sw
 This readme stores additional information, examples and encoding tables that go beyond the display options of swagger.
 
 - [Travel Time Calculation](#travel-time-calculation)
+	- [Waytype](#waytype-speeds)
+	- [Surface](#surface-speeds)
+	- [Tracktype](#tracktype-speeds)
+	- [Country Speed Sets](#country-speed-sets)
 - [URL Encoding](#url-encoding)
 - [Routing `options`](#routing-options)
 	- [Examples](#examples)
@@ -26,24 +30,26 @@ This readme stores additional information, examples and encoding tables that go 
 
 The travel time is calculated for each segment by using speed-limits for different [waytypes](https://wiki.openstreetmap.org/wiki/Key:highway) and adjusting them for different [grades](https://wiki.openstreetmap.org/wiki/Key:tracktype) of the road and the Incline. For `cycling` profiles also the [surface](https://wiki.openstreetmap.org/wiki/Key:surface) is considered. These limits can be reduced by setting the `maxSpeed` parameter in the [options](#routing-options). The following table shows the speed-limits used for the main profiles:
 
-_(Values in km/h)_
+_(all Values in km/h)_
 
-  | Waytype \ Profile -> | driving-hgv | driving-car | cycling-regular |
+## Waytype Speeds
+
+  | Waytype \ Profile -> | driving-car | driving-hgv | cycling-regular |
   |:--------------------:|:-----------:|:-----------:|:---------------:|
-  |       motorway       |      80     |     100     |        -        |
-  |     motorway_link    |      50     |      70     |        -        |
-  |       motorroad      |      80     |      90     |        -        |
-  |         trunk        |      80     |      70     |        18       |
-  |      trunk_link      |      50     |      65     |        18       |
-  |        primary       |      60     |      65     |        18       |
-  |     primary_link     |      50     |      60     |        18       |
+  |       motorway       |     100     |      85     |        -        |
+  |     motorway_link    |      60     |      50     |        -        |
+  |       motorroad      |      90     |      80     |        -        |
+  |         trunk        |      85     |      60     |        18       |
+  |      trunk_link      |      60     |      50     |        18       |
+  |        primary       |      65     |      60     |        18       |
+  |     primary_link     |      50     |      50     |        18       |
   |       secondary      |      60     |      60     |        18       |
   |    secondary_link    |      50     |      50     |        18       |
-  |       tertiary       |      60     |      50     |        18       |
-  |     tertiary_link    |      50     |      40     |        18       |
-  |     unclassified     |      60     |      30     |        16       |
-  |      residential     |      60     |      30     |        18       |
-  |     living_street    |      10     |      5      |        6        |
+  |       tertiary       |      50     |      50     |        18       |
+  |     tertiary_link    |      40     |      40     |        18       |
+  |     unclassified     |      30     |      30     |        16       |
+  |      residential     |      30     |      30     |        18       |
+  |     living_street    |      10     |      10     |        6        |
   |        service       |      20     |      20     |        14       |
   |         road         |      20     |      20     |        12       |
   |         track        |      15     |      15     |        12       |
@@ -51,6 +57,238 @@ _(Values in km/h)_
   |        footway       |      -      |      -      |        6        |
   |      pedestrian      |      -      |      -      |        6        |
   |       cycleway       |      -      |      -      |        18       |
+
+## Surface Speeds
+
+  | Surface \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |        asphalt       |      -1     |      -1     |
+  |       concrete       |      -1     |      -1     |
+  |    concrete:plates   |      -1     |      -1     |
+  |    concrete:lanes    |      -1     |      -1     |
+  |         paved        |      -1     |      -1     |
+  |        cement        |      80     |      60     |
+  |       compacted      |      80     |      60     |
+  |      fine_gravel     |      60     |      50     |
+  |     paving_stones    |      40     |      40     |
+  |         metal        |      40     |      40     |
+  |        bricks        |      40     |      40     |
+  |         grass        |      30     |      30     |
+  |         wood         |      30     |      30     |
+  |         sett         |      30     |      30     |
+  |      grass_paver     |      30     |      30     |
+  |        gravel        |      30     |      30     |
+  |        unpaved       |      30     |      30     |
+  |        ground        |      30     |      30     |
+  |         dirt         |      30     |      30     |
+  |      pebblestone     |      30     |      30     |
+  |        tartan        |      30     |      30     |
+  |      cobblestone     |      20     |      20     |
+  |         clay         |      20     |      20     |
+  |         earth        |      15     |      15     |
+  |         stone        |      15     |      15     |
+  |         rocky        |      15     |      15     |
+  |         sand         |      15     |      15     |
+  |          mud         |      10     |      10     |
+  |       unknown:       |      30     |      30     |
+
+## Tracktype Speeds
+
+  | Tracktype \ Profile -> | driving-car | driving-hgv |
+  |:----------------------:|:-----------:|:-----------:|
+  |         grade1         |      40     |      40     |
+  |         grade2         |      30     |      30     |
+  |         grade3         |      20     |      20     |
+  |         grade4         |      15     |      15     |
+  |         grade5         |      10     |      10     |
+  
+## Country Speed Sets
+As there are various traffic regulations in different countries we adjust the maximum speed for known deviations.
+
+### Austria
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |       AT:urban       |      50     |      50     |
+  |       AT:rural       |     100     |      80     |
+  |       AT:trunk       |     100     |      80     |
+  |      AT:motorway     |     130     |      80     |
+
+### Switzerland
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |       CH:urban       |      50     |      50     |
+  |       CH:rural       |      80     |      80     |
+  |       CH:trunk       |     100     |      80     |
+  |      CH:motorway     |     120     |      80     |
+
+### Czech Republic
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |       CZ:urban       |      50     |      50     |
+  |       CZ:rural       |      90     |      90     |
+  |       CZ:trunk       |      80     |      80     |
+  |      CZ:motorway     |      80     |      80     |
+
+### Denmark
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |       DK:urban       |      50     |      50     |
+  |       DK:rural       |      80     |      80     |
+  |      DK:motorway     |     130     |      80     |
+
+### Germany
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |   DE:living_street   |      7      |      7      |
+  |       DE:urban       |      50     |      50     |
+  |       DE:rural       |     100     |      80     |
+  |      DE:motorway     |     130     |      80     |
+
+### Finland
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |       FI:urban       |      50     |      50     |
+  |       FI:rural       |      80     |      80     |
+  |       FI:trunk       |     100     |      80     |
+  |      FI:motorway     |     120     |      80     |
+  
+### France
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |       FR:urban       |      50     |      50     |
+  |       FR:rural       |      90     |      80     |
+  |       FR:trunk       |     110     |      80     |
+  |      FR:motorway     |     130     |      80     |
+
+### Greece
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |       GR:urban       |      50     |      50     |
+  |       GR:rural       |      90     |      80     |
+  |       GR:trunk       |     110     |      80     |
+  |      GR:motorway     |     130     |      80     |
+
+### Hungary
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |       HU:urban       |      50     |      50     |
+  |       HU:rural       |      90     |      80     |
+  |       HU:trunk       |     110     |      80     |
+  |      HU:motorway     |     130     |      80     |
+
+### Italy
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |       IT:urban       |      50     |      50     |
+  |       IT:rural       |      90     |      80     |
+  |       IT:trunk       |     110     |      80     |
+  |      IT:motorway     |     130     |      80     |
+
+### Japan
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |      JP:national     |      60     |      60     |
+  |      JP:motorway     |     100     |      80     |
+
+### Poland
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |   PL:living_street   |      20     |      20     |
+  |       PL:urban       |      50     |      50     |
+  |       PL:rural       |      90     |      80     |
+  |      PL:motorway     |     140     |      80     |
+  
+### Romania
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |       RO:urban       |      50     |      50     |
+  |       RO:rural       |      90     |      80     |
+  |       RO:trunk       |     100     |      80     |
+  |      RO:motorway     |     130     |      80     |
+
+### Russian Federation
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |   RU:living_street   |      20     |      20     |
+  |       RU:rural       |      90     |      80     |
+  |       RU:urban       |      60     |      60     |
+  |      RU:motorway     |     110     |      80     |
+
+### Slovakia
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |       SK:urban       |      50     |      50     |
+  |       SK:rural       |      90     |      80     |
+  |       SK:trunk       |      90     |      80     |
+  |      SK:motorway     |      90     |      80     |
+
+### Slovenia
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |       SI:urban       |      50     |      50     |
+  |       SI:rural       |      90     |      80     |
+  |       SI:trunk       |     110     |      80     |
+  |      SI:motorway     |     130     |      80     |
+
+### Spain
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |       ES:urban       |      50     |      50     |
+  |       ES:rural       |      90     |      80     |
+  |       ES:trunk       |     100     |      80     |
+  |      ES:motorway     |     120     |      80     |
+
+### Sweden
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |       SE:urban       |      50     |      50     |
+  |       SE:rural       |      70     |      70     |
+  |       SE:trunk       |      90     |      80     |
+  |      SE:motorway     |     110     |      80     |
+
+### United Kingdom
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |     GB:nsl_single    |      95     |      90     |
+  |      GB:nsl_dual     |     112     |      90     |
+  |      GB:motorway     |     112     |      90     |
+
+### United States of America
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |       UA:urban       |      60     |      60     |
+  |       UA:rural       |      90     |      80     |
+  |       UA:trunk       |     110     |      80     |
+  |      UA:motorway     |     130     |      80     |
+
+### Uzbekistan
+
+  | Waytype \ Profile -> | driving-car | driving-hgv |
+  |:--------------------:|:-----------:|:-----------:|
+  |   UZ:living_street   |      30     |      30     |
+  |       UZ:urban       |      70     |      70     |
+  |       UZ:rural       |     100     |      90     |
+  |      UZ:motorway     |     110     |      90     |
 
 # URL Encoding
 
