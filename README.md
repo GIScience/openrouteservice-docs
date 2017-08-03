@@ -33,6 +33,7 @@ The travel time is calculated for each segment by using speed-limits for differe
 _(all Values in km/h)_
 
 ## Waytype Speeds
+Corresponds to the OSM [highway](https://wiki.openstreetmap.org/wiki/Key:highway) tag value.
 
   | Waytype \ Profile -> | driving-car | driving-hgv | cycling-regular |
   |:--------------------:|:-----------:|:-----------:|:---------------:|
@@ -59,6 +60,7 @@ _(all Values in km/h)_
   |       cycleway       |      -      |      -      |        18       |
 
 ## Surface Speeds
+Corresponds to the OSM [surface](https://wiki.openstreetmap.org/wiki/Key:surface) tag value.
 
   | Surface \ Profile -> | driving-car | driving-hgv |
   |:--------------------:|:-----------:|:-----------:|
@@ -93,6 +95,7 @@ _(all Values in km/h)_
   |       unknown:       |      30     |      30     |
 
 ## Tracktype Speeds
+Corresponds to the OSM [tracktype](https://wiki.openstreetmap.org/wiki/Key:tracktype) tag value.
 
   | Tracktype \ Profile -> | driving-car | driving-hgv |
   |:----------------------:|:-----------:|:-----------:|
