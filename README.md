@@ -106,7 +106,7 @@ Corresponds to the OSM [tracktype](https://wiki.openstreetmap.org/wiki/Key:track
   |         grade5         |      10     |      10     |
   
 ## Country Speed Sets
-As there are various traffic regulations in different countries we adjust the maximum speed for known deviations.
+As there are various traffic regulations in different countries. If [maximum speed](http://wiki.openstreetmap.org/wiki/Key:maxspeed) tag is not given in openstreetmap, we adjust the maximum speed according to the following key values taken from [country specific speed limits](http://wiki.openstreetmap.org/wiki/Speed_limits).
 
 ### Austria
 
