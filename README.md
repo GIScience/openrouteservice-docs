@@ -436,8 +436,7 @@ The exponential assignment of the values is used for [bit fields](http://eddmann
 |:-----:|:----------------------------:|
 | 0     | No category                  |
 | 1     | Highway                      |
-| 2     | Tollway (driving-* profiles) |
-| 2     | Steps (other profiles)       |
+| 2     | Steps                        |
 | 4     | Ferry                        |
 | 8     | Unpaved road                 |
 | 16    | Track                        |
@@ -477,6 +476,15 @@ The exponential assignment of the values is used for [bit fields](http://eddmann
 | 9     | U-turn           |
 | 10    | Goal             |
 | 11    | Unknown          |
+
+## Tollways
+
+Tollways are vehicle and weight specific. Thus it depends on the request if a ways is marked as [tollway](https://wiki.openstreetmap.org/wiki/Key:toll). 
+
+| Value |  Encoding  |
+|:-----:|:----------:|
+|   0   | no tollway |
+|   1   | is tollway |
 
 # Places Response
 
