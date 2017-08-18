@@ -122,6 +122,14 @@
           "default" : "text",
           "enum" : [ "html", "text" ]
         }, {
+          "name" : "maneuvers",
+          "in" : "query",
+          "description" : "Specifies whether maneuver element is included into step element or not. Default value is false.",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false,
+          "enum" : [ "true", "false" ]
+        }, {
           "name" : "elevation",
           "in" : "query",
           "description" : "Specifies whether to return elevation values for points.",
@@ -941,6 +949,13 @@
           "type" : "string",
           "description" : "The routing instruction text for the step."
         },
+        "name" : {
+          "type" : "string",
+          "description" : "The name of the next street."
+        },
+        "maneuver" : {
+          "$ref" : "#/definitions/maneuver"
+        },
         "way_points" : {
           "type" : "array",
           "description" : "List containing the indices of the steps start- and endpoint corresponding to the *geometry*.",
@@ -978,6 +993,31 @@
         "instruction" : "Turn slight right",
         "way_points" : [ 63, 163 ]
       } ]
+    },
+    "maneuver" : {
+      "properties" : {
+        "bearing_before" : {
+          "type" : "number",
+          "format" : "int64",
+          "description" : "Specifies an azimuth angle (in degrees) of the direction right before the maneuver."
+        },
+        "bearing_after" : {
+          "type" : "number",
+          "format" : "int64",
+          "description" : "Specifies an azimuth angle (in degrees) of the direction right after the maneuver."
+        },
+        "location" : {
+          "type" : "array",
+          "description" : "The coordinate of the point where a maneuver takes place.",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "maxItems" : 2,
+          "minItems" : 2
+        }
+      },
+      "title" : "maneuver object"
     },
     "extras" : {
       "properties" : {
