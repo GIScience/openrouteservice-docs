@@ -132,12 +132,12 @@
         }, {
           "name" : "extra_info",
           "in" : "query",
-          "description" : "Pipe separated List of additional information. Returns information on [steepness](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#steepness), [suitability](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#suitability), [surface](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#surface), [waycategory](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waycategory), [waytype](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waytype) or [tollways](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#tollways) ",
+          "description" : "Pipe separated List of additional information. Returns information on [steepness](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#steepness), [suitability](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#suitability), [surface](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#surface), [waycategory](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waycategory), [waytype](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waytype), [tollways](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#tollways) or [trail difficulty](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#trail-difficulty) ",
           "required" : false,
           "type" : "array",
           "items" : {
             "type" : "string",
-            "enum" : [ "steepness", "suitability", "surface", "waycategory", "waytype", "tollways" ]
+            "enum" : [ "steepness", "suitability", "surface", "waycategory", "waytype", "tollways", "TrailDifficulty" ]
           },
           "collectionFormat" : "pipes",
           "uniqueItems" : true
@@ -197,7 +197,7 @@
         "parameters" : [ {
           "name" : "query",
           "in" : "query",
-          "description" : "Name of location, street address or postal code.",
+          "description" : "Name of location, street address or postal code. For a structured geocoding request, a JSON object can be passed.  Please refer to the `Geocoding structured query` in the model section below. Examples can be found [here](https://github.com/GIScience/openrouteservice-docs#geocoding-structured-query). ",
           "required" : false,
           "type" : "string"
         }, {
@@ -998,6 +998,9 @@
         },
         "tollways" : {
           "$ref" : "#/definitions/extras_property"
+        },
+        "TrailDifficulty" : {
+          "$ref" : "#/definitions/extras_property"
         }
       },
       "description" : "For every information item there is an associated block divided into *summary* and *values*."
@@ -1132,9 +1135,52 @@
           "type" : "string",
           "example" : ""
         }
+      }
+    },
+    "Geocode_structured_query" : {
+      "type" : "object",
+      "properties" : {
+        "address" : {
+          "type" : "string",
+          "description" : "Can contain a full address with house number or only a street name"
+        },
+        "neighbourhood" : {
+          "type" : "string",
+          "description" : "Vernacular geographic entities that may not necessarily be official administrative divisions but are important nonetheless"
+        },
+        "borough" : {
+          "type" : "string",
+          "description" : "Mostly known in the context of New York City, even though they may exist in other cities, such as Mexico City"
+        },
+        "locality" : {
+          "type" : "string",
+          "description" : "Name of a City"
+        },
+        "county" : {
+          "type" : "string",
+          "description" : "Administrative division between localities and regions"
+        },
+        "region" : {
+          "type" : "string",
+          "description" : "Normally the first-level administrative divisions within countries, analogous to states and provinces in the United States and Canada, respectively, though most other countries contain regions as well"
+        },
+        "postalcode" : {
+          "type" : "string",
+          "description" : "A postalcode"
+        },
+        "country" : {
+          "type" : "string",
+          "description" : "Name of a country. Supports two- and three-letter abbreviations"
+        }
       },
-      "title" : "query object",
-      "description" : "Parameters that were specified in the query."
+      "title" : "Geocoding structured query",
+      "description" : "Composition of a structured query object. A minimum of one parameter has to be specified.",
+      "example" : {
+        "address" : "Berliner Straße 45",
+        "locality" : "Heidelberg",
+        "country" : "Germany",
+        "postalcode" : 69120
+      }
     },
     "Geocoderesponse" : {
       "properties" : {
