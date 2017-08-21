@@ -22,6 +22,7 @@ This readme stores additional information, examples and encoding tables that go 
 	- [Surface](#surface)
 	- [WayCategory](#waycategory)
 	- [Waytype](#waytype)
+	- [AvgSpeed](#avgspeed)
   	- [Tollways](#tollways)
 	- [TrailDifficulty](#trail-difficulty)
 	- [Instruction Types](#instruction-types)
@@ -31,7 +32,7 @@ This readme stores additional information, examples and encoding tables that go 
 
 # Travel Time Calculation
 
-The travel time is calculated for each segment by using speed-limits for different [waytypes](https://wiki.openstreetmap.org/wiki/Key:highway) and adjusting them for different [grades](https://wiki.openstreetmap.org/wiki/Key:tracktype) of the road and the Incline. For `cycling` profiles also the [surface](https://wiki.openstreetmap.org/wiki/Key:surface) is considered. These limits can be reduced by setting the `maxSpeed` parameter in the [options](#routing-options). The following table shows the speed-limits used for the main profiles:
+The travel time is calculated for each segment by using speed-limits for different [waytypes](https://wiki.openstreetmap.org/wiki/Key:highway) and adjusting them for different [grades](https://wiki.openstreetmap.org/wiki/Key:tracktype) of the road. For `cycling` profiles also the steepness and the [surface](https://wiki.openstreetmap.org/wiki/Key:surface) is considered. These limits can be reduced by setting the `maxSpeed` parameter in the [options](#routing-options). The final [average speed-limits](#avgspeed) can be requested by adding `AvgSpeed` to the `extra_info` parameter. The following table shows the initial speed-limits used for the main profiles:
 
 _(all Values in km/h)_
 
@@ -493,6 +494,10 @@ The exponential assignment of the values is used for [bit fields](http://eddmann
 | 8     | Steps        |
 | 9     | Ferry        |
 | 10    | Construction |
+
+## AvgSpeed
+
+This value is in _km/h_ and equals the average speed for this way segment after grading and applying factors.
 
 ## Instruction Types
 
