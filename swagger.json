@@ -140,12 +140,12 @@
         }, {
           "name" : "extra_info",
           "in" : "query",
-          "description" : "Pipe separated List of additional information. Returns information on [steepness](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#steepness), [suitability](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#suitability), [surface](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#surface), [waycategory](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waycategory), [waytype](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waytype), [tollways](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#tollways) or [trail difficulty](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#trail-difficulty) ",
+          "description" : "Pipe separated List of additional information. Returns information on [steepness](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#steepness), [suitability](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#suitability), [surface](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#surface), [waycategory](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waycategory), [waytype](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waytype), [average speed](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#avgspeed), [tollways](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#tollways) or [trail difficulty](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#trail-difficulty) ",
           "required" : false,
           "type" : "array",
           "items" : {
             "type" : "string",
-            "enum" : [ "steepness", "suitability", "surface", "waycategory", "waytype", "tollways", "TrailDifficulty" ]
+            "enum" : [ "steepness", "suitability", "surface", "waycategory", "waytype", "AvgSpeed", "tollways", "TrailDifficulty" ]
           },
           "collectionFormat" : "pipes",
           "uniqueItems" : true
@@ -1034,6 +1034,9 @@
           "$ref" : "#/definitions/extras_property"
         },
         "waytype" : {
+          "$ref" : "#/definitions/extras_property"
+        },
+        "AvgSpeed" : {
           "$ref" : "#/definitions/extras_property"
         },
         "tollways" : {
