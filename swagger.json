@@ -122,6 +122,18 @@
           "default" : "text",
           "enum" : [ "html", "text" ]
         }, {
+          "name" : "attributes",
+          "in" : "query",
+          "description" : "Pipe seperated List of route attributes:\n* `avgspeed` - Returns average speed of each segment and the route in km/h.\n* `detour_factor` - Returns the deviation of a segment compared to a straight line (1) from A to B.\n* `percentage` - Returns the proportion of the route for each segment.\n",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "avgspeed", "detour_factor", "percentage" ]
+          },
+          "collectionFormat" : "pipes",
+          "uniqueItems" : true
+        }, {
           "name" : "maneuvers",
           "in" : "query",
           "description" : "Specifies whether the maneuver object is included into the step object or not. Default value is false.",
@@ -856,6 +868,11 @@
           "format" : "double",
           "example" : 336.0,
           "description" : "Total descent in meters."
+        },
+        "avgspeed" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Total average speed in km/h"
         }
       },
       "title" : "summary object",
@@ -910,6 +927,21 @@
           "type" : "number",
           "format" : "double",
           "description" : "Contains descent of this segment in meters for `elevation=true`."
+        },
+        "detour_factor" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Contains the deviation compared to a straight line that would have the factor `1`. Double the Distance would be a `2`."
+        },
+        "percentage" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Contains the proportion of the route in percent."
+        },
+        "avgspeed" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Contains the average speed of this segment in km/h."
         },
         "steps" : {
           "type" : "array",
