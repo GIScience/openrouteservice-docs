@@ -14,6 +14,8 @@ This readme stores additional information, examples and encoding tables that go 
 	- [Country Speed Sets](#country-speed-sets)
 - [URL Encoding](#url-encoding)
 - [Geocoding structured query](#geocoding-structured-query)
+- [Geocoding Response](#geocoding-response)
+  - [Place Type](#place-type)
 - [Routing `options`](#routing-options)
 	- [Examples](#examples)
 - [Routing Response](#routing-response)
@@ -237,6 +239,28 @@ uglyfied and encoded:
 
 `%7B"address": "Berliner Straße 45","locality": "Heidelberg","country": "Germany","postalcode": "69120"%7D`
 
+# Geocoding Response
+
+Explanation of returned parameters
+
+## Place type
+
+Describes the returned location type
+
+  |      Value      |                                           Description                                           |
+  |:---------------:|:------------------------------------------------------------------------------------------------|
+  |     `venue`     | Points of interest, businesses, things with walls                                               |
+  |    `address`    | Places with a street address                                                                    |
+  |     `street`    | Streets, roads, highways                                                                        |
+  | `neighbourhood` | Social communities, neighbourhoods                                                              |
+  |    `borough`    | Local administrative boundary, currently only used for New York City                            |
+  |   `localadmin`  | Local administrative boundaries                                                                 |
+  |    `locality`   | Towns, hamlets, cities                                                                          |
+  |     `county`    | Official governmental area; usually bigger than a locality, almost always smaller than a region |
+  |  `macrocounty`  | Related group of counties. Mostly in Europe                                                     |
+  |     `region`    | States and provinces                                                                            |
+  |  `macroregion`  | Related group of regions. Mostly in Europe                                                      |
+  |    `country`    | Places that issue passports, nations, nation-states                                             |
 
 # Routing options
 
