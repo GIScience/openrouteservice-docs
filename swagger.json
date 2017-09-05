@@ -1131,7 +1131,7 @@
         },
         "version" : {
           "type" : "string",
-          "example" : "4.0.0",
+          "example" : "4.2",
           "description" : "Backend version used for the request."
         },
         "service" : {
@@ -1229,7 +1229,11 @@
         },
         "locality" : {
           "type" : "string",
-          "description" : "Name of a City"
+          "description" : "Name of a Settlement"
+        },
+        "municipality" : {
+          "type" : "string",
+          "description" : "Single urban administrative division, distinguished from county"
         },
         "county" : {
           "type" : "string",
@@ -1312,7 +1316,7 @@
         },
         "coordinates" : {
           "type" : "array",
-          "example" : [ 13.239515, 52.514679 ],
+          "example" : [ 13.414369, 52.516116 ],
           "description" : "Contains the longitude and latitude",
           "items" : {
             "type" : "number",
@@ -1330,6 +1334,21 @@
           "type" : "string",
           "example" : "Germany"
         },
+        "country_code" : {
+          "type" : "string",
+          "example" : "DE"
+        },
+        "region" : {
+          "type" : "string",
+          "example" : "Berlin"
+        },
+        "locality" : {
+          "type" : "string",
+          "example" : "Berlin"
+        },
+        "county" : {
+          "type" : "string"
+        },
         "state" : {
           "type" : "string",
           "example" : "Berlin"
@@ -1340,11 +1359,19 @@
         },
         "postal_code" : {
           "type" : "string",
-          "example" : "14053"
+          "example" : "10179"
+        },
+        "borough" : {
+          "type" : "string",
+          "example" : "Mitte"
+        },
+        "neighbourhood" : {
+          "type" : "string",
+          "example" : "Mitte"
         },
         "street" : {
           "type" : "string",
-          "example" : "Olympischer Platz"
+          "example" : "Waisenstraße"
         },
         "house_number" : {
           "type" : "string",
@@ -1352,15 +1379,21 @@
         },
         "name" : {
           "type" : "string",
-          "example" : "Berlin Olympic Stadium"
+          "example" : "Waisenstraße 3"
+        },
+        "place_type" : {
+          "type" : "string",
+          "example" : "address",
+          "description" : "[Type](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#place-type) of the returned location.\n"
         },
         "distance" : {
           "type" : "string",
-          "example" : "0.33",
+          "example" : "12.41",
           "description" : "Distance between the input location and the result point."
         },
         "confidence" : {
           "type" : "string",
+          "example" : "0.8",
           "description" : "Value range: `0-1`\n**For reverse geocoding:** Based on the distance. The closer a result is to the queried point, the higher the `confidence`.\n**For normal geocoding:**  Based on the comparison of the query and the result. The closer a result is to the query, the higher the `confidence`.\n"
         }
       },
@@ -1385,7 +1418,7 @@
         },
         "version" : {
           "type" : "string",
-          "example" : "4.0.0",
+          "example" : "4.2",
           "description" : "Backend version used for the request."
         },
         "timestamp" : {
@@ -1558,7 +1591,7 @@
         },
         "version" : {
           "type" : "string",
-          "example" : "4.0.0",
+          "example" : "4.2",
           "description" : "Backend version used for the request."
         },
         "timestamp" : {
