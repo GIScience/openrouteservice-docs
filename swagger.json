@@ -672,23 +672,21 @@
           "required" : false,
           "type" : "array",
           "items" : {
-            "type" : "string",
-            "description" : "null"
+            "type" : "string"
           },
-          "collectionFormat" : "comma",
+          "collectionFormat" : "multi",
           "default" : "all",
           "uniqueItems" : true
         }, {
           "name" : "destinations",
           "in" : "query",
-          "description" : "A comma separated list of indices that refers to the list of locations (starting with `0`). {index_1},{index_2}[,{index_N} ...] or all (default).\n\nExample: `0,3` for the first and fourth Location.\n",
+          "description" : "A comma separated list of indices that refers to the list of locations (starting with `0`). {index_1},{index_2}[,{index_N} ...] or `all` (default).\n\nExample: `0,3` for the first and fourth Location.\n",
           "required" : false,
           "type" : "array",
           "items" : {
-            "type" : "string",
-            "description" : "null"
+            "type" : "string"
           },
-          "collectionFormat" : "comma",
+          "collectionFormat" : "multi",
           "default" : "all",
           "uniqueItems" : true
         }, {
@@ -2085,7 +2083,7 @@
         "locations" : {
           "type" : "array",
           "example" : "9.970093,48.477473|9.207916,49.153868|37.573242,55.801281|115.663757,38.106467",
-          "description" : "Pipe (|) separated List of longitude,latitude coordinates\n\nExample values: `9.970093,48.477473` `9.207916,49.153868` `37.573242,55.801281` `115.663757,38.106467`\n",
+          "description" : "Pipe (|) separated List of longitude,latitude coordinates\nExample values: `9.970093,48.477473` `9.207916,49.153868` `37.573242,55.801281` `115.663757,38.106467`\n",
           "items" : {
             "type" : "string",
             "format" : "longitude,latitude"
@@ -2097,8 +2095,7 @@
           "description" : "A comma separated list of indices that refers to the list of locations (starting with `0`). `{index_1},{index_2}[,{index_N} ...]` or `all` (default).\n\nExample: `0,3` for the first and fourth Location.\n",
           "uniqueItems" : true,
           "items" : {
-            "type" : "string",
-            "description" : "null"
+            "type" : "string"
           }
         },
         "metrics" : {
@@ -2112,7 +2109,7 @@
         },
         "resolve_locations" : {
           "type" : "boolean",
-          "description" : "Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain `name` element that identifies the name of the closest street. Default is `false`\n",
+          "description" : "Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain `name` element that identifies the name of the closest street. Default is `false`",
           "default" : false
         },
         "units" : {
@@ -2141,14 +2138,32 @@
         },
         "destinations" : {
           "type" : "array",
-          "example" : null,
+          "example" : [ {
+            "location" : [ 37.572926, 55.80129 ],
+            "snapped_distance" : 19.8
+          }, {
+            "location" : [ 115.658655, 38.116731 ],
+            "snapped_distance" : 1225.53
+          } ],
           "items" : {
             "$ref" : "#/definitions/MatrixResponse_location"
           }
         },
         "sources" : {
           "type" : "array",
-          "example" : null,
+          "example" : [ {
+            "location" : [ 9.968501, 48.47789 ],
+            "snapped_distance" : 126.17
+          }, {
+            "location" : [ 9.207773, 49.153882 ],
+            "snapped_distance" : 10.54
+          }, {
+            "location" : [ 37.572926, 55.80129 ],
+            "snapped_distance" : 19.8
+          }, {
+            "location" : [ 115.658655, 38.116731 ],
+            "snapped_distance" : 1225.53
+          } ],
           "items" : {
             "$ref" : "#/definitions/MatrixResponse_location"
           }
@@ -2162,13 +2177,24 @@
     },
     "MatrixResponse_distances" : {
       "type" : "array",
-      "description" : "",
+      "description" : "Distance matrix where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\n\nHere is a simple example for `sources=2,3` and `destinations=all` with 4 `locations`:\n\n  | Location |    L0    |    L1    |    L2    |    L3    |\n  |:--------:|:--------:|:--------:|:--------:|:--------:|\n  |    L2    | L2 -> L0 | L2 -> L1 |     0    | L2 -> L3 |\n  |    L3    | L3 -> L0 | L3 -> L1 | L3 -> L2 |     0    |\n",
+      "items" : {
+        "type" : "number",
+        "format" : "double"
+      },
       "example" : [ [ 2366119, 2338412.25, 0, 7519754 ], [ 9983969, 9956262, 7509508.5, 0 ] ]
     },
     "MatrixResponse_durations" : {
+      "type" : "array",
+      "description" : " Distance matrix where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\nHere is a simple example for `sources=2,3` and `destinations=all` with 4 `locations`:\n| Location |    L0    |    L1    |    L2    |    L3    | |:--------:|:--------:|:--------:|:--------:|:--------:| |    L2    | L2 -> L0 | L2 -> L1 |     0    | L2 -> L3 | |    L3    | L3 -> L0 | L3 -> L1 | L3 -> L2 |     0    |\n",
+      "items" : {
+        "type" : "number",
+        "format" : "double"
+      },
       "example" : [ [ 88632.73, 87838.93, 0, 311791.09 ], [ 399967.72, 399173.91, 310735.56, 0 ] ]
     },
     "MatrixResponse_weights" : {
+      "description" : " Weight matrix where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\nHere is a simple example for `sources=2,3` and `destinations=all` with 4 `locations`:\n| Location |    L0    |    L1    |    L2    |    L3    | |:--------:|:--------:|:--------:|:--------:|:--------:| |    L2    | L2 -> L0 | L2 -> L1 |     0    | L2 -> L3 | |    L3    | L3 -> L0 | L3 -> L1 | L3 -> L2 |     0    |\n",
       "example" : [ [ 88635.17, 87841.37, 0, 311794.25 ], [ 399973.16, 399179.34, 310738.84, 0 ] ]
     },
     "MatrixResponse_location" : {
@@ -2181,6 +2207,10 @@
             "type" : "number",
             "format" : "double"
           }
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "Name of the street the closest accessible point is situated on. Only for `resolve_locations=true` and only if name is available.\n"
         },
         "snapped_distance" : {
           "type" : "number",
