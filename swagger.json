@@ -645,7 +645,7 @@
       "get" : {
         "tags" : [ "Matrix" ],
         "summary" : "Matrix Service",
-        "description" : "Returns duration, distance or weight matrix for mutliple source and destination points. \n",
+        "description" : "Returns duration, distance or weight matrix for mutliple source and destination points.\nBy default a symmetric duration matrix is returned where every point in `locations` is paired with each other. The result is `null` if a value can't be determined.\n",
         "parameters" : [ {
           "name" : "profile",
           "in" : "query",
@@ -2145,6 +2145,7 @@
             "location" : [ 115.658655, 38.116731 ],
             "snapped_distance" : 1225.53
           } ],
+          "description" : "Array of destinations. Each point is snapped to the road and path network",
           "items" : {
             "$ref" : "#/definitions/MatrixResponse_location"
           }
@@ -2164,6 +2165,7 @@
             "location" : [ 115.658655, 38.116731 ],
             "snapped_distance" : 1225.53
           } ],
+          "description" : "Array of sources. Each point is snapped to the road and path network",
           "items" : {
             "$ref" : "#/definitions/MatrixResponse_location"
           }
@@ -2176,25 +2178,15 @@
       "description" : "The Matrix Response contains one matrix for each specified `metrics` value.\n"
     },
     "MatrixResponse_distances" : {
-      "type" : "array",
-      "description" : "Distance matrix where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\n\nHere is a simple example for `sources=2,3` and `destinations=all` with 4 `locations`:\n\n  | Location |    L0    |    L1    |    L2    |    L3    |\n  |:--------:|:--------:|:--------:|:--------:|:--------:|\n  |    L2    | L2 -> L0 | L2 -> L1 |     0    | L2 -> L3 |\n  |    L3    | L3 -> L0 | L3 -> L1 | L3 -> L2 |     0    |\n",
-      "items" : {
-        "type" : "number",
-        "format" : "double"
-      },
+      "description" : "[Distance matrix](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#matrix-response) where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\n",
       "example" : [ [ 2366119, 2338412.25, 0, 7519754 ], [ 9983969, 9956262, 7509508.5, 0 ] ]
     },
     "MatrixResponse_durations" : {
-      "type" : "array",
-      "description" : " Distance matrix where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\nHere is a simple example for `sources=2,3` and `destinations=all` with 4 `locations`:\n| Location |    L0    |    L1    |    L2    |    L3    | |:--------:|:--------:|:--------:|:--------:|:--------:| |    L2    | L2 -> L0 | L2 -> L1 |     0    | L2 -> L3 | |    L3    | L3 -> L0 | L3 -> L1 | L3 -> L2 |     0    |\n",
-      "items" : {
-        "type" : "number",
-        "format" : "double"
-      },
+      "description" : "[Duration matrix](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#matrix-response) where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\n",
       "example" : [ [ 88632.73, 87838.93, 0, 311791.09 ], [ 399967.72, 399173.91, 310735.56, 0 ] ]
     },
     "MatrixResponse_weights" : {
-      "description" : " Weight matrix where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\nHere is a simple example for `sources=2,3` and `destinations=all` with 4 `locations`:\n| Location |    L0    |    L1    |    L2    |    L3    | |:--------:|:--------:|:--------:|:--------:|:--------:| |    L2    | L2 -> L0 | L2 -> L1 |     0    | L2 -> L3 | |    L3    | L3 -> L0 | L3 -> L1 | L3 -> L2 |     0    |\n",
+      "description" : "[Weight matrix](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#matrix-response) where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\n",
       "example" : [ [ 88635.17, 87841.37, 0, 311794.25 ], [ 399973.16, 399179.34, 310738.84, 0 ] ]
     },
     "MatrixResponse_location" : {
