@@ -40,7 +40,7 @@
         "parameters" : [ {
           "name" : "coordinates",
           "in" : "query",
-          "description" : "Pipe separated List of longitude,latitude coordinates visited in order.\n\nExample values:\n  `8.34234,48.23424`\n  `8.34423,48.26424`\n",
+          "description" : "Pipe (|) separated List of longitude,latitude coordinates visited in order.\n\nExample values:\n  `8.34234,48.23424`\n  `8.34423,48.26424`\n",
           "required" : true,
           "type" : "array",
           "items" : {
@@ -124,7 +124,7 @@
         }, {
           "name" : "attributes",
           "in" : "query",
-          "description" : "Pipe seperated List of route attributes:\n* `avgspeed` - Returns average speed of each segment and the route in km/h.\n* `detour_factor` - Returns the deviation of a segment compared to a straight line (1) from A to B.\n* `percentage` - Returns the proportion of the route for each segment.\n",
+          "description" : "Pipe (|) seperated List of route attributes:\n* `avgspeed` - Returns average speed of each segment and the route in km/h.\n* `detour_factor` - Returns the deviation of a segment compared to a straight line (1) from A to B.\n* `percentage` - Returns the proportion of the route for each segment.\n",
           "required" : false,
           "type" : "array",
           "items" : {
@@ -152,7 +152,7 @@
         }, {
           "name" : "extra_info",
           "in" : "query",
-          "description" : "Pipe separated List of additional information. Returns information on [steepness](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#steepness), [suitability](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#suitability), [surface](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#surface), [waycategory](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waycategory), [waytype](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waytype), [average speed](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#avgspeed), [tollways](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#tollways) or [trail difficulty](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#trail-difficulty) ",
+          "description" : "Pipe (|) separated List of additional information. Returns information on [steepness](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#steepness), [suitability](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#suitability), [surface](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#surface), [waycategory](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waycategory), [waytype](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waytype), [average speed](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#avgspeed), [tollways](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#tollways) or [trail difficulty](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#trail-difficulty) ",
           "required" : false,
           "type" : "array",
           "items" : {
@@ -164,7 +164,7 @@
         }, {
           "name" : "options",
           "in" : "query",
-          "description" : "For advanced options formatted as json object. For structure refer to the **options model** below.\nThe available parameters are:\n\n\n  - `maximum_speed` : Specifies a maximum travel speed restriction in km/h.\n\n\n  - `avoid_features` : Pipe seperated list of features to avoid.\n    The available features are :\n\n      |     Feature    | Available for                               |\n      |:--------------:|---------------------------------------------|\n      | `highways`     | driving-*                                   |\n      | `tollways`     | driving-*                                   |\n      | `ferries`      | driving-\\*, cycling-\\*, foot-\\*, wheelchair |\n      | `tunnels`      | driving-*                                   |\n      | `pavedroads`   | driving-\\*, cycling-*                       |\n      | `unpavedroads` | driving-\\*, cycling-*                       |\n      | `tracks`       | driving-*                                   |\n      | `fords`        | driving-\\*, cycling-\\*, foot-*              |\n      | `steps`        | cycling-\\*, foot-\\*, wheelchair             |\n      | `hills`        | cycling-\\*, foot-\\*                         |\n\n\n  - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`.\n\n\n  - `profile_params` : Specifies additional routing parameters.\n    - `weightings`: Weightings will prioritize specified factors over the shortest path.\n      - `fitness`: Parameters for `cycling-*` profiles:\n\n          |      Parameter     | Description                                                                                                                                                                        |\n          |:------------------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n          | `difficulty_level` |  Specifies the fitness level. 0 = Novice, 1 = Moderate, 2 = Amateur, 3 = Pro. The prefered gradient increases with level.                                                          |\n          | `maximum_gradient` | Only for avoided `hills` or specified `difficulty_level`. Specifies the maximum route steepness in percent. Values range from 1 to 15. Routes with a higher gradient are avoided.  |\n\n      - `green`: Specifies the Green factor for `foot-*` profiles.\n        - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer ways through green areas over a shorter route.\n\n      - `quiet`: Specifies the Quiet factor for `foot-*` profiles.\n        - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer quiet ways over a shorter route.\n\n    - `restrictions` : Specifies restrictions for `driving-hgv` and `wheelchair`\n      - for `driving-hgv`: \n\n          |  Parameter | Description                                                                                                                       |\n          |:----------:|-----------------------------------------------------------------------------------------------------------------------------------|\n          | `length`   | Length restriction in meters.                                                                                                     |\n          | `width`    | Width restriction in meters.                                                                                                      |\n          | `height`   | Height restriction in meters.                                                                                                     |\n          | `axleload` | Axleload restriction in tons.                                                                                                     |\n          | `weight`   | Weight restriction in tons.                                                                                                       |\n          | `hazmat`   | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false. |\n\n      - for `wheelchair`:\n\n        |       Parameter       | Description                                                                                                         |\n        |:---------------------:|---------------------------------------------------------------------------------------------------------------------|\n        |     `surface_type`    | Specifies the [surface type](http://wiki.openstreetmap.org/wiki/Key:surface). Default is `\"cobblestone:flattened\"`. |\n        |      `track_type`     | Specifies the [grade](http://wiki.openstreetmap.org/wiki/Key:tracktype) of the route. Default is `\"grade1\"`.        |\n        |   `smoothness_type`   | Specifies the [smoothness](http://wiki.openstreetmap.org/wiki/Key:smoothness) of the route. Default is `\"good\"`.    |\n        | `maximum_sloped_curb` | Specifies the maximum height of the sloped curb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.      |\n        |   `maximum_incline`   | Specifies the maximum incline as a percentage. `3`, `6`(default), `10`, `15` or `any`.                              |\n\n\n  - `avoid_polygons` : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).\n\nThis is an example options object for a `cycling-*` profile:\n\n```json\n{\n  \"maximum_speed\": 10,\n  \"avoid_features\": \"unpavedroads\",\n  \"profile_params\": {\n    \"weightings\": {\n      \"fitness\": {\n        \"difficulty_level\": 1,\n        \"maximum_gradient\": 5\n      },\n      \"green\": {\n        \"factor\": 0.8\n      },\n      \"quiet\": {\n        \"factor\": 1.0\n      }\n    }\n  },\n  \"avoid_polygons\": {\n    \"type\": \"Polygon\",\n    \"coordinates\": [\n                    [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]\n   ]}\n}\n```\nThe minified form(for copy paste purposes):\n\n`{\"maximum_speed\":10,\"avoid_features\":\"unpavedroads\",\"profile_params\":{\"weightings\":{\"fitness\":{\"difficulty_level\":1,\"maximum_gradient\":5},\"green\":{\"factor\":0.8},\"quiet\":{\"factor\":1.0}}},\"avoid_polygons\":{\"type\":\"Polygon\",\"coordinates\":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`\n\nMore examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).\n",
+          "description" : "For advanced options formatted as json object. For structure refer to the **options model** below.\nThe available parameters are:\n\n\n  - `maximum_speed` : Specifies a maximum travel speed restriction in km/h.\n\n\n  - `avoid_features` : Pipe (|) seperated list of features to avoid.\n    The available features are :\n\n      |     Feature    | Available for                               |\n      |:--------------:|---------------------------------------------|\n      | `highways`     | driving-*                                   |\n      | `tollways`     | driving-*                                   |\n      | `ferries`      | driving-\\*, cycling-\\*, foot-\\*, wheelchair |\n      | `tunnels`      | driving-*                                   |\n      | `pavedroads`   | driving-\\*, cycling-*                       |\n      | `unpavedroads` | driving-\\*, cycling-*                       |\n      | `tracks`       | driving-*                                   |\n      | `fords`        | driving-\\*, cycling-\\*, foot-*              |\n      | `steps`        | cycling-\\*, foot-\\*, wheelchair             |\n      | `hills`        | cycling-\\*, foot-\\*                         |\n\n\n  - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`.\n\n\n  - `profile_params` : Specifies additional routing parameters.\n    - `weightings`: Weightings will prioritize specified factors over the shortest path.\n      - `fitness`: Parameters for `cycling-*` profiles:\n\n          |      Parameter     | Description                                                                                                                                                                        |\n          |:------------------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n          | `difficulty_level` |  Specifies the fitness level. 0 = Novice, 1 = Moderate, 2 = Amateur, 3 = Pro. The prefered gradient increases with level.                                                          |\n          | `maximum_gradient` | Only for avoided `hills` or specified `difficulty_level`. Specifies the maximum route steepness in percent. Values range from 1 to 15. Routes with a higher gradient are avoided.  |\n\n      - `green`: Specifies the Green factor for `foot-*` profiles.\n        - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer ways through green areas over a shorter route.\n\n      - `quiet`: Specifies the Quiet factor for `foot-*` profiles.\n        - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer quiet ways over a shorter route.\n\n    - `restrictions` : Specifies restrictions for `driving-hgv` and `wheelchair`\n      - for `driving-hgv`: \n\n          |  Parameter | Description                                                                                                                       |\n          |:----------:|-----------------------------------------------------------------------------------------------------------------------------------|\n          | `length`   | Length restriction in meters.                                                                                                     |\n          | `width`    | Width restriction in meters.                                                                                                      |\n          | `height`   | Height restriction in meters.                                                                                                     |\n          | `axleload` | Axleload restriction in tons.                                                                                                     |\n          | `weight`   | Weight restriction in tons.                                                                                                       |\n          | `hazmat`   | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false. |\n\n      - for `wheelchair`:\n\n        |       Parameter       | Description                                                                                                         |\n        |:---------------------:|---------------------------------------------------------------------------------------------------------------------|\n        |     `surface_type`    | Specifies the [surface type](http://wiki.openstreetmap.org/wiki/Key:surface). Default is `\"cobblestone:flattened\"`. |\n        |      `track_type`     | Specifies the [grade](http://wiki.openstreetmap.org/wiki/Key:tracktype) of the route. Default is `\"grade1\"`.        |\n        |   `smoothness_type`   | Specifies the [smoothness](http://wiki.openstreetmap.org/wiki/Key:smoothness) of the route. Default is `\"good\"`.    |\n        | `maximum_sloped_curb` | Specifies the maximum height of the sloped curb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.      |\n        |   `maximum_incline`   | Specifies the maximum incline as a percentage. `3`, `6`(default), `10`, `15` or `any`.                              |\n\n\n  - `avoid_polygons` : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).\n\nThis is an example options object for a `cycling-*` profile:\n\n```json\n{\n  \"maximum_speed\": 10,\n  \"avoid_features\": \"unpavedroads\",\n  \"profile_params\": {\n    \"weightings\": {\n      \"fitness\": {\n        \"difficulty_level\": 1,\n        \"maximum_gradient\": 5\n      },\n      \"green\": {\n        \"factor\": 0.8\n      },\n      \"quiet\": {\n        \"factor\": 1.0\n      }\n    }\n  },\n  \"avoid_polygons\": {\n    \"type\": \"Polygon\",\n    \"coordinates\": [\n                    [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]\n   ]}\n}\n```\nThe minified form(for copy paste purposes):\n\n`{\"maximum_speed\":10,\"avoid_features\":\"unpavedroads\",\"profile_params\":{\"weightings\":{\"fitness\":{\"difficulty_level\":1,\"maximum_gradient\":5},\"green\":{\"factor\":0.8},\"quiet\":{\"factor\":1.0}}},\"avoid_polygons\":{\"type\":\"Polygon\",\"coordinates\":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`\n\nMore examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).\n",
           "required" : false,
           "type" : "string",
           "default" : "{}"
@@ -314,7 +314,7 @@
         "parameters" : [ {
           "name" : "locations",
           "in" : "query",
-          "description" : "List of longitude, latitude coordinates delimited with pipe.\n\nExample values:\n  `8.34234,48.23424`\n",
+          "description" : "List of longitude, latitude coordinates delimited with pipe (|).\n\nExample values:\n  `8.34234,48.23424`\n",
           "required" : true,
           "type" : "array",
           "items" : {
@@ -370,7 +370,7 @@
         }, {
           "name" : "attributes",
           "in" : "query",
-          "description" : "Values are area and reachfactor. Delimit with pipe for both.\n`area` returns the area of each polygon in its feature properties.\n`reachfactor` returns a reachability score between 0 and 1.\n",
+          "description" : "Values are area and reachfactor. Delimit with pipe (|) for both.\n`area` returns the area of each polygon in its feature properties.\n`reachfactor` returns a reachability score between 0 and 1.\n",
           "required" : false,
           "type" : "array",
           "items" : {
@@ -382,7 +382,7 @@
         }, {
           "name" : "options",
           "in" : "query",
-          "description" : "For advanced options formatted as json object. For structure refer to the **options model** below.\nThe available parameters are:\n\n\n  - `maximum_speed` : Specifies a maximum travel speed restriction in km/h.\n\n\n  - `avoid_features` : Pipe seperated list of features to avoid.\n    The available features are :\n\n      |     Feature    | Available for                               |\n      |:--------------:|---------------------------------------------|\n      | `highways`     | driving-*                                   |\n      | `tollways`     | driving-*                                   |\n      | `ferries`      | driving-\\*, cycling-\\*, foot-\\*, wheelchair |\n      | `tunnels`      | driving-*                                   |\n      | `pavedroads`   | driving-\\*, cycling-*                       |\n      | `unpavedroads` | driving-\\*, cycling-*                       |\n      | `tracks`       | driving-*                                   |\n      | `fords`        | driving-\\*, cycling-\\*, foot-*              |\n      | `steps`        | cycling-\\*, foot-\\*, wheelchair             |\n      | `hills`        | cycling-\\*, foot-\\*                         |\n\n\n  - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`.\n\n\n  - `profile_params` : Specifies additional routing parameters.\n    - `weightings`: Weightings will prioritize specified factors over the shortest path.\n      - `fitness`: Parameters for `cycling-*` profiles:\n\n          |      Parameter     | Description                                                                                                                                                                        |\n          |:------------------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n          | `difficulty_level` |  Specifies the fitness level. 0 = Novice, 1 = Moderate, 2 = Amateur, 3 = Pro. The prefered gradient increases with level.                                                          |\n          | `maximum_gradient` | Only for avoided `hills` or specified `difficulty_level`. Specifies the maximum route steepness in percent. Values range from 1 to 15. Routes with a higher gradient are avoided.  |\n\n      - `green`: Specifies the Green factor for `foot-*` profiles.\n        - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer ways through green areas over a shorter route.\n\n      - `quiet`: Specifies the Quiet factor for `foot-*` profiles.\n        - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer quiet ways over a shorter route.\n\n    - `restrictions` : Specifies restrictions for `driving-hgv` and `wheelchair`\n      - for `driving-hgv`: \n\n          |  Parameter | Description                                                                                                                       |\n          |:----------:|-----------------------------------------------------------------------------------------------------------------------------------|\n          | `length`   | Length restriction in meters.                                                                                                     |\n          | `width`    | Width restriction in meters.                                                                                                      |\n          | `height`   | Height restriction in meters.                                                                                                     |\n          | `axleload` | Axleload restriction in tons.                                                                                                     |\n          | `weight`   | Weight restriction in tons.                                                                                                       |\n          | `hazmat`   | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false. |\n\n      - for `wheelchair`:\n\n        |       Parameter       | Description                                                                                                         |\n        |:---------------------:|---------------------------------------------------------------------------------------------------------------------|\n        |     `surface_type`    | Specifies the [surface type](http://wiki.openstreetmap.org/wiki/Key:surface). Default is `\"cobblestone:flattened\"`. |\n        |      `track_type`     | Specifies the [grade](http://wiki.openstreetmap.org/wiki/Key:tracktype) of the route. Default is `\"grade1\"`.        |\n        |   `smoothness_type`   | Specifies the [smoothness](http://wiki.openstreetmap.org/wiki/Key:smoothness) of the route. Default is `\"good\"`.    |\n        | `maximum_sloped_curb` | Specifies the maximum height of the sloped curb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.      |\n        |   `maximum_incline`   | Specifies the maximum incline as a percentage. `3`, `6`(default), `10`, `15` or `any`.                              |\n\n\n  - `avoid_polygons` : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).\n\nThis is an example options object for a `cycling-*` profile:\n\n```json\n{\n  \"maximum_speed\": 10,\n  \"avoid_features\": \"unpavedroads\",\n  \"profile_params\": {\n    \"weightings\": {\n      \"fitness\": {\n        \"difficulty_level\": 1,\n        \"maximum_gradient\": 5\n      },\n      \"green\": {\n        \"factor\": 0.8\n      },\n      \"quiet\": {\n        \"factor\": 1.0\n      }\n    }\n  },\n  \"avoid_polygons\": {\n    \"type\": \"Polygon\",\n    \"coordinates\": [\n                    [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]\n   ]}\n}\n```\nThe minified form(for copy paste purposes):\n\n`{\"maximum_speed\":10,\"avoid_features\":\"unpavedroads\",\"profile_params\":{\"weightings\":{\"fitness\":{\"difficulty_level\":1,\"maximum_gradient\":5},\"green\":{\"factor\":0.8},\"quiet\":{\"factor\":1.0}}},\"avoid_polygons\":{\"type\":\"Polygon\",\"coordinates\":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`\n\nMore examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).\n",
+          "description" : "For advanced options formatted as json object. For structure refer to the **options model** below.\nThe available parameters are:\n\n\n  - `maximum_speed` : Specifies a maximum travel speed restriction in km/h.\n\n\n  - `avoid_features` : Pipe (|) seperated list of features to avoid.\n    The available features are :\n\n      |     Feature    | Available for                               |\n      |:--------------:|---------------------------------------------|\n      | `highways`     | driving-*                                   |\n      | `tollways`     | driving-*                                   |\n      | `ferries`      | driving-\\*, cycling-\\*, foot-\\*, wheelchair |\n      | `tunnels`      | driving-*                                   |\n      | `pavedroads`   | driving-\\*, cycling-*                       |\n      | `unpavedroads` | driving-\\*, cycling-*                       |\n      | `tracks`       | driving-*                                   |\n      | `fords`        | driving-\\*, cycling-\\*, foot-*              |\n      | `steps`        | cycling-\\*, foot-\\*, wheelchair             |\n      | `hills`        | cycling-\\*, foot-\\*                         |\n\n\n  - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`.\n\n\n  - `profile_params` : Specifies additional routing parameters.\n    - `weightings`: Weightings will prioritize specified factors over the shortest path.\n      - `fitness`: Parameters for `cycling-*` profiles:\n\n          |      Parameter     | Description                                                                                                                                                                        |\n          |:------------------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n          | `difficulty_level` |  Specifies the fitness level. 0 = Novice, 1 = Moderate, 2 = Amateur, 3 = Pro. The prefered gradient increases with level.                                                          |\n          | `maximum_gradient` | Only for avoided `hills` or specified `difficulty_level`. Specifies the maximum route steepness in percent. Values range from 1 to 15. Routes with a higher gradient are avoided.  |\n\n      - `green`: Specifies the Green factor for `foot-*` profiles.\n        - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer ways through green areas over a shorter route.\n\n      - `quiet`: Specifies the Quiet factor for `foot-*` profiles.\n        - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer quiet ways over a shorter route.\n\n    - `restrictions` : Specifies restrictions for `driving-hgv` and `wheelchair`\n      - for `driving-hgv`: \n\n          |  Parameter | Description                                                                                                                       |\n          |:----------:|-----------------------------------------------------------------------------------------------------------------------------------|\n          | `length`   | Length restriction in meters.                                                                                                     |\n          | `width`    | Width restriction in meters.                                                                                                      |\n          | `height`   | Height restriction in meters.                                                                                                     |\n          | `axleload` | Axleload restriction in tons.                                                                                                     |\n          | `weight`   | Weight restriction in tons.                                                                                                       |\n          | `hazmat`   | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false. |\n\n      - for `wheelchair`:\n\n        |       Parameter       | Description                                                                                                         |\n        |:---------------------:|---------------------------------------------------------------------------------------------------------------------|\n        |     `surface_type`    | Specifies the [surface type](http://wiki.openstreetmap.org/wiki/Key:surface). Default is `\"cobblestone:flattened\"`. |\n        |      `track_type`     | Specifies the [grade](http://wiki.openstreetmap.org/wiki/Key:tracktype) of the route. Default is `\"grade1\"`.        |\n        |   `smoothness_type`   | Specifies the [smoothness](http://wiki.openstreetmap.org/wiki/Key:smoothness) of the route. Default is `\"good\"`.    |\n        | `maximum_sloped_curb` | Specifies the maximum height of the sloped curb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.      |\n        |   `maximum_incline`   | Specifies the maximum incline as a percentage. `3`, `6`(default), `10`, `15` or `any`.                              |\n\n\n  - `avoid_polygons` : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).\n\nThis is an example options object for a `cycling-*` profile:\n\n```json\n{\n  \"maximum_speed\": 10,\n  \"avoid_features\": \"unpavedroads\",\n  \"profile_params\": {\n    \"weightings\": {\n      \"fitness\": {\n        \"difficulty_level\": 1,\n        \"maximum_gradient\": 5\n      },\n      \"green\": {\n        \"factor\": 0.8\n      },\n      \"quiet\": {\n        \"factor\": 1.0\n      }\n    }\n  },\n  \"avoid_polygons\": {\n    \"type\": \"Polygon\",\n    \"coordinates\": [\n                    [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]\n   ]}\n}\n```\nThe minified form(for copy paste purposes):\n\n`{\"maximum_speed\":10,\"avoid_features\":\"unpavedroads\",\"profile_params\":{\"weightings\":{\"fitness\":{\"difficulty_level\":1,\"maximum_gradient\":5},\"green\":{\"factor\":0.8},\"quiet\":{\"factor\":1.0}}},\"avoid_polygons\":{\"type\":\"Polygon\",\"coordinates\":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`\n\nMore examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).\n",
           "required" : false,
           "type" : "string"
         }, {
@@ -536,7 +536,7 @@
         }, {
           "name" : "details",
           "in" : "query",
-          "description" : "Pipe seperated list of desired details. **For** `request=pois` **only.**\n",
+          "description" : "Pipe (|) seperated list of desired details. **For** `request=pois` **only.**\n",
           "required" : false,
           "type" : "array",
           "items" : {
@@ -590,15 +590,15 @@
       },
       "post" : {
         "tags" : [ "Places" ],
-        "summary" : "Location Service",
+        "summary" : "Location Service (for big requests)",
         "description" : "Returns Points of Interest in the area surrounding a geometry.\n",
         "parameters" : [ {
           "in" : "body",
           "name" : "body",
-          "description" : "this is body",
+          "description" : "body for a post request",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/body"
+            "$ref" : "#/definitions/LocationsBody"
           }
         } ],
         "responses" : {
@@ -610,6 +610,186 @@
           },
           "400" : {
             "description" : "An unexpected error was encountered and more detailed internal\nerror\\ncode is provided.\n\n| Internal Code | Description                                        |\n|:-------------:|----------------------------------------------------|\n|      400      | Unable to parse JSON request.                      |\n|      401      | Required parameter is missing.                     |\n|      402      | Invalid parameter format.                          |\n|      403      | Invalid parameter value.                           |\n|      404      | Parameter value exceeds the maximum allowed limit. |\n|      499      | Unknown internal error.                            |\n",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/error"
+              }
+            }
+          },
+          "401" : {
+            "description" : "Authorization field missing."
+          },
+          "403" : {
+            "description" : "Key not authorised."
+          },
+          "405" : {
+            "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
+          },
+          "413" : {
+            "description" : "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
+          },
+          "500" : {
+            "description" : "The request is incorrect and therefore can not be processed."
+          },
+          "501" : {
+            "description" : "Indicates that the server does not support the functionality needed to fulfill the request."
+          },
+          "503" : {
+            "description" : "The server is currently unavailable due to overload or maintenance."
+          }
+        }
+      }
+    },
+    "/matrix" : {
+      "get" : {
+        "tags" : [ "Matrix" ],
+        "summary" : "Matrix Service",
+        "description" : "Returns duration, distance or weight matrix for mutliple source and destination points. \n",
+        "parameters" : [ {
+          "name" : "profile",
+          "in" : "query",
+          "description" : "Specifies the route profile.",
+          "required" : true,
+          "type" : "string",
+          "default" : "driving-car",
+          "enum" : [ "driving-car", "driving-hgv", "cycling-regular", "cycling-road", "cycling-safe", "cycling-mountain", "cycling-tour", "cycling-electric", "foot-walking", "foot-hiking", "wheelchair" ]
+        }, {
+          "name" : "locations",
+          "in" : "query",
+          "description" : "Pipe (|) separated List of longitude,latitude coordinates\n\nExample values: `9.970093,48.477473` `9.207916,49.153868` `37.573242,55.801281` `115.663757,38.106467`\n",
+          "required" : true,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "longitude,latitude"
+          },
+          "collectionFormat" : "pipes"
+        }, {
+          "name" : "sources",
+          "in" : "query",
+          "description" : "A comma separated list of indices that refers to the list of locations (starting with `0`). {index_1},{index_2}(,{index_N} ...) or `all` (default).\n\nExample: `0,3` for the first and fourth Location.\n",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "description" : "null"
+          },
+          "collectionFormat" : "comma",
+          "default" : "all",
+          "uniqueItems" : true
+        }, {
+          "name" : "destinations",
+          "in" : "query",
+          "description" : "A comma separated list of indices that refers to the list of locations (starting with `0`). {index_1},{index_2}[,{index_N} ...] or all (default).\n\nExample: `0,3` for the first and fourth Location.\n",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "description" : "null"
+          },
+          "collectionFormat" : "comma",
+          "default" : "all",
+          "uniqueItems" : true
+        }, {
+          "name" : "metrics",
+          "in" : "query",
+          "description" : "Specifies a list of returned metrics separated with a pipe character (|).\n* `distance` - Returns distance matrix for specified points in defined `units`.\n* `duration` - Returns duration matrix for specified points in defined `units`.\n* `weight`   - Returns weight matrix for specified points in defined `units`.\n",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "distance", "duration", "weight" ]
+          },
+          "collectionFormat" : "pipes",
+          "default" : "duration",
+          "uniqueItems" : true
+        }, {
+          "name" : "resolve_locations",
+          "in" : "query",
+          "description" : "Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain `name` element that identifies the name of the closest street. Default is `false`\n",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false,
+          "enum" : [ "true", "false" ]
+        }, {
+          "name" : "units",
+          "in" : "query",
+          "description" : "Specifies the unit of measurement for distances. Default is `m`",
+          "required" : false,
+          "type" : "string",
+          "default" : "m",
+          "enum" : [ "m", "km", "mi" ]
+        }, {
+          "name" : "optimized",
+          "in" : "query",
+          "description" : "Specifies whether Dijkstra algorithm (`false`) or any available technique to speed up shortest-path routing (`true`) is used.\n",
+          "required" : false,
+          "type" : "boolean",
+          "default" : true,
+          "enum" : [ "true", "false" ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Standard response for successfully processed requests. Returns JSON.\n",
+            "schema" : {
+              "$ref" : "#/definitions/MatrixResponse"
+            }
+          },
+          "400" : {
+            "description" : "An unexpected error was encountered and more detailed internal\nerror\\ncode is provided.\n\n| Internal Code | Description                                        |\n|:-------------:|----------------------------------------------------|\n|      600      | Unable to parse JSON request.                      |\n|      601      | Required parameter is missing.                     |\n|      602      | Invalid parameter format.                          |\n|      603      | Invalid parameter value.                           |\n|      604      | Parameter value exceeds the maximum allowed limit. |\n|      699      | Unknown internal error.                            |\n",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/error"
+              }
+            }
+          },
+          "401" : {
+            "description" : "Authorization field missing."
+          },
+          "403" : {
+            "description" : "Key not authorised."
+          },
+          "405" : {
+            "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
+          },
+          "413" : {
+            "description" : "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
+          },
+          "500" : {
+            "description" : "The request is incorrect and therefore can not be processed."
+          },
+          "501" : {
+            "description" : "Indicates that the server does not support the functionality needed to fulfill the request."
+          },
+          "503" : {
+            "description" : "The server is currently unavailable due to overload or maintenance."
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Matrix" ],
+        "summary" : "Matrix Service (for big requests)",
+        "description" : "Returns duration, distance or weight matrix for mutliple source and destination points.",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body for a Matrix post request",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/MatrixBody"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Standard response for successfully processed requests. Returns JSON.\n",
+            "schema" : {
+              "$ref" : "#/definitions/MatrixResponse"
+            }
+          },
+          "400" : {
+            "description" : "An unexpected error was encountered and more detailed internal\nerror\\ncode is provided.\n\n| Internal Code | Description                                        |\n|:-------------:|----------------------------------------------------|\n|      600      | Unable to parse JSON request.                      |\n|      601      | Required parameter is missing.                     |\n|      602      | Invalid parameter format.                          |\n|      603      | Invalid parameter value.                           |\n|      604      | Parameter value exceeds the maximum allowed limit. |\n|      699      | Unknown internal error.                            |\n",
             "schema" : {
               "type" : "array",
               "items" : {
@@ -1129,10 +1309,8 @@
           "example" : "openrouteservice.org, OpenStreetMap contributors, tmc - BASt",
           "description" : "Attribution for using our service."
         },
-        "version" : {
-          "type" : "string",
-          "example" : "4.2",
-          "description" : "Backend version used for the request."
+        "engine" : {
+          "$ref" : "#/definitions/info_engine"
         },
         "service" : {
           "type" : "string",
@@ -1416,10 +1594,8 @@
         "query" : {
           "$ref" : "#/definitions/Geocoderesponse_info_query"
         },
-        "version" : {
-          "type" : "string",
-          "example" : "4.2",
-          "description" : "Backend version used for the request."
+        "engine" : {
+          "$ref" : "#/definitions/info_engine"
         },
         "timestamp" : {
           "type" : "integer",
@@ -1589,10 +1765,8 @@
           "example" : "openrouteservice.org, OpenStreetMap contributors",
           "description" : "Attribution for using our service."
         },
-        "version" : {
-          "type" : "string",
-          "example" : "4.2",
-          "description" : "Backend version used for the request."
+        "engine" : {
+          "$ref" : "#/definitions/info_engine"
         },
         "timestamp" : {
           "type" : "integer",
@@ -1771,10 +1945,8 @@
           "example" : "places",
           "description" : "API endpoint used."
         },
-        "version" : {
-          "type" : "string",
-          "example" : "4.2.0",
-          "description" : "Backend version used for the request."
+        "engine" : {
+          "$ref" : "#/definitions/info_engine"
         },
         "attribution" : {
           "type" : "string",
@@ -1839,7 +2011,7 @@
       "title" : "filter object",
       "description" : "Filter the results by `category_group_ids` or `category_ids`. If both are specified the *group_ids* take priority."
     },
-    "body" : {
+    "LocationsBody" : {
       "properties" : {
         "filter" : {
           "$ref" : "#/definitions/filter"
@@ -1873,6 +2045,7 @@
           "$ref" : "#/definitions/geometry"
         }
       },
+      "title" : "Locations(Post) body",
       "description" : "**You have to specify at least one of** `bbox` **and** `geometry` !\n"
     },
     "filter" : {
@@ -1897,8 +2070,216 @@
       "title" : "filter object"
     },
     "geometry" : {
+      "type" : "string",
       "description" : "The geometry can be either a Point , LineString or Polygon.",
       "example" : "{type: LineString, coordinates:[[8.167426,49.272556],[8.167588,47.272445],[8.168082,47.272105],[8.168224,47.271917],[8.16831,47.271941],[8.168926,47.272216],[8.169054,47.272278],[8.169165,47.272186],[8.169256,47.272103],[8.16948,47.271921],[8.170129,47.271408],[8.170265,47.271295],[8.170701,47.27097],[8.171496,47.270485],[8.171796,47.270296]]}"
+    },
+    "MatrixBody" : {
+      "properties" : {
+        "profile" : {
+          "type" : "string",
+          "description" : "Specifies the route profile.",
+          "enum" : [ "driving-car", "driving-hgv", "cycling-regular", "cycling-road", "cycling-safe", "cycling-mountain", "cycling-tour", "cycling-electric", "foot-walking", "foot-hiking", "wheelchair" ],
+          "default" : "driving-car"
+        },
+        "locations" : {
+          "type" : "array",
+          "example" : "9.970093,48.477473|9.207916,49.153868|37.573242,55.801281|115.663757,38.106467",
+          "description" : "Pipe (|) separated List of longitude,latitude coordinates\n\nExample values: `9.970093,48.477473` `9.207916,49.153868` `37.573242,55.801281` `115.663757,38.106467`\n",
+          "items" : {
+            "type" : "string",
+            "format" : "longitude,latitude"
+          }
+        },
+        "sources" : {
+          "type" : "array",
+          "example" : "2,3",
+          "description" : "A comma separated list of indices that refers to the list of locations (starting with `0`). `{index_1},{index_2}[,{index_N} ...]` or `all` (default).\n\nExample: `0,3` for the first and fourth Location.\n",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string",
+            "description" : "null"
+          }
+        },
+        "metrics" : {
+          "type" : "array",
+          "description" : "Specifies a list of returned metrics separated with a pipe character (|).\n* `distance` - Returns distance matrix for specified points in defined `units`.\n* `duration` - Returns duration matrix for specified points in defined `units`.\n* `weight`   - Returns weight matrix for specified points in defined `units`.\n",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string",
+            "enum" : [ "distance", "duration", "weight" ]
+          }
+        },
+        "resolve_locations" : {
+          "type" : "boolean",
+          "description" : "Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain `name` element that identifies the name of the closest street. Default is `false`\n",
+          "default" : false
+        },
+        "units" : {
+          "type" : "string",
+          "description" : "Specifies the unit of measurement for distances. Default is `m`",
+          "enum" : [ "m", "km", "mi" ],
+          "default" : "m"
+        },
+        "optimized" : {
+          "type" : "boolean",
+          "description" : "Specifies whether Dijkstra algorithm (`false`) or any available technique to speed up shortest-path routing (`true`) is used.\n",
+          "default" : true
+        }
+      }
+    },
+    "MatrixResponse" : {
+      "properties" : {
+        "distances" : {
+          "$ref" : "#/definitions/MatrixResponse_distances"
+        },
+        "durations" : {
+          "$ref" : "#/definitions/MatrixResponse_durations"
+        },
+        "weights" : {
+          "$ref" : "#/definitions/MatrixResponse_weights"
+        },
+        "destinations" : {
+          "type" : "array",
+          "example" : null,
+          "items" : {
+            "$ref" : "#/definitions/MatrixResponse_location"
+          }
+        },
+        "sources" : {
+          "type" : "array",
+          "example" : null,
+          "items" : {
+            "$ref" : "#/definitions/MatrixResponse_location"
+          }
+        },
+        "info" : {
+          "$ref" : "#/definitions/MatrixResponse_info"
+        }
+      },
+      "title" : "Matrix Response Object",
+      "description" : "The Matrix Response contains one matrix for each specified `metrics` value.\n"
+    },
+    "MatrixResponse_distances" : {
+      "type" : "array",
+      "description" : "",
+      "example" : [ [ 2366119, 2338412.25, 0, 7519754 ], [ 9983969, 9956262, 7509508.5, 0 ] ]
+    },
+    "MatrixResponse_durations" : {
+      "example" : [ [ 88632.73, 87838.93, 0, 311791.09 ], [ 399967.72, 399173.91, 310735.56, 0 ] ]
+    },
+    "MatrixResponse_weights" : {
+      "example" : [ [ 88635.17, 87841.37, 0, 311794.25 ], [ 399973.16, 399179.34, 310738.84, 0 ] ]
+    },
+    "MatrixResponse_location" : {
+      "type" : "object",
+      "properties" : {
+        "location" : {
+          "type" : "array",
+          "description" : "`{longitude},{latitude}` coordinates of the closest accessible point on the routing graph.\n",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          }
+        },
+        "snapped_distance" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Distance between the `source`/`destination` Location and the used point on the routing graph.\n"
+        }
+      }
+    },
+    "MatrixResponse_info" : {
+      "properties" : {
+        "service" : {
+          "type" : "string",
+          "example" : "matrix",
+          "description" : "API endpoint used."
+        },
+        "engine" : {
+          "$ref" : "#/definitions/info_engine"
+        },
+        "attribution" : {
+          "type" : "string",
+          "example" : "openrouteservice.org, OpenStreetMap contributors",
+          "description" : "Attribution for using our service."
+        },
+        "timestamp" : {
+          "type" : "integer",
+          "format" : "int64",
+          "example" : 1493306341299,
+          "description" : "Unix timestamp of the precise request date."
+        },
+        "query" : {
+          "$ref" : "#/definitions/MatrixResponse_info_query"
+        }
+      },
+      "title" : "info object"
+    },
+    "MatrixResponse_info_query" : {
+      "properties" : {
+        "profile" : {
+          "type" : "string",
+          "example" : "driving-car"
+        },
+        "locations" : {
+          "type" : "array",
+          "example" : [ [ 9.970093, 48.477473 ], [ 9.207916, 49.153868 ], [ 37.573242, 55.801281 ], [ 115.663757, 38.106467 ] ],
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "type" : "number",
+              "format" : "double"
+            },
+            "maxItems" : 2,
+            "minItems" : 2
+          },
+          "maxItems" : 200,
+          "minItems" : 2
+        },
+        "sources" : {
+          "type" : "array",
+          "example" : "2,3",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "destinations" : {
+          "type" : "array",
+          "example" : "all",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "metrics" : {
+          "type" : "array",
+          "example" : "distance|duration|weight",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "optimized" : {
+          "type" : "boolean",
+          "example" : true
+        }
+      },
+      "title" : "query object",
+      "description" : "Summarizes your query settings."
+    },
+    "info_engine" : {
+      "properties" : {
+        "version" : {
+          "type" : "string",
+          "example" : "4.2.0",
+          "description" : "Backend version used for the request."
+        },
+        "build_date" : {
+          "type" : "string",
+          "example" : "2017-09-08T09:21:35Z",
+          "description" : "Build date of the used backend version"
+        }
+      },
+      "title" : "Engine Information"
     },
     "error" : {
       "properties" : {
