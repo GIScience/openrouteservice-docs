@@ -1,6 +1,5 @@
-This repository stores the swagger specifications of the [OpenRouteService](openrouteservice.org "ORS website") API in yaml and json format.
-For an API-Key please register at our [developers portal](https://developers.openrouteservice.org/portal/register/ "ORS Register").
-Afterwards the Key can be requested in the [API catalogue](https://developers.openrouteservice.org/portal/apis/ "ORS Catalogue").
+This repository stores the swagger specifications of the [openrouteservice](openrouteservice.org "ORS website") API in yaml and json format.
+For an API-Key please sign up at our [developers portal](https://go.openrouteservice.org "ORS portal").
 A live version of this documentation can be found on [swaggerhub](https://app.swaggerhub.com/apis/OpenRouteService/ors-api/ "Swagger Doku").
 
 ## Content
