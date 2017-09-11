@@ -176,6 +176,10 @@ for `profile=driving-hgv`:
 
 Encoding of the Extra Information:
 
+## Tollways
+
+Tollway specific information for the selected mode of transport. https://en.wikipedia.org/wiki/Vehicle_category
+
 ## Steepness
 
 Negative values indicate decline, positive incline.
