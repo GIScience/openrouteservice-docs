@@ -543,7 +543,7 @@ This value is in _km/h_ and equals the average speed for this way segment after 
 
 ## Tollways
 
-Tollways are vehicle and weight specific. Thus it depends on the request if a ways is marked as [tollway](https://wiki.openstreetmap.org/wiki/Key:toll). 
+Tollway specific information for the [selected mode of transport](https://en.wikipedia.org/wiki/Vehicle_category). Thus it depends on the `profile` if a ways is marked as [tollway](https://wiki.openstreetmap.org/wiki/Key:toll). 
 
 | Value |  Encoding  |
 |:-----:|:----------:|
