@@ -292,12 +292,8 @@ The available parameters are:
   
   - `weightings` : Weightings will prioritize specified factors over the shortest path.
 
-    - `fitness` : for `cycling-*` profiles:
-
-      |        Value       |                                  Description                                  |
-      |:------------------:|-------------------------------------------------------------------------------|
-      | `difficulty_level` |  Specifies the fitness level. 0 = Novice, 1 = Moderate, 2 = Amateur, 3 = Pro. |
-      | `maximum_gradient` |  Specifies the maximum route steepness in percent. Values range from 1 to 15. |
+    - `steepness_difficulty`: Specifies the fitness level for `cycling-*` profiles.
+      - `level`: `0` = Novice, `1` = Moderate, `2` = Amateur, `3` = Pro. The prefered gradient increases with level
 
     - `green`: Specifies the Green factor for `foot-*` profiles.
         - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer ways through green areas over a shorter route.
@@ -306,6 +302,13 @@ The available parameters are:
         - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer quiet ways over a shorter route.
 
   - `restrictions` : Specifies restrictions for `driving-hgv` and `wheelchair`
+  
+    - for `cycling-*`: 
+
+      |  Parameter | Description                                                                                                                                                                               |
+      |:----------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+      | `gradient` | Only for avoided `hills` or specified `steepness_difficulty`. Specifies the maximum route steepness in percent. Values range from `1` to `15`. Routes with a higher gradient are avoided. |
+
     - for `driving-hgv`: 
 
       |  Parameter | Description                                                                                                                       |
@@ -355,10 +358,12 @@ for `profile=cycling-*`:
 "avoid_features": "hills|unpavedroads",
 "profile_params": {
     "weightings": {
-        "fitness": {
-            "difficulty_level": 2,
-            "maximum_gradient": 13
-        }
+        "steepness_difficulty": {
+            "level": 2
+        },
+	"restrictions": {
+            "gradient": 13
+	}
     }
 },
 "avoid_polygons": {
@@ -368,7 +373,7 @@ for `profile=cycling-*`:
  ]}
 }
 ```
-`{"maximum_speed":18,"avoid_features":"hills|unpavedroads","profile_params":{"weightings":{"fitness":{"difficulty_level":2,"maximum_gradient":13}},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
+`{"maximum_speed":18,"avoid_features":"hills|unpavedroads","profile_params":{"weightings":{"steepness_difficulty":{"level":2},"restrictions":{"gradient":13}}},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
 
 for `profile=foot-*`:
 
