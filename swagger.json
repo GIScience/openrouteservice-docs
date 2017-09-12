@@ -731,6 +731,9 @@
         },
         "weightings" : {
           "$ref" : "#/definitions/profile_params_weightings"
+        },
+        "restrictions" : {
+          "$ref" : "#/definitions/profile_params_restrictions"
         }
       }
     },
@@ -1957,6 +1960,16 @@
           "type" : "integer",
           "format" : "int64",
           "enum" : [ 0, 1, 2, 3 ]
+        }
+      }
+    },
+    "profile_params_restrictions" : {
+      "properties" : {
+        "gradient" : {
+          "type" : "integer",
+          "format" : "int64",
+          "minimum" : 1,
+          "maximum" : 15
         }
       }
     }
