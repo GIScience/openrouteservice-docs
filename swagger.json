@@ -598,7 +598,7 @@
       },
       "post" : {
         "tags" : [ "Places" ],
-        "summary" : "Location Service (for big requests)",
+        "summary" : "Location Service",
         "description" : "Returns Points of Interest in the area surrounding a geometry.\n",
         "parameters" : [ {
           "in" : "body",
@@ -727,7 +727,7 @@
         }, {
           "name" : "optimized",
           "in" : "query",
-          "description" : "Specifies whether Dijkstra algorithm (`false`) or any available technique to speed up shortest-path routing (`true`) is used.\n",
+          "description" : "Specifies whether Dijkstra algorithm (`false`) or any available technique to speed up shortest-path routing (`true`) is used. For normal Dijkstra the number of visited nodes is limited to `1000000`\n",
           "required" : false,
           "type" : "boolean",
           "default" : true,
@@ -774,7 +774,7 @@
       },
       "post" : {
         "tags" : [ "Matrix" ],
-        "summary" : "Matrix Service (for big requests)",
+        "summary" : "Matrix Service",
         "description" : "Returns duration, distance or weight matrix for mutliple source and destination points.",
         "parameters" : [ {
           "in" : "body",
