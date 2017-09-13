@@ -648,6 +648,182 @@
           }
         }
       }
+    },
+    "/matrix" : {
+      "get" : {
+        "tags" : [ "Matrix" ],
+        "summary" : "Matrix Service",
+        "description" : "Returns duration, distance or weight matrix for mutliple source and destination points.\nBy default a symmetric duration matrix is returned where every point in `locations` is paired with each other. The result is `null` if a value can't be determined.\n",
+        "parameters" : [ {
+          "name" : "profile",
+          "in" : "query",
+          "description" : "Specifies the route profile.",
+          "required" : true,
+          "type" : "string",
+          "default" : "driving-car",
+          "enum" : [ "driving-car", "driving-hgv", "cycling-regular", "cycling-road", "cycling-safe", "cycling-mountain", "cycling-tour", "cycling-electric", "foot-walking", "foot-hiking", "wheelchair" ]
+        }, {
+          "name" : "locations",
+          "in" : "query",
+          "description" : "Pipe (|) separated List of longitude,latitude coordinates\n\nExample values: `9.970093,48.477473` `9.207916,49.153868` `37.573242,55.801281` `115.663757,38.106467`\n",
+          "required" : true,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "longitude,latitude"
+          },
+          "collectionFormat" : "pipes"
+        }, {
+          "name" : "sources",
+          "in" : "query",
+          "description" : "A comma separated list of indices that refers to the list of locations (starting with `0`). {index_1},{index_2}(,{index_N} ...) or `all` (default).\n\nExample: `0,3` for the first and fourth Location.\n",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "{index}"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "destinations",
+          "in" : "query",
+          "description" : "A comma separated list of indices that refers to the list of locations (starting with `0`). {index_1},{index_2}[,{index_N} ...] or `all` (default).\n\nExample: `0,3` for the first and fourth Location.\n",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "{index}"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "metrics",
+          "in" : "query",
+          "description" : "Specifies a list of returned metrics separated with a pipe character (|).\n* `distance` - Returns distance matrix for specified points in defined `units`.\n* `duration` - Returns duration matrix for specified points in defined `units`.\n* `weight`   - Returns weight matrix for specified points in defined `units`.\n",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "enum" : [ "distance", "duration", "weight" ]
+          },
+          "collectionFormat" : "pipes",
+          "default" : "duration",
+          "uniqueItems" : true
+        }, {
+          "name" : "resolve_locations",
+          "in" : "query",
+          "description" : "Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain `name` element that identifies the name of the closest street. Default is `false`\n",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false,
+          "enum" : [ "true", "false" ]
+        }, {
+          "name" : "units",
+          "in" : "query",
+          "description" : "Specifies the unit of measurement for distances. Default is `m`",
+          "required" : false,
+          "type" : "string",
+          "default" : "m",
+          "enum" : [ "m", "km", "mi" ]
+        }, {
+          "name" : "optimized",
+          "in" : "query",
+          "description" : "Specifies whether Dijkstra algorithm (`false`) or any available technique to speed up shortest-path routing (`true`) is used.\n",
+          "required" : false,
+          "type" : "boolean",
+          "default" : true,
+          "enum" : [ "true", "false" ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Standard response for successfully processed requests. Returns JSON.\n",
+            "schema" : {
+              "$ref" : "#/definitions/MatrixResponse"
+            }
+          },
+          "400" : {
+            "description" : "An unexpected error was encountered and more detailed internal\nerror\\ncode is provided.\n\n| Internal Code | Description                                        |\n|:-------------:|----------------------------------------------------|\n|      600      | Unable to parse JSON request.                      |\n|      601      | Required parameter is missing.                     |\n|      602      | Invalid parameter format.                          |\n|      603      | Invalid parameter value.                           |\n|      604      | Parameter value exceeds the maximum allowed limit. |\n|      699      | Unknown internal error.                            |\n",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/error"
+              }
+            }
+          },
+          "401" : {
+            "description" : "Authorization field missing."
+          },
+          "403" : {
+            "description" : "Key not authorised."
+          },
+          "405" : {
+            "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
+          },
+          "413" : {
+            "description" : "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
+          },
+          "500" : {
+            "description" : "The request is incorrect and therefore can not be processed."
+          },
+          "501" : {
+            "description" : "Indicates that the server does not support the functionality needed to fulfill the request."
+          },
+          "503" : {
+            "description" : "The server is currently unavailable due to overload or maintenance."
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Matrix" ],
+        "summary" : "Matrix Service (for big requests)",
+        "description" : "Returns duration, distance or weight matrix for mutliple source and destination points.",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body for a Matrix post request",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/MatrixBody"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Standard response for successfully processed requests. Returns JSON.\n",
+            "schema" : {
+              "$ref" : "#/definitions/MatrixResponse"
+            }
+          },
+          "400" : {
+            "description" : "An unexpected error was encountered and more detailed internal\nerror\\ncode is provided.\n\n| Internal Code | Description                                        |\n|:-------------:|----------------------------------------------------|\n|      600      | Unable to parse JSON request.                      |\n|      601      | Required parameter is missing.                     |\n|      602      | Invalid parameter format.                          |\n|      603      | Invalid parameter value.                           |\n|      604      | Parameter value exceeds the maximum allowed limit. |\n|      699      | Unknown internal error.                            |\n",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/error"
+              }
+            }
+          },
+          "401" : {
+            "description" : "Authorization field missing."
+          },
+          "403" : {
+            "description" : "Key not authorised."
+          },
+          "405" : {
+            "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
+          },
+          "413" : {
+            "description" : "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
+          },
+          "500" : {
+            "description" : "The request is incorrect and therefore can not be processed."
+          },
+          "501" : {
+            "description" : "Indicates that the server does not support the functionality needed to fulfill the request."
+          },
+          "503" : {
+            "description" : "The server is currently unavailable due to overload or maintenance."
+          }
+        }
+      }
     }
   },
   "securityDefinitions" : {
@@ -1900,6 +2076,222 @@
       "type" : "string",
       "description" : "The geometry can be either a Point , LineString or Polygon.",
       "example" : "{type: LineString, coordinates:[[8.167426,49.272556],[8.167588,47.272445],[8.168082,47.272105],[8.168224,47.271917],[8.16831,47.271941],[8.168926,47.272216],[8.169054,47.272278],[8.169165,47.272186],[8.169256,47.272103],[8.16948,47.271921],[8.170129,47.271408],[8.170265,47.271295],[8.170701,47.27097],[8.171496,47.270485],[8.171796,47.270296]]}"
+    },
+    "MatrixBody" : {
+      "properties" : {
+        "profile" : {
+          "type" : "string",
+          "description" : "Specifies the route profile.",
+          "enum" : [ "driving-car", "driving-hgv", "cycling-regular", "cycling-road", "cycling-safe", "cycling-mountain", "cycling-tour", "cycling-electric", "foot-walking", "foot-hiking", "wheelchair" ],
+          "default" : "driving-car"
+        },
+        "locations" : {
+          "type" : "array",
+          "example" : "9.970093,48.477473|9.207916,49.153868|37.573242,55.801281|115.663757,38.106467",
+          "description" : "Pipe (|) separated List of longitude,latitude coordinates\nExample values: `9.970093,48.477473` `9.207916,49.153868` `37.573242,55.801281` `115.663757,38.106467`\n",
+          "items" : {
+            "type" : "string",
+            "format" : "longitude,latitude"
+          }
+        },
+        "sources" : {
+          "type" : "array",
+          "example" : "2,3",
+          "description" : "A comma separated list of indices that refers to the list of locations (starting with `0`). `{index_1},{index_2}[,{index_N} ...]` or `all` (default).\n\nExample: `0,3` for the first and fourth Location.\n",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "metrics" : {
+          "type" : "array",
+          "description" : "Specifies a list of returned metrics separated with a pipe character (|).\n* `distance` - Returns distance matrix for specified points in defined `units`.\n* `duration` - Returns duration matrix for specified points in defined `units`.\n* `weight`   - Returns weight matrix for specified points in defined `units`.\n",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string",
+            "enum" : [ "distance", "duration", "weight" ]
+          }
+        },
+        "resolve_locations" : {
+          "type" : "boolean",
+          "description" : "Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain `name` element that identifies the name of the closest street. Default is `false`",
+          "default" : false
+        },
+        "units" : {
+          "type" : "string",
+          "description" : "Specifies the unit of measurement for distances. Default is `m`",
+          "enum" : [ "m", "km", "mi" ],
+          "default" : "m"
+        },
+        "optimized" : {
+          "type" : "boolean",
+          "description" : "Specifies whether Dijkstra algorithm (`false`) or any available technique to speed up shortest-path routing (`true`) is used.\n",
+          "default" : true
+        }
+      }
+    },
+    "MatrixResponse" : {
+      "properties" : {
+        "distances" : {
+          "$ref" : "#/definitions/MatrixResponse_distances"
+        },
+        "durations" : {
+          "$ref" : "#/definitions/MatrixResponse_durations"
+        },
+        "weights" : {
+          "$ref" : "#/definitions/MatrixResponse_weights"
+        },
+        "destinations" : {
+          "type" : "array",
+          "example" : [ {
+            "location" : [ 37.572926, 55.80129 ],
+            "snapped_distance" : 19.8
+          }, {
+            "location" : [ 115.658655, 38.116731 ],
+            "snapped_distance" : 1225.53
+          } ],
+          "description" : "Array of destinations. Each point is snapped to the road and path network",
+          "items" : {
+            "$ref" : "#/definitions/MatrixResponse_location"
+          }
+        },
+        "sources" : {
+          "type" : "array",
+          "example" : [ {
+            "location" : [ 9.968501, 48.47789 ],
+            "snapped_distance" : 126.17
+          }, {
+            "location" : [ 9.207773, 49.153882 ],
+            "snapped_distance" : 10.54
+          }, {
+            "location" : [ 37.572926, 55.80129 ],
+            "snapped_distance" : 19.8
+          }, {
+            "location" : [ 115.658655, 38.116731 ],
+            "snapped_distance" : 1225.53
+          } ],
+          "description" : "Array of sources. Each point is snapped to the road and path network",
+          "items" : {
+            "$ref" : "#/definitions/MatrixResponse_location"
+          }
+        },
+        "info" : {
+          "$ref" : "#/definitions/MatrixResponse_info"
+        }
+      },
+      "title" : "Matrix Response Object",
+      "description" : "The Matrix Response contains one matrix for each specified `metrics` value.\n"
+    },
+    "MatrixResponse_distances" : {
+      "description" : "[Distance matrix](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#matrix-response) where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\n",
+      "example" : [ [ 2366119, 2338412.25, 0, 7519754 ], [ 9983969, 9956262, 7509508.5, 0 ] ]
+    },
+    "MatrixResponse_durations" : {
+      "description" : "[Duration matrix](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#matrix-response) where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\n",
+      "example" : [ [ 88632.73, 87838.93, 0, 311791.09 ], [ 399967.72, 399173.91, 310735.56, 0 ] ]
+    },
+    "MatrixResponse_weights" : {
+      "description" : "[Weight matrix](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#matrix-response) where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\n",
+      "example" : [ [ 88635.17, 87841.37, 0, 311794.25 ], [ 399973.16, 399179.34, 310738.84, 0 ] ]
+    },
+    "MatrixResponse_location" : {
+      "type" : "object",
+      "properties" : {
+        "location" : {
+          "type" : "array",
+          "description" : "`{longitude},{latitude}` coordinates of the closest accessible point on the routing graph.\n",
+          "items" : {
+            "type" : "number",
+            "format" : "double"
+          }
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "Name of the street the closest accessible point is situated on. Only for `resolve_locations=true` and only if name is available.\n"
+        },
+        "snapped_distance" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Distance between the `source`/`destination` Location and the used point on the routing graph.\n"
+        }
+      }
+    },
+    "MatrixResponse_info" : {
+      "properties" : {
+        "service" : {
+          "type" : "string",
+          "example" : "matrix",
+          "description" : "API endpoint used."
+        },
+        "engine" : {
+          "$ref" : "#/definitions/info_engine"
+        },
+        "attribution" : {
+          "type" : "string",
+          "example" : "openrouteservice.org, OpenStreetMap contributors",
+          "description" : "Attribution for using our service."
+        },
+        "timestamp" : {
+          "type" : "integer",
+          "format" : "int64",
+          "example" : 1493306341299,
+          "description" : "Unix timestamp of the precise request date."
+        },
+        "query" : {
+          "$ref" : "#/definitions/MatrixResponse_info_query"
+        }
+      },
+      "title" : "info object"
+    },
+    "MatrixResponse_info_query" : {
+      "properties" : {
+        "profile" : {
+          "type" : "string",
+          "example" : "driving-car"
+        },
+        "locations" : {
+          "type" : "array",
+          "example" : [ [ 9.970093, 48.477473 ], [ 9.207916, 49.153868 ], [ 37.573242, 55.801281 ], [ 115.663757, 38.106467 ] ],
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "type" : "number",
+              "format" : "double"
+            },
+            "maxItems" : 2,
+            "minItems" : 2
+          },
+          "maxItems" : 200,
+          "minItems" : 2
+        },
+        "sources" : {
+          "type" : "array",
+          "example" : "2,3",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "destinations" : {
+          "type" : "array",
+          "example" : "all",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "metrics" : {
+          "type" : "array",
+          "example" : "distance|duration|weight",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "optimized" : {
+          "type" : "boolean",
+          "example" : true
+        }
+      },
+      "title" : "query object",
+      "description" : "Summarizes your query settings."
     },
     "info_engine" : {
       "properties" : {
