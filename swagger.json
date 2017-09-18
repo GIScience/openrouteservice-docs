@@ -2090,7 +2090,7 @@
             "type" : "array",
             "items" : {
               "type" : "number",
-              "format" : "longitude,latitude"
+              "format" : "double"
             }
           }
         },
