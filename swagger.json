@@ -2084,11 +2084,14 @@
         },
         "locations" : {
           "type" : "array",
-          "example" : "9.970093,48.477473|9.207916,49.153868|37.573242,55.801281|115.663757,38.106467",
+          "example" : [ [ "9.970093,48.477473" ], [ "9.207916,49.153868" ], [ "37.573242,55.801281" ], [ "115.663757,38.106467" ] ],
           "description" : "Pipe (|) separated List of longitude,latitude coordinates\nExample values: `9.970093,48.477473` `9.207916,49.153868` `37.573242,55.801281` `115.663757,38.106467`\n",
           "items" : {
-            "type" : "string",
-            "format" : "longitude,latitude"
+            "type" : "array",
+            "items" : {
+              "type" : "number",
+              "format" : "longitude,latitude"
+            }
           }
         },
         "sources" : {
@@ -2101,13 +2104,10 @@
           }
         },
         "metrics" : {
-          "type" : "array",
+          "type" : "string",
           "description" : "Specifies a list of returned metrics separated with a pipe character (|).\n* `distance` - Returns distance matrix for specified points in defined `units`.\n* `duration` - Returns duration matrix for specified points in defined `units`.\n* `weight`   - Returns weight matrix for specified points in defined `units`.\n",
-          "uniqueItems" : true,
-          "items" : {
-            "type" : "string",
-            "enum" : [ "distance", "duration", "weight" ]
-          }
+          "enum" : [ "distance", "duration", "weight" ],
+          "default" : "duration"
         },
         "resolve_locations" : {
           "type" : "boolean",
