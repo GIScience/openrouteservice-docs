@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "This is the openrouteservice API documentation",
-    "version" : "4.2",
+    "version" : "4.3",
     "title" : "openrouteservice",
     "contact" : {
       "email" : "support@openrouteservice.org"
@@ -25,6 +25,9 @@
   }, {
     "name" : "Places",
     "description" : "Search for points of interest around points or in geometries"
+  }, {
+    "name" : "Matrix",
+    "description" : "Obtain One-to-Many, Many-to-One and Many-to-Many matrices for time or distance"
   } ],
   "schemes" : [ "https" ],
   "produces" : [ "text/json; charset=utf-8" ],
@@ -122,6 +125,14 @@
           "default" : "text",
           "enum" : [ "html", "text" ]
         }, {
+          "name" : "roundabout_exits",
+          "in" : "query",
+          "description" : "Provides bearings of the entrance and all passed roundabout exits. Adds the `exit_bearings` array to the `step` object in the response. Default is `false`.",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false,
+          "enum" : [ "true", "false" ]
+        }, {
           "name" : "attributes",
           "in" : "query",
           "description" : "Pipe (|) seperated List of route attributes:\n* `avgspeed` - Returns average speed of each segment and the route in km/h.\n* `detour_factor` - Returns the deviation of a segment compared to a straight line (1) from A to B.\n* `percentage` - Returns the proportion of the route for each segment.\n",
@@ -136,7 +147,7 @@
         }, {
           "name" : "maneuvers",
           "in" : "query",
-          "description" : "Specifies whether the maneuver object is included into the step object or not. Default value is false.",
+          "description" : "Specifies whether the maneuver object is included into the `step` object or not. Default value is `false`.",
           "required" : false,
           "type" : "boolean",
           "default" : false,
@@ -164,10 +175,18 @@
         }, {
           "name" : "optimized",
           "in" : "query",
-          "description" : "Uses contraction hierarchies if available (`false`).\n",
+          "description" : "Uses contraction hierarchies if available (`false`). `true` by default\n",
           "required" : false,
           "type" : "boolean",
           "default" : true,
+          "enum" : [ "true", "false" ]
+        }, {
+          "name" : "continue_straight",
+          "in" : "query",
+          "description" : "Forces the route to keep going straight at waypoints restricting uturns there even if it would be faster. This setting will work for all profiles except for `driving-*`. In this case you will have to set `optimized=false` for it to work. `false` by default",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false,
           "enum" : [ "true", "false" ]
         }, {
           "name" : "options",
@@ -1180,6 +1199,20 @@
           },
           "maxItems" : 2,
           "minItems" : 2
+        },
+        "exit_number" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Only for roundabouts. Contains the number of the exit to take."
+        },
+        "exit_bearings" : {
+          "type" : "array",
+          "description" : "Contains the bearing of the entrance and all passed exits in a roundabout for `roundabout_exits=true`.",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "minItems" : 2
         }
       },
       "title" : "steps object",
@@ -2084,11 +2117,14 @@
         },
         "locations" : {
           "type" : "array",
-          "example" : "9.970093,48.477473|9.207916,49.153868|37.573242,55.801281|115.663757,38.106467",
-          "description" : "Pipe (|) separated List of longitude,latitude coordinates\nExample values: `9.970093,48.477473` `9.207916,49.153868` `37.573242,55.801281` `115.663757,38.106467`\n",
+          "example" : [ [ "9.970093,48.477473" ], [ "9.207916,49.153868" ], [ "37.573242,55.801281" ], [ "115.663757,38.106467" ] ],
+          "description" : "List of comma separated Lists of `longitude,latitude` coordinates (Without quotes around the coordinates! This is a displaying Error). \nExample : `\"locations\":[[9.970093,48.477473],[9.207916,49.153868],[37.573242,55.801281],[115.663757,38.106467]]`\n",
           "items" : {
-            "type" : "string",
-            "format" : "longitude,latitude"
+            "type" : "array",
+            "items" : {
+              "type" : "number",
+              "format" : "double"
+            }
           }
         },
         "sources" : {
@@ -2101,13 +2137,10 @@
           }
         },
         "metrics" : {
-          "type" : "array",
+          "type" : "string",
           "description" : "Specifies a list of returned metrics separated with a pipe character (|).\n* `distance` - Returns distance matrix for specified points in defined `units`.\n* `duration` - Returns duration matrix for specified points in defined `units`.\n* `weight`   - Returns weight matrix for specified points in defined `units`.\n",
-          "uniqueItems" : true,
-          "items" : {
-            "type" : "string",
-            "enum" : [ "distance", "duration", "weight" ]
-          }
+          "enum" : [ "distance", "duration", "weight" ],
+          "default" : "duration"
         },
         "resolve_locations" : {
           "type" : "boolean",
