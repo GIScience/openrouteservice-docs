@@ -2118,7 +2118,7 @@
         "locations" : {
           "type" : "array",
           "example" : [ [ "9.9700934,48.477473" ], [ "9.207916,49.153868" ], [ "37.573242,55.801281" ], [ "115.663757,38.106467" ] ],
-          "description" : "List of comma separated lists of `longitude,latitude` coordinates (without quotes around the coordinates, this is a displaying error of swagger). \nexample : `\"locations\":[[9.70093,48.477473],[9.207916,49.153868],[37.573242,55.801281],[115.663757,38.106467]]`\n",
+          "description" : "List of comma separated lists of `longitude,latitude` coordinates (note: without quotes around the coordinates, this is a displaying error of swagger). \nexample : `\"locations\":[[9.70093,48.477473],[9.207916,49.153868],[37.573242,55.801281],[115.663757,38.106467]]`\n",
           "items" : {
             "type" : "array",
             "items" : {
