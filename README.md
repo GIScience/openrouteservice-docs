@@ -286,8 +286,8 @@ The available parameters are:
   | `hills`        | cycling-\*, foot-\*                         |
 
 
-- `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`.
-
+- `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`. It is needed for **hgv restrictions** to work.
+  
 - `profile_params` : Specifies vehicle parameters.
   
   - `weightings` : Weightings will prioritize specified factors over the shortest path.
@@ -310,6 +310,7 @@ The available parameters are:
       | `gradient` | Only for avoided `hills` or specified `steepness_difficulty`. Specifies the maximum route steepness in percent. Values range from `1` to `15`. Routes with a higher gradient are avoided. |
 
     - for `driving-hgv`: 
+      *(you have to specify the `vehicle_type` in the options for these parameters)*
 
       |  Parameter | Description                                                                                                                       |
       |:----------:|-----------------------------------------------------------------------------------------------------------------------------------|
