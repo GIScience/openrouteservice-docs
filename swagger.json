@@ -94,7 +94,7 @@
         }, {
           "name" : "geometry_format",
           "in" : "query",
-          "description" : "Sets the format of the returned geometry.",
+          "description" : "Sets the format of the returned geometry. Note that for `elevation=true` `encodedpolyline` also encodes the height information of each point.\nTo decode, please use a suitable library (for example [graphhopper](https://github.com/graphhopper/graphhopper/blob/master/web/src/main/java/com/graphhopper/http/WebHelper.java)).\n",
           "required" : false,
           "type" : "string",
           "default" : "encodedpolyline",
@@ -155,7 +155,7 @@
         }, {
           "name" : "elevation",
           "in" : "query",
-          "description" : "Specifies whether to return elevation values for points.",
+          "description" : "Specifies whether to return elevation values for points. Please note that elevation also gets encoded for `geometry_format=encodedpolyline`.",
           "required" : false,
           "type" : "boolean",
           "default" : false,
