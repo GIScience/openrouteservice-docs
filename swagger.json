@@ -166,7 +166,7 @@
         }, {
           "name" : "bearings",
           "in" : "query",
-          "description" : "Specifies a pipe (|) delimited list of pairs (bearings and deviations) to filter the segments of the road network a waypoint can snap to. For example `bearings=45,10|120,20`. Each pair is a comma-separated list that can consist of one or two float values, where the first value is the bearing and the second one is the allowed deviation from the bearing. Both values are angles between `0` and `360` clockwise from true north.\nIf the second value in a pair is not set, then the default value of `100` degrees is used. The number of pairs correspond to the number of waypoints.\nThis setting will work for all profiles except for `driving-*`. In this case you will have to set `optimized=false` for it to work.\n",
+          "description" : "Specifies a pipe (|) delimited list of pairs (bearings and deviations) to filter the segments of the road network a waypoint can snap to. For example `bearings=45,10|120,20`. \nEach pair is a comma-separated list that can consist of one or two float values, where the first value is the bearing and the second one is the allowed deviation from the bearing. The bearing can take values between `0` and `360` clockwise from true north.\nIf the deviation is not set, then the default value of `100` degrees is used. The number of pairs must correspond to the number of waypoints.\n Setting `optimized=false` is mandatory for this feature to work for all profiles.\n",
           "required" : false,
           "type" : "array",
           "items" : {
