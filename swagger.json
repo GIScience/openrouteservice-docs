@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "description" : "This is the openrouteservice API documentation",
-    "version" : "4.3",
+    "version" : "4.4",
     "title" : "openrouteservice",
     "contact" : {
       "email" : "support@openrouteservice.org"
@@ -153,6 +153,36 @@
           "default" : false,
           "enum" : [ "true", "false" ]
         }, {
+          "name" : "radiuses",
+          "in" : "query",
+          "description" : "A pipe (`|`) delimited list of maximum distances (measured in meters) that limit the search of nearby road segments to every given waypoint.\nThe values must be greater than `0`, the value of `-1` specifies no limit in the search.\nThe number of radiuses correspond to the number of waypoints.\n",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "collectionFormat" : "pipes"
+        }, {
+          "name" : "bearings",
+          "in" : "query",
+          "description" : "Specifies a pipe (|) delimited list of pairs (bearings and deviations) to filter the segments of the road network a waypoint can snap to. For example `bearings=45,10|120,20`. Each pair is a comma-separated list that can consist of one or two float values, where the first value is the bearing and the second one is the allowed deviation from the bearing. Both values are angles between `0` and `360` clockwise from true north.\nIf the second value in a pair is not set, then the default value of `100` degrees is used. The number of pairs correspond to the number of waypoints\n",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "bearing,deviation"
+          },
+          "collectionFormat" : "pipes"
+        }, {
+          "name" : "continue_straight",
+          "in" : "query",
+          "description" : "Forces the route to keep going straight at waypoints restricting uturns there even if it would be faster. This setting will work for all profiles except for `driving-*`. In this case you will have to set `optimized=false` for it to work. `false` by default",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false,
+          "enum" : [ "true", "false" ]
+        }, {
           "name" : "elevation",
           "in" : "query",
           "description" : "Specifies whether to return elevation values for points. Please note that elevation also gets encoded for `geometry_format=encodedpolyline`.",
@@ -179,14 +209,6 @@
           "required" : false,
           "type" : "boolean",
           "default" : true,
-          "enum" : [ "true", "false" ]
-        }, {
-          "name" : "continue_straight",
-          "in" : "query",
-          "description" : "Forces the route to keep going straight at waypoints restricting uturns there even if it would be faster. This setting will work for all profiles except for `driving-*`. In this case you will have to set `optimized=false` for it to work. `false` by default",
-          "required" : false,
-          "type" : "boolean",
-          "default" : false,
           "enum" : [ "true", "false" ]
         }, {
           "name" : "options",
