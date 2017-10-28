@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "This is the openrouteservice API documentation"
+  description: "This is the openrouteservice API documentation. Current version `4.4`"
   version: "4.4"
   title: "openrouteservice"
   contact:
@@ -25,7 +25,7 @@ schemes:
 produces:
 - "text/json; charset=utf-8"
 security:
-- UserSecurity: []
+- UserSecurity: [api_key]
 paths:
   /directions:
     get:
@@ -36,6 +36,13 @@ paths:
         Returns a route between two or more locations for a selected profile and its settings as GeoJSON response.
 
       parameters:
+      - name: "api_key"
+        in: "query"
+        description: |
+          Insert your API Key here.
+        type: "string"
+        required: true
+        default: "your-api-key"
       - name: "coordinates"
         in: "query"
         description: |
@@ -48,11 +55,9 @@ paths:
         type: "array"
         items:
           type: "string"
-          format: "longitude,latitude"
         collectionFormat: "pipes"
-        #default:
-        #  - "8.34234,48.23424"
-        #  - "8.34423,48.26424"
+        default:
+          - "8.34234,48.23424|8.34423,48.26424"
       - name: "profile"
         in: "query"
         description: "Specifies the route profile."
@@ -129,11 +134,10 @@ paths:
         - "polyline"
       - name: "geometry_simplify"
         in: "query"
-        description: "Specifies whether to simplify the geometry. `true` will automatically\
-          \ be set to `false` if `extra_info` parameter is specified."
+        description: |
+          Specifies whether to simplify the geometry. `true` will automatically be set to `false` if `extra_info` parameter is specified."
         type: "boolean"
         default: false
-        format: "double"
         enum:
         - true
         - false
@@ -155,7 +159,7 @@ paths:
         - "text"
       - name: "roundabout_exits"
         in: "query"
-        description: "Provides bearings of the entrance and all passed roundabout exits. Adds the `exit_bearings` array to the `step` object in the response. Default is `false`."
+        description: "Provides bearings of the entrance and all passed roundabout exits. Adds the `exit_bearings` array to the `step` object in the response. Default: `false`."
         type: boolean
         default: false
         enum:
@@ -179,7 +183,7 @@ paths:
             - "percentage"
       - name: "maneuvers"
         in: "query"
-        description: "Specifies whether the maneuver object is included into the `step` object or not. Default value is `false`."
+        description: "Specifies whether the maneuver object is included into the `step` object or not. Default: `false`."
         type: "boolean"
         default: false
         enum:
@@ -211,7 +215,7 @@ paths:
           format: 'bearing,deviation'
       - name: "continue_straight"
         in: "query"
-        description: "Forces the route to keep going straight at waypoints restricting uturns there even if it would be faster. This setting will work for all profiles except for `driving-*`. In this case you will have to set `optimized=false` for it to work. `false` by default"
+        description: "Forces the route to keep going straight at waypoints restricting uturns there even if it would be faster. This setting will work for all profiles except for `driving-*`. In this case you will have to set `optimized=false` for it to work. Default: `false`."
         type: "boolean"
         default: false
         enum:
@@ -241,10 +245,12 @@ paths:
           - "traildifficulty"
         collectionFormat: "pipes"
         uniqueItems: true
+        default: 
+          - "steepness"
       - name: optimized
         in: query
         description: |
-          Uses contraction hierarchies if available (`false`). `true` by default
+          Uses contraction hierarchies if available (`false`).
         type: boolean
         default: true
         enum:
@@ -414,15 +420,23 @@ paths:
         - **geocoding:** Returns a JSON formatted list of objects corresponding to the search input.
         - **reverse geocoding:** Returns the next enclosing object with an address tag which surrounds the given coordinate.
       parameters:
+      - name: "api_key"
+        in: "query"
+        description: |
+          Insert your API Key here.
+        type: "string"
+        required: true
+        default: "your-api-key"
       - name: "query"
         in: "query"
         description: "Name of location, street address or postal code. For a structured geocoding request, a JSON object can be passed.  Please refer to the `Geocoding structured query` in the model section below. Examples can be found [here](https://github.com/GIScience/openrouteservice-docs#geocoding-structured-query). "
         type: "string"
+        default: "Heidelberg"
       - name: "location"
         in: "query"
-        description: "Coordinate to be inquired."
-        type: "number"
-        format: "longitude,latitude"
+        description: "Coordinate to be inquired. [longitude,latitude]"
+        type: "string"
+        default: "8.68353,49.412623"
       - name: "lang"
         in: "query"
         description: "Sets the language of the response."
@@ -455,7 +469,7 @@ paths:
         in: "query"
         description: "Specifies the maximum number of responses. Not needed for reverse."
         type: "number"
-        default: 20
+        default: 5
         format: "double"
       - name: "id"
         in: "query"
@@ -512,21 +526,24 @@ paths:
         \ you to further customize your request to obtain a more detailed\nreachability\
         \ area response.\n"
       parameters:
+      - name: "api_key"
+        in: "query"
+        description: |
+          Insert your API Key here.
+        type: "string"
+        required: true
+        default: "your-api-key"
       - name: "locations"
         in: "query"
         description: |
           List of longitude, latitude coordinates delimited with pipe (|).
-
-          Example values:
-            `8.34234,48.23424`
         required: true
         type: "array"
         items:
           type: "string"
-          format: "longitude,latitude"
         collectionFormat: "pipes"
-        #default: 
-        #  - "8.34234,48.23424"
+        default: 
+          - "8.34234,48.23424"
       - name: "profile"
         in: "query"
         description: "Specifies the routing profile."
@@ -562,19 +579,19 @@ paths:
           \ value in **seconds** for time and **meters** for distance.\n"
         type: "number"
         format: "double"
+        default: 20
       - name: "units"
         in: "query"
         description: "Unit format for  `range_type=distance`.\n"
         type: "string"
-        default: ""
+        default: "m"
         enum:
         - "m"
         - "km"
         - "mi"
       - name: "location_type"
         in: "query"
-        description: "start(default) treats the location(s) as starting point, destination\
-          \ as goal.\n"
+        description: "start treats the location(s) as starting point, destination as goal."
         type: "string"
         default: "start"
         enum:
@@ -592,6 +609,8 @@ paths:
           enum:
           - "area"
           - "reachfactor"
+        default:
+          - "area"
         collectionFormat: "pipes"
         uniqueItems: true
       - name: "options"
@@ -765,6 +784,13 @@ paths:
         - **category_stats:** Either `geometry` or `bbox` are required. `radius` required depending on `geometry`.
         - **category_list:** Additionally to this List the category groups and ids can be found [here](https://github.com/GIScience/openrouteservice-docs).
       parameters:
+      - name: "api_key"
+        in: "query"
+        description: |
+          Insert your API Key here.
+        type: "string"
+        required: true
+        default: "your-api-key"  
       - name: "request"
         in: "query"
         description: "`pois` will return POI geometry as well as requested details.\
@@ -776,7 +802,7 @@ paths:
         - "pois"
         - "category_stats"
         - "category_list"
-        default: pois
+        default: "pois"
       - name: "category_group_ids"
         in: "query"
         description: "Comma seperated list of category group ids.\n"
@@ -825,7 +851,6 @@ paths:
         items:
           type: "number"
           format: "double"
-        collectionFormat: "csv"
         maxItems: 4
         minItems: 4
       - name: "geometry"
@@ -978,6 +1003,13 @@ paths:
         Returns duration, distance or weight matrix for mutliple source and destination points.
         By default a symmetric duration matrix is returned where every point in `locations` is paired with each other. The result is `null` if a value can't be determined.
       parameters:
+        - name: "api_key"
+          in: "query"
+          description: |
+            Insert your API Key here.
+          type: "string"
+          required: true
+          default: "your-api-key"
         - name: profile
           in: "query"
           description: "Specifies the route profile."
@@ -999,15 +1031,16 @@ paths:
         - name: locations
           in: "query"
           description: |
-            Pipe (|) separated List of longitude,latitude coordinates
+            Pipe (|) separated List of `longitude,latitude` coordinates
             
             Example values: `9.970093,48.477473` `9.207916,49.153868` `37.573242,55.801281` `115.663757,38.106467`
           required: true
           type: "array"
           items:
             type: "string"
-            format: "longitude,latitude"
           collectionFormat: "pipes"
+          default:
+            - "9.970093,48.477473|9.207916,49.153868|37.573242,55.801281|115.663757,38.106467"
         - name: sources
           in: "query"
           description: |
@@ -1017,7 +1050,8 @@ paths:
           type: "array"
           items:
             type: string
-            format: "{index}"            
+          default:
+            - "0,1,2"
         - name: destinations
           in: "query"
           description: |
@@ -1027,7 +1061,8 @@ paths:
           type: "array"
           items:
             type: string
-            format: "{index}"
+          default:
+            - "all"
         - name: metrics
           in: "query"
           description: |
@@ -1049,7 +1084,7 @@ paths:
         - name: resolve_locations
           in: query
           description: |
-            Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain the `name` element that identifies the name of the closest street. Default is `false`
+            Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain the `name` element that identifies the name of the closest street. Default: `false`
           type: boolean
           default: false
           enum:
@@ -1057,7 +1092,7 @@ paths:
           - false        
         - name: units
           in: query
-          description: "Specifies the unit of measurement for distances. Default is `m`"
+          description: "Specifies the unit of measurement for distances."
           type: "string"
           default: "m"
           enum:
@@ -1166,10 +1201,9 @@ paths:
           description: "The server is currently unavailable due to overload or maintenance."
 securityDefinitions:
   UserSecurity:
-    description: "Add your API Key as the value of the *api_key* parameter to your\
-      \ GET\nrequest. (In this Demo you can click the Authentication Button.)\n"
-    type: "apiKey"
     name: "api_key"
+    description: "Add your API Key as the value of the ``api_key`` parameter to your GET request."
+    type: "apiKey"
     in: "query"
 definitions:
   options:
