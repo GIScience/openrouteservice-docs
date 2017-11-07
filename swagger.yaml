@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "This is the openrouteservice API documentation. Current version `4.4`"
+  description: "This is the openrouteservice API documentation. Current version is `4.4`"
   version: "4.4"
   title: "openrouteservice"
   contact:
@@ -207,7 +207,7 @@ paths:
           Each pair is a comma-separated list that can consist of one or two float values, where the first value is the bearing and the second one is the allowed deviation from the bearing. The bearing can take values between `0` and `360` clockwise from true north.
           If the deviation is not set, then the default value of `100` degrees is used. The number of pairs must correspond to the number of waypoints.
            Setting `optimized=false` is mandatory for this feature to work for all profiles.
-          The number of bearings corresponds to the length of waypoints-1 or waypoints. If the bearing information for the last waypoint is given, then this will control the sector from which the destination waypoint may be reached. You can skip a bearing for a certain waypoint by passing an empty value for a pair, e.g. 30,20||40,20.
+          The number of bearings corresponds to the length of waypoints-1 or waypoints. If the bearing information for the last waypoint is given, then this will control the sector from which the destination waypoint may be reached. You can skip a bearing for a certain waypoint by passing an empty value for a pair, e.g. `30,20||40,20`.
         type: array
         collectionFormat: "pipes"
         items:
@@ -774,7 +774,7 @@ paths:
     get:
       tags:
       - "Places"
-      summary: "Location Service"
+      summary: "Location Service (GET)"
       description: |
         Returns Points of Interest in the area surrounding a point or
         a line geometry. Use the post endpoint for requests that exceed the get
@@ -946,11 +946,22 @@ paths:
     post:
       tags:
       - "Places"
-      summary: "Location Service"
-      description: "Returns Points of Interest in the area surrounding a geometry.\n"
+      summary: "Location Service (POST)"
+      description: |
+        Returns Points of Interest in the area surrounding a geometry.
+        
+        Body example:
+        ```{'request':'pois','filter':{'category_group_ids':[560]},'details':'address','limit':1000,'radius':1000,'sortby':'category','geometry':{'type':'LineString','coordinates':[[8.167426,49.272556],[8.167588,47.272445],[8.168082,47.272105],[8.168224,47.271917],[8.16831,47.271941],[8.168926,47.272216],[8.169054,47.272278],[8.169165,47.272186],[8.169256,47.272103],[8.16948,47.271921],[8.170129,47.271408],[8.170265,47.271295],[8.170701,47.27097],[8.171496,47.270485],[8.171796,47.270296]]}}```
       parameters:
-      - in: "body"
-        name: "body"
+      - name: "api_key"
+        in: "query"
+        description: |
+          Insert your API Key here.
+        type: "string"
+        required: true
+        default: "your-api-key"
+      - name: "body"
+        in: "body"
         description: "body for a post request"
         schema:
           $ref: "#/definitions/LocationsBody"
@@ -998,7 +1009,7 @@ paths:
     get:
       tags:
       - "Matrix"
-      summary: "Matrix Service"
+      summary: "Matrix Service (GET)"
       description: |
         Returns duration, distance or weight matrix for mutliple source and destination points.
         By default a symmetric duration matrix is returned where every point in `locations` is paired with each other. The result is `null` if a value can't be determined.
@@ -1151,14 +1162,38 @@ paths:
     post:
       tags:
       - "Matrix"
-      summary: "Matrix Service"
-      description: "Returns duration, distance or weight matrix for mutliple source and destination points."
+      summary: "Matrix Service (POST)"
+      description: |
+        Returns duration, distance or weight matrix for mutliple source and destination points.
+        
+        Body example:
+        ```{'profile': 'driving-hgv', 'metrics': 'duration', 'optimized': true, 'units': 'm', 'locations': [[7.796, 48.35], [11.13, 50.98]]}```
       parameters:
-      - in: "body"
-        name: "body"
+      - name: "api_key"
+        in: "query"
+        description: |
+          Insert your API Key here.
+        type: "string"
+        required: true
+        default: "your-api-key"
+      - name: "body"
+        in: "body"
         description: "body for a Matrix post request"
+        required: true
         schema:
           $ref: "#/definitions/MatrixBody"
+          # type: string
+          example: |
+            {"profile": "driving-hgv", "metrics": "duration", "optimized": True, "units": "m", "locations": [[7.796, 48.35], [11.13, 50.98]]}
+            # profile: driving-hgv
+            # metrics: duration
+            # optimized: True
+            # units: m
+            # locations: 
+            #   - - 7.796 
+            #     - 48.35
+            #   - - 11.13
+            #     - 50.98
       responses:
         200:
           description: |
@@ -1202,7 +1237,8 @@ paths:
 securityDefinitions:
   UserSecurity:
     name: "api_key"
-    description: "Add your API Key as the value of the ``api_key`` parameter to your GET request."
+    description: |
+      Add your API Key as the value of the api_key parameter to your request.
     type: "apiKey"
     in: "query"
 definitions:
@@ -2319,7 +2355,7 @@ definitions:
           items:
             type: number
             format: double
-        example: 
+        default: 
           - - 9.9700934,48.477473
           - - 9.207916,49.153868
           - - 37.573242,55.801281
@@ -2332,7 +2368,7 @@ definitions:
         type: "array"
         items:
           type: "string"
-        example: "2,3"
+        default: "2,3"
         uniqueItems: true
       destinations:
         description: |
@@ -2343,7 +2379,7 @@ definitions:
         items:
           type: "string"
           format: "{index}"
-        example: "all"
+        default: "all"
         uniqueItems: true
       metrics:
         description: |
@@ -2357,7 +2393,7 @@ definitions:
           - "distance"
           - "duration"
           - "weight"
-        default: "duration"
+        default: "duration|duration"
       resolve_locations:
         description: "Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain `name` element that identifies the name of the closest street. Default is `false`"
         type: boolean
