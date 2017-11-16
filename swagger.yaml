@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   description: "This is the openrouteservice API documentation. Current version is `4.4`"
   version: "4.4"
-  title: "openrouteservice"
+  title: "Openrouteservice"
   contact:
     email: "support@openrouteservice.org"
   license:
@@ -1078,9 +1078,9 @@ paths:
           in: "query"
           description: |
             Specifies a list of returned metrics separated with a pipe character (|).
-            * `distance` - Returns distance matrix for specified points in defined `units`.
+            * `distance` - Returns distance matrix for specified points in *seconds*.
             * `duration` - Returns duration matrix for specified points in defined `units`.
-            * `weight`   - Returns weight matrix for specified points in defined `units`.
+            * `weight`   - Returns weight matrix for specified points.
           type: "array"
           collectionFormat: "pipes"
           uniqueItems: true
@@ -1103,7 +1103,7 @@ paths:
           - false        
         - name: units
           in: query
-          description: "Specifies the unit of measurement for distances."
+          description: "Specifies the unit of measurement for distances (only)."
           type: "string"
           default: "m"
           enum:
@@ -1167,7 +1167,7 @@ paths:
         Returns duration, distance or weight matrix for mutliple source and destination points.
         
         Body example:
-        ```{'profile': 'driving-hgv', 'metrics': 'duration', 'optimized': true, 'units': 'm', 'locations': [[7.796, 48.35], [11.13, 50.98]]}```
+        ```{'profile': 'driving-hgv', 'metrics': 'duration|distance', 'optimized': true, 'units': 'm', 'locations': [[7.796, 48.35], [11.13, 50.98]]}```
       parameters:
       - name: "api_key"
         in: "query"
@@ -2384,16 +2384,16 @@ definitions:
       metrics:
         description: |
           Specifies a list of returned metrics separated with a pipe character (|).
-          * `distance` - Returns distance matrix for specified points in defined `units`.
+          * `distance` - Returns distance matrix for specified points in *seconds*.
           * `duration` - Returns duration matrix for specified points in defined `units`.
-          * `weight`   - Returns weight matrix for specified points in defined `units`.
+          * `weight`   - Returns weight matrix for specified points.
         type: "string"
         uniqueItems: true
         enum:
           - "distance"
           - "duration"
           - "weight"
-        default: "duration|duration"
+        default: "duration"
       resolve_locations:
         description: "Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain `name` element that identifies the name of the closest street. Default is `false`"
         type: boolean
@@ -2402,7 +2402,7 @@ definitions:
         - true
         - false        
       units:
-        description: "Specifies the unit of measurement for distances. Default is `m`"
+        description: "Specifies the unit of measurement for `metrics=distance`."
         type: "string"
         default: "m"
         enum:
