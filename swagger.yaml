@@ -1011,7 +1011,7 @@ paths:
       - "Matrix"
       summary: "Matrix Service (GET)"
       description: |
-        Returns duration, distance or weight matrix for mutliple source and destination points.
+        Returns duration or distance matrix for mutliple source and destination points.
         By default a symmetric duration matrix is returned where every point in `locations` is paired with each other. The result is `null` if a value can't be determined.
       parameters:
         - name: "api_key"
@@ -1080,7 +1080,7 @@ paths:
             Specifies a list of returned metrics separated with a pipe character (|).
             * `distance` - Returns distance matrix for specified points in *seconds*.
             * `duration` - Returns duration matrix for specified points in defined `units`.
-            * `weight`   - Returns weight matrix for specified points.
+          #* `weight`   - Returns weight matrix for specified points.
           type: "array"
           collectionFormat: "pipes"
           uniqueItems: true
@@ -1089,7 +1089,7 @@ paths:
             enum:
               - "distance"
               - "duration"
-              - "weight"
+            #  - "weight"
           default: 
           - duration
         - name: resolve_locations
@@ -1164,7 +1164,7 @@ paths:
       - "Matrix"
       summary: "Matrix Service (POST)"
       description: |
-        Returns duration, distance or weight matrix for mutliple source and destination points.
+        Returns duration or distance or matrix for mutliple source and destination points.
         
         Body example:
         ```{'profile': 'driving-hgv', 'metrics': 'duration|distance', 'optimized': true, 'units': 'm', 'locations': [[7.796, 48.35], [11.13, 50.98]]}```
@@ -2386,7 +2386,7 @@ definitions:
           Specifies a list of returned metrics separated with a pipe character (|).
           * `distance` - Returns distance matrix for specified points in *seconds*.
           * `duration` - Returns duration matrix for specified points in defined `units`.
-          * `weight`   - Returns weight matrix for specified points.
+        #* `weight`   - Returns weight matrix for specified points.
         type: "string"
         uniqueItems: true
         enum:
@@ -2423,8 +2423,8 @@ definitions:
         $ref: "#/definitions/MatrixResponse_distances"
       durations:
         $ref: "#/definitions/MatrixResponse_durations"
-      weights:
-        $ref: "#/definitions/MatrixResponse_weights"
+      #weights:
+      #  $ref: "#/definitions/MatrixResponse_weights"
       destinations:
         description: "Array of destinations. Each point is snapped to the road and path network"
         type: array
