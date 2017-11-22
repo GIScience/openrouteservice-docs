@@ -102,7 +102,7 @@
         }, {
           "name" : "geometry_simplify",
           "in" : "query",
-          "description" : "Specifies whether to simplify the geometry. `true` will automatically be set to `false` if `extra_info` parameter is specified.",
+          "description" : "\"Specifies whether to simplify the geometry. `true` will automatically be set to `false` if `extra_info` parameter is specified.\"\n",
           "required" : false,
           "type" : "boolean",
           "default" : false,
@@ -226,7 +226,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Standard response for successfully processed requests. Returns JSON. The decoded values of the extra information can be found [here](https://github.com/GIScience/openrouteservice-docs).\n",
+            "description" : "Standard response for successfully processed requests. Returns JSON. The decoded values of the extra information can be found [here](https://github.com/GIScience/openrouteservice-docs).",
             "schema" : {
               "$ref" : "#/definitions/Routeresponse"
             }
@@ -239,6 +239,9 @@
           },
           "401" : {
             "description" : "Authorization field missing."
+          },
+          "403" : {
+            "description" : "Key not authorised."
           },
           "405" : {
             "description" : "The specified HTTP method is not supported. For more details, refer to the EndPoint documentation."
@@ -262,7 +265,7 @@
       "get" : {
         "tags" : [ "Geocoding" ],
         "summary" : "Geocoding Service",
-        "description" : "This endpoint can be used for geocoding (specified `query`) and reverse geocoding requests (specified `location`)\n\n**Either** `query` **or** `location` **has to be specified for a valid request!**\n\nIf both parameters are specified `location` takes precedence.\n\n- **geocoding:** Returns a JSON formatted list of objects corresponding to the search input.\n- **reverse geocoding:** Returns the next enclosing object with an address tag which surrounds the given coordinate.\n",
+        "description" : "This endpoint can be used for geocoding (specified `query`) and reverse geocoding requests (specified `location`)\n\n**Either** `query` **or** `location` **has to be specified for a valid request.**\n\nIf both parameters are specified `location` takes precedence.\n\n- **geocoding:** Returns a JSON formatted list of objects corresponding to the search input.\n- **reverse geocoding:** Returns the next enclosing object with an address tag which surrounds the given coordinate.\n",
         "parameters" : [ {
           "name" : "query",
           "in" : "query",
@@ -359,7 +362,7 @@
       "get" : {
         "tags" : [ "Isochrones" ],
         "summary" : "Isochrones Service",
-        "description" : "The Isochrone Service supports time and distance analyses for one single\nor multiple locations. You may also specify the isochrone interval or\nprovide multiple exact isochrone range values. This service allows the\nsame range of profile options listed in the ORS Routing section which\nhelp you to further customize your request to obtain a more detailed\nreachability area response.\n",
+        "description" : "\"The Isochrone Service supports time and distance analyses for one single or multiple locations.\nYou may also specify the isochrone interval or provide multiple exact isochrone range values.\nThis service allows the same range of profile options listed in the ORS Routing section which help you to further customize your request to obtain a more detailed reachability area response. \"\n",
         "parameters" : [ {
           "name" : "locations",
           "in" : "query",
@@ -382,7 +385,7 @@
         }, {
           "name" : "range_type",
           "in" : "query",
-          "description" : "Set _time_ for isochrones or _distance_ for equidistants.\n",
+          "description" : "Set _time_ for isochrones or _distance_ for equidistants.",
           "required" : false,
           "type" : "string",
           "default" : "time"
@@ -411,7 +414,7 @@
         }, {
           "name" : "location_type",
           "in" : "query",
-          "description" : "start(default) treats the location(s) as starting point, destination as goal.\n",
+          "description" : "start(default) treats the location(s) as starting point, destination as goal.",
           "required" : false,
           "type" : "string",
           "default" : "start",
@@ -437,7 +440,7 @@
         }, {
           "name" : "intersections",
           "in" : "query",
-          "description" : "Specifies whether to return intersection polygons.\n",
+          "description" : "Specifies whether to return intersection polygons.",
           "required" : false,
           "type" : "boolean",
           "default" : false
@@ -493,7 +496,7 @@
         "parameters" : [ {
           "name" : "request",
           "in" : "query",
-          "description" : "`pois` will return POI geometry as well as requested details. `category_stats` returns a POI count for each requested category. `category_list` returns a list of all categories (only the id parameter will be considered).\n",
+          "description" : "\"`pois` will return POI geometry as well as requested details.\n`category_stats` returns a POI count for each requested category.\n`category_list` returns a list of all categories (only the id parameter will be considered).\"\n",
           "required" : true,
           "type" : "string",
           "default" : "pois",
@@ -501,14 +504,14 @@
         }, {
           "name" : "category_group_ids",
           "in" : "query",
-          "description" : "Comma seperated list of category group ids.\n",
+          "description" : "Comma seperated list of category group ids.",
           "required" : false,
           "type" : "string",
           "default" : "420"
         }, {
           "name" : "category_ids",
           "in" : "query",
-          "description" : "Comma seperated list of category ids.\n",
+          "description" : "Comma seperated list of category ids.",
           "required" : false,
           "type" : "string"
         }, {
@@ -520,21 +523,21 @@
         }, {
           "name" : "wheelchair",
           "in" : "query",
-          "description" : "Filter returned features by wheelchair tag entries.\n",
+          "description" : "Filter returned features by wheelchair tag entries.",
           "required" : false,
           "type" : "string",
           "enum" : [ "true", "false", "limited" ]
         }, {
           "name" : "smoking",
           "in" : "query",
-          "description" : "Filter returned features by wheelchair tag entries.\n",
+          "description" : "Filter returned features by wheelchair tag entries.",
           "required" : false,
           "type" : "string",
           "enum" : [ "true", "false" ]
         }, {
           "name" : "fee",
           "in" : "query",
-          "description" : "Filter returned features by fee tag entries.\n",
+          "description" : "Filter returned features by fee tag entries.",
           "required" : false,
           "type" : "string",
           "enum" : [ "true", "false" ]
@@ -554,7 +557,7 @@
         }, {
           "name" : "geometry",
           "in" : "query",
-          "description" : "GeoJSON geometry object (Point, Linestring or Polygon)\n",
+          "description" : "GeoJSON geometry object (Point, Linestring or Polygon)",
           "required" : false,
           "type" : "string",
           "default" : "{type: LineString, coordinates:[[8.167426,49.272556],[8.167588,47.272445],[8.168082,47.272105],[8.168224,47.271917],[8.16831,47.271941],[8.168926,47.272216],[8.169054,47.272278],[8.169165,47.272186],[8.169256,47.272103],[8.16948,47.271921],[8.170129,47.271408],[8.170265,47.271295],[8.170701,47.27097],[8.171496,47.270485],[8.171796,47.270296]]}"
@@ -640,7 +643,7 @@
       "post" : {
         "tags" : [ "Places" ],
         "summary" : "Location Service",
-        "description" : "Returns Points of Interest in the area surrounding a geometry.\n",
+        "description" : "Returns Points of Interest in the area surrounding a geometry.",
         "parameters" : [ {
           "in" : "body",
           "name" : "body",
@@ -869,7 +872,7 @@
   },
   "securityDefinitions" : {
     "UserSecurity" : {
-      "description" : "Add your API Key as the value of the *api_key* parameter to your GET\nrequest. (In this Demo you can click the Authentication Button.)\n",
+      "description" : "Add your API Key as the value of the *api_key* parameter to your GETrequest. (In this Demo you can click the Authentication Button.)",
       "type" : "apiKey",
       "name" : "api_key",
       "in" : "query"
@@ -2064,7 +2067,7 @@
         }
       },
       "title" : "filter object",
-      "description" : "Filter the results by `category_group_ids` or `category_ids`. If both are specified the *group_ids* take priority."
+      "description" : "Filter the results by `category_group_ids` or `category_ids`. If; ; both are specified the *group_ids* take priority."
     },
     "LocationsBody" : {
       "properties" : {
@@ -2094,7 +2097,7 @@
         "bbox" : {
           "type" : "string",
           "example" : "8.165339,47.265966,8.179995,49.214088",
-          "description" : "The pattern for this bbox string is `\"minlon,minlat,maxlon,maxlat\"`"
+          "description" : "\"The pattern for this bbox string is `\"minlon,minlat,maxlon,maxlat\"`\"\n"
         },
         "geometry" : {
           "$ref" : "#/definitions/geometry"
