@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "This is the openrouteservice API documentation. Current version is `4.4`"
+  description: "This is the openrouteservice API documentation. Version `4.4`"
   version: "4.4"
   title: "Openrouteservice"
   contact:
