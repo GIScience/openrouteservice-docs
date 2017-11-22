@@ -7,29 +7,29 @@ A live version of this documentation can be found on [swaggerhub](https://app.sw
 This readme stores additional information, examples and encoding tables that go beyond the display options of swagger.
 
 - [Travel Time Calculation](#travel-time-calculation)
-	- [Waytype](#waytype-speeds)
-	- [Surface](#surface-speeds)
-	- [Tracktype](#tracktype-speeds)
-	- [Country Speed Sets](#country-speed-sets)
+  - [Waytype](#waytype-speeds)
+  - [Surface](#surface-speeds)
+  - [Tracktype](#tracktype-speeds)
+  - [Country Speed Sets](#country-speed-sets)
 - [URL Encoding](#url-encoding)
 - [Geocoding structured query](#geocoding-structured-query)
 - [Geocoding Response](#geocoding-response)
   - [Place Type](#place-type)
 - [Routing `options`](#routing-options)
-	- [Examples](#examples)
+  - [Examples](#examples)
 - [Routing Response](#routing-response)
-	- [Steepness](#steepness)
-	- [Suitability](#suitability)
-	- [Surface](#surface)
-	- [WayCategory](#waycategory)
-	- [Waytype](#waytype)
-	- [AvgSpeed](#avgspeed)
-  	- [Tollways](#tollways)
-	- [TrailDifficulty](#trail-difficulty)
-	- [Instruction Types](#instruction-types)
+  - [Steepness](#steepness)
+  - [Suitability](#suitability)
+  - [Surface](#surface)
+  - [WayCategory](#waycategory)
+  - [Waytype](#waytype)
+  - [AvgSpeed](#avgspeed)
+    - [Tollways](#tollways)
+  - [TrailDifficulty](#trail-difficulty)
+  - [Instruction Types](#instruction-types)
 - [Places Response](#places-response)
-	- [category_group_ids](#category_group_ids)
-	- [category_ids](#category_ids)
+  - [category_group_ids](#category_group_ids)
+  - [category_ids](#category_ids)
 - [Matrix Response](#matrix-response)
 
 # Travel Time Calculation
@@ -262,47 +262,6 @@ Describes the returned location type
   |  `macroregion`  | Related group of regions. Mostly in Europe                                                      |
   |    `country`    | Places that issue passports, nations, nation-states                                             |
 
-# Travel Time Calculation
-
-The travel time is calculated for each segment by using speed-limits for different [waytypes](https://wiki.openstreetmap.org/wiki/Key:highway) and adjusting them for different [grades](https://wiki.openstreetmap.org/wiki/Key:tracktype) of the road and the Incline. For `cycling` profiles also the [surface](https://wiki.openstreetmap.org/wiki/Key:surface) is considered. These limits can be reduced by setting the `maxSpeed` parameter in the [options](#routing-options). The following table shows the speed-limits used for the main profiles:
-
-_(Values in km/h)_
-
-  | Waytype \ Profile -> | driving-hgv | driving-car | cycling-regular |
-  |:--------------------:|:-----------:|:-----------:|:---------------:|
-  |       motorway       |      80     |     100     |        -        |
-  |     motorway_link    |      50     |      70     |        -        |
-  |       motorroad      |      80     |      90     |        -        |
-  |         trunk        |      80     |      70     |        18       |
-  |      trunk_link      |      50     |      65     |        18       |
-  |        primary       |      60     |      65     |        18       |
-  |     primary_link     |      50     |      60     |        18       |
-  |       secondary      |      60     |      60     |        18       |
-  |    secondary_link    |      50     |      50     |        18       |
-  |       tertiary       |      60     |      50     |        18       |
-  |     tertiary_link    |      50     |      40     |        18       |
-  |     unclassified     |      60     |      30     |        16       |
-  |      residential     |      60     |      30     |        18       |
-  |     living_street    |      10     |      5      |        6        |
-  |        service       |      20     |      20     |        14       |
-  |         road         |      20     |      20     |        12       |
-  |         track        |      15     |      15     |        12       |
-  |         path         |      -      |      -      |        12       |
-  |        footway       |      -      |      -      |        6        |
-  |      pedestrian      |      -      |      -      |        6        |
-  |       cycleway       |      -      |      -      |        18       |
-
-# URL Encoding
-
-To use the curl command string you have to encode special characters.
-Values you need are shown in this table:
-
-  | Character |  {  |  \| |  }  |  "  |  [  |  ]  |
-  |:---------:|:---:|:---:|:---:|:---:|:---:|:---:|
-  |  Encoding | %7B | %7C | %7D | %22 | %5B | %5D |
-
-Sometimes needs to be used for the [options object](#examples).
-
 # Routing options
 
 For advanced options formatted as json object. For structure refer to the [examples](#examples) below.
@@ -403,9 +362,9 @@ for `profile=cycling-*`:
         "steepness_difficulty": {
             "level": 2
         },
-	"restrictions": {
+  "restrictions": {
             "gradient": 13
-	}
+  }
     }
 },
 "avoid_polygons": {
