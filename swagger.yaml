@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
-  description: "This is the openrouteservice API documentation. Version `4.4`"
-  version: "4.4"
+  description: "This is the openrouteservice API documentation. Version `4.5`"
+  version: "4.5"
   title: "Openrouteservice"
   contact:
     email: "support@openrouteservice.org"
@@ -168,7 +168,7 @@ paths:
       - name: "attributes"
         in: "query"
         description: |
-          Pipe (|) seperated List of route attributes:
+          Pipe (|) separated List of route attributes:
           * `avgspeed` - Returns average speed of each segment and the route in km/h.
           * `detour_factor` - Returns the deviation of a segment compared to a straight line (1) from A to B.
           * `percentage` - Returns the proportion of the route for each segment.
@@ -266,21 +266,23 @@ paths:
             - `maximum_speed` : Specifies a maximum travel speed restriction in km/h.
 
 
-            - `avoid_features` : Pipe (|) seperated list of features to avoid.
+            - `avoid_features` : Pipe (|) separated list of features to avoid.
               The available features are :
 
-                |     Feature    | Available for                               |
-                |:--------------:|---------------------------------------------|
-                | `highways`     | driving-*                                   |
-                | `tollways`     | driving-*                                   |
-                | `ferries`      | driving-\*, cycling-\*, foot-\*, wheelchair |
-                | `tunnels`      | driving-*                                   |
-                | `pavedroads`   | driving-\*, cycling-*                       |
-                | `unpavedroads` | driving-\*, cycling-*                       |
-                | `tracks`       | driving-*                                   |
-                | `fords`        | driving-\*, cycling-\*, foot-*              |
-                | `steps`        | cycling-\*, foot-\*, wheelchair             |
-                | `hills`        | cycling-\*, foot-\*                         |
+                |     Feature         | Available for                               |
+                |:-------------------:|---------------------------------------------|
+                | `highways`          | driving-*                                   |
+                | `tollways`          | driving-*                                   |
+                | `ferries`           | driving-\*, cycling-\*, foot-\*, wheelchair |
+                | `tunnels`           | driving-*                                   |
+                | `pavedroads`        | driving-\*, cycling-*                       |
+                | `unpavedroads`      | driving-\*, cycling-*                       |
+                | `tracks`            | driving-*                                   |
+                | `fords`             | driving-\*, cycling-\*, foot-*              |
+                | `steps`             | cycling-\*, foot-\*, wheelchair             |
+                | `hills`             | cycling-\*, foot-\*                         |
+                | `borders`           | driving-*                                   |
+                | `controlledborders` | driving-*                                   |
 
 
             - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`. It is needed for **vehicle restrictions** to work.
@@ -288,6 +290,9 @@ paths:
 
             - `profile_params` : Specifies additional routing parameters.
               - `weightings`: Weightings will prioritize specified factors over the shortest path.
+                - `border`: Specifies countries to exclude from routing with `driving-*` profiles. Can be used together with `avoid_features:controlledborders`.
+                  - `country`: Pipe (|) separated list of countries to avoid. `"country": "11|193"` would exclude Austria and Switzerland. List of countries and application examples can be found [here](https://github.com/GIScience/openrouteservice-docs#country-list). 
+
                 - `steepness_difficulty`: Specifies the fitness level for `cycling-*` profiles.
                   - `level`: `0` = Novice, `1` = Moderate, `2` = Amateur, `3` = Pro. The prefered gradient increases with level
 
@@ -623,21 +628,23 @@ paths:
             - `maximum_speed` : Specifies a maximum travel speed restriction in km/h.
 
 
-            - `avoid_features` : Pipe (|) seperated list of features to avoid.
+            - `avoid_features` : Pipe (|) separated list of features to avoid.
               The available features are :
 
-                |     Feature    | Available for                               |
-                |:--------------:|---------------------------------------------|
-                | `highways`     | driving-*                                   |
-                | `tollways`     | driving-*                                   |
-                | `ferries`      | driving-\*, cycling-\*, foot-\*, wheelchair |
-                | `tunnels`      | driving-*                                   |
-                | `pavedroads`   | driving-\*, cycling-*                       |
-                | `unpavedroads` | driving-\*, cycling-*                       |
-                | `tracks`       | driving-*                                   |
-                | `fords`        | driving-\*, cycling-\*, foot-*              |
-                | `steps`        | cycling-\*, foot-\*, wheelchair             |
-                | `hills`        | cycling-\*, foot-\*                         |
+                |     Feature         | Available for                               |
+                |:-------------------:|---------------------------------------------|
+                | `highways`          | driving-*                                   |
+                | `tollways`          | driving-*                                   |
+                | `ferries`           | driving-\*, cycling-\*, foot-\*, wheelchair |
+                | `tunnels`           | driving-*                                   |
+                | `pavedroads`        | driving-\*, cycling-*                       |
+                | `unpavedroads`      | driving-\*, cycling-*                       |
+                | `tracks`            | driving-*                                   |
+                | `fords`             | driving-\*, cycling-\*, foot-*              |
+                | `steps`             | cycling-\*, foot-\*, wheelchair             |
+                | `hills`             | cycling-\*, foot-\*                         |
+                | `borders`           | driving-*                                   |
+                | `controlledborders` | driving-*                                   |
 
 
             - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`. It is needed for **vehicle restrictions** to work.
@@ -645,6 +652,9 @@ paths:
 
             - `profile_params` : Specifies additional routing parameters.
               - `weightings`: Weightings will prioritize specified factors over the shortest path.
+                - `border`: Specifies countries to exclude from routing with `driving-*` profiles. Can be used together with `avoid_features:controlledborders`.
+                  - `country`: Pipe (|) separated list of countries to avoid. `"country": "11|193"` would exclude Austria and Switzerland. List of countries and application examples can be found [here](https://github.com/GIScience/openrouteservice-docs#country-list). 
+
                 - `steepness_difficulty`: Specifies the fitness level for `cycling-*` profiles.
                   - `level`: `0` = Novice, `1` = Moderate, `2` = Amateur, `3` = Pro. The prefered gradient increases with level
 
@@ -805,12 +815,12 @@ paths:
         default: "pois"
       - name: "category_group_ids"
         in: "query"
-        description: "Comma seperated list of category group ids.\n"
+        description: "Comma separated list of category group ids.\n"
         type: "string"
         default: "420"
       - name: "category_ids"
         in: "query"
-        description: "Comma seperated list of category ids.\n"
+        description: "Comma separated list of category ids.\n"
         type: "string"
       - name: "name"
         in: "query"
@@ -886,7 +896,7 @@ paths:
       - name: "details"
         in: "query"
         description: |
-          Pipe (|) seperated list of desired details. **For** `request=pois` **only.**
+          Pipe (|) separated list of desired details. **For** `request=pois` **only.**
         type: "array"
         items:
           type: "string"
