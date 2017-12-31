@@ -85,6 +85,14 @@ paths:
         - "fastest"
         - "shortest"
         - "recommended"
+      - name: "format"
+        in: "query"
+        description: "Specifies the response format. The gpx schema the response is validated against can be found [here](https://raw.githubusercontent.com/GIScience/openrouteservice-schema/master/gpx/v1/ors-gpx.xsd)."
+        type: "string"
+        default: "geojson"
+        enum:
+        - "geojson"
+        - "gpx"
       - name: "units"
         in: "query"
         description: "Specifies the distance unit."
@@ -170,7 +178,7 @@ paths:
         description: |
           Pipe (|) separated List of route attributes:
           * `avgspeed` - Returns average speed of each segment and the route in km/h.
-          * `detour_factor` - Returns the deviation of a segment compared to a straight line (1) from A to B.
+          * `detourfactor` - Returns the deviation of a segment compared to a straight line (1) from A to B.
           * `percentage` - Returns the proportion of the route for each segment.
         type: "array"
         collectionFormat: "pipes"
@@ -179,7 +187,7 @@ paths:
           type: "string"
           enum:
             - "avgspeed"
-            - "detour_factor"
+            - "detourfactor"
             - "percentage"
       - name: "maneuvers"
         in: "query"
@@ -1505,7 +1513,7 @@ definitions:
         type: number
         format: double
         description: Contains descent of this segment in meters for `elevation=true`.
-      detour_factor:
+      detourfactor:
         type: number
         format: double
         description: Contains the deviation compared to a straight line that would have the factor `1`. Double the Distance would be a `2`.
