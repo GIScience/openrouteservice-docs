@@ -87,7 +87,7 @@ paths:
         - "recommended"
       - name: "format"
         in: "query"
-        description: "Specifies the response format. The gpx schema the response is validated against can be found [here](https://raw.githubusercontent.com/GIScience/openrouteservice-schema/master/gpx/v1/ors-gpx.xsd)."
+        description: "Specifies the response format. The GPX schema the response is validated against can be found [here](https://raw.githubusercontent.com/GIScience/openrouteservice-schema/master/gpx/v1/ors-gpx.xsd)."
         type: "string"
         default: "geojson"
         enum:
