@@ -1692,12 +1692,16 @@ definitions:
         description: Category percentage of the entire route.
   Routeresponse_info:
     properties:
+      engine:
+        $ref: "#/definitions/info_engine"
       attribution:
         type: "string"
         description: "Attribution for using our service."
         example: "openrouteservice.org, OpenStreetMap contributors, tmc - BASt"
-      engine:
-        $ref: "#/definitions/info_engine"
+      osm_file_md5_hash:
+        type: "string"
+        description: "md5 hash of the planet file which the graphs were built from."
+        example: "bbff3c042b19c04e3efdd9722e22db5f"
       service:
         type: "string"
         description: "API endpoint used."
@@ -1924,6 +1928,10 @@ definitions:
         type: "string"
         description: "Attribution for using our service."
         example: "openrouteservice.org, OpenStreetMap contributors"
+      osm_file_md5_hash:
+        type: "string"
+        description: "md5 hash of the planet file which the graphs were built from."
+        example: "bbff3c042b19c04e3efdd9722e22db5f"
       query:
         $ref: "#/definitions/Geocoderesponse_info_query"
       engine:
@@ -2090,6 +2098,10 @@ definitions:
         type: "string"
         description: "Attribution for using our service."
         example: "openrouteservice.org, OpenStreetMap contributors"
+      osm_file_md5_hash:
+        type: "string"
+        description: "md5 hash of the planet file which the graphs were built from."
+        example: "bbff3c042b19c04e3efdd9722e22db5f"
       engine:
         $ref: "#/definitions/info_engine"
       timestamp:
@@ -2246,6 +2258,10 @@ definitions:
         type: "string"
         description: "Attribution for using our service."
         example: "openrouteservice.org, OpenStreetMap contributors"
+      osm_file_md5_hash:
+        type: "string"
+        description: "md5 hash of the planet file which the graphs were built from."
+        example: "bbff3c042b19c04e3efdd9722e22db5f"
       timestamp:
         type: "integer"
         format: "int64"
@@ -2580,6 +2596,10 @@ definitions:
         type: "string"
         description: "Attribution for using our service."
         example: "openrouteservice.org, OpenStreetMap contributors"
+      osm_file_md5_hash:
+        type: "string"
+        description: "md5 hash of the planet file which the graphs were built from."
+        example: "bbff3c042b19c04e3efdd9722e22db5f"
       timestamp:
         type: "integer"
         format: "int64"
