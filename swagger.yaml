@@ -389,21 +389,11 @@ paths:
           schema:
             $ref: "#/definitions/Routeresponse"
         400:
-          description: |
-            An unexpected error was encountered and more detailed internal error code is provided.
-
-            | Internal Code | Description                                        |
-            |:-------------:|----------------------------------------------------|
-            |      200      | Unable to parse JSON request.                      |
-            |      201      | Required parameter is missing.                     |
-            |      202      | Invalid parameter format.                          |
-            |      203      | Invalid parameter value.                           |
-            |      204      | Parameter value exceeds the maximum allowed limit. |
-            |      299      | Unknown internal error.                            |
-          schema:
-            $ref: "#/definitions/error"
+          description: "The request is incorrect and therefore can not be processed."
         401:
           description: "Authorization field missing."
+        403:
+          description: "Key not authorised."
         405:
           description: "The specified HTTP method is not supported. For more details,\
             \ refer to the EndPoint documentation."
@@ -411,7 +401,22 @@ paths:
           description: "The request is larger than the server is able to process,\
             \ the data provided in the request exceeds the capacity limit."
         500:
-          description: "The request is incorrect and therefore can not be processed."
+          description: |
+            An unexpected error was encountered and more detailed internal error code is provided.
+
+            | Internal Code | Description                                        |
+            |:-------------:|----------------------------------------------------|
+            | 2000 |  Unable to parse JSON request. |
+            | 2001 |  Required parameter is missing. |
+            | 2002 |  Invalid parameter format. |
+            | 2003 |  Invalid parameter value. |
+            | 2004 |  Parameter value exceeds the maximum allowed limit. |
+            | 2006 |  Unable to parse the request to the export handler. |
+            | 2007 |  Unsupported export format. |
+            | 2008 |  Empty Element. |
+            | 2099 |  Unknown internal error. |
+          schema:
+            $ref: "#/definitions/error"
         501:
           description: "Indicates that the server does not support the functionality\
             \ needed to fulfill the request."
@@ -495,20 +500,7 @@ paths:
           schema:
             $ref: "#/definitions/Geocoderesponse"
         400:
-          description: |
-            An unexpected error was encountered and more detailed internal
-            error\ncode is provided.
-
-            | Internal Code | Description                                        |
-            |:-------------:|----------------------------------------------------|
-            |      100      | Unable to parse JSON request.                      |
-            |      101      | Required parameter is missing.                     |
-            |      102      | Invalid parameter format.                          |
-            |      103      | Invalid parameter value.                           |
-            |      104      | Parameter value exceeds the maximum allowed limit. |
-            |      199      | Unknown internal error.                            |
-          schema:
-            $ref: "#/definitions/error"
+          description: "The request is incorrect and therefore can not be processed."
         401:
           description: "Authorization field missing."
         403:
@@ -520,7 +512,23 @@ paths:
           description: "The request is larger than the server is able to process,\
             \ the data provided in the request exceeds the capacity limit."
         500:
-          description: "The request is incorrect and therefore can not be processed."
+          description: |
+            An unexpected error was encountered and more detailed internal
+            errorcode is provided.
+
+            | Internal Code | Description                                        |
+            |:-------------:|----------------------------------------------------|
+            | 1000 |  Unable to parse JSON request. |
+            | 1001 |  Required parameter is missing. |
+            | 1002 |  Invalid parameter format. |
+            | 1003 |  Invalid parameter value. |
+            | 1004 |  Parameter value exceeds the maximum allowed limit. |
+            | 1006 |  Unable to parse the request to the export handler. |
+            | 1007 |  Unsupported export format. |
+            | 1008 |  Empty Element. |
+            | 1099 |  Unknown internal error. |
+          schema:
+            $ref: "#/definitions/error"
         501:
           description: "Indicates that the server does not support the functionality\
             \ needed to fulfill the request."
@@ -660,9 +668,6 @@ paths:
 
             - `profile_params` : Specifies additional routing parameters.
               - `weightings`: Weightings will prioritize specified factors over the shortest path.
-                - `border`: Specifies countries to exclude from routing with `driving-*` profiles. Can be used together with `avoid_features:controlledborders`.
-                  - `country`: Pipe (|) separated list of countries to avoid. `"country": "11|193"` would exclude Austria and Switzerland. List of countries and application examples can be found [here](https://github.com/GIScience/openrouteservice-docs#country-list). 
-
                 - `steepness_difficulty`: Specifies the fitness level for `cycling-*` profiles.
                   - `level`: `0` = Novice, `1` = Moderate, `2` = Amateur, `3` = Pro. The prefered gradient increases with level
 
@@ -756,21 +761,7 @@ paths:
           schema:
             $ref: "#/definitions/IsochronesResponse"
         400:
-          description: |
-            An unexpected error was encountered and more detailed internal
-            error\ncode is provided.
-
-            | Internal Code | Description                                        |
-            |:-------------:|----------------------------------------------------|
-            |      300      | Unable to parse JSON request.                      |
-            |      301      | Required parameter is missing.                     |
-            |      302      | Invalid parameter format.                          |
-            |      303      | Invalid parameter value.                           |
-            |      304      | Parameter value exceeds the maximum allowed limit. |
-            |      305      | PRequested feature is not supported.               |
-            |      399      | Unknown internal error.                            |
-          schema:
-            $ref: "#/definitions/error"
+          description: "The request is incorrect and therefore can not be processed."
         401:
           description: "Authorization field missing."
         403:
@@ -782,7 +773,24 @@ paths:
           description: "The request is larger than the server is able to process,\
             \ the data provided in the request exceeds the capacity limit."
         500:
-          description: "The request is incorrect and therefore can not be processed."
+          description: |
+            An unexpected error was encountered and more detailed internal
+            errorcode is provided.
+
+            | Internal Code | Description                                        |
+            |:-------------:|----------------------------------------------------|
+            | 3000 |  Unable to parse JSON request. |
+            | 3001 |  Required parameter is missing. |
+            | 3002 |  Invalid parameter format. |
+            | 3003 |  Invalid parameter value. |
+            | 3004 |  Parameter value exceeds the maximum allowed limit. |
+            | 3005 |  Requested feature is not supported. |
+            | 3006 |  Unable to parse the request to the export handler. |
+            | 3007 |  Unsupported export format. |
+            | 3008 |  Empty Element. |
+            | 3099 |  Unknown internal error. |
+          schema:
+            $ref: "#/definitions/error"
         501:
           description: "Indicates that the server does not support the functionality\
             \ needed to fulfill the request."
@@ -930,20 +938,7 @@ paths:
           schema:
             $ref: "#/definitions/LocationsPoiResponse"
         400:
-          description: |
-            An unexpected error was encountered and more detailed internal
-             error\ncode is provided.
-
-            | Internal Code | Description                                        |
-            |:-------------:|----------------------------------------------------|
-            |      400      | Unable to parse JSON request.                      |
-            |      401      | Required parameter is missing.                     |
-            |      402      | Invalid parameter format.                          |
-            |      403      | Invalid parameter value.                           |
-            |      404      | Parameter value exceeds the maximum allowed limit. |
-            |      499      | Unknown internal error.                            |
-          schema:
-            $ref: "#/definitions/error"
+          description: "The request is incorrect and therefore can not be processed."
         401:
           description: "Authorization field missing."
         403:
@@ -955,7 +950,23 @@ paths:
           description: "The request is larger than the server is able to process,\
             \ the data provided in the request exceeds the capacity limit."
         500:
-          description: "The request is incorrect and therefore can not be processed."
+          description: |
+            An unexpected error was encountered and more detailed internal
+             errorcode is provided.
+
+            | Internal Code | Description                                        |
+            |:-------------:|----------------------------------------------------|
+            | 4000 |  Unable to parse JSON request. |
+            | 4001 |  Required parameter is missing. |
+            | 4002 |  Invalid parameter format. |
+            | 4003 |  Invalid parameter value. |
+            | 4004 |  Parameter value exceeds the maximum allowed limit. |
+            | 4006 |  Unable to parse the request to the export handler. |
+            | 4007 |  Unsupported export format. |
+            | 4008 |  Empty Element. |
+            | 4099 |  Unknown internal error. |
+          schema:
+            $ref: "#/definitions/error"
         501:
           description: "Indicates that the server does not support the functionality\
             \ needed to fulfill the request."
@@ -990,22 +1001,7 @@ paths:
           schema:
             $ref: "#/definitions/LocationsPoiResponse"
         400:
-          description: |
-            An unexpected error was encountered and more detailed internal
-            error\ncode is provided.
-
-            | Internal Code | Description                                        |
-            |:-------------:|----------------------------------------------------|
-            |      400      | Unable to parse JSON request.                      |
-            |      401      | Required parameter is missing.                     |
-            |      402      | Invalid parameter format.                          |
-            |      403      | Invalid parameter value.                           |
-            |      404      | Parameter value exceeds the maximum allowed limit. |
-            |      499      | Unknown internal error.                            |
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/error"
+          description: "The request is incorrect and therefore can not be processed."
         401:
           description: "Authorization field missing."
         403:
@@ -1017,7 +1013,25 @@ paths:
           description: "The request is larger than the server is able to process,\
             \ the data provided in the request exceeds the capacity limit."
         500:
-          description: "The request is incorrect and therefore can not be processed."
+          description: |
+            An unexpected error was encountered and more detailed internal
+            errorcode is provided.
+
+            | Internal Code | Description                                        |
+            |:-------------:|----------------------------------------------------|
+            | 4000 |  Unable to parse JSON request. |
+            | 4001 |  Required parameter is missing. |
+            | 4002 |  Invalid parameter format. |
+            | 4003 |  Invalid parameter value. |
+            | 4004 |  Parameter value exceeds the maximum allowed limit. |
+            | 4006 |  Unable to parse the request to the export handler. |
+            | 4007 |  Unsupported export format. |
+            | 4008 |  Empty Element. |
+            | 4099 |  Unknown internal error. |
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/error"
         501:
           description: "Indicates that the server does not support the functionality\
             \ needed to fulfill the request."
@@ -1144,22 +1158,7 @@ paths:
           schema:
             $ref: "#/definitions/MatrixResponse"
         400:
-          description: |
-            An unexpected error was encountered and more detailed internal
-            error\ncode is provided.
-
-            | Internal Code | Description                                        |
-            |:-------------:|----------------------------------------------------|
-            |      600      | Unable to parse JSON request.                      |
-            |      601      | Required parameter is missing.                     |
-            |      602      | Invalid parameter format.                          |
-            |      603      | Invalid parameter value.                           |
-            |      604      | Parameter value exceeds the maximum allowed limit. |
-            |      699      | Unknown internal error.                            |
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/error"
+          description: "The request is incorrect and therefore can not be processed."
         401:
           description: "Authorization field missing."
         403:
@@ -1171,7 +1170,25 @@ paths:
           description: "The request is larger than the server is able to process,\
             \ the data provided in the request exceeds the capacity limit."
         500:
-          description: "The request is incorrect and therefore can not be processed."
+          description: |
+            An unexpected error was encountered and more detailed internal
+            errorcode is provided.
+
+            | Internal Code | Description                                        |
+            |:-------------:|----------------------------------------------------|
+            | 6000 |  Unable to parse JSON request. |
+            | 6001 |  Required parameter is missing. |
+            | 6002 |  Invalid parameter format. |
+            | 6003 |  Invalid parameter value. |
+            | 6004 |  Parameter value exceeds the maximum allowed limit. |
+            | 6006 |  Unable to parse the request to the export handler. |
+            | 6007 |  Unsupported export format. |
+            | 6008 |  Empty Element. |
+            | 6099 |  Unknown internal error. |
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/error"
         501:
           description: "Indicates that the server does not support the functionality\
             \ needed to fulfill the request."
@@ -1219,22 +1236,7 @@ paths:
           schema:
             $ref: "#/definitions/MatrixResponse"
         400:
-          description: |
-            An unexpected error was encountered and more detailed internal
-            error\ncode is provided.
-
-            | Internal Code | Description                                        |
-            |:-------------:|----------------------------------------------------|
-            |      600      | Unable to parse JSON request.                      |
-            |      601      | Required parameter is missing.                     |
-            |      602      | Invalid parameter format.                          |
-            |      603      | Invalid parameter value.                           |
-            |      604      | Parameter value exceeds the maximum allowed limit. |
-            |      699      | Unknown internal error.                            |
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/error"
+          description: "The request is incorrect and therefore can not be processed."
         401:
           description: "Authorization field missing."
         403:
@@ -1246,7 +1248,25 @@ paths:
           description: "The request is larger than the server is able to process,\
             \ the data provided in the request exceeds the capacity limit."
         500:
-          description: "The request is incorrect and therefore can not be processed."
+          description: |
+            An unexpected error was encountered and more detailed internal
+            error\ncode is provided.
+
+            | Internal Code | Description                                        |
+            |:-------------:|----------------------------------------------------|
+            | 6000 |  Unable to parse JSON request. |
+            | 6001 |  Required parameter is missing. |
+            | 6002 |  Invalid parameter format. |
+            | 6003 |  Invalid parameter value. |
+            | 6004 |  Parameter value exceeds the maximum allowed limit. |
+            | 6006 |  Unable to parse the request to the export handler. |
+            | 6007 |  Unsupported export format. |
+            | 6008 |  Empty Element. |
+            | 6099 |  Unknown internal error. |
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/error"
         501:
           description: "Indicates that the server does not support the functionality\
             \ needed to fulfill the request."
