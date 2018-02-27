@@ -286,9 +286,11 @@ The available parameters are:
   | `fords`             | driving-\*, cycling-\*, foot-*              |
   | `steps`             | cycling-\*, foot-\*, wheelchair             |
   | `hills`             | cycling-\*, foot-\*                         |
-  | `borders`           | driving-*                                   |
-  | `controlledborders` | driving-*                                   |
 
+
+- `avoid_borders` : `"all"` for no border crossing. `"controlled"` to cross open borders but avoid controlled ones. Only for `driving-*` profiles.
+
+- `avoid_countries` : Pipe (|) separated list of countries to exclude from routing with `driving-*` profiles. Can be used together with `"avoid_features": "controlledborders"`. `"11|193"` would exclude Austria and Switzerland. List of countries and application examples can be found in the [country list](#country-list).
 
 - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`. It is needed for **vehicle restrictions** to work.
 
@@ -296,10 +298,6 @@ The available parameters are:
 - `profile_params` : Specifies additional routing parameters.
 
   - `weightings`: Weightings will prioritize specified factors over the shortest path.
-
-    - `border`: Specifies countries to exclude from routing with `driving-*` profiles. Can be used together with `avoid_features:controlledborders`.
-
-      - `country`: Pipe (|) separated list of countries to avoid. List of countries and application examples can be found [below](https://github.com/GIScience/openrouteservice-docs#border-restrictions). 
 
     - `steepness_difficulty`: Specifies the fitness level for `cycling-*` profiles.
       - `level`: `0` = Novice, `1` = Moderate, `2` = Amateur, `3` = Pro. The prefered gradient increases with level
