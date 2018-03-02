@@ -567,6 +567,7 @@ paths:
       - name: "profile"
         in: "query"
         description: "Specifies the routing profile."
+        required: true
         type: "string"
         default: "driving-car"
         enum:
@@ -620,15 +621,19 @@ paths:
       - name: "attributes"
         in: "query"
         description: |
-          Values are area and reachfactor. Delimit with pipe (|) for both.
-          `area` returns the area of each polygon in its feature properties.
-          `reachfactor` returns a reachability score between 0 and 1.
+          List of requested attributes delimited by pipe (|). Values are `area`, `reachfactor` and `total_pop`.
+          | Value | Description|
+          |:--:|---|
+          | `area` | Returns the area of each polygon in its feature properties. |
+          | `reachfactor` | Returns a reachability score between 0 and 1. |
+          | `total_pop` | Returns the total population of each polygon based on [GHS data](http://ghsl.jrc.ec.europa.eu/about.php) |
         type: "array"
         items:
           type: "string"
           enum:
           - "area"
           - "reachfactor"
+          - "total_pop"
         default:
           - "area"
         collectionFormat: "pipes"
@@ -2069,7 +2074,12 @@ definitions:
         type: number
         format: double
         description: |
-          Returns a reachability score between 0 and 1. As the maximum reachfactor would be achieved by travelling as the crow flies at maximum speed in a vacuum without obstacles, naturally it can never be 1. The availability of motorways however produces a higher score over normal roads.
+          Returns a reachability score between 0 and 1 (for attributes=reachfactor). As the maximum reachfactor would be achieved by travelling as the crow flies at maximum speed in a vacuum without obstacles, naturally it can never be 1. The availability of motorways however produces a higher score over normal roads.
+      total_pop:
+        type: integer
+        format: int64
+        description: |
+          Total population of the polygon (for attributes=total_pop).
       center:
         type: "array"
         items:
