@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
-  description: "This is the openrouteservice API documentation. Version `4.6`"
-  version: "4.6"
+  description: "This is the openrouteservice API documentation. Version `4.5.1`"
+  version: "4.5.1"
   title: "Openrouteservice"
   contact:
     email: "support@openrouteservice.org"
@@ -16,8 +16,8 @@ tags:
   description: "Resolve input coordinates to addresses and vice versa"
 - name: "Isochrones"
   description: "Obtain areas of reachability from given locations"
-- name: "Places"
-  description: "Search for points of interest around points or in geometries"
+- name: "Pois"
+  description: "Search for points of interest around points or geometries"
 - name: "Matrix"
   description: "Obtain one-to-many, many-to-one and many-to-many matrices for time and distance"
 schemes:
@@ -426,7 +426,7 @@ paths:
     get:
       tags:
       - "Geocoding"
-      summary: "Geocoding Service"
+      summary: "Geocoding Service (deprecated)"
       description: |
         This endpoint can be used for geocoding (specified `query`) and reverse geocoding requests (specified `location`)
         
@@ -534,6 +534,170 @@ paths:
             \ needed to fulfill the request."
         503:
           description: "The server is currently unavailable due to overload or maintenance."
+  /geocode/search:
+    get:
+      tags:
+      - "Geocoding"
+      summary: "Forward Geocoding Service (Pelias)"
+      description: |
+        Returns a JSON formatted list of objects corresponding to the search input.
+      parameters:
+      - name: "api_key"
+        in: "query"
+        description: |
+          Insert your API Key here.
+        type: "string"
+        required: true
+        default: "your-api-key"
+      - name: "text"
+        required: true
+        in: query
+        description: |
+          Name of location, street address or postal code.
+        type: string
+        default: Heidelberg
+      - name: focus.point.lat
+        in: query
+        description: |
+          
+        type: number
+        format: float
+        default: Null
+      - name: focus.point.lon
+        in: query
+        description: |
+          
+        type: number
+        format: float
+        default: Null
+      - name: boundary.rect.min_lon
+        in: query
+        description: |
+          
+        type: number
+        format: float
+        default: Null
+      - name: boundary.rect.max_lon
+        in: query
+        description: |
+          
+        type: number
+        format: float
+        default: Null
+      - name: boundary.rect.min_lat
+        in: query
+        description: |
+          
+        type: number
+        format: float
+        default: Null
+      - name: boundary.rect.max_lat
+        in: query
+        description: |
+          
+        type: number
+        format: float
+        default: Null
+      - name: boundary.circle.lat
+        in: query
+        description: |
+          
+        type: number
+        format: float
+        default: Null
+      - name: boundary.circle.lon
+        in: query
+        description: |
+          
+        type: number
+        format: float
+        default: Null
+      - name: boundary.circle.radius
+        in: query
+        description: |
+          
+        type: number
+        format: float
+        default: 50
+      - name: sources
+        in: query
+        description: |
+          Restrict your search to specific sources. Searches all sources by default. You can either use the normal or short name. Sources are [`openstreetmap(osm)`](http://www.openstreetmap.org/), [`openaddresses(oa)`](http://openaddresses.io/), [`whosonfirst(wof)`](https://whosonfirst.org/), [`geonames(gn)`](http://www.geonames.org/).
+        type: array
+        items:
+          type: "string"
+          enum:
+          - osm
+          - oa
+          - wof
+          - gn
+          - openstreetmap
+          - openaddresses
+          - whosonfirst
+          - geonames
+        uniqueItems: true
+        default: ""
+      - name: layers
+        in: query
+        description: |
+          Restrict results to layer
+        type: string
+      - name: "boundary.(country"
+        in: query
+        description: |
+          Restrict results to single country. Possible values are [alpha-2 and alpha-3 country codes](https://en.wikipedia.org/wiki/ISO_3166-1). Example: `DEU` or `DE` for Germany.
+        type: string
+      - name: size
+        in: query
+        description: |
+          Set the number of returned results.
+        type: integer
+        format: int64
+        default: 10
+      responses:
+        200:
+          description: "Standard response for successfully processed requests. Returns\
+            \ JSON."
+          schema:
+            $ref: "#/definitions/Geocoderesponse"
+  /geocode/search/structured:
+    get:
+      tags:
+      - "Geocoding"
+      summary: "Structured Forward Geocoding Service (Pelias)"
+      description: |
+        Returns a JSON formatted list of objects corresponding to the search input.
+      parameters:
+      - name: "text"
+        required: true
+        in: query
+        type: string
+        default: none
+      responses:
+        200:
+          description: "Standard response for successfully processed requests. Returns\
+            \ JSON."
+          schema:
+            $ref: "#/definitions/Geocoderesponse"
+  /geocode/reverse:
+    get:
+      tags:
+      - "Geocoding"
+      summary: "Reverse Geocoding Service (Pelias)"
+      description: |
+         Returns the next enclosing object with an address tag which surrounds the given coordinate.
+      parameters:
+      - name: "text"
+        required: true
+        in: query
+        type: string
+        default: none
+      responses:
+        200:
+          description: "Standard response for successfully processed requests. Returns\
+            \ JSON."
+          schema:
+            $ref: "#/definitions/Geocoderesponse"
   /isochrones:
     get:
       tags:
@@ -801,247 +965,69 @@ paths:
             \ needed to fulfill the request."
         503:
           description: "The server is currently unavailable due to overload or maintenance."
-  /places:
-    get:
-      tags:
-      - "Places"
-      summary: "Location Service (GET)"
-      description: |
-        Returns Points of Interest in the area surrounding a point or
-        a line geometry. Use the post endpoint for requests that exceed the get
-        character limit.
-
-        - **pois:** Either `geometry` or `bbox` are required. `radius` required depending on `geometry`.
-        - **category_stats:** Either `geometry` or `bbox` are required. `radius` required depending on `geometry`.
-        - **category_list:** Additionally to this List the category groups and ids can be found [here](https://github.com/GIScience/openrouteservice-docs).
-      parameters:
-      - name: "api_key"
-        in: "query"
-        description: |
-          Insert your API Key here.
-        type: "string"
-        required: true
-        default: "your-api-key"  
-      - name: "request"
-        in: "query"
-        description: "`pois` will return POI geometry as well as requested details.\
-          \ `category_stats` returns a POI count for each requested category. `category_list`\
-          \ returns a list of all categories (only the id parameter will be considered).\n"
-        required: true
-        type: "string"
-        enum:
-        - "pois"
-        - "category_stats"
-        - "category_list"
-        default: "pois"
-      - name: "category_group_ids"
-        in: "query"
-        description: "Comma separated list of category group ids.\n"
-        type: "string"
-        default: "420"
-      - name: "category_ids"
-        in: "query"
-        description: "Comma separated list of category ids.\n"
-        type: "string"
-      - name: "name"
-        in: "query"
-        description: "Name to filter the POIs by. **Only finds exact matches**"
-        type: "string"
-      - name: "wheelchair"
-        in: "query"
-        description: "Filter returned features by wheelchair tag entries.\n"
-        type: "string"
-        enum:
-        - "true"
-        - "false"
-        - "limited"
-      - name: "smoking"
-        in: "query"
-        description: "Filter returned features by wheelchair tag entries.\n"
-        type: "string"
-        enum:
-        - "true"
-        - "false"
-      - name: "fee"
-        in: "query"
-        description: "Filter returned features by fee tag entries.\n"
-        type: "string"
-        enum:
-        - "true"
-        - "false"
-      - name: "bbox"
-        in: "query"
-        description: |
-          Defines a clipping bounding box. Can be defined additionally to `geometry`.
-        type: "array"
-        #default:
-        #  - 8.168082
-        #  - 47.272105
-        #  - 8.169165
-        #  - 48.272186
-        items:
-          type: "number"
-          format: "double"
-        maxItems: 4
-        minItems: 4
-      - name: "geometry"
-        in: "query"
-        description: "GeoJSON geometry object (Point, Linestring or Polygon)\n"
-        type: "string"
-        default: "{type: LineString, coordinates:[[8.167426,49.272556],[8.167588,47.272445],[8.168082,47.272105],[8.168224,47.271917],[8.16831,47.271941],[8.168926,47.272216],[8.169054,47.272278],[8.169165,47.272186],[8.169256,47.272103],[8.16948,47.271921],[8.170129,47.271408],[8.170265,47.271295],[8.170701,47.27097],[8.171496,47.270485],[8.171796,47.270296]]}"
-      - name: "radius"
-        in: "query"
-        description: |
-          Search radius in meters around the given (might be limited in the backend).
-          **Required if geometry is a Point or Linestring**
-        type: "number"
-        maximum: 1000
-        minimum: 0
-        format: "double"
-        default: 500
-      - name: "limit"
-        in: "query"
-        description: |
-          Maximum number of returned objects (might be limited in the
-          backend). **For** `request=pois` **only.**
-        type: "integer"
-        format: "int64"
-      - name: "sortby"
-        in: "query"
-        description: |
-          Sorts the returned features by _distance_ or _category_. **For** `request=pois` **only.**
-        type: "string"
-        enum:
-        - "distance"
-        - "category"
-      - name: "details"
-        in: "query"
-        description: |
-          Pipe (|) separated list of desired details. **For** `request=pois` **only.**
-        type: "array"
-        items:
-          type: "string"
-          enum:
-          - "address"
-          - "contact"
-          - "attributes"
-        collectionFormat: "pipes"
-        #default: 
-        #  - "address"
-        #  - "contact"
-        #  - "attributes"
-        uniqueItems: true
-      - name: "id"
-        in: "query"
-        description: "Arbitrary identification string of the request reflected in\
-          \ the meta information."
-        type: "string"
-      responses:
-        200:
-          description: "Standard response for successfully processed requests. Returns\
-            \ JSON."
-          schema:
-            $ref: "#/definitions/LocationsPoiResponse"
-        400:
-          description: "The request is incorrect and therefore can not be processed."
-        401:
-          description: "Authorization field missing."
-        403:
-          description: "Key not authorised."
-        405:
-          description: "The specified HTTP method is not supported. For more details,\
-            \ refer to the EndPoint documentation."
-        413:
-          description: "The request is larger than the server is able to process,\
-            \ the data provided in the request exceeds the capacity limit."
-        500:
-          description: |
-            An unexpected error was encountered and more detailed internal
-             errorcode is provided.
-
-            | Internal Code | Description                                        |
-            |:-------------:|----------------------------------------------------|
-            | 4000 |  Unable to parse JSON request. |
-            | 4001 |  Required parameter is missing. |
-            | 4002 |  Invalid parameter format. |
-            | 4003 |  Invalid parameter value. |
-            | 4004 |  Parameter value exceeds the maximum allowed limit. |
-            | 4006 |  Unable to parse the request to the export handler. |
-            | 4007 |  Unsupported export format. |
-            | 4008 |  Empty Element. |
-            | 4099 |  Unknown internal error. |
-          schema:
-            $ref: "#/definitions/error"
-        501:
-          description: "Indicates that the server does not support the functionality\
-            \ needed to fulfill the request."
-        503:
-          description: "The server is currently unavailable due to overload or maintenance."
+  /pois:
     post:
       tags:
-      - "Places"
-      summary: "Location Service (POST)"
+      - "Pois"
+      summary: "Poi Service"
       description: |
-        Returns Points of Interest in the area surrounding a geometry.
-        
-        Body example:
-        ```{'request':'pois','filter':{'category_group_ids':[560]},'details':'address','limit':1000,'radius':1000,'sortby':'category','geometry':{'type':'LineString','coordinates':[[8.167426,49.272556],[8.167588,47.272445],[8.168082,47.272105],[8.168224,47.271917],[8.16831,47.271941],[8.168926,47.272216],[8.169054,47.272278],[8.169165,47.272186],[8.169256,47.272103],[8.16948,47.271921],[8.170129,47.271408],[8.170265,47.271295],[8.170701,47.27097],[8.171496,47.270485],[8.171796,47.270296]]}}```
-      parameters:
-      - name: "api_key"
-        in: "query"
-        description: |
-          Insert your API Key here.
-        type: "string"
-        required: true
-        default: "your-api-key"
-      - name: "body"
-        in: "body"
-        description: "body for a post request"
-        schema:
-          $ref: "#/definitions/LocationsBody"
+        [Please refer to this external documentation for this endpoint](https://openpoiservice.docs.apiary.io/#)
+      # parameters:
+      # - name: "api_key"
+      #   in: "query"
+      #   description: |
+      #     Insert your API Key here.
+      #   type: "string"
+      #   required: true
+      #   default: "your-api-key"
+      # - name: "body"
+      #   in: "body"
+      #   description: "body for a post request"
+      #   schema:
+      #     $ref: "#/definitions/LocationsBody"
       responses:
         200:
           description: "Standard response for successfully processed requests. Returns\
-            \ JSON."
-          schema:
-            $ref: "#/definitions/LocationsPoiResponse"
-        400:
-          description: "The request is incorrect and therefore can not be processed."
-        401:
-          description: "Authorization field missing."
-        403:
-          description: "Key not authorised."
-        405:
-          description: "The specified HTTP method is not supported. For more details,\
-            \ refer to the EndPoint documentation."
-        413:
-          description: "The request is larger than the server is able to process,\
-            \ the data provided in the request exceeds the capacity limit."
-        500:
-          description: |
-            An unexpected error was encountered and more detailed internal
-            errorcode is provided.
+      #       \ JSON."
+      #     schema:
+      #       $ref: "#/definitions/LocationsPoiResponse"
+      #   400:
+      #     description: "The request is incorrect and therefore can not be processed."
+      #   401:
+      #     description: "Authorization field missing."
+      #   403:
+      #     description: "Key not authorised."
+      #   405:
+      #     description: "The specified HTTP method is not supported. For more details,\
+      #       \ refer to the EndPoint documentation."
+      #   413:
+      #     description: "The request is larger than the server is able to process,\
+      #       \ the data provided in the request exceeds the capacity limit."
+      #   500:
+      #     description: |
+      #       An unexpected error was encountered and more detailed internal
+      #       errorcode is provided.
 
-            | Internal Code | Description                                        |
-            |:-------------:|----------------------------------------------------|
-            | 4000 |  Unable to parse JSON request. |
-            | 4001 |  Required parameter is missing. |
-            | 4002 |  Invalid parameter format. |
-            | 4003 |  Invalid parameter value. |
-            | 4004 |  Parameter value exceeds the maximum allowed limit. |
-            | 4006 |  Unable to parse the request to the export handler. |
-            | 4007 |  Unsupported export format. |
-            | 4008 |  Empty Element. |
-            | 4099 |  Unknown internal error. |
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/error"
-        501:
-          description: "Indicates that the server does not support the functionality\
-            \ needed to fulfill the request."
-        503:
-          description: "The server is currently unavailable due to overload or maintenance."
+      #       | Internal Code | Description                                        |
+      #       |:-------------:|----------------------------------------------------|
+      #       | 4000 |  Unable to parse JSON request. |
+      #       | 4001 |  Required parameter is missing. |
+      #       | 4002 |  Invalid parameter format. |
+      #       | 4003 |  Invalid parameter value. |
+      #       | 4004 |  Parameter value exceeds the maximum allowed limit. |
+      #       | 4006 |  Unable to parse the request to the export handler. |
+      #       | 4007 |  Unsupported export format. |
+      #       | 4008 |  Empty Element. |
+      #       | 4099 |  Unknown internal error. |
+      #     schema:
+      #       type: "array"
+      #       items:
+      #         $ref: "#/definitions/error"
+      #   501:
+      #     description: "Indicates that the server does not support the functionality\
+      #       \ needed to fulfill the request."
+      #   503:
+      #     description: "The server is currently unavailable due to overload or maintenance."
   /matrix:
     get:
       tags:
@@ -2169,227 +2155,227 @@ definitions:
           - 48.23424
       range_type: "time"
       location_type: "start"
-  LocationsPoiResponse:
-    type: "object"
-    properties:
-      type:
-        type: "string"
-        default: "FeatureCollection"
-        example: "FeatureCollection"
-      features:
-        type: "array"
-        items:
-          $ref: "#/definitions/location_features"
-        example:
-          - {
-              "type": "Feature",
-              "geometry": {
-                "type": "Point",
-                "coordinates": [
-                  8.1691,
-                  47.444286
-                ]
-              },
-              "properties": {
-                "osm_id": "4491251090",
-                "category": "451",
-                "name": "Volg",
-                "distance": "115.08"
-              }
-            }
-          - {
-              "type": "Feature",
-              "geometry": {
-                "type": "Point",
-                "coordinates": [
-                  8.168594,
-                  47.380072
-                ]
-              },
-              "properties": {
-                "osm_id": "2754058215",
-                "category": "474",
-                "name": "Berner Früchte und Gemüse",
-                "phone": "+41 (0)62 891 34 50/51",
-                "website": "http://www.berner-gemuese.ch",
-                "distance": "76.58"
-              }
-            }
-      bbox:
-        type: "array"
-        items:
-          type: "number"
-          format: "double"
-        maxItems: 4
-        minItems: 4
-        description: "Contains the minimum bounding box of all features."
-        example:
-          - 8.168594
-          - 47.380072
-          -  8.1691
-          - 47.444286
-      info:
-        $ref: "#/definitions/LocationsPoiResponse_info"
-    title: "Places Poi Response Object"
-  location_features:
-    type: "object"
-    properties:
-      type:
-        type: "string"
-        default: "Feature"
-      geometry:
-        $ref: "#/definitions/location_features_geometry"
-      properties:
-        $ref: "#/definitions/location_features_properties"
-    title: "features object"
-  location_features_geometry:
-    properties:
-      type:
-        type: "string"
-        default: "Point"
-      coordinates:
-        type: "array"
-        items:
-          type: "number"
-          format: "double"
-        maxItems: 2
-        minItems: 2
-    title: "geometry object"
-  location_features_properties:
-    properties:
-      osm_id:
-        type: "string"
-      category:
-        type: "string"
-      name:
-        type: "string"
-      address:
-        type: "string"
-      phone:
-        type: "string"
-      website:
-        type: "string"
-      opening_hours:
-        type: "string"
-      wheelchair:
-        type: "string"
-      distance:
-        type: "string"
-    title: "properties object"
-  LocationsPoiResponse_info:
-    properties:
-      service:
-        type: "string"
-        description: "API endpoint used."
-        example: "places"
-      engine:
-        $ref: "#/definitions/info_engine"
-      attribution:
-        type: "string"
-        description: "Attribution for using our service."
-        example: "openrouteservice.org, OpenStreetMap contributors"
-      osm_file_md5_hash:
-        type: "string"
-        description: "md5 hash of the planet file which the graphs were built from."
-        example: "bbff3c042b19c04e3efdd9722e22db5f"
-      timestamp:
-        type: "integer"
-        format: "int64"
-        description: "Unix timestamp of the precise request date."
-        example: 1493306341299
-      query:
-        $ref: "#/definitions/LocationsPoiResponse_info_query"
-    title: "info object"
-  LocationsPoiResponse_info_query:
-    properties:
-      filter:
-        $ref: "#/definitions/LocationsPoiResponse_info_query_filter"
-      radius:
-        type: "integer"
-        format: "int64"
-      limit:
-        type: "integer"
-        format: "int64"
-    description: Summarizes your query settings.
-    title: "query object"
-    example:
-      filter:
-        category_group_ids:
-          - 420
-      radius: 500
-      limit: 20
-  LocationsPoiResponse_info_query_filter:
-    properties:
-      category_group_ids:
-        type: "array"
-        items:
-          type: "integer"
-          format: "int64"
-          example: 560
-      catoegory_ids:
-        type: "array"
-        items:
-          type: "integer"
-          format: "int64"
-          example: 561
-    title: "filter object"
-    description: "Filter the results by `category_group_ids` or `category_ids`. If\
-      \ both are specified the *group_ids* take priority."
-  LocationsBody:
-    properties:
-      filter:
-        $ref: "#/definitions/filter"
-      details:
-        type: "string"
-        example: "address|contact|attributes"
-        enum:
-        - "address"
-        - "contact"
-        - "attributes"
-      limit:
-        type: "integer"
-        format: "int64"
-        example: 1000
-      radius:
-        type: "integer"
-        format: "int64"
-        example: 500
-      sortby:
-        type: "string"
-        example: "category"
-        enum:
-        - "category"
-        - "distance"
-      bbox:
-        type: "string"
-        example: "8.165339,47.265966,8.179995,49.214088"
-        description: "The pattern for this bbox string is `\"minlon,minlat,maxlon,maxlat\"\
-          `"
-      geometry:
-        $ref: "#/definitions/geometry"
-    description: "**You have to specify at least one of** `bbox` **and** `geometry`\
-      \ !\n"
-    title:  "Locations(Post) body"
-  filter:
-    properties:
-      category_group_ids:
-        type: "array"
-        items:
-          type: "integer"
-          format: "int64"
-          example: 560
-      catoegory_ids:
-        type: "array"
-        items:
-          type: "integer"
-          format: "int64"
-          example: 561
-    title: "filter object"
-  geometry:
-    description: "The geometry can be either a Point , LineString or Polygon."
-    type: string
-    example:
-      "{type: LineString, coordinates:[[8.167426,49.272556],[8.167588,47.272445],[8.168082,47.272105],[8.168224,47.271917],[8.16831,47.271941],[8.168926,47.272216],[8.169054,47.272278],[8.169165,47.272186],[8.169256,47.272103],[8.16948,47.271921],[8.170129,47.271408],[8.170265,47.271295],[8.170701,47.27097],[8.171496,47.270485],[8.171796,47.270296]]}"
+  # LocationsPoiResponse:
+  #   type: "object"
+  #   properties:
+  #     type:
+  #       type: "string"
+  #       default: "FeatureCollection"
+  #       example: "FeatureCollection"
+  #     features:
+  #       type: "array"
+  #       items:
+  #         $ref: "#/definitions/location_features"
+  #       example:
+  #         - {
+  #             "type": "Feature",
+  #             "geometry": {
+  #               "type": "Point",
+  #               "coordinates": [
+  #                 8.1691,
+  #                 47.444286
+  #               ]
+  #             },
+  #             "properties": {
+  #               "osm_id": "4491251090",
+  #               "category": "451",
+  #               "name": "Volg",
+  #               "distance": "115.08"
+  #             }
+  #           }
+  #         - {
+  #             "type": "Feature",
+  #             "geometry": {
+  #               "type": "Point",
+  #               "coordinates": [
+  #                 8.168594,
+  #                 47.380072
+  #               ]
+  #             },
+  #             "properties": {
+  #               "osm_id": "2754058215",
+  #               "category": "474",
+  #               "name": "Berner Früchte und Gemüse",
+  #               "phone": "+41 (0)62 891 34 50/51",
+  #               "website": "http://www.berner-gemuese.ch",
+  #               "distance": "76.58"
+  #             }
+  #           }
+  #     bbox:
+  #       type: "array"
+  #       items:
+  #         type: "number"
+  #         format: "double"
+  #       maxItems: 4
+  #       minItems: 4
+  #       description: "Contains the minimum bounding box of all features."
+  #       example:
+  #         - 8.168594
+  #         - 47.380072
+  #         -  8.1691
+  #         - 47.444286
+  #     info:
+  #       $ref: "#/definitions/LocationsPoiResponse_info"
+  #   title: "Places Poi Response Object"
+  # location_features:
+  #   type: "object"
+  #   properties:
+  #     type:
+  #       type: "string"
+  #       default: "Feature"
+  #     geometry:
+  #       $ref: "#/definitions/location_features_geometry"
+  #     properties:
+  #       $ref: "#/definitions/location_features_properties"
+  #   title: "features object"
+  # location_features_geometry:
+  #   properties:
+  #     type:
+  #       type: "string"
+  #       default: "Point"
+  #     coordinates:
+  #       type: "array"
+  #       items:
+  #         type: "number"
+  #         format: "double"
+  #       maxItems: 2
+  #       minItems: 2
+  #   title: "geometry object"
+  # location_features_properties:
+  #   properties:
+  #     osm_id:
+  #       type: "string"
+  #     category:
+  #       type: "string"
+  #     name:
+  #       type: "string"
+  #     address:
+  #       type: "string"
+  #     phone:
+  #       type: "string"
+  #     website:
+  #       type: "string"
+  #     opening_hours:
+  #       type: "string"
+  #     wheelchair:
+  #       type: "string"
+  #     distance:
+  #       type: "string"
+  #   title: "properties object"
+  # LocationsPoiResponse_info:
+  #   properties:
+  #     service:
+  #       type: "string"
+  #       description: "API endpoint used."
+  #       example: "places"
+  #     engine:
+  #       $ref: "#/definitions/info_engine"
+  #     attribution:
+  #       type: "string"
+  #       description: "Attribution for using our service."
+  #       example: "openrouteservice.org, OpenStreetMap contributors"
+  #     osm_file_md5_hash:
+  #       type: "string"
+  #       description: "md5 hash of the planet file which the graphs were built from."
+  #       example: "bbff3c042b19c04e3efdd9722e22db5f"
+  #     timestamp:
+  #       type: "integer"
+  #       format: "int64"
+  #       description: "Unix timestamp of the precise request date."
+  #       example: 1493306341299
+  #     query:
+  #       $ref: "#/definitions/LocationsPoiResponse_info_query"
+  #   title: "info object"
+  # LocationsPoiResponse_info_query:
+  #   properties:
+  #     filter:
+  #       $ref: "#/definitions/LocationsPoiResponse_info_query_filter"
+  #     radius:
+  #       type: "integer"
+  #       format: "int64"
+  #     limit:
+  #       type: "integer"
+  #       format: "int64"
+  #   description: Summarizes your query settings.
+  #   title: "query object"
+  #   example:
+  #     filter:
+  #       category_group_ids:
+  #         - 420
+  #     radius: 500
+  #     limit: 20
+  # LocationsPoiResponse_info_query_filter:
+  #   properties:
+  #     category_group_ids:
+  #       type: "array"
+  #       items:
+  #         type: "integer"
+  #         format: "int64"
+  #         example: 560
+  #     catoegory_ids:
+  #       type: "array"
+  #       items:
+  #         type: "integer"
+  #         format: "int64"
+  #         example: 561
+  #   title: "filter object"
+  #   description: "Filter the results by `category_group_ids` or `category_ids`. If\
+  #     \ both are specified the *group_ids* take priority."
+  # LocationsBody:
+  #   properties:
+  #     filter:
+  #       $ref: "#/definitions/filter"
+  #     details:
+  #       type: "string"
+  #       example: "address|contact|attributes"
+  #       enum:
+  #       - "address"
+  #       - "contact"
+  #       - "attributes"
+  #     limit:
+  #       type: "integer"
+  #       format: "int64"
+  #       example: 1000
+  #     radius:
+  #       type: "integer"
+  #       format: "int64"
+  #       example: 500
+  #     sortby:
+  #       type: "string"
+  #       example: "category"
+  #       enum:
+  #       - "category"
+  #       - "distance"
+  #     bbox:
+  #       type: "string"
+  #       example: "8.165339,47.265966,8.179995,49.214088"
+  #       description: "The pattern for this bbox string is `\"minlon,minlat,maxlon,maxlat\"\
+  #         `"
+  #     geometry:
+  #       $ref: "#/definitions/geometry"
+  #   description: "**You have to specify at least one of** `bbox` **and** `geometry`\
+  #     \ !\n"
+  #   title:  "Locations(Post) body"
+  # filter:
+  #   properties:
+  #     category_group_ids:
+  #       type: "array"
+  #       items:
+  #         type: "integer"
+  #         format: "int64"
+  #         example: 560
+  #     catoegory_ids:
+  #       type: "array"
+  #       items:
+  #         type: "integer"
+  #         format: "int64"
+  #         example: 561
+  #   title: "filter object"
+  # geometry:
+  #   description: "The geometry can be either a Point , LineString or Polygon."
+  #   type: string
+  #   example:
+  #     "{type: LineString, coordinates:[[8.167426,49.272556],[8.167588,47.272445],[8.168082,47.272105],[8.168224,47.271917],[8.16831,47.271941],[8.168926,47.272216],[8.169054,47.272278],[8.169165,47.272186],[8.169256,47.272103],[8.16948,47.271921],[8.170129,47.271408],[8.170265,47.271295],[8.170701,47.27097],[8.171496,47.270485],[8.171796,47.270296]]}"
   MatrixBody:
     properties:
       profile:
