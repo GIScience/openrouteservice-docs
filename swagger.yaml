@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
-  description: "This is the openrouteservice API documentation. Version `4.5`"
-  version: "4.5"
+  description: "This is the openrouteservice API documentation. Version `4.6`"
+  version: "4.6"
   title: "Openrouteservice"
   contact:
     email: "support@openrouteservice.org"
@@ -23,7 +23,7 @@ tags:
 schemes:
 - "https"
 produces:
-- "text/json; charset=utf-8"
+- "application/json; charset=utf-8"
 security:
 - UserSecurity: [api_key]
 paths:
