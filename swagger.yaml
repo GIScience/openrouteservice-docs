@@ -1116,8 +1116,8 @@ paths:
           in: "query"
           description: |
             Specifies a list of returned metrics separated with a pipe character (|).
-            * `distance` - Returns distance matrix for specified points in *seconds*.
-            * `duration` - Returns duration matrix for specified points in defined `units`.
+            * `distance` - Returns distance matrix for specified points in defined `units`.
+            * `duration` - Returns duration matrix for specified points in *seconds*.
           #* `weight`   - Returns weight matrix for specified points.
           type: "array"
           collectionFormat: "pipes"
@@ -2449,8 +2449,8 @@ definitions:
       metrics:
         description: |
           Specifies a list of returned metrics separated with a pipe character (|).
-          * `distance` - Returns distance matrix for specified points in *seconds*.
-          * `duration` - Returns duration matrix for specified points in defined `units`.
+          * `distance` - Returns distance matrix for specified points in defined `units`.
+          * `duration` - Returns duration matrix for specified points in *seconds*.
         #* `weight`   - Returns weight matrix for specified points.
         type: "string"
         uniqueItems: true
