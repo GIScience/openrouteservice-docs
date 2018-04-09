@@ -89,8 +89,9 @@ paths:
         in: "query"
         description: "Specifies the response format. The GPX schema the response is validated against can be found [here](https://raw.githubusercontent.com/GIScience/openrouteservice-schema/master/gpx/v1/ors-gpx.xsd)."
         type: "string"
-        default: "geojson"
+        default: "json"
         enum:
+        - "json"
         - "geojson"
         - "gpx"
       - name: "units"
@@ -132,7 +133,7 @@ paths:
       - name: "geometry_format"
         in: "query"
         description: |
-          Sets the format of the returned geometry. Note that for `elevation=true` `encodedpolyline` also encodes the height information of each point.
+          Sets the format of the returned geometry. Note that for `elevation=true` `encodedpolyline` also encodes the height information of each point. If `format=geojson`, this parameter has no effect.
           To decode, please use a suitable library (for example [graphhopper](https://github.com/graphhopper/graphhopper/blob/master/web/src/main/java/com/graphhopper/http/WebHelper.java)).
         type: "string"
         default: "encodedpolyline"
@@ -1172,8 +1173,8 @@ paths:
           in: "query"
           description: |
             Specifies a list of returned metrics separated with a pipe character (|).
-            * `distance` - Returns distance matrix for specified points in *seconds*.
-            * `duration` - Returns duration matrix for specified points in defined `units`.
+            * `distance` - Returns distance matrix for specified points in defined `units`.
+            * `duration` - Returns duration matrix for specified points in *seconds*.
           #* `weight`   - Returns weight matrix for specified points.
           type: "array"
           collectionFormat: "pipes"
@@ -2505,8 +2506,8 @@ definitions:
       metrics:
         description: |
           Specifies a list of returned metrics separated with a pipe character (|).
-          * `distance` - Returns distance matrix for specified points in *seconds*.
-          * `duration` - Returns duration matrix for specified points in defined `units`.
+          * `distance` - Returns distance matrix for specified points in defined `units`.
+          * `duration` - Returns duration matrix for specified points in *seconds*.
         #* `weight`   - Returns weight matrix for specified points.
         type: "string"
         uniqueItems: true
