@@ -16,8 +16,8 @@ tags:
   description: "Resolve input coordinates to addresses and vice versa"
 - name: "Isochrones"
   description: "Obtain areas of reachability from given locations"
-- name: "Pois"
-  description: "Search for points of interest around points or geometries"
+# - name: "Pois"
+#   description: "Search for points of interest around points or geometries"
 - name: "Matrix"
   description: "Obtain one-to-many, many-to-one and many-to-many matrices for time and distance"
 schemes:
@@ -426,7 +426,7 @@ paths:
   /geocoding:
     get:
       tags:
-      - "Geocoding"
+      - "Geocode"
       summary: "Geocoding Service (deprecated)"
       description: |
         This endpoint can be used for geocoding (specified `query`) and reverse geocoding requests (specified `location`)
@@ -538,238 +538,241 @@ paths:
   /geocode/search:
     get:
       tags:
-      - "Geocoding"
-      summary: "Forward Geocoding Service (Pelias)"
+      - "Geocode"
+      summary: "Forward Geocoding Service"
       description: |
-        Returns a JSON formatted list of objects corresponding to the search input. `boundary.*`-parameters can be combined if they are [overlapping](https://github.com/pelias/documentation/blob/master/search.md#specify-multiple-boundaries). 
-      parameters:
-      - name: "api_key"
-        in: "query"
-        description: |
-          Insert your API Key here.
-        type: "string"
-        required: true
-        default: "your-api-key"
-      - name: "text"
-        required: true
-        in: query
-        description: |
-          Name of location, street address or postal code.
-        type: string
-        default: Heidelberg
-      - name: focus.point.lat
-        in: query
-        description: |
-          Latitude of the `focus.point`. Specify the focus point to order results by linear distance to this point. Works for up to 100 kilometers distance. Use with `focus.point.lon`.
-        type: number
-        format: float
-        default: Null
-      - name: focus.point.lon
-        in: query
-        description: |
-          Longitude of the `focus.point`. Specify the focus point to order results by linear distance to this point. Works for up to 100 kilometers distance.  Use with `focus.point.lat`.          
-        type: number
-        format: float
-        default: Null
-      - name: boundary.rect.min_lon
-        in: query
-        description: |
-          Left border of rectangular boundary to narrow results.
-        type: number
-        format: float
-        default: Null
-      - name: boundary.rect.max_lon
-        in: query
-        description: |
-          Right border of rectangular boundary to narrow results.
-        type: number
-        format: float
-        default: Null
-      - name: boundary.rect.min_lat
-        in: query
-        description: |
-          Bottom border of rectangular boundary to narrow results.
-        type: number
-        format: float
-        default: Null
-      - name: boundary.rect.max_lat
-        in: query
-        description: |
-          Top border of rectangular boundary to narrow results.
-        type: number
-        format: float
-        default: Null
-      - name: boundary.circle.lat
-        in: query
-        description: |
-          Center Latitude of circular boundary to narrow results. Use with `boundary.circle.lon` & `boundary.circle.radius`.
-        type: number
-        format: float
-        default: Null
-      - name: boundary.circle.lon
-        in: query
-        description: |
-          Center Longitude of circular boundary to narrow results. Use with `boundary.circle.lat` & `boundary.circle.radius`.
-        type: number
-        format: float
-        default: Null
-      - name: boundary.circle.radius
-        in: query
-        description: |
-          Radius of circular boundary around the center coordinate. Use with `boundary.circle.lon` & `boundary.circle.lat`.
-        type: number
-        format: float
-        default: 50
-      - name: "boundary.country"
-        in: query
-        description: |
-          Restrict results to single country. Possible values are [alpha-2 and alpha-3 country codes](https://en.wikipedia.org/wiki/ISO_3166-1). Example: `DEU` or `DE` for Germany.
-        type: string
-      - name: sources
-        in: query
-        description: |
-          Restrict your search to specific sources. Searches all sources by default. You can either use the normal or short name. Sources are [`openstreetmap(osm)`](http://www.openstreetmap.org/), [`openaddresses(oa)`](http://openaddresses.io/), [`whosonfirst(wof)`](https://whosonfirst.org/), [`geonames(gn)`](http://www.geonames.org/).
-        type: array
-        items:
-          type: "string"
-          enum:
-          - osm
-          - oa
-          - wof
-          - gn
-          - openstreetmap
-          - openaddresses
-          - whosonfirst
-          - geonames
-        uniqueItems: true
-        default: ""
-      - name: layers
-        in: query
-        description: |
-          Filter results by layer (place type)
+        Returns a JSON formatted list of objects corresponding to the search input. `boundary.*`-parameters can be combined if they are overlapping. [Please refer to this external Documentation](https://github.com/pelias/documentation/blob/master/search.md#search-the-world)
+      # parameters:
+      # - name: "api_key"
+      #   in: "query"
+      #   description: |
+      #     Insert your API Key here.
+      #   type: "string"
+      #   required: true
+      #   default: "your-api-key"
+      # - name: "text"
+      #   required: true
+      #   in: query
+      #   description: |
+      #     Name of location, street address or postal code.
+      #   type: string
+      #   default: Heidelberg
+      # - name: focus.point.lat
+      #   in: query
+      #   description: |
+      #     Latitude of the `focus.point`. Specify the focus point to order results by linear distance to this point. Works for up to 100 kilometers distance. Use with `focus.point.lon`.
+      #   type: number
+      #   format: float
+      #   default: Null
+      # - name: focus.point.lon
+      #   in: query
+      #   description: |
+      #     Longitude of the `focus.point`. Specify the focus point to order results by linear distance to this point. Works for up to 100 kilometers distance.  Use with `focus.point.lat`.          
+      #   type: number
+      #   format: float
+      #   default: Null
+      # - name: boundary.rect.min_lon
+      #   in: query
+      #   description: |
+      #     Left border of rectangular boundary to narrow results.
+      #   type: number
+      #   format: float
+      #   default: Null
+      # - name: boundary.rect.max_lon
+      #   in: query
+      #   description: |
+      #     Right border of rectangular boundary to narrow results.
+      #   type: number
+      #   format: float
+      #   default: Null
+      # - name: boundary.rect.min_lat
+      #   in: query
+      #   description: |
+      #     Bottom border of rectangular boundary to narrow results.
+      #   type: number
+      #   format: float
+      #   default: Null
+      # - name: boundary.rect.max_lat
+      #   in: query
+      #   description: |
+      #     Top border of rectangular boundary to narrow results.
+      #   type: number
+      #   format: float
+      #   default: Null
+      # - name: boundary.circle.lat
+      #   in: query
+      #   description: |
+      #     Center Latitude of circular boundary to narrow results. Use with `boundary.circle.lon` & `boundary.circle.radius`.
+      #   type: number
+      #   format: float
+      #   default: Null
+      # - name: boundary.circle.lon
+      #   in: query
+      #   description: |
+      #     Center Longitude of circular boundary to narrow results. Use with `boundary.circle.lat` & `boundary.circle.radius`.
+      #   type: number
+      #   format: float
+      #   default: Null
+      # - name: boundary.circle.radius
+      #   in: query
+      #   description: |
+      #     Radius of circular boundary around the center coordinate. Use with `boundary.circle.lon` & `boundary.circle.lat`.
+      #   type: number
+      #   format: float
+      #   default: 50
+      # - name: "boundary.country"
+      #   in: query
+      #   description: |
+      #     Restrict results to single country. Possible values are [alpha-2 and alpha-3 country codes](https://en.wikipedia.org/wiki/ISO_3166-1). Example: `DEU` or `DE` for Germany.
+      #   type: string
+      # - name: sources
+      #   in: query
+      #   description: |
+      #     Restrict your search to specific sources. Searches all sources by default. You can either use the normal or short name. Sources are [`openstreetmap(osm)`](http://www.openstreetmap.org/), [`openaddresses(oa)`](http://openaddresses.io/), [`whosonfirst(wof)`](https://whosonfirst.org/), [`geonames(gn)`](http://www.geonames.org/).
+      #   type: array
+      #   items:
+      #     type: "string"
+      #     enum:
+      #     - osm
+      #     - oa
+      #     - wof
+      #     - gn
+      #     - openstreetmap
+      #     - openaddresses
+      #     - whosonfirst
+      #     - geonames
+      #   uniqueItems: true
+      #   default: ""
+      # - name: layers
+      #   in: query
+      #   description: |
+      #     Filter results by layer (place type)
 
-            |layer|description|
-            |----|----|
-            |`venue`|points of interest, businesses, things with walls|
-            |`address`|places with a street address|
-            |`street`|streets,roads,highways|
-            |`neighbourhood`|social communities, neighbourhoods|
-            |`borough`|a local administrative boundary, currently only used for New York City|
-            |`localadmin`|local administrative boundaries|
-            |`locality`|towns, hamlets, cities|
-            |`county`|official governmental area; usually bigger than a locality, almost always smaller than a region|
-            |`macrocounty`|a related group of counties. Mostly in Europe.|
-            |`region`|states and provinces|
-            |`macroregion`|a related group of regions. Mostly in Europe|
-            |`country`|places that issue passports, nations, nation-states|
-            |`coarse`|alias for simultaneously using all administrative layers (everything except `venue` and `address`)|
+      #       |layer|description|
+      #       |----|----|
+      #       |`venue`|points of interest, businesses, things with walls|
+      #       |`address`|places with a street address|
+      #       |`street`|streets,roads,highways|
+      #       |`neighbourhood`|social communities, neighbourhoods|
+      #       |`borough`|a local administrative boundary, currently only used for New York City|
+      #       |`localadmin`|local administrative boundaries|
+      #       |`locality`|towns, hamlets, cities|
+      #       |`county`|official governmental area; usually bigger than a locality, almost always smaller than a region|
+      #       |`macrocounty`|a related group of counties. Mostly in Europe.|
+      #       |`region`|states and provinces|
+      #       |`macroregion`|a related group of regions. Mostly in Europe|
+      #       |`country`|places that issue passports, nations, nation-states|
+      #       |`coarse`|alias for simultaneously using all administrative layers (everything except `venue` and `address`)|
 
-        type: array
-        items:
-          type: string
-          enum: 
-          - address
-          - venue
-          - neighbourhood
-          - locality
-          - borough
-          - localadmin
-          - county
-          - macrocounty
-          - region
-          - macroregion
-          - country
-          - coarse
-          uniqueItems: true
-          default: ""
-      - name: size
-        in: query
-        description: |
-          Set the number of returned results.
-        type: integer
-        format: int64
-        default: 10
+      #   type: array
+      #   items:
+      #     type: string
+      #     enum: 
+      #     - address
+      #     - venue
+      #     - neighbourhood
+      #     - locality
+      #     - borough
+      #     - localadmin
+      #     - county
+      #     - macrocounty
+      #     - region
+      #     - macroregion
+      #     - country
+      #     - coarse
+      #     uniqueItems: true
+      #     default: ""
+      # - name: size
+      #   in: query
+      #   description: |
+      #     Set the number of returned results.
+      #   type: integer
+      #   format: int64
+      #   default: 10
       responses:
         200:
-          description: "Standard response for successfully processed requests. Returns\
-            \ JSON."
-          schema:
-            $ref: "#/definitions/Geocoderesponse"
+          # description: "Standard response for successfully processed requests. Returns\
+          #   \ JSON."
+          description: "Please refer to [this external documentation](https://github.com/pelias/documentation/blob/master/search.md#search-the-world) for this endpoint"
+      #     schema:
+      #       $ref: "#/definitions/Geocoderesponse"
   /geocode/search/structured:
     get:
       tags:
-      - "Geocoding"
-      summary: "Structured Forward Geocoding Service (Pelias)"
+      - "Geocode"
+      summary: "Structured Forward Geocoding Service"
       description: |
-        Returns a JSON formatted list of objects corresponding to the search input.
-      parameters:
-      - name: "country"
-        in: query
-        description: |
-          Search for full country name, [alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or [alpha 3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) codes.
-        type: string
-        default: none
-      - name: "postalcode"
-        in: query
-        description: |
-          Search for postal codes. Postal codes are unique within a country so they are useful in geocoding as a shorthand for a fairly granular geographical location.
-        type: string
-        default: none
-      - name: "region"
-        in: query
-        description: |
-          Search for regions. Regions are normally the first-level administrative divisions within countries. For US-regions [common abbreviations](https://en.wikipedia.org/wiki/List_of_U.S._state_abbreviations) can be used.
-        type: string
-        default: none
-      - name: "county"
-        in: query
-        description: |
-          Search for counties. Counties are administrative divisions between localities and regions. Can be useful when attempting to disambiguate between localities.
-        type: string
-        default: none
-      - name: "locality"
-        in: query
-        description: |
-          Search for localities. Localities are equivalent to what are commonly referred to as *cities*.
-        type: string
-        default: none
-      - name: "borough"
-        in: query
-        description: |
-          Search for boroughs. Boroughs are mostly known in the context of New York City, even though they may exist in other cities, such as Mexico City. Example: `Manhatten`.
-        type: string
-        default: none
-      - name: "neighbourhood"
-        in: query
-        description: |
-          Search for neighbourhoods. Neighbourhoods are vernacular geographic entities that may not necessarily be official administrative divisions but are important nonetheless. Example: `Notting Hill`.
-        type: string
-        default: none
+        Returns a JSON formatted list of objects corresponding to the search input. [Please refer to this external Documentation](https://github.com/pelias/documentation/blob/master/structured-geocoding.md#structured-geocoding)
+      # parameters:
+      # - name: "country"
+      #   in: query
+      #   description: |
+      #     Search for full country name, [alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or [alpha 3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) codes.
+      #   type: string
+      #   default: none
+      # - name: "postalcode"
+      #   in: query
+      #   description: |
+      #     Search for postal codes. Postal codes are unique within a country so they are useful in geocoding as a shorthand for a fairly granular geographical location.
+      #   type: string
+      #   default: none
+      # - name: "region"
+      #   in: query
+      #   description: |
+      #     Search for regions. Regions are normally the first-level administrative divisions within countries. For US-regions [common abbreviations](https://en.wikipedia.org/wiki/List_of_U.S._state_abbreviations) can be used.
+      #   type: string
+      #   default: none
+      # - name: "county"
+      #   in: query
+      #   description: |
+      #     Search for counties. Counties are administrative divisions between localities and regions. Can be useful when attempting to disambiguate between localities.
+      #   type: string
+      #   default: none
+      # - name: "locality"
+      #   in: query
+      #   description: |
+      #     Search for localities. Localities are equivalent to what are commonly referred to as *cities*.
+      #   type: string
+      #   default: none
+      # - name: "borough"
+      #   in: query
+      #   description: |
+      #     Search for boroughs. Boroughs are mostly known in the context of New York City, even though they may exist in other cities, such as Mexico City. Example: `Manhatten`.
+      #   type: string
+      #   default: none
+      # - name: "neighbourhood"
+      #   in: query
+      #   description: |
+      #     Search for neighbourhoods. Neighbourhoods are vernacular geographic entities that may not necessarily be official administrative divisions but are important nonetheless. Example: `Notting Hill`.
+      #   type: string
+      #   default: none
       responses:
         200:
-          description: "Standard response for successfully processed requests. Returns\
-            \ JSON."
-          schema:
-            $ref: "#/definitions/Geocoderesponse"
+          # description: "Standard response for successfully processed requests. Returns\
+          #   \ JSON."
+          description: "Please refer to [this external documentation](https://github.com/pelias/documentation/blob/master/structured-geocoding.md#structured-geocoding) for this endpoint"
+          # schema:
+          #   $ref: "#/definitions/Geocoderesponse"
   /geocode/reverse:
     get:
       tags:
-      - "Geocoding"
-      summary: "Reverse Geocoding Service (Pelias)"
+      - "Geocode"
+      summary: "Reverse Geocoding Service"
       description: |
-         Returns the next enclosing object with an address tag which surrounds the given coordinate.
-      parameters:
-      - name: "text"
-        required: true
-        in: query
-        type: string
-        default: none
+         Returns the next enclosing object with an address tag which surrounds the given coordinate. [Please refer to this external Documentation]()
+      # parameters:
+      # - name: "text"
+      #   required: true
+      #   in: query
+      #   type: string
+      #   default: none
       responses:
         200:
-          description: "Standard response for successfully processed requests. Returns\
-            \ JSON."
-          schema:
-            $ref: "#/definitions/Geocoderesponse"
+          # description: "Standard response for successfully processed requests. Returns\
+          #   \ JSON."
+          description: "Please refer to [this external documentation](https://github.com/pelias/documentation/blob/master/reverse.md#reverse-geocoding) for this endpoint"
+          # schema:
+          #   $ref: "#/definitions/Geocoderesponse"
   /isochrones:
     get:
       tags:
@@ -1037,13 +1040,13 @@ paths:
             \ needed to fulfill the request."
         503:
           description: "The server is currently unavailable due to overload or maintenance."
-  /pois:
-    post:
-      tags:
-      - "Pois"
-      summary: "Poi Service"
-      description: |
-        [Please refer to this external documentation for this endpoint](https://openpoiservice.docs.apiary.io/#)
+  # /pois:
+  #   post:
+  #     tags:
+  #     - "Pois"
+  #     summary: "Poi Service"
+  #     description: |
+  #       [Please refer to this external documentation for this endpoint](https://openpoiservice.docs.apiary.io/#)
       # parameters:
       # - name: "api_key"
       #   in: "query"
@@ -1057,9 +1060,9 @@ paths:
       #   description: "body for a post request"
       #   schema:
       #     $ref: "#/definitions/LocationsBody"
-      responses:
-        200:
-          description: "Standard response for successfully processed requests. Returns\
+      # responses:
+        # 200:
+        #   description: "Standard response for successfully processed requests. Returns\
       #       \ JSON."
       #     schema:
       #       $ref: "#/definitions/LocationsPoiResponse"
