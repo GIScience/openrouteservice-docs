@@ -168,7 +168,7 @@ paths:
         - "text"
       - name: "roundabout_exits"
         in: "query"
-        description: "Provides bearings of the entrance and all passed roundabout exits. Adds the `exit_bearings` array to the `step` object in the response. Default: `false`."
+        description: "Provides bearings of the entrance and all passed roundabout exits. Adds the `exit_bearings` array to the `step` object in the response."
         type: boolean
         default: false
         enum:
@@ -254,8 +254,6 @@ paths:
           - "traildifficulty"
         collectionFormat: "pipes"
         uniqueItems: true
-        default: 
-          - "steepness"
       - name: optimized
         in: query
         description: |
@@ -839,7 +837,6 @@ paths:
           \ value in **seconds** for time and **meters** for distance.\n"
         type: "number"
         format: "double"
-        default: 20
       - name: "units"
         in: "query"
         description: "Unit format for  `range_type=distance`.\n"
@@ -873,8 +870,6 @@ paths:
           - "area"
           - "reachfactor"
           - "total_pop"
-        default:
-          - "area"
         collectionFormat: "pipes"
         uniqueItems: true
       - name: "options"
@@ -1160,7 +1155,7 @@ paths:
           items:
             type: string
           default:
-            - "0,1,2"
+            - "all"
         - name: destinations
           in: "query"
           description: |
