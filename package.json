@@ -1,0 +1,17 @@
+{
+  "name": "openrouteservice-docs",
+  "version": "4.5.2",
+  "description": "This repository stores the swagger specifications of openrouteservice as well as additional API information.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GIScience/openrouteservice-docs.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GIScience/openrouteservice-docs/issues"
+  },
+  "homepage": "https://openrouteservice.org",
+  "dependencies": {
+    "swagger-merger": "^1.3.0"
+  }
+}

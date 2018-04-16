@@ -16,8 +16,8 @@ tags:
   description: "Resolve input coordinates to addresses and vice versa"
 - name: "Isochrones"
   description: "Obtain areas of reachability from given locations"
-# - name: "Pois"
-#   description: "Search for points of interest around points or geometries"
+- name: "Pois"
+  description: "Search for points of interest around points or geometries"
 - name: "Matrix"
   description: "Obtain one-to-many, many-to-one and many-to-many matrices for time and distance"
 schemes:
@@ -1035,6 +1035,7 @@ paths:
             \ needed to fulfill the request."
         503:
           description: "The server is currently unavailable due to overload or maintenance."
+  $ref: "https://raw.githubusercontent.com/GIScience/openpoiservice/master/openpoiservice/server/api/pois_post.yaml#paths"
   # /pois:
   #   post:
   #     tags:
@@ -2225,6 +2226,7 @@ definitions:
           - 48.23424
       range_type: "time"
       location_type: "start"
+  $ref: "https://raw.githubusercontent.com/GIScience/openpoiservice/master/openpoiservice/server/api/pois_post.yaml#definitions"
   # LocationsPoiResponse:
   #   type: "object"
   #   properties:
