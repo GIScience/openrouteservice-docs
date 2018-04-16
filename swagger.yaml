@@ -757,7 +757,7 @@ paths:
       - "Geocode"
       summary: "Reverse Geocoding Service"
       description: |
-         Returns the next enclosing object with an address tag which surrounds the given coordinate. [Please refer to this external Documentation]()
+         Returns the next enclosing object with an address tag which surrounds the given coordinate. [Please refer to this external Documentation](https://github.com/pelias/documentation/blob/master/reverse.md#reverse-geocoding)
       # parameters:
       # - name: "text"
       #   required: true
