@@ -10,6 +10,7 @@ This readme stores additional information, examples and encoding tables that go 
   - [Waytype](#waytype-speeds)
   - [Surface](#surface-speeds)
   - [Tracktype](#tracktype-speeds)
+  - [Pedestrian Speeds](#$pedestrian-speeds)
   - [Country Speed Sets](#country-speed-sets)
 - [URL Encoding](#url-encoding)
 - [Geocoding structured query](#geocoding-structured-query)
@@ -36,7 +37,7 @@ This readme stores additional information, examples and encoding tables that go 
 
 # Travel Time Calculation
 
-The travel time is calculated for each segment by using speed-limits for different [waytypes](https://wiki.openstreetmap.org/wiki/Key:highway) and adjusting them for different [grades](https://wiki.openstreetmap.org/wiki/Key:tracktype) of the road. For `cycling` profiles also the steepness and the [surface](https://wiki.openstreetmap.org/wiki/Key:surface) is considered. These limits can be reduced by setting the `maxSpeed` parameter in the [options](#routing-options). The final [average speed-limits](#avgspeed) can be requested by adding `AvgSpeed` to the `extra_info` parameter. The following table shows the initial speed-limits used for the main profiles:
+The travel time is calculated for each segment by using speed-limits for different [waytypes](https://wiki.openstreetmap.org/wiki/Key:highway) and adjusting them for different [grades](https://wiki.openstreetmap.org/wiki/Key:tracktype) or [surfaces](https://wiki.openstreetmap.org/wiki/Key:surface) of the road. If multiple values apply for this segment, the lowest value is used. For `cycling` profiles also the steepness is considered. These limits can be reduced by setting the `maxSpeed` parameter in the [options](#routing-options). The final [average speed-limits](#avgspeed) can be requested by adding `AvgSpeed` to the `extra_info` parameter. The following table shows the initial speed-limits used for the main profiles:
 
 _(all Values in km/h)_
 
@@ -70,48 +71,64 @@ Corresponds to the OSM [highway](https://wiki.openstreetmap.org/wiki/Key:highway
 ## Surface Speeds
 Corresponds to the OSM [surface](https://wiki.openstreetmap.org/wiki/Key:surface) tag value.
 
-  | Surface \ Profile -> | driving-car | driving-hgv |
-  |:--------------------:|:-----------:|:-----------:|
-  |        asphalt       |      -1     |      -1     |
-  |       concrete       |      -1     |      -1     |
-  |    concrete:plates   |      -1     |      -1     |
-  |    concrete:lanes    |      -1     |      -1     |
-  |         paved        |      -1     |      -1     |
-  |        cement        |      80     |      60     |
-  |       compacted      |      80     |      60     |
-  |      fine_gravel     |      60     |      50     |
-  |     paving_stones    |      40     |      40     |
-  |         metal        |      40     |      40     |
-  |        bricks        |      40     |      40     |
-  |         grass        |      30     |      30     |
-  |         wood         |      30     |      30     |
-  |         sett         |      30     |      30     |
-  |      grass_paver     |      30     |      30     |
-  |        gravel        |      30     |      30     |
-  |        unpaved       |      30     |      30     |
-  |        ground        |      30     |      30     |
-  |         dirt         |      30     |      30     |
-  |      pebblestone     |      30     |      30     |
-  |        tartan        |      30     |      30     |
-  |      cobblestone     |      20     |      20     |
-  |         clay         |      20     |      20     |
-  |         earth        |      15     |      15     |
-  |         stone        |      15     |      15     |
-  |         rocky        |      15     |      15     |
-  |         sand         |      15     |      15     |
-  |          mud         |      10     |      10     |
-  |       unknown:       |      30     |      30     |
+  | Surface \ Profile -> | driving-car | driving-hgv | cycling-regular |
+  |:--------------------:|:-----------:|:-----------:|:---------------:|
+  |        asphalt       |      -1     |      -1     |        18       |
+  |       concrete       |      -1     |      -1     |        18       |
+  |    concrete:plates   |      -1     |      -1     |        16       |
+  |    concrete:lanes    |      -1     |      -1     |        16       |
+  |         paved        |      -1     |      -1     |        18       |
+  |        cement        |      80     |      60     |        -1       |
+  |       compacted      |      80     |      60     |        18       |
+  |      fine_gravel     |      60     |      50     |        16       |
+  |     paving_stones    |      40     |      40     |        12       |
+  |         metal        |      40     |      40     |        10       |
+  |        bricks        |      40     |      40     |        -1       |
+  |         grass        |      30     |      30     |         8       |
+  |         wood         |      30     |      30     |         6       |
+  |         sett         |      30     |      30     |        10       |
+  |      grass_paver     |      30     |      30     |         8       |
+  |        gravel        |      30     |      30     |        12       |
+  |        unpaved       |      30     |      30     |        14       |
+  |        ground        |      30     |      30     |        12       |
+  |         dirt         |      30     |      30     |        10       |
+  |      pebblestone     |      30     |      30     |        16       |
+  |        tartan        |      30     |      30     |        -1       |
+  |      cobblestone     |      20     |      20     |         8       |
+  |         clay         |      20     |      20     |        -1       |
+  |         earth        |      15     |      15     |        12       |
+  |         stone        |      15     |      15     |        -1       |
+  |         rocky        |      15     |      15     |        -1       |
+  |         sand         |      15     |      15     |         6       |
+  |          mud         |      10     |      10     |        10       |
+  |       unknown:       |      30     |      30     |        -1       |
 
 ## Tracktype Speeds
 Corresponds to the OSM [tracktype](https://wiki.openstreetmap.org/wiki/Key:tracktype) tag value.
 
-  | Tracktype \ Profile -> | driving-car | driving-hgv |
-  |:----------------------:|:-----------:|:-----------:|
-  |         grade1         |      40     |      40     |
-  |         grade2         |      30     |      30     |
-  |         grade3         |      20     |      20     |
-  |         grade4         |      15     |      15     |
-  |         grade5         |      10     |      10     |
+  | Tracktype \ Profile -> | driving-car | driving-hgv | cycling-regular|
+  |:----------------------:|:-----------:|:-----------:|:--------------:|
+  |         grade1         |      40     |      40     |       18       |
+  |         grade2         |      30     |      30     |       12       |
+  |         grade3         |      20     |      20     |        8       |
+  |         grade4         |      15     |      15     |        6       |
+  |         grade5         |      10     |      10     |        4       |
+
+## Pedestrian Speeds
+The `foot-*` profiles generally use 5 km/h on all allowed waytypes.
+Allowed waytypes consist of ways that are safe for use, ways that are better avoided (but still allowed) and other allowed ways in between:
+
+  |        safe tags       |  avoid tags      |  other highway tags |
+  |:----------------------:|:----------------:|:-------------------:|
+  |         footway        |   trunk          |       cycleway      |
+  |         path           | trunk_link       |    unclassified     |
+  |         steps          |  primary         |       road        |
+  |         pedestrian     |  primary_link    |                   |
+  |         living_street  |  secondary       |                   |
+  |         track          |  secondary_link  |                   |
+  |         residential    |  tertiary        |                   |
+  |         service        |  tertiary_link   |                   |
+
   
 ## Country Speed Sets
 As there are various traffic regulations in different countries. If [maximum speed](http://wiki.openstreetmap.org/wiki/Key:maxspeed) tag is not given in openstreetmap, we adjust the maximum speed according to the following key values taken from [country specific speed limits](http://wiki.openstreetmap.org/wiki/Speed_limits).
