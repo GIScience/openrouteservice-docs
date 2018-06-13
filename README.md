@@ -979,3 +979,5 @@ Here is a simple example for `sources=2,3` and `destinations=all` with 4 `locati
   |:--------:|:--------:|:--------:|:--------:|:--------:|
   |    L2    | L2 -> L0 | L2 -> L1 |     0    | L2 -> L3 |
   |    L3    | L3 -> L0 | L3 -> L1 | L3 -> L2 |     0    |
+  
+The result is `null` if a value can't be determined.
