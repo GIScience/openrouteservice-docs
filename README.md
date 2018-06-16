@@ -1,5 +1,5 @@
 This repository stores the swagger specifications of the [openrouteservice](openrouteservice.org "ORS website") API in yaml and json format.
-For an API-Key please sign up at our [developers portal](https://go.openrouteservice.org "ORS portal").
+For an API-Key please sign up at our [developers portal](https://openrouteservice.org "ORS portal").
 A live version of this documentation can be found on [swaggerhub](https://app.swaggerhub.com/apis/OpenRouteService/ors-api/ "Swagger Doku").
 
 ## Content
@@ -621,7 +621,7 @@ The suitability values for the selected profile range from ``10`` for best suita
 | 11    | Dirt             |
 | 12    | Ground           |
 | 13    | Ice              |
-| 14    | Salt             |
+| 14    | Paving Stones    |
 | 15    | Sand             |
 | 16    | Woodchips        |
 | 17    | Grass            |
