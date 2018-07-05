@@ -678,7 +678,9 @@ This value is in _km/h_ and equals the average speed for this way segment after 
 | 8     | Exit roundabout  |
 | 9     | U-turn           |
 | 10    | Goal             |
-| 11    | Unknown          |
+| 11    | Depart           |
+| 12    | Keep left        |
+| 13    | Keep right       |
 
 ## Tollways
 
