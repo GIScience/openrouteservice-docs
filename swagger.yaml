@@ -1262,6 +1262,10 @@ paths:
       description: |
         Returns duration or distance or matrix for mutliple source and destination points.
         
+        **IMPORTANT**
+        
+        The profile currently has to be passed both as a parameter *AND* in the body for other profiles than `driving-car`.
+        
         Body example:
         ```{'profile': 'driving-hgv', 'metrics': 'duration|distance', 'optimized': true, 'units': 'm', 'locations': [[7.796, 48.35], [11.13, 50.98]]}```
       parameters:
@@ -1272,6 +1276,24 @@ paths:
         type: "string"
         required: true
         default: "your-api-key"
+      - name: "profile"
+        in: "query"
+        description: "Specifies the profile to use for the matrix."
+        required: true
+        type: "string"
+        enum:
+        - "driving-car"
+        - "driving-hgv"
+        - "cycling-regular"
+        - "cycling-road"
+        - "cycling-safe"
+        - "cycling-mountain"
+        - "cycling-tour"
+        - "cycling-electric"
+        - "foot-walking"
+        - "foot-hiking"
+        - "wheelchair"
+        default: driving-car
       - name: "body"
         in: "body"
         description: "body for a Matrix post request"
