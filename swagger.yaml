@@ -393,6 +393,17 @@ paths:
           description: "Authorization field missing."
         403:
           description: "Key not authorised."
+        '404':
+          description: >
+            Route could not be found.
+
+
+            | Internal Code | Description
+            |
+
+            |:-------------:|----------------------------------------------------|
+
+            | 2009 |  Unable to find a route between points x (lon lat) and y (lon lat). |
         405:
           description: "The specified HTTP method is not supported. For more details,\
             \ refer to the EndPoint documentation."
@@ -2744,7 +2755,7 @@ definitions:
       version:
         type: "string"
         description: "Backend version used for the request."
-        example: 4.2.0
+        example: 4.5.1
       build_date:
         type: "string"
         description: "Build date of the used backend version"
@@ -2769,8 +2780,8 @@ definitions:
     title: "error object"
   error_info:
     properties:
-      version:
-        type: "string"
+      engine:
+        $ref: "#/definitions/MatrixResponse_info/info_engine"
       timestamp:
         type: "integer"
         format: "int64"
