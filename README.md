@@ -1,5 +1,5 @@
 This repository stores the swagger specifications of the [openrouteservice](openrouteservice.org "ORS website") API in yaml and json format.
-For an API-Key please sign up at our [developers portal](https://go.openrouteservice.org "ORS portal").
+For an API-Key please sign up at our [developers portal](https://openrouteservice.org "ORS portal").
 A live version of this documentation can be found on [swaggerhub](https://app.swaggerhub.com/apis/OpenRouteService/ors-api/ "Swagger Doku").
 
 ## Content
@@ -621,7 +621,7 @@ The suitability values for the selected profile range from ``10`` for best suita
 | 11    | Dirt             |
 | 12    | Ground           |
 | 13    | Ice              |
-| 14    | Salt             |
+| 14    | Paving Stones    |
 | 15    | Sand             |
 | 16    | Woodchips        |
 | 17    | Grass            |
@@ -678,7 +678,9 @@ This value is in _km/h_ and equals the average speed for this way segment after 
 | 8     | Exit roundabout  |
 | 9     | U-turn           |
 | 10    | Goal             |
-| 11    | Unknown          |
+| 11    | Depart           |
+| 12    | Keep left        |
+| 13    | Keep right       |
 
 ## Tollways
 
@@ -979,3 +981,5 @@ Here is a simple example for `sources=2,3` and `destinations=all` with 4 `locati
   |:--------:|:--------:|:--------:|:--------:|:--------:|
   |    L2    | L2 -> L0 | L2 -> L1 |     0    | L2 -> L3 |
   |    L3    | L3 -> L0 | L3 -> L1 | L3 -> L2 |     0    |
+  
+The result is `null` if a value can't be determined.
