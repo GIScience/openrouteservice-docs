@@ -2803,7 +2803,7 @@ definitions:
   error_info:
     properties:
       engine:
-        $ref: "#/definitions/MatrixResponse_info/info_engine"
+        $ref: "#/definitions/info_engine"
       timestamp:
         type: "integer"
         format: "int64"
