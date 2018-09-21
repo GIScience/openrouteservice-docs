@@ -16,8 +16,6 @@ tags:
   description: "Resolve input coordinates to addresses and vice versa"
 - name: "Isochrones"
   description: "Obtain areas of reachability from given locations"
-# - name: "Pois"
-#   description: "Search for points of interest around points or geometries"
 - name: "Matrix"
   description: "Obtain one-to-many, many-to-one and many-to-many matrices for time and distance"
 schemes:
@@ -47,7 +45,7 @@ paths:
         in: "query"
         description: |
           Pipe (|) separated List of longitude,latitude coordinates visited in order.
-          
+
           Example values:
             `8.34234,48.23424`
             `8.34423,48.26424`
@@ -57,7 +55,7 @@ paths:
           type: "string"
         collectionFormat: "pipes"
         default:
-          - "8.34234,48.23424|8.34423,48.26424"
+        - "8.34234,48.23424|8.34423,48.26424"
       - name: "profile"
         in: "query"
         description: "Specifies the route profile."
@@ -187,9 +185,9 @@ paths:
         items:
           type: "string"
           enum:
-            - "avgspeed"
-            - "detourfactor"
-            - "percentage"
+          - "avgspeed"
+          - "detourfactor"
+          - "percentage"
       - name: "maneuvers"
         in: "query"
         description: "Specifies whether the maneuver object is included into the `step` object or not. Default: `false`."
@@ -212,7 +210,7 @@ paths:
       - name: "bearings"
         in: "query"
         description: |
-          Specifies a pipe (|) delimited list of pairs (bearings and deviations) to filter the segments of the road network a waypoint can snap to. For example `bearings=45,10|120,20`. 
+          Specifies a pipe (|) delimited list of pairs (bearings and deviations) to filter the segments of the road network a waypoint can snap to. For example `bearings=45,10|120,20`.
           Each pair is a comma-separated list that can consist of one or two float values, where the first value is the bearing and the second one is the allowed deviation from the bearing. The bearing can take values between `0` and `360` clockwise from true north.
           If the deviation is not set, then the default value of `100` degrees is used. The number of pairs must correspond to the number of waypoints.
            Setting `optimized=false` is mandatory for this feature to work for all profiles.
@@ -276,21 +274,21 @@ paths:
             - `avoid_features` : Pipe (|) separated list of features to avoid.
               The available features are :
 
-                |     Feature         | Available for                               |
-                |:-------------------:|---------------------------------------------|
-                | `highways`          | driving-*                                   |
-                | `tollways`          | driving-*                                   |
-                | `ferries`           | driving-\*, cycling-\*, foot-\*, wheelchair |
-                | `tunnels`           | driving-*                                   |
-                | `pavedroads`        | driving-\*, cycling-*                       |
-                | `unpavedroads`      | driving-\*, cycling-*                       |
-                | `tracks`            | driving-*                                   |
-                | `fords`             | driving-\*, cycling-\*, foot-*              |
-                | `steps`             | cycling-\*, foot-\*, wheelchair             |
-                | `hills`             | cycling-\*, foot-\*                         |
+                Feature         | Available for                                    |
+                :-------------------:|---------------------------------------------|
+                 `highways`          | driving-*                                   |
+                 `tollways`          | driving-*                                   |
+                 `ferries`           | driving-\*, cycling-\*, foot-\*, wheelchair |
+                 `tunnels`           | driving-*                                   |
+                 `pavedroads`        | driving-\*, cycling-*                       |
+                 `unpavedroads`      | driving-\*, cycling-*                       |
+                 `tracks`            | driving-*                                   |
+                 `fords`             | driving-\*, cycling-\*, foot-*              |
+                 `steps`             | cycling-\*, foot-\*, wheelchair             |
+                 `hills`             | cycling-\*, foot-\*                         |
 
             - `avoid_borders` : `"all"` for no border crossing. `"controlled"` to cross open borders but avoid controlled ones. Only for `driving-*` profiles.
-            
+
             - `avoid_countries` : Pipe (|) separated list of countries to exclude from routing with `driving-*` profiles. Can be used together with `"avoid_borders": "controlled"`. `"11|193"` would exclude Austria and Switzerland. List of countries and application examples can be found [here](https://github.com/GIScience/openrouteservice-docs#country-list).
 
             - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`. It is needed for **vehicle restrictions** to work.
@@ -309,33 +307,33 @@ paths:
                   - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer quiet ways over a shorter route.
 
               - `restrictions` : Specifies restrictions for `driving-hgv`, `wheelchair` or `cycling-*` profiles.
-                - for `cycling-*`: 
-                    
-                    |  Parameter | Description                                                                                                                                                                               |
-                    |:----------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                    | `gradient` | Only for avoided `hills` or specified `steepness_difficulty`. Specifies the maximum route steepness in percent. Values range from `1` to `15`. Routes with a higher gradient are avoided. |
+                - for `cycling-*`:
 
-                - for `driving-hgv`: 
+                    Parameter   | Description                                                                                                                                                                               |
+                    :----------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+                     `gradient` | Only for avoided `hills` or specified `steepness_difficulty`. Specifies the maximum route steepness in percent. Values range from `1` to `15`. Routes with a higher gradient are avoided. |
+
+                - for `driving-hgv`:
                   _(you have to specify the `vehicle_type` in the options for these parameters)_
 
-                    |  Parameter | Description                                                                                                                       |
-                    |:----------:|-----------------------------------------------------------------------------------------------------------------------------------|
-                    | `length`   | Length restriction in meters.                                                                                                     |
-                    | `width`    | Width restriction in meters.                                                                                                      |
-                    | `height`   | Height restriction in meters.                                                                                                     |
-                    | `axleload` | Axleload restriction in tons.                                                                                                     |
-                    | `weight`   | Weight restriction in tons.                                                                                                       |
-                    | `hazmat`   | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false. |
+                    Parameter   | Description                                                                                                                       |
+                    :----------:|-----------------------------------------------------------------------------------------------------------------------------------|
+                     `length`   | Length restriction in meters.                                                                                                     |
+                     `width`    | Width restriction in meters.                                                                                                      |
+                     `height`   | Height restriction in meters.                                                                                                     |
+                     `axleload` | Axleload restriction in tons.                                                                                                     |
+                     `weight`   | Weight restriction in tons.                                                                                                       |
+                     `hazmat`   | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false. |
 
                 - for `wheelchair`:
 
-                  |       Parameter       | Description                                                                                                                 |
-                  |:---------------------:|-----------------------------------------------------------------------------------------------------------------------------|
-                  |     `surface_type`    | Specifies the minimum [surface type](http://wiki.openstreetmap.org/wiki/Key:surface). Default is `"cobblestone:flattened"`. |
-                  |      `track_type`     | Specifies the minimum [grade](http://wiki.openstreetmap.org/wiki/Key:tracktype) of the route. Default is `"grade1"`.        |
-                  |   `smoothness_type`   | Specifies the minimum [smoothness](http://wiki.openstreetmap.org/wiki/Key:smoothness) of the route. Default is `"good"`.    |
-                  | `maximum_sloped_curb` | Specifies the maximum height of the sloped curb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.              |
-                  |   `maximum_incline`   | Specifies the maximum incline as a percentage. `3`, `6`(default), `10`, `15` or `any`.                                      |
+                  Parameter              | Description                                                                                                                 |
+                  :---------------------:|-----------------------------------------------------------------------------------------------------------------------------|
+                       `surface_type`    | Specifies the minimum [surface type](http://wiki.openstreetmap.org/wiki/Key:surface). Default is `"cobblestone:flattened"`. |
+                        `track_type`     | Specifies the minimum [grade](http://wiki.openstreetmap.org/wiki/Key:tracktype) of the route. Default is `"grade1"`.        |
+                     `smoothness_type`   | Specifies the minimum [smoothness](http://wiki.openstreetmap.org/wiki/Key:smoothness) of the route. Default is `"good"`.    |
+                   `maximum_sloped_curb` | Specifies the maximum height of the sloped curb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.              |
+                     `maximum_incline`   | Specifies the maximum incline as a percentage. `3`, `6`(default), `10`, `15` or `any`.                                      |
 
 
             - `avoid_polygons` : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).
@@ -370,7 +368,7 @@ paths:
           }
           ```
           The minified form(for copy paste purposes):
-  
+
           `{"maximum_speed":10,"avoid_features":"unpavedroads","profile_params":{"weightings":{"steepness_difficulty":{"level":1},"green":{"factor":0.8},"quiet":{"factor":1.0}},"restrictions":{"gradient":5}},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
 
           More examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).
@@ -398,12 +396,9 @@ paths:
             Route could not be found.
 
 
-            | Internal Code | Description
-            |
-
-            |:-------------:|----------------------------------------------------|
-
-            | 2009 |  Unable to find a route between points x (lon lat) and y (lon lat). |
+            Internal Code  | Description                                                |
+            :-------------:|------------------------------------------------------------|
+             2009 |  Unable to find a route between points x (lon lat) and y (lon lat). |
         405:
           description: "The specified HTTP method is not supported. For more details,\
             \ refer to the EndPoint documentation."
@@ -414,129 +409,17 @@ paths:
           description: |
             An unexpected error was encountered and more detailed internal error code is provided.
 
-            | Internal Code | Description                                        |
-            |:-------------:|----------------------------------------------------|
-            | 2000 |  Unable to parse JSON request. |
-            | 2001 |  Required parameter is missing. |
-            | 2002 |  Invalid parameter format. |
-            | 2003 |  Invalid parameter value. |
-            | 2004 |  Parameter value exceeds the maximum allowed limit. |
-            | 2006 |  Unable to parse the request to the export handler. |
-            | 2007 |  Unsupported export format. |
-            | 2008 |  Empty Element. |
-            | 2099 |  Unknown internal error. |
-          schema:
-            $ref: "#/definitions/error"
-        501:
-          description: "Indicates that the server does not support the functionality\
-            \ needed to fulfill the request."
-        503:
-          description: "The server is currently unavailable due to overload or maintenance."
-  /geocoding:
-    get:
-      tags:
-      - "Geocode"
-      summary: "Geocoding Service (deprecated)"
-      description: |
-        This endpoint can be used for geocoding (specified `query`) and reverse geocoding requests (specified `location`)
-        
-        **Either** `query` **or** `location` **has to be specified for a valid request!**
-
-        If both parameters are specified `location` takes precedence.
-        
-        - **geocoding:** Returns a JSON formatted list of objects corresponding to the search input.
-        - **reverse geocoding:** Returns the next enclosing object with an address tag which surrounds the given coordinate.
-      parameters:
-      - name: "api_key"
-        in: "query"
-        description: |
-          Insert your API Key here.
-        type: "string"
-        required: true
-        default: "your-api-key"
-      - name: "query"
-        in: "query"
-        description: "Name of location, street address or postal code. For a structured geocoding request, a JSON object can be passed.  Please refer to the `Geocoding structured query` in the model section below. Examples can be found [here](https://github.com/GIScience/openrouteservice-docs#geocoding-structured-query). "
-        type: "string"
-        default: "Heidelberg"
-      - name: "location"
-        in: "query"
-        description: "Coordinate to be inquired. [longitude,latitude]"
-        type: "string"
-        default: "8.68353,49.412623"
-      - name: "lang"
-        in: "query"
-        description: "Sets the language of the response."
-        type: "string"
-        default: "en"
-        enum:
-        - "de"
-        - "en"
-        - "fr"
-        - "it"
-      - name: "boundary_type"
-        in: "query"
-        description: "Specifies the type of spatial search restriction.  `rect` for a rectangle and `circle`"
-        type: "string"
-        enum:
-        - "rect"
-        - "circle"
-      - name: "rect"
-        in: "query"
-        description: |
-          **For `boundary_type=rect` only!** Sets the restriction rectangle's minimum/maximum longitude/latitude: `MinLong,MinLat,MaxLong,Maxlat`. Example: `8.696837,49.408739,8.703489,49.41209`
-        type: "string"
-      - name: "circle"
-        in: "query"
-        description: |
-          "**For `boundary_type=circle` only!** Sets the restriction circle with a Centerpoint and a Radius in meters: `Long,Lat,Radius`. Example: `8.696837,49.408739,5000`"
-        type: "string"
-
-      - name: "limit"
-        in: "query"
-        description: "Specifies the maximum number of responses. Not needed for reverse."
-        type: "number"
-        default: 5
-        format: "double"
-      - name: "id"
-        in: "query"
-        description: "Arbitrary identification string of the request reflected in\
-          \ the meta information."
-        type: "string"
-      responses:
-        200:
-          description: "Standard response for successfully processed requests. Returns\
-            \ JSON."
-          schema:
-            $ref: "#/definitions/Geocoderesponse"
-        400:
-          description: "The request is incorrect and therefore can not be processed."
-        401:
-          description: "Authorization field missing."
-        403:
-          description: "Key not authorised."
-        405:
-          description: "The specified HTTP method is not supported. For more details,\
-            \ refer to the EndPoint documentation."
-        413:
-          description: "The request is larger than the server is able to process,\
-            \ the data provided in the request exceeds the capacity limit."
-        500:
-          description: |
-            An unexpected error was encountered and more detailed internal
-            errorcode is provided.
-
-            | Internal Code | Description                                        |
-            |:-------------:|----------------------------------------------------|
-            | 1000 |  Unable to parse JSON request. |
-            | 1001 |  Required parameter is missing. |
-            | 1002 |  Invalid parameter format. |
-            | 1003 |  Invalid parameter value. |
-            | 1004 |  Parameter value exceeds the maximum allowed limit. |
-            | 1006 |  Unable to parse the request to the export handler. |
-            | 1007 |  Unsupported export format. |
-            | 1008 |  Empty Element. |
-            | 1099 |  Unknown internal error. |
+            Internal Code  | Description                                        |
+            :-------------:|----------------------------------------------------|
+             2000 |  Unable to parse JSON request. |
+             2001 |  Required parameter is missing. |
+             2002 |  Invalid parameter format. |
+             2003 |  Invalid parameter value. |
+             2004 |  Parameter value exceeds the maximum allowed limit. |
+             2006 |  Unable to parse the request to the export handler. |
+             2007 |  Unsupported export format. |
+             2008 |  Empty Element. |
+             2099 |  Unknown internal error. |
           schema:
             $ref: "#/definitions/error"
         501:
@@ -548,213 +431,222 @@ paths:
     get:
       tags:
       - "Geocode"
-      summary: "Forward Geocoding Service"
+      summary: "Forward Geocode Service"
       description: |
-        Returns a JSON formatted list of objects corresponding to the search input. `boundary.*`-parameters can be combined if they are overlapping. [Please refer to this external Documentation](https://github.com/pelias/documentation/blob/master/search.md#search-the-world)
-      # parameters:
-      # - name: "api_key"
-      #   in: "query"
-      #   description: |
-      #     Insert your API Key here.
-      #   type: "string"
-      #   required: true
-      #   default: "your-api-key"
-      # - name: "text"
-      #   required: true
-      #   in: query
-      #   description: |
-      #     Name of location, street address or postal code.
-      #   type: string
-      #   default: Heidelberg
-      # - name: focus.point.lat
-      #   in: query
-      #   description: |
-      #     Latitude of the `focus.point`. Specify the focus point to order results by linear distance to this point. Works for up to 100 kilometers distance. Use with `focus.point.lon`.
-      #   type: number
-      #   format: float
-      #   default: Null
-      # - name: focus.point.lon
-      #   in: query
-      #   description: |
-      #     Longitude of the `focus.point`. Specify the focus point to order results by linear distance to this point. Works for up to 100 kilometers distance.  Use with `focus.point.lat`.          
-      #   type: number
-      #   format: float
-      #   default: Null
-      # - name: boundary.rect.min_lon
-      #   in: query
-      #   description: |
-      #     Left border of rectangular boundary to narrow results.
-      #   type: number
-      #   format: float
-      #   default: Null
-      # - name: boundary.rect.max_lon
-      #   in: query
-      #   description: |
-      #     Right border of rectangular boundary to narrow results.
-      #   type: number
-      #   format: float
-      #   default: Null
-      # - name: boundary.rect.min_lat
-      #   in: query
-      #   description: |
-      #     Bottom border of rectangular boundary to narrow results.
-      #   type: number
-      #   format: float
-      #   default: Null
-      # - name: boundary.rect.max_lat
-      #   in: query
-      #   description: |
-      #     Top border of rectangular boundary to narrow results.
-      #   type: number
-      #   format: float
-      #   default: Null
-      # - name: boundary.circle.lat
-      #   in: query
-      #   description: |
-      #     Center Latitude of circular boundary to narrow results. Use with `boundary.circle.lon` & `boundary.circle.radius`.
-      #   type: number
-      #   format: float
-      #   default: Null
-      # - name: boundary.circle.lon
-      #   in: query
-      #   description: |
-      #     Center Longitude of circular boundary to narrow results. Use with `boundary.circle.lat` & `boundary.circle.radius`.
-      #   type: number
-      #   format: float
-      #   default: Null
-      # - name: boundary.circle.radius
-      #   in: query
-      #   description: |
-      #     Radius of circular boundary around the center coordinate. Use with `boundary.circle.lon` & `boundary.circle.lat`.
-      #   type: number
-      #   format: float
-      #   default: 50
-      # - name: "boundary.country"
-      #   in: query
-      #   description: |
-      #     Restrict results to single country. Possible values are [alpha-2 and alpha-3 country codes](https://en.wikipedia.org/wiki/ISO_3166-1). Example: `DEU` or `DE` for Germany.
-      #   type: string
-      # - name: sources
-      #   in: query
-      #   description: |
-      #     Restrict your search to specific sources. Searches all sources by default. You can either use the normal or short name. Sources are [`openstreetmap(osm)`](http://www.openstreetmap.org/), [`openaddresses(oa)`](http://openaddresses.io/), [`whosonfirst(wof)`](https://whosonfirst.org/), [`geonames(gn)`](http://www.geonames.org/).
-      #   type: array
-      #   items:
-      #     type: "string"
-      #     enum:
-      #     - osm
-      #     - oa
-      #     - wof
-      #     - gn
-      #     - openstreetmap
-      #     - openaddresses
-      #     - whosonfirst
-      #     - geonames
-      #   uniqueItems: true
-      #   default: ""
-      # - name: layers
-      #   in: query
-      #   description: |
-      #     Filter results by layer (place type)
-
-      #       |layer|description|
-      #       |----|----|
-      #       |`venue`|points of interest, businesses, things with walls|
-      #       |`address`|places with a street address|
-      #       |`street`|streets,roads,highways|
-      #       |`neighbourhood`|social communities, neighbourhoods|
-      #       |`borough`|a local administrative boundary, currently only used for New York City|
-      #       |`localadmin`|local administrative boundaries|
-      #       |`locality`|towns, hamlets, cities|
-      #       |`county`|official governmental area; usually bigger than a locality, almost always smaller than a region|
-      #       |`macrocounty`|a related group of counties. Mostly in Europe.|
-      #       |`region`|states and provinces|
-      #       |`macroregion`|a related group of regions. Mostly in Europe|
-      #       |`country`|places that issue passports, nations, nation-states|
-      #       |`coarse`|alias for simultaneously using all administrative layers (everything except `venue` and `address`)|
-
-      #   type: array
-      #   items:
-      #     type: string
-      #     enum: 
-      #     - address
-      #     - venue
-      #     - neighbourhood
-      #     - locality
-      #     - borough
-      #     - localadmin
-      #     - county
-      #     - macrocounty
-      #     - region
-      #     - macroregion
-      #     - country
-      #     - coarse
-      #     uniqueItems: true
-      #     default: ""
-      # - name: size
-      #   in: query
-      #   description: |
-      #     Set the number of returned results.
-      #   type: integer
-      #   format: int64
-      #   default: 10
+        Returns a JSON formatted list of objects corresponding to the search input. `boundary.*`-parameters can be combined if they are overlapping. **The interactivity for this enpoint is experimental!** [Please refer to this external Documentation](https://github.com/pelias/documentation/blob/master/search.md#search-the-world)
+      parameters:
+      - name: "api_key"
+        in: "query"
+        description: |
+          Insert your API Key here.
+        type: "string"
+        required: true
+        default: "your-api-key"
+      - name: "text"
+        required: true
+        in: query
+        description: |
+          Name of location, street address or postal code.
+        type: string
+        example: Heidelberg
+      - name: focus.point.lat
+        in: query
+        description: |
+          Latitude of the `focus.point`. Specify the focus point to order results by linear distance to this point. Works for up to 100 kilometers distance. Use with `focus.point.lon`.
+        type: number
+        format: float
+        example: Null
+      - name: focus.point.lon
+        in: query
+        description: |
+          Longitude of the `focus.point`. Specify the focus point to order results by linear distance to this point. Works for up to 100 kilometers distance.  Use with `focus.point.lat`.
+        type: number
+        format: float
+        example: Null
+      - name: boundary.rect.min_lon
+        in: query
+        description: |
+          Left border of rectangular boundary to narrow results.
+        type: number
+        format: float
+        example: Null
+      - name: boundary.rect.max_lon
+        in: query
+        description: |
+          Right border of rectangular boundary to narrow results.
+        type: number
+        format: float
+        example: Null
+      - name: boundary.rect.min_lat
+        in: query
+        description: |
+          Bottom border of rectangular boundary to narrow results.
+        type: number
+        format: float
+        example: Null
+      - name: boundary.rect.max_lat
+        in: query
+        description: |
+          Top border of rectangular boundary to narrow results.
+        type: number
+        format: float
+        example: Null
+      - name: boundary.circle.lat
+        in: query
+        description: |
+          Center Latitude of circular boundary to narrow results. Use with `boundary.circle.lon` & `boundary.circle.radius`.
+        type: number
+        format: float
+        example: Null
+      - name: boundary.circle.lon
+        in: query
+        description: |
+          Center Longitude of circular boundary to narrow results. Use with `boundary.circle.lat` & `boundary.circle.radius`.
+        type: number
+        format: float
+        example: Null
+      - name: boundary.circle.radius
+        in: query
+        description: |
+          Radius of circular boundary around the center coordinate. Use with `boundary.circle.lon` & `boundary.circle.lat`.
+        type: number
+        format: float
+        example: 50
+      - name: "boundary.country"
+        in: query
+        description: |
+          Restrict results to single country. Possible values are [alpha-2 and alpha-3 country codes](https://en.wikipedia.org/wiki/ISO_3166-1). Example: `DEU` or `DE` for Germany.
+        type: string
+      - name: sources
+        in: query
+        description: |
+          Restrict your search to specific sources. Searches all sources by default. You can either use the normal or short name. Sources are [`openstreetmap(osm)`](http://www.openstreetmap.org/), [`openaddresses(oa)`](http://openaddresses.io/), [`whosonfirst(wof)`](https://whosonfirst.org/), [`geonames(gn)`](http://www.geonames.org/).
+        type: array
+        items:
+          type: "string"
+          enum:
+          - osm
+          - oa
+          - wof
+          - gn
+          - openstreetmap
+          - openaddresses
+          - whosonfirst
+          - geonames
+        uniqueItems: true
+        example: "osm,oa"
+      - name: layers
+        in: query
+        description: |
+          Filter results by layer (place type)
+            layer|description|
+            ----|----|
+            `venue`|points of interest, businesses, things with walls|
+            `address`|places with a street address|
+            `street`|streets,roads,highways|
+            `neighbourhood`|social communities, neighbourhoods|
+            `borough`|a local administrative boundary, currently only used for New York City|
+            `localadmin`|local administrative boundaries|
+            `locality`|towns, hamlets, cities|
+            `county`|official governmental area; usually bigger than a locality, almost always smaller than a region|
+            `macrocounty`|a related group of counties. Mostly in Europe.|
+            `region`|states and provinces|
+            `macroregion`|a related group of regions. Mostly in Europe|
+            `country`|places that issue passports, nations, nation-states|
+            `coarse`|alias for simultaneously using all administrative layers (everything except `venue` and `address`)|
+        type: array
+        items:
+          type: string
+          enum:
+          - address
+          - venue
+          - neighbourhood
+          - locality
+          - borough
+          - localadmin
+          - county
+          - macrocounty
+          - region
+          - macroregion
+          - country
+          - coarse
+          uniqueItems: true
+          example: "region,county"
+      - name: size
+        in: query
+        description: |
+          Set the number of returned results.
+        type: integer
+        format: int64
+        default: 10
       responses:
         200:
           # description: "Standard response for successfully processed requests. Returns\
           #   \ JSON."
           description: "Please refer to [this external documentation](https://github.com/pelias/documentation/blob/master/search.md#search-the-world) for this endpoint"
-      #     schema:
-      #       $ref: "#/definitions/Geocoderesponse"
   /geocode/search/structured:
     get:
       tags:
       - "Geocode"
-      summary: "Structured Forward Geocoding Service"
+      summary: "Structured Forward Geocode Service (beta)"
       description: |
-        Returns a JSON formatted list of objects corresponding to the search input. [Please refer to this external Documentation](https://github.com/pelias/documentation/blob/master/structured-geocoding.md#structured-geocoding)
-      # parameters:
-      # - name: "country"
-      #   in: query
-      #   description: |
-      #     Search for full country name, [alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or [alpha 3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) codes.
-      #   type: string
-      #   default: none
-      # - name: "postalcode"
-      #   in: query
-      #   description: |
-      #     Search for postal codes. Postal codes are unique within a country so they are useful in geocoding as a shorthand for a fairly granular geographical location.
-      #   type: string
-      #   default: none
-      # - name: "region"
-      #   in: query
-      #   description: |
-      #     Search for regions. Regions are normally the first-level administrative divisions within countries. For US-regions [common abbreviations](https://en.wikipedia.org/wiki/List_of_U.S._state_abbreviations) can be used.
-      #   type: string
-      #   default: none
-      # - name: "county"
-      #   in: query
-      #   description: |
-      #     Search for counties. Counties are administrative divisions between localities and regions. Can be useful when attempting to disambiguate between localities.
-      #   type: string
-      #   default: none
-      # - name: "locality"
-      #   in: query
-      #   description: |
-      #     Search for localities. Localities are equivalent to what are commonly referred to as *cities*.
-      #   type: string
-      #   default: none
-      # - name: "borough"
-      #   in: query
-      #   description: |
-      #     Search for boroughs. Boroughs are mostly known in the context of New York City, even though they may exist in other cities, such as Mexico City. Example: `Manhatten`.
-      #   type: string
-      #   default: none
-      # - name: "neighbourhood"
-      #   in: query
-      #   description: |
-      #     Search for neighbourhoods. Neighbourhoods are vernacular geographic entities that may not necessarily be official administrative divisions but are important nonetheless. Example: `Notting Hill`.
-      #   type: string
-      #   default: none
+        Returns a JSON formatted list of objects corresponding to the search input. **The interactivity for this enpoint is experimental!** [Please refer to this external Documentation](https://github.com/pelias/documentation/blob/master/structured-geocoding.md#structured-geocoding)
+      parameters:
+      - name: "api_key"
+        in: "query"
+        description: |
+          Insert your API Key here.
+        type: "string"
+        required: true
+        default: "your-api-key"
+      - name: "address"
+        in: query
+        description: |
+          Search for full address with house number or only a street name.
+        type: string
+        example: none
+      - name: "neighbourhood"
+        in: query
+        description: |
+          Search for neighbourhoods. Neighbourhoods are vernacular geographic entities that may not necessarily be official administrative divisions but are important nonetheless. Example: `Notting Hill`.
+        type: string
+        example: none
+      - name: "country"
+        in: query
+        description: |
+          Search for full country name, [alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or [alpha 3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) codes.
+        type: string
+        example: none
+      - name: "postalcode"
+        in: query
+        description: |
+          Search for postal codes. Postal codes are unique within a country so they are useful in geocoding as a shorthand for a fairly granular geographical location.
+        type: string
+        example: none
+      - name: "region"
+        in: query
+        description: |
+          Search for regions. Regions are normally the first-level administrative divisions within countries. For US-regions [common abbreviations](https://en.wikipedia.org/wiki/List_of_U.S._state_abbreviations) can be used.
+        type: string
+        example: none
+      - name: "county"
+        in: query
+        description: |
+          Search for counties. Counties are administrative divisions between localities and regions. Can be useful when attempting to disambiguate between localities.
+        type: string
+        example: none
+      - name: "locality"
+        in: query
+        description: |
+          Search for localities. Localities are equivalent to what are commonly referred to as *cities*.
+        type: string
+        example: none
+      - name: "borough"
+        in: query
+        description: |
+          Search for boroughs. Boroughs are mostly known in the context of New York City, even though they may exist in other cities, such as Mexico City. Example: `Manhatten`.
+        type: string
+        example: none
       responses:
         200:
           # description: "Standard response for successfully processed requests. Returns\
@@ -766,15 +658,110 @@ paths:
     get:
       tags:
       - "Geocode"
-      summary: "Reverse Geocoding Service"
+      summary: "Reverse Geocode Service"
       description: |
-         Returns the next enclosing object with an address tag which surrounds the given coordinate. [Please refer to this external Documentation](https://github.com/pelias/documentation/blob/master/reverse.md#reverse-geocoding)
-      # parameters:
-      # - name: "text"
-      #   required: true
-      #   in: query
-      #   type: string
-      #   default: none
+        Returns the next enclosing object with an address tag which surrounds the given coordinate. **The interactivity for this enpoint is experimental!** [Please refer to this external Documentation](https://github.com/pelias/documentation/blob/master/reverse.md#reverse-geocoding)
+      parameters:
+      - name: "api_key"
+        in: "query"
+        description: |
+          Insert your API Key here.
+        type: "string"
+        required: true
+        default: "your-api-key"
+      - name: "point.lat"
+        description: |
+          Latitude of the coordinate to query.
+        required: true
+        in: query
+        type: number
+        format: float
+        example: 48.858268
+      - name: "point.lon"
+        description: |
+          Longitude of the coordinate to query.
+        required: true
+        in: query
+        type: number
+        format: float
+        example: 2.294471
+      - name: "boundary.circle.radius"
+        description: |
+          Restrict search to circular region around `point.lat/point.lon`. Value in kilometers.
+        in: query
+        type: number
+        format: float
+        default: 1
+        example: 35
+      - name: size
+        in: query
+        description: |
+          Set the number of returned results.
+        type: integer
+        format: int64
+        default: 10
+      - name: layers
+        in: query
+        description: |
+          Restrict search to layers (place type). By default all layers are searched.
+
+            layer|description|
+            ----|----|
+            `venue`|points of interest, businesses, things with walls|
+            `address`|places with a street address|
+            `street`|streets,roads,highways|
+            `neighbourhood`|social communities, neighbourhoods|
+            `borough`|a local administrative boundary, currently only used for New York City|
+            `localadmin`|local administrative boundaries|
+            `locality`|towns, hamlets, cities|
+            `county`|official governmental area; usually bigger than a locality, almost always smaller than a region|
+            `macrocounty`|a related group of counties. Mostly in Europe.|
+            `region`|states and provinces|
+            `macroregion`|a related group of regions. Mostly in Europe|
+            `country`|places that issue passports, nations, nation-states|
+            `coarse`|alias for simultaneously using all administrative layers (everything except `venue` and `address`)|
+        type: array
+        items:
+          type: string
+          enum:
+          - address
+          - venue
+          - neighbourhood
+          - locality
+          - borough
+          - localadmin
+          - county
+          - macrocounty
+          - region
+          - macroregion
+          - country
+          - coarse
+          uniqueItems: true
+          example: ""
+      - name: sources
+        in: query
+        description: |
+          Restrict your search to specific sources. Searches all sources by default. You can either use the normal or short name. Sources are [`openstreetmap(osm)`](http://www.openstreetmap.org/), [`openaddresses(oa)`](http://openaddresses.io/), [`whosonfirst(wof)`](https://whosonfirst.org/), [`geonames(gn)`](http://www.geonames.org/).
+        type: array
+        items:
+          type: "string"
+          enum:
+          - osm
+          - oa
+          - wof
+          - gn
+          - openstreetmap
+          - openaddresses
+          - whosonfirst
+          - geonames
+        uniqueItems: true
+        example: "osm,oa"
+      - name: "boundary.country"
+        in: query
+        description: |
+          Restrict search to country by [alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or [alpha 3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) codes.
+        type: string
+        example: 'FR'
       responses:
         200:
           # description: "Standard response for successfully processed requests. Returns\
@@ -810,8 +797,8 @@ paths:
         items:
           type: "string"
         collectionFormat: "pipes"
-        default: 
-          - "8.34234,48.23424"
+        default:
+        - "8.34234,48.23424"
       - name: "profile"
         in: "query"
         description: "Specifies the routing profile."
@@ -869,11 +856,12 @@ paths:
         in: "query"
         description: |
           List of requested attributes delimited by pipe (|). Values are `area`, `reachfactor` and `total_pop`.
-          | Value | Description|
-          |:--:|---|
-          | `area` | Returns the area of each polygon in its feature properties. |
-          | `reachfactor` | Returns a reachability score between 0 and 1. |
-          | `total_pop` | Returns the total population of each polygon based on [GHS data](http://ghsl.jrc.ec.europa.eu/about.php) |
+
+          Value  | Description|
+          :--:|---|
+           `area` | Returns the area of each polygon in its feature properties. |
+           `reachfactor` | Returns a reachability score between 0 and 1. |
+           `total_pop` | Returns the total population of each polygon based on [GHS data](http://ghsl.jrc.ec.europa.eu/about.php) |
         type: "array"
         items:
           type: "string"
@@ -896,21 +884,21 @@ paths:
             - `avoid_features` : Pipe (|) separated list of features to avoid.
               The available features are :
 
-                |     Feature         | Available for                               |
-                |:-------------------:|---------------------------------------------|
-                | `highways`          | driving-*                                   |
-                | `tollways`          | driving-*                                   |
-                | `ferries`           | driving-\*, cycling-\*, foot-\*, wheelchair |
-                | `tunnels`           | driving-*                                   |
-                | `pavedroads`        | driving-\*, cycling-*                       |
-                | `unpavedroads`      | driving-\*, cycling-*                       |
-                | `tracks`            | driving-*                                   |
-                | `fords`             | driving-\*, cycling-\*, foot-*              |
-                | `steps`             | cycling-\*, foot-\*, wheelchair             |
-                | `hills`             | cycling-\*, foot-\*                         |
+                Feature              | Available for                               |
+                :-------------------:|---------------------------------------------|
+                 `highways`          | driving-*                                   |
+                 `tollways`          | driving-*                                   |
+                 `ferries`           | driving-\*, cycling-\*, foot-\*, wheelchair |
+                 `tunnels`           | driving-*                                   |
+                 `pavedroads`        | driving-\*, cycling-*                       |
+                 `unpavedroads`      | driving-\*, cycling-*                       |
+                 `tracks`            | driving-*                                   |
+                 `fords`             | driving-\*, cycling-\*, foot-*              |
+                 `steps`             | cycling-\*, foot-\*, wheelchair             |
+                 `hills`             | cycling-\*, foot-\*                         |
 
             - `avoid_borders` : `"all"` for no border crossing. `"controlled"` to cross open borders but avoid controlled ones. Only for `driving-*` profiles.
-            
+
             - `avoid_countries` : Pipe (|) separated list of countries to exclude from routing with `driving-*` profiles. Can be used together with `"avoid_features": "controlledborders"`. `"11|193"` would exclude Austria and Switzerland. List of countries and application examples can be found [here](https://github.com/GIScience/openrouteservice-docs#country-list).
 
             - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`. It is needed for **vehicle restrictions** to work.
@@ -928,33 +916,33 @@ paths:
                   - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer quiet ways over a shorter route.
 
               - `restrictions` : Specifies restrictions for `driving-hgv`, `wheelchair` or `cycling-*` profiles.
-                - for `cycling-*`: 
-                    
-                    |  Parameter | Description                                                                                                                                                                               |
-                    |:----------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                    | `gradient` | Only for avoided `hills` or specified `steepness_difficulty`. Specifies the maximum route steepness in percent. Values range from `1` to `15`. Routes with a higher gradient are avoided. |
+                - for `cycling-*`:
 
-                - for `driving-hgv`: 
+                    Parameter   | Description                                                                                                                                                                               |
+                    :----------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+                     `gradient` | Only for avoided `hills` or specified `steepness_difficulty`. Specifies the maximum route steepness in percent. Values range from `1` to `15`. Routes with a higher gradient are avoided. |
+
+                - for `driving-hgv`:
                   _(you have to specify the `vehicle_type` in the options for these parameters)_
-                
-                    |  Parameter | Description                                                                                                                       |
-                    |:----------:|-----------------------------------------------------------------------------------------------------------------------------------|
-                    | `length`   | Length restriction in meters.                                                                                                     |
-                    | `width`    | Width restriction in meters.                                                                                                      |
-                    | `height`   | Height restriction in meters.                                                                                                     |
-                    | `axleload` | Axleload restriction in tons.                                                                                                     |
-                    | `weight`   | Weight restriction in tons.                                                                                                       |
-                    | `hazmat`   | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false. |
+
+                    Parameter   | Description                                                                                                                       |
+                    :----------:|-----------------------------------------------------------------------------------------------------------------------------------|
+                     `length`   | Length restriction in meters.                                                                                                     |
+                     `width`    | Width restriction in meters.                                                                                                      |
+                     `height`   | Height restriction in meters.                                                                                                     |
+                     `axleload` | Axleload restriction in tons.                                                                                                     |
+                     `weight`   | Weight restriction in tons.                                                                                                       |
+                     `hazmat`   | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false. |
 
                 - for `wheelchair`:
 
-                  |       Parameter       | Description                                                                                                         |
-                  |:---------------------:|---------------------------------------------------------------------------------------------------------------------|
-                  |     `surface_type`    | Specifies the [surface type](http://wiki.openstreetmap.org/wiki/Key:surface). Default is `"cobblestone:flattened"`. |
-                  |      `track_type`     | Specifies the [grade](http://wiki.openstreetmap.org/wiki/Key:tracktype) of the route. Default is `"grade1"`.        |
-                  |   `smoothness_type`   | Specifies the [smoothness](http://wiki.openstreetmap.org/wiki/Key:smoothness) of the route. Default is `"good"`.    |
-                  | `maximum_sloped_curb` | Specifies the maximum height of the sloped curb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.      |
-                  |   `maximum_incline`   | Specifies the maximum incline as a percentage. `3`, `6`(default), `10`, `15` or `any`.                              |
+                  Parameter              | Description                                                                                                         |
+                  :---------------------:|---------------------------------------------------------------------------------------------------------------------|
+                       `surface_type`    | Specifies the [surface type](http://wiki.openstreetmap.org/wiki/Key:surface). Default is `"cobblestone:flattened"`. |
+                        `track_type`     | Specifies the [grade](http://wiki.openstreetmap.org/wiki/Key:tracktype) of the route. Default is `"grade1"`.        |
+                     `smoothness_type`   | Specifies the [smoothness](http://wiki.openstreetmap.org/wiki/Key:smoothness) of the route. Default is `"good"`.    |
+                   `maximum_sloped_curb` | Specifies the maximum height of the sloped curb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.      |
+                     `maximum_incline`   | Specifies the maximum incline as a percentage. `3`, `6`(default), `10`, `15` or `any`.                              |
 
 
             - `avoid_polygons` : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).
@@ -989,7 +977,7 @@ paths:
           }
           ```
           The minified form(for copy paste purposes):
-  
+
           `{"maximum_speed":10,"avoid_features":"unpavedroads","profile_params":{"weightings":{"steepness_difficulty":{"level":1},"green":{"factor":0.8},"quiet":{"factor":1.0}},"restrictions":{"gradient":5}},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
 
           More examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).
@@ -1027,18 +1015,18 @@ paths:
             An unexpected error was encountered and more detailed internal
             errorcode is provided.
 
-            | Internal Code | Description                                        |
-            |:-------------:|----------------------------------------------------|
-            | 3000 |  Unable to parse JSON request. |
-            | 3001 |  Required parameter is missing. |
-            | 3002 |  Invalid parameter format. |
-            | 3003 |  Invalid parameter value. |
-            | 3004 |  Parameter value exceeds the maximum allowed limit. |
-            | 3005 |  Requested feature is not supported. |
-            | 3006 |  Unable to parse the request to the export handler. |
-            | 3007 |  Unsupported export format. |
-            | 3008 |  Empty Element. |
-            | 3099 |  Unknown internal error. |
+            Internal Code  | Description                                        |
+            :-------------:|----------------------------------------------------|
+             3000 |  Unable to parse JSON request. |
+             3001 |  Required parameter is missing. |
+             3002 |  Invalid parameter format. |
+             3003 |  Invalid parameter value. |
+             3004 |  Parameter value exceeds the maximum allowed limit. |
+             3005 |  Requested feature is not supported. |
+             3006 |  Unable to parse the request to the export handler. |
+             3007 |  Unsupported export format. |
+             3008 |  Empty Element. |
+             3099 |  Unknown internal error. |
           schema:
             $ref: "#/definitions/error"
         501:
@@ -1046,69 +1034,6 @@ paths:
             \ needed to fulfill the request."
         503:
           description: "The server is currently unavailable due to overload or maintenance."
-  # /pois:
-  #   post:
-  #     tags:
-  #     - "Pois"
-  #     summary: "Poi Service"
-  #     description: |
-  #       [Please refer to this external documentation for this endpoint](https://openpoiservice.docs.apiary.io/#)
-      # parameters:
-      # - name: "api_key"
-      #   in: "query"
-      #   description: |
-      #     Insert your API Key here.
-      #   type: "string"
-      #   required: true
-      #   default: "your-api-key"
-      # - name: "body"
-      #   in: "body"
-      #   description: "body for a post request"
-      #   schema:
-      #     $ref: "#/definitions/LocationsBody"
-      # responses:
-        # 200:
-        #   description: "Standard response for successfully processed requests. Returns\
-      #       \ JSON."
-      #     schema:
-      #       $ref: "#/definitions/LocationsPoiResponse"
-      #   400:
-      #     description: "The request is incorrect and therefore can not be processed."
-      #   401:
-      #     description: "Authorization field missing."
-      #   403:
-      #     description: "Key not authorised."
-      #   405:
-      #     description: "The specified HTTP method is not supported. For more details,\
-      #       \ refer to the EndPoint documentation."
-      #   413:
-      #     description: "The request is larger than the server is able to process,\
-      #       \ the data provided in the request exceeds the capacity limit."
-      #   500:
-      #     description: |
-      #       An unexpected error was encountered and more detailed internal
-      #       errorcode is provided.
-
-      #       | Internal Code | Description                                        |
-      #       |:-------------:|----------------------------------------------------|
-      #       | 4000 |  Unable to parse JSON request. |
-      #       | 4001 |  Required parameter is missing. |
-      #       | 4002 |  Invalid parameter format. |
-      #       | 4003 |  Invalid parameter value. |
-      #       | 4004 |  Parameter value exceeds the maximum allowed limit. |
-      #       | 4006 |  Unable to parse the request to the export handler. |
-      #       | 4007 |  Unsupported export format. |
-      #       | 4008 |  Empty Element. |
-      #       | 4099 |  Unknown internal error. |
-      #     schema:
-      #       type: "array"
-      #       items:
-      #         $ref: "#/definitions/error"
-      #   501:
-      #     description: "Indicates that the server does not support the functionality\
-      #       \ needed to fulfill the request."
-      #   503:
-      #     description: "The server is currently unavailable due to overload or maintenance."
   /matrix:
     get:
       tags:
@@ -1118,111 +1043,111 @@ paths:
         Returns duration or distance matrix for mutliple source and destination points.
         By default a symmetric duration matrix is returned where every point in `locations` is paired with each other. The result is `null` if a value can't be determined.
       parameters:
-        - name: "api_key"
-          in: "query"
-          description: |
-            Insert your API Key here.
-          type: "string"
-          required: true
-          default: "your-api-key"
-        - name: profile
-          in: "query"
-          description: "Specifies the route profile."
-          required: true
-          type: "string"
-          enum:
-          - "driving-car"
-          - "driving-hgv"
-          - "cycling-regular"
-          - "cycling-road"
-          - "cycling-safe"
-          - "cycling-mountain"
-          - "cycling-tour"
-          - "cycling-electric"
-          - "foot-walking"
-          - "foot-hiking"
-          - "wheelchair"
-          default: driving-car
-        - name: locations
-          in: "query"
-          description: |
-            Pipe (|) separated List of `longitude,latitude` coordinates
-            
-            Example values: `9.970093,48.477473` `9.207916,49.153868` `37.573242,55.801281` `115.663757,38.106467`
-          required: true
-          type: "array"
-          items:
-            type: "string"
-          collectionFormat: "pipes"
-          default:
-            - "9.970093,48.477473|9.207916,49.153868|37.573242,55.801281|115.663757,38.106467"
-        - name: sources
-          in: "query"
-          description: |
-            A comma separated list of indices that refers to the list of locations (starting with `0`). {index_1},{index_2}(,{index_N} ...) or `all` (default).
+      - name: "api_key"
+        in: "query"
+        description: |
+          Insert your API Key here.
+        type: "string"
+        required: true
+        default: "your-api-key"
+      - name: profile
+        in: "query"
+        description: "Specifies the route profile."
+        required: true
+        type: "string"
+        enum:
+        - "driving-car"
+        - "driving-hgv"
+        - "cycling-regular"
+        - "cycling-road"
+        - "cycling-safe"
+        - "cycling-mountain"
+        - "cycling-tour"
+        - "cycling-electric"
+        - "foot-walking"
+        - "foot-hiking"
+        - "wheelchair"
+        default: driving-car
+      - name: locations
+        in: "query"
+        description: |
+          Pipe (|) separated List of `longitude,latitude` coordinates
 
-            Example: `0,3` for the first and fourth Location.
-          type: "array"
-          items:
-            type: string
-          default:
-            - "all"
-        - name: destinations
-          in: "query"
-          description: |
-            A comma separated list of indices that refers to the list of locations (starting with `0`). {index_1},{index_2}[,{index_N} ...] or `all` (default).
-
-            Example: `0,3` for the first and fourth Location.
-          type: "array"
-          items:
-            type: string
-          default:
-            - "all"
-        - name: metrics
-          in: "query"
-          description: |
-            Specifies a list of returned metrics separated with a pipe character (|).
-            * `distance` - Returns distance matrix for specified points in defined `units`.
-            * `duration` - Returns duration matrix for specified points in *seconds*.
-          #* `weight`   - Returns weight matrix for specified points.
-          type: "array"
-          collectionFormat: "pipes"
-          uniqueItems: true
-          items:
-            type: "string"
-            enum:
-              - "distance"
-              - "duration"
-            #  - "weight"
-          default: 
-          - duration
-        - name: resolve_locations
-          in: query
-          description: |
-            Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain the `name` element that identifies the name of the closest street. Default: `false`
-          type: boolean
-          default: false
-          enum:
-          - true
-          - false        
-        - name: units
-          in: query
-          description: "Specifies the unit of measurement for distances (only)."
+          Example values: `9.970093,48.477473` `9.207916,49.153868` `37.573242,55.801281` `115.663757,38.106467`
+        required: true
+        type: "array"
+        items:
           type: "string"
-          default: "m"
+        collectionFormat: "pipes"
+        default:
+        - "9.970093,48.477473|9.207916,49.153868|37.573242,55.801281|115.663757,38.106467"
+      - name: sources
+        in: "query"
+        description: |
+          A comma separated list of indices that refers to the list of locations (starting with `0`). {index_1},{index_2}(,{index_N} ...) or `all` (default).
+
+          Example: `0,3` for the first and fourth Location.
+        type: "array"
+        items:
+          type: string
+        default:
+        - "all"
+      - name: destinations
+        in: "query"
+        description: |
+          A comma separated list of indices that refers to the list of locations (starting with `0`). {index_1},{index_2}[,{index_N} ...] or `all` (default).
+
+          Example: `0,3` for the first and fourth Location.
+        type: "array"
+        items:
+          type: string
+        default:
+        - "all"
+      - name: metrics
+        in: "query"
+        description: |
+          Specifies a list of returned metrics separated with a pipe character (|).
+          * `distance` - Returns distance matrix for specified points in defined `units`.
+          * `duration` - Returns duration matrix for specified points in *seconds*.
+        #* `weight`   - Returns weight matrix for specified points.
+        type: "array"
+        collectionFormat: "pipes"
+        uniqueItems: true
+        items:
+          type: "string"
           enum:
-          - "m"
-          - "km"
-          - "mi"
-        - name: optimized
-          in: query
-          description: |
-            Specifies whether Dijkstra algorithm (`false`) or any available technique to speed up shortest-path routing (`true`) is used. For normal Dijkstra the number of visited nodes is limited to `100000`
-          type: boolean
-          default: true
-          enum:
-          - true
-          - false
+          - "distance"
+          - "duration"
+          #  - "weight"
+        default:
+        - duration
+      - name: resolve_locations
+        in: query
+        description: |
+          Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain the `name` element that identifies the name of the closest street. Default: `false`
+        type: boolean
+        default: false
+        enum:
+        - true
+        - false
+      - name: units
+        in: query
+        description: "Specifies the unit of measurement for distances (only)."
+        type: "string"
+        default: "m"
+        enum:
+        - "m"
+        - "km"
+        - "mi"
+      - name: optimized
+        in: query
+        description: |
+          Specifies whether Dijkstra algorithm (`false`) or any available technique to speed up shortest-path routing (`true`) is used. For normal Dijkstra the number of visited nodes is limited to `100000`
+        type: boolean
+        default: true
+        enum:
+        - true
+        - false
       responses:
         200:
           description: |
@@ -1246,17 +1171,17 @@ paths:
             An unexpected error was encountered and more detailed internal
             errorcode is provided.
 
-            | Internal Code | Description                                        |
-            |:-------------:|----------------------------------------------------|
-            | 6000 |  Unable to parse JSON request. |
-            | 6001 |  Required parameter is missing. |
-            | 6002 |  Invalid parameter format. |
-            | 6003 |  Invalid parameter value. |
-            | 6004 |  Parameter value exceeds the maximum allowed limit. |
-            | 6006 |  Unable to parse the request to the export handler. |
-            | 6007 |  Unsupported export format. |
-            | 6008 |  Empty Element. |
-            | 6099 |  Unknown internal error. |
+            Internal Code  | Description                                        |
+            :-------------:|----------------------------------------------------|
+             6000 |  Unable to parse JSON request. |
+             6001 |  Required parameter is missing. |
+             6002 |  Invalid parameter format. |
+             6003 |  Invalid parameter value. |
+             6004 |  Parameter value exceeds the maximum allowed limit. |
+             6006 |  Unable to parse the request to the export handler. |
+             6007 |  Unsupported export format. |
+             6008 |  Empty Element. |
+             6099 |  Unknown internal error. |
           schema:
             type: "array"
             items:
@@ -1272,11 +1197,11 @@ paths:
       summary: "Matrix Service (POST)"
       description: |
         Returns duration or distance or matrix for mutliple source and destination points.
-        
+
         **IMPORTANT**
-        
+
         The profile currently has to be passed both as a parameter *AND* in the body for other profiles than `driving-car`.
-        
+
         Body example:
         ```{'profile': 'driving-hgv', 'metrics': 'duration|distance', 'optimized': true, 'units': 'm', 'locations': [[7.796, 48.35], [11.13, 50.98]]}```
       parameters:
@@ -1318,8 +1243,8 @@ paths:
             # metrics: duration
             # optimized: True
             # units: m
-            # locations: 
-            #   - - 7.796 
+            # locations:
+            #   - - 7.796
             #     - 48.35
             #   - - 11.13
             #     - 50.98
@@ -1346,17 +1271,17 @@ paths:
             An unexpected error was encountered and more detailed internal
             errorcode is provided.
 
-            | Internal Code | Description                                        |
-            |:-------------:|----------------------------------------------------|
-            | 6000 |  Unable to parse JSON request. |
-            | 6001 |  Required parameter is missing. |
-            | 6002 |  Invalid parameter format. |
-            | 6003 |  Invalid parameter value. |
-            | 6004 |  Parameter value exceeds the maximum allowed limit. |
-            | 6006 |  Unable to parse the request to the export handler. |
-            | 6007 |  Unsupported export format. |
-            | 6008 |  Empty Element. |
-            | 6099 |  Unknown internal error. |
+            Internal Code  | Description                                        |
+            :-------------:|----------------------------------------------------|
+             6000 |  Unable to parse JSON request. |
+             6001 |  Required parameter is missing. |
+             6002 |  Invalid parameter format. |
+             6003 |  Invalid parameter value. |
+             6004 |  Parameter value exceeds the maximum allowed limit. |
+             6006 |  Unable to parse the request to the export handler. |
+             6007 |  Unsupported export format. |
+             6008 |  Empty Element. |
+             6099 |  Unknown internal error. |
           schema:
             type: "array"
             items:
@@ -1522,8 +1447,8 @@ definitions:
         maxItems: 2
         minItems: 2
         example:
-          - 0
-          - 163
+        - 0
+        - 163
       extras:
         $ref: '#/definitions/extras'
       bbox:
@@ -1535,10 +1460,10 @@ definitions:
         maxItems: 4
         minItems: 4
         example:
-          - 8.327707
-          - 48.231946
-          - 8.345244
-          - 48.263552
+        - 8.327707
+        - 48.231946
+        - 8.345244
+        - 48.263552
     title: "routes object"
     example:
       summary:
@@ -1557,7 +1482,7 @@ definitions:
       segments:
         distance : 5757.4
         duration : 821
-        steps: 
+        steps:
           $ref: "#/definitions/steps/example"
   routes_summary:
     properties:
@@ -1602,7 +1527,7 @@ definitions:
     items:
       type: array
       description: Contains longitude, latitude and altitude(for elevation=true).
-      minItems: 2 
+      minItems: 2
       maxItems: 3
       items:
         type: number
@@ -1638,17 +1563,17 @@ definitions:
       avgspeed:
         type: number
         format: double
-        description: Contains the average speed of this segment in km/h. 
+        description: Contains the average speed of this segment in km/h.
       steps:
         type: "array"
         description: "List containing the specific steps the segment consists of."
         items:
-          $ref: "#/definitions/steps"          
+          $ref: "#/definitions/steps"
     title: "segments object"
     example:
       distance : 5757.4
       duration : 821
-      steps: 
+      steps:
         $ref: "#/definitions/steps/example"
   steps:
     properties:
@@ -1693,46 +1618,46 @@ definitions:
         minItems: 2
     title: "steps object"
     example:
-      - {
-          "distance": 383.1,
-          "duration": 46,
-          "type": "6",
-          "instruction": "Head south on Benatweg",
-          "way_points": [
-            0,
-            12
-          ]
-        }
-      - {
-          "distance": 757.4,
-          "duration": 54.5,
-          "type": "1",
-          "instruction": "Turn right onto Hölzle, K 5528",
-          "way_points": [
-            12,
-            33
-          ]
-        }
-      - {
-          "distance": 980.2,
-          "duration": 70.6,
-          "type": "6",
-          "instruction": "Continue straight onto Sulzbacher Straße, K 5528",
-          "way_points": [
-            33,
-            63
-          ]
-        }
-      - {
-          "distance": 3636.7,
-          "duration": 649.9,
-          "type": "5",
-          "instruction": "Turn slight right",
-          "way_points": [
-            63,
-            163
-          ]
-        }
+    - {
+      "distance": 383.1,
+      "duration": 46,
+      "type": "6",
+      "instruction": "Head south on Benatweg",
+      "way_points": [
+        0,
+        12
+      ]
+    }
+    - {
+      "distance": 757.4,
+      "duration": 54.5,
+      "type": "1",
+      "instruction": "Turn right onto Hölzle, K 5528",
+      "way_points": [
+        12,
+        33
+      ]
+    }
+    - {
+      "distance": 980.2,
+      "duration": 70.6,
+      "type": "6",
+      "instruction": "Continue straight onto Sulzbacher Straße, K 5528",
+      "way_points": [
+        33,
+        63
+      ]
+    }
+    - {
+      "distance": 3636.7,
+      "duration": 649.9,
+      "type": "5",
+      "instruction": "Turn slight right",
+      "way_points": [
+        63,
+        163
+      ]
+    }
   maneuver:
     title: maneuver object
     properties:
@@ -1764,11 +1689,11 @@ definitions:
       waycategory:
         $ref: '#/definitions/extras_property'
       waytype:
-        $ref: '#/definitions/extras_property'       
+        $ref: '#/definitions/extras_property'
       tollways:
         $ref: '#/definitions/extras_property'
       traildifficulty:
-        $ref: '#/definitions/extras_property'        
+        $ref: '#/definitions/extras_property'
   extras_property:
     properties:
       values:
@@ -1853,10 +1778,10 @@ definitions:
           minItems: 2
         minItems: 2
         example:
-          - - 8.34234
-            - 48.23424
-          - - 8.23424
-            - 48.26424
+        - - 8.34234
+          - 48.23424
+        - - 8.23424
+          - 48.26424
       language:
         type: string
         example: en
@@ -1882,7 +1807,7 @@ definitions:
         type: string
         example: {}
   Geocode_structured_query:
-    title: "Geocoding structured query"
+    title: "Geocode structured query"
     description: "Composition of a structured query object. A minimum of one parameter has to be specified."
     type: "object"
     properties:
@@ -1918,163 +1843,6 @@ definitions:
       locality: Heidelberg
       country: Germany
       postalcode: 69120
-  Geocoderesponse:
-    properties:
-      type:
-        type: "string"
-        default: FeatureCollection
-        example: FeatureCollection
-      features:
-        type: "array"
-        items:
-          $ref: "#/definitions/Geocoderesponse_features"
-      bbox:
-        type: "array"
-        description: "Contains the minimum bounding box of all features."
-        items:
-          type: "number"
-          format: "double"
-        maxItems: 4
-        minItems: 4
-        example:
-          - 13.239515
-          - 52.514679
-          - 13.239515
-          - 52.514679
-      info:
-        $ref: "#/definitions/Geocoderesponse_info"
-    title: "Geocode Response Object"
-  Geocoderesponse_features:
-    properties:
-      type:
-        type: "string"
-        default: Feature
-        example: Feature
-      geometry:
-        $ref: "#/definitions/Geocoderesponse_geometry"
-      properties:
-        $ref: "#/definitions/Geocoderesponse_properties"
-    title: "features object"
-  Geocoderesponse_geometry:
-    properties:
-      type:
-        type: "string"
-        default: Point
-        example: Point
-      coordinates:
-        description: "Contains the longitude and latitude"
-        type: "array"
-        items:
-          type: "number"
-          format: "double"
-        maxItems: 2
-        minItems: 2
-        example: 
-          - 13.414369
-          - 52.516116
-    title: "geometry object"
-  Geocoderesponse_properties:
-    properties:
-      country:
-        type: string
-        example: Germany
-      country_code:
-        type: string
-        example: DE
-      region:
-        type: string
-        example: Berlin
-      locality:
-        type: string
-        example: Berlin
-      county:
-        type: string
-      state:
-        type: "string"
-        example: Berlin
-      city:
-        type: string
-        example: Berlin
-      postal_code:
-        type: "string"
-        example: 10179
-      borough:
-        type: string
-        example: Mitte
-      neighbourhood:
-        type: string
-        example: Mitte
-      street:
-        type: "string"
-        example: Waisenstraße
-      house_number:
-        type: "string"
-        example: 3
-      name:
-        type: "string"
-        example: Waisenstraße 3
-      place_type:
-        type: string
-        description: |
-          [Type](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#place-type) of the returned location.
-        example: address 
-      distance:
-        type: "string"
-        description: Distance between the input location and the result point.
-        example: 12.41
-      confidence:
-        type: "string"
-        description: |
-          Value range: `0-1`
-          **For reverse geocoding:** Based on the distance. The closer a result is to the queried point, the higher the `confidence`.
-          **For normal geocoding:**  Based on the comparison of the query and the result. The closer a result is to the query, the higher the `confidence`.
-        example: 0.8
-    title: "porperties object"
-    description: Contains the OSM tag information of the point and the `confidence`. For reverse request with `distance`.
-  Geocoderesponse_info:
-    properties:
-      service:
-        type: string
-        default: geocoding
-        example: geocoding
-        description: API endpoint used.
-      attribution:
-        type: "string"
-        description: "Attribution for using our service."
-        example: "openrouteservice.org, OpenStreetMap contributors"
-      osm_file_md5_hash:
-        type: "string"
-        description: "md5 hash of the planet file which the graphs were built from."
-        example: "bbff3c042b19c04e3efdd9722e22db5f"
-      query:
-        $ref: "#/definitions/Geocoderesponse_info_query"
-      engine:
-        $ref: "#/definitions/info_engine"
-      timestamp:
-        type: "integer"
-        format: "int64"
-        description: "Unix timestamp of the precise request date."
-        example: 1493288124343
-    title: "info object"
-  Geocoderesponse_info_query:
-    properties:
-      query:
-        type: "string"
-      location:
-        type: array
-        items:
-          type: number
-          format: double
-        example:
-          - 13.239515
-          - 52.514679
-      limit:
-        type: "integer"
-        format: "int64"
-        default: 20
-        example: 20
-    title: query object
-    description: Summarizes your query settings.
   IsochronesResponse:
     type: "object"
     properties:
@@ -2094,10 +1862,10 @@ definitions:
         minItems: 4
         description: "Contains the minimum bounding box of all features."
         example:
-          - 8.337413
-          - 48.228996
-          - 8.348807
-          - 48.235437
+        - 8.337413
+        - 48.228996
+        - 8.348807
+        - 48.235437
       info:
         $ref: "#/definitions/IsochronesResponse_info"
     title: "Isochrones Response Object"
@@ -2122,32 +1890,32 @@ definitions:
             type: "number"
             format: "double"
         example:
-          - - 8.337413
-            - 48.233333
-          - - 8.337446
-            - 48.233146
-          - - 8.339023
-            - 48.231162
-          - - 8.342829
-            - 48.228996
-          - - 8.344379
-            - 48.229675
-          - - 8.34602
-            - 48.230662
-          - - 8.347124
-            - 48.231837
-          - - 8.348778
-            - 48.233859
-          - - 8.348807
-            - 48.233995
-          - - 8.348731
-            - 48.235059
-          - - 8.347973
-            - 48.235437
-          - - 8.340959
-            - 48.233954
-          - - 8.337413
-            - 48.233333
+        - - 8.337413
+          - 48.233333
+        - - 8.337446
+          - 48.233146
+        - - 8.339023
+          - 48.231162
+        - - 8.342829
+          - 48.228996
+        - - 8.344379
+          - 48.229675
+        - - 8.34602
+          - 48.230662
+        - - 8.347124
+          - 48.231837
+        - - 8.348778
+          - 48.233859
+        - - 8.348807
+          - 48.233995
+        - - 8.348731
+          - 48.235059
+        - - 8.347973
+          - 48.235437
+        - - 8.340959
+          - 48.233954
+        - - 8.337413
+          - 48.233333
       type:
         type: "string"
         default: "Polygon"
@@ -2202,8 +1970,8 @@ definitions:
       group_index: 0
       value: 60
       center:
-        - 8.34234
-        - 48.23424
+      - 8.34234
+      - 48.23424
   IsochronesResponse_info:
     properties:
       service:
@@ -2254,8 +2022,8 @@ definitions:
       ranges: "60.0"
       profile: "driving-car"
       locations:
-        - - 8.34234
-          - 48.23424
+      - - 8.34234
+        - 48.23424
       range_type: "time"
       location_type: "start"
   # LocationsPoiResponse:
@@ -2499,8 +2267,8 @@ definitions:
         default: driving-car
       locations:
         description: >
-          List of comma separated lists of `longitude,latitude` coordinates (note, without quotes around the coordinates, this is a displaying error of swagger). 
-          
+          List of comma separated lists of `longitude,latitude` coordinates (note, without quotes around the coordinates, this is a displaying error of swagger).
+
           example : `"locations":[[9.70093,48.477473],[9.207916,49.153868],[37.573242,55.801281],[115.663757,38.106467]]`
         type: "array"
         items:
@@ -2508,11 +2276,11 @@ definitions:
           items:
             type: number
             format: double
-        default: 
-          - - 9.9700934,48.477473
-          - - 9.207916,49.153868
-          - - 37.573242,55.801281
-          - - 115.663757,38.106467
+        default:
+        - - 9.9700934,48.477473
+        - - 9.207916,49.153868
+        - - 37.573242,55.801281
+        - - 115.663757,38.106467
       sources:
         description: |
           A comma separated list of indices that refers to the list of locations (starting with `0`). `{index_1},{index_2}[,{index_N} ...]` or `all` (default).
@@ -2543,9 +2311,9 @@ definitions:
         type: "string"
         uniqueItems: true
         enum:
-          - "distance"
-          - "duration"
-          - "weight"
+        - "distance"
+        - "duration"
+        - "weight"
         default: "duration"
       resolve_locations:
         description: "Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain `name` element that identifies the name of the closest street. Default is `false`"
@@ -2553,7 +2321,7 @@ definitions:
         default: false
         enum:
         - true
-        - false        
+        - false
       units:
         description: "Specifies the unit of measurement for `metrics=distance`."
         type: "string"
@@ -2584,54 +2352,54 @@ definitions:
         items:
           $ref: "#/definitions/MatrixResponse_location"
         example:
-          - {
-              "location": [
-                  37.572926,
-                  55.80129
-              ],
-              "snapped_distance": 19.8
-            }
-          - {
-              "location": [
-                  115.658655,
-                  38.116731
-              ],
-              "snapped_distance": 1225.53
-            }
+        - {
+          "location": [
+            37.572926,
+            55.80129
+          ],
+          "snapped_distance": 19.8
+        }
+        - {
+          "location": [
+            115.658655,
+            38.116731
+          ],
+          "snapped_distance": 1225.53
+        }
       sources:
         description: "Array of sources. Each point is snapped to the road and path network"
         type: array
         items:
           $ref: "#/definitions/MatrixResponse_location"
         example:
-          - {
-              "location": [
-                  9.968501,
-                  48.47789
-              ],
-              "snapped_distance": 126.17
-            }
-          - {
-              "location": [
-                  9.207773,
-                  49.153882
-              ],
-              "snapped_distance": 10.54
-            }
-          - {
-              "location": [
-                  37.572926,
-                  55.80129
-              ],
-              "snapped_distance": 19.8
-            }
-          - {
-              "location": [
-                  115.658655,
-                  38.116731
-              ],
-              "snapped_distance": 1225.53
-            }
+        - {
+          "location": [
+            9.968501,
+            48.47789
+          ],
+          "snapped_distance": 126.17
+        }
+        - {
+          "location": [
+            9.207773,
+            49.153882
+          ],
+          "snapped_distance": 10.54
+        }
+        - {
+          "location": [
+            37.572926,
+            55.80129
+          ],
+          "snapped_distance": 19.8
+        }
+        - {
+          "location": [
+            115.658655,
+            38.116731
+          ],
+          "snapped_distance": 1225.53
+        }
       info:
         $ref: "#/definitions/MatrixResponse_info"
     title: "Matrix Response Object"
@@ -2644,14 +2412,14 @@ definitions:
       type: number
       format: double
     example:
-      - - 2366119
-        - 2338412.25
-        - 0
-        - 7519754
-      - - 9983969
-        - 9956262
-        - 7509508.5
-        - 0
+    - - 2366119
+      - 2338412.25
+      - 0
+      - 7519754
+    - - 9983969
+      - 9956262
+      - 7509508.5
+      - 0
   MatrixResponse_durations:
     description: |
       [Duration matrix](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#matrix-response) where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.
@@ -2659,14 +2427,14 @@ definitions:
       type: number
       format: double
     example:
-      - - 88632.73
-        - 87838.93
-        - 0
-        - 311791.09
-      - - 399967.72
-        - 399173.91
-        - 310735.56
-        - 0
+    - - 88632.73
+      - 87838.93
+      - 0
+      - 311791.09
+    - - 399967.72
+      - 399173.91
+      - 310735.56
+      - 0
   MatrixResponse_weights:
     description: |
       [Weight matrix](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#matrix-response) where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.
@@ -2674,14 +2442,14 @@ definitions:
       type: number
       format: double
     example:
-      - - 88635.17
-        - 87841.37
-        - 0
-        - 311794.25
-      - - 399973.16
-        - 399179.34
-        - 310738.84
-        - 0
+    - - 88635.17
+      - 87841.37
+      - 0
+      - 311794.25
+    - - 399973.16
+      - 399179.34
+      - 310738.84
+      - 0
   MatrixResponse_location:
     type: object
     properties:
@@ -2744,25 +2512,25 @@ definitions:
         minItems: 2
         maxItems: 200
         example:
-          - - 9.970093
-            - 48.477473
-          - - 9.207916
-            - 49.153868
-          - - 37.573242
-            - 55.801281
-          - - 115.663757
-            - 38.106467
+        - - 9.970093
+          - 48.477473
+        - - 9.207916
+          - 49.153868
+        - - 37.573242
+          - 55.801281
+        - - 115.663757
+          - 38.106467
       sources:
         type: "array"
         items:
           type: string
         example: "2,3"
-      destinations: 
+      destinations:
         type: "array"
         items:
           type: string
         example: "all"
-      metrics: 
+      metrics:
         type: array
         items:
           type: string
