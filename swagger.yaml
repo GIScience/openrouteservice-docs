@@ -392,9 +392,8 @@ paths:
         403:
           description: "Key not authorised."
         '404':
-          description: >
+          description: |
             Route could not be found.
-
 
             Internal Code  | Description                                                |
             :-------------:|------------------------------------------------------------|
