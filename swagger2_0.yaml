@@ -107,17 +107,19 @@ paths:
         type: "string"
         default: "en"
         enum:
-        - "zh-CN"
+        - "cn"
         - "de"
         - "en"
         - "es"
         - "ru"
+        - "dk"
         - "fr"
         - "it"
         - "nl"
-        - "pt"
+        - "br"
+        - "se"
+        - "tr"
         - "gr"
-        - "hu"
       - name: "geometry"
         in: "query"
         description: "Specifies whether to return geometry."
@@ -381,7 +383,6 @@ paths:
         200:
           description: "Standard response for successfully processed requests. Returns\
             \ JSON. The decoded values of the extra information can be found [here](https://github.com/GIScience/openrouteservice-docs).\n"
-          body:
           schema:
             $ref: "#/definitions/Routeresponse"
         400:
@@ -817,9 +818,6 @@ paths:
         in: "query"
         description: "Set _time_ for isochrones or _distance_ for equidistants.\n"
         type: "string"
-        enum:
-        - "time"
-        - "distance"
         default: "time"
       - name: "range"
         in: "query"
@@ -840,7 +838,7 @@ paths:
         in: "query"
         description: "Unit format for  `range_type=distance`.\n"
         type: "string"
-        example: "m"
+        default: "m"
         enum:
         - "m"
         - "km"
@@ -1204,7 +1202,7 @@ paths:
         The profile currently has to be passed both as a parameter *AND* in the body for other profiles than `driving-car`.
 
         Body example:
-        ```{ "profile":"driving-hgv", "locations": [[7.796, 48.35], [11.13, 50.98]]}```
+        ```{'profile': 'driving-hgv', 'metrics': 'duration|distance', 'optimized': true, 'units': 'm', 'locations': [[7.796, 48.35], [11.13, 50.98]]}```
       parameters:
       - name: "api_key"
         in: "query"
@@ -1237,8 +1235,18 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/MatrixBody"
+          # type: string
           example: |
-            `{ "profile":"driving-hgv", "locations": [[7.796, 48.35], [11.13, 50.98]]}`
+            {"profile": "driving-hgv", "metrics": "duration", "optimized": True, "units": "m", "locations": [[7.796, 48.35], [11.13, 50.98]]}
+            # profile: driving-hgv
+            # metrics: duration
+            # optimized: True
+            # units: m
+            # locations:
+            #   - - 7.796
+            #     - 48.35
+            #   - - 11.13
+            #     - 50.98
       responses:
         200:
           description: |
@@ -1324,57 +1332,9 @@ definitions:
         - "delivery"
         default: "hgv"
       profile_params:
-        properties:
-          length:
-            type: "number"
-            format: "double"
-          width:
-            type: "number"
-            format: "double"
-          height:
-            type: "number"
-            format: "double"
-          axleload:
-            type: "number"
-            format: "double"
-          weight:
-            type: "number"
-            format: "double"
-          hazmat:
-            type: "boolean"
-          weightings:
-            type: "object"
-            properties:
-              level:
-                type: "integer"
-                format: "int64"
-                enum:
-                - 0
-                - 1
-                - 2
-                - 3
-          restrictions:
-            type: "object"
-            properties:
-              gradient:
-                type: "integer"
-                format: "int64"
-                minimum: 1
-                maximum: 15
+        $ref: "#/definitions/profile_params"
       avoid_polygons:
-        properties:
-          type:
-            type: "string"
-            default: "Polygon"
-          coordinates:
-            type: "array"
-            items:
-              type: "array"
-              items:
-                type: "number"
-                format: "double"
-              maxItems: 2
-              minItems: 2
+        $ref: "#/definitions/avoid_polygons"
     example:
       maximum_speed: 12
       avoid_features:
@@ -1399,6 +1359,58 @@ definitions:
             - 1
           - - 100
             - 0
+  profile_params:
+    properties:
+      length:
+        type: "number"
+        format: "double"
+      width:
+        type: "number"
+        format: "double"
+      height:
+        type: "number"
+        format: "double"
+      axleload:
+        type: "number"
+        format: "double"
+      weight:
+        type: "number"
+        format: "double"
+      hazmat:
+        type: "boolean"
+      weightings:
+        type: "object"
+        properties:
+          level:
+            type: "integer"
+            format: "int64"
+            enum:
+            - 0
+            - 1
+            - 2
+            - 3
+      restrictions:
+        type: "object"
+        properties:
+          gradient:
+            type: "integer"
+            format: "int64"
+            minimum: 1
+            maximum: 15
+  avoid_polygons:
+    properties:
+      type:
+        type: "string"
+        default: "Polygon"
+      coordinates:
+        type: "array"
+        items:
+          type: "array"
+          items:
+            type: "number"
+            format: "double"
+          maxItems: 2
+          minItems: 2
   Routeresponse:
     properties:
       routes:
