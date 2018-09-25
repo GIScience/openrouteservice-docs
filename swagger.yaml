@@ -78,7 +78,7 @@ paths:
         in: "query"
         description: "Specifies the route preference."
         type: "string"
-        default: "fastest"
+        apiDefault: "fastest"
         enum:
         - "fastest"
         - "shortest"
@@ -87,7 +87,7 @@ paths:
         in: "query"
         description: "Specifies the response format. The GPX schema the response is validated against can be found [here](https://raw.githubusercontent.com/GIScience/openrouteservice-schema/master/gpx/v1/ors-gpx.xsd)."
         type: "string"
-        default: "json"
+        apiDefault: "json"
         enum:
         - "json"
         - "geojson"
@@ -96,7 +96,7 @@ paths:
         in: "query"
         description: "Specifies the distance unit."
         type: "string"
-        default: "m"
+        apiDefault: "m"
         enum:
         - "m"
         - "km"
@@ -105,7 +105,7 @@ paths:
         in: "query"
         description: "Language for the route instructions."
         type: "string"
-        default: "en"
+        apiDefault: "en"
         enum:
         - "zh-CN"
         - "de"
@@ -122,7 +122,7 @@ paths:
         in: "query"
         description: "Specifies whether to return geometry."
         type: "boolean"
-        default: true
+        apiDefault: true
         enum:
         - true
         - false
@@ -132,7 +132,7 @@ paths:
           Sets the format of the returned geometry. Note that for `elevation=true` `encodedpolyline` also encodes the height information of each point. If `format=geojson`, this parameter has no effect.
           To decode, please use a suitable library (for example [graphhopper](https://github.com/graphhopper/graphhopper/blob/master/web/src/main/java/com/graphhopper/http/WebHelper.java)).
         type: "string"
-        default: "encodedpolyline"
+        apiDefault: "encodedpolyline"
         enum:
         - "encodedpolyline"
         - "geojson"
@@ -142,7 +142,7 @@ paths:
         description: |
           Specifies whether to simplify the geometry. `true` will automatically be set to `false` if `extra_info` parameter is specified."
         type: "boolean"
-        default: false
+        apiDefault: false
         enum:
         - true
         - false
@@ -150,7 +150,7 @@ paths:
         in: "query"
         description: "Specifies whether to return instructions."
         type: "boolean"
-        default: true
+        apiDefault: "true"
         enum:
         - true
         - false
@@ -158,7 +158,7 @@ paths:
         in: "query"
         description: "Select `html` for more verbose instructions."
         type: "string"
-        default: "text"
+        apiDefault: "text"
         enum:
         - "html"
         - "text"
@@ -166,7 +166,7 @@ paths:
         in: "query"
         description: "Provides bearings of the entrance and all passed roundabout exits. Adds the `exit_bearings` array to the `step` object in the response."
         type: boolean
-        default: false
+        apiDefault: false
         enum:
         - true
         - false
@@ -180,17 +180,17 @@ paths:
         type: "array"
         collectionFormat: "pipes"
         uniqueItems: true
-        items:
-          type: "string"
-          enum:
-          - "avgspeed"
-          - "detourfactor"
-          - "percentage"
+        multiSelect: true
+        enum:
+        - "avgspeed"
+        - "detourfactor"
+        - "percentage"
+        example: "avgspeed|percentage"
       - name: "maneuvers"
         in: "query"
         description: "Specifies whether the maneuver object is included into the `step` object or not. Default: `false`."
         type: "boolean"
-        default: false
+        apiDefault: false
         enum:
         - true
         - false
@@ -205,6 +205,7 @@ paths:
         items:
           type: number
           format: float
+        example: "200|-1"
       - name: "bearings"
         in: "query"
         description: |
@@ -218,11 +219,12 @@ paths:
         items:
           type: string
           format: 'bearing,deviation'
+        example: "45,10|120,20"
       - name: "continue_straight"
         in: "query"
         description: "Forces the route to keep going straight at waypoints restricting uturns there even if it would be faster. This setting will work for all profiles except for `driving-*`. In this case you will have to set `optimized=false` for it to work. Default: `false`."
         type: "boolean"
-        default: false
+        apiDefault: false
         enum:
         - true
         - false
@@ -230,7 +232,7 @@ paths:
         in: "query"
         description: "Specifies whether to return elevation values for points. Please note that elevation also gets encoded for `geometry_format=encodedpolyline`."
         type: "boolean"
-        default: false
+        apiDefault: false
         enum:
         - true
         - false
@@ -238,29 +240,31 @@ paths:
         in: "query"
         description: "Pipe (|) separated List of additional information. Returns information on [steepness](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#steepness), [suitability](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#suitability), [surface](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#surface), [waycategory](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waycategory), [waytype](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waytype), [tollways](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#tollways) or [trail difficulty](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#trail-difficulty) "
         type: "array"
-        items:
-          type: "string"
-          enum:
-          - "steepness"
-          - "suitability"
-          - "surface"
-          - "waycategory"
-          - "waytype"
-          - "tollways"
-          - "traildifficulty"
+        enum:
+        - "steepness"
+        - "suitability"
+        - "surface"
+        - "waycategory"
+        - "waytype"
+        - "tollways"
+        - "traildifficulty"
         collectionFormat: "pipes"
         uniqueItems: true
+        multiSelect: true
+        example: "waytype|surface"
       - name: optimized
         in: query
         description: |
           Uses contraction hierarchies if available (`false`).
         type: boolean
-        default: true
+        apiDefault: true
         enum:
         - true
         - false
       - name: "options"
         in: "query"
+        type: "object"
+        example: "{maximum_speed=100}"
         description: |
           For advanced options formatted as json object. For structure refer to the [these examples](https://github.com/GIScience/openrouteservice-docs#examples).
           The available parameters are:
@@ -370,13 +374,12 @@ paths:
           `{"maximum_speed":10,"avoid_features":"unpavedroads","profile_params":{"weightings":{"steepness_difficulty":{"level":1},"green":{"factor":0.8},"quiet":{"factor":1.0}},"restrictions":{"gradient":5}},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
 
           More examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).
-        type: "string"
-        default: "{}"
       - name: "id"
         in: "query"
         description: "Arbitrary identification string of the request reflected in\
           \ the meta information."
         type: "string"
+        example: "My trip"
       responses:
         200:
           description: "Standard response for successfully processed requests. Returns\
@@ -447,66 +450,67 @@ paths:
           Name of location, street address or postal code.
         type: string
         example: Heidelberg
+        default: Heidelberg
       - name: focus.point.lat
         in: query
         description: |
           Latitude of the `focus.point`. Specify the focus point to order results by linear distance to this point. Works for up to 100 kilometers distance. Use with `focus.point.lon`.
         type: number
         format: float
-        example: Null
+        example: 49.436431
       - name: focus.point.lon
         in: query
         description: |
           Longitude of the `focus.point`. Specify the focus point to order results by linear distance to this point. Works for up to 100 kilometers distance.  Use with `focus.point.lat`.
         type: number
         format: float
-        example: Null
+        example: 8.673964
       - name: boundary.rect.min_lon
         in: query
         description: |
           Left border of rectangular boundary to narrow results.
         type: number
         format: float
-        example: Null
+        example: 8.557663
       - name: boundary.rect.max_lon
         in: query
         description: |
           Right border of rectangular boundary to narrow results.
         type: number
         format: float
-        example: Null
+        example: 8.972054
       - name: boundary.rect.min_lat
         in: query
         description: |
           Bottom border of rectangular boundary to narrow results.
         type: number
         format: float
-        example: Null
+        example: 49.331387
       - name: boundary.rect.max_lat
         in: query
         description: |
           Top border of rectangular boundary to narrow results.
         type: number
         format: float
-        example: Null
+        example: 49.525654
       - name: boundary.circle.lat
         in: query
         description: |
           Center Latitude of circular boundary to narrow results. Use with `boundary.circle.lon` & `boundary.circle.radius`.
         type: number
         format: float
-        example: Null
+        example: 49.436431
       - name: boundary.circle.lon
         in: query
         description: |
           Center Longitude of circular boundary to narrow results. Use with `boundary.circle.lat` & `boundary.circle.radius`.
         type: number
         format: float
-        example: Null
+        example: 8.673964
       - name: boundary.circle.radius
         in: query
         description: |
-          Radius of circular boundary around the center coordinate. Use with `boundary.circle.lon` & `boundary.circle.lat`.
+          Radius of circular boundary around the center coordinate in kilometers. Use with `boundary.circle.lon` & `boundary.circle.lat`.
         type: number
         format: float
         example: 50
@@ -515,22 +519,18 @@ paths:
         description: |
           Restrict results to single country. Possible values are [alpha-2 and alpha-3 country codes](https://en.wikipedia.org/wiki/ISO_3166-1). Example: `DEU` or `DE` for Germany.
         type: string
+        example: "DE"
       - name: sources
         in: query
         description: |
           Restrict your search to specific sources. Searches all sources by default. You can either use the normal or short name. Sources are [`openstreetmap(osm)`](http://www.openstreetmap.org/), [`openaddresses(oa)`](http://openaddresses.io/), [`whosonfirst(wof)`](https://whosonfirst.org/), [`geonames(gn)`](http://www.geonames.org/).
         type: array
-        items:
-          type: "string"
-          enum:
-          - osm
-          - oa
-          - wof
-          - gn
-          - openstreetmap
-          - openaddresses
-          - whosonfirst
-          - geonames
+        multiSelect: true
+        enum:
+        - openstreetmap
+        - openaddresses
+        - whosonfirst
+        - geonames
         uniqueItems: true
         example: "osm,oa"
       - name: layers
@@ -553,23 +553,22 @@ paths:
             `country`|places that issue passports, nations, nation-states|
             `coarse`|alias for simultaneously using all administrative layers (everything except `venue` and `address`)|
         type: array
-        items:
-          type: string
-          enum:
-          - address
-          - venue
-          - neighbourhood
-          - locality
-          - borough
-          - localadmin
-          - county
-          - macrocounty
-          - region
-          - macroregion
-          - country
-          - coarse
-          uniqueItems: true
-          example: "region,county"
+        multiSelect: true
+        enum:
+        - address
+        - venue
+        - neighbourhood
+        - locality
+        - borough
+        - localadmin
+        - county
+        - macrocounty
+        - region
+        - macroregion
+        - country
+        - coarse
+        uniqueItems: true
+        example: "region,county"
       - name: size
         in: query
         description: |
@@ -675,6 +674,7 @@ paths:
         type: number
         format: float
         example: 48.858268
+        default: 48.858268
       - name: "point.lon"
         description: |
           Longitude of the coordinate to query.
@@ -683,6 +683,7 @@ paths:
         type: number
         format: float
         example: 2.294471
+        default: 2.294471
       - name: "boundary.circle.radius"
         description: |
           Restrict search to circular region around `point.lat/point.lon`. Value in kilometers.
@@ -719,40 +720,34 @@ paths:
             `country`|places that issue passports, nations, nation-states|
             `coarse`|alias for simultaneously using all administrative layers (everything except `venue` and `address`)|
         type: array
-        items:
-          type: string
-          enum:
-          - address
-          - venue
-          - neighbourhood
-          - locality
-          - borough
-          - localadmin
-          - county
-          - macrocounty
-          - region
-          - macroregion
-          - country
-          - coarse
-          uniqueItems: true
-          example: ""
+        multiSelect: true
+        enum:
+        - address
+        - venue
+        - neighbourhood
+        - locality
+        - borough
+        - localadmin
+        - county
+        - macrocounty
+        - region
+        - macroregion
+        - country
+        - coarse
+        uniqueItems: true
+        example: "address,venue"
       - name: sources
         in: query
         description: |
           Restrict your search to specific sources. Searches all sources by default. You can either use the normal or short name. Sources are [`openstreetmap(osm)`](http://www.openstreetmap.org/), [`openaddresses(oa)`](http://openaddresses.io/), [`whosonfirst(wof)`](https://whosonfirst.org/), [`geonames(gn)`](http://www.geonames.org/).
         type: array
-        items:
-          type: "string"
-          enum:
-          - osm
-          - oa
-          - wof
-          - gn
-          - openstreetmap
-          - openaddresses
-          - whosonfirst
-          - geonames
+        enum:
+        - openstreetmap
+        - openaddresses
+        - whosonfirst
+        - geonames
         uniqueItems: true
+        multiSelect: true
         example: "osm,oa"
       - name: "boundary.country"
         in: query
@@ -864,16 +859,18 @@ paths:
            `reachfactor` | Returns a reachability score between 0 and 1. |
            `total_pop` | Returns the total population of each polygon based on [GHS data](http://ghsl.jrc.ec.europa.eu/about.php) |
         type: "array"
+        multiSelect: true
         items:
           type: "string"
-          enum:
-          - "area"
-          - "reachfactor"
-          - "total_pop"
+        enum:
+        - "area"
+        - "reachfactor"
+        - "total_pop"
         collectionFormat: "pipes"
         uniqueItems: true
       - name: "options"
         in: "query"
+        type: "object"
         description: |
           For advanced options formatted as json object. For structure refer to the **options model** below.
           The available parameters are:
@@ -981,8 +978,7 @@ paths:
 
           `{"maximum_speed":10,"avoid_features":"unpavedroads","profile_params":{"weightings":{"steepness_difficulty":{"level":1},"green":{"factor":0.8},"quiet":{"factor":1.0}},"restrictions":{"gradient":5}},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
 
-          More examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).
-        type: "string"
+                More examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).
       - name: "intersections"
         in: "query"
         description: "Specifies whether to return intersection polygons.\n"
@@ -1234,6 +1230,7 @@ paths:
       - name: "body"
         in: "body"
         description: "body for a Matrix post request"
+        type: "object"
         required: true
         schema:
           $ref: "#/definitions/MatrixBody"
