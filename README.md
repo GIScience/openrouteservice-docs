@@ -37,7 +37,11 @@ This readme stores additional information, examples and encoding tables that go 
 
 # Travel Time Calculation
 
-The travel time is calculated for each segment by using speed-limits for different [waytypes](https://wiki.openstreetmap.org/wiki/Key:highway) and adjusting them for different [grades](https://wiki.openstreetmap.org/wiki/Key:tracktype) or [surfaces](https://wiki.openstreetmap.org/wiki/Key:surface) of the road. If multiple values apply for this segment, the lowest value is used. For `cycling` profiles also the steepness is considered. These limits can be reduced by setting the `maxSpeed` parameter in the [options](#routing-options). The final [average speed-limits](#avgspeed) can be requested by adding `AvgSpeed` to the `extra_info` parameter. The following table shows the initial speed-limits used for the main profiles:
+The travel time is calculated for each segment by using speed-limits for different [waytypes](https://wiki.openstreetmap.org/wiki/Key:highway) and adjusting them for different [grades](https://wiki.openstreetmap.org/wiki/Key:tracktype) or [surfaces](https://wiki.openstreetmap.org/wiki/Key:surface) of the road.
+If multiple values apply for this segment, the lowest value is used. For `cycling` profiles also the steepness is considered.
+These limits can be reduced by setting the `maxSpeed` parameter in the [options](#routing-options).
+The final [average speed-limits](#avgspeed) can be requested by adding `AvgSpeed` to the `extra_info` parameter.
+The following table shows the initial speed-limits used for the main profiles:
 
 _(all Values in km/h)_
 
@@ -352,7 +356,7 @@ The available parameters are:
       |     `surface_type`    | Specifies the minimum [surface type](http://wiki.openstreetmap.org/wiki/Key:surface). Default is `"cobblestone:flattened"`. |
       |      `track_type`     | Specifies the minimum [grade](http://wiki.openstreetmap.org/wiki/Key:tracktype) of the route. Default is `"grade1"`.        |
       |   `smoothness_type`   | Specifies the minimum [smoothness](http://wiki.openstreetmap.org/wiki/Key:smoothness) of the route. Default is `"good"`.    |
-      | `maximum_sloped_curb` | Specifies the maximum height of the sloped curb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.              |
+      | `maximum_sloped_kerb` | Specifies the maximum height of the sloped kerb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.              |
       |   `maximum_incline`   | Specifies the maximum incline as a percentage. `3`, `6`(default), `10`, `15` or `any`.                                      |
 
 

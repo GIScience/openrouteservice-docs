@@ -334,9 +334,9 @@ paths:
                        `surface_type`    | Specifies the minimum [surface type](http://wiki.openstreetmap.org/wiki/Key:surface). Default is `"cobblestone:flattened"`. |
                         `track_type`     | Specifies the minimum [grade](http://wiki.openstreetmap.org/wiki/Key:tracktype) of the route. Default is `"grade1"`.        |
                      `smoothness_type`   | Specifies the minimum [smoothness](http://wiki.openstreetmap.org/wiki/Key:smoothness) of the route. Default is `"good"`.    |
-                   `maximum_sloped_curb` | Specifies the maximum height of the sloped curb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.              |
+                   `maximum_sloped_kerb` | Specifies the maximum height of the sloped kerb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.              |
                      `maximum_incline`   | Specifies the maximum incline as a percentage. `3`, `6`(default), `10`, `15` or `any`.                                      |
-
+                      `minimum_width`    | Specifies the minimum width of the way (in meters).                                                                         |
 
             - `avoid_polygons` : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).
 
@@ -1000,11 +1000,12 @@ paths:
             description: "The token specified in `api_key` is not valid."
         404:
           description: |
-            Route could not be found.
+            An element could not be found. If possible, a more detailed error code is provided.
 
-            Internal Code  | Description                                                |
-            :-------------:|------------------------------------------------------------|
-             2009 |  Unable to find a route between points x (lon lat) and y (lon lat). |
+            Internal Code  | Description                                                  |
+            :-------------:|--------------------------------------------------------------|
+             2009 |  Unable to find a route between points x (lon lat) and y (lon lat).   |
+             2010 |  One or more points specified cannot be found in the routing network. |
           example:
             body:
               error:
@@ -1637,8 +1638,22 @@ paths:
         type: "string"
         apiDefault: "start"
         enum:
-        - "start"
-        - "destination"
+         "start"
+         "destination"
+      - name: "smoothing"
+        in: "query"
+        description: |
+          Applies a level of generalisation to the isochrone polygons generated as a smoothing_factor between `0` and `1.0`.
+          Generalisation is produced by determining a maximum length of a connecting line between two points found on the outside of a containing polygon.
+          If the distance is larger than a threshold value, the line between the two points is removed and a smaller connecting line between other points is used.
+          The threshold value is determined as (smoothing_factor * maximum_radius_of_isochrone) / 10.
+          Therefore, a value closer to 1 will result in a more generalised shape.
+          The polygon generation algorithm is based on Duckham and al. (2008) `"Efficient
+          generation of simple polygons for characterizing the shape of a set of points in the plane."`
+        type: "number"
+        format: "float"
+        minimum: 0
+        maximum: 1.0
       - name: "attributes"
         in: "query"
         description: |
