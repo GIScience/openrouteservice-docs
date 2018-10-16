@@ -311,7 +311,7 @@ The available parameters are:
 
 - `avoid_borders` : `"all"` for no border crossing. `"controlled"` to cross open borders but avoid controlled ones. Only for `driving-*` profiles.
 
-- `avoid_countries` : Pipe (|) separated list of countries to exclude from routing with `driving-*` profiles. Can be used together with `"avoid_features": "controlledborders"`. `"11|193"` would exclude Austria and Switzerland. List of countries and application examples can be found in the [country list](#country-list).
+- `avoid_countries` : Pipe (|) separated list of countries to exclude from routing with `driving-*` profiles. Can be used together with `"avoid_borders": "controlled"`. `"11|193"` would exclude Austria and Switzerland. List of countries and application examples can be found in the [country list](#country-list).
 
 - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`. It is needed for **vehicle restrictions** to work.
 
@@ -479,54 +479,42 @@ Examples for routing options object with border restrictions:
 
 ```json
 {
-    "avoid_features":"borders"
+    "avoid_borders":"all"
 }
 ```
 
-`{"avoid_)features":"borders"}`
+`{"avoid_borders":"all"}`
 
 *Do not cross controlled borders (i.e. USA - Canada) but allow crossing of open borders (i.e. France - Germany):*
 
 ```json
 {
-    "avoid_features": "controlledborders"
+    "avoid_borders":"controlled"
 }
 ```
 
-`{"avoid_features":"controlledborders"}`
+`{"avoid_borders":"controlled"}`
 
 *Do not route through Austria or Switzerland:*
 
 ```json
 {
-    "profile_params": {
-        "weightings": {
-            "borders": {
-                "country": "1|120"
-            }
-        }
-    }
+    "avoid_countries": "1|120"
 }
 ```
 
-`{"profile_params":{"weightings":{"borders":{"country":"1|120"}}}}`
+`{"avoid_countries": "1|120"}`
 
 *Pass open borders but do not cross into Switzerland:*
 
 ```json
 {
-    "avoid_features": "controlledborders",
-    "profile_params": {
-        "weightings": {
-            "borders": {
-                "country": 193
-            }
-        }
-    }
+    "avoid_borders": "controlled",
+    "avoid_countries": "193"
 }
 ```
 
-`{"avoid_features":"controlledborders","profile_params":{"weightings":{"borders":{"country":193}}}}`
+`{"avoid_borders": "controlled","avoid_countries": "193"}`
 
 ### country list
 
