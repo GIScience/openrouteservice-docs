@@ -1638,8 +1638,8 @@ paths:
         type: "string"
         apiDefault: "start"
         enum:
-         "start"
-         "destination"
+        - "start"
+        - "destination"
       - name: "smoothing"
         in: "query"
         description: |
