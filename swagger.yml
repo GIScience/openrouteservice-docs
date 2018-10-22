@@ -68,7 +68,6 @@ paths:
         - "cycling-road"
         - "cycling-safe"
         - "cycling-mountain"
-        - "cycling-tour"
         - "cycling-electric"
         - "foot-walking"
         - "foot-hiking"
@@ -1242,7 +1241,133 @@ paths:
         200:
           # description: "Standard response for successfully processed requests. Returns\
           #   \ JSON."
-          description: "Please refer to [this external documentation](https://github.com/pelias/documentation/blob/master/search.md#search-the-world) for this endpoint"
+          description: "Please refer to [this external documentation](https://github.com/pelias/documentation/blob/master/search.md#search-the-world) for this endpoint"/geocode/search:
+  /geocode/autocomplete:
+    get:
+      tags:
+      - "Geocode"
+      summary: "Forward Geocode Service"
+      description: |
+        **Requests should be throttled when using this endpoint!**
+        *Be aware that Responses are asynchronous.*
+        Returns a JSON formatted list of objects corresponding to the search input. `boundary.*`-parameters can be combined if they are overlapping. **The interactivity for this enpoint is experimental!** [Please refer to this external Documentation](https://github.com/pelias/documentation/blob/master/autocomplete.md)
+      parameters:
+      - name: "api_key"
+        in: "query"
+        description: |
+          Insert your API Key here.
+        type: "string"
+        required: true
+        default: "your-api-key"
+      - name: "text"
+        required: true
+        in: query
+        description: |
+          Name of location, street address or postal code.
+        type: string
+        example: Heidelbe
+        default: Heidelbe
+      - name: focus.point.lat
+        in: query
+        description: |
+          Latitude of the `focus.point`. Specify the focus point to order results by linear distance to this point. Works for up to 100 kilometers distance. Use with `focus.point.lon`.
+        type: number
+        format: float
+        example: 49.436431
+      - name: focus.point.lon
+        in: query
+        description: |
+          Longitude of the `focus.point`. Specify the focus point to order results by linear distance to this point. Works for up to 100 kilometers distance.  Use with `focus.point.lat`.
+        type: number
+        format: float
+        example: 8.673964
+      - name: boundary.rect.min_lon
+        in: query
+        description: |
+          Left border of rectangular boundary to narrow results.
+        type: number
+        format: float
+        example: 8.557663
+      - name: boundary.rect.max_lon
+        in: query
+        description: |
+          Right border of rectangular boundary to narrow results.
+        type: number
+        format: float
+        example: 8.972054
+      - name: boundary.rect.min_lat
+        in: query
+        description: |
+          Bottom border of rectangular boundary to narrow results.
+        type: number
+        format: float
+        example: 49.331387
+      - name: boundary.rect.max_lat
+        in: query
+        description: |
+          Top border of rectangular boundary to narrow results.
+        type: number
+        format: float
+        example: 49.525654
+      - name: "boundary.country"
+        in: query
+        description: |
+          Restrict results to single country. Possible values are [alpha-2 and alpha-3 country codes](https://en.wikipedia.org/wiki/ISO_3166-1). Example: `DEU` or `DE` for Germany.
+        type: string
+        example: "DE"
+      - name: sources
+        in: query
+        description: |
+          Restrict your search to specific sources. Searches all sources by default. You can either use the normal or short name. Sources are [`openstreetmap(osm)`](http://www.openstreetmap.org/), [`openaddresses(oa)`](http://openaddresses.io/), [`whosonfirst(wof)`](https://whosonfirst.org/), [`geonames(gn)`](http://www.geonames.org/).
+        type: array
+        multiSelect: true
+        enum:
+        - openstreetmap
+        - openaddresses
+        - whosonfirst
+        - geonames
+        uniqueItems: true
+        apiDefault: "osm,oa,gn,wof"
+      - name: layers
+        in: query
+        description: |
+          Restrict search to layers (place type). By default all layers are searched.
+
+            layer|description|
+            ----|----|
+            `venue`|points of interest, businesses, things with walls|
+            `address`|places with a street address|
+            `street`|streets,roads,highways|
+            `neighbourhood`|social communities, neighbourhoods|
+            `borough`|a local administrative boundary, currently only used for New York City|
+            `localadmin`|local administrative boundaries|
+            `locality`|towns, hamlets, cities|
+            `county`|official governmental area; usually bigger than a locality, almost always smaller than a region|
+            `macrocounty`|a related group of counties. Mostly in Europe.|
+            `region`|states and provinces|
+            `macroregion`|a related group of regions. Mostly in Europe|
+            `country`|places that issue passports, nations, nation-states|
+            `coarse`|alias for simultaneously using all administrative layers (everything except `venue` and `address`)|
+        type: array
+        multiSelect: true
+        enum:
+        - address
+        - venue
+        - neighbourhood
+        - locality
+        - borough
+        - localadmin
+        - county
+        - macrocounty
+        - region
+        - macroregion
+        - country
+        - coarse
+        uniqueItems: true
+        example: "region,county"
+      responses:
+        200:
+          description: "Please refer to [this external documentation](https://github.com/pelias/documentation/blob/master/autocomplete.md) for this endpoint"
   /geocode/search/structured:
     get:
       tags:
@@ -1434,11 +1559,7 @@ paths:
         apiDefault: 10
       responses:
         200:
-          # description: "Standard response for successfully processed requests. Returns\
-          #   \ JSON."
           description: "Please refer to [this external documentation](https://github.com/pelias/documentation/blob/master/structured-geocoding.md#structured-geocoding) for this endpoint"
-          # schema:
-          #   $ref: "#/definitions/Geocoderesponse"
   /geocode/reverse:
     get:
       tags:
@@ -1591,7 +1712,6 @@ paths:
         - "cycling-road"
         - "cycling-safe"
         - "cycling-mountain"
-        - "cycling-tour"
         - "foot-walking"
         - "foot-hiking"
       - name: "range_type"
@@ -1614,8 +1734,8 @@ paths:
           format: "double"
         default:
         - 60
-        - 30
-        - 10
+        - 120
+        - 300
       - name: "interval"
         in: "query"
         description: "Interval of isochrones or equidistants for one range value.\
@@ -2225,7 +2345,6 @@ paths:
         - "cycling-road"
         - "cycling-safe"
         - "cycling-mountain"
-        - "cycling-tour"
         - "cycling-electric"
         - "foot-walking"
         - "foot-hiking"
@@ -2654,7 +2773,6 @@ paths:
         - "cycling-road"
         - "cycling-safe"
         - "cycling-mountain"
-        - "cycling-tour"
         - "cycling-electric"
         - "foot-walking"
         - "foot-hiking"
@@ -3147,7 +3265,6 @@ definitions:
         - "cycling-road"
         - "cycling-safe"
         - "cycling-mountain"
-        - "cycling-tour"
         - "cycling-electric"
         - "foot-walking"
         - "foot-hiking"
