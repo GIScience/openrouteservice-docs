@@ -1246,7 +1246,7 @@ paths:
     get:
       tags:
       - "Geocode"
-      summary: "Forward Geocode Service"
+      summary: "Geocode Autocomplete Service"
       description: |
         **Requests should be throttled when using this endpoint!**
         *Be aware that Responses are asynchronous.*
