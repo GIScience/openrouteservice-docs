@@ -31,7 +31,7 @@ paths:
       - "Directions"
       summary: "Directions Service"
       description: |
-        Returns a route between two or more locations for a selected profile and its settings as GeoJSON response.
+        Returns a route between two or more locations for a selected profile and its settings as json, GeoJson or GPX response.
 
       parameters:
       - name: "api_key"
