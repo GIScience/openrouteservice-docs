@@ -163,7 +163,7 @@ As there are various traffic regulations in different countries. If [maximum spe
   |                |       FI:trunk       |     100     |      80     |
   |                |      FI:motorway     |     120     |      80     |
   |   France       |       FR:urban       |      50     |      50     |
-  |                |       FR:rural       |      90     |      80     |
+  |                |       FR:rural       |      80     |      80     |
   |                |       FR:trunk       |     110     |      80     |
   |                |      FR:motorway     |     130     |      80     |
   |   Greece       |       GR:urban       |      50     |      50     |
