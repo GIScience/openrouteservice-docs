@@ -31,7 +31,7 @@ paths:
       - "Directions"
       summary: "Directions Service"
       description: |
-        Returns a route between two or more locations for a selected profile and its settings as GeoJSON response.
+        Returns a route between two or more locations for a selected profile and its settings as json, GeoJson or GPX response.
 
       parameters:
       - name: "api_key"
@@ -860,25 +860,6 @@ paths:
                       - 8.345244
                       - 48.263552
                   title: "routes object"
-                #        examples:
-                #          summary:
-                #            distance:
-                #              $ref: "#/definitions/routes_summary/properties/distance/example"
-                #            duration:
-                #              $ref: "#/definitions/routes_summary/properties/duration/example"
-                #            ascent:
-                #              $ref: "#/definitions/routes_summary/properties/ascent/example"
-                #            descent:
-                #              $ref: "#/definitions/routes_summary/properties/descent/example"
-                #          geometry_format:
-                #            $ref: "#/definitions/Routeresponse_routes/properties/geometry_format/example"
-                #          geometry:
-                #            $ref: "#/definitions/routes_geometry/example"
-                #          segments:
-                #            distance : 5757.4
-                #            duration : 821
-                #            steps:
-                #              $ref: "#/definitions/steps/example"
               info:
                 type: object
                 properties:
@@ -1109,8 +1090,8 @@ paths:
         description: |
           Name of location, street address or postal code.
         type: string
-        example: Heidelberg
-        default: Heidelberg
+        example: Namibian Brewery
+        default: Namibian Brewery
       - name: focus.point.lat
         in: query
         description: |
@@ -1239,8 +1220,6 @@ paths:
         apiDefault: 10
       responses:
         200:
-          # description: "Standard response for successfully processed requests. Returns\
-          #   \ JSON."
           description: "Please refer to [this external documentation](https://github.com/pelias/documentation/blob/master/search.md#search-the-world) for this endpoint"
   /geocode/autocomplete:
     get:
@@ -1265,8 +1244,8 @@ paths:
         description: |
           Name of location, street address or postal code.
         type: string
-        example: Heidelbe
-        default: Heidelbe
+        example: Toky
+        default: Toky
       - name: focus.point.lat
         in: query
         description: |
@@ -1400,7 +1379,7 @@ paths:
         description: |
           Search for full country name, [alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or [alpha 3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) codes.
         type: string
-        default: Japan
+        example: none
       - name: "postalcode"
         in: query
         description: |
@@ -1424,7 +1403,8 @@ paths:
         description: |
           Search for localities. Localities are equivalent to what are commonly referred to as *cities*.
         type: string
-        example: none
+        example: Tokyo
+        default: Tokyo
       - name: "borough"
         in: query
         description: |
@@ -1665,11 +1645,7 @@ paths:
         example: 'FR'
       responses:
         200:
-          # description: "Standard response for successfully processed requests. Returns\
-          #   \ JSON."
           description: "Please refer to [this external documentation](https://github.com/pelias/documentation/blob/master/reverse.md#reverse-geocoding) for this endpoint"
-          # schema:
-          #   $ref: "#/definitions/Geocoderesponse"
   /isochrones:
     get:
       tags:
@@ -1698,7 +1674,9 @@ paths:
           type: "string"
         collectionFormat: "pipes"
         default:
-        - "8.34234,48.23424"
+        - "40.38939, 56.148562"
+        example:
+        - "40.38939, 56.148562"
       - name: "profile"
         in: "query"
         description: "Specifies the routing profile."
@@ -1735,7 +1713,7 @@ paths:
         default:
         - 60
         - 120
-        - 300
+        - 600
       - name: "interval"
         in: "query"
         description: "Interval of isochrones or equidistants for one range value.\
@@ -1743,9 +1721,19 @@ paths:
         type: "number"
         format: "double"
         example: 10
+      - name: "area_units"
+        in: "query"
+        description: "Unit format of areas in the response. Takes effect if `area` is specified in `attributes`."
+        type: "string"
+        apiDefault: "m"
+        example: "m"
+        enum:
+        - "m"
+        - "km"
+        - "mi"
       - name: "units"
         in: "query"
-        description: "Unit format for  `range_type=distance`.\n"
+        description: "Unit format of the `range` input for `range_type=distance`."
         type: "string"
         example: "m"
         enum:
