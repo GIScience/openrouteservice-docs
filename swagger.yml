@@ -1220,7 +1220,7 @@ paths:
         apiDefault: 10
       responses:
         200:
-          description: "Please refer to [this external documentation](https://github.com/pelias/documentation/blob/master/search.md#search-the-world) for this endpoint"/geocode/search:
+          description: "Please refer to [this external documentation](https://github.com/pelias/documentation/blob/master/search.md#search-the-world) for this endpoint"
   /geocode/autocomplete:
     get:
       tags:
@@ -1721,9 +1721,19 @@ paths:
         type: "number"
         format: "double"
         example: 10
+      - name: "area_units"
+        in: "query"
+        description: "Unit format of areas in the response. Takes effect if `area` is specified in `attributes`."
+        type: "string"
+        apiDefault: "m"
+        example: "m"
+        enum:
+        - "m"
+        - "km"
+        - "mi"
       - name: "units"
         in: "query"
-        description: "Unit format for  `range_type=distance`.\n"
+        description: "Unit format of the `range` input for `range_type=distance`."
         type: "string"
         example: "m"
         enum:
