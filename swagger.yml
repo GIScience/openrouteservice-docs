@@ -1241,7 +1241,7 @@ paths:
         200:
           # description: "Standard response for successfully processed requests. Returns\
           #   \ JSON."
-          description: "Please refer to [this external documentation](https://github.com/pelias/documentation/blob/master/search.md#search-the-world) for this endpoint"/geocode/search:
+          description: "Please refer to [this external documentation](https://github.com/pelias/documentation/blob/master/search.md#search-the-world) for this endpoint"
   /geocode/autocomplete:
     get:
       tags:
