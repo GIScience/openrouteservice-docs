@@ -704,6 +704,7 @@ This extra provides information about a trails difficulty for [hiking](https://w
 Provides information about possible restrictions on roads.
 
 | Value |  Encoding  |
+|:-----:|:----------:|
 | 0 | None (there are no restrictions) |
 | 1 | No |
 | 2 | Customers |
