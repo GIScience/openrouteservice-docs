@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
-  description: "This is the openrouteservice API documentation. Version `4.7.1`"
-  version: "4.7.1"
+  description: "This is the openrouteservice API documentation. Version `4.7.2`"
+  version: "4.7.2"
   title: "Openrouteservice"
   contact:
     email: "support@openrouteservice.org"
@@ -122,9 +122,6 @@ paths:
         description: "Specifies whether to return geometry."
         type: "boolean"
         apiDefault: true
-        enum:
-        - true
-        - false
       - name: "geometry_format"
         in: "query"
         description: |
@@ -142,17 +139,11 @@ paths:
           Specifies whether to simplify the geometry. `true` will automatically be set to `false` if `extra_info` parameter is specified."
         type: "boolean"
         apiDefault: false
-        enum:
-        - true
-        - false
       - name: "instructions"
         in: "query"
         description: "Specifies whether to return instructions."
         type: "boolean"
         apiDefault: "true"
-        enum:
-        - true
-        - false
       - name: "instructions_format"
         in: "query"
         description: "Select `html` for more verbose instructions."
@@ -166,9 +157,6 @@ paths:
         description: "Provides bearings of the entrance and all passed roundabout exits. Adds the `exit_bearings` array to the `step` object in the response."
         type: boolean
         apiDefault: false
-        enum:
-        - true
-        - false
       - name: "attributes"
         in: "query"
         description: |
@@ -190,9 +178,6 @@ paths:
         description: "Specifies whether the maneuver object is included into the `step` object or not. Default: `false`."
         type: "boolean"
         apiDefault: false
-        enum:
-        - true
-        - false
       - name: "radiuses"
         in: "query"
         description: |
@@ -224,17 +209,11 @@ paths:
         description: "Forces the route to keep going straight at waypoints restricting uturns there even if it would be faster. This setting will work for all profiles except for `driving-*`. In this case you will have to set `optimized=false` for it to work. Default: `false`."
         type: "boolean"
         apiDefault: false
-        enum:
-        - true
-        - false
       - name: "elevation"
         in: "query"
         description: "Specifies whether to return elevation values for points. Please note that elevation also gets encoded for `geometry_format=encodedpolyline`."
         type: "boolean"
         apiDefault: false
-        enum:
-        - true
-        - false
       - name: "extra_info"
         in: "query"
         description: "Pipe (|) separated List of additional information. Returns information on [steepness](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#steepness), [suitability](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#suitability), [surface](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#surface), [waycategory](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waycategory), [waytype](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waytype), [tollways](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#tollways) or [trail difficulty](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#trail-difficulty) "
@@ -247,142 +226,39 @@ paths:
         - "waytype"
         - "tollways"
         - "traildifficulty"
+        - "roadaccessrestrictions"
         collectionFormat: "pipes"
         uniqueItems: true
         multiSelect: true
         example: "waytype|surface"
+      - name: "suppress_warnings"
+        in: query
+        description: |
+          Tells the system to not return any warning messages and corresponding `extra_info`. For `false` the extra information can still be explicitly requested by adding it with the `extra_info` parameter.
+        type: boolean
+        apiDefault: false
       - name: optimized
         in: query
         description: |
           Uses contraction hierarchies if available (`false`).
         type: boolean
         apiDefault: true
-        enum:
-        - true
-        - false
       - name: "options"
         in: "query"
         type: "object"
         example: "{maximum_speed:100}"
-        description: |
-          For advanced options formatted as json object. For structure refer to the [these examples](https://github.com/GIScience/openrouteservice-docs#examples).
-          The available parameters are:
-
-
-            - `maximum_speed` : Specifies a maximum travel speed restriction in km/h.
-
-
-            - `avoid_features` : Pipe (|) separated list of features to avoid.
-              The available features are :
-
-                Feature         | Available for                                    |
-                :-------------------:|---------------------------------------------|
-                 `highways`          | driving-*                                   |
-                 `tollways`          | driving-*                                   |
-                 `ferries`           | driving-\*, cycling-\*, foot-\*, wheelchair |
-                 `tunnels`           | driving-*                                   |
-                 `pavedroads`        | driving-\*, cycling-*                       |
-                 `unpavedroads`      | driving-\*, cycling-*                       |
-                 `tracks`            | driving-*                                   |
-                 `fords`             | driving-\*, cycling-\*, foot-*              |
-                 `steps`             | cycling-\*, foot-\*, wheelchair             |
-                 `hills`             | cycling-\*, foot-\*                         |
-
-            - `avoid_borders` : `"all"` for no border crossing. `"controlled"` to cross open borders but avoid controlled ones. Only for `driving-*` profiles.
-
-            - `avoid_countries` : Pipe (|) separated list of countries to exclude from routing with `driving-*` profiles. Can be used together with `"avoid_borders": "controlled"`. `"11|193"` would exclude Austria and Switzerland. List of countries and application examples can be found [here](https://github.com/GIScience/openrouteservice-docs#country-list).
-
-            - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`. It is needed for **vehicle restrictions** to work.
-
-
-            - `profile_params` : Specifies additional routing parameters.
-              - `weightings`: Weightings will prioritize specified factors over the shortest path.
-
-                - `steepness_difficulty`: Specifies the fitness level for `cycling-*` profiles.
-                  - `level`: `0` = Novice, `1` = Moderate, `2` = Amateur, `3` = Pro. The prefered gradient increases with level
-
-                - `green`: Specifies the Green factor for `foot-*` profiles.
-                  - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer ways through green areas over a shorter route.
-
-                - `quiet`: Specifies the Quiet factor for `foot-*` profiles.
-                  - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer quiet ways over a shorter route.
-
-              - `restrictions` : Specifies restrictions for `driving-hgv`, `wheelchair` or `cycling-*` profiles.
-                - for `cycling-*`:
-
-                    Parameter   | Description                                                                                                                                                                               |
-                    :----------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                     `gradient` | Only for avoided `hills` or specified `steepness_difficulty`. Specifies the maximum route steepness in percent. Values range from `1` to `15`. Routes with a higher gradient are avoided. |
-
-                - for `driving-hgv`:
-                  _(you have to specify the `vehicle_type` in the options for these parameters)_
-
-                    Parameter   | Description                                                                                                                       |
-                    :----------:|-----------------------------------------------------------------------------------------------------------------------------------|
-                     `length`   | Length restriction in meters.                                                                                                     |
-                     `width`    | Width restriction in meters.                                                                                                      |
-                     `height`   | Height restriction in meters.                                                                                                     |
-                     `axleload` | Axleload restriction in tons.                                                                                                     |
-                     `weight`   | Weight restriction in tons.                                                                                                       |
-                     `hazmat`   | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false. |
-
-                - for `wheelchair`:
-
-                  Parameter              | Description                                                                                                                 |
-                  :---------------------:|-----------------------------------------------------------------------------------------------------------------------------|
-                       `surface_type`    | Specifies the minimum [surface type](http://wiki.openstreetmap.org/wiki/Key:surface). Default is `"cobblestone:flattened"`. |
-                        `track_type`     | Specifies the minimum [grade](http://wiki.openstreetmap.org/wiki/Key:tracktype) of the route. Default is `"grade1"`.        |
-                     `smoothness_type`   | Specifies the minimum [smoothness](http://wiki.openstreetmap.org/wiki/Key:smoothness) of the route. Default is `"good"`.    |
-                   `maximum_sloped_kerb` | Specifies the maximum height of the sloped kerb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.              |
-                     `maximum_incline`   | Specifies the maximum incline as a percentage. `3`, `6`(default), `10`, `15` or `any`.                                      |
-                      `minimum_width`    | Specifies the minimum width of the way (in meters).                                                                         |
-
-            - `avoid_polygons` : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).
-
-          This is an example options object for a `cycling-*` profile:
-
-          ```json
-          {
-            "maximum_speed": 10,
-            "avoid_features": "unpavedroads",
-            "profile_params": {
-              "weightings": {
-                "steepness_difficulty": {
-                  "level": 1
-                },
-                "green": {
-                  "factor": 0.8
-                },
-                "quiet": {
-                  "factor": 1.0
-                }
-              },
-              "restrictions": {
-                "gradient": 5
-              }
-            },
-            "avoid_polygons": {
-              "type": "Polygon",
-              "coordinates": [
-                              [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]
-             ]}
-          }
-          ```
-          The minified form(for copy paste purposes):
-
-          `{"maximum_speed":10,"avoid_features":"unpavedroads","profile_params":{"weightings":{"steepness_difficulty":{"level":1},"green":{"factor":0.8},"quiet":{"factor":1.0}},"restrictions":{"gradient":5}},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
-
-          More examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).
+        properties:
+          $ref: "#/definitions/optionProps"
+        description:
+          $ref: "#/definitions/optionDescription"
       - name: "id"
         in: "query"
-        description: "Arbitrary identification string of the request reflected in\
-          \ the meta information."
+        description: "Arbitrary identification string of the request reflected in the meta information."
         type: "string"
         example: "My trip"
       responses:
         200:
-          description: "Standard response for successfully processed requests. Returns\
-            \ JSON. The decoded values of the extra information can be found [here](https://github.com/GIScience/openrouteservice-docs).\n"
+          description: "Standard response for successfully processed requests. Returns JSON. The decoded values of the extra information can be found [here](https://github.com/GIScience/openrouteservice-docs).\n"
           example:
             body:
               routes:
@@ -430,6 +306,14 @@ paths:
                 items:
                   type: object
                   properties:
+                    warnings:
+                      type: array
+                      description: |
+                        Informs about possible difficulties like access restrictions on the generated route. Generates a corresponding `extras` object with the affected segments.
+                      example: [{
+                                  code: 1,
+                                  message: "There may be restrictions on some roads."
+                                }]
                     summary:
                       type: object
                       properties:
@@ -458,8 +342,7 @@ paths:
                           format: "double"
                           description: "Total average speed in km/h"
                       title: "summary object"
-                      description: "Contains total sums of duration, route distance and actual distance\
-                              \ of the route."
+                      description: "Contains total sums of duration, route distance and actual distance of the route."
                     geometry_format:
                       type: "string"
                       description: "Contains the defined geometry format."
@@ -814,38 +697,11 @@ paths:
                         traildifficulty:
                           type: object
                           properties:
-                            values:
-                              description: Broken down by way_points.
-                              type: array
-                              items:
-                                type: array
-                                items:
-                                  type: number
-                                  format: double
-                                  description: |
-                                    Value 1: Indice of the starting geometry for this section.
-
-                                    Value 2: Indice of the end geometry for this section.
-
-                                    Value 3: [Value](https://github.com/GIScience/openrouteservice-docs#routing-response) assigned to this section.
-                            summary:
-                              description: Broken down by information category values.
-                              type: array
-                              items:
-                                type: object
-                                properties:
-                                  value:
-                                    type: integer
-                                    format: int64
-                                    description: "[Value](https://github.com/GIScience/openrouteservice-docs#routing-response) of a info category."
-                                  distance:
-                                    type: integer
-                                    format: int64
-                                    description: Cumulative distance of this value.
-                                  amount:
-                                    type: integer
-                                    format: int64
-                                    description: Category percentage of the entire route.
+                            $ref: "#/definitions/routeResponseExtrasProps"
+                        roadaccessrestrictions:
+                          type: object
+                          properties:
+                            $ref: "#/definitions/routeResponseExtrasProps"
                     bbox:
                       type: "array"
                       description: "Contains the minimum bounding box of the route."
@@ -894,6 +750,7 @@ paths:
                     example: 1493300103526
                   query:
                     type: object
+                    description: "Summarizes your query settings."
                     required:
                     - "coordinates"
                     - "geometry_format"
@@ -945,8 +802,6 @@ paths:
                       options:
                         type: string
                         example: {}
-                title: "info object"
-                description: "Summarizes your query settings."
             title: OK
             description: |
               The Routing Response contains the requested route as an object in `routes`.
@@ -1702,9 +1557,7 @@ paths:
         apiDefault: "time"
       - name: "range"
         in: "query"
-        description: "Maximum range value of the analysis in **seconds** for time and\
-          \ **meters** for distance. Alternatively a comma separated list of specific\
-          \ single range values.\n"
+        description: "Maximum range value of the analysis in **seconds** for time and **meters** for distance. Alternatively a comma separated list of specific single range values.\n"
         required: true
         type: array
         items:
@@ -1716,8 +1569,7 @@ paths:
         - 600
       - name: "interval"
         in: "query"
-        description: "Interval of isochrones or equidistants for one range value.\
-          \ value in **seconds** for time and **meters** for distance.\n"
+        description: "Interval of isochrones or equidistants for one range value. value in **seconds** for time and **meters** for distance.\n"
         type: "number"
         format: "double"
         example: 10
@@ -1785,114 +1637,10 @@ paths:
       - name: "options"
         in: "query"
         type: "object"
-        description: |
-          For advanced options formatted as json object. For structure refer to the **options model** below.
-          The available parameters are:
-
-
-            - `maximum_speed` : Specifies a maximum travel speed restriction in km/h.
-
-
-            - `avoid_features` : Pipe (|) separated list of features to avoid.
-              The available features are :
-
-                Feature              | Available for                               |
-                :-------------------:|---------------------------------------------|
-                 `highways`          | driving-*                                   |
-                 `tollways`          | driving-*                                   |
-                 `ferries`           | driving-\*, cycling-\*, foot-\*, wheelchair |
-                 `tunnels`           | driving-*                                   |
-                 `pavedroads`        | driving-\*, cycling-*                       |
-                 `unpavedroads`      | driving-\*, cycling-*                       |
-                 `tracks`            | driving-*                                   |
-                 `fords`             | driving-\*, cycling-\*, foot-*              |
-                 `steps`             | cycling-\*, foot-\*, wheelchair             |
-                 `hills`             | cycling-\*, foot-\*                         |
-
-            - `avoid_borders` : `"all"` for no border crossing. `"controlled"` to cross open borders but avoid controlled ones. Only for `driving-*` profiles.
-
-            - `avoid_countries` : Pipe (|) separated list of countries to exclude from routing with `driving-*` profiles. Can be used together with `"avoid_borders": "controlled"`. `"11|193"` would exclude Austria and Switzerland. List of countries and application examples can be found [here](https://github.com/GIScience/openrouteservice-docs#country-list).
-
-            - `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`. It is needed for **vehicle restrictions** to work.
-
-
-            - `profile_params` : Specifies additional routing parameters.
-              - `weightings`: Weightings will prioritize specified factors over the shortest path.
-                - `steepness_difficulty`: Specifies the fitness level for `cycling-*` profiles.
-                  - `level`: `0` = Novice, `1` = Moderate, `2` = Amateur, `3` = Pro. The prefered gradient increases with level
-
-                - `green`: Specifies the Green factor for `foot-*` profiles.
-                  - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer ways through green areas over a shorter route.
-
-                - `quiet`: Specifies the Quiet factor for `foot-*` profiles.
-                  - `factor`: Values range from `0` to `1`. `0` equals normal routing. `1` will prefer quiet ways over a shorter route.
-
-              - `restrictions` : Specifies restrictions for `driving-hgv`, `wheelchair` or `cycling-*` profiles.
-                - for `cycling-*`:
-
-                    Parameter   | Description                                                                                                                                                                               |
-                    :----------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                     `gradient` | Only for avoided `hills` or specified `steepness_difficulty`. Specifies the maximum route steepness in percent. Values range from `1` to `15`. Routes with a higher gradient are avoided. |
-
-                - for `driving-hgv`:
-                  _(you have to specify the `vehicle_type` in the options for these parameters)_
-
-                    Parameter   | Description                                                                                                                       |
-                    :----------:|-----------------------------------------------------------------------------------------------------------------------------------|
-                     `length`   | Length restriction in meters.                                                                                                     |
-                     `width`    | Width restriction in meters.                                                                                                      |
-                     `height`   | Height restriction in meters.                                                                                                     |
-                     `axleload` | Axleload restriction in tons.                                                                                                     |
-                     `weight`   | Weight restriction in tons.                                                                                                       |
-                     `hazmat`   | Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false. |
-
-                - for `wheelchair`:
-
-                  Parameter              | Description                                                                                                         |
-                  :---------------------:|---------------------------------------------------------------------------------------------------------------------|
-                       `surface_type`    | Specifies the [surface type](http://wiki.openstreetmap.org/wiki/Key:surface). Default is `"cobblestone:flattened"`. |
-                        `track_type`     | Specifies the [grade](http://wiki.openstreetmap.org/wiki/Key:tracktype) of the route. Default is `"grade1"`.        |
-                     `smoothness_type`   | Specifies the [smoothness](http://wiki.openstreetmap.org/wiki/Key:smoothness) of the route. Default is `"good"`.    |
-                   `maximum_sloped_curb` | Specifies the maximum height of the sloped curb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.      |
-                     `maximum_incline`   | Specifies the maximum incline as a percentage. `3`, `6`(default), `10`, `15` or `any`.                              |
-
-
-            - `avoid_polygons` : Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).
-
-          This is an example options object for a `cycling-*` profile:
-
-          ```json
-          {
-            "maximum_speed": 10,
-            "avoid_features": "unpavedroads",
-            "profile_params": {
-              "weightings": {
-                "steepness_difficulty": {
-                  "level": 1
-                },
-                "green": {
-                  "factor": 0.8
-                },
-                "quiet": {
-                  "factor": 1.0
-                }
-              },
-              "restrictions": {
-                "gradient": 5
-              }
-            },
-            "avoid_polygons": {
-              "type": "Polygon",
-              "coordinates": [
-                              [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]
-             ]}
-          }
-          ```
-          The minified form(for copy paste purposes):
-
-          `{"maximum_speed":10,"avoid_features":"unpavedroads","profile_params":{"weightings":{"steepness_difficulty":{"level":1},"green":{"factor":0.8},"quiet":{"factor":1.0}},"restrictions":{"gradient":5}},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
-
-                More examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).
+        properties:
+          $ref: "#/definitions/optionProps"
+        description:
+          $ref: "#/definitions/optionDescription"
         example: "{maximum_speed:80}"
       - name: "intersections"
         in: "query"
@@ -1901,14 +1649,12 @@ paths:
         apiDefault: false
       - name: "id"
         in: "query"
-        description: "Arbitrary identification string of the request reflected in\
-          \ the meta information."
+        description: "Arbitrary identification string of the request reflected in the meta information."
         type: "string"
         example: "My isochrone"
       responses:
         200:
-          description: "Standard response for successfully processed requests. Returns\
-            \ JSON."
+          description: "Standard response for successfully processed requests. Returns JSON."
           example:
             body:
               type:
@@ -2394,9 +2140,6 @@ paths:
           Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain the `name` element that identifies the name of the closest street. Default: `false`
         type: boolean
         apiDefault: false
-        enum:
-        - true
-        - false
       - name: units
         in: query
         description: "Specifies the unit of measurement for distances (only)."
@@ -2412,9 +2155,6 @@ paths:
           Specifies whether Dijkstra algorithm (`false`) or any available technique to speed up shortest-path routing (`true`) is used. For normal Dijkstra the number of visited nodes is limited to `100000`
         type: boolean
         apiDefault: true
-        enum:
-        - true
-        - false
       - name: "id"
         in: "query"
         description: "Arbitrary identification string of the request reflected in\
@@ -2772,11 +2512,9 @@ paths:
         type: "object"
         required: true
         default: '{ "profile":"driving-car", "locations": [[7.796, 48.35], [11.13, 50.98]]}'
-        schema:
-          $ref: "#/definitions/MatrixBody"
-          example: |
-            `{ "profile":"driving-car", "locations": [[7.796, 48.35], [11.13, 50.98]]}`
-
+        example: '{ "profile":"driving-car", "locations": [[7.796, 48.35], [11.13, 50.98]]}'
+        props:
+          $ref: "#/definitions/matrixBodyProps"
       responses:
         200:
           description: |
@@ -3095,115 +2833,317 @@ securityDefinitions:
     type: "apiKey"
     in: "query"
 definitions:
-  options:
-    type: "object"
-    properties:
-      maximum_speed:
-        type: "integer"
-        format: "int64"
-      avoid_features:
-        type: "array"
-        uniqueItems: true
-        items:
-          type: "string"
-          enum:
-          - "highways"
-          - "tollways"
-          - "ferries"
-          - "tunnels"
-          - "pavedroads"
-          - "unpavedroads"
-          - "tracks"
-          - "fords"
-          - "steps"
-          - "hills"
-      vehicle_type:
+  optionDescription: |
+    For advanced options formatted as json object. For structure refer to the [these examples](https://github.com/GIScience/openrouteservice-docs#examples).
+    This is an example options object for a `cycling-*` profile:
+
+    ```json
+    {
+      "maximum_speed": 10,
+      "avoid_features": "unpavedroads",
+      "profile_params": {
+        "weightings": {
+          "steepness_difficulty": {
+            "level": 1
+          },
+          "green": {
+            "factor": 0.8
+          },
+          "quiet": {
+            "factor": 1.0
+          }
+        },
+        "restrictions": {
+          "gradient": 5
+        }
+      },
+      "avoid_polygons": {
+        "type": "Polygon",
+        "coordinates": [
+        [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]
+        ]}
+    }
+    ```
+    The minified form(for copy paste purposes):
+
+    `{"maximum_speed":10,"avoid_features":"unpavedroads","profile_params":{"weightings":{"steepness_difficulty":{"level":1},"green":{"factor":0.8},"quiet":{"factor":1.0}},"restrictions":{"gradient":5}},"avoid_polygons":{"type":"Polygon","coordinates":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`
+
+    More examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).
+  optionProps:
+    maximum_speed:
+      description: |
+        Specifies a maximum travel speed restriction in km/h.
+      type: "integer"
+      format: "int64"
+      example: 60
+    avoid_features:
+      description: |
+        Pipe (|) separated list of features to avoid.
+        The available features are :
+
+          Feature         | Available for                                    |
+          :-------------------:|---------------------------------------------|
+           `highways`          | driving-*                                   |
+           `tollways`          | driving-*                                   |
+           `ferries`           | driving-\*, cycling-\*, foot-\*, wheelchair |
+           `tunnels`           | driving-*                                   |
+           `pavedroads`        | driving-\*, cycling-*                       |
+           `unpavedroads`      | driving-\*, cycling-*                       |
+           `tracks`            | driving-*                                   |
+           `fords`             | driving-\*, cycling-\*, foot-*              |
+           `steps`             | cycling-\*, foot-\*, wheelchair             |
+           `hills`             | cycling-\*, foot-\*                         |
+      type: "array"
+      collectionFormat: "pipes"
+      uniqueItems: true
+      multiSelect: true
+      items:
         type: "string"
-        description: "Parameter for the driving-hgv Profile"
-        enum:
-        - "hgv"
-        - "bus"
-        - "agricultural"
-        - "forestry"
-        - "goods"
-        - "delivery"
-        default: "hgv"
-      profile_params:
-        properties:
-          length:
-            type: "number"
-            format: "double"
-          width:
-            type: "number"
-            format: "double"
-          height:
-            type: "number"
-            format: "double"
-          axleload:
-            type: "number"
-            format: "double"
-          weight:
-            type: "number"
-            format: "double"
-          hazmat:
-            type: "boolean"
-          weightings:
-            type: "object"
-            properties:
-              level:
-                type: "integer"
-                format: "int64"
-                enum:
-                - 0
-                - 1
-                - 2
-                - 3
-          restrictions:
-            type: "object"
-            properties:
-              gradient:
-                type: "integer"
-                format: "int64"
-                minimum: 1
-                maximum: 15
-      avoid_polygons:
-        properties:
-          type:
-            type: "string"
-            default: "Polygon"
-          coordinates:
+      enum:
+      - "highways"
+      - "tollways"
+      - "ferries"
+      - "tunnels"
+      - "pavedroads"
+      - "unpavedroads"
+      - "tracks"
+      - "fords"
+      - "steps"
+      - "hills"
+    avoid_borders:
+      type: string
+      enum: [all, controlled]
+      description: |
+        `"all"` for no border crossing. `"controlled"` to cross open borders but avoid controlled ones. Only for `driving-*` profiles.
+    avoid_countries:
+      type: "array"
+      items:
+        type: integer
+        format: int64
+      collectionFormat: "pipes"
+      multiSelect: true
+      description: |
+        Pipe (|) separated list of countries to exclude from routing with `driving-*` profiles. Can be used together with `"avoid_borders": "controlled"`. `"11|193"` would exclude Austria and Switzerland. List of countries and application examples can be found [here](https://github.com/GIScience/openrouteservice-docs#country-list).
+    vehicle_type:
+      type: "string"
+      description: |
+        `vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`. It is needed for **vehicle restrictions** to work.
+      enum:
+      - "hgv"
+      - "bus"
+      - "agricultural"
+      - "forestry"
+      - "goods"
+      - "delivery"
+      default: "hgv"
+    profile_params:
+      type: object
+      description: |
+        Specifies additional routing parameters.
+      properties:
+        weightings:
+          description: |
+            Weightings will prioritize specified factors over the shortest path.
+          type: "object"
+          properties:
+            steepness_difficulty:
+              type: object
+              description: |
+                Specifies the fitness level for `cycling-*` profiles.
+              properties:
+                level:
+                  description: |
+                    `0` = Novice, `1` = Moderate, `2` = Amateur, `3` = Pro. The prefered gradient increases with level
+                  type: "integer"
+                  format: "int64"
+                  enum:
+                  - 0
+                  - 1
+                  - 2
+                  - 3
+            green:
+              type: object
+              description: |
+                Specifies the Green factor for `foot-*` profiles.
+              properties:
+                factor:
+                  description: |
+                    Values range from `0` to `1`. `0` equals normal routing. `1` will prefer ways through green areas over a shorter route.
+                  type: "number"
+                  format: "float"
+                  minimum: 0
+                  maximum: 1
+            quiet:
+              type: object
+              description: |
+                Specifies the Quiet factor for `foot-*` profiles.
+              properties:
+                factor:
+                  description: |
+                    Values range from `0` to `1`. `0` equals normal routing. `1` will prefer quiet ways over a shorter route.
+                  type: "number"
+                  format: "float"
+                  minimum: 0
+                  maximum: 1
+        restrictions:
+          description: |
+            Specifies restrictions for `driving-hgv`, `wheelchair` or `cycling-*` profiles.
+          type: "object"
+          properties:
+            length:
+              description: |
+                Length restriction in meters.
+              type: "number"
+              format: "double"
+            width:
+              description: |
+                Width restriction in meters.
+              type: "number"
+              format: "double"
+            height:
+              description: |
+                Height restriction in meters.
+              type: "number"
+              format: "double"
+            axleload:
+              description: |
+                Axleload restriction in tons.
+              type: "number"
+              format: "double"
+            weight:
+              description: |
+                Weight restriction in tons.
+              type: "number"
+              format: "double"
+            hazmat:
+              description: |
+                Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false.
+              type: "boolean"
+              apiDefault: false
+            gradient:
+              description: |
+                Only for avoided `hills` or specified `steepness_difficulty`. Specifies the maximum route steepness in percent. Values range from `1` to `15`. Routes with a higher gradient are avoided.
+              type: "integer"
+              format: "int64"
+              enum: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+              minimum: 1
+              maximum: 15
+            surface_type:
+              type: string
+              description: |
+                Specifies the minimum [surface type](http://wiki.openstreetmap.org/wiki/Key:surface). Default is `"cobblestone:flattened"`.
+              apiDefault: "cobblestone:flattened"
+            track_type:
+              type: string
+              description: |
+                Specifies the minimum [grade](http://wiki.openstreetmap.org/wiki/Key:tracktype) of the route. Default is `"grade1"`.
+              apiDefault: grade1
+            smoothness_type:
+              type: string
+              description: |
+                Specifies the minimum [smoothness](http://wiki.openstreetmap.org/wiki/Key:smoothness) of the route. Default is `"good"`.
+              apiDefault: good
+            maximum_sloped_kerb:
+              type: string
+              description: |
+                Specifies the maximum height of the sloped kerb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.
+              enum: [0.03,0.06,0.1,any]
+              apiDefault: 0.06
+            maximum_incline:
+              type: string
+              description: |
+                Specifies the maximum incline as a percentage. `3`, `6`(default), `10`, `15` or `any`.
+              enum: [3,6,10,15,any]
+              apiDefault: 6
+            minimum_width:
+              type: integer
+              format: int64
+              description: |
+                Specifies the minimum width of the way (in meters).
+              example: 3
+    avoid_polygons:
+      type: object
+      description: |
+        Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).
+        An example Polygon would be:
+        ```json
+        {
+          "type": "Polygon",
+          "coordinates": [[[100],[0]],[[101],[0]],[[101],[1]],[[100],[1]],[[100],[0]]]
+        }
+        ```
+      properties:
+        type:
+          description: |
+            Geometry type is always polygon.
+          type: array
+          enum: ["Polygon"]
+          example: "Polygon"
+        coordinates:
+          description: |
+            Coordinate array of the geometry.
+            Example coords:
+            ```json
+            [
+              [
+                [100],[0]
+              ],
+              [
+                [101],[0]
+              ],
+              [
+                [101],[1]
+              ],
+              [
+                [100],[1]
+              ],
+              [
+                [100],[0]
+              ]
+            ]
+            ```
+          example: "See help (?)"
+          type: "array"
+          items:
             type: "array"
             items:
-              type: "array"
-              items:
-                type: "number"
-                format: "double"
-              maxItems: 2
-              minItems: 2
-    example:
-      maximum_speed: 12
-      avoid_features:
-      - "hills"
-      - "ferries"
-      - "tollways"
-      profile_params:
-        weightings:
-          level: 2
-      restrictions:
-        gradient: 13
-      avoid_polygons:
-        type: "Polygon"
-        coordinates:
-        - - - 100
-            - 0
-          - - 101
-            - 0
-          - - 101
-            - 1
-          - - 100
-            - 1
-          - - 100
-            - 0
+              type: "number"
+              format: "double"
+            maxItems: 2
+            minItems: 2
+  routeResponseExtrasProps:
+    values:
+      description: Broken down by way_points.
+      type: array
+      items:
+        type: array
+        items:
+          type: number
+          format: double
+          description: |
+            Value 1: Indice of the starting geometry for this section.
+
+            Value 2: Indice of the end geometry for this section.
+
+            Value 3: [Value](https://github.com/GIScience/openrouteservice-docs#routing-response) assigned to this section.
+    summary:
+      description: Broken down by information category values.
+      type: array
+      items:
+        type: object
+        properties:
+          value:
+            type: integer
+            format: int64
+            description: "[Value](https://github.com/GIScience/openrouteservice-docs#routing-response) of a info category."
+          distance:
+            type: integer
+            format: int64
+            description: Cumulative distance of this value.
+          amount:
+            type: integer
+            format: int64
+            description: Category percentage of the entire route.
   Geocode_structured_query:
     title: "Geocode structured query"
     description: "Composition of a structured query object. A minimum of one parameter has to be specified."
@@ -3241,92 +3181,85 @@ definitions:
       locality: Heidelberg
       country: Germany
       postalcode: 69120
-  MatrixBody:
-    properties:
-      profile:
-        description: "Specifies the route profile."
-        type: "string"
-        enum:
-        - "driving-car"
-        - "driving-hgv"
-        - "cycling-regular"
-        - "cycling-road"
-        - "cycling-safe"
-        - "cycling-mountain"
-        - "cycling-electric"
-        - "foot-walking"
-        - "foot-hiking"
-        - "wheelchair"
-        default: driving-car
-      locations:
-        description: >
-          List of comma separated lists of `longitude,latitude` coordinates (note, without quotes around the coordinates, this is a displaying error of swagger).
+  matrixBodyProps:
+    profile:
+      description: "Specifies the route profile."
+      type: "string"
+      enum:
+      - "driving-car"
+      - "driving-hgv"
+      - "cycling-regular"
+      - "cycling-road"
+      - "cycling-safe"
+      - "cycling-mountain"
+      - "cycling-electric"
+      - "foot-walking"
+      - "foot-hiking"
+      - "wheelchair"
+      default: driving-car
+    locations:
+      description: >
+        List of comma separated lists of `longitude,latitude` coordinates (note, without quotes around the coordinates, this is a displaying error of swagger).
 
-          example : `"locations":[[9.70093,48.477473],[9.207916,49.153868],[37.573242,55.801281],[115.663757,38.106467]]`
+        example : `"locations":[[9.70093,48.477473],[9.207916,49.153868],[37.573242,55.801281],[115.663757,38.106467]]`
+      type: "array"
+      items:
         type: "array"
         items:
-          type: "array"
-          items:
-            type: number
-            format: double
-        default:
-        - - 9.9700934,48.477473
-        - - 9.207916,49.153868
-        - - 37.573242,55.801281
-        - - 115.663757,38.106467
-      sources:
-        description: |
-          A comma separated list of indices that refers to the list of locations (starting with `0`). `{index_1},{index_2}[,{index_N} ...]` or `all` (default).
+          type: number
+          format: double
+      default:
+      - - 9.9700934,48.477473
+      - - 9.207916,49.153868
+      - - 37.573242,55.801281
+      - - 115.663757,38.106467
+    sources:
+      description: |
+        A comma separated list of indices that refers to the list of locations (starting with `0`). `{index_1},{index_2}[,{index_N} ...]` or `all` (default).
 
-          Example: `0,3` for the first and fourth Location.
-        type: "array"
-        items:
-          type: "string"
-        default: "2,3"
-        uniqueItems: true
-      destinations:
-        description: |
-          A comma separated list of indices that refers to the list of locations (starting with `0`). `{index_1},{index_2}[,{index_N} ...]` or `all` (default).
+        Example: `0,3` for the first and fourth Location.
+      type: "array"
+      items:
+        type: "string"
+      default: "2,3"
+      uniqueItems: true
+    destinations:
+      description: |
+        A comma separated list of indices that refers to the list of locations (starting with `0`). `{index_1},{index_2}[,{index_N} ...]` or `all` (default).
 
-          Example: `0,3` for the first and fourth Location.
-                type: "array"
-        items:
-          type: "string"
-          format: "{index}"
-        default: "all"
-        uniqueItems: true
-      metrics:
-        description: |
-          Specifies a list of returned metrics separated with a pipe character (|).
-          * `distance` - Returns distance matrix for specified points in defined `units`.
-          * `duration` - Returns duration matrix for specified points in *seconds*.
+        Example: `0,3` for the first and fourth Location.
+              type: "array"
+      items:
         type: "string"
-        uniqueItems: true
-        enum:
-        - "distance"
-        - "duration"
-        - "weight"
-        default: "duration"
-      resolve_locations:
-        description: "Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain `name` element that identifies the name of the closest street. Default is `false`"
-        type: boolean
-        default: false
-        enum:
-        - true
-        - false
-      units:
-        description: "Specifies the unit of measurement for `metrics=distance`."
-        type: "string"
-        default: "m"
-        enum:
-        - "m"
-        - "km"
-        - "mi"
-      optimized:
-        description: |
-          Specifies whether Dijkstra algorithm (`false`) or any available technique to speed up shortest-path routing (`true`) is used.
-        type: boolean
-        default: true
-        enum:
-        - true
-        - false
+        format: "{index}"
+      default: "all"
+      uniqueItems: true
+    metrics:
+      description: |
+        Specifies a list of returned metrics separated with a pipe character (|).
+        * `distance` - Returns distance matrix for specified points in defined `units`.
+        * `duration` - Returns duration matrix for specified points in *seconds*.
+      type: "string"
+      uniqueItems: true
+      enum:
+      - "distance"
+      - "duration"
+      - "weight"
+      default: "duration"
+    resolve_locations:
+      description: "Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain `name` element that identifies the name of the closest street. Default is `false`"
+      type: boolean
+      default: false
+    units:
+      description: "Specifies the unit of measurement for `metrics=distance`."
+      type: "string"
+      default: "m"
+      enum:
+      - "m"
+      - "km"
+      - "mi"
+    optimized:
+      description: |
+        Specifies whether Dijkstra algorithm (`false`) or any available technique to speed up shortest-path routing (`true`) is used.
+      type: boolean
+      default: true

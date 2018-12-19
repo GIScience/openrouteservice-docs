@@ -1,6 +1,6 @@
 This repository stores the swagger specifications of the [openrouteservice](openrouteservice.org "ORS website") API in yaml and json format.
 For an API-Key please sign up at our [developers portal](https://openrouteservice.org "ORS portal").
-A live version of this documentation can be found on [swaggerhub](https://app.swaggerhub.com/apis/OpenRouteService/ors-api/ "Swagger Doku").
+A live version of this documentation can be found in the [API Playground](https://openrouteservice.org/dev/#/api-docs "API Playground").
 
 ## Content
 
@@ -27,9 +27,10 @@ This readme stores additional information, examples and encoding tables that go 
   - [WayCategory](#waycategory)
   - [Waytype](#waytype)
   - [AvgSpeed](#avgspeed)
-    - [Tollways](#tollways)
+  - [Tollways](#tollways)
   - [TrailDifficulty](#trail-difficulty)
   - [Instruction Types](#instruction-types)
+  - [Road Access Restrictions](#road-access-restrictions)
 - [Places Response](#places-response)
   - [category_group_ids](#category_group_ids)
   - [category_ids](#category_ids)
@@ -697,6 +698,19 @@ This extra provides information about a trails difficulty for [hiking](https://w
 |   5   | sac_scale=demanding_alpine_hiking   | mtb:scale=4 |
 |   6   | sac_scale=difficult_alpine_hiking   | mtb:scale=5 |
 |   7   |                 ---                 | mtb:scale=6 |
+
+## Road access restrictions
+
+Provides information about possible restrictions on roads.
+
+| Value |  Encoding  |
+| 0 | None (there are no restrictions) |
+| 1 | No |
+| 2 | Customers |
+| 4 | Destination |
+| 8 | Delivery |
+| 16 | Private |
+| 32 | Permissive |
 
 # Places Response
 
