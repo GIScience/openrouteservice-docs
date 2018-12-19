@@ -216,7 +216,9 @@ paths:
         apiDefault: false
       - name: "extra_info"
         in: "query"
-        description: "Pipe (|) separated List of additional information. Returns information on [steepness](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#steepness), [suitability](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#suitability), [surface](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#surface), [waycategory](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waycategory), [waytype](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waytype), [tollways](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#tollways) or [trail difficulty](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#trail-difficulty) "
+        description: |
+          Pipe (|) separated List of additional information.
+          Returns information on [steepness](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#steepness), [suitability](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#suitability), [surface](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#surface), [waycategory](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waycategory), [waytype](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waytype), [tollways](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#tollways), [trail difficulty](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#trail-difficulty) or [road access restrictions](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#road-access-restrictions)
         type: "array"
         enum:
         - "steepness"
