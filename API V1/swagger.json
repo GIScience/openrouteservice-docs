@@ -1,0 +1,3207 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the openrouteservice API V1 documentation for ORS Core-Version `5.0.0`",
+    "version": "5.0.0",
+    "title": "Openrouteservice",
+    "contact": {
+      "email": "support@openrouteservice.org"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/swagger-api/swagger-ui/blob/master/LICENSE"
+    }
+  },
+  "host": "api.openrouteservice.org",
+  "tags": [
+    {
+      "name": "Directions",
+      "description": "Get directions for different modes of transport"
+    },
+    {
+      "name": "Isochrones",
+      "description": "Obtain areas of reachability from given locations"
+    },
+    {
+      "name": "Matrix",
+      "description": "Obtain one-to-many, many-to-one and many-to-many matrices for time and distance"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json; charset=utf-8"
+  ],
+  "security": [
+    {
+      "UserSecurity": [
+        "api_key"
+      ]
+    }
+  ],
+  "paths": {
+    "/directions": {
+      "get": {
+        "tags": [
+          "Directions"
+        ],
+        "summary": "Directions Service",
+        "description": "Returns a route between two or more locations for a selected profile and its settings as json, GeoJson or GPX response.\n",
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "query",
+            "description": "Insert your API Key here.\n",
+            "type": "string",
+            "required": true,
+            "example": "your-api-key"
+          },
+          {
+            "name": "coordinates",
+            "in": "query",
+            "description": "Pipe (|) separated List of longitude,latitude coordinates visited in order.\n\nExample values:\n  `8.34234,48.23424`\n  `8.34423,48.26424`\n",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "pipes",
+            "example": "8.34234,48.23424|8.34423,48.26424"
+          },
+          {
+            "name": "profile",
+            "in": "query",
+            "description": "Specifies the route profile.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "driving-car",
+              "driving-hgv",
+              "cycling-regular",
+              "cycling-road",
+              "cycling-safe",
+              "cycling-mountain",
+              "cycling-electric",
+              "foot-walking",
+              "foot-hiking",
+              "wheelchair"
+            ],
+            "example": "driving-car"
+          },
+          {
+            "name": "preference",
+            "in": "query",
+            "description": "Specifies the route preference.",
+            "type": "string",
+            "apiDefault": "fastest",
+            "enum": [
+              "fastest",
+              "shortest",
+              "recommended"
+            ]
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Specifies the response format. The GPX schema the response is validated against can be found [here](https://raw.githubusercontent.com/GIScience/openrouteservice-schema/master/gpx/v1/ors-gpx.xsd).",
+            "type": "string",
+            "apiDefault": "json",
+            "enum": [
+              "json",
+              "geojson",
+              "gpx"
+            ]
+          },
+          {
+            "name": "units",
+            "in": "query",
+            "description": "Specifies the distance unit.",
+            "type": "string",
+            "apiDefault": "m",
+            "enum": [
+              "m",
+              "km",
+              "mi"
+            ]
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Language for the route instructions.",
+            "type": "string",
+            "apiDefault": "en",
+            "enum": [
+              "zh-CN",
+              "de",
+              "en",
+              "es",
+              "ru",
+              "fr",
+              "it",
+              "nl",
+              "pt",
+              "gr",
+              "hu"
+            ]
+          },
+          {
+            "name": "extra_info",
+            "in": "query",
+            "description": "Pipe (|) separated List of additional information.\nReturns information on [steepness](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#steepness), [suitability](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#suitability), [surface](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#surface), [waycategory](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waycategory), [waytype](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#waytype), [tollways](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#tollways), [trail difficulty](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#trail-difficulty) or [road access restrictions](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#road-access-restrictions)\n",
+            "type": "array",
+            "enum": [
+              "steepness",
+              "suitability",
+              "surface",
+              "waycategory",
+              "waytype",
+              "tollways",
+              "traildifficulty",
+              "roadaccessrestrictions"
+            ],
+            "collectionFormat": "pipes",
+            "uniqueItems": true,
+            "multiSelect": true,
+            "example": "waytype|surface",
+            "validWhen": [
+              {
+                "ref": "format",
+                "value": [
+                  "json",
+                  "geojson"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "geometry",
+            "in": "query",
+            "description": "Specifies whether to return geometry.",
+            "type": "boolean",
+            "apiDefault": true
+          },
+          {
+            "name": "geometry_format",
+            "in": "query",
+            "description": "Sets the format of the returned geometry. Note that for `elevation=true` `encodedpolyline` also encodes the height information of each point. If `format=geojson`, this parameter has no effect.\nTo decode, please use a suitable library (for example [graphhopper](https://github.com/graphhopper/graphhopper/blob/master/web/src/main/java/com/graphhopper/http/WebHelper.java)).\n",
+            "type": "string",
+            "apiDefault": "encodedpolyline",
+            "enum": [
+              "encodedpolyline",
+              "geojson",
+              "polyline"
+            ],
+            "validWhen": [
+              {
+                "ref": "format",
+                "value": "json"
+              },
+              {
+                "ref": "geometry",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "geometry_simplify",
+            "in": "query",
+            "description": "Specifies whether to simplify the geometry. This cannot be set to true when `extra_info` has been requested, or on routes with more than one segment (more than two coordinates).",
+            "type": "boolean",
+            "apiDefault": false,
+            "validWhen": [
+              {
+                "ref": "geometry",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "instructions",
+            "in": "query",
+            "description": "Specifies whether to return instructions.",
+            "type": "boolean",
+            "apiDefault": "true"
+          },
+          {
+            "name": "instructions_format",
+            "in": "query",
+            "description": "Select `html` for more verbose instructions.",
+            "type": "string",
+            "apiDefault": "text",
+            "enum": [
+              "html",
+              "text"
+            ],
+            "validWhen": [
+              {
+                "ref": "instructions",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "roundabout_exits",
+            "in": "query",
+            "description": "Provides bearings of the entrance and all passed roundabout exits. Adds the `exit_bearings` array to the `step` object in the response.",
+            "type": "boolean",
+            "apiDefault": false
+          },
+          {
+            "name": "attributes",
+            "in": "query",
+            "description": "Pipe (|) separated List of route attributes:\n* `avgspeed` - Returns average speed of each segment and the route in km/h.\n* `detourfactor` - Returns the deviation of a segment compared to a straight line (1) from A to B.\n* `percentage` - Returns the proportion of the route for each segment.\n",
+            "type": "array",
+            "collectionFormat": "pipes",
+            "uniqueItems": true,
+            "multiSelect": true,
+            "enum": [
+              "avgspeed",
+              "detourfactor",
+              "percentage"
+            ],
+            "example": "avgspeed|percentage"
+          },
+          {
+            "name": "maneuvers",
+            "in": "query",
+            "description": "Specifies whether the maneuver object is included into the `step` object or not. Default: `false`.",
+            "type": "boolean",
+            "apiDefault": false
+          },
+          {
+            "name": "optimized",
+            "in": "query",
+            "description": "Uses contraction hierarchies if available (`false`).\n",
+            "type": "boolean",
+            "apiDefault": true
+          },
+          {
+            "name": "bearings",
+            "in": "query",
+            "description": "Specifies a pipe (|) delimited list of pairs (bearings and deviations) to filter the segments of the road network a waypoint can snap to. For example `bearings=45,10|120,20`.\nEach pair is a comma-separated list that can consist of one or two float values, where the first value is the bearing and the second one is the allowed deviation from the bearing. The bearing can take values between `0` and `360` clockwise from true north.\nIf the deviation is not set, then the default value of `100` degrees is used. The number of pairs must correspond to the number of waypoints.\n Setting `optimized=false` is mandatory for this feature to work for all profiles.\nThe number of bearings corresponds to the length of waypoints-1 or waypoints. If the bearing information for the last waypoint is given, then this will control the sector from which the destination waypoint may be reached. You can skip a bearing for a certain waypoint by passing an empty value for a pair, e.g. `30,20||40,20`.\n",
+            "type": "array",
+            "collectionFormat": "pipes",
+            "items": {
+              "type": "string",
+              "format": "bearing,deviation"
+            },
+            "example": "45,10|120,20",
+            "validWhen": [
+              {
+                "ref": "optimized",
+                "value": "false"
+              }
+            ]
+          },
+          {
+            "name": "radiuses",
+            "in": "query",
+            "description": "A pipe (`|`) delimited list of maximum distances (measured in meters) that limit the search of nearby road segments to every given waypoint.\nThe values must be greater than `0`, the value of `-1` specifies no limit in the search.\nThe number of radiuses correspond to the number of waypoints.\n",
+            "type": "array",
+            "collectionFormat": "pipes",
+            "items": {
+              "type": "number",
+              "format": "float"
+            },
+            "example": "200|-1"
+          },
+          {
+            "name": "continue_straight",
+            "in": "query",
+            "description": "Forces the route to keep going straight at waypoints restricting uturns there even if it would be faster. This setting will work for all profiles except for `driving-*`. In this case you will have to set `optimized=false` for it to work. Default: `false`.",
+            "type": "boolean",
+            "apiDefault": false,
+            "validWhen": [
+              {
+                "ref": "optimized",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "elevation",
+            "in": "query",
+            "description": "Specifies whether to return elevation values for points. Please note that elevation also gets encoded for `geometry_format=encodedpolyline`.",
+            "type": "boolean",
+            "apiDefault": false,
+            "validWhen": [
+              {
+                "ref": "geometry",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "suppress_warnings",
+            "in": "query",
+            "description": "Tells the system to not return any warning messages and corresponding `extra_info`. For `false` the extra information can still be explicitly requested by adding it with the `extra_info` parameter.\n",
+            "type": "boolean",
+            "apiDefault": false
+          },
+          {
+            "name": "options",
+            "in": "query",
+            "type": "object",
+            "example": "{maximum_speed:100}",
+            "properties": {
+              "$ref": "#/definitions/optionProps"
+            },
+            "description": {
+              "$ref": "#/definitions/optionDescription"
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Arbitrary identification string of the request reflected in the meta information.",
+            "type": "string",
+            "example": "My trip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Standard response for successfully processed requests. Returns JSON. The decoded values of the extra information can be found [here](https://github.com/GIScience/openrouteservice-docs).\n",
+            "example": {
+              "body": {
+                "routes": {
+                  "examples": [
+                    [
+                      {
+                        "summary": {
+                          "distance": 5757.4,
+                          "duration": 821,
+                          "ascent": 257,
+                          "descent": 336
+                        },
+                        "geometry_format": "encodedpolyline",
+                        "geometry": "mtkeHuv|q@~@VLHz@\\PR|@hBt@j@^n@L\\NjALv@Jh@NXi@zBm@jCKTy@z@qAhBa@\\[Ne@DgCc@i@?[Ty@hAi@zASRi@R}@H_@N[b@kAdCy@`Au@d@eA|@q@h@WRe@PYHYBqADgAAcAL_A^w@~@q@`@w@Zw@Cm@K[PeA|Aa@p@g@fAiAhBuAv@]VU^k@xAUXe@TqATy@V}@f@_@V[MUWqA_FKy@Me@_@cAu@{Ae@c@aAfBaAv@g@rBm@|@w@x@m@^U@m@Ma@SI\\mAlEkAjC_AjC_ApCe@z@i@j@q@f@[NsAp@u@T}A\\wATU?WCeBm@q@MwAGUCg@SMaAi@mDQm@K}@Mq@u@mAc@i@c@Ys@[WW_@q@e@a@cA_@w@E{BHmBXqBkBsA}@{Ao@iAB{@QYSi@qCUy@Ee@i@kBWk@yAoCWS_@SaAE{@yAu@mDUsAqA}@EM@QTiA|@iAn@gAd@eAg@_@I]??k@i@yBkEa@}@W}@WkCUqC?_@Hg@ZqABg@Gm@YoAEgAMq@@jAB|CC`@{@rACH",
+                        "segments": [
+                          {
+                            "distance": 5757.4,
+                            "duration": 821,
+                            "steps": [
+                              {
+                                "distance": 383.1,
+                                "duration": 46,
+                                "type": 6,
+                                "instruction": "Head south on Benatweg",
+                                "way_points": [
+                                  0,
+                                  12
+                                ]
+                              },
+                              {
+                                "distance": 757.4,
+                                "duration": 54.5,
+                                "type": "1",
+                                "instruction": "Turn right onto Hölzle, K 5528",
+                                "way_points": [
+                                  12,
+                                  33
+                                ]
+                              },
+                              {
+                                "distance": 980.2,
+                                "duration": 70.6,
+                                "type": "6",
+                                "instruction": "Continue straight onto Sulzbacher Straße, K 5528",
+                                "way_points": [
+                                  33,
+                                  63
+                                ]
+                              },
+                              {
+                                "distance": 3636.7,
+                                "duration": 649.9,
+                                "type": "5",
+                                "instruction": "Turn slight right",
+                                "way_points": [
+                                  63,
+                                  163
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  ],
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "warnings": {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        },
+                        "description": "Informs about possible difficulties like access restrictions on the generated route. Generates a corresponding `extras` object with the affected segments.\n",
+                        "example": [
+                          {
+                            "code": 1,
+                            "message": "There may be restrictions on some roads."
+                          }
+                        ]
+                      },
+                      "summary": {
+                        "type": "object",
+                        "properties": {
+                          "distance": {
+                            "type": "number",
+                            "format": "double",
+                            "description": "Total route distance in specified units.",
+                            "example": 5757.4
+                          },
+                          "duration": {
+                            "type": "number",
+                            "format": "double",
+                            "description": "Total duration in seconds.",
+                            "example": 821
+                          },
+                          "ascent": {
+                            "type": "number",
+                            "format": "double",
+                            "description": "Total ascent in meters.",
+                            "example": 257
+                          },
+                          "descent": {
+                            "type": "number",
+                            "format": "double",
+                            "description": "Total descent in meters.",
+                            "example": 336
+                          },
+                          "avgspeed": {
+                            "type": "number",
+                            "format": "double",
+                            "description": "Total average speed in km/h"
+                          }
+                        },
+                        "title": "summary object",
+                        "description": "Contains total sums of duration, route distance and actual distance of the route."
+                      },
+                      "geometry_format": {
+                        "type": "string",
+                        "description": "Contains the defined geometry format.",
+                        "default": "encodedpolyline",
+                        "example": "encodedpolyline"
+                      },
+                      "geometry": {
+                        "type": "object",
+                        "description": "Contains the geometry in the defined geometry format.",
+                        "properties": {
+                          "type": {
+                            "type": "string"
+                          },
+                          "coordinates": {
+                            "type": "array",
+                            "description": "Contains the coordinate arrays of every route point.",
+                            "items": {
+                              "type": "array",
+                              "description": "Contains longitude, latitude and altitude(for elevation=true).",
+                              "minItems": 2,
+                              "maxItems": 3,
+                              "items": {
+                                "type": "number",
+                                "format": "double"
+                              }
+                            }
+                          }
+                        },
+                        "example": "mtkeHuv|q@~@VLHz@\\PR|@hBt@j@^n@L\\NjALv@Jh@NXi@zBm@jCKTy@z@qAhBa@\\[Ne@DgCc@i@?[Ty@hAi@zASRi@R}@H_@N[b@kAdCy@`Au@d@eA|@q@h@WRe@PYHYBqADgAAcAL_A^w@~@q@`@w@Zw@Cm@K[PeA|Aa@p@g@fAiAhBuAv@]VU^k@xAUXe@TqATy@V}@f@_@V[MUWqA_FKy@Me@_@cAu@{Ae@c@aAfBaAv@g@rBm@|@w@x@m@^U@m@Ma@SI\\mAlEkAjC_AjC_ApCe@z@i@j@q@f@[NsAp@u@T}A\\wATU?WCeBm@q@MwAGUCg@SMaAi@mDQm@K}@Mq@u@mAc@i@c@Ys@[WW_@q@e@a@cA_@w@E{BHmBXqBkBsA}@{Ao@iAB{@QYSi@qCUy@Ee@i@kBWk@yAoCWS_@SaAE{@yAu@mDUsAqA}@EM@QTiA|@iAn@gAd@eAg@_@I]??k@i@yBkEa@}@W}@WkCUqC?_@Hg@ZqABg@Gm@YoAEgAMq@@jAB|CC`@{@rACH"
+                      },
+                      "segments": {
+                        "type": "array",
+                        "description": "List containing the segments and its correspoding steps which make up the route.",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "distance": {
+                              "type": "number",
+                              "format": "double",
+                              "description": "Contains the distance of the segment in specified units.",
+                              "example": 5757.4
+                            },
+                            "duration": {
+                              "type": "number",
+                              "format": "double",
+                              "description": "Contains the duration of the segment in seconds.",
+                              "example": 821
+                            },
+                            "ascent": {
+                              "type": "number",
+                              "format": "double",
+                              "description": "Contains ascent of this segment in meters for `elevation=true`."
+                            },
+                            "descent": {
+                              "type": "number",
+                              "format": "double",
+                              "description": "Contains descent of this segment in meters for `elevation=true`."
+                            },
+                            "detourfactor": {
+                              "type": "number",
+                              "format": "double",
+                              "description": "Contains the deviation compared to a straight line that would have the factor `1`. Double the Distance would be a `2`."
+                            },
+                            "percentage": {
+                              "type": "number",
+                              "format": "double",
+                              "description": "Contains the proportion of the route in percent."
+                            },
+                            "avgspeed": {
+                              "type": "number",
+                              "format": "double",
+                              "description": "Contains the average speed of this segment in km/h."
+                            },
+                            "steps": {
+                              "type": "array",
+                              "description": "List containing the specific steps the segment consists of.",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "distance": {
+                                    "type": "number",
+                                    "format": "double",
+                                    "description": "The distance for the step in meters."
+                                  },
+                                  "duration": {
+                                    "type": "number",
+                                    "format": "double",
+                                    "description": "The duration for the step in seconds."
+                                  },
+                                  "type": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "The [instruction](https://github.com/GIScience/openrouteservice-docs#instruction-types) action for symbolisation purposes."
+                                  },
+                                  "instruction": {
+                                    "type": "string",
+                                    "description": "The routing instruction text for the step."
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "description": "The name of the next street."
+                                  },
+                                  "maneuver": {
+                                    "type": "object",
+                                    "title": "maneuver object",
+                                    "properties": {
+                                      "bearing_before": {
+                                        "type": "number",
+                                        "format": "int64",
+                                        "description": "The azimuth angle (in degrees) of the direction right before the maneuver."
+                                      },
+                                      "bearing_after": {
+                                        "type": "number",
+                                        "format": "int64",
+                                        "description": "The azimuth angle (in degrees) of the direction right after the maneuver."
+                                      },
+                                      "location": {
+                                        "type": "array",
+                                        "description": "The coordinate of the point where a maneuver takes place.",
+                                        "items": {
+                                          "type": "number",
+                                          "format": "double"
+                                        },
+                                        "maxItems": 2,
+                                        "minItems": 2
+                                      }
+                                    }
+                                  },
+                                  "way_points": {
+                                    "type": "array",
+                                    "description": "List containing the indices of the steps start- and endpoint corresponding to the *geometry*.",
+                                    "items": {
+                                      "type": "integer",
+                                      "format": "int64"
+                                    },
+                                    "maxItems": 2,
+                                    "minItems": 2
+                                  },
+                                  "exit_number": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "Only for roundabouts. Contains the number of the exit to take."
+                                  },
+                                  "exit_bearings": {
+                                    "type": "array",
+                                    "description": "Contains the bearing of the entrance and all passed exits in a roundabout for `roundabout_exits=true`.",
+                                    "items": {
+                                      "type": "integer",
+                                      "format": "int64"
+                                    },
+                                    "minItems": 2
+                                  }
+                                },
+                                "title": "steps object"
+                              }
+                            }
+                          },
+                          "title": "segments object",
+                          "example": {
+                            "distance": 5757.4,
+                            "duration": 821
+                          }
+                        },
+                        "maxItems": 1
+                      },
+                      "way_points": {
+                        "type": "array",
+                        "description": "List containing the indices of way points corresponding to the *geometry*.",
+                        "items": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "example": [
+                          0,
+                          163
+                        ]
+                      },
+                      "extras": {
+                        "type": "object",
+                        "description": "For every information item there is an associated block divided into *summary* and *values*.\nValue 1\\: Indice of the starting geometry for this section.\nValue 2\\: Indice of the end geometry for this section.\nValue 3\\: [Value](https://github.com/GIScience/openrouteservice-docs#routing-response) assigned to this section.\n",
+                        "properties": {
+                          "steepness": {
+                            "type": "object",
+                            "properties": {
+                              "$ref": "#/definitions/routeResponseExtrasProps"
+                            }
+                          },
+                          "suitability": {
+                            "type": "object",
+                            "properties": {
+                              "$ref": "#/definitions/routeResponseExtrasProps"
+                            }
+                          },
+                          "surface": {
+                            "type": "object",
+                            "properties": {
+                              "$ref": "#/definitions/routeResponseExtrasProps"
+                            }
+                          },
+                          "waycategory": {
+                            "type": "object",
+                            "properties": {
+                              "$ref": "#/definitions/routeResponseExtrasProps"
+                            }
+                          },
+                          "waytype": {
+                            "type": "object",
+                            "properties": {
+                              "$ref": "#/definitions/routeResponseExtrasProps"
+                            }
+                          },
+                          "tollways": {
+                            "type": "object",
+                            "properties": {
+                              "$ref": "#/definitions/routeResponseExtrasProps"
+                            }
+                          },
+                          "traildifficulty": {
+                            "type": "object",
+                            "properties": {
+                              "$ref": "#/definitions/routeResponseExtrasProps"
+                            }
+                          },
+                          "roadaccessrestrictions": {
+                            "type": "object",
+                            "properties": {
+                              "$ref": "#/definitions/routeResponseExtrasProps"
+                            }
+                          }
+                        }
+                      },
+                      "bbox": {
+                        "type": "array",
+                        "description": "Contains the minimum bounding box of the route.",
+                        "items": {
+                          "type": "number",
+                          "format": "double"
+                        },
+                        "maxItems": 4,
+                        "minItems": 4,
+                        "example": [
+                          8.327707,
+                          48.231946,
+                          8.345244,
+                          48.263552
+                        ]
+                      }
+                    },
+                    "title": "routes object"
+                  }
+                },
+                "info": {
+                  "type": "object",
+                  "properties": {
+                    "engine": {
+                      "type": "object",
+                      "properties": {
+                        "version": {
+                          "type": "string",
+                          "description": "Backend version used for the request.",
+                          "examples": "4.5.1"
+                        },
+                        "build_date": {
+                          "type": "string",
+                          "description": "Build date of the used backend version",
+                          "examples": "2017-09-08T09:21:35Z"
+                        }
+                      },
+                      "title": "Engine Information"
+                    },
+                    "attribution": {
+                      "type": "string",
+                      "description": "Attribution for using our service.",
+                      "example": "openrouteservice.org, OpenStreetMap contributors, tmc - BASt"
+                    },
+                    "osm_file_md5_hash": {
+                      "type": "string",
+                      "description": "md5 hash of the planet file which the graphs were built from.",
+                      "example": "bbff3c042b19c04e3efdd9722e22db5f"
+                    },
+                    "service": {
+                      "type": "string",
+                      "description": "API endpoint used.",
+                      "example": "routing"
+                    },
+                    "timestamp": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Unix timestamp of the precise request date.",
+                      "example": 1493300103526
+                    },
+                    "query": {
+                      "type": "object",
+                      "description": "Summarizes your query settings.",
+                      "required": [
+                        "coordinates",
+                        "geometry_format",
+                        "profile"
+                      ],
+                      "properties": {
+                        "profile": {
+                          "type": "string",
+                          "example": "driving-car"
+                        },
+                        "preference": {
+                          "type": "string",
+                          "default": "fastest",
+                          "example": "fastest"
+                        },
+                        "coordinates": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "number",
+                              "format": "double"
+                            },
+                            "maxItems": 2,
+                            "minItems": 2
+                          },
+                          "minItems": 2,
+                          "example": [
+                            [
+                              8.34234,
+                              48.23424
+                            ],
+                            [
+                              8.23424,
+                              48.26424
+                            ]
+                          ]
+                        },
+                        "language": {
+                          "type": "string",
+                          "example": "en"
+                        },
+                        "units": {
+                          "type": "string",
+                          "example": "meters"
+                        },
+                        "geometry": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "geometry_format": {
+                          "type": "string",
+                          "example": "encodedpolyline"
+                        },
+                        "instructions_format": {
+                          "type": "string",
+                          "example": "text"
+                        },
+                        "instructions": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "elevation": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "options": {
+                          "type": "string",
+                          "example": {
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "title": "OK",
+              "description": "The Routing Response contains the requested route as an object in `routes`.\n"
+            }
+          },
+          "400": {
+            "description": "The request is incorrect and therefore can not be processed.",
+            "example": {
+              "body": {
+                "error": {
+                  "code": "eg.:2001",
+                  "message": "Parameter 'profile' is missing."
+                },
+                "info": {
+                  "engine": {
+                    "version": "4.5.0",
+                    "build_date": "2018-09-23T13:47:22Z"
+                  },
+                  "timestamp": 1537962538916
+                }
+              },
+              "title": "Incorrect request",
+              "description": "The request structure is incorrect."
+            }
+          },
+          "401": {
+            "description": "Authorization field missing.",
+            "example": {
+              "body": {
+                "error": "Authorization field missing"
+              },
+              "title": "No authorization",
+              "description": "The parameter `api_key` is missing from the request."
+            }
+          },
+          "403": {
+            "description": "Key not authorised.",
+            "example": {
+              "body": {
+                "error": "Access to this API has been disallowed"
+              },
+              "title": "No valid token",
+              "description": "The token specified in `api_key` is not valid."
+            }
+          },
+          "404": {
+            "description": "An element could not be found. If possible, a more detailed error code is provided.\n\nInternal Code  | Description                                                  |\n:-------------:|--------------------------------------------------------------|\n 2009 |  Unable to find a route between points x (lon lat) and y (lon lat).   |\n 2010 |  One or more points specified cannot be found in the routing network. |\n",
+            "example": {
+              "body": {
+                "error": {
+                  "code": "2009",
+                  "message": "Unable to find a route between points x (lon lat) and y (lon lat)."
+                },
+                "info": {
+                  "engine": {
+                    "version": "4.5.0",
+                    "build_date": "2018-09-23T13:47:22Z"
+                  },
+                  "timestamp": 1537962538916
+                }
+              },
+              "title": "Not Found",
+              "description": "Unable to find requested object."
+            }
+          },
+          "405": {
+            "description": "The specified HTTP method is not supported. For more details,\nrefer to the EndPoint documentation.\n",
+            "example": {
+              "title": "Method Not Allowed",
+              "description": "The used HTTP method is not supported\n\n```html\n<html>\n    <head>\n        <title>405 Not Allowed</title>\n    </head>\n    <body bgcolor=\"white\">\n        <center>\n            <h1>405 Not Allowed</h1>\n        </center>\n        <hr>\n        <center>nginx</center>\n    </body>\n</html>\n```\n"
+            }
+          },
+          "413": {
+            "description": "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.",
+            "example": {
+              "body": {
+                "error": "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
+              },
+              "title": "Request Entity Too Large",
+              "description": "The request is too large."
+            }
+          },
+          "500": {
+            "description": "An unexpected error was encountered and more detailed internal error code is provided.\n\nInternal Code  | Description                                        |\n:-------------:|----------------------------------------------------|\n 2000 |  Unable to parse JSON request. |\n 2001 |  Required parameter is missing. |\n 2002 |  Invalid parameter format. |\n 2003 |  Invalid parameter value. |\n 2004 |  Parameter value exceeds the maximum allowed limit. |\n 2006 |  Unable to parse the request to the export handler. |\n 2007 |  Unsupported export format. |\n 2008 |  Empty Element. |\n 2099 |  Unknown internal error. |\n",
+            "example": {
+              "body": {
+                "error": {
+                  "code": "eg.:2099",
+                  "message": "Unknown internal error."
+                },
+                "info": {
+                  "engine": {
+                    "version": "4.5.0",
+                    "build_date": "2018-09-23T13:47:22Z"
+                  },
+                  "timestamp": 1537962538916
+                }
+              },
+              "title": "Internal Server Error",
+              "description": "The request structure is incorrect."
+            }
+          },
+          "501": {
+            "description": "Indicates that the server does not support the functionality needed to fulfill the request.",
+            "example": {
+              "body": {
+                "error": "The server does not support the functionality needed to fulfill the request."
+              },
+              "title": "Not Implemented",
+              "description": "The server does not support the functionality needed to fulfill the request."
+            }
+          },
+          "503": {
+            "description": "The server is currently unavailable due to overload or maintenance.",
+            "example": {
+              "body": {
+                "error": "The server is currently unavailable due to overload or maintenance"
+              },
+              "title": "Service Unavailable",
+              "description": "The server is currently unavailable due to overload or maintenance."
+            }
+          }
+        }
+      }
+    },
+    "/isochrones": {
+      "get": {
+        "tags": [
+          "Isochrones"
+        ],
+        "summary": "Isochrones Service",
+        "description": "The Isochrone Service supports time and distance analyses for one single or multiple locations.\nYou may also specify the isochrone interval or provide multiple exact isochrone range values.\nThis service allows the same range of profile options as the `/directions` endpoint,\nwhich help you to further customize your request to obtain a more detailed reachability area response.\n",
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "query",
+            "description": "Insert your API Key here.\n",
+            "type": "string",
+            "required": true,
+            "example": "your-api-key"
+          },
+          {
+            "name": "profile",
+            "in": "query",
+            "description": "Specifies the routing profile.",
+            "required": true,
+            "type": "string",
+            "example": "driving-car",
+            "enum": [
+              "driving-car",
+              "driving-hgv",
+              "cycling-regular",
+              "cycling-road",
+              "cycling-safe",
+              "cycling-mountain",
+              "foot-walking",
+              "foot-hiking"
+            ]
+          },
+          {
+            "name": "locations",
+            "in": "query",
+            "description": "List of longitude, latitude coordinates delimited with pipe (|).\n",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "pipes",
+            "example": "40.38939, 56.148562"
+          },
+          {
+            "name": "range",
+            "in": "query",
+            "description": "Maximum range value of the analysis in **seconds** for time and **meters** for distance. Alternatively a comma separated list of specific single range values.\n",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "example": "60,120,600"
+          },
+          {
+            "name": "location_type",
+            "in": "query",
+            "description": "start treats the location(s) as starting point, destination as goal.",
+            "type": "string",
+            "apiDefault": "start",
+            "enum": [
+              "start",
+              "destination"
+            ]
+          },
+          {
+            "name": "range_type",
+            "in": "query",
+            "description": "Set _time_ for isochrones or _distance_ for equidistants.\n",
+            "type": "string",
+            "enum": [
+              "time",
+              "distance"
+            ],
+            "apiDefault": "time"
+          },
+          {
+            "name": "units",
+            "in": "query",
+            "description": "Unit format of the `range` input for `range_type=distance`.",
+            "type": "string",
+            "example": "m",
+            "enum": [
+              "m",
+              "km",
+              "mi"
+            ],
+            "validWhen": [
+              {
+                "ref": "range_type",
+                "value": "distance"
+              }
+            ]
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "Interval of isochrones or equidistants for one range value. value in **seconds** for time and **meters** for distance.\n",
+            "type": "number",
+            "format": "double",
+            "example": 10
+          },
+          {
+            "name": "smoothing",
+            "in": "query",
+            "description": "Applies a level of generalisation to the isochrone polygons generated as a smoothing_factor between `0` and `1.0`.\nGeneralisation is produced by determining a maximum length of a connecting line between two points found on the outside of a containing polygon.\nIf the distance is larger than a threshold value, the line between the two points is removed and a smaller connecting line between other points is used.\nThe threshold value is determined as (smoothing_factor * maximum_radius_of_isochrone) / 10.\nTherefore, a value closer to 1 will result in a more generalised shape.\nThe polygon generation algorithm is based on Duckham and al. (2008) `\"Efficient\ngeneration of simple polygons for characterizing the shape of a set of points in the plane.\"`\n",
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1.0,
+            "example": 0.2
+          },
+          {
+            "name": "attributes",
+            "in": "query",
+            "description": "List of requested attributes delimited by pipe (|). Values are `area`, `reachfactor` and `total_pop`.\n\nValue  | Description|\n:--:|---|\n `area` | Returns the area of each polygon in its feature properties. |\n `reachfactor` | Returns a reachability score between 0 and 1. |\n `total_pop` | Returns the total population of each polygon based on [GHS data](http://ghsl.jrc.ec.europa.eu/about.php) |\n",
+            "type": "array",
+            "multiSelect": true,
+            "enum": [
+              "area",
+              "reachfactor",
+              "total_pop"
+            ],
+            "collectionFormat": "pipes",
+            "uniqueItems": true,
+            "example": "area"
+          },
+          {
+            "name": "area_units",
+            "in": "query",
+            "description": "Unit format of areas in the response. Takes effect if `area` is specified in `attributes`.",
+            "type": "string",
+            "apiDefault": "m",
+            "example": "m",
+            "enum": [
+              "m",
+              "km",
+              "mi"
+            ],
+            "validWhen": [
+              {
+                "ref": "attributes",
+                "value": "area"
+              }
+            ]
+          },
+          {
+            "name": "options",
+            "in": "query",
+            "type": "object",
+            "properties": {
+              "$ref": "#/definitions/optionProps"
+            },
+            "description": {
+              "$ref": "#/definitions/optionDescription"
+            },
+            "example": "{maximum_speed:80}"
+          },
+          {
+            "name": "intersections",
+            "in": "query",
+            "description": "Specifies whether to return intersection polygons.\n",
+            "type": "boolean",
+            "apiDefault": false
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Arbitrary identification string of the request reflected in the meta information.",
+            "type": "string",
+            "example": "My isochrone"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Standard response for successfully processed requests. Returns JSON.",
+            "example": {
+              "body": {
+                "type": {
+                  "type": "string",
+                  "example": "FeatureCollection"
+                },
+                "features": {
+                  "type": "array",
+                  "examples": [
+                    [
+                      {
+                        "type": "Feature",
+                        "geometry": {
+                          "type": "Polygon",
+                          "coordinates": [
+                            [
+                              [
+                                8.342343,
+                                48.233955
+                              ],
+                              [
+                                8.343488,
+                                48.231793
+                              ],
+                              [
+                                8.343936,
+                                48.231589
+                              ],
+                              [
+                                8.345551,
+                                48.232323
+                              ],
+                              [
+                                8.345702,
+                                48.232619
+                              ],
+                              [
+                                8.345942,
+                                48.233138
+                              ],
+                              [
+                                8.345429,
+                                48.234865
+                              ],
+                              [
+                                8.34498,
+                                48.235069
+                              ],
+                              [
+                                8.342772,
+                                48.234845
+                              ],
+                              [
+                                8.342683,
+                                48.234679
+                              ],
+                              [
+                                8.342343,
+                                48.233955
+                              ]
+                            ]
+                          ]
+                        },
+                        "properties": {
+                          "group_index": 0,
+                          "value": 10,
+                          "center": [
+                            8.34234,
+                            48.23424
+                          ]
+                        }
+                      },
+                      {
+                        "type": "Feature",
+                        "geometry": {
+                          "type": "Polygon",
+                          "coordinates": [
+                            [
+                              [
+                                8.342343,
+                                48.233955
+                              ],
+                              [
+                                8.343488,
+                                48.231793
+                              ],
+                              [
+                                8.343936,
+                                48.231589
+                              ],
+                              [
+                                8.345551,
+                                48.232323
+                              ],
+                              [
+                                8.346667,
+                                48.233789
+                              ],
+                              [
+                                8.346703,
+                                48.233894
+                              ],
+                              [
+                                8.345757,
+                                48.236001
+                              ],
+                              [
+                                8.345674,
+                                48.236036
+                              ],
+                              [
+                                8.343303,
+                                48.235077
+                              ],
+                              [
+                                8.342772,
+                                48.234845
+                              ],
+                              [
+                                8.342683,
+                                48.234679
+                              ],
+                              [
+                                8.342343,
+                                48.233955
+                              ]
+                            ]
+                          ]
+                        },
+                        "properties": {
+                          "group_index": 0,
+                          "value": 30,
+                          "center": [
+                            8.34234,
+                            48.23424
+                          ]
+                        }
+                      },
+                      {
+                        "type": "Feature",
+                        "geometry": {
+                          "type": "Polygon",
+                          "coordinates": [
+                            [
+                              [
+                                8.340736,
+                                48.23346
+                              ],
+                              [
+                                8.341493,
+                                48.230505
+                              ],
+                              [
+                                8.343068,
+                                48.230105
+                              ],
+                              [
+                                8.343291,
+                                48.230101
+                              ],
+                              [
+                                8.345219,
+                                48.230879
+                              ],
+                              [
+                                8.347384,
+                                48.233295
+                              ],
+                              [
+                                8.347701,
+                                48.233754
+                              ],
+                              [
+                                8.347676,
+                                48.234
+                              ],
+                              [
+                                8.345757,
+                                48.236001
+                              ],
+                              [
+                                8.345674,
+                                48.236036
+                              ],
+                              [
+                                8.343303,
+                                48.235077
+                              ],
+                              [
+                                8.342772,
+                                48.234845
+                              ],
+                              [
+                                8.340835,
+                                48.233526
+                              ],
+                              [
+                                8.340736,
+                                48.23346
+                              ]
+                            ]
+                          ]
+                        },
+                        "properties": {
+                          "group_index": 0,
+                          "value": 60,
+                          "center": [
+                            8.34234,
+                            48.23424
+                          ]
+                        }
+                      }
+                    ]
+                  ],
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "geometry": {
+                        "type": "object",
+                        "properties": {
+                          "coordinates": {
+                            "type": "array",
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "number",
+                                "format": "double"
+                              }
+                            },
+                            "example": [
+                              [
+                                8.337413,
+                                48.233333
+                              ],
+                              [
+                                8.337446,
+                                48.233146
+                              ],
+                              [
+                                8.339023,
+                                48.231162
+                              ],
+                              [
+                                8.342829,
+                                48.228996
+                              ],
+                              [
+                                8.344379,
+                                48.229675
+                              ],
+                              [
+                                8.34602,
+                                48.230662
+                              ],
+                              [
+                                8.347124,
+                                48.231837
+                              ],
+                              [
+                                8.348778,
+                                48.233859
+                              ],
+                              [
+                                8.348807,
+                                48.233995
+                              ],
+                              [
+                                8.348731,
+                                48.235059
+                              ],
+                              [
+                                8.347973,
+                                48.235437
+                              ],
+                              [
+                                8.340959,
+                                48.233954
+                              ],
+                              [
+                                8.337413,
+                                48.233333
+                              ]
+                            ]
+                          },
+                          "type": {
+                            "type": "string",
+                            "default": "Polygon",
+                            "example": "Polygon"
+                          }
+                        },
+                        "description": "geometry object"
+                      },
+                      "type": {
+                        "type": "string",
+                        "default": "Feature",
+                        "example": "Feature"
+                      },
+                      "properties": {
+                        "type": "object",
+                        "properties": {
+                          "area": {
+                            "type": "number",
+                            "format": "double",
+                            "description": "Area of the polygon in square meters (for attributes=area)."
+                          },
+                          "reachfactor": {
+                            "type": "number",
+                            "format": "double",
+                            "description": "Returns a reachability score between 0 and 1 (for attributes=reachfactor). As the maximum reachfactor would be achieved by travelling as the crow flies at maximum speed in a vacuum without obstacles, naturally it can never be 1. The availability of motorways however produces a higher score over normal roads.\n"
+                          },
+                          "total_pop": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Total population of the polygon (for attributes=total_pop).\n"
+                          },
+                          "center": {
+                            "type": "array",
+                            "items": {
+                              "type": "number",
+                              "format": "double"
+                            },
+                            "maxItems": 2,
+                            "minItems": 2,
+                            "description": "The coordinates of the specific analysis location."
+                          },
+                          "group_index": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Id of the isochrone based on the position in the `locations` query-parameter. Every location comprises its own group of polygons."
+                          },
+                          "value": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "The range value of this isochrone/equidistant in seconds/meters."
+                          },
+                          "contours": {
+                            "type": "array",
+                            "description": "For intersections=true. Every intersection polygon comprises contours with an index array for each participating isochrone.",
+                            "items": {
+                              "type": "array",
+                              "description": "For each participating isochrone...",
+                              "items": {
+                                "type": "integer",
+                                "format": "int64",
+                                "description": "... the group_index(first value) and the isochrone index(second value), numbered from the center, starting with `0`.\nThe example (\"contours\": [[0,1],[1,1],[2,0]]) would indicate the intersection polygon between the 2nd isochrone of the 1st location, the 2nd isochrone of th 2nd location and the 1st isochrone of the 3rd location.\n"
+                              }
+                            }
+                          }
+                        },
+                        "description": "properties object",
+                        "example": {
+                          "group_index": 0,
+                          "value": 60,
+                          "center": [
+                            8.34234,
+                            48.23424
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "bbox": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "maxItems": 4,
+                  "minItems": 4,
+                  "description": "Contains the minimum bounding box of all features.",
+                  "example": [
+                    8.337413,
+                    48.228996,
+                    8.348807,
+                    48.235437
+                  ]
+                },
+                "info": {
+                  "type": "object",
+                  "description": "info object",
+                  "properties": {
+                    "service": {
+                      "type": "string",
+                      "description": "API endpoint used.",
+                      "default": "isochrones",
+                      "examples": "isochrones"
+                    },
+                    "query": {
+                      "type": "object",
+                      "description": "Summarizes your query settings.",
+                      "properties": {
+                        "ranges": {
+                          "type": "string",
+                          "examples": "10.0,30.0,60.0"
+                        },
+                        "profile": {
+                          "type": "string",
+                          "example": "driving-car"
+                        },
+                        "locations": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "number",
+                              "format": "double"
+                            }
+                          },
+                          "example": [
+                            [
+                              [
+                                8.34234,
+                                48.23424
+                              ]
+                            ]
+                          ]
+                        },
+                        "range_type": {
+                          "type": "string",
+                          "examples": "time"
+                        },
+                        "location_type": {
+                          "type": "string",
+                          "example": "start"
+                        }
+                      },
+                      "examples": {
+                        "ranges": "60.0",
+                        "profile": "driving-car",
+                        "locations": [
+                          [
+                            8.34234,
+                            48.23424
+                          ]
+                        ],
+                        "range_type": "time",
+                        "location_type": "start"
+                      }
+                    },
+                    "attribution": {
+                      "type": "string",
+                      "description": "Attribution for using our service.",
+                      "example": "openrouteservice.org, OpenStreetMap contributors"
+                    },
+                    "osm_file_md5_hash": {
+                      "type": "string",
+                      "description": "md5 hash of the planet file which the graphs were built from.",
+                      "example": "bbff3c042b19c04e3efdd9722e22db5f"
+                    },
+                    "engine": {
+                      "type": "object",
+                      "properties": {
+                        "version": {
+                          "type": "string",
+                          "description": "Backend version used for the request.",
+                          "examples": "4.5.1"
+                        },
+                        "build_date": {
+                          "type": "string",
+                          "description": "Build date of the used backend version",
+                          "examples": "2017-09-08T09:21:35Z"
+                        }
+                      },
+                      "description": "Engine Information"
+                    },
+                    "timestamp": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Unix timestamp of the precise request date.",
+                      "example": 1493305098226
+                    }
+                  }
+                }
+              },
+              "title": "OK",
+              "description": "The Isochrone Response returns one feature for each isochrone ring which are grouped by requested center.\n"
+            }
+          },
+          "400": {
+            "description": "The request is incorrect and therefore can not be processed.",
+            "example": {
+              "body": {
+                "error": {
+                  "code": "eg.:3001",
+                  "message": "Parameter 'profile' is missing."
+                },
+                "info": {
+                  "engine": {
+                    "version": "4.5.0",
+                    "build_date": "2018-09-23T13:47:22Z"
+                  },
+                  "timestamp": 1537962538916
+                }
+              },
+              "title": "Incorrect request",
+              "description": "The request structure is incorrect."
+            }
+          },
+          "401": {
+            "description": "Authorization field missing.",
+            "example": {
+              "body": {
+                "error": "Authorization field missing"
+              },
+              "title": "No authorization",
+              "description": "The parameter `api_key` is missing from the request."
+            }
+          },
+          "403": {
+            "description": "Key not authorised.",
+            "example": {
+              "body": {
+                "error": "Access to this API has been disallowed"
+              },
+              "title": "No valid token",
+              "description": "The token specified in `api_key` is not valid."
+            }
+          },
+          "405": {
+            "description": "The specified HTTP method is not supported. For more details,\nrefer to the EndPoint documentation.\n",
+            "example": {
+              "title": "Method Not Allowed",
+              "description": "The used HTTP method is not supported\n\n```html\n<html>\n    <head>\n        <title>405 Not Allowed</title>\n    </head>\n    <body bgcolor=\"white\">\n        <center>\n            <h1>405 Not Allowed</h1>\n        </center>\n        <hr>\n        <center>nginx</center>\n    </body>\n</html>\n```\n"
+            }
+          },
+          "413": {
+            "description": "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit.",
+            "example": {
+              "body": {
+                "error": "The request is larger than the server is able to process, the data provided in the request exceeds the capacity limit."
+              },
+              "title": "Request Entity Too Large",
+              "description": "The request is too large."
+            }
+          },
+          "500": {
+            "description": "An unexpected error was encountered and more detailed internal error code is provided.\n\nInternal Code  | Description                                        |\n:-------------:|----------------------------------------------------|\n 3000 |  Unable to parse JSON request. |\n 3001 |  Required parameter is missing. |\n 3002 |  Invalid parameter format. |\n 3003 |  Invalid parameter value. |\n 3004 |  Parameter value exceeds the maximum allowed limit. |\n 3006 |  Unable to parse the request to the export handler. |\n 3007 |  Unsupported export format. |\n 3008 |  Empty Element. |\n 3099 |  Unknown internal error. |\n",
+            "example": {
+              "body": {
+                "error": {
+                  "code": "eg.:3099",
+                  "message": "Unknown internal error."
+                },
+                "info": {
+                  "engine": {
+                    "version": "4.5.0",
+                    "build_date": "2018-09-23T13:47:22Z"
+                  },
+                  "timestamp": 1537962538916
+                }
+              },
+              "title": "Internal Server Error",
+              "description": "The request structure is incorrect."
+            }
+          },
+          "501": {
+            "description": "Indicates that the server does not support the functionality needed to fulfill the request.",
+            "example": {
+              "body": {
+                "error": "The server does not support the functionality needed to fulfill the request."
+              },
+              "title": "Not Implemented",
+              "description": "The server does not support the functionality needed to fulfill the request."
+            }
+          },
+          "503": {
+            "description": "The server is currently unavailable due to overload or maintenance.",
+            "example": {
+              "body": {
+                "error": "The server is currently unavailable due to overload or maintenance"
+              },
+              "title": "Service Unavailable",
+              "description": "The server is currently unavailable due to overload or maintenance."
+            }
+          }
+        }
+      }
+    },
+    "/matrix": {
+      "get": {
+        "tags": [
+          "Matrix"
+        ],
+        "summary": "Matrix Service (GET)",
+        "description": "Returns duration or distance matrix for mutliple source and destination points.\nBy default a symmetric duration matrix is returned where every point in `locations` is paired with each other. The result is `null` if a value can't be determined.\n",
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "query",
+            "description": "Insert your API Key here.\n",
+            "type": "string",
+            "required": true,
+            "example": "your-api-key"
+          },
+          {
+            "name": "profile",
+            "in": "query",
+            "description": "Specifies the route profile.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "driving-car",
+              "driving-hgv",
+              "cycling-regular",
+              "cycling-road",
+              "cycling-safe",
+              "cycling-mountain",
+              "cycling-electric",
+              "foot-walking",
+              "foot-hiking",
+              "wheelchair"
+            ],
+            "example": "driving-car"
+          },
+          {
+            "name": "locations",
+            "in": "query",
+            "description": "Pipe (|) separated List of `longitude,latitude` coordinates\n\nExample values: `9.970093,48.477473` `9.207916,49.153868` `37.573242,55.801281` `115.663757,38.106467`\n",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "pipes",
+            "example": "9.970093,48.477473|9.207916,49.153868|37.573242,55.801281|115.663757,38.106467"
+          },
+          {
+            "name": "sources",
+            "in": "query",
+            "description": "A comma separated list of indices that refers to the list of locations (starting with `0`). {index_1},{index_2}(,{index_N} ...) or `all` (default).\n\nExample: `0,3` for the first and fourth Location.\n",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "apiDefault": [
+              "all"
+            ]
+          },
+          {
+            "name": "destinations",
+            "in": "query",
+            "description": "A comma separated list of indices that refers to the list of locations (starting with `0`). {index_1},{index_2}[,{index_N} ...] or `all` (default).\n\nExample: `0,3` for the first and fourth Location.\n",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "apiDefault": [
+              "all"
+            ]
+          },
+          {
+            "name": "metrics",
+            "in": "query",
+            "description": "Specifies a list of returned metrics separated with a pipe character (|).\n* `distance` - Returns distance matrix for specified points in defined `units`.\n* `duration` - Returns duration matrix for specified points in *seconds*.\n",
+            "type": "array",
+            "collectionFormat": "pipes",
+            "uniqueItems": true,
+            "multiSelect": true,
+            "enum": [
+              "distance",
+              "duration"
+            ],
+            "apiDefault": [
+              "duration"
+            ]
+          },
+          {
+            "name": "units",
+            "in": "query",
+            "description": "Specifies the unit of measurement for distances (only).",
+            "type": "string",
+            "apiDefault": "m",
+            "enum": [
+              "m",
+              "km",
+              "mi"
+            ],
+            "validWhen": [
+              {
+                "ref": "metrics",
+                "value": "distance"
+              }
+            ]
+          },
+          {
+            "name": "resolve_locations",
+            "in": "query",
+            "description": "Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain the `name` element that identifies the name of the closest street. Default: `false`\n",
+            "type": "boolean",
+            "apiDefault": false
+          },
+          {
+            "name": "optimized",
+            "in": "query",
+            "description": "Specifies whether Dijkstra algorithm (`false`) or any available technique to speed up shortest-path routing (`true`) is used. For normal Dijkstra the number of visited nodes is limited to `100000`\n",
+            "type": "boolean",
+            "apiDefault": true
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Arbitrary identification string of the request reflected in the meta information.",
+            "type": "string",
+            "example": "My Matrix"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Standard response for successfully processed requests. Returns JSON.\n",
+            "example": {
+              "title": "OK",
+              "description": "The Matrix Response contains one matrix for each specified `metrics` value.\n",
+              "body": {
+                "distances": {
+                  "type": "array",
+                  "description": "[Distance matrix](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#matrix-response) where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\n",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "format": "double"
+                    }
+                  },
+                  "examples": [
+                    [
+                      [
+                        2366119,
+                        2338412.25,
+                        0,
+                        7519754
+                      ],
+                      [
+                        9983969,
+                        9956262,
+                        7509508.5,
+                        0
+                      ]
+                    ]
+                  ]
+                },
+                "durations": {
+                  "type": "array",
+                  "description": "[Duration matrix](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#matrix-response) where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\n",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "format": "double"
+                    }
+                  },
+                  "examples": [
+                    [
+                      [
+                        88632.73,
+                        87838.93,
+                        0,
+                        311791.09
+                      ],
+                      [
+                        399967.72,
+                        399173.91,
+                        310735.56,
+                        0
+                      ]
+                    ]
+                  ]
+                },
+                "destinations": {
+                  "description": "Array of destinations. Each point is snapped to the road and path network",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "location": {
+                        "description": "`{longitude},{latitude}` coordinates of the closest accessible\npoint on the routing graph.\n",
+                        "type": "array",
+                        "items": {
+                          "type": "number",
+                          "format": "double",
+                          "minItems": 2,
+                          "maxItems": 2
+                        }
+                      },
+                      "name": {
+                        "description": "'Name of the street the closest accessible point is situated\non. Only for `resolve_locations=true` and only if name is available.'\n",
+                        "type": "string"
+                      },
+                      "snapped_distance": {
+                        "description": "Distance between the `source`/`destination` Location and the\nused point on the routing graph.\n",
+                        "type": "number",
+                        "format": "double"
+                      }
+                    }
+                  },
+                  "examples": [
+                    [
+                      {
+                        "location": [
+                          37.572926,
+                          55.80129
+                        ],
+                        "snapped_distance": 19.8
+                      },
+                      {
+                        "location": [
+                          115.658655,
+                          38.116731
+                        ],
+                        "snapped_distance": 1225.53
+                      }
+                    ]
+                  ]
+                },
+                "sources": {
+                  "description": "Array of sources. Each point is snapped to the road and path network",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "location": {
+                        "description": "`{longitude},{latitude}` coordinates of the closest accessible\npoint on the routing graph.\n",
+                        "type": "array",
+                        "items": {
+                          "type": "number",
+                          "format": "double",
+                          "minItems": 2,
+                          "maxItems": 2
+                        }
+                      },
+                      "name": {
+                        "description": "Name of the street the closest accessible point is situated\non. Only for `resolve_locations=true` and only if name is available.\n",
+                        "type": "string"
+                      },
+                      "snapped_distance": {
+                        "description": "Distance between the `source`/`destination` Location and the\nused point on the routing graph.\n",
+                        "type": "number",
+                        "format": "double"
+                      }
+                    }
+                  },
+                  "examples": [
+                    [
+                      {
+                        "location": [
+                          9.968501,
+                          48.47789
+                        ],
+                        "snapped_distance": 126.17
+                      },
+                      {
+                        "location": [
+                          9.207773,
+                          49.153882
+                        ],
+                        "snapped_distance": 10.54
+                      },
+                      {
+                        "location": [
+                          37.572926,
+                          55.80129
+                        ],
+                        "snapped_distance": 19.8
+                      },
+                      {
+                        "location": [
+                          115.658655,
+                          38.116731
+                        ],
+                        "snapped_distance": 1225.53
+                      }
+                    ]
+                  ]
+                },
+                "info": {
+                  "type": "object",
+                  "description": "info object",
+                  "properties": {
+                    "service": {
+                      "type": "string",
+                      "description": "API endpoint used.",
+                      "examples": "matrix"
+                    },
+                    "engine": {
+                      "type": "object",
+                      "properties": {
+                        "version": {
+                          "type": "string",
+                          "description": "Backend version used for the request.",
+                          "examples": "4.5.1"
+                        },
+                        "build_date": {
+                          "type": "string",
+                          "description": "Build date of the used backend version",
+                          "examples": "2017-09-08T09:21:35Z"
+                        }
+                      },
+                      "title": "Engine Information"
+                    },
+                    "attribution": {
+                      "type": "string",
+                      "description": "Attribution for using our service.",
+                      "examples": "openrouteservice.org, OpenStreetMap contributors"
+                    },
+                    "osm_file_md5_hash": {
+                      "type": "string",
+                      "description": "md5 hash of the planet file which the graphs were built from.",
+                      "examples": "bbff3c042b19c04e3efdd9722e22db5f"
+                    },
+                    "timestamp": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Unix timestamp of the precise request date.",
+                      "examples": 1493306341299
+                    },
+                    "query": {
+                      "type": "object",
+                      "title": "query object",
+                      "description": "Summarizes your query settings.",
+                      "properties": {
+                        "profile": {
+                          "type": "string",
+                          "examples": "driving-car"
+                        },
+                        "locations": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "number",
+                              "format": "double"
+                            },
+                            "maxItems": 2,
+                            "minItems": 2
+                          },
+                          "minItems": 2,
+                          "maxItems": 200,
+                          "examples": [
+                            [
+                              [
+                                9.970093,
+                                48.477473
+                              ],
+                              [
+                                9.207916,
+                                49.153868
+                              ],
+                              [
+                                37.573242,
+                                55.801281
+                              ],
+                              [
+                                115.663757,
+                                38.106467
+                              ]
+                            ]
+                          ]
+                        },
+                        "sources": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "examples": [
+                            "2,3"
+                          ]
+                        },
+                        "destinations": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "examples": [
+                            "all"
+                          ]
+                        },
+                        "metrics": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "examples": [
+                            "distance|duration"
+                          ]
+                        },
+                        "optimized": {
+                          "type": "boolean",
+                          "examples": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is incorrect and therefore can not be processed.",
+            "example": {
+              "body": {
+                "error": {
+                  "code": "eg.:6001",
+                  "message": "Parameter 'profile' is missing."
+                },
+                "info": {
+                  "engine": {
+                    "version": "4.5.0",
+                    "build_date": "2018-09-23T13:47:22Z"
+                  },
+                  "timestamp": 1537962538916
+                }
+              },
+              "title": "Incorrect request",
+              "description": "The request structure is incorrect."
+            }
+          },
+          "401": {
+            "description": "Authorization field missing.",
+            "example": {
+              "body": {
+                "error": "Authorization field missing"
+              },
+              "title": "No authorization",
+              "description": "The parameter `api_key` is missing from the request."
+            }
+          },
+          "403": {
+            "description": "Key not authorised.",
+            "example": {
+              "body": {
+                "error": "Access to this API has been disallowed"
+              },
+              "title": "No valid token",
+              "description": "The token specified in `api_key` is not valid."
+            }
+          },
+          "405": {
+            "description": "The specified HTTP method is not supported. For more details,\nrefer to the EndPoint documentation.\n",
+            "example": {
+              "title": "Method Not Allowed",
+              "description": "The used HTTP method is not supported\n\n```html\n<html>\n    <head>\n        <title>405 Not Allowed</title>\n    </head>\n    <body bgcolor=\"white\">\n        <center>\n            <h1>405 Not Allowed</h1>\n        </center>\n        <hr>\n        <center>nginx</center>\n    </body>\n</html>\n```\n"
+            }
+          },
+          "413": {
+            "description": "The request is larger than the server is able to process,\nthe data provided in the request exceeds the capacity limit.\n",
+            "example": {
+              "body": {
+                "error": ""
+              },
+              "title": "Request Entity Too Large",
+              "description": ""
+            }
+          },
+          "500": {
+            "description": "An unexpected error was encountered and more detailed internal\nerrorcode is provided.\n\nInternal Code  | Description                                        |\n:-------------:|----------------------------------------------------|\n 6000 |  Unable to parse JSON request. |\n 6001 |  Required parameter is missing. |\n 6002 |  Invalid parameter format. |\n 6003 |  Invalid parameter value. |\n 6004 |  Parameter value exceeds the maximum allowed limit. |\n 6006 |  Unable to parse the request to the export handler. |\n 6007 |  Unsupported export format. |\n 6008 |  Empty Element. |\n 6099 |  Unknown internal error. |\n",
+            "example": {
+              "body": {
+                "error": {
+                  "code": "eg.:6003",
+                  "message": "Parameter 'profile' is missing."
+                },
+                "info": {
+                  "engine": {
+                    "version": "4.5.0",
+                    "build_date": "2018-09-23T13:47:22Z"
+                  },
+                  "timestamp": 1537962538916
+                }
+              },
+              "title": "Internal Server Error",
+              "description": "The request structure is incorrect."
+            }
+          },
+          "501": {
+            "description": "Indicates that the server does not support the functionality needed to fulfill the request.",
+            "example": {
+              "body": {
+                "error": ""
+              },
+              "title": "Not Implemented",
+              "description": ""
+            }
+          },
+          "503": {
+            "description": "The server is currently unavailable due to overload or maintenance.",
+            "example": {
+              "body": {
+                "error": "The server is currently unavailable due to overload or maintenance"
+              },
+              "title": "Service Unavailable",
+              "description": ""
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Matrix"
+        ],
+        "summary": "Matrix Service (POST)",
+        "description": "Returns duration or distance or matrix for mutliple source and destination points.\n\n**IMPORTANT**\n\nThe profile currently has to be passed both as a parameter *AND* in the body for other profiles than `driving-car`.\n",
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "query",
+            "description": "Insert your API Key here.\n",
+            "type": "string",
+            "required": true,
+            "example": "your-api-key"
+          },
+          {
+            "name": "profile",
+            "in": "query",
+            "description": "Specifies the profile to use for the matrix.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "driving-car",
+              "driving-hgv",
+              "cycling-regular",
+              "cycling-road",
+              "cycling-safe",
+              "cycling-mountain",
+              "cycling-electric",
+              "foot-walking",
+              "foot-hiking",
+              "wheelchair"
+            ],
+            "example": "driving-car"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "body for a Matrix post request",
+            "type": "object",
+            "required": true,
+            "example": "{ \"profile\":\"driving-car\", \"locations\": [[7.796, 48.35], [11.13, 50.98]]}",
+            "properties": {
+              "$ref": "#/definitions/matrixBodyProps"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Standard response for successfully processed requests. Returns JSON.\n",
+            "example": {
+              "title": "OK",
+              "description": "The Matrix Response contains one matrix for each specified `metrics` value.\n",
+              "body": {
+                "distances": {
+                  "type": "array",
+                  "description": "[Distance matrix](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#matrix-response) where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\n",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "format": "double"
+                    }
+                  },
+                  "examples": [
+                    [
+                      [
+                        2366119,
+                        2338412.25,
+                        0,
+                        7519754
+                      ],
+                      [
+                        9983969,
+                        9956262,
+                        7509508.5,
+                        0
+                      ]
+                    ]
+                  ]
+                },
+                "durations": {
+                  "type": "array",
+                  "description": "[Duration matrix](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#matrix-response) where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\n",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "format": "double"
+                    }
+                  },
+                  "examples": [
+                    [
+                      [
+                        88632.73,
+                        87838.93,
+                        0,
+                        311791.09
+                      ],
+                      [
+                        399967.72,
+                        399173.91,
+                        310735.56,
+                        0
+                      ]
+                    ]
+                  ]
+                },
+                "destinations": {
+                  "description": "Array of destinations. Each point is snapped to the road and path network",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "location": {
+                        "description": "`{longitude},{latitude}` coordinates of the closest accessible\npoint on the routing graph.\n",
+                        "type": "array",
+                        "items": {
+                          "type": "number",
+                          "format": "double",
+                          "minItems": 2,
+                          "maxItems": 2
+                        }
+                      },
+                      "name": {
+                        "description": "'Name of the street the closest accessible point is situated\non. Only for `resolve_locations=true` and only if name is available.'\n",
+                        "type": "string"
+                      },
+                      "snapped_distance": {
+                        "description": "Distance between the `source`/`destination` Location and the\nused point on the routing graph.\n",
+                        "type": "number",
+                        "format": "double"
+                      }
+                    }
+                  },
+                  "examples": [
+                    [
+                      {
+                        "location": [
+                          37.572926,
+                          55.80129
+                        ],
+                        "snapped_distance": 19.8
+                      },
+                      {
+                        "location": [
+                          115.658655,
+                          38.116731
+                        ],
+                        "snapped_distance": 1225.53
+                      }
+                    ]
+                  ]
+                },
+                "sources": {
+                  "description": "Array of sources. Each point is snapped to the road and path network",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "location": {
+                        "description": "`{longitude},{latitude}` coordinates of the closest accessible\npoint on the routing graph.\n",
+                        "type": "array",
+                        "items": {
+                          "type": "number",
+                          "format": "double",
+                          "minItems": 2,
+                          "maxItems": 2
+                        }
+                      },
+                      "name": {
+                        "description": "Name of the street the closest accessible point is situated\non. Only for `resolve_locations=true` and only if name is available.\n",
+                        "type": "string"
+                      },
+                      "snapped_distance": {
+                        "description": "Distance between the `source`/`destination` Location and the\nused point on the routing graph.\n",
+                        "type": "number",
+                        "format": "double"
+                      }
+                    }
+                  },
+                  "examples": [
+                    [
+                      {
+                        "location": [
+                          9.968501,
+                          48.47789
+                        ],
+                        "snapped_distance": 126.17
+                      },
+                      {
+                        "location": [
+                          9.207773,
+                          49.153882
+                        ],
+                        "snapped_distance": 10.54
+                      },
+                      {
+                        "location": [
+                          37.572926,
+                          55.80129
+                        ],
+                        "snapped_distance": 19.8
+                      },
+                      {
+                        "location": [
+                          115.658655,
+                          38.116731
+                        ],
+                        "snapped_distance": 1225.53
+                      }
+                    ]
+                  ]
+                },
+                "info": {
+                  "type": "object",
+                  "description": "info object",
+                  "properties": {
+                    "service": {
+                      "type": "string",
+                      "description": "API endpoint used.",
+                      "examples": "matrix"
+                    },
+                    "engine": {
+                      "type": "object",
+                      "properties": {
+                        "version": {
+                          "type": "string",
+                          "description": "Backend version used for the request.",
+                          "examples": "4.5.1"
+                        },
+                        "build_date": {
+                          "type": "string",
+                          "description": "Build date of the used backend version",
+                          "examples": "2017-09-08T09:21:35Z"
+                        }
+                      },
+                      "title": "Engine Information"
+                    },
+                    "attribution": {
+                      "type": "string",
+                      "description": "Attribution for using our service.",
+                      "examples": "openrouteservice.org, OpenStreetMap contributors"
+                    },
+                    "osm_file_md5_hash": {
+                      "type": "string",
+                      "description": "md5 hash of the planet file which the graphs were built from.",
+                      "examples": "bbff3c042b19c04e3efdd9722e22db5f"
+                    },
+                    "timestamp": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Unix timestamp of the precise request date.",
+                      "examples": 1493306341299
+                    },
+                    "query": {
+                      "type": "object",
+                      "title": "query object",
+                      "description": "Summarizes your query settings.",
+                      "properties": {
+                        "profile": {
+                          "type": "string",
+                          "examples": "driving-car"
+                        },
+                        "locations": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "number",
+                              "format": "double"
+                            },
+                            "maxItems": 2,
+                            "minItems": 2
+                          },
+                          "minItems": 2,
+                          "maxItems": 200,
+                          "examples": [
+                            [
+                              [
+                                9.970093,
+                                48.477473
+                              ],
+                              [
+                                9.207916,
+                                49.153868
+                              ],
+                              [
+                                37.573242,
+                                55.801281
+                              ],
+                              [
+                                115.663757,
+                                38.106467
+                              ]
+                            ]
+                          ]
+                        },
+                        "sources": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "examples": [
+                            "2,3"
+                          ]
+                        },
+                        "destinations": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "examples": [
+                            "all"
+                          ]
+                        },
+                        "metrics": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "examples": [
+                            "distance|duration"
+                          ]
+                        },
+                        "optimized": {
+                          "type": "boolean",
+                          "examples": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is incorrect and therefore can not be processed.",
+            "example": {
+              "body": {
+                "error": {
+                  "code": "eg.:6001",
+                  "message": "Parameter 'profile' is missing."
+                },
+                "info": {
+                  "engine": {
+                    "version": "4.5.0",
+                    "build_date": "2018-09-23T13:47:22Z"
+                  },
+                  "timestamp": 1537962538916
+                }
+              },
+              "title": "Incorrect request",
+              "description": "The request structure is incorrect."
+            }
+          },
+          "401": {
+            "description": "Authorization field missing.",
+            "example": {
+              "body": {
+                "error": "Authorization field missing"
+              },
+              "title": "No authorization",
+              "description": "The parameter `api_key` is missing from the request."
+            }
+          },
+          "403": {
+            "description": "Key not authorised.",
+            "example": {
+              "body": {
+                "error": "Access to this API has been disallowed"
+              },
+              "title": "No valid token",
+              "description": "The token specified in `api_key` is not valid."
+            }
+          },
+          "405": {
+            "description": "The specified HTTP method is not supported. For more details,\nrefer to the EndPoint documentation.\n",
+            "example": {
+              "title": "Method Not Allowed",
+              "description": "The used HTTP method is not supported\n\n```html\n<html>\n    <head>\n        <title>405 Not Allowed</title>\n    </head>\n    <body bgcolor=\"white\">\n        <center>\n            <h1>405 Not Allowed</h1>\n        </center>\n        <hr>\n        <center>nginx</center>\n    </body>\n</html>\n```\n"
+            }
+          },
+          "413": {
+            "description": "The request is larger than the server is able to process,\nthe data provided in the request exceeds the capacity limit.\n",
+            "example": {
+              "body": {
+                "error": ""
+              },
+              "title": "Request Entity Too Large",
+              "description": ""
+            }
+          },
+          "500": {
+            "description": "An unexpected error was encountered and more detailed internal\nerrorcode is provided.\n\nInternal Code  | Description                                        |\n:-------------:|----------------------------------------------------|\n 6000 |  Unable to parse JSON request. |\n 6001 |  Required parameter is missing. |\n 6002 |  Invalid parameter format. |\n 6003 |  Invalid parameter value. |\n 6004 |  Parameter value exceeds the maximum allowed limit. |\n 6006 |  Unable to parse the request to the export handler. |\n 6007 |  Unsupported export format. |\n 6008 |  Empty Element. |\n 6099 |  Unknown internal error. |\n",
+            "example": {
+              "body": {
+                "error": {
+                  "code": "eg.:6003",
+                  "message": "Parameter 'profile' is missing."
+                },
+                "info": {
+                  "engine": {
+                    "version": "4.5.0",
+                    "build_date": "2018-09-23T13:47:22Z"
+                  },
+                  "timestamp": 1537962538916
+                }
+              },
+              "title": "Internal Server Error",
+              "description": "The request structure is incorrect."
+            }
+          },
+          "501": {
+            "description": "Indicates that the server does not support the functionality needed to fulfill the request.",
+            "example": {
+              "body": {
+                "error": ""
+              },
+              "title": "Not Implemented",
+              "description": ""
+            }
+          },
+          "503": {
+            "description": "The server is currently unavailable due to overload or maintenance.",
+            "example": {
+              "body": {
+                "error": "The server is currently unavailable due to overload or maintenance"
+              },
+              "title": "Service Unavailable",
+              "description": ""
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "UserSecurity": {
+      "name": "api_key",
+      "description": "Add your API Key as the value of the api_key parameter to your request.\n",
+      "type": "apiKey",
+      "in": "query"
+    }
+  },
+  "definitions": {
+    "optionDescription": "For advanced options formatted as json object. For structure refer to the [these examples](https://github.com/GIScience/openrouteservice-docs#examples).\nThis is an example options object for a `cycling-*` profile:\n\n```json\n{\n  \"maximum_speed\": 10,\n  \"avoid_features\": \"unpavedroads\",\n  \"profile_params\": {\n    \"weightings\": {\n      \"steepness_difficulty\": {\n        \"level\": 1\n      },\n      \"green\": {\n        \"factor\": 0.8\n      },\n      \"quiet\": {\n        \"factor\": 1.0\n      }\n    },\n    \"restrictions\": {\n      \"gradient\": 5\n    }\n  },\n  \"avoid_polygons\": {\n    \"type\": \"Polygon\",\n    \"coordinates\": [\n    [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]\n    ]}\n}\n```\nThe minified form(for copy paste purposes):\n\n`{\"maximum_speed\":10,\"avoid_features\":\"unpavedroads\",\"profile_params\":{\"weightings\":{\"steepness_difficulty\":{\"level\":1},\"green\":{\"factor\":0.8},\"quiet\":{\"factor\":1.0}},\"restrictions\":{\"gradient\":5}},\"avoid_polygons\":{\"type\":\"Polygon\",\"coordinates\":[[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]]}}`\n\nMore examples can be found [here](https://github.com/GIScience/openrouteservice-docs#examples).\n",
+    "optionProps": {
+      "avoid_features": {
+        "description": "Pipe (|) separated list of features to avoid.\nThe available features are :\n\n  Feature         | Available for                                    |\n  :-------------------:|---------------------------------------------|\n   `highways`          | driving-*                                   |\n   `tollways`          | driving-*                                   |\n   `ferries`           | driving-\\*, cycling-\\*, foot-\\*, wheelchair |\n   `tunnels`           | driving-*                                   |\n   `pavedroads`        | driving-\\*, cycling-*                       |\n   `unpavedroads`      | driving-\\*, cycling-*                       |\n   `tracks`            | driving-*                                   |\n   `fords`             | driving-\\*, cycling-\\*, foot-*              |\n   `steps`             | cycling-\\*, foot-\\*, wheelchair             |\n   `hills`             | cycling-\\*, foot-\\*                         |\n",
+        "type": "array",
+        "collectionFormat": "pipes",
+        "uniqueItems": true,
+        "multiSelect": true,
+        "items": {
+          "type": "string",
+          "enum": [
+            "highways",
+            "tollways",
+            "ferries",
+            "fords",
+            "steps"
+          ]
+        },
+        "itemRestrictions": [
+          {
+            "ref": "profile",
+            "itemsWhen": {
+              "driving-*": [
+                "highways",
+                "tollways",
+                "ferries"
+              ],
+              "cycling-*": [
+                "ferries",
+                "fords",
+                "steps"
+              ],
+              "foot-*": [
+                "ferries",
+                "fords",
+                "steps"
+              ],
+              "wheelchair": [
+                "ferries",
+                "steps"
+              ]
+            }
+          }
+        ]
+      },
+      "avoid_borders": {
+        "type": "string",
+        "enum": [
+          "all",
+          "controlled"
+        ],
+        "description": "`\"all\"` for no border crossing. `\"controlled\"` to cross open borders but avoid controlled ones. Only for `driving-*` profiles.\n",
+        "validWhen": [
+          {
+            "ref": "profile",
+            "value": "driving*"
+          }
+        ]
+      },
+      "avoid_countries": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "pipes",
+        "multiSelect": true,
+        "description": "Pipe (|) separated list of countries to exclude from routing with `driving-*` profiles. Can be used together with `\"avoid_borders\": \"controlled\"`. `\"11|193\"` would exclude Austria and Switzerland. List of countries and application examples can be found [here](https://github.com/GIScience/openrouteservice-docs#country-list).\n",
+        "validWhen": [
+          {
+            "ref": "profile",
+            "value": "driving*"
+          }
+        ]
+      },
+      "vehicle_type": {
+        "type": "string",
+        "description": "`vehicle_type` (for `profile=driving-hgv` only): `hgv`,`bus`,`agricultural`,`delivery`,`forestry` and `goods`. It is needed for **vehicle restrictions** to work.\n",
+        "enum": [
+          "hgv",
+          "bus",
+          "agricultural",
+          "forestry",
+          "goods",
+          "delivery",
+          "unknown"
+        ],
+        "example": "hgv",
+        "validWhen": [
+          {
+            "ref": "profile",
+            "value": "driving-hgv"
+          }
+        ]
+      },
+      "profile_params": {
+        "type": "object",
+        "description": "Specifies additional routing parameters. For all profiles except `driving-car`.\n",
+        "properties": {
+          "weightings": {
+            "description": "Weightings will prioritize specified factors over the shortest path.\n",
+            "type": "object",
+            "properties": {
+              "steepness_difficulty": {
+                "type":"integer",
+                "format":"int32",
+                "example":2,
+                "description":"Specifies the fitness level for `cycling-*` profiles.\n\n level: 0 = Novice, 1 = Moderate, 2 = Amateur, 3 = Pro. The prefered gradient increases with level. CUSTOM_KEYS:{'validWhen':{'ref':'profile','value':['cycling-*']}}",
+                "validWhen": [
+                  {
+                    "ref": "profile",
+                    "value": "cycling-*"
+                  }
+                ]
+              },
+              "green": {
+                "type":"number",
+                "format":"float",
+                "example":0.4,
+                "description":"Specifies the Green factor for `foot-*` profiles.\n\nfactor: Values range from 0 to 1. 0 equals normal routing. 1 will prefer ways through green areas over a shorter route. CUSTOM_KEYS:{'validWhen':{'ref':'profile','value':['foot-*']}}",
+                "validWhen": [
+                  {
+                    "ref": "profile",
+                    "value": "foot-*"
+                  }
+                ]
+              },
+              "quiet": {
+                "type":"number",
+                "format":"float",
+                "example":0.8,
+                "description":"Specifies the Quiet factor for foot-* profiles.\n\nfactor: Values range from 0 to 1. 0 equals normal routing. 1 will prefer quiet ways over a shorter route. CUSTOM_KEYS:{'validWhen':{'ref':'profile','value':['foot-*']}}",
+                "validWhen": [
+                  {
+                    "ref": "profile",
+                    "value": "foot-*"
+                  }
+                ]
+              }
+            },
+            "validWhen": [
+              {
+                "ref": "profile",
+                "value": [
+                  "cycling-*",
+                  "foot-*"
+                ]
+              }
+            ]
+          },
+          "restrictions": {
+            "description": "Specifies restrictions for `driving-hgv`, `wheelchair` or `cycling-*` profiles.\n",
+            "type": "object",
+            "properties": {
+              "length": {
+                "type":"number",
+                "format":"float",
+                "example":8.4,
+                "description":"Length restriction in metres.",
+                "validWhen": [
+                  {
+                    "ref": "profile",
+                    "value": "driving-hgv"
+                  }
+                ]
+              },
+              "width":{
+                "type":"number",
+                "format":"float",
+                "example":5.6,
+                "description":"Width restriction in metres.",
+                "validWhen": [
+                  {
+                    "ref": "profile",
+                    "value": "driving-hgv"
+                  }
+                ]
+              },
+              "height": {
+                "type":"number",
+                "format":"float",
+                "example":4.2,
+                "description":"Height restriction in metres.",
+                "validWhen": [
+                  {
+                    "ref": "profile",
+                    "value": "driving-hgv"
+                  }
+                ]
+              },
+              "axleload": {
+                "type":"number",
+                "format":"float",
+                "example":50.0,
+                "description":"Axleload restriction in tons.",
+                "validWhen": [
+                  {
+                    "ref": "profile",
+                    "value": "driving-hgv"
+                  }
+                ]
+              },
+              "weight": {
+                "type":"number",
+                "format":"float",
+                "example":40.0,
+                "description":"Weight restriction in tons.",
+                "validWhen": [
+                  {
+                    "ref": "profile",
+                    "value": "driving-hgv"
+                  }
+                ]
+              },
+              "hazmat": {
+                "description": "Specifies whether to use appropriate routing for delivering hazardous goods and avoiding water protected areas. Default is false.\n",
+                "type": "boolean",
+                "apiDefault": false,
+                "validWhen": [
+                  {
+                    "ref": "profile",
+                    "value": "driving-hgv"
+                  }
+                ]
+              },
+              "surface_type": {
+                "type": "string",
+                "example": "asphalt",
+                "description": "Specifies the minimum [surface type](http://wiki.openstreetmap.org/wiki/Key:surface). Default is `\"cobblestone:flattened\"`.\n",
+                "apiDefault": "cobblestone:flattened",
+                "validWhen": [
+                  {
+                    "ref": "profile",
+                    "value": "wheelchair"
+                  }
+                ]
+              },
+              "track_type": {
+                "type": "string",
+                "example": "grade2",
+                "description": "Specifies the minimum [grade](http://wiki.openstreetmap.org/wiki/Key:tracktype) of the route. Default is `\"grade1\"`.\n",
+                "apiDefault": "grade1",
+                "validWhen": [
+                  {
+                    "ref": "profile",
+                    "value": "wheelchair"
+                  }
+                ]
+              },
+              "smoothness_type": {
+                "type": "string",
+                "example": "best",
+                "description": "Specifies the minimum [smoothness](http://wiki.openstreetmap.org/wiki/Key:smoothness) of the route. Default is `\"good\"`.\n",
+                "apiDefault": "good",
+                "validWhen": [
+                  {
+                    "ref": "profile",
+                    "value": "wheelchair"
+                  }
+                ]
+              },
+              "maximum_sloped_kerb": {
+                "type": "string",
+                "description": "Specifies the maximum height of the sloped kerb in meters. Values are `0.03`, `0.06`(default), `0.1` or `any`.\n",
+                "enum": [
+                  0.03,
+                  0.06,
+                  0.1,
+                  "any"
+                ],
+                "apiDefault": 0.06,
+                "validWhen": [
+                  {
+                    "ref": "profile",
+                    "value": "wheelchair"
+                  }
+                ]
+              },
+              "maximum_incline": {
+                "type": "string",
+                "description": "Specifies the maximum incline as a percentage. `3`, `6`(default), `10`, `15` or `any`.\n",
+                "enum": [
+                  3,
+                  6,
+                  10,
+                  15,
+                  "any"
+                ],
+                "apiDefault": 6,
+                "validWhen": [
+                  {
+                    "ref": "profile",
+                    "value": "wheelchair"
+                  }
+                ]
+              },
+              "minimum_width": {
+                "type": "number",
+                "format": "float",
+                "description": "Specifies the minimum width of the way (in meters).\n",
+                "example": 3,
+                "validWhen": [
+                  {
+                    "ref": "profile",
+                    "value": "wheelchair"
+                  }
+                ]
+              }
+            },
+            "validWhen": [
+              {
+                "ref": "profile",
+                "value": [
+                  "driving-hgv",
+                  "cycling-*",
+                  "wheelchair"
+                ]
+              }
+            ]
+          }
+        },
+        "validWhen": [
+          {
+            "ref": "profile",
+            "valueNot": [
+              "driving-car"
+            ]
+          }
+        ]
+      },
+      "avoid_polygons": {
+        "type": "object",
+        "description": "Comprises areas to be avoided for the route. Formatted as [geojson polygon](http://geojson.org/geojson-spec.html#id4) or [geojson multipolygon](http://geojson.org/geojson-spec.html#id7).\nAn example Polygon would be:\n```json\n{\n  \"type\": \"Polygon\",\n  \"coordinates\": [[[100],[0]],[[101],[0]],[[101],[1]],[[100],[1]],[[100],[0]]]\n}\n```\n",
+        "properties": {
+          "type": {
+            "description": "Geometry type is always polygon.\n",
+            "type": "array",
+            "enum": [
+              "Polygon",
+              "MultiPolygon"
+            ],
+            "example": "Polygon"
+          },
+          "coordinates": {
+            "description": "Coordinate array of the geometry.\nExample coords:\n```json\n[\n  [\n    [100],[0]\n  ],\n  [\n    [101],[0]\n  ],\n  [\n    [101],[1]\n  ],\n  [\n    [100],[1]\n  ],\n  [\n    [100],[0]\n  ]\n]\n```\n",
+            "example": "See help (?)",
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "format": "double"
+              },
+              "maxItems": 2,
+              "minItems": 2
+            }
+          }
+        }
+      }
+    },
+    "routeResponseExtrasProps": {
+      "values": {
+        "description": "Broken down by way_points.",
+        "type": "array",
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double",
+            "description": "Value 1: Indice of the starting geometry for this section.\n\nValue 2: Indice of the end geometry for this section.\n\nValue 3: [Value](https://github.com/GIScience/openrouteservice-docs#routing-response) assigned to this section.\n"
+          }
+        }
+      },
+      "summary": {
+        "description": "Broken down by information category values.",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer",
+              "format": "int64",
+              "description": "[Value](https://github.com/GIScience/openrouteservice-docs#routing-response) of a info category."
+            },
+            "distance": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Cumulative distance of this value."
+            },
+            "amount": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Category percentage of the entire route."
+            }
+          }
+        }
+      }
+    },
+    "matrixBodyProps": {
+      "profile": {
+        "description": "Specifies the route profile.",
+        "required": true,
+        "type": "string",
+        "enum": [
+          "driving-car",
+          "driving-hgv",
+          "cycling-regular",
+          "cycling-road",
+          "cycling-safe",
+          "cycling-mountain",
+          "cycling-electric",
+          "foot-walking",
+          "foot-hiking",
+          "wheelchair"
+        ],
+        "example": "driving-car"
+      },
+      "locations": {
+        "description": "List of comma separated lists of `longitude,latitude` coordinates.\nexample : `\"locations\":[[9.70093,48.477473],[9.207916,49.153868],[37.573242,55.801281],[115.663757,38.106467]]`\n",
+        "type": "array",
+        "required": true,
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "example": [
+          [
+            9.9700934,
+            48.477473
+          ],
+          [
+            9.207916,
+            49.153868
+          ],
+          [
+            37.573242,
+            55.801281
+          ],
+          [
+            115.663757,
+            38.106467
+          ]
+        ]
+      },
+      "sources": {
+        "description": "A comma separated list of indices that refers to the list of locations (starting with `0`). `{index_1},{index_2}[,{index_N} ...]` or `all` (default).\n\nExample: `0,3` for the first and fourth Location.\n",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "apiDefault": [
+          "all"
+        ]
+      },
+      "destinations": {
+        "description": "A comma separated list of indices that refers to the list of locations (starting with `0`). `{index_1},{index_2}[,{index_N} ...]` or `all` (default).\n\nExample: `0,3` for the first and fourth Location.\n      type: \"array\"\n",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "format": "{index}"
+        },
+        "apiDefault": [
+          "all"
+        ]
+      },
+      "metrics": {
+        "description": "Specifies a list of returned metrics separated with a pipe character (|).\n* `distance` - Returns distance matrix for specified points in defined `units`.\n* `duration` - Returns duration matrix for specified points in *seconds*.\n",
+        "type": "array",
+        "multiSelect": true,
+        "uniqueItems": true,
+        "collectionFormat": "pipes",
+        "enum": [
+          "distance",
+          "duration"
+        ],
+        "apiDefault": "duration"
+      },
+      "units": {
+        "description": "Specifies the unit of measurement for `metrics=distance`.",
+        "type": "string",
+        "apiDefault": "m",
+        "enum": [
+          "m",
+          "km",
+          "mi"
+        ],
+        "validWhen": [
+          {
+            "ref": "body.props.metrics",
+            "value": "distance"
+          }
+        ]
+      },
+      "resolve_locations": {
+        "description": "Specifies whether given locations are resolved or not. If the parameter value set to `true`, every element in destinations and sources will contain `name` element that identifies the name of the closest street. Default is `false`",
+        "type": "boolean",
+        "apiDefault": false
+      },
+      "optimized": {
+        "description": "Specifies whether Dijkstra algorithm (`false`) or any available technique to speed up shortest-path routing (`true`) is used.\n",
+        "type": "boolean",
+        "apiDefault": true
+      }
+    }
+  }
+}
