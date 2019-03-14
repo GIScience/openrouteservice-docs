@@ -1,7 +1,7 @@
 {
   "swagger":"2.0",
   "info":{
-    "description":"This is the openrouteservice API documentation",
+    "description":"This is the openrouteservice API V2 documentation for ORS Core-Version `5.0.0`. Documentations for older Core-Versions can be found [here](https://github.com/GIScience/openrouteservice-docs/releases) and rendered with the [Swagger-Editor](https://editor.swagger.io/)",
     "title":"OpenRouteService",
     "contact":{
       "email":"info@openrouteservice.org"
