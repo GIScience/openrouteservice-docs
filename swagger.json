@@ -58,7 +58,7 @@
           "required" : true,
           "type" : "string",
           "default" : "driving-car",
-          "enum" : [ "driving-car", "driving-hgv", "cycling-regular", "cycling-road", "cycling-safe", "cycling-mountain", "cycling-tour", "cycling-electric", "foot-walking", "foot-hiking", "wheelchair" ]
+          "enum" : [ "driving-car", "driving-hgv", "cycling-regular", "cycling-road", "cycling-mountain", "cycling-electric", "foot-walking", "foot-hiking", "wheelchair" ]
         }, {
           "name" : "preference",
           "in" : "query",
@@ -381,7 +381,7 @@
           "required" : false,
           "type" : "string",
           "default" : "driving-car",
-          "enum" : [ "driving-car", "driving-hgv", "cycling-regular", "cycling-road", "cycling-safe", "cycling-mountain", "cycling-tour", "foot-walking", "foot-hiking" ]
+          "enum" : [ "driving-car", "driving-hgv", "cycling-regular", "cycling-road", "cycling-mountain", "cycling-electric", "foot-walking", "foot-hiking"]
         }, {
           "name" : "range_type",
           "in" : "query",
@@ -705,7 +705,7 @@
           "required" : true,
           "type" : "string",
           "default" : "driving-car",
-          "enum" : [ "driving-car", "driving-hgv", "cycling-regular", "cycling-road", "cycling-safe", "cycling-mountain", "cycling-tour", "cycling-electric", "foot-walking", "foot-hiking", "wheelchair" ]
+          "enum" : [ "driving-car", "driving-hgv", "cycling-regular", "cycling-road", "cycling-mountain", "cycling-electric", "foot-walking", "foot-hiking", "wheelchair" ]
         }, {
           "name" : "locations",
           "in" : "query",
@@ -2137,7 +2137,7 @@
         "profile" : {
           "type" : "string",
           "description" : "Specifies the route profile.",
-          "enum" : [ "driving-car", "driving-hgv", "cycling-regular", "cycling-road", "cycling-safe", "cycling-mountain", "cycling-tour", "cycling-electric", "foot-walking", "foot-hiking", "wheelchair" ],
+          "enum" : [ "driving-car", "driving-hgv", "cycling-regular", "cycling-road", "cycling-mountain", "cycling-electric", "foot-walking", "foot-hiking", "wheelchair" ],
           "default" : "driving-car"
         },
         "locations" : {
