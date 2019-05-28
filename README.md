@@ -31,6 +31,7 @@ This readme stores additional information, examples and encoding tables that go 
   - [TrailDifficulty](#trail-difficulty)
   - [Instruction Types](#instruction-types)
   - [Road Access Restrictions](#road-access-restrictions)
+  - [Geometry](#geometry-decoding)
 - [Places Response](#places-response)
   - [category_group_ids](#category_group_ids)
   - [category_ids](#category_ids)
@@ -712,6 +713,115 @@ Provides information about possible restrictions on roads.
 | 8 | Delivery |
 | 16 | Private |
 | 32 | Permissive |
+
+## Geometry Decoding
+
+When a response include a geometry the data might be encoded as single string. When you request additional elevation data this encoded string can not be decoded with a the standard polyline decoders available (e.g. from Mapbox) - The reason for that is, that the elevation data is included (additionally to the lat & lng values) - Please find below some java sample code to decode a ORS encoded geometry:  
+
+```java
+public class GeometryDecoder {
+
+    private static JSONArray decodeGeometry(String encodedPath, boolean includeElevation) {
+        if (includeElevation) {
+            return decodeGeometryORS(encodedPath);
+        } else {
+            return decodeGeometryDefault(encodedPath);
+        }
+    }
+
+    private static JSONArray decodeGeometryDefault(String encodedGeometry) {
+        JSONArray geometry = new JSONArray();
+        int len = encodedGeometry.length();
+
+        int index = 0;
+        int lat = 0;
+        int lng = 0;
+
+        while (index < len) {
+            int result = 1;
+            int shift = 0;
+            int b;
+            do {
+                b = encodedGeometry.charAt(index++) - 63 - 1;
+                result += b << shift;
+                shift += 5;
+            } while (b >= 0x1f);
+            lat += (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
+
+            result = 1;
+            shift = 0;
+            do {
+                b = encodedGeometry.charAt(index++) - 63 - 1;
+                result += b << shift;
+                shift += 5;
+            } while (b >= 0x1f);
+            lng += (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
+
+            JSONArray cood = new JSONArray();
+            try {
+                cood.put(lat / 1E5);
+                cood.put(lng / 1E5);
+                geometry.put(cood);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return poly;
+    }
+    
+    private static JSONArray decodeGeometryORS(String encodedGeometry) {
+        JSONArray geometry = new JSONArray();
+        int len = encodedGeometry.length();
+
+        int index = 0;
+        int lat = 0;
+        int lng = 0;
+        int ele = 0;
+
+        while (index < len) {
+            int result = 1;
+            int shift = 0;
+            int b;
+            do {
+                b = encodedGeometry.charAt(index++) - 63 - 1;
+                result += b << shift;
+                shift += 5;
+            } while (b >= 0x1f);
+            lat += (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
+
+            result = 1;
+            shift = 0;
+            do {
+                b = encodedGeometry.charAt(index++) - 63 - 1;
+                result += b << shift;
+                shift += 5;
+            } while (b >= 0x1f);
+            lng += (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
+
+            result = 1;
+            shift = 0;
+            do {
+                b = encodedGeometry.charAt(index++) - 63 - 1;
+                result += b << shift;
+                shift += 5;
+            } while (b >= 0x1f);
+            ele += (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
+
+            JSONArray cood = new JSONArray();
+            try {
+                cood.put(lat / 1E5);
+                cood.put(lng / 1E5);
+                cood.put((float) (ele / 100));
+                geometry.put(cood);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return poly;
+    }
+}
+```
+ 
 
 # Places Response
 
