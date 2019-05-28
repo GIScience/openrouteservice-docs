@@ -719,60 +719,13 @@ Provides information about possible restrictions on roads.
 When a response include a geometry the data might be encoded as single string. When you request additional elevation data this encoded string can not be decoded with a the standard polyline decoders available (e.g. from Mapbox) - The reason for that is, that the elevation data is included (additionally to the lat & lng values) - Please find below some java sample code to decode a ORS encoded geometry:  
 
 ```java
+import org.json.JSONArray;
+
 public class GeometryDecoder {
 
-    private static JSONArray decodeGeometry(String encodedPath, boolean includeElevation) {
-        if (includeElevation) {
-            return decodeGeometryORS(encodedPath);
-        } else {
-            return decodeGeometryDefault(encodedPath);
-        }
-    }
-
-    private static JSONArray decodeGeometryDefault(String encodedGeometry) {
+    private static JSONArray decodeGeometry(String encodedGeometry, boolean inclElevation) {
         JSONArray geometry = new JSONArray();
         int len = encodedGeometry.length();
-
-        int index = 0;
-        int lat = 0;
-        int lng = 0;
-
-        while (index < len) {
-            int result = 1;
-            int shift = 0;
-            int b;
-            do {
-                b = encodedGeometry.charAt(index++) - 63 - 1;
-                result += b << shift;
-                shift += 5;
-            } while (b >= 0x1f);
-            lat += (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
-
-            result = 1;
-            shift = 0;
-            do {
-                b = encodedGeometry.charAt(index++) - 63 - 1;
-                result += b << shift;
-                shift += 5;
-            } while (b >= 0x1f);
-            lng += (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
-
-            JSONArray cood = new JSONArray();
-            try {
-                cood.put(lat / 1E5);
-                cood.put(lng / 1E5);
-                geometry.put(cood);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return poly;
-    }
-    
-    private static JSONArray decodeGeometryORS(String encodedGeometry) {
-        JSONArray geometry = new JSONArray();
-        int len = encodedGeometry.length();
-
         int index = 0;
         int lat = 0;
         int lng = 0;
@@ -798,30 +751,34 @@ public class GeometryDecoder {
             } while (b >= 0x1f);
             lng += (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
 
-            result = 1;
-            shift = 0;
-            do {
-                b = encodedGeometry.charAt(index++) - 63 - 1;
-                result += b << shift;
-                shift += 5;
-            } while (b >= 0x1f);
-            ele += (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
 
-            JSONArray cood = new JSONArray();
+            if(inclElevation){
+                result = 1;
+                shift = 0;
+                do {
+                    b = encodedGeometry.charAt(index++) - 63 - 1;
+                    result += b << shift;
+                    shift += 5;
+                } while (b >= 0x1f);
+                ele += (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
+            }
+
+            JSONArray location = new JSONArray();
             try {
-                cood.put(lat / 1E5);
-                cood.put(lng / 1E5);
-                cood.put((float) (ele / 100));
-                geometry.put(cood);
+                location.put(lat / 1E5);
+                location.put(lng / 1E5);
+                if(inclElevation){
+                    location.put((float) (ele / 100));
+                }
+                geometry.put(location);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        return poly;
+        return geometry;
     }
 }
 ```
- 
 
 # Places Response
 
