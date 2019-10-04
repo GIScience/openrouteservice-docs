@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is the openrouteservice API V1 documentation for ORS Core-Version `5.0.0`. Documentations for older Core-Versions can be found [here](https://github.com/GIScience/openrouteservice-docs/releases) and rendered with the [Swagger-Editor](https://editor.swagger.io/)",
-    "version": "5.0.0",
+    "description": "This is the openrouteservice API V1 documentation for ORS Core-Version `5.0.2`. Documentations for [older Core-Versions](https://github.com/GIScience/openrouteservice-docs/releases) can be rendered with the [Swagger-Editor](https://editor.swagger.io/).",
+    "version": "5.0.2",
     "title": "Openrouteservice",
     "contact": {
       "email": "support@openrouteservice.org"
@@ -35,9 +35,7 @@
   ],
   "security": [
     {
-      "UserSecurity": [
-        "api_key"
-      ]
+      "api_key-Parameter": []
     }
   ],
   "paths": {
@@ -157,7 +155,8 @@
               "waytype",
               "tollways",
               "traildifficulty",
-              "roadaccessrestrictions"
+              "roadaccessrestrictions",
+              "countryinfo"
             ],
             "collectionFormat": "pipes",
             "uniqueItems": true,
@@ -2253,7 +2252,7 @@
           "Matrix"
         ],
         "summary": "Matrix Service (POST)",
-        "description": "Returns duration or distance or matrix for mutliple source and destination points.\n\n**IMPORTANT**\n\nThe profile currently has to be passed both as a parameter *AND* in the body for other profiles than `driving-car`.\n",
+        "description": "Returns duration or distance or matrix for multiple source and destination points.\n\n**IMPORTANT**\n\nThe profile currently has to be passed both as a parameter *AND* in the body for other profiles than `driving-car`.\n",
         "parameters": [
           {
             "name": "api_key",
@@ -2685,11 +2684,19 @@
     }
   },
   "securityDefinitions": {
-    "UserSecurity": {
+    "api_key-Parameter": {
       "name": "api_key",
-      "description": "Add your API Key as the value of the api_key parameter to your request.\n",
+      "description": "For GET requests add your API Key as the value of the `api_key` parameter.\n",
       "type": "apiKey",
-      "in": "query"
+      "in": "query",
+      "strategy": "api_key-Parameter"
+    },
+    "Authorization-Header": {
+      "name": "Authorization",
+      "description": "For POST requests add your API Key as the value of the `Authorization` header.\n",
+      "type": "apiKey",
+      "in": "header",
+      "strategy": "Authorization-Header"
     }
   },
   "definitions": {
