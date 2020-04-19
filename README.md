@@ -212,7 +212,7 @@ As there are various traffic regulations in different countries. If [maximum spe
   | United Kingdom |     GB:nsl_single    |      95     |      90     |
   |                |      GB:nsl_dual     |     112     |      90     |
   |                |      GB:motorway     |     112     |      90     |
-  | USA            |       UA:urban       |      60     |      60     |
+  | Ukraine        |       UA:urban       |      60     |      60     |
   |                |       UA:rural       |      90     |      80     |
   |                |       UA:trunk       |     110     |      80     |
   |                |      UA:motorway     |     130     |      80     |
