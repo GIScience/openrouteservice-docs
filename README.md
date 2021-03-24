@@ -303,8 +303,6 @@ The available parameters are:
   | `tollways`          | driving-*                                   |
   | `ferries`           | driving-\*, cycling-\*, foot-\*, wheelchair |
   | `tunnels`           | driving-*                                   |
-  | `pavedroads`        | driving-\*, cycling-*                       |
-  | `unpavedroads`      | driving-\*, cycling-*                       |
   | `tracks`            | driving-*                                   |
   | `fords`             | driving-\*, cycling-\*, foot-*              |
   | `steps`             | cycling-\*, foot-\*, wheelchair             |
@@ -630,8 +628,8 @@ The exponential assignment of the values is used for [bit fields](http://eddmann
 | 0     | No category                  |
 | 1     | Highway                      |
 | 2     | Steps                        |
-| 4     | Ferry                        |
-| 8     | Unpaved road                 |
+| 4     | Unpaved road                 |
+| 8     | Ferry                        |
 | 16    | Track                        |
 | 32    | Tunnel                       |
 | 64    | Paved road                   |
