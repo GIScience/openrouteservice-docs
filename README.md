@@ -160,8 +160,8 @@ As there are various traffic regulations in different countries. If [maximum spe
   |                |       DE:urban       |      50     |      50     |
   |                |       DE:rural       |     100     |      80     |
   |                |      DE:motorway     |     130     |      80     |
-  |                |       FI:urban       |      50     |      50     |
-  |   Finland      |       FI:rural       |      80     |      80     |
+  |   Finland      |       FI:urban       |      50     |      50     |
+  |                |       FI:rural       |      80     |      80     |
   |                |       FI:trunk       |     100     |      80     |
   |                |      FI:motorway     |     120     |      80     |
   |   France       |       FR:urban       |      50     |      50     |
@@ -181,6 +181,7 @@ As there are various traffic regulations in different countries. If [maximum spe
   |                |       IT:trunk       |     110     |      80     |
   |                |      IT:motorway     |     130     |      80     |
   |    Japan       |      JP:national     |      60     |      60     |
+  |                |      JP:motorway     |     100     |      80     |
   |   Poland       |   PL:living_street   |      20     |      20     |
   |                |       PL:urban       |      50     |      50     |
   |                |       PL:rural       |      90     |      80     |
