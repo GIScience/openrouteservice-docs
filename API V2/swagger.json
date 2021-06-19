@@ -1,6 +1,7 @@
 {
   "swagger":"2.0",
   "info":{
+    "version":"5.0.2",
     "description":"This is the openrouteservice API V2 documentation for ORS Core-Version `5.0.2`. Documentations for [older Core-Versions](https://github.com/GIScience/openrouteservice-docs/releases) can be rendered with the [Swagger-Editor](https://editor.swagger.io/).",
     "title":"OpenRouteService",
     "contact":{
@@ -163,7 +164,7 @@
             "description":"The request payload",
             "required":true,
             "schema":{
-              "$ref":"#/definitions/Directions Service"
+              "$ref":"#/definitions/DirectionsService"
             }
           }
         ],
@@ -249,7 +250,7 @@
             "description":"The request payload",
             "required":true,
             "schema":{
-              "$ref":"#/definitions/Directions Service"
+              "$ref":"#/definitions/DirectionsService"
             }
           }
         ],
@@ -335,7 +336,7 @@
             "description":"The request payload",
             "required":true,
             "schema":{
-              "$ref":"#/definitions/Directions Service"
+              "$ref":"#/definitions/DirectionsService"
             }
           }
         ],
@@ -421,7 +422,7 @@
             "description":"The request payload",
             "required":true,
             "schema":{
-              "$ref":"#/definitions/Directions Service"
+              "$ref":"#/definitions/DirectionsService"
             }
           }
         ],
@@ -700,11 +701,11 @@
     }
   },
   "definitions":{
-    "Directions Service":{
+    "DirectionsService":{
       "title":"Directions Service",
       "allOf":[
         {
-          "$ref":"#/definitions/Route Options"
+          "$ref":"#/definitions/RouteOptions"
         },
         {
           "type":"object",
@@ -869,7 +870,7 @@
                 "maximum_speed":100
               },
               "description":"For advanced options formatted as json object. For structure refer to the [these examples](https://github.com/GIScience/openrouteservice-docs#examples).",
-              "$ref":"#/definitions/Route Options"
+              "$ref":"#/definitions/RouteOptions"
             },
             "preference":{
               "type":"string",
@@ -1110,7 +1111,7 @@
             "avoid_borders":"all"
           },
           "description":"Additional options for the isochrones request",
-          "$ref":"#/definitions/Route Options"
+          "$ref":"#/definitions/RouteOptions"
         },
         "range":{
           "type":"array",
@@ -1757,20 +1758,20 @@
       "title":"MatrixResponseInfo",
       "description":"Information about the request"
     },
-    "Profile Parameters":{
+    "ProfileParameters":{
       "type":"object",
       "properties":{
         "restrictions":{
           "$ref":"#/definitions/Restrictions"
         },
         "weightings":{
-          "$ref":"#/definitions/Profile Weightings"
+          "$ref":"#/definitions/ProfileWeightings"
         }
       },
       "title":"Profile Parameters",
       "description":"Specifies additional routing parameters. For all profiles except `driving-car`."
     },
-    "Profile Weightings":{
+    "ProfileWeightings":{
       "type":"object",
       "properties":{
         "green":{
@@ -1951,7 +1952,7 @@
       "title":"Restrictions",
       "description":"Describe restrictions to be applied to edges on the routing. any edges that do not match these restrictions are not traversed."
     },
-    "Route Options":{
+    "RouteOptions":{
       "type":"object",
       "properties":{
         "avoid_borders":{
@@ -1997,7 +1998,7 @@
         },
         "profile_params":{
           "description":" Specifies additional routing parameters.",
-          "$ref":"#/definitions/Profile Parameters"
+          "$ref":"#/definitions/ProfileParameters"
         },
         "vehicle_type":{
           "type":"string",
@@ -2040,7 +2041,7 @@
         },
         "query":{
           "description":"The information that was used for generating the route",
-          "$ref":"#/definitions/Directions Service"
+          "$ref":"#/definitions/DirectionsService"
         },
         "service":{
           "type":"string",
