@@ -1,3 +1,7 @@
+# DEPRECATED
+
+> All information was migrated to our [backend documentation](https://giscience.github.io/openrouteservice).
+
 This repository stores the swagger specifications of the [openrouteservice](openrouteservice.org "ORS website") API in yaml and json format.
 For an API-Key please sign up at our [developers portal](https://openrouteservice.org "ORS portal").
 A live version of this documentation can be found in the [API Playground](https://openrouteservice.org/dev/#/api-docs "API Playground").
